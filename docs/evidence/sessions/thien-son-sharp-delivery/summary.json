@@ -1,0 +1,108 @@
+{
+  "status": "PASS",
+  "newCels": 24,
+  "branches": {
+    "thien-son-phien-unified-v2": {
+      "changed": [
+        "fan_catch_down_right",
+        "fan_open_down_right",
+        "fan_throw_down_right",
+        "idle_0_down_right",
+        "idle_1_down_right",
+        "idle_2_down_right",
+        "idle_3_down_right",
+        "walk_0_down_right",
+        "walk_1_down_right",
+        "walk_2_down_right",
+        "walk_3_down_right",
+        "windup_down_right"
+      ],
+      "retainedCels": 212,
+      "nativeFrames": 224,
+      "tags": 40,
+      "bodyPNG": "c71d3770be34dc1b1eeaa5ae2692644e65a96ca35d18b4295834b9350d22ad9a"
+    },
+    "thien-son-dao-unified-v3": {
+      "changed": [
+        "idle_0_down_right",
+        "idle_1_down_right",
+        "idle_2_down_right",
+        "idle_3_down_right",
+        "overhead_down_right",
+        "sweep_left_down_right",
+        "sweep_right_down_right",
+        "walk_0_down_right",
+        "walk_1_down_right",
+        "walk_2_down_right",
+        "walk_3_down_right",
+        "windup_down_right"
+      ],
+      "retainedCels": 244,
+      "nativeFrames": 256,
+      "tags": 40,
+      "bodyPNG": "ba2c263579e8ec225a68a923c8f672af3d06d1331614215b65a849f01205bb37"
+    }
+  },
+  "phase": "Directional prototype only; stop before bulk actions/directions",
+  "tests": {
+    "unitCases": 13,
+    "types": "client + tools PASS",
+    "beforeClients": 2,
+    "iterationClients": 2,
+    "finalClients": 6,
+    "scope": "southeast idle4/walk4/basic4; lifecycle/authority/F8 smoke; retained directions in crowd use baseline art"
+  },
+  "recordings": false,
+  "rooms": {
+    "thien_son_dao": {
+      "status": "READY",
+      "url": "http://127.0.0.1:5620/?debug=1",
+      "roomId": "wZO9ak9XI",
+      "sessionId": "sQ0gGJGmK",
+      "basic": "thien_son_dao",
+      "level": 30,
+      "slots": [
+        "phi_anh_tram",
+        "truy_hon_dao",
+        "phong_anh_hoan_vi",
+        "liet_phong_dao",
+        "bach_liet_thien_kich"
+      ],
+      "ranks": {
+        "phi_anh_tram": 4,
+        "truy_hon_dao": 4,
+        "phong_anh_hoan_vi": 4,
+        "liet_phong_dao": 4,
+        "bach_liet_thien_kich": 4
+      },
+      "body": "hero-unified:thien_son_dao",
+      "f8": "ON; keyboard toggle verified",
+      "errors": []
+    },
+    "thien_son_phien": {
+      "status": "READY",
+      "url": "http://127.0.0.1:5620/?debug=1",
+      "roomId": "maZCTg4H5",
+      "sessionId": "_ei_EDwrt",
+      "basic": "thien_son_phien",
+      "level": 30,
+      "slots": [
+        "lien_hoa_phien",
+        "luc_duong_chuong",
+        "luu_phong_bo",
+        "chiet_mai_thu",
+        "bach_phien_phong_bao"
+      ],
+      "ranks": {
+        "lien_hoa_phien": 4,
+        "luc_duong_chuong": 4,
+        "luu_phong_bo": 4,
+        "chiet_mai_thu": 4,
+        "bach_phien_phong_bao": 4
+      },
+      "body": "hero-unified:thien_son_phien",
+      "f8": "ON; keyboard toggle verified",
+      "errors": []
+    }
+  }
+}

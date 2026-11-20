@@ -1,0 +1,149 @@
+{
+  "scenario": "same 38 import-validated files; alternating isolated fork workers 1 vs 2; warmup excluded; fresh tests every run; machine/OS load uncontrolled",
+  "samples": [
+    {
+      "trial": -1,
+      "workers": 1,
+      "seconds": 57.6297709,
+      "exitCode": 0,
+      "status": "PASS",
+      "artifacts": [
+        {
+          "label": "prepared simulation data",
+          "hit": false
+        },
+        {
+          "label": "compiled pure-core artifacts",
+          "hit": false
+        }
+      ],
+      "testSeconds": 40.603,
+      "report": "../core-parallel-warmup/check-core/core-timings.json"
+    },
+    {
+      "trial": 0,
+      "workers": 1,
+      "seconds": 38.5187948,
+      "exitCode": 0,
+      "status": "PASS",
+      "artifacts": [
+        {
+          "label": "prepared simulation data",
+          "hit": true
+        },
+        {
+          "label": "compiled pure-core artifacts",
+          "hit": true
+        }
+      ],
+      "testSeconds": 35.584,
+      "report": "../core-parallel-0-1/check-core/core-timings.json"
+    },
+    {
+      "trial": 0,
+      "workers": 2,
+      "seconds": 21.006455900000002,
+      "exitCode": 0,
+      "status": "PASS",
+      "artifacts": [
+        {
+          "label": "prepared simulation data",
+          "hit": true
+        },
+        {
+          "label": "compiled pure-core artifacts",
+          "hit": true
+        }
+      ],
+      "testSeconds": 17.833,
+      "report": "../core-parallel-0-2/check-core/core-timings.json"
+    },
+    {
+      "trial": 1,
+      "workers": 2,
+      "seconds": 24.073048599999996,
+      "exitCode": 0,
+      "status": "PASS",
+      "artifacts": [
+        {
+          "label": "prepared simulation data",
+          "hit": true
+        },
+        {
+          "label": "compiled pure-core artifacts",
+          "hit": true
+        }
+      ],
+      "testSeconds": 21.22,
+      "report": "../core-parallel-1-2/check-core/core-timings.json"
+    },
+    {
+      "trial": 1,
+      "workers": 1,
+      "seconds": 36.26728719999999,
+      "exitCode": 0,
+      "status": "PASS",
+      "artifacts": [
+        {
+          "label": "prepared simulation data",
+          "hit": true
+        },
+        {
+          "label": "compiled pure-core artifacts",
+          "hit": true
+        }
+      ],
+      "testSeconds": 33.355,
+      "report": "../core-parallel-1-1/check-core/core-timings.json"
+    },
+    {
+      "trial": 2,
+      "workers": 1,
+      "seconds": 46.0017187,
+      "exitCode": 0,
+      "status": "PASS",
+      "artifacts": [
+        {
+          "label": "prepared simulation data",
+          "hit": true
+        },
+        {
+          "label": "compiled pure-core artifacts",
+          "hit": true
+        }
+      ],
+      "testSeconds": 39.09,
+      "report": "../core-parallel-2-1/check-core/core-timings.json"
+    },
+    {
+      "trial": 2,
+      "workers": 2,
+      "seconds": 23.862570399999996,
+      "exitCode": 0,
+      "status": "PASS",
+      "artifacts": [
+        {
+          "label": "prepared simulation data",
+          "hit": true
+        },
+        {
+          "label": "compiled pure-core artifacts",
+          "hit": true
+        }
+      ],
+      "testSeconds": 19.816,
+      "report": "../core-parallel-2-2/check-core/core-timings.json"
+    }
+  ],
+  "summary": {
+    "medianSeconds": {
+      "1": 38.5187948,
+      "2": 23.862570399999996
+    },
+    "reductionPercent": 38.049540428507925,
+    "testStageMedianSeconds": {
+      "1": 35.584,
+      "2": 19.816
+    }
+  }
+}

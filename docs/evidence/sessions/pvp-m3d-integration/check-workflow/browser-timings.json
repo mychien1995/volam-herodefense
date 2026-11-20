@@ -1,0 +1,88 @@
+{
+  "runId": "f2a29741-d631-41b7-ae32-afe3bcc3abdf",
+  "mode": "browser",
+  "args": [
+    "--config",
+    "playwright.practice.config.ts",
+    "--grep",
+    "two clients agree|entry, link"
+  ],
+  "startedAt": "2026-11-19T08:23:35.334Z",
+  "status": "PASS",
+  "stages": [
+    {
+      "label": "environment preflight",
+      "seconds": 0.015,
+      "status": "PASS",
+      "checks": [
+        {
+          "id": "workspace",
+          "status": "PASS",
+          "detail": {
+            "mode": "browser",
+            "stage": "before-build",
+            "managed": false
+          }
+        },
+        {
+          "id": "session",
+          "status": "PASS",
+          "detail": "No managed service ports for this profile"
+        },
+        {
+          "id": "node",
+          "status": "PASS",
+          "detail": "26.0.0"
+        },
+        {
+          "id": "installation",
+          "status": "PASS",
+          "detail": "pnpm@11.25.0"
+        },
+        {
+          "id": "tools",
+          "status": "PASS",
+          "detail": {
+            "typescript": "7.0.2",
+            "vitest": "5.0.5",
+            "vite": "8.3.5",
+            "@playwright/test": "1.64.1"
+          }
+        }
+      ]
+    },
+    {
+      "label": "prepare assets (once)",
+      "seconds": 37.22,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\pvp\\volam-hero-defense\\docs\\evidence\\sessions\\pvp-m3d-integration\\check-workflow\\f2a29741-d631-41b7-ae32-afe3bcc3abdf\\1-prepare-assets-once-.log",
+      "outputBytes": 786
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 0.35,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\pvp\\volam-hero-defense\\docs\\evidence\\sessions\\pvp-m3d-integration\\check-workflow\\f2a29741-d631-41b7-ae32-afe3bcc3abdf\\2-compile-TypeScript.log",
+      "outputBytes": 0
+    },
+    {
+      "label": "production client build",
+      "seconds": 16.25,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\pvp\\volam-hero-defense\\docs\\evidence\\sessions\\pvp-m3d-integration\\check-workflow\\f2a29741-d631-41b7-ae32-afe3bcc3abdf\\3-production-client-build.log",
+      "outputBytes": 12624
+    },
+    {
+      "label": "browser verification",
+      "seconds": 128.96,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\pvp\\volam-hero-defense\\docs\\evidence\\sessions\\pvp-m3d-integration\\check-workflow\\f2a29741-d631-41b7-ae32-afe3bcc3abdf\\4-browser-verification.log",
+      "outputBytes": 1317
+    }
+  ],
+  "totalSeconds": 182.82
+}

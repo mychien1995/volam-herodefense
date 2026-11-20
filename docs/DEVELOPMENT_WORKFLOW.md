@@ -7,6 +7,9 @@ Read [session execution lessons](SESSION_EXECUTION_LESSONS.md) before choosing t
 | Work | Command |
 | --- | --- |
 | One unit/integration area | `pnpm check:quick tests/skill-assets.test.ts` (accepts more files and Vitest filters) |
+| Pure-core simulation iteration | `pnpm check:core tests/combat.test.ts tests/practice.test.ts` (explicit pure-core files; hash-verified artifacts) |
+| Environment preflight (no build/install) | `pnpm qa:preflight --mode browser [--config <profile>]` |
+| Owned development browser iteration | `pnpm qa:iterate --plan rounds.json` (explicit supported smoke/gameplay selection; [boundaries](QA_ITERATION_REUSE_2026_11_20.md)) |
 | Preparation helper | `pnpm test:workflow` |
 | Affected art exports | `python -X utf8 scripts/verify-vo-dang.py` or the corresponding asset validator |
 | Focused live Phaser/browser check | `pnpm check:browser --config playwright.vo-dang.config.ts tests/e2e/vo-dang-art.spec.ts --grep "both weapon"` |
@@ -28,6 +31,18 @@ The pipe in the grep examples is a regular-expression alternative; quote it in t
 6. One Playwright invocation with the requested scope (the default configuration/suite if no arguments are supplied).
 
 The pipeline calls installed binaries directly; it does not invoke nested build/test scripts that prepare again. Existing standalone `pnpm typecheck`, `pnpm test`, `pnpm build` and `pnpm verify:assets` remain available and safe for independent use. Avoid chaining all of them when `check:final` already covers them. No check results are cached or inferred from previous success.
+
+`check:core` is a separate simulation-only iteration path: reuse prepared data and isolated compiled artifacts only when input/output SHA-256 match; execute tests fresh every time. It rejects IO/room/browser/asset graphs and keeps the final runner unchanged. [Cache boundaries, invalidation and commands](CORE_TEST_FAST_PATH.md).
+
+## Environment and shared browser helpers — 2026-11-19
+
+`check:quick`, `check:browser` and `check:final` now run a fresh preflight before asset preparation. It checks the checkout, supported Node, pnpm installation/lock identity, installed tool versions and, for managed browser profiles, free ports and the configured Chromium cache. Final also checks Python. It never installs dependencies, starts/borrows/stops a service, caches a PASS or skips any final gate.
+
+Use `pnpm qa:preflight --mode browser --json` for structured diagnostics. `--ready` additionally checks compiled server presence, source/dist protocol and the built client endpoint before launch; it is not a proof that all compiled server inputs are fresh. The existing compile and owned-service run/health identity checks remain required. Registered legacy profiles use the audited port/channel contracts and shared ownership/identity/cleanup described in QA_TOOLING.md; unregistered WIP profiles remain explicit exceptions.
+
+Successful stage output is summarized; full stdout/stderr streams to a per-run log next to the timing report and is readable while a stage runs. Failures show a bounded tail and the full log path. `VOLAM_QA_VERBOSE=1` prints full stage output after completion. Reports retain log paths/byte counts; historical failures stay in their run directories.
+
+Reuse `tools/qa-browser.mjs` rather than adding another polling loop. It provides Phaser + server readiness, idempotent lobby acknowledgements, browser-side observations with compact diagnostic state, and a focused single key press with observation armed first. Combat is never retried; missing/dead actors are explicit prerequisites, not outcomes to fabricate. [Usage, coverage and measurements](QA_TOOLING.md).
 
 ## Asset preparation and production
 
@@ -73,7 +88,7 @@ pnpm check:final --config playwright.arena-creeps.config.ts
 
 `VOLAM_QA_SESSION` separates Vite cache, Playwright outputs and evidence. Explicit overrides are `VOLAM_QA_VITE_CACHE`, `VOLAM_QA_PLAYWRIGHT_OUTPUT` and `VOLAM_QA_EVIDENCE_DIR` (the evidence root retains profile subdirectories). `VITE_SERVER_URL` remains available; managed QA requires it to identify the configured local server port. The check runner derives it from `VOLAM_QA_SERVER_PORT` when omitted. Set ports before building: the default preview checks the bundle's emitted `volam-build-endpoint.json` and rejects a stale endpoint. Direct browser-stage retries must use the same endpoint/build inputs. No successful stage result is loaded from a prior report.
 
-Both profiles refuse occupied ports and verify the owned server's run identity and protocol plus the client's identity/endpoint. The default historical combat fixture explicitly sets/restores development mode so Vite preview cannot silently disable its practice-creep prerequisite. Cleanup closes only handles created by that setup. No service discovery by healthy port, shell process-tree killing or other checkout changes are performed. Older dedicated school/dungeon configs retain their existing fixed isolated services; they have not been migrated to these overrides.
+Both profiles refuse occupied ports and verify the owned server's run identity and protocol plus the client's identity/endpoint. The default historical combat fixture explicitly sets/restores development mode so Vite preview cannot silently disable its practice-creep prerequisite. Cleanup closes only handles created by that setup. No service discovery by healthy port, shell process-tree killing or other checkout changes are performed. Dedicated school/dungeon profiles now use the shared lifecycle while retaining their audited fixed/shared/alias port contracts. Fixed profiles still reject unsupported common port overrides. Child services own separate processes and verify run/PID/protocol/ports; static visual fixtures use their existing PID or Playwright no-reuse ownership contract. See [fixture coverage and measurements](QA_OWNERSHIP_2026_11_20.md).
 
 The single-pass pipeline now writes compact per-stage timings, exit status and run identity on success or failure. Without a session, reports are `.cache/check-workflow/{mode}-timings.json`; session reports use `docs/evidence/sessions/<session>/check-workflow/`. Preparation, compilation, tool typechecking, unit checks, production build, validators and browser time remain separate. Arena reports additionally separate services, joins, frame observations, presentation checks, movement and natural combat. These are measurements, not reusable validation results. Browser-only retries use `node tools/run-playwright.mjs test <the same relevant scope>` after fixture-only fixes; rerun dependencies whenever their actual inputs change.
 

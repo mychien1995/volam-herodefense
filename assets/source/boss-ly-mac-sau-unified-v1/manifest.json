@@ -1,0 +1,5861 @@
+{
+  "basic": "ly_mac_sau",
+  "texture": "boss-unified:ly_mac_sau",
+  "folder": "boss-ly-mac-sau-unified-v1",
+  "sourceRows": 7,
+  "sourceColumns": 4,
+  "canvas": [
+    512,
+    448
+  ],
+  "foot": [
+    256,
+    352
+  ],
+  "bodyHeight": 112,
+  "scale": 0.5,
+  "bodyWidth": 80,
+  "rootMode": "monochrome",
+  "poses": [
+    "idle_0",
+    "idle_1",
+    "idle_2",
+    "idle_3",
+    "walk_0",
+    "walk_1",
+    "walk_2",
+    "walk_3",
+    "windup",
+    "attack_1",
+    "attack_2",
+    "attack_3",
+    "cast_0",
+    "cast_1",
+    "cast_2",
+    "cast_3",
+    "cast_4",
+    "cast_5",
+    "cast_6",
+    "cast_7",
+    "guard",
+    "channel",
+    "recover",
+    "step",
+    "hurt_0",
+    "hurt_1",
+    "death_0",
+    "death_1"
+  ],
+  "groups": [
+    {
+      "name": "idle",
+      "poses": [
+        "idle_0",
+        "idle_1",
+        "idle_2",
+        "idle_3"
+      ],
+      "durationMs": 700
+    },
+    {
+      "name": "walk",
+      "poses": [
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3"
+      ],
+      "durationMs": 110
+    },
+    {
+      "name": "action_library",
+      "poses": [
+        "windup",
+        "attack_1",
+        "attack_2",
+        "attack_3",
+        "cast_0",
+        "cast_1",
+        "cast_2",
+        "cast_3",
+        "cast_4",
+        "cast_5",
+        "cast_6",
+        "cast_7",
+        "guard",
+        "channel",
+        "recover",
+        "step"
+      ],
+      "durationMs": 100
+    },
+    {
+      "name": "hurt",
+      "poses": [
+        "hurt_0",
+        "hurt_1"
+      ],
+      "durationMs": 90
+    },
+    {
+      "name": "death",
+      "poses": [
+        "death_0",
+        "death_1"
+      ],
+      "durationMs": 220
+    }
+  ],
+  "references": [
+    {
+      "path": "assets/source/renovation-v3/raw/ly_mac_sau_actions.png",
+      "sha256": "c07cb8654ec3f1f00d6707ad83f2f5923a94fd69f652b0211c8a346067095bd1"
+    },
+    {
+      "path": "assets/source/boss-ly-mac-sau-unified-v1/references/dong-quality-master.png",
+      "sha256": "9591491af25d06290a4809bfdb135131ea9a9f8ff0a8d3b60914b1e765c8f7cd"
+    }
+  ],
+  "directionDensityPolicies": {
+    "down": "uniform-source",
+    "down_right": "uniform-source",
+    "right": "uniform-source",
+    "up_right": "uniform-source",
+    "up": "uniform-source",
+    "up_left": "uniform-source",
+    "left": "uniform-source",
+    "down_left": "uniform-source"
+  },
+  "status": "prototype pending director review",
+  "directions": [
+    "down",
+    "down_right",
+    "right",
+    "up_right",
+    "up",
+    "up_left",
+    "left",
+    "down_left"
+  ],
+  "pivot": [
+    0.5,
+    0.7857142857142857
+  ],
+  "source": "Built-in imagegen; sharp retained native art for identity/quality; separate body and VFX",
+  "groupsAuthored": [
+    {
+      "direction": "down",
+      "path": "assets/source/boss-ly-mac-sau-unified-v1/raw/down.png",
+      "sha256": "c23f632770f8cf2ad9235e4724af5b8046d6d9c7a2429902f844098aceff2e82",
+      "extraSources": [],
+      "celGroupOverrides": [],
+      "ratio": 0.6381766381766382,
+      "walkRatio": 0.6381766381766382,
+      "actionRatio": 0.6381766381766382,
+      "reactionRatio": 0.6381766381766382,
+      "targetHairWidth": 54.883190883190885,
+      "frames": [
+        {
+          "frame": "idle_0_down",
+          "sha256": "20b2eaef7da701b3d8612c200e68ec4e7e5561ae1b9da123a3100ff0869b8425",
+          "visible": [
+            210,
+            236,
+            295,
+            359
+          ],
+          "sourceBounds": [
+            61,
+            10,
+            194,
+            203
+          ],
+          "sourceRoot": [
+            71.81512605042016,
+            181.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.6381766381766382,
+          "sourceHairWidth": 89.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "idle_1_down",
+          "sha256": "a0519846b0fe25540f27ab7e027cc458f42303ecff3cc5fe4e9c337b72507fb4",
+          "visible": [
+            207,
+            236,
+            297,
+            359
+          ],
+          "sourceBounds": [
+            320,
+            10,
+            461,
+            203
+          ],
+          "sourceRoot": [
+            76.71218255428782,
+            182.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.6381766381766382,
+          "sourceHairWidth": 86.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "idle_2_down",
+          "sha256": "5fed209128d193b992bf0d21264e16318c983e07842c211625ba33b07b78a352",
+          "visible": [
+            212,
+            236,
+            298,
+            359
+          ],
+          "sourceBounds": [
+            592,
+            10,
+            727,
+            203
+          ],
+          "sourceRoot": [
+            68.20030291556229,
+            182.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.6381766381766382,
+          "sourceHairWidth": 86.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "idle_3_down",
+          "sha256": "463fe9d6e5120fb240fd801140898cfb2e14fb800089c0cbd0c2608aae4af7ee",
+          "visible": [
+            212,
+            236,
+            296,
+            359
+          ],
+          "sourceBounds": [
+            856,
+            10,
+            987,
+            203
+          ],
+          "sourceRoot": [
+            69.40470766894457,
+            181.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.6381766381766382,
+          "sourceHairWidth": 85.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "walk_0_down",
+          "sha256": "e9ec13a75c2c3146978733cb39f8c6cb72853a4806417ee7d9f9fdda81f0f685",
+          "visible": [
+            213,
+            236,
+            299,
+            358
+          ],
+          "sourceBounds": [
+            64,
+            214,
+            198,
+            405
+          ],
+          "sourceRoot": [
+            68.11726981218507,
+            182.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.6381766381766382,
+          "sourceHairWidth": 80.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "walk_1_down",
+          "sha256": "cf471be16bbb07c4d6a61aea60faaca3cb60b75d85931ae754afbaf448291d1c",
+          "visible": [
+            211,
+            236,
+            297,
+            356
+          ],
+          "sourceBounds": [
+            324,
+            214,
+            459,
+            402
+          ],
+          "sourceRoot": [
+            70.77767695099818,
+            182.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.6381766381766382,
+          "sourceHairWidth": 83.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "walk_2_down",
+          "sha256": "cc2e4d2723a5bbb3dc66ed5da39a8d85460c74b7935320af2a66d3e77186e18e",
+          "visible": [
+            213,
+            234,
+            299,
+            356
+          ],
+          "sourceBounds": [
+            592,
+            214,
+            726,
+            405
+          ],
+          "sourceRoot": [
+            67.66666666666667,
+            185.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.6381766381766382,
+          "sourceHairWidth": 89.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "walk_3_down",
+          "sha256": "7bb9c7622e50cb22528e7d64ba3f10301dd5aff939a5b997404f208ad2f90c94",
+          "visible": [
+            210,
+            235,
+            294,
+            356
+          ],
+          "sourceBounds": [
+            857,
+            214,
+            988,
+            403
+          ],
+          "sourceRoot": [
+            71.93846899224806,
+            183.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.6381766381766382,
+          "sourceHairWidth": 87.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "windup_down",
+          "sha256": "b8462c626db254e681d6ef402738104ee4fcaa6a96d3754e49f99dc14929f9ff",
+          "visible": [
+            195,
+            236,
+            295,
+            360
+          ],
+          "sourceBounds": [
+            44,
+            416,
+            201,
+            610
+          ],
+          "sourceRoot": [
+            95.26587301587301,
+            181.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.6381766381766382,
+          "sourceHairWidth": 104.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "attack_1_down",
+          "sha256": "f6985074a99595fd467a1fe255efab955575d9cd8eabead12878ad26598ce6a8",
+          "visible": [
+            212,
+            234,
+            297,
+            355
+          ],
+          "sourceBounds": [
+            333,
+            421,
+            466,
+            611
+          ],
+          "sourceRoot": [
+            69.50251537171604,
+            185.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.6381766381766382,
+          "sourceHairWidth": 99.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "attack_2_down",
+          "sha256": "e5545ba63cf05e807bfd969954e1fa56aebc9311491a798934ccbf7f7f60e5ee",
+          "visible": [
+            199,
+            238,
+            301,
+            355
+          ],
+          "sourceBounds": [
+            571,
+            419,
+            731,
+            602
+          ],
+          "sourceRoot": [
+            89.6677494199536,
+            178.0
+          ],
+          "sourceHeadTop": 10.0,
+          "groupRatio": 0.6381766381766382,
+          "sourceHairWidth": 80.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "attack_3_down",
+          "sha256": "fc669896ee7bc7cd78bae805c94c8f248286b35788f458a25c2e1b190b0e0d83",
+          "visible": [
+            193,
+            237,
+            300,
+            361
+          ],
+          "sourceBounds": [
+            835,
+            417,
+            1003,
+            611
+          ],
+          "sourceRoot": [
+            98.83546704599337,
+            180.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.6381766381766382,
+          "sourceHairWidth": 71.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_0_down",
+          "sha256": "48eb53c8b0f400d2c5aa8d827bb86528edcd885b1a5cea293ed5ccb43208b138",
+          "visible": [
+            212,
+            236,
+            299,
+            358
+          ],
+          "sourceBounds": [
+            61,
+            622,
+            197,
+            813
+          ],
+          "sourceRoot": [
+            69.38933640199463,
+            182.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.6381766381766382,
+          "sourceHairWidth": 85.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_1_down",
+          "sha256": "84544af3b2ebac283f7da5b29489fc75fa946b7f15e50f6692bf0b0078fd2926",
+          "visible": [
+            210,
+            235,
+            297,
+            358
+          ],
+          "sourceBounds": [
+            327,
+            621,
+            464,
+            813
+          ],
+          "sourceRoot": [
+            71.31998728948204,
+            184.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.6381766381766382,
+          "sourceHairWidth": 85.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_2_down",
+          "sha256": "0725da158a1dfaf9279bc01aefe30cabb944ed7f89a966ddc74c61b7bd3a2594",
+          "visible": [
+            190,
+            233,
+            291,
+            357
+          ],
+          "sourceBounds": [
+            570,
+            619,
+            728,
+            813
+          ],
+          "sourceRoot": [
+            103.05359801488834,
+            187.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.6381766381766382,
+          "sourceHairWidth": 112.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_3_down",
+          "sha256": "31462a878811cbe08a57e84c90ec3d0caec9d1ddccfce4400fb3aa3b3965e9cf",
+          "visible": [
+            211,
+            231,
+            303,
+            355
+          ],
+          "sourceBounds": [
+            855,
+            622,
+            999,
+            817
+          ],
+          "sourceRoot": [
+            71.0147954743255,
+            190.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.6381766381766382,
+          "sourceHairWidth": 88.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_4_down",
+          "sha256": "ac9c0253321887e7d293368168708ad72fb9b30c765acc8d7efa0fceba0c755b",
+          "visible": [
+            213,
+            239,
+            296,
+            356
+          ],
+          "sourceBounds": [
+            66,
+            822,
+            196,
+            1006
+          ],
+          "sourceRoot": [
+            67.13902053712481,
+            177.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.6381766381766382,
+          "sourceHairWidth": 82.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_5_down",
+          "sha256": "6806ca8d83554197ba1f84125884ca0776ac006af0f41552fc7d8f3035618be4",
+          "visible": [
+            212,
+            240,
+            298,
+            358
+          ],
+          "sourceBounds": [
+            326,
+            821,
+            460,
+            1006
+          ],
+          "sourceRoot": [
+            69.0195211786372,
+            176.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.6381766381766382,
+          "sourceHairWidth": 85.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_6_down",
+          "sha256": "0bd613027676fbdec7f34073b7b624fe17eae6f6f8ebbbd52ebc76c1a86e11db",
+          "visible": [
+            191,
+            240,
+            299,
+            359
+          ],
+          "sourceBounds": [
+            566,
+            820,
+            735,
+            1006
+          ],
+          "sourceRoot": [
+            101.3704433497537,
+            176.0
+          ],
+          "sourceHeadTop": 11.0,
+          "groupRatio": 0.6381766381766382,
+          "sourceHairWidth": 85.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_7_down",
+          "sha256": "b56fd920f87e332ecd37bfb635b0fcc3d5e7563965b8008ad23741d177ce9c18",
+          "visible": [
+            193,
+            241,
+            314,
+            358
+          ],
+          "sourceBounds": [
+            833,
+            822,
+            1022,
+            1006
+          ],
+          "sourceRoot": [
+            98.19504240052186,
+            174.0
+          ],
+          "sourceHeadTop": 13.0,
+          "groupRatio": 0.6381766381766382,
+          "sourceHairWidth": 97.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "guard_down",
+          "sha256": "dd2b3748d7dcdf620b91cf7e50befa19f20b57ae0afe63c69c4ec503839deb4b",
+          "visible": [
+            212,
+            232,
+            297,
+            355
+          ],
+          "sourceBounds": [
+            64,
+            1015,
+            197,
+            1208
+          ],
+          "sourceRoot": [
+            69.61541582150102,
+            188.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.6381766381766382,
+          "sourceHairWidth": 82.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "channel_down",
+          "sha256": "45d75c51a90a02007dc2aa7f9327d14398d6006790d76937d9d0a672c7644967",
+          "visible": [
+            208,
+            232,
+            303,
+            355
+          ],
+          "sourceBounds": [
+            328,
+            1015,
+            477,
+            1208
+          ],
+          "sourceRoot": [
+            75.12787356321839,
+            188.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.6381766381766382,
+          "sourceHairWidth": 97.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "recover_down",
+          "sha256": "f5bb00e3811f708e9119a9297fa0300474e3445ce928134d6c25f10b8024c62a",
+          "visible": [
+            212,
+            233,
+            299,
+            356
+          ],
+          "sourceBounds": [
+            590,
+            1015,
+            727,
+            1208
+          ],
+          "sourceRoot": [
+            68.24037037037037,
+            187.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.6381766381766382,
+          "sourceHairWidth": 96.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "step_down",
+          "sha256": "214f8553e4aab0f1e3353208d4463a217da22b234f7fd13520888e9d7032b945",
+          "visible": [
+            211,
+            232,
+            301,
+            355
+          ],
+          "sourceBounds": [
+            854,
+            1015,
+            995,
+            1208
+          ],
+          "sourceRoot": [
+            69.90978537650055,
+            188.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.6381766381766382,
+          "sourceHairWidth": 91.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "hurt_0_down",
+          "sha256": "b67338edb1479482eb9e0cab35bd00a3f7bf63841440705ce97c276f67962688",
+          "visible": [
+            210,
+            235,
+            303,
+            358
+          ],
+          "sourceBounds": [
+            61,
+            1227,
+            206,
+            1420
+          ],
+          "sourceRoot": [
+            72.29357429718875,
+            183.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.6381766381766382,
+          "sourceHairWidth": 90.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "hurt_1_down",
+          "sha256": "706453b9ed882c8e048959496962f12cbff217ee99fc7e4d2e6c98d8f3baf6ea",
+          "visible": [
+            207,
+            236,
+            298,
+            356
+          ],
+          "sourceBounds": [
+            325,
+            1235,
+            467,
+            1423
+          ],
+          "sourceRoot": [
+            76.84941461445297,
+            182.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.6381766381766382,
+          "sourceHairWidth": 85.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "death_0_down",
+          "sha256": "72651ee652688104bfb9d47e67ef58b5e45cf33c0ecdcb71414f881866860e36",
+          "visible": [
+            202,
+            258,
+            313,
+            361
+          ],
+          "sourceBounds": [
+            561,
+            1269,
+            735,
+            1430
+          ],
+          "sourceRoot": [
+            83.97377830750894,
+            148.0
+          ],
+          "sourceHeadTop": 9.0,
+          "groupRatio": 0.6381766381766382,
+          "sourceHairWidth": 83.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "death_1_down",
+          "sha256": "d3ef8d6b5123e1e5e3e80752b134b8e25b17fc199dc54044c5939ef1f0680767",
+          "visible": [
+            193,
+            277,
+            321,
+            354
+          ],
+          "sourceBounds": [
+            817,
+            1312,
+            1018,
+            1433
+          ],
+          "sourceRoot": [
+            99.0,
+            117.0
+          ],
+          "sourceHeadTop": 0,
+          "groupRatio": 0.6381766381766382,
+          "sourceHairWidth": 140.0,
+          "override": null,
+          "overrideSha256": null
+        }
+      ]
+    },
+    {
+      "direction": "down_right",
+      "path": "assets/source/boss-ly-mac-sau-unified-v1/raw/down_right.png",
+      "sha256": "ed297aedb594d12354ea3b7d845d1261852a95e55c01b8d01ad457f66457a630",
+      "extraSources": [],
+      "celGroupOverrides": [],
+      "ratio": 0.5788113695090439,
+      "walkRatio": 0.5788113695090439,
+      "actionRatio": 0.5788113695090439,
+      "reactionRatio": 0.5788113695090439,
+      "targetHairWidth": 57.591731266149864,
+      "frames": [
+        {
+          "frame": "idle_0_down_right",
+          "sha256": "95ceb3c2e61152d32a8305b417ef0cab19c9a22fb9cbc760c141a6128f452035",
+          "visible": [
+            204,
+            236,
+            297,
+            358
+          ],
+          "sourceBounds": [
+            37,
+            6,
+            197,
+            217
+          ],
+          "sourceRoot": [
+            89.56582633053222,
+            201.0
+          ],
+          "sourceHeadTop": 9.0,
+          "groupRatio": 0.5788113695090439,
+          "sourceHairWidth": 101.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "idle_1_down_right",
+          "sha256": "5396a6f6453732026446262822ae4734806dc0c1f97ba1fa2609cc48149c2ca9",
+          "visible": [
+            205,
+            236,
+            297,
+            358
+          ],
+          "sourceBounds": [
+            305,
+            6,
+            464,
+            217
+          ],
+          "sourceRoot": [
+            88.1125525946704,
+            201.0
+          ],
+          "sourceHeadTop": 9.0,
+          "groupRatio": 0.5788113695090439,
+          "sourceHairWidth": 104.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "idle_2_down_right",
+          "sha256": "e431cce76a51c4cfc4c58d0fecdb00bebeb6344749bea94d2420f6560a482b3c",
+          "visible": [
+            205,
+            235,
+            296,
+            357
+          ],
+          "sourceBounds": [
+            571,
+            6,
+            729,
+            217
+          ],
+          "sourceRoot": [
+            88.51970534069982,
+            202.0
+          ],
+          "sourceHeadTop": 9.0,
+          "groupRatio": 0.5788113695090439,
+          "sourceHairWidth": 98.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "idle_3_down_right",
+          "sha256": "2d61059e0724f74bd1dc070b46e2f1443ee48ffe8464cb776ad4b2d615ba49ac",
+          "visible": [
+            206,
+            234,
+            296,
+            357
+          ],
+          "sourceBounds": [
+            839,
+            5,
+            994,
+            217
+          ],
+          "sourceRoot": [
+            85.63983344899376,
+            204.0
+          ],
+          "sourceHeadTop": 10.0,
+          "groupRatio": 0.5788113695090439,
+          "sourceHairWidth": 98.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "walk_0_down_right",
+          "sha256": "7897a00d9331cae9790ef8c42cc09d37e2ff5d47ce7711b976ec6b536e40848a",
+          "visible": [
+            203,
+            239,
+            294,
+            357
+          ],
+          "sourceBounds": [
+            38,
+            226,
+            195,
+            430
+          ],
+          "sourceRoot": [
+            91.46382978723405,
+            195.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.5788113695090439,
+          "sourceHairWidth": 107.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "walk_1_down_right",
+          "sha256": "5ca2685d44fb3fadedb94bb77ee5c67965583f563966e92d57b324bd67f35138",
+          "visible": [
+            202,
+            237,
+            295,
+            356
+          ],
+          "sourceBounds": [
+            304,
+            223,
+            464,
+            428
+          ],
+          "sourceRoot": [
+            94.13220940550133,
+            199.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.5788113695090439,
+          "sourceHairWidth": 105.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "walk_2_down_right",
+          "sha256": "b8f1ac556cde029ff8931ff86e698fcf03e27e150ef1638fba2c10257ebe7afb",
+          "visible": [
+            200,
+            237,
+            292,
+            354
+          ],
+          "sourceBounds": [
+            566,
+            224,
+            725,
+            427
+          ],
+          "sourceRoot": [
+            96.14678899082568,
+            198.0
+          ],
+          "sourceHeadTop": 9.0,
+          "groupRatio": 0.5788113695090439,
+          "sourceHairWidth": 111.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "walk_3_down_right",
+          "sha256": "13b689640e246215db27058506ccbe267f5bb4aa5db25d7a2d399f32ebda2512",
+          "visible": [
+            199,
+            237,
+            294,
+            355
+          ],
+          "sourceBounds": [
+            834,
+            223,
+            998,
+            427
+          ],
+          "sourceRoot": [
+            98.97085201793722,
+            199.0
+          ],
+          "sourceHeadTop": 9.0,
+          "groupRatio": 0.5788113695090439,
+          "sourceHairWidth": 102.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "windup_down_right",
+          "sha256": "f657a946d94e75a7c567af43d8f44541d6f73ae6c45a8699736450734c8741b8",
+          "visible": [
+            185,
+            232,
+            296,
+            355
+          ],
+          "sourceBounds": [
+            13,
+            432,
+            205,
+            645
+          ],
+          "sourceRoot": [
+            122.40907328421869,
+            208.0
+          ],
+          "sourceHeadTop": 9.0,
+          "groupRatio": 0.5788113695090439,
+          "sourceHairWidth": 83.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "attack_1_down_right",
+          "sha256": "7b5550cd669f01ee230f4b4727f5d0228f947b5cf684301613a787387526023e",
+          "visible": [
+            203,
+            236,
+            332,
+            359
+          ],
+          "sourceBounds": [
+            294,
+            434,
+            517,
+            646
+          ],
+          "sourceRoot": [
+            92.10639057479472,
+            200.0
+          ],
+          "sourceHeadTop": 15.0,
+          "groupRatio": 0.5788113695090439,
+          "sourceHairWidth": 122.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "attack_2_down_right",
+          "sha256": "84f25feb2562a5e18651aeadd791337fb383589ab8f8de47bdc999127b890348",
+          "visible": [
+            196,
+            235,
+            320,
+            357
+          ],
+          "sourceBounds": [
+            554,
+            433,
+            769,
+            643
+          ],
+          "sourceRoot": [
+            102.86917293233083,
+            203.0
+          ],
+          "sourceHeadTop": 13.0,
+          "groupRatio": 0.5788113695090439,
+          "sourceHairWidth": 103.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "attack_3_down_right",
+          "sha256": "c8932b1b8b6ba7c4073b8d94ac7fdca4ad337fc807c0ac9c99610ddd17faa79a",
+          "visible": [
+            189,
+            230,
+            302,
+            355
+          ],
+          "sourceBounds": [
+            816,
+            431,
+            1011,
+            647
+          ],
+          "sourceRoot": [
+            116.46736011477762,
+            210.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.5788113695090439,
+          "sourceHairWidth": 82.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_0_down_right",
+          "sha256": "4d76e371343ddc268f1ee0b2a53ed1fb4961174b350ec532c7c495c98e3d4abf",
+          "visible": [
+            209,
+            237,
+            295,
+            355
+          ],
+          "sourceBounds": [
+            46,
+            647,
+            194,
+            851
+          ],
+          "sourceRoot": [
+            80.34399431414357,
+            199.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.5788113695090439,
+          "sourceHairWidth": 96.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_1_down_right",
+          "sha256": "f13af59d1bbea8a9f36a44b452689b2ccdbae3f7c67855ba93def3457bccb859",
+          "visible": [
+            206,
+            237,
+            317,
+            355
+          ],
+          "sourceBounds": [
+            299,
+            648,
+            493,
+            852
+          ],
+          "sourceRoot": [
+            85.66100032690422,
+            199.0
+          ],
+          "sourceHeadTop": 10.0,
+          "groupRatio": 0.5788113695090439,
+          "sourceHairWidth": 95.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_2_down_right",
+          "sha256": "acf52263c9c0d0590c867dd201e396b8ae21382a8ee90c1790948441e3e410fd",
+          "visible": [
+            189,
+            237,
+            294,
+            355
+          ],
+          "sourceBounds": [
+            543,
+            647,
+            725,
+            851
+          ],
+          "sourceRoot": [
+            115.11300919842313,
+            199.0
+          ],
+          "sourceHeadTop": 10.0,
+          "groupRatio": 0.5788113695090439,
+          "sourceHairWidth": 103.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_3_down_right",
+          "sha256": "4d857dd356203beba5728ecbc56f8fb3933606d0954fbc958f8762ecdfcfeeae",
+          "visible": [
+            205,
+            237,
+            310,
+            356
+          ],
+          "sourceBounds": [
+            828,
+            647,
+            1010,
+            852
+          ],
+          "sourceRoot": [
+            88.18056024299696,
+            199.0
+          ],
+          "sourceHeadTop": 11.0,
+          "groupRatio": 0.5788113695090439,
+          "sourceHairWidth": 95.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_4_down_right",
+          "sha256": "0a3710a25d396c1d950855502156f1ae7345afa31a276acd23c998a21ec45171",
+          "visible": [
+            206,
+            240,
+            293,
+            355
+          ],
+          "sourceBounds": [
+            43,
+            852,
+            194,
+            1050
+          ],
+          "sourceRoot": [
+            86.79395017793594,
+            193.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.5788113695090439,
+          "sourceHairWidth": 101.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_5_down_right",
+          "sha256": "a806c0ea26fcafbd0aa4e367c42a482d613917ecd024a65033dea8e87bcb70bb",
+          "visible": [
+            201,
+            239,
+            305,
+            355
+          ],
+          "sourceBounds": [
+            296,
+            851,
+            475,
+            1051
+          ],
+          "sourceRoot": [
+            94.19688936019794,
+            195.0
+          ],
+          "sourceHeadTop": 11.0,
+          "groupRatio": 0.5788113695090439,
+          "sourceHairWidth": 107.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_6_down_right",
+          "sha256": "ae4bb6c69cab71348923777e09e2931f5da0e0beb1c0ebd371d808db2d56f24a",
+          "visible": [
+            187,
+            240,
+            304,
+            356
+          ],
+          "sourceBounds": [
+            544,
+            851,
+            747,
+            1051
+          ],
+          "sourceRoot": [
+            118.83246073298429,
+            193.0
+          ],
+          "sourceHeadTop": 13.0,
+          "groupRatio": 0.5788113695090439,
+          "sourceHairWidth": 79.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_7_down_right",
+          "sha256": "f8570918448ebe4daafb044b25e3993d8ee3cf905f5bd10a0060d50282d8f475",
+          "visible": [
+            194,
+            240,
+            305,
+            355
+          ],
+          "sourceBounds": [
+            813,
+            852,
+            1005,
+            1050
+          ],
+          "sourceRoot": [
+            107.42857142857143,
+            193.0
+          ],
+          "sourceHeadTop": 13.0,
+          "groupRatio": 0.5788113695090439,
+          "sourceHairWidth": 108.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "guard_down_right",
+          "sha256": "da2a978e665c9ff12b5277f68532c435e51c1afa515ff05a0544ac61a12e6439",
+          "visible": [
+            204,
+            239,
+            291,
+            356
+          ],
+          "sourceBounds": [
+            40,
+            1051,
+            191,
+            1253
+          ],
+          "sourceRoot": [
+            90.48893280632412,
+            196.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.5788113695090439,
+          "sourceHairWidth": 90.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "channel_down_right",
+          "sha256": "3f2f7825c78de9b43dc643531b9138ddb354a363753b9773ab50164599ed8129",
+          "visible": [
+            203,
+            239,
+            304,
+            356
+          ],
+          "sourceBounds": [
+            296,
+            1051,
+            471,
+            1253
+          ],
+          "sourceRoot": [
+            91.17541136293077,
+            196.0
+          ],
+          "sourceHeadTop": 11.0,
+          "groupRatio": 0.5788113695090439,
+          "sourceHairWidth": 98.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "recover_down_right",
+          "sha256": "00a8b539ce1abf0dca78d15ee4a71f7d1ecbe189d303aa917578ae368811b076",
+          "visible": [
+            206,
+            237,
+            294,
+            356
+          ],
+          "sourceBounds": [
+            565,
+            1051,
+            717,
+            1256
+          ],
+          "sourceRoot": [
+            85.92049775319737,
+            198.0
+          ],
+          "sourceHeadTop": 9.0,
+          "groupRatio": 0.5788113695090439,
+          "sourceHairWidth": 106.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "step_down_right",
+          "sha256": "773001ea3b1f319a67a99383e2166d066c795f551f091c39725b84769fe78ee9",
+          "visible": [
+            202,
+            245,
+            302,
+            361
+          ],
+          "sourceBounds": [
+            826,
+            1051,
+            999,
+            1251
+          ],
+          "sourceRoot": [
+            93.78602894902454,
+            184.0
+          ],
+          "sourceHeadTop": 10.0,
+          "groupRatio": 0.5788113695090439,
+          "sourceHairWidth": 111.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "hurt_0_down_right",
+          "sha256": "b0f4283aed68c979d9a3d1b17af1f6495288715bb344b9ae826aaee30464318a",
+          "visible": [
+            196,
+            239,
+            298,
+            356
+          ],
+          "sourceBounds": [
+            23,
+            1253,
+            199,
+            1455
+          ],
+          "sourceRoot": [
+            103.7703678239945,
+            196.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.5788113695090439,
+          "sourceHairWidth": 102.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "hurt_1_down_right",
+          "sha256": "2661babe58e3581823d5387c0c00ab190942c01b611f6f8b0ce31989718d760b",
+          "visible": [
+            200,
+            245,
+            300,
+            358
+          ],
+          "sourceBounds": [
+            282,
+            1265,
+            455,
+            1460
+          ],
+          "sourceRoot": [
+            97.20461285008237,
+            185.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.5788113695090439,
+          "sourceHairWidth": 112.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "death_0_down_right",
+          "sha256": "a34e861f58e575e61d5a76078ddbf3c98a6afc553a972718643c8481364ac03f",
+          "visible": [
+            178,
+            261,
+            296,
+            363
+          ],
+          "sourceBounds": [
+            524,
+            1282,
+            729,
+            1459
+          ],
+          "sourceRoot": [
+            136.94935543278083,
+            158.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.5788113695090439,
+          "sourceHairWidth": 115.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "death_1_down_right",
+          "sha256": "a22556ceb20f70ca1cdcf997140649b311539cb6c0383cb10d715782707d0657",
+          "visible": [
+            185,
+            287,
+            330,
+            355
+          ],
+          "sourceBounds": [
+            778,
+            1342,
+            1028,
+            1459
+          ],
+          "sourceRoot": [
+            122.0,
+            113.0
+          ],
+          "sourceHeadTop": 0,
+          "groupRatio": 0.5788113695090439,
+          "sourceHairWidth": 127.0,
+          "override": null,
+          "overrideSha256": null
+        }
+      ]
+    },
+    {
+      "direction": "right",
+      "path": "assets/source/boss-ly-mac-sau-unified-v1/raw/right.png",
+      "sha256": "e671093a42d4d7f8a52dc51dae05568fb46affc59446ee294471898b3c8783aa",
+      "extraSources": [],
+      "celGroupOverrides": [],
+      "ratio": 0.7,
+      "walkRatio": 0.7,
+      "actionRatio": 0.7,
+      "reactionRatio": 0.7,
+      "targetHairWidth": 57.74999999999999,
+      "frames": [
+        {
+          "frame": "idle_0_right",
+          "sha256": "af6aeb8cf59369d84457e3cb4d5637bee00e757682347e37c10b89c6ee59e0f7",
+          "visible": [
+            196,
+            235,
+            298,
+            357
+          ],
+          "sourceBounds": [
+            72,
+            35,
+            217,
+            209
+          ],
+          "sourceRoot": [
+            85.65826873385014,
+            167.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 69.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "idle_1_right",
+          "sha256": "164641ae2b4e40ac5f6f9ef5aa4453b32f0f4a45d086cc311a5b8c7aff45fc70",
+          "visible": [
+            197,
+            235,
+            298,
+            357
+          ],
+          "sourceBounds": [
+            325,
+            35,
+            469,
+            209
+          ],
+          "sourceRoot": [
+            84.10889994472085,
+            167.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 82.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "idle_2_right",
+          "sha256": "d72d9aec582080b3ba67b9c8fc35d035604fdf77580da9796fb5da55dba3f056",
+          "visible": [
+            196,
+            236,
+            298,
+            357
+          ],
+          "sourceBounds": [
+            577,
+            36,
+            723,
+            209
+          ],
+          "sourceRoot": [
+            86.21281741233373,
+            166.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 83.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "idle_3_right",
+          "sha256": "a272224d8d60af77b1a32c1bfeb7b45bc63b9682bec1dd90b5192b495474ad46",
+          "visible": [
+            197,
+            235,
+            299,
+            357
+          ],
+          "sourceBounds": [
+            831,
+            35,
+            976,
+            209
+          ],
+          "sourceRoot": [
+            84.28388278388279,
+            167.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 84.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "walk_0_right",
+          "sha256": "771525a2c86c7796b7da0f3b6fb75fe10df22f14f0c1ad0a6b0e9ecadaae568e",
+          "visible": [
+            201,
+            236,
+            292,
+            356
+          ],
+          "sourceBounds": [
+            76,
+            240,
+            206,
+            411
+          ],
+          "sourceRoot": [
+            77.87295597484277,
+            165.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 85.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "walk_1_right",
+          "sha256": "301ad8854279c987c4a1eb5770a0a94e94e4ade61a5fe10c6b84342a2a8b631c",
+          "visible": [
+            201,
+            236,
+            296,
+            356
+          ],
+          "sourceBounds": [
+            326,
+            239,
+            462,
+            411
+          ],
+          "sourceRoot": [
+            77.88942052099947,
+            166.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 87.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "walk_2_right",
+          "sha256": "127a4c312be8ae092c00cd839baafaf1888b49a1d88169a9645257bf04b3895b",
+          "visible": [
+            198,
+            239,
+            291,
+            358
+          ],
+          "sourceBounds": [
+            578,
+            241,
+            711,
+            411
+          ],
+          "sourceRoot": [
+            82.40483870967742,
+            161.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 89.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "walk_3_right",
+          "sha256": "c6f4b7af159dcf4298bcf84338023aa5071827a2ff3b597fe95e1400af1fec59",
+          "visible": [
+            196,
+            238,
+            295,
+            357
+          ],
+          "sourceBounds": [
+            829,
+            241,
+            971,
+            411
+          ],
+          "sourceRoot": [
+            85.21708542713567,
+            163.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 92.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "windup_right",
+          "sha256": "a38892a5143a21821b3642267f3ab0e9be823bd4b8f32d07629e378a3c162ddc",
+          "visible": [
+            182,
+            237,
+            302,
+            357
+          ],
+          "sourceBounds": [
+            53,
+            444,
+            224,
+            616
+          ],
+          "sourceRoot": [
+            105.26733380986418,
+            164.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 61.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "attack_1_right",
+          "sha256": "f0d85fa2183e914a584c81418a6aad50132e3c8f5fedf0c940fb0d3197fa9d4e",
+          "visible": [
+            200,
+            236,
+            355,
+            356
+          ],
+          "sourceBounds": [
+            304,
+            443,
+            525,
+            615
+          ],
+          "sourceRoot": [
+            80.18426395939086,
+            165.0
+          ],
+          "sourceHeadTop": 20.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 94.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "attack_2_right",
+          "sha256": "e012f130f160a25fc29aa285ece291d1d4071a51d55dbf8fd12e293282387ed8",
+          "visible": [
+            190,
+            237,
+            320,
+            358
+          ],
+          "sourceBounds": [
+            561,
+            443,
+            747,
+            616
+          ],
+          "sourceRoot": [
+            93.64894259818732,
+            164.0
+          ],
+          "sourceHeadTop": 10.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 88.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "attack_3_right",
+          "sha256": "9d4b9c37d9514a589c6ed91ecbe5e1e3481cbfac23ff47b738d144985405cc81",
+          "visible": [
+            194,
+            226,
+            303,
+            357
+          ],
+          "sourceBounds": [
+            834,
+            429,
+            990,
+            616
+          ],
+          "sourceRoot": [
+            88.32189973614776,
+            180.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 50.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_0_right",
+          "sha256": "2eb2039428fa9e89882c2d26ab5ac2b4f9de22996ddcff02f41dc3521071cd37",
+          "visible": [
+            203,
+            236,
+            297,
+            357
+          ],
+          "sourceBounds": [
+            70,
+            648,
+            204,
+            821
+          ],
+          "sourceRoot": [
+            75.98871063576946,
+            165.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 84.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_1_right",
+          "sha256": "f588a62c6648e78b44e3ee156ab0d33377adbccd952c6c26abf50df9085371aa",
+          "visible": [
+            203,
+            236,
+            329,
+            357
+          ],
+          "sourceBounds": [
+            316,
+            648,
+            497,
+            821
+          ],
+          "sourceRoot": [
+            75.9947399181765,
+            165.0
+          ],
+          "sourceHeadTop": 11.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 86.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_2_right",
+          "sha256": "2a9d54ff037ff13115a6d99535038f88f7c72607cb973968271a1fc017a04f46",
+          "visible": [
+            183,
+            233,
+            300,
+            358
+          ],
+          "sourceBounds": [
+            556,
+            643,
+            723,
+            821
+          ],
+          "sourceRoot": [
+            104.3973597359736,
+            170.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 65.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_3_right",
+          "sha256": "6ad363510dbbb41c1cfa9d09461e8698d0249417f65390ee5e80b493f228e2b0",
+          "visible": [
+            199,
+            239,
+            352,
+            358
+          ],
+          "sourceBounds": [
+            810,
+            650,
+            1029,
+            820
+          ],
+          "sourceRoot": [
+            81.7937106918239,
+            161.0
+          ],
+          "sourceHeadTop": 17.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 87.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_4_right",
+          "sha256": "67fc57c40034376b02fb8c859fdcdd169cc6bca4cefd02cacf8bfb3e2a1091a9",
+          "visible": [
+            198,
+            236,
+            295,
+            357
+          ],
+          "sourceBounds": [
+            64,
+            855,
+            202,
+            1028
+          ],
+          "sourceRoot": [
+            82.66646039603961,
+            166.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 90.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_5_right",
+          "sha256": "e283e80a0032d59edbb83b763b51613cd6dd5e8071437ca873556fae4b17b345",
+          "visible": [
+            196,
+            235,
+            309,
+            357
+          ],
+          "sourceBounds": [
+            311,
+            854,
+            473,
+            1028
+          ],
+          "sourceRoot": [
+            85.53680430879713,
+            167.0
+          ],
+          "sourceHeadTop": 10.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 86.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_6_right",
+          "sha256": "e1308ccecf1dfc7c15474dfc104036d88b509bef5597393bc98e8d6a7d85935d",
+          "visible": [
+            187,
+            230,
+            304,
+            358
+          ],
+          "sourceBounds": [
+            567,
+            845,
+            734,
+            1028
+          ],
+          "sourceRoot": [
+            98.51377860812704,
+            175.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 49.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_7_right",
+          "sha256": "494bad911941813e9512e49ba3b525c64d94b83baa9ba70534b6c28362fd8ac4",
+          "visible": [
+            203,
+            236,
+            325,
+            357
+          ],
+          "sourceBounds": [
+            822,
+            855,
+            997,
+            1028
+          ],
+          "sourceRoot": [
+            76.32742017232641,
+            165.0
+          ],
+          "sourceHeadTop": 10.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 88.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "guard_right",
+          "sha256": "281f347bac51bf588c002b45ee98d50d8a8525e05453e31e9f837585f22819ed",
+          "visible": [
+            201,
+            237,
+            297,
+            357
+          ],
+          "sourceBounds": [
+            65,
+            1062,
+            202,
+            1234
+          ],
+          "sourceRoot": [
+            78.58995815899581,
+            164.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 83.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "channel_right",
+          "sha256": "97476ccb83f29bdd633e46d0b1398905f8e75597e6fa3629b0fdd1422248f121",
+          "visible": [
+            203,
+            238,
+            310,
+            357
+          ],
+          "sourceBounds": [
+            322,
+            1063,
+            475,
+            1233
+          ],
+          "sourceRoot": [
+            76.09848908785675,
+            163.0
+          ],
+          "sourceHeadTop": 10.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 88.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "recover_right",
+          "sha256": "d42753b41cd05b98dac75057dd1673596ffcc17160f802e702aee75653105afa",
+          "visible": [
+            201,
+            236,
+            297,
+            356
+          ],
+          "sourceBounds": [
+            580,
+            1061,
+            717,
+            1233
+          ],
+          "sourceRoot": [
+            78.591985428051,
+            165.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 83.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "step_right",
+          "sha256": "377350606c4a89877710d36234451cf083e01d03cbe2dbaca7015c1fd5afa01e",
+          "visible": [
+            193,
+            241,
+            299,
+            359
+          ],
+          "sourceBounds": [
+            830,
+            1061,
+            982,
+            1230
+          ],
+          "sourceRoot": [
+            89.29798241076048,
+            159.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 88.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "hurt_0_right",
+          "sha256": "5cdf0ed7dd8d701ec678bb324c70e7ce90f68dec707dcb81abc6ba5c3cfdef8b",
+          "visible": [
+            187,
+            239,
+            293,
+            356
+          ],
+          "sourceBounds": [
+            56,
+            1276,
+            207,
+            1443
+          ],
+          "sourceRoot": [
+            99.17222963951936,
+            161.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 99.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "hurt_1_right",
+          "sha256": "e1694c423784158afbcc14c026186290e522ea82d8c51df0827670b5973ec6d8",
+          "visible": [
+            198,
+            247,
+            302,
+            358
+          ],
+          "sourceBounds": [
+            314,
+            1288,
+            463,
+            1446
+          ],
+          "sourceRoot": [
+            82.83413751507841,
+            150.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 105.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "death_0_right",
+          "sha256": "5aae76cb0243a4eaebe0f9df5d35cdf3926abe1a62435acf20a746cff52a5639",
+          "visible": [
+            198,
+            257,
+            331,
+            361
+          ],
+          "sourceBounds": [
+            557,
+            1299,
+            747,
+            1447
+          ],
+          "sourceRoot": [
+            82.72748267898383,
+            136.0
+          ],
+          "sourceHeadTop": 15.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 82.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "death_1_right",
+          "sha256": "abf44388e26b9961701f982d38d1876a7c8146d6c871f0f235c9c1ad84b3e053",
+          "visible": [
+            176,
+            284,
+            336,
+            355
+          ],
+          "sourceBounds": [
+            800,
+            1346,
+            1028,
+            1447
+          ],
+          "sourceRoot": [
+            115.0,
+            97.0
+          ],
+          "sourceHeadTop": 0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 127.0,
+          "override": null,
+          "overrideSha256": null
+        }
+      ]
+    },
+    {
+      "direction": "up_right",
+      "path": "assets/source/boss-ly-mac-sau-unified-v1/raw/up_right.png",
+      "sha256": "8ff9c9a5144d9dd0bfbae65fcbfd36bd249f86b6ed39a72bd2137cf1102b30a2",
+      "extraSources": [],
+      "celGroupOverrides": [],
+      "ratio": 0.7466666666666667,
+      "walkRatio": 0.7466666666666667,
+      "actionRatio": 0.7466666666666667,
+      "reactionRatio": 0.7466666666666667,
+      "targetHairWidth": 53.013333333333335,
+      "frames": [
+        {
+          "frame": "idle_0_up_right",
+          "sha256": "4e9db2a61d7515e5b29f8fc340b635ef824ae8c093fa5048dedae966ecb10458",
+          "visible": [
+            209,
+            236,
+            311,
+            358
+          ],
+          "sourceBounds": [
+            84,
+            42,
+            220,
+            205
+          ],
+          "sourceRoot": [
+            63.61474358974359,
+            156.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.7466666666666667,
+          "sourceHairWidth": 48.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "idle_1_up_right",
+          "sha256": "5b5d3586c3bbaf92edd15daf9700c80072dd77dfec7b1548bc20529f4d443e27",
+          "visible": [
+            211,
+            236,
+            311,
+            358
+          ],
+          "sourceBounds": [
+            335,
+            42,
+            469,
+            205
+          ],
+          "sourceRoot": [
+            60.528888888888886,
+            156.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.7466666666666667,
+          "sourceHairWidth": 72.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "idle_2_up_right",
+          "sha256": "e21c8ee2c19dc833ed7260f856528330efecb3e9dde57fcd93b715524e806420",
+          "visible": [
+            211,
+            236,
+            311,
+            358
+          ],
+          "sourceBounds": [
+            586,
+            42,
+            720,
+            205
+          ],
+          "sourceRoot": [
+            60.52999294283698,
+            156.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.7466666666666667,
+          "sourceHairWidth": 71.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "idle_3_up_right",
+          "sha256": "26f51effacbd34af649c15a05a9a2f19ba60e14827b5681b3154f265ac290b83",
+          "visible": [
+            209,
+            236,
+            311,
+            358
+          ],
+          "sourceBounds": [
+            832,
+            42,
+            969,
+            205
+          ],
+          "sourceRoot": [
+            62.789439793947196,
+            156.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.7466666666666667,
+          "sourceHairWidth": 71.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "walk_0_up_right",
+          "sha256": "4a650e4bd41e86adcdbfcf0d2e1a8f6aa55fd6ce38ee656b4215f4196ed1dffd",
+          "visible": [
+            208,
+            241,
+            313,
+            363
+          ],
+          "sourceBounds": [
+            80,
+            238,
+            220,
+            401
+          ],
+          "sourceRoot": [
+            64.8497506234414,
+            148.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.7466666666666667,
+          "sourceHairWidth": 74.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "walk_1_up_right",
+          "sha256": "c73214d5946d30f78e65879d00c923d9c37ba3f2da39f138ea73a0c766380c8e",
+          "visible": [
+            206,
+            246,
+            313,
+            366
+          ],
+          "sourceBounds": [
+            328,
+            238,
+            471,
+            399
+          ],
+          "sourceRoot": [
+            66.46538229981938,
+            142.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7466666666666667,
+          "sourceHairWidth": 59.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "walk_2_up_right",
+          "sha256": "c7132ec69cfbaba059ac39846d0e184b41c42294e433f878e1e0a55e4db09d02",
+          "visible": [
+            207,
+            242,
+            315,
+            361
+          ],
+          "sourceBounds": [
+            579,
+            238,
+            723,
+            398
+          ],
+          "sourceRoot": [
+            66.16181448882871,
+            147.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.7466666666666667,
+          "sourceHairWidth": 71.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "walk_3_up_right",
+          "sha256": "40f4b8bde52593c3e6e13c7a28e2a00a99f33e60cb1e20dc3ad6dbc6fd7a9be6",
+          "visible": [
+            209,
+            243,
+            321,
+            362
+          ],
+          "sourceBounds": [
+            827,
+            239,
+            977,
+            398
+          ],
+          "sourceRoot": [
+            63.534065934065936,
+            146.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.7466666666666667,
+          "sourceHairWidth": 77.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "windup_up_right",
+          "sha256": "5dde2e47f961fc3c5d358bd2cb326e27cb9f9778915ca5191e5a98d33af46b83",
+          "visible": [
+            210,
+            243,
+            317,
+            356
+          ],
+          "sourceBounds": [
+            77,
+            441,
+            220,
+            593
+          ],
+          "sourceRoot": [
+            62.197596795727634,
+            146.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.7466666666666667,
+          "sourceHairWidth": 66.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "attack_1_up_right",
+          "sha256": "c6634221181e7c0bea5f0fc9e6d24d70ceee18069c958adc1eda13dbddc00837",
+          "visible": [
+            206,
+            242,
+            341,
+            358
+          ],
+          "sourceBounds": [
+            328,
+            440,
+            509,
+            595
+          ],
+          "sourceRoot": [
+            67.13511507052709,
+            147.0
+          ],
+          "sourceHeadTop": 9.0,
+          "groupRatio": 0.7466666666666667,
+          "sourceHairWidth": 71.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "attack_2_up_right",
+          "sha256": "ba2769a40e9abeca1f1edb51067c1b3ac4a80413ad0c2d2d98166c61846c4452",
+          "visible": [
+            199,
+            245,
+            344,
+            356
+          ],
+          "sourceBounds": [
+            566,
+            443,
+            760,
+            591
+          ],
+          "sourceRoot": [
+            75.8407494145199,
+            143.0
+          ],
+          "sourceHeadTop": 4.0,
+          "groupRatio": 0.7466666666666667,
+          "sourceHairWidth": 75.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "attack_3_up_right",
+          "sha256": "392e95a0a3b309b351cbd1da34d5567d8ba414e7aa9dde09d2029553a7636951",
+          "visible": [
+            209,
+            227,
+            345,
+            357
+          ],
+          "sourceBounds": [
+            831,
+            420,
+            1013,
+            594
+          ],
+          "sourceRoot": [
+            63.101683937823836,
+            168.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.7466666666666667,
+          "sourceHairWidth": 76.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_0_up_right",
+          "sha256": "0be2c58cdcc783a760e845beaf808325ffbe012830be354475b00f5148405d34",
+          "visible": [
+            201,
+            239,
+            312,
+            358
+          ],
+          "sourceBounds": [
+            82,
+            630,
+            230,
+            789
+          ],
+          "sourceRoot": [
+            73.88417910447761,
+            152.0
+          ],
+          "sourceHeadTop": 9.0,
+          "groupRatio": 0.7466666666666667,
+          "sourceHairWidth": 71.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_1_up_right",
+          "sha256": "36ac499f4f0bc1cbdf4c78f5fcc23cb44c173408eb6b0e1d8118c5414763e26c",
+          "visible": [
+            203,
+            239,
+            317,
+            357
+          ],
+          "sourceBounds": [
+            329,
+            630,
+            482,
+            788
+          ],
+          "sourceRoot": [
+            70.68780487804878,
+            151.0
+          ],
+          "sourceHeadTop": 12.0,
+          "groupRatio": 0.7466666666666667,
+          "sourceHairWidth": 69.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_2_up_right",
+          "sha256": "3b20a51ffe1903686940f86a79a348e77cd6c85196061b838f6f10451aadab40",
+          "visible": [
+            213,
+            238,
+            315,
+            357
+          ],
+          "sourceBounds": [
+            587,
+            628,
+            724,
+            787
+          ],
+          "sourceRoot": [
+            57.95074946466809,
+            153.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.7466666666666667,
+          "sourceHairWidth": 44.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_3_up_right",
+          "sha256": "6a8c9cd2c2e59d70e7b2831bb4e9dd474daef788dd454206c147e361d8c15175",
+          "visible": [
+            211,
+            241,
+            346,
+            357
+          ],
+          "sourceBounds": [
+            833,
+            632,
+            1014,
+            788
+          ],
+          "sourceRoot": [
+            59.70659590598939,
+            149.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7466666666666667,
+          "sourceHairWidth": 66.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_4_up_right",
+          "sha256": "3cb2b7e8766706ad8958d723b52399ccbb879c3b0599f471224178134fb6248e",
+          "visible": [
+            203,
+            241,
+            316,
+            357
+          ],
+          "sourceBounds": [
+            80,
+            825,
+            231,
+            981
+          ],
+          "sourceRoot": [
+            71.44931327665141,
+            149.0
+          ],
+          "sourceHeadTop": 9.0,
+          "groupRatio": 0.7466666666666667,
+          "sourceHairWidth": 45.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_5_up_right",
+          "sha256": "fcbceda1672ece2428c40c25ce20a1b71da567bc3ef988dcb4c77267c537a3ae",
+          "visible": [
+            204,
+            241,
+            318,
+            357
+          ],
+          "sourceBounds": [
+            328,
+            825,
+            481,
+            980
+          ],
+          "sourceRoot": [
+            69.8203076923077,
+            148.0
+          ],
+          "sourceHeadTop": 10.0,
+          "groupRatio": 0.7466666666666667,
+          "sourceHairWidth": 86.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_6_up_right",
+          "sha256": "70bb1277434a2245b073b8ea5e67601a18e78ca4302be5a7c0b426f5a5321683",
+          "visible": [
+            204,
+            233,
+            330,
+            357
+          ],
+          "sourceBounds": [
+            574,
+            812,
+            743,
+            978
+          ],
+          "sourceRoot": [
+            70.2834699453552,
+            160.0
+          ],
+          "sourceHeadTop": 12.0,
+          "groupRatio": 0.7466666666666667,
+          "sourceHairWidth": 52.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_7_up_right",
+          "sha256": "e1210f8a7cc9d5434cbd26b87f982ff23e5a96126d2bae02f533f7de0b7cd2ea",
+          "visible": [
+            194,
+            243,
+            342,
+            357
+          ],
+          "sourceBounds": [
+            815,
+            826,
+            1013,
+            979
+          ],
+          "sourceRoot": [
+            83.16148390616476,
+            146.0
+          ],
+          "sourceHeadTop": 15.0,
+          "groupRatio": 0.7466666666666667,
+          "sourceHairWidth": 72.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "guard_up_right",
+          "sha256": "ce1a3d4df2cce4b5d916337ffa92d1514d32e2fe25274d15527c93219391e578",
+          "visible": [
+            209,
+            236,
+            313,
+            357
+          ],
+          "sourceBounds": [
+            83,
+            1020,
+            222,
+            1182
+          ],
+          "sourceRoot": [
+            63.22941590429275,
+            155.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.7466666666666667,
+          "sourceHairWidth": 68.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "channel_up_right",
+          "sha256": "2eafa15ef41571cf31470204edb63472cdb74523630a24d28156cede1a06413d",
+          "visible": [
+            205,
+            236,
+            316,
+            355
+          ],
+          "sourceBounds": [
+            329,
+            1019,
+            477,
+            1179
+          ],
+          "sourceRoot": [
+            67.89861751152074,
+            155.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.7466666666666667,
+          "sourceHairWidth": 72.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "recover_up_right",
+          "sha256": "28a0bacb3e112367b88ed5685642faaec5beb2751ecfbe9b91e2921b6eed22e0",
+          "visible": [
+            211,
+            237,
+            316,
+            356
+          ],
+          "sourceBounds": [
+            585,
+            1021,
+            726,
+            1181
+          ],
+          "sourceRoot": [
+            60.31590413943355,
+            154.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7466666666666667,
+          "sourceHairWidth": 68.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "step_up_right",
+          "sha256": "6794f4eb5e03b50c3d2ee975eb3801ab6386d095557ee0b1388c1b5b74fac23e",
+          "visible": [
+            198,
+            241,
+            319,
+            360
+          ],
+          "sourceBounds": [
+            824,
+            1021,
+            986,
+            1180
+          ],
+          "sourceRoot": [
+            77.51650165016501,
+            148.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7466666666666667,
+          "sourceHairWidth": 72.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "hurt_0_up_right",
+          "sha256": "c73da9c75a3033c945e2c8f4d08440f2b1fbfa0ba44971d403936c3f9c35be0c",
+          "visible": [
+            202,
+            244,
+            304,
+            356
+          ],
+          "sourceBounds": [
+            76,
+            1235,
+            212,
+            1385
+          ],
+          "sourceRoot": [
+            71.78551724137931,
+            144.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7466666666666667,
+          "sourceHairWidth": 84.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "hurt_1_up_right",
+          "sha256": "7d7b6eac3c2177db75dfc5c5c5e70eaf76995e7f4160b07268a73bdf917b2dba",
+          "visible": [
+            209,
+            245,
+            324,
+            356
+          ],
+          "sourceBounds": [
+            320,
+            1244,
+            474,
+            1393
+          ],
+          "sourceRoot": [
+            63.393229166666664,
+            143.0
+          ],
+          "sourceHeadTop": 10.0,
+          "groupRatio": 0.7466666666666667,
+          "sourceHairWidth": 112.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "death_0_up_right",
+          "sha256": "b45aead8863cedc3556c237414e113942ff2b1488d5f81b2d59af746735c4aa3",
+          "visible": [
+            199,
+            256,
+            332,
+            357
+          ],
+          "sourceBounds": [
+            562,
+            1261,
+            740,
+            1396
+          ],
+          "sourceRoot": [
+            76.13746223564955,
+            129.0
+          ],
+          "sourceHeadTop": 11.0,
+          "groupRatio": 0.7466666666666667,
+          "sourceHairWidth": 101.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "death_1_up_right",
+          "sha256": "f0fbf6129d0a85e4e8967675982dd8a1e7c426feff8aa05de71fb228e3120c49",
+          "visible": [
+            178,
+            280,
+            345,
+            355
+          ],
+          "sourceBounds": [
+            792,
+            1297,
+            1015,
+            1397
+          ],
+          "sourceRoot": [
+            105.0,
+            96.0
+          ],
+          "sourceHeadTop": 0,
+          "groupRatio": 0.7466666666666667,
+          "sourceHairWidth": 116.0,
+          "override": null,
+          "overrideSha256": null
+        }
+      ]
+    },
+    {
+      "direction": "up",
+      "path": "assets/source/boss-ly-mac-sau-unified-v1/raw/up.png",
+      "sha256": "bf142245f9a9472701c18c6bd3ef97312fa674bd62c8bfabc3e58702f343ec47",
+      "extraSources": [],
+      "celGroupOverrides": [],
+      "ratio": 0.7225806451612903,
+      "walkRatio": 0.7225806451612903,
+      "actionRatio": 0.7225806451612903,
+      "reactionRatio": 0.7225806451612903,
+      "targetHairWidth": 59.97419354838709,
+      "frames": [
+        {
+          "frame": "idle_0_up",
+          "sha256": "1c45bbe4a889841749586fd0df66533d7dddafa32b0bbc3c332f58dce8633237",
+          "visible": [
+            215,
+            234,
+            314,
+            355
+          ],
+          "sourceBounds": [
+            86,
+            47,
+            223,
+            214
+          ],
+          "sourceRoot": [
+            57.04716981132076,
+            163.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.7225806451612903,
+          "sourceHairWidth": 89.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "idle_1_up",
+          "sha256": "ff49bd23717ca925b0b8e0d31ead8a6d9d7cc4a97fe9c0ad09a08a1522c1f1fc",
+          "visible": [
+            212,
+            235,
+            314,
+            356
+          ],
+          "sourceBounds": [
+            339,
+            47,
+            480,
+            214
+          ],
+          "sourceRoot": [
+            60.76028880866426,
+            162.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7225806451612903,
+          "sourceHairWidth": 88.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "idle_2_up",
+          "sha256": "641c41e39cd57a675b1f0edc85e2864dc7342ac8985dcbc35652c4dd4dc52e4a",
+          "visible": [
+            213,
+            235,
+            313,
+            356
+          ],
+          "sourceBounds": [
+            597,
+            47,
+            736,
+            214
+          ],
+          "sourceRoot": [
+            59.39136904761905,
+            162.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7225806451612903,
+          "sourceHairWidth": 78.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "idle_3_up",
+          "sha256": "96e545d6a5d3277767126b29a29c4285fff64c4e6e83dff5ae4d09ab07d7d8c9",
+          "visible": [
+            212,
+            236,
+            312,
+            356
+          ],
+          "sourceBounds": [
+            853,
+            48,
+            992,
+            214
+          ],
+          "sourceRoot": [
+            60.41503759398496,
+            161.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.7225806451612903,
+          "sourceHairWidth": 78.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "walk_0_up",
+          "sha256": "31dd8ba6bb91fd663ae0be7aad65e2c38ab684114bae6ebcb860766f57a2f6fe",
+          "visible": [
+            212,
+            239,
+            317,
+            361
+          ],
+          "sourceBounds": [
+            82,
+            245,
+            227,
+            414
+          ],
+          "sourceRoot": [
+            60.29642857142857,
+            157.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.7225806451612903,
+          "sourceHairWidth": 82.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "walk_1_up",
+          "sha256": "73496e52b6dd3e2e307174b6db31c752784f693b008e01119003a20964c187c4",
+          "visible": [
+            210,
+            239,
+            315,
+            365
+          ],
+          "sourceBounds": [
+            337,
+            245,
+            483,
+            420
+          ],
+          "sourceRoot": [
+            63.09844192634561,
+            156.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.7225806451612903,
+          "sourceHairWidth": 99.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "walk_2_up",
+          "sha256": "2fee5508e3e57bc50a8f9386ad683eb857030e0096933d8b89e556066c72ae69",
+          "visible": [
+            211,
+            244,
+            317,
+            363
+          ],
+          "sourceBounds": [
+            593,
+            245,
+            740,
+            410
+          ],
+          "sourceRoot": [
+            61.989297658862874,
+            149.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7225806451612903,
+          "sourceHairWidth": 82.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "walk_3_up",
+          "sha256": "8b8eb9aa5bbca1edffd295d078cdca0248ac4f5413bc9f4aa6cfd75b61d32ccc",
+          "visible": [
+            206,
+            239,
+            314,
+            365
+          ],
+          "sourceBounds": [
+            848,
+            245,
+            997,
+            420
+          ],
+          "sourceRoot": [
+            68.81388012618297,
+            156.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7225806451612903,
+          "sourceHairWidth": 99.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "windup_up",
+          "sha256": "becac8135a7680fa96f2d1d5b2efd4b368563fb41aeaecea56caffa6183e957a",
+          "visible": [
+            212,
+            236,
+            317,
+            358
+          ],
+          "sourceBounds": [
+            77,
+            456,
+            223,
+            625
+          ],
+          "sourceRoot": [
+            60.48106060606061,
+            161.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7225806451612903,
+          "sourceHairWidth": 92.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "attack_1_up",
+          "sha256": "491bb1e41edf4c65a6b38299aa1cda57f7f87178bb96eaf2038dc5c3a31d3d62",
+          "visible": [
+            206,
+            241,
+            332,
+            362
+          ],
+          "sourceBounds": [
+            328,
+            457,
+            502,
+            625
+          ],
+          "sourceRoot": [
+            69.34563520227111,
+            154.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7225806451612903,
+          "sourceHairWidth": 73.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "attack_2_up",
+          "sha256": "d837f8b3583f8d9b641f2de104339d02c9cf92860ad26d7839ea113a3cd61a25",
+          "visible": [
+            204,
+            241,
+            347,
+            364
+          ],
+          "sourceBounds": [
+            573,
+            456,
+            771,
+            626
+          ],
+          "sourceRoot": [
+            71.9625340599455,
+            154.0
+          ],
+          "sourceHeadTop": 11.0,
+          "groupRatio": 0.7225806451612903,
+          "sourceHairWidth": 83.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "attack_3_up",
+          "sha256": "d717103901e4b3037761b54bef2e354886de1cef7e752e010aa79f0494440663",
+          "visible": [
+            207,
+            216,
+            299,
+            363
+          ],
+          "sourceBounds": [
+            840,
+            421,
+            968,
+            624
+          ],
+          "sourceRoot": [
+            67.6586007364545,
+            188.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.7225806451612903,
+          "sourceHairWidth": 68.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_0_up",
+          "sha256": "7e2fd68c1889a34ad6035fa4a294b188a4cf5f012d6fb8b2a77d099280903e1b",
+          "visible": [
+            210,
+            237,
+            312,
+            356
+          ],
+          "sourceBounds": [
+            82,
+            662,
+            223,
+            827
+          ],
+          "sourceRoot": [
+            63.6693744922827,
+            159.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7225806451612903,
+          "sourceHairWidth": 86.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_1_up",
+          "sha256": "1d6563f85e4801c63cd96a95660766aaeae5ea72411ac7a63c4d9be4c9cfb757",
+          "visible": [
+            207,
+            238,
+            312,
+            357
+          ],
+          "sourceBounds": [
+            336,
+            663,
+            482,
+            827
+          ],
+          "sourceRoot": [
+            68.01044776119403,
+            158.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7225806451612903,
+          "sourceHairWidth": 83.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_2_up",
+          "sha256": "ccb56d2c566d821728067b50fa71b000856ee7c698ec63bc0963a5edd1ed9422",
+          "visible": [
+            204,
+            217,
+            302,
+            356
+          ],
+          "sourceBounds": [
+            587,
+            635,
+            722,
+            827
+          ],
+          "sourceRoot": [
+            71.34355828220859,
+            187.0
+          ],
+          "sourceHeadTop": 9.0,
+          "groupRatio": 0.7225806451612903,
+          "sourceHairWidth": 79.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_3_up",
+          "sha256": "9907d3976429a660e62bf45970d02ed9856998ccc28c2a27e9478e3e3f36c366",
+          "visible": [
+            203,
+            232,
+            330,
+            356
+          ],
+          "sourceBounds": [
+            840,
+            656,
+            1016,
+            827
+          ],
+          "sourceRoot": [
+            73.91002747252747,
+            166.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.7225806451612903,
+          "sourceHairWidth": 71.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_4_up",
+          "sha256": "014de030c1d7f21884c8faa52a408f2060fa03e80121a670670ee2b13f304681",
+          "visible": [
+            211,
+            239,
+            311,
+            356
+          ],
+          "sourceBounds": [
+            81,
+            860,
+            220,
+            1022
+          ],
+          "sourceRoot": [
+            62.433234421364986,
+            157.0
+          ],
+          "sourceHeadTop": 9.0,
+          "groupRatio": 0.7225806451612903,
+          "sourceHairWidth": 88.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_5_up",
+          "sha256": "516549b8861346209acde616441b734bd9b84bffd30b13f19ce2e8882ed9512c",
+          "visible": [
+            206,
+            241,
+            314,
+            357
+          ],
+          "sourceBounds": [
+            332,
+            862,
+            481,
+            1022
+          ],
+          "sourceRoot": [
+            68.84537572254335,
+            154.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7225806451612903,
+          "sourceHairWidth": 69.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_6_up",
+          "sha256": "d8a04a851ae8f077b72f8dfa5b8bc1e1b666b89f79a38eb68830f2821ee4b466",
+          "visible": [
+            207,
+            230,
+            320,
+            356
+          ],
+          "sourceBounds": [
+            583,
+            848,
+            740,
+            1022
+          ],
+          "sourceRoot": [
+            67.78099173553719,
+            169.0
+          ],
+          "sourceHeadTop": 10.0,
+          "groupRatio": 0.7225806451612903,
+          "sourceHairWidth": 75.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_7_up",
+          "sha256": "32860f690b58e81cff2cc3973f1b181dc03ae453ce2cf8dfd90252c2a56dc858",
+          "visible": [
+            197,
+            240,
+            321,
+            356
+          ],
+          "sourceBounds": [
+            830,
+            861,
+            1001,
+            1022
+          ],
+          "sourceRoot": [
+            81.33015006821283,
+            155.0
+          ],
+          "sourceHeadTop": 12.0,
+          "groupRatio": 0.7225806451612903,
+          "sourceHairWidth": 66.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "guard_up",
+          "sha256": "a9dbb0dbb353b7499e3adfd704ecb7c9710b067b5ecba57f8b9ed5901e41d41c",
+          "visible": [
+            218,
+            236,
+            305,
+            356
+          ],
+          "sourceBounds": [
+            91,
+            1051,
+            212,
+            1217
+          ],
+          "sourceRoot": [
+            53.231231231231234,
+            161.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.7225806451612903,
+          "sourceHairWidth": 87.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "channel_up",
+          "sha256": "7a72bb37fbd6b93a1268c4bcfd9c79adfcf284448c67275b7f6697b6ce6b3860",
+          "visible": [
+            214,
+            235,
+            309,
+            355
+          ],
+          "sourceBounds": [
+            335,
+            1051,
+            466,
+            1217
+          ],
+          "sourceRoot": [
+            57.55192878338279,
+            162.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.7225806451612903,
+          "sourceHairWidth": 83.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "recover_up",
+          "sha256": "ad3da474e107cfab581efecd404e178511e3ca39f7b286c3b34ba8df21f424b2",
+          "visible": [
+            213,
+            236,
+            310,
+            356
+          ],
+          "sourceBounds": [
+            593,
+            1052,
+            727,
+            1218
+          ],
+          "sourceRoot": [
+            60.08956328645448,
+            160.0
+          ],
+          "sourceHeadTop": 9.0,
+          "groupRatio": 0.7225806451612903,
+          "sourceHairWidth": 86.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "step_up",
+          "sha256": "eaca60a768e7ef2fc84fd655f5c419ab33553dd5cae4741d5ee2b1263318d17d",
+          "visible": [
+            215,
+            244,
+            325,
+            365
+          ],
+          "sourceBounds": [
+            838,
+            1050,
+            990,
+            1217
+          ],
+          "sourceRoot": [
+            56.21906022501655,
+            150.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.7225806451612903,
+          "sourceHairWidth": 91.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "hurt_0_up",
+          "sha256": "cc9341a5a5346f1d95066e0ba6816f7ec4674325a7dd43921338aeac6d2e5d06",
+          "visible": [
+            208,
+            237,
+            306,
+            356
+          ],
+          "sourceBounds": [
+            74,
+            1254,
+            210,
+            1418
+          ],
+          "sourceRoot": [
+            66.15149253731343,
+            159.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.7225806451612903,
+          "sourceHairWidth": 88.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "hurt_1_up",
+          "sha256": "776da00b55b03cbf3cf7ae279803e2018fce83f0adca2f6a50b77d52e4990fc4",
+          "visible": [
+            203,
+            255,
+            310,
+            359
+          ],
+          "sourceBounds": [
+            326,
+            1274,
+            474,
+            1418
+          ],
+          "sourceRoot": [
+            73.98288508557457,
+            134.0
+          ],
+          "sourceHeadTop": 9.0,
+          "groupRatio": 0.7225806451612903,
+          "sourceHairWidth": 83.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "death_0_up",
+          "sha256": "0c60dee1f39fad25f2091a081b344ffc9287502dca5fed4e4a533d3d21b79a79",
+          "visible": [
+            205,
+            265,
+            320,
+            355
+          ],
+          "sourceBounds": [
+            577,
+            1292,
+            736,
+            1417
+          ],
+          "sourceRoot": [
+            70.83666377063423,
+            120.0
+          ],
+          "sourceHeadTop": 9.0,
+          "groupRatio": 0.7225806451612903,
+          "sourceHairWidth": 71.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "death_1_up",
+          "sha256": "f8ffd1760c87d8fa13a6cb2139716e5c517c651ba7c85c1884b4ff30bf661f3a",
+          "visible": [
+            193,
+            291,
+            343,
+            355
+          ],
+          "sourceBounds": [
+            812,
+            1327,
+            1019,
+            1415
+          ],
+          "sourceRoot": [
+            87.0,
+            84.0
+          ],
+          "sourceHeadTop": 0,
+          "groupRatio": 0.7225806451612903,
+          "sourceHairWidth": 75.0,
+          "override": null,
+          "overrideSha256": null
+        }
+      ]
+    },
+    {
+      "direction": "up_left",
+      "path": "assets/source/boss-ly-mac-sau-unified-v1/raw/up_left.png",
+      "sha256": "7ecb5a92bbbda1e345004dd737853d38dd67a9fb4d94b5a30433e27924c8cb4d",
+      "extraSources": [],
+      "celGroupOverrides": [],
+      "ratio": 0.7,
+      "walkRatio": 0.7,
+      "actionRatio": 0.7,
+      "reactionRatio": 0.7,
+      "targetHairWidth": 59.849999999999994,
+      "frames": [
+        {
+          "frame": "idle_0_up_left",
+          "sha256": "705b18f813423767f95e527902a7b09083b7cba1c5b7147faa6c29edd080a919",
+          "visible": [
+            214,
+            236,
+            305,
+            356
+          ],
+          "sourceBounds": [
+            100,
+            46,
+            230,
+            217
+          ],
+          "sourceRoot": [
+            59.8125,
+            166.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 86.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "idle_1_up_left",
+          "sha256": "be8ef4904973ed4634b41d1b2c7bee09c658c4531b387a5a3c94253952110fd8",
+          "visible": [
+            215,
+            236,
+            307,
+            356
+          ],
+          "sourceBounds": [
+            348,
+            46,
+            479,
+            217
+          ],
+          "sourceRoot": [
+            58.87492182614134,
+            166.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 87.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "idle_2_up_left",
+          "sha256": "72667d13d6899e36ae9ed259c0f6d2fb6ecc1531e78a089a1d38798bcd68d535",
+          "visible": [
+            214,
+            236,
+            304,
+            356
+          ],
+          "sourceBounds": [
+            600,
+            46,
+            729,
+            217
+          ],
+          "sourceRoot": [
+            60.36093552465234,
+            166.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 85.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "idle_3_up_left",
+          "sha256": "5ee0142f9a7b01c57eddb10b253255046321fc15c2c2ee70e1463f0a27f1d239",
+          "visible": [
+            214,
+            236,
+            305,
+            356
+          ],
+          "sourceBounds": [
+            850,
+            46,
+            980,
+            217
+          ],
+          "sourceRoot": [
+            60.532467532467535,
+            166.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 84.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "walk_0_up_left",
+          "sha256": "95c25d104bbff7bdf49f96a34bbb4ff3d6901df64ec6c4cec70d71f6eb87d601",
+          "visible": [
+            217,
+            241,
+            305,
+            362
+          ],
+          "sourceBounds": [
+            104,
+            239,
+            229,
+            412
+          ],
+          "sourceRoot": [
+            55.758234519104086,
+            158.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 82.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "walk_1_up_left",
+          "sha256": "329ab257c41ceec4bdcc72022348da4c8e897e1c3e7902d6dc3ed4a9e8a7e456",
+          "visible": [
+            212,
+            244,
+            306,
+            365
+          ],
+          "sourceBounds": [
+            353,
+            239,
+            488,
+            412
+          ],
+          "sourceRoot": [
+            63.3440170940171,
+            155.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 87.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "walk_2_up_left",
+          "sha256": "8371cfe2a1a27cecadfb5b0fc09165394e766179c07bb82a6cbafd6512b7a591",
+          "visible": [
+            205,
+            239,
+            307,
+            361
+          ],
+          "sourceBounds": [
+            603,
+            238,
+            748,
+            412
+          ],
+          "sourceRoot": [
+            73.34763092269327,
+            161.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 76.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "walk_3_up_left",
+          "sha256": "59d8c26318b05b60d4c6399a7da6e4e460f5c1c4a3526e4a54f9448aea053ca9",
+          "visible": [
+            209,
+            246,
+            306,
+            368
+          ],
+          "sourceBounds": [
+            854,
+            238,
+            993,
+            412
+          ],
+          "sourceRoot": [
+            66.85077616424637,
+            151.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 94.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "windup_up_left",
+          "sha256": "6aec3c44b54ed2b88d433ceb4d4323e3b36c4da1431f56bf9cd3298e4fffe74b",
+          "visible": [
+            214,
+            236,
+            315,
+            355
+          ],
+          "sourceBounds": [
+            102,
+            431,
+            246,
+            601
+          ],
+          "sourceRoot": [
+            59.84446074834923,
+            165.0
+          ],
+          "sourceHeadTop": 5.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 87.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "attack_1_up_left",
+          "sha256": "4eab9ed75d07da45b76fdc8a6c15bf4dfb6fd71d3563d0bc4cccdff9c21c8a92",
+          "visible": [
+            161,
+            243,
+            309,
+            361
+          ],
+          "sourceBounds": [
+            292,
+            433,
+            504,
+            602
+          ],
+          "sourceRoot": [
+            135.16065192083818,
+            156.0
+          ],
+          "sourceHeadTop": 16.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 144.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "attack_2_up_left",
+          "sha256": "41afaecf6fd71499c7accd940dca6fbf0d8a374cdd58453eee5e8f3a9d2b497f",
+          "visible": [
+            155,
+            246,
+            308,
+            362
+          ],
+          "sourceBounds": [
+            541,
+            436,
+            760,
+            602
+          ],
+          "sourceRoot": [
+            144.23349339735896,
+            151.0
+          ],
+          "sourceHeadTop": 11.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 91.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "attack_3_up_left",
+          "sha256": "80ca7cb0eeaedb7372bfef90767cc35485b698001f33b0137b5d4b737dc87432",
+          "visible": [
+            192,
+            225,
+            303,
+            356
+          ],
+          "sourceBounds": [
+            836,
+            414,
+            995,
+            601
+          ],
+          "sourceRoot": [
+            90.8051539912005,
+            181.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 90.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_0_up_left",
+          "sha256": "c8631307aefc9810cbb3cc590b93a7d5e64a0a258dd3f71217f8682d7fb753df",
+          "visible": [
+            215,
+            239,
+            305,
+            356
+          ],
+          "sourceBounds": [
+            108,
+            626,
+            237,
+            793
+          ],
+          "sourceRoot": [
+            58.981378026070765,
+            161.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 73.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_1_up_left",
+          "sha256": "e5c22ecaa715fb3d74c131da85359ef7fffd00492f1977314422585fa3b09a6a",
+          "visible": [
+            196,
+            239,
+            308,
+            356
+          ],
+          "sourceBounds": [
+            329,
+            626,
+            490,
+            793
+          ],
+          "sourceRoot": [
+            86.96494252873563,
+            162.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 74.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_2_up_left",
+          "sha256": "0bcba96745a3370abd50439da311d26640aba7f203a895b506e786c2830301ff",
+          "visible": [
+            213,
+            239,
+            305,
+            355
+          ],
+          "sourceBounds": [
+            601,
+            627,
+            733,
+            793
+          ],
+          "sourceRoot": [
+            60.815989847715734,
+            161.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 101.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_3_up_left",
+          "sha256": "eec08ac9675aa2605fd5a8195f1672fd6fa48427646fdc0da0c842b8ef172155",
+          "visible": [
+            171,
+            240,
+            310,
+            356
+          ],
+          "sourceBounds": [
+            796,
+            627,
+            994,
+            793
+          ],
+          "sourceRoot": [
+            121.11349862258953,
+            160.0
+          ],
+          "sourceHeadTop": 10.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 105.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_4_up_left",
+          "sha256": "2fa68afc18fe066eb54531c1feced47278a24084dfe4d53494841c970f0a305c",
+          "visible": [
+            208,
+            239,
+            310,
+            356
+          ],
+          "sourceBounds": [
+            94,
+            817,
+            240,
+            984
+          ],
+          "sourceRoot": [
+            68.99285714285715,
+            162.0
+          ],
+          "sourceHeadTop": 9.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 89.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_5_up_left",
+          "sha256": "291e5ee16f45d16b681e5e369339092ec68d31a027c30d645ce67221a914645e",
+          "visible": [
+            201,
+            239,
+            309,
+            356
+          ],
+          "sourceBounds": [
+            339,
+            817,
+            493,
+            984
+          ],
+          "sourceRoot": [
+            77.89183937823834,
+            162.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 73.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_6_up_left",
+          "sha256": "8e1570de5e5651fd38c7be7aaa5e14a076f27946279bb239455e87c5674342b4",
+          "visible": [
+            202,
+            232,
+            310,
+            355
+          ],
+          "sourceBounds": [
+            587,
+            808,
+            742,
+            984
+          ],
+          "sourceRoot": [
+            77.84677419354838,
+            171.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 105.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_7_up_left",
+          "sha256": "c19d7213665bf69e3803313e8d2c9b7f845fa1f07ca4dffb23b0edc280c3883c",
+          "visible": [
+            195,
+            247,
+            317,
+            358
+          ],
+          "sourceBounds": [
+            835,
+            825,
+            1009,
+            984
+          ],
+          "sourceRoot": [
+            87.44866920152091,
+            150.0
+          ],
+          "sourceHeadTop": 12.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 75.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "guard_up_left",
+          "sha256": "dbbcff57e2ee9f93592bf5e368097abe0f1dec7a78eeb724100e522026e2dc54",
+          "visible": [
+            204,
+            239,
+            298,
+            356
+          ],
+          "sourceBounds": [
+            89,
+            1012,
+            224,
+            1179
+          ],
+          "sourceRoot": [
+            73.65870521684475,
+            161.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 103.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "channel_up_left",
+          "sha256": "e0abebc050e32e62eb82e3c310814b0cc7cd6e44b231466ec3482fa4d636c049",
+          "visible": [
+            203,
+            240,
+            311,
+            356
+          ],
+          "sourceBounds": [
+            338,
+            1013,
+            492,
+            1179
+          ],
+          "sourceRoot": [
+            75.10686015831135,
+            160.0
+          ],
+          "sourceHeadTop": 9.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 105.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "recover_up_left",
+          "sha256": "825bf1026f6f63336df8907be7dfcde4e774a91c9604bf27ec8405d61a4c8501",
+          "visible": [
+            214,
+            239,
+            306,
+            355
+          ],
+          "sourceBounds": [
+            604,
+            1013,
+            736,
+            1179
+          ],
+          "sourceRoot": [
+            59.950129533678755,
+            161.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 88.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "step_up_left",
+          "sha256": "4b96d873882f51fbc7fa232975a70eddc7987abfc35aa65df5794c71abe77f26",
+          "visible": [
+            211,
+            241,
+            315,
+            356
+          ],
+          "sourceBounds": [
+            860,
+            1009,
+            1008,
+            1174
+          ],
+          "sourceRoot": [
+            63.81157948197054,
+            158.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 84.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "hurt_0_up_left",
+          "sha256": "9f4e2d839a19b08d83ed8bbfeabd10bb2e526554317551bf1df970a27119c0de",
+          "visible": [
+            211,
+            236,
+            309,
+            356
+          ],
+          "sourceBounds": [
+            91,
+            1215,
+            231,
+            1387
+          ],
+          "sourceRoot": [
+            64.31515812431843,
+            166.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 77.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "hurt_1_up_left",
+          "sha256": "f59e474b0fbfaaa60b94de8da9c20c71d8ece03040b86aa7328ee41a81369689",
+          "visible": [
+            213,
+            249,
+            312,
+            355
+          ],
+          "sourceBounds": [
+            355,
+            1238,
+            496,
+            1390
+          ],
+          "sourceRoot": [
+            61.51447135262847,
+            147.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 105.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "death_0_up_left",
+          "sha256": "b959e3d6ffbcc4dd5b10d25a95fc723af296a0b2b828363e9c911298637fc240",
+          "visible": [
+            196,
+            262,
+            320,
+            360
+          ],
+          "sourceBounds": [
+            578,
+            1263,
+            755,
+            1403
+          ],
+          "sourceRoot": [
+            85.56172069825436,
+            129.0
+          ],
+          "sourceHeadTop": 10.0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 108.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "death_1_up_left",
+          "sha256": "c9f106028e5e5dc2ab7ff452707e28b15b0ab29e61af5c7473f529890f3c1099",
+          "visible": [
+            188,
+            278,
+            332,
+            355
+          ],
+          "sourceBounds": [
+            797,
+            1291,
+            1003,
+            1401
+          ],
+          "sourceRoot": [
+            97.0,
+            106.0
+          ],
+          "sourceHeadTop": 0,
+          "groupRatio": 0.7,
+          "sourceHairWidth": 154.0,
+          "override": null,
+          "overrideSha256": null
+        }
+      ]
+    },
+    {
+      "direction": "left",
+      "path": "assets/source/boss-ly-mac-sau-unified-v1/raw/left.png",
+      "sha256": "8b38298e919618f81f9bdc82601f206b6912f1cb9b04dc13046eb1daf013fb5c",
+      "extraSources": [],
+      "celGroupOverrides": [],
+      "ratio": 0.717948717948718,
+      "walkRatio": 0.717948717948718,
+      "actionRatio": 0.717948717948718,
+      "reactionRatio": 0.717948717948718,
+      "targetHairWidth": 68.56410256410257,
+      "frames": [
+        {
+          "frame": "idle_0_left",
+          "sha256": "d91424307add7d8e527ac04c1cb7c5424a95206b2d9e21fb84be8e0f692ef7af",
+          "visible": [
+            198,
+            235,
+            304,
+            357
+          ],
+          "sourceBounds": [
+            68,
+            42,
+            216,
+            212
+          ],
+          "sourceRoot": [
+            80.80563887222556,
+            163.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.717948717948718,
+          "sourceHairWidth": 95.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "idle_1_left",
+          "sha256": "950fcf70ba90e87934b5a64d12dd814d2b58814f8b7cd280a320ef9df08290ed",
+          "visible": [
+            195,
+            235,
+            302,
+            357
+          ],
+          "sourceBounds": [
+            317,
+            42,
+            466,
+            212
+          ],
+          "sourceRoot": [
+            85.16994535519126,
+            163.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.717948717948718,
+          "sourceHairWidth": 96.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "idle_2_left",
+          "sha256": "add4d32b209c5ab1e0c73ad217df5bfa3f8ab77658bacf113720c754d7e6c849",
+          "visible": [
+            198,
+            235,
+            304,
+            357
+          ],
+          "sourceBounds": [
+            569,
+            42,
+            716,
+            212
+          ],
+          "sourceRoot": [
+            81.32267613972765,
+            163.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.717948717948718,
+          "sourceHairWidth": 79.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "idle_3_left",
+          "sha256": "96ad8e63b60d83a9a6a372bfca03e7396e5029c6dbb4ef6e7e681511f699faf0",
+          "visible": [
+            197,
+            235,
+            303,
+            357
+          ],
+          "sourceBounds": [
+            818,
+            42,
+            966,
+            212
+          ],
+          "sourceRoot": [
+            81.52909090909091,
+            163.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.717948717948718,
+          "sourceHairWidth": 100.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "walk_0_left",
+          "sha256": "89bd5f5ff8bb6ab3426c7500c2978bc663fccdc58f6edcfdb1dbcbfd163a4edc",
+          "visible": [
+            201,
+            241,
+            309,
+            356
+          ],
+          "sourceBounds": [
+            66,
+            241,
+            217,
+            401
+          ],
+          "sourceRoot": [
+            76.07887323943662,
+            155.0
+          ],
+          "sourceHeadTop": 9.0,
+          "groupRatio": 0.717948717948718,
+          "sourceHairWidth": 78.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "walk_1_left",
+          "sha256": "9365b993c2ffbebf371d57fa77398280d30403308cdcf4d2ff4db4a70bb75122",
+          "visible": [
+            195,
+            241,
+            308,
+            357
+          ],
+          "sourceBounds": [
+            315,
+            241,
+            472,
+            403
+          ],
+          "sourceRoot": [
+            85.16118047673099,
+            154.0
+          ],
+          "sourceHeadTop": 10.0,
+          "groupRatio": 0.717948717948718,
+          "sourceHairWidth": 97.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "walk_2_left",
+          "sha256": "25b91dddaae7f61aa876158117ccdbd43a55d0a2d4adeb0efdd182b8460c837e",
+          "visible": [
+            197,
+            241,
+            306,
+            357
+          ],
+          "sourceBounds": [
+            566,
+            241,
+            718,
+            403
+          ],
+          "sourceRoot": [
+            81.82368958475153,
+            154.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.717948717948718,
+          "sourceHairWidth": 77.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "walk_3_left",
+          "sha256": "46e3958031c43672e1796e788f19532b8f1a2c7649d2bb6d59148eaebe5df2e8",
+          "visible": [
+            196,
+            240,
+            309,
+            356
+          ],
+          "sourceBounds": [
+            815,
+            241,
+            973,
+            402
+          ],
+          "sourceRoot": [
+            83.26662561576354,
+            156.0
+          ],
+          "sourceHeadTop": 10.0,
+          "groupRatio": 0.717948717948718,
+          "sourceHairWidth": 99.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "windup_left",
+          "sha256": "3cbaa474d4e73b42e75d713ebe0f15fd966409baba31e182df6086d59aa82660",
+          "visible": [
+            204,
+            237,
+            315,
+            356
+          ],
+          "sourceBounds": [
+            67,
+            428,
+            221,
+            594
+          ],
+          "sourceRoot": [
+            72.5631443298969,
+            160.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.717948717948718,
+          "sourceHairWidth": 94.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "attack_1_left",
+          "sha256": "ba9eed8b6c077f51dfdefb027f1a5abaabedd62e9b823fda24e62e9316989e32",
+          "visible": [
+            147,
+            243,
+            305,
+            356
+          ],
+          "sourceBounds": [
+            256,
+            436,
+            476,
+            594
+          ],
+          "sourceRoot": [
+            151.26108824874257,
+            152.0
+          ],
+          "sourceHeadTop": 23.0,
+          "groupRatio": 0.717948717948718,
+          "sourceHairWidth": 91.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "attack_2_left",
+          "sha256": "0213d363c3c36d1b44ac8c209b5a0c065e794e8e75c965c7a9b99189cb4c90ad",
+          "visible": [
+            168,
+            243,
+            315,
+            356
+          ],
+          "sourceBounds": [
+            535,
+            436,
+            740,
+            594
+          ],
+          "sourceRoot": [
+            122.01943127962085,
+            152.0
+          ],
+          "sourceHeadTop": 13.0,
+          "groupRatio": 0.717948717948718,
+          "sourceHairWidth": 94.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "attack_3_left",
+          "sha256": "8efe6119967cf3e8dfb6457604861d2ff4ed3d918068052996298c4e49d8f3ec",
+          "visible": [
+            198,
+            233,
+            316,
+            359
+          ],
+          "sourceBounds": [
+            830,
+            419,
+            994,
+            594
+          ],
+          "sourceRoot": [
+            80.75776397515529,
+            166.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.717948717948718,
+          "sourceHairWidth": 93.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_0_left",
+          "sha256": "c72b0c088d770e875125a509185973d7467db2335e4bf3d712b336a30df37b5c",
+          "visible": [
+            199,
+            238,
+            307,
+            356
+          ],
+          "sourceBounds": [
+            69,
+            629,
+            220,
+            794
+          ],
+          "sourceRoot": [
+            78.72191863995143,
+            159.0
+          ],
+          "sourceHeadTop": 9.0,
+          "groupRatio": 0.717948717948718,
+          "sourceHairWidth": 77.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_1_left",
+          "sha256": "fd345b7f3c91ffc287c657c0f5b48249dcd572fea3bdde8dc3ef88ce83f35fd0",
+          "visible": [
+            196,
+            236,
+            303,
+            356
+          ],
+          "sourceBounds": [
+            320,
+            627,
+            469,
+            794
+          ],
+          "sourceRoot": [
+            83.51354113438937,
+            161.0
+          ],
+          "sourceHeadTop": 10.0,
+          "groupRatio": 0.717948717948718,
+          "sourceHairWidth": 96.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_2_left",
+          "sha256": "9f322b0614d58b7a0a3772c5e0e86e21d955e3120b38a8ca555cc14789a55497",
+          "visible": [
+            196,
+            236,
+            307,
+            357
+          ],
+          "sourceBounds": [
+            566,
+            626,
+            720,
+            794
+          ],
+          "sourceRoot": [
+            84.04,
+            162.0
+          ],
+          "sourceHeadTop": 4.0,
+          "groupRatio": 0.717948717948718,
+          "sourceHairWidth": 94.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_3_left",
+          "sha256": "dec34e92d42ee9aec82ef42cc36e805d32de208b85bf6a622e044c30106f2e37",
+          "visible": [
+            159,
+            239,
+            309,
+            357
+          ],
+          "sourceBounds": [
+            768,
+            630,
+            978,
+            794
+          ],
+          "sourceRoot": [
+            136.94969596462133,
+            157.0
+          ],
+          "sourceHeadTop": 22.0,
+          "groupRatio": 0.717948717948718,
+          "sourceHairWidth": 87.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_4_left",
+          "sha256": "8b44db48665c6bcee31a7be21beced5b314604c91bcebcee5f65f4e9cdb59a16",
+          "visible": [
+            196,
+            236,
+            307,
+            356
+          ],
+          "sourceBounds": [
+            63,
+            825,
+            217,
+            992
+          ],
+          "sourceRoot": [
+            83.45431789737171,
+            161.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.717948717948718,
+          "sourceHairWidth": 75.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_5_left",
+          "sha256": "59688a2b752f23a37c499d80ca363f048b0a06e42899ae04fa1cbf681bb5a0ba",
+          "visible": [
+            190,
+            236,
+            305,
+            356
+          ],
+          "sourceBounds": [
+            310,
+            825,
+            470,
+            992
+          ],
+          "sourceRoot": [
+            91.86161187698833,
+            161.0
+          ],
+          "sourceHeadTop": 10.0,
+          "groupRatio": 0.717948717948718,
+          "sourceHairWidth": 100.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_6_left",
+          "sha256": "010bd97f06887f3401bd939d0bcfbe9c63be818188e60dd7cc479da115773532",
+          "visible": [
+            188,
+            235,
+            314,
+            356
+          ],
+          "sourceBounds": [
+            556,
+            823,
+            732,
+            992
+          ],
+          "sourceRoot": [
+            95.24841132293471,
+            163.0
+          ],
+          "sourceHeadTop": 4.0,
+          "groupRatio": 0.717948717948718,
+          "sourceHairWidth": 69.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_7_left",
+          "sha256": "a318edf8e73cfb1294bcafbc687b28ea43abe509843dc9a8bd673534da3c7f72",
+          "visible": [
+            177,
+            239,
+            315,
+            357
+          ],
+          "sourceBounds": [
+            796,
+            828,
+            988,
+            992
+          ],
+          "sourceRoot": [
+            109.66535819430814,
+            157.0
+          ],
+          "sourceHeadTop": 9.0,
+          "groupRatio": 0.717948717948718,
+          "sourceHairWidth": 91.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "guard_left",
+          "sha256": "bd59f1e00c53eb054948719d262f24d2142e145bf9f821eed028b03bd32584a4",
+          "visible": [
+            190,
+            236,
+            306,
+            357
+          ],
+          "sourceBounds": [
+            58,
+            1019,
+            220,
+            1187
+          ],
+          "sourceRoot": [
+            91.76009362200116,
+            161.0
+          ],
+          "sourceHeadTop": 10.0,
+          "groupRatio": 0.717948717948718,
+          "sourceHairWidth": 80.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "channel_left",
+          "sha256": "61d7617a03151d99e251554bf5666a722b10adf581401281a9209fc08c8bcf6b",
+          "visible": [
+            182,
+            234,
+            311,
+            356
+          ],
+          "sourceBounds": [
+            303,
+            1019,
+            482,
+            1189
+          ],
+          "sourceRoot": [
+            102.99893333333333,
+            164.0
+          ],
+          "sourceHeadTop": 11.0,
+          "groupRatio": 0.717948717948718,
+          "sourceHairWidth": 87.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "recover_left",
+          "sha256": "2c5fed8986cf0aff09151337cf5efed3639bb2e58b10d1531b6b645bcb2e25c2",
+          "visible": [
+            198,
+            235,
+            305,
+            356
+          ],
+          "sourceBounds": [
+            572,
+            1021,
+            721,
+            1189
+          ],
+          "sourceRoot": [
+            80.55820895522388,
+            163.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.717948717948718,
+          "sourceHairWidth": 96.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "step_left",
+          "sha256": "9828e4714f9a93b6b398e335a9bd43888bd57e83e1497b583a61eee20ad8e5cc",
+          "visible": [
+            183,
+            237,
+            306,
+            358
+          ],
+          "sourceBounds": [
+            813,
+            1021,
+            984,
+            1189
+          ],
+          "sourceRoot": [
+            101.29326705829192,
+            160.0
+          ],
+          "sourceHeadTop": 10.0,
+          "groupRatio": 0.717948717948718,
+          "sourceHairWidth": 92.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "hurt_0_left",
+          "sha256": "8c72b762581cb0bcfd516e986ba964e8f4d9e9e0683a5a49162a7ee2e20b14a2",
+          "visible": [
+            198,
+            239,
+            315,
+            356
+          ],
+          "sourceBounds": [
+            70,
+            1228,
+            233,
+            1391
+          ],
+          "sourceRoot": [
+            81.3216743119266,
+            157.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.717948717948718,
+          "sourceHairWidth": 96.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "hurt_1_left",
+          "sha256": "bff39a925deae4313994c62eb67ba29b526e99f98e7466d56cd6dab2a905dcd8",
+          "visible": [
+            187,
+            251,
+            313,
+            357
+          ],
+          "sourceBounds": [
+            309,
+            1246,
+            484,
+            1393
+          ],
+          "sourceRoot": [
+            96.75600195982362,
+            141.0
+          ],
+          "sourceHeadTop": 9.0,
+          "groupRatio": 0.717948717948718,
+          "sourceHairWidth": 121.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "death_0_left",
+          "sha256": "b0b1712ab0961d8e67b844534f318c4cdcbd0b4f16631395133edd94847edd41",
+          "visible": [
+            181,
+            262,
+            317,
+            360
+          ],
+          "sourceBounds": [
+            530,
+            1265,
+            720,
+            1402
+          ],
+          "sourceRoot": [
+            105.15145228215768,
+            126.0
+          ],
+          "sourceHeadTop": 14.0,
+          "groupRatio": 0.717948717948718,
+          "sourceHairWidth": 108.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "death_1_left",
+          "sha256": "69c93dc05fc4bae9c139ec4dea42d3f00d1c29d2f12e723da4d0a980208673d7",
+          "visible": [
+            162,
+            295,
+            337,
+            355
+          ],
+          "sourceBounds": [
+            776,
+            1310,
+            1020,
+            1394
+          ],
+          "sourceRoot": [
+            131.0,
+            80.0
+          ],
+          "sourceHeadTop": 0,
+          "groupRatio": 0.717948717948718,
+          "sourceHairWidth": 151.0,
+          "override": null,
+          "overrideSha256": null
+        }
+      ]
+    },
+    {
+      "direction": "down_left",
+      "path": "assets/source/boss-ly-mac-sau-unified-v1/raw/down_left.png",
+      "sha256": "2d1553c0cbfcb34a5988f218411ca39ae0ec95c02d471f5352ac634509201a8f",
+      "extraSources": [],
+      "celGroupOverrides": [],
+      "ratio": 0.7320261437908496,
+      "walkRatio": 0.7320261437908496,
+      "actionRatio": 0.7320261437908496,
+      "reactionRatio": 0.7320261437908496,
+      "targetHairWidth": 55.63398692810457,
+      "frames": [
+        {
+          "frame": "idle_0_down_left",
+          "sha256": "d83cd2dc85d48d5d6c029f60b2caf09f500eaf8c835a1be0eaed4ad2efc93089",
+          "visible": [
+            212,
+            236,
+            314,
+            357
+          ],
+          "sourceBounds": [
+            80,
+            46,
+            220,
+            211
+          ],
+          "sourceRoot": [
+            60.2542662116041,
+            158.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.7320261437908496,
+          "sourceHairWidth": 76.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "idle_1_down_left",
+          "sha256": "7f494b2afa872f29b7009d07dbfd91dce731e0b754b4033fcf6d84c982ab7cf9",
+          "visible": [
+            213,
+            236,
+            315,
+            357
+          ],
+          "sourceBounds": [
+            338,
+            46,
+            477,
+            211
+          ],
+          "sourceRoot": [
+            58.65807962529274,
+            158.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.7320261437908496,
+          "sourceHairWidth": 75.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "idle_2_down_left",
+          "sha256": "9ad96a22cf90fedfdee46fe7d3cad48b71e6759985eb60bd0a6c921579a40232",
+          "visible": [
+            213,
+            236,
+            314,
+            357
+          ],
+          "sourceBounds": [
+            595,
+            46,
+            733,
+            211
+          ],
+          "sourceRoot": [
+            59.32329545454545,
+            158.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.7320261437908496,
+          "sourceHairWidth": 76.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "idle_3_down_left",
+          "sha256": "4f24874f047e462b4a5239515430959eb9940f0573414172bc455330fb38c323",
+          "visible": [
+            212,
+            236,
+            314,
+            357
+          ],
+          "sourceBounds": [
+            853,
+            46,
+            992,
+            211
+          ],
+          "sourceRoot": [
+            59.44807467911318,
+            158.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.7320261437908496,
+          "sourceHairWidth": 76.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "walk_0_down_left",
+          "sha256": "81e0809b0872a1a7aabcc52e14d61d076d4d80808618b050a99e95d3b2bd542f",
+          "visible": [
+            205,
+            238,
+            315,
+            362
+          ],
+          "sourceBounds": [
+            74,
+            246,
+            224,
+            415
+          ],
+          "sourceRoot": [
+            69.67846778874056,
+            156.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.7320261437908496,
+          "sourceHairWidth": 82.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "walk_1_down_left",
+          "sha256": "922f1fd84c1b5da66692db1a006afdb313e892290ead47140a8d0628ad729e50",
+          "visible": [
+            211,
+            236,
+            313,
+            360
+          ],
+          "sourceBounds": [
+            338,
+            244,
+            477,
+            414
+          ],
+          "sourceRoot": [
+            61.9023709902371,
+            159.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.7320261437908496,
+          "sourceHairWidth": 84.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "walk_2_down_left",
+          "sha256": "ef20a8955667af17f1576e7f5aeb1d5baa692dc0deb8362b6675e7ea6d6cffac",
+          "visible": [
+            212,
+            239,
+            311,
+            362
+          ],
+          "sourceBounds": [
+            593,
+            246,
+            728,
+            414
+          ],
+          "sourceRoot": [
+            59.842770753161076,
+            155.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.7320261437908496,
+          "sourceHairWidth": 79.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "walk_3_down_left",
+          "sha256": "4ce7cff988deb3528eddb62232981afb9323207475e7678dd63e7619f2fff7e6",
+          "visible": [
+            208,
+            235,
+            313,
+            359
+          ],
+          "sourceBounds": [
+            846,
+            244,
+            990,
+            414
+          ],
+          "sourceRoot": [
+            65.9831045406547,
+            160.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7320261437908496,
+          "sourceHairWidth": 90.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "windup_down_left",
+          "sha256": "18ae8957692ec862e2547751016c31a5050e6f8dd603b1d9e3b7aa06fba6a2d7",
+          "visible": [
+            193,
+            239,
+            310,
+            360
+          ],
+          "sourceBounds": [
+            64,
+            449,
+            224,
+            614
+          ],
+          "sourceRoot": [
+            85.98574969021065,
+            155.0
+          ],
+          "sourceHeadTop": 9.0,
+          "groupRatio": 0.7320261437908496,
+          "sourceHairWidth": 89.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "attack_1_down_left",
+          "sha256": "c105ebd52b9444cfc5875af0c39f6edb97ff72aa27d288e6142465303eb09ae9",
+          "visible": [
+            168,
+            237,
+            311,
+            359
+          ],
+          "sourceBounds": [
+            290,
+            447,
+            485,
+            614
+          ],
+          "sourceRoot": [
+            119.77891339429802,
+            157.0
+          ],
+          "sourceHeadTop": 9.0,
+          "groupRatio": 0.7320261437908496,
+          "sourceHairWidth": 97.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "attack_2_down_left",
+          "sha256": "c523c110318ace8f596cec7f462496919ab5a2df347279dccb2889b6f28150f3",
+          "visible": [
+            188,
+            235,
+            314,
+            357
+          ],
+          "sourceBounds": [
+            570,
+            447,
+            742,
+            614
+          ],
+          "sourceRoot": [
+            92.3781686497672,
+            160.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7320261437908496,
+          "sourceHairWidth": 91.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "attack_3_down_left",
+          "sha256": "5d82be5a72f920840b8ec64a52493c161284592eb1cba64465e60382911aeda6",
+          "visible": [
+            189,
+            229,
+            309,
+            359
+          ],
+          "sourceBounds": [
+            838,
+            435,
+            1002,
+            614
+          ],
+          "sourceRoot": [
+            92.18408941485865,
+            170.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.7320261437908496,
+          "sourceHairWidth": 84.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_0_down_left",
+          "sha256": "51d60d04d9e11dc7898d8fbca5c01f2aa29489974167487386ec5872fa6fcb81",
+          "visible": [
+            209,
+            235,
+            312,
+            356
+          ],
+          "sourceBounds": [
+            76,
+            650,
+            217,
+            815
+          ],
+          "sourceRoot": [
+            63.71617161716171,
+            160.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.7320261437908496,
+          "sourceHairWidth": 83.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_1_down_left",
+          "sha256": "344cf8cb084bb2d7be1fdc284113170b85ae8a224af4b0b9d452d3dc8f51378e",
+          "visible": [
+            195,
+            235,
+            307,
+            356
+          ],
+          "sourceBounds": [
+            320,
+            650,
+            474,
+            815
+          ],
+          "sourceRoot": [
+            84.77365269461077,
+            160.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.7320261437908496,
+          "sourceHairWidth": 82.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_2_down_left",
+          "sha256": "b741b490056f8483491f41a698db58a927d5632dde60f1eba5c22c471bddefc0",
+          "visible": [
+            186,
+            235,
+            306,
+            356
+          ],
+          "sourceBounds": [
+            571,
+            650,
+            735,
+            815
+          ],
+          "sourceRoot": [
+            95.56391875746715,
+            160.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7320261437908496,
+          "sourceHairWidth": 87.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_3_down_left",
+          "sha256": "2cb71c3be8b751b80437b80be063f5e280ecda93daa1a02c462d42c446259b81",
+          "visible": [
+            164,
+            236,
+            305,
+            357
+          ],
+          "sourceBounds": [
+            804,
+            650,
+            997,
+            815
+          ],
+          "sourceRoot": [
+            126.24819944598337,
+            159.0
+          ],
+          "sourceHeadTop": 10.0,
+          "groupRatio": 0.7320261437908496,
+          "sourceHairWidth": 90.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_4_down_left",
+          "sha256": "c1d13d0a240fc0861ec1c1dc311aeb0d809d3f48fa49c858900a22394fec9e32",
+          "visible": [
+            207,
+            236,
+            315,
+            356
+          ],
+          "sourceBounds": [
+            73,
+            850,
+            221,
+            1014
+          ],
+          "sourceRoot": [
+            67.16204217536071,
+            158.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.7320261437908496,
+          "sourceHairWidth": 82.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_5_down_left",
+          "sha256": "6b0126ed00463a342b9e0c2e55415c56ef7c8968de4150f00fa12ee8a1b235f5",
+          "visible": [
+            205,
+            239,
+            318,
+            358
+          ],
+          "sourceBounds": [
+            325,
+            851,
+            479,
+            1013
+          ],
+          "sourceRoot": [
+            69.86607608129233,
+            154.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.7320261437908496,
+          "sourceHairWidth": 78.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_6_down_left",
+          "sha256": "315c99396b6ca48751322017405e7fecb6282dcea636859f44fcc960b7e35dc7",
+          "visible": [
+            191,
+            238,
+            318,
+            357
+          ],
+          "sourceBounds": [
+            571,
+            852,
+            745,
+            1015
+          ],
+          "sourceRoot": [
+            89.42095238095239,
+            156.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.7320261437908496,
+          "sourceHairWidth": 76.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "cast_7_down_left",
+          "sha256": "742225773a680006aecc7f7ac51dd41cbbb3bb06d2271e6c0a869ab9ad4e5bf2",
+          "visible": [
+            189,
+            239,
+            313,
+            358
+          ],
+          "sourceBounds": [
+            828,
+            852,
+            997,
+            1014
+          ],
+          "sourceRoot": [
+            91.16181549087321,
+            155.0
+          ],
+          "sourceHeadTop": 9.0,
+          "groupRatio": 0.7320261437908496,
+          "sourceHairWidth": 89.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "guard_down_left",
+          "sha256": "5efa5eb6f40fdeb0c4c52e7102e597c6d702303d7f17b7feadcb43472fca97d6",
+          "visible": [
+            216,
+            233,
+            313,
+            356
+          ],
+          "sourceBounds": [
+            89,
+            1048,
+            221,
+            1216
+          ],
+          "sourceRoot": [
+            54.87275985663082,
+            162.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.7320261437908496,
+          "sourceHairWidth": 81.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "channel_down_left",
+          "sha256": "88aed3a303a80d16a9cd306c5e72064f363f942d6daea5a5c2cd7ea320c97bca",
+          "visible": [
+            179,
+            235,
+            307,
+            357
+          ],
+          "sourceBounds": [
+            303,
+            1048,
+            479,
+            1215
+          ],
+          "sourceRoot": [
+            106.39698200812536,
+            160.0
+          ],
+          "sourceHeadTop": 8.0,
+          "groupRatio": 0.7320261437908496,
+          "sourceHairWidth": 85.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "recover_down_left",
+          "sha256": "752d1be41e21947b6486abd1dfc1edf318e71c1d52ccb40dec8b9c655df6c1a3",
+          "visible": [
+            209,
+            235,
+            311,
+            358
+          ],
+          "sourceBounds": [
+            592,
+            1048,
+            731,
+            1216
+          ],
+          "sourceRoot": [
+            64.42315270935961,
+            160.0
+          ],
+          "sourceHeadTop": 7.0,
+          "groupRatio": 0.7320261437908496,
+          "sourceHairWidth": 84.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "step_down_left",
+          "sha256": "f3489a2650425f924da088ccb12582432596910017d8dbcd19d47f3f0cc73676",
+          "visible": [
+            191,
+            234,
+            318,
+            356
+          ],
+          "sourceBounds": [
+            825,
+            1050,
+            998,
+            1217
+          ],
+          "sourceRoot": [
+            89.01992204417496,
+            161.0
+          ],
+          "sourceHeadTop": 9.0,
+          "groupRatio": 0.7320261437908496,
+          "sourceHairWidth": 95.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "hurt_0_down_left",
+          "sha256": "290d064577b260c5aeb67eef2e1b88096fa47e6602bad5af05e075cc92ae7024",
+          "visible": [
+            192,
+            225,
+            314,
+            357
+          ],
+          "sourceBounds": [
+            53,
+            1256,
+            219,
+            1437
+          ],
+          "sourceRoot": [
+            87.37680288461539,
+            174.0
+          ],
+          "sourceHeadTop": 6.0,
+          "groupRatio": 0.7320261437908496,
+          "sourceHairWidth": 96.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "hurt_1_down_left",
+          "sha256": "9e817401e42bde77b8db6b50cfdc8bce9e944eacb955bd401e1cabed0fc95e86",
+          "visible": [
+            182,
+            242,
+            306,
+            363
+          ],
+          "sourceBounds": [
+            296,
+            1272,
+            465,
+            1439
+          ],
+          "sourceRoot": [
+            100.83516483516483,
+            150.0
+          ],
+          "sourceHeadTop": 9.0,
+          "groupRatio": 0.7320261437908496,
+          "sourceHairWidth": 109.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "death_0_down_left",
+          "sha256": "b99a31ac86a17f8ca6d6b3f74d943a46bd9f845ad2aad73820145369fbc009e5",
+          "visible": [
+            184,
+            254,
+            314,
+            363
+          ],
+          "sourceBounds": [
+            552,
+            1284,
+            730,
+            1433
+          ],
+          "sourceRoot": [
+            97.89194029850746,
+            134.0
+          ],
+          "sourceHeadTop": 12.0,
+          "groupRatio": 0.7320261437908496,
+          "sourceHairWidth": 96.0,
+          "override": null,
+          "overrideSha256": null
+        },
+        {
+          "frame": "death_1_down_left",
+          "sha256": "cfed5274f2613e24079a4153bb1861e183b08639faa7c17f894afd19ba4ff30d",
+          "visible": [
+            175,
+            282,
+            338,
+            354
+          ],
+          "sourceBounds": [
+            795,
+            1327,
+            1018,
+            1426
+          ],
+          "sourceRoot": [
+            110.0,
+            95.0
+          ],
+          "sourceHeadTop": 0,
+          "groupRatio": 0.7320261437908496,
+          "sourceHairWidth": 107.0,
+          "override": null,
+          "overrideSha256": null
+        }
+      ]
+    }
+  ],
+  "logicalBytes": 205520896,
+  "packedTextureBytes": 15862572
+}

@@ -1,0 +1,165 @@
+{
+  "baselineCommit": "eb558064",
+  "environment": "Windows, Node 26.0.0, pnpm 11.25.0, Playwright 1.64.1; same checkout/listener and command",
+  "occupiedPort": {
+    "before": {
+      "label": "warm-before",
+      "scenario": "same occupied QA server port; warm checkout; old runner retained from eb558064",
+      "args": [
+        ".cache/qa-tooling-benchmark/check-workflow-before.mjs",
+        "browser",
+        "tests/e2e/gameplay.spec.ts",
+        "--grep",
+        "ranged projectile"
+      ],
+      "exitCode": 1,
+      "milliseconds": 142278,
+      "outputBytes": 14483,
+      "outputLines": 194,
+      "foreignListenerStillAlive": true,
+      "serverPort": 61868,
+      "clientPort": 61869
+    },
+    "afterSamples": [
+      {
+        "label": "warm-after-1",
+        "scenario": "same occupied QA server port; warm checkout; old runner retained from eb558064",
+        "args": [
+          "scripts/check-workflow.mjs",
+          "browser",
+          "tests/e2e/gameplay.spec.ts",
+          "--grep",
+          "ranged projectile"
+        ],
+        "exitCode": 1,
+        "milliseconds": 147,
+        "outputBytes": 381,
+        "outputLines": 4,
+        "foreignListenerStillAlive": true,
+        "serverPort": 61868,
+        "clientPort": 61869
+      },
+      {
+        "label": "warm-after-2",
+        "scenario": "same occupied QA server port; warm checkout; old runner retained from eb558064",
+        "args": [
+          "scripts/check-workflow.mjs",
+          "browser",
+          "tests/e2e/gameplay.spec.ts",
+          "--grep",
+          "ranged projectile"
+        ],
+        "exitCode": 1,
+        "milliseconds": 214,
+        "outputBytes": 381,
+        "outputLines": 4,
+        "foreignListenerStillAlive": true,
+        "serverPort": 61868,
+        "clientPort": 61869
+      },
+      {
+        "label": "warm-after-3",
+        "scenario": "same occupied QA server port; warm checkout; old runner retained from eb558064",
+        "args": [
+          "scripts/check-workflow.mjs",
+          "browser",
+          "tests/e2e/gameplay.spec.ts",
+          "--grep",
+          "ranged projectile"
+        ],
+        "exitCode": 1,
+        "milliseconds": 142,
+        "outputBytes": 381,
+        "outputLines": 4,
+        "foreignListenerStillAlive": true,
+        "serverPort": 61868,
+        "clientPort": 61869
+      }
+    ],
+    "afterMedianMilliseconds": 147,
+    "secondsAvoided": 142.131,
+    "timeReductionPercent": 99.9,
+    "consoleByteReductionPercent": 97.37
+  },
+  "helper": {
+    "scope": "synthetic 180ms ack; same browser/polling; alternating order; not gameplay performance",
+    "summary": {
+      "old": {
+        "medianDriverCalls": 5,
+        "medianMilliseconds": 186
+      },
+      "shared": {
+        "medianDriverCalls": 3,
+        "medianMilliseconds": 228
+      }
+    },
+    "samples": [
+      {
+        "trial": 0,
+        "strategy": "old",
+        "driverCalls": 5,
+        "milliseconds": 183
+      },
+      {
+        "trial": 0,
+        "strategy": "shared",
+        "driverCalls": 3,
+        "milliseconds": 219
+      },
+      {
+        "trial": 1,
+        "strategy": "shared",
+        "driverCalls": 3,
+        "milliseconds": 230
+      },
+      {
+        "trial": 1,
+        "strategy": "old",
+        "driverCalls": 5,
+        "milliseconds": 201
+      },
+      {
+        "trial": 2,
+        "strategy": "old",
+        "driverCalls": 6,
+        "milliseconds": 226
+      },
+      {
+        "trial": 2,
+        "strategy": "shared",
+        "driverCalls": 3,
+        "milliseconds": 228
+      },
+      {
+        "trial": 3,
+        "strategy": "shared",
+        "driverCalls": 3,
+        "milliseconds": 235
+      },
+      {
+        "trial": 3,
+        "strategy": "old",
+        "driverCalls": 5,
+        "milliseconds": 184
+      },
+      {
+        "trial": 4,
+        "strategy": "old",
+        "driverCalls": 5,
+        "milliseconds": 186
+      },
+      {
+        "trial": 4,
+        "strategy": "shared",
+        "driverCalls": 3,
+        "milliseconds": 223
+      }
+    ]
+  },
+  "limits": [
+    "One before sample, three after samples; no universal speed guarantee.",
+    "Helper driver calls count waitForFunction, jsonValue and dispose; not all wire-level CDP traffic.",
+    "Output bytes and driver calls are proxies, not billed token usage.",
+    "Baseline valid smoke failed before changes and is retained; do not compare its elapsed time with a later PASS."
+  ]
+}

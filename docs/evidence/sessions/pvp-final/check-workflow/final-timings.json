@@ -1,0 +1,43 @@
+{
+  "runId": "50bd0848-fc96-47b0-b6c1-75757cdd4ed2",
+  "mode": "final",
+  "args": [
+    "--config",
+    "playwright.standalone-pvp.config.ts"
+  ],
+  "startedAt": "2026-11-18T19:49:25.103Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "prepare assets (once)",
+      "seconds": 15.37,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 2.25,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "typecheck tests and tools",
+      "seconds": 2.14,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "workflow regression checks",
+      "seconds": 0.42,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "all unit/integration tests",
+      "seconds": 161.71,
+      "status": "FAIL",
+      "exitCode": 1
+    }
+  ],
+  "totalSeconds": 181.89
+}

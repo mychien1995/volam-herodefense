@@ -1,0 +1,291 @@
+{
+  "baseline": "584e34ca",
+  "order": [
+    "control-dev",
+    "observed-dev",
+    "observed-preview"
+  ],
+  "scope": "same two-client smoke, fresh tests, two sequential rounds per arm; preparation guards and full post-test hashes retained",
+  "arms": {
+    "control-dev": {
+      "totalSeconds": 110.0794565,
+      "rows": [
+        {
+          "index": 0,
+          "seconds": 53.2741049,
+          "prepareSeconds": 13.1211036,
+          "prepareReadBytes": 3005945994,
+          "prepareShaBytes": 1315235348,
+          "compiler": {
+            "reused": false,
+            "pid": 11624,
+            "nativePid": 1868,
+            "input": "45763f46c6797c43b5615fe98fd9e227cc44e5200c5c1c09899e73e24b922435",
+            "output": "a36ccbb5bf894c450b5d8f58cd7817182aa8f0017a93d0e4479d6a9b628687e1"
+          },
+          "browserSeconds": 23.274010699999998,
+          "hashes": {
+            "input": {
+              "scans": 5,
+              "readBytes": 11355050,
+              "shaBytes": 11491395,
+              "wallSeconds": 0.4218480000000018
+            },
+            "output": {
+              "scans": 4,
+              "readBytes": 18923196,
+              "shaBytes": 19148184,
+              "wallSeconds": 1.0389367999999977
+            },
+            "service": {
+              "scans": 2,
+              "readBytes": 1603478390,
+              "shaBytes": 1606435196,
+              "wallSeconds": 8.402648600000004
+            }
+          },
+          "reused": false,
+          "preparedOutputs": null,
+          "previewBuild": null
+        },
+        {
+          "index": 1,
+          "seconds": 56.022417,
+          "prepareSeconds": 16.68576819999999,
+          "prepareReadBytes": 3005945994,
+          "prepareShaBytes": 1315235348,
+          "compiler": {
+            "reused": true,
+            "pid": 11624,
+            "nativePid": 1868,
+            "input": "45763f46c6797c43b5615fe98fd9e227cc44e5200c5c1c09899e73e24b922435",
+            "output": "a36ccbb5bf894c450b5d8f58cd7817182aa8f0017a93d0e4479d6a9b628687e1"
+          },
+          "browserSeconds": 29.6179185,
+          "hashes": {
+            "input": {
+              "scans": 3,
+              "readBytes": 6813030,
+              "shaBytes": 6894837,
+              "wallSeconds": 0.23019279999998982
+            },
+            "output": {
+              "scans": 3,
+              "readBytes": 14192397,
+              "shaBytes": 14361138,
+              "wallSeconds": 0.37345140000000543
+            },
+            "service": {
+              "scans": 2,
+              "readBytes": 1603478390,
+              "shaBytes": 1606435196,
+              "wallSeconds": 8.600619899999991
+            }
+          },
+          "reused": true,
+          "preparedOutputs": null,
+          "previewBuild": null
+        }
+      ]
+    },
+    "observed-dev": {
+      "totalSeconds": 92.60752869999999,
+      "rows": [
+        {
+          "index": 0,
+          "seconds": 50.2996997,
+          "prepareSeconds": 14.636994199999998,
+          "prepareReadBytes": 3006011771,
+          "prepareShaBytes": 2130496971,
+          "compiler": {
+            "reused": false,
+            "pid": 19264,
+            "nativePid": 20616,
+            "input": "45763f46c6797c43b5615fe98fd9e227cc44e5200c5c1c09899e73e24b922435",
+            "output": "a36ccbb5bf894c450b5d8f58cd7817182aa8f0017a93d0e4479d6a9b628687e1"
+          },
+          "browserSeconds": 22.1741585,
+          "hashes": {
+            "input": {
+              "scans": 5,
+              "readBytes": 11355050,
+              "shaBytes": 11491395,
+              "wallSeconds": 0.41460850000000216
+            },
+            "output": {
+              "scans": 4,
+              "readBytes": 18923196,
+              "shaBytes": 19148184,
+              "wallSeconds": 0.8830301
+            },
+            "service": {
+              "scans": 2,
+              "readBytes": 833178487,
+              "shaBytes": 836320611,
+              "wallSeconds": 8.548684400000003
+            }
+          },
+          "reused": false,
+          "preparedOutputs": 7571,
+          "previewBuild": null
+        },
+        {
+          "index": 1,
+          "seconds": 41.5432742,
+          "prepareSeconds": 14.468133899999993,
+          "prepareReadBytes": 3006011771,
+          "prepareShaBytes": 2130496971,
+          "compiler": {
+            "reused": true,
+            "pid": 19264,
+            "nativePid": 20616,
+            "input": "45763f46c6797c43b5615fe98fd9e227cc44e5200c5c1c09899e73e24b922435",
+            "output": "a36ccbb5bf894c450b5d8f58cd7817182aa8f0017a93d0e4479d6a9b628687e1"
+          },
+          "browserSeconds": 21.358605400000002,
+          "hashes": {
+            "input": {
+              "scans": 3,
+              "readBytes": 6813030,
+              "shaBytes": 6894837,
+              "wallSeconds": 0.2241534000000247
+            },
+            "output": {
+              "scans": 3,
+              "readBytes": 14192397,
+              "shaBytes": 14361138,
+              "wallSeconds": 0.3606483000000153
+            },
+            "service": {
+              "scans": 2,
+              "readBytes": 833178487,
+              "shaBytes": 836320611,
+              "wallSeconds": 4.693337400000003
+            }
+          },
+          "reused": true,
+          "preparedOutputs": 7571,
+          "previewBuild": null
+        }
+      ]
+    },
+    "observed-preview": {
+      "totalSeconds": 170.1193021,
+      "rows": [
+        {
+          "index": 0,
+          "seconds": 109.507233,
+          "prepareSeconds": 18.243999900000002,
+          "prepareReadBytes": 3006011771,
+          "prepareShaBytes": 2130496971,
+          "compiler": {
+            "reused": false,
+            "pid": 18772,
+            "nativePid": 22372,
+            "input": "45763f46c6797c43b5615fe98fd9e227cc44e5200c5c1c09899e73e24b922435",
+            "output": "a36ccbb5bf894c450b5d8f58cd7817182aa8f0017a93d0e4479d6a9b628687e1"
+          },
+          "browserSeconds": 20.617898799999995,
+          "hashes": {
+            "input": {
+              "scans": 5,
+              "readBytes": 11355050,
+              "shaBytes": 11491395,
+              "wallSeconds": 0.42273070000000373
+            },
+            "output": {
+              "scans": 4,
+              "readBytes": 18923196,
+              "shaBytes": 19148184,
+              "wallSeconds": 0.8694672999999894
+            },
+            "service": {
+              "scans": 2,
+              "readBytes": 833178487,
+              "shaBytes": 836320611,
+              "wallSeconds": 4.664684400000002
+            },
+            "preview-input": {
+              "scans": 2,
+              "readBytes": 1402574390,
+              "shaBytes": 1404797358,
+              "wallSeconds": 6.497361399999994
+            },
+            "preview-output": {
+              "scans": 2,
+              "readBytes": 1665588844,
+              "shaBytes": 1667882314,
+              "wallSeconds": 45.54822559999998
+            }
+          },
+          "reused": false,
+          "preparedOutputs": 7571,
+          "previewBuild": {
+            "directory": "D:\\Projects\\volam-hero-defense\\.cache\\qa-iteration-preview-Fj1Cv8",
+            "output": "1ad6c6cd115226b78e198307528b92dbc1e6d3cb28835d6b8daef785400f9a09",
+            "reused": false,
+            "seconds": 50.779501100000004
+          }
+        },
+        {
+          "index": 1,
+          "seconds": 57.6704348,
+          "prepareSeconds": 18.106929300000004,
+          "prepareReadBytes": 3006011771,
+          "prepareShaBytes": 2130496971,
+          "compiler": {
+            "reused": true,
+            "pid": 18772,
+            "nativePid": 22372,
+            "input": "45763f46c6797c43b5615fe98fd9e227cc44e5200c5c1c09899e73e24b922435",
+            "output": "a36ccbb5bf894c450b5d8f58cd7817182aa8f0017a93d0e4479d6a9b628687e1"
+          },
+          "browserSeconds": 20.229054999999992,
+          "hashes": {
+            "input": {
+              "scans": 3,
+              "readBytes": 6813030,
+              "shaBytes": 6894837,
+              "wallSeconds": 0.2183499000000011
+            },
+            "output": {
+              "scans": 3,
+              "readBytes": 14192397,
+              "shaBytes": 14361138,
+              "wallSeconds": 0.35927930000000924
+            },
+            "service": {
+              "scans": 2,
+              "readBytes": 833178487,
+              "shaBytes": 836320611,
+              "wallSeconds": 4.539177599999995
+            },
+            "preview-input": {
+              "scans": 2,
+              "readBytes": 1402574390,
+              "shaBytes": 1404797358,
+              "wallSeconds": 6.363377100000027
+            },
+            "preview-output": {
+              "scans": 2,
+              "readBytes": 1665588844,
+              "shaBytes": 1667882314,
+              "wallSeconds": 6.987766199999983
+            }
+          },
+          "reused": true,
+          "preparedOutputs": 7571,
+          "previewBuild": {
+            "directory": "D:\\Projects\\volam-hero-defense\\.cache\\qa-iteration-preview-Fj1Cv8",
+            "output": "1ad6c6cd115226b78e198307528b92dbc1e6d3cb28835d6b8daef785400f9a09",
+            "reused": true,
+            "seconds": 3.5088052000000025
+          }
+        }
+      ]
+    }
+  },
+  "fullDefaultClientEndpoint": {
+    "serverUrl": "http://127.0.0.1:2567"
+  }
+}

@@ -330,7 +330,20 @@ export class BacCaiRenderer {
         b.fx,
         b.fy,
         cast?.ability ?? tag,
-        cast ? { beat: releaseBeat(this.clock, cast.release) } : undefined,
+        cast
+          ? {
+              beat: releaseBeat(this.clock, cast.release),
+              phase:
+                cast.ability === 'vortex' &&
+                this.clock >= cast.release &&
+                this.clock <
+                  cast.release + (v.tuning.vortex.activeMs * v.tickRate) / 1000
+                  ? 'sustain'
+                  : '',
+            }
+          : v.phase === 'drink' || v.phase === 'sleep'
+            ? { elapsedMs: clock }
+            : undefined,
       );
       markImpactTarget(renderedBody, 'bac_cai');
       if (v.phase !== 'defeated')

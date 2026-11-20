@@ -1,0 +1,69 @@
+{
+  "date": "2026-11-19",
+  "branch": "wip/m3d/pvp",
+  "implementation": "standalone_loi_dai",
+  "typecheck": "PASS",
+  "workflowTests": {
+    "passed": 18
+  },
+  "unitIntegration": {
+    "uniqueTests": 1135,
+    "fullRunPassed": 1131,
+    "fullRunFailed": 4,
+    "reason": "Four protocol 46 assertions updated to intentional protocol 47",
+    "retryFiles": 4,
+    "retryPassed": 8
+  },
+  "build": "PASS",
+  "assets": "PASS",
+  "pvpBrowser": {
+    "twoClient": "PASS",
+    "eightMemberFiveMaps": "PASS",
+    "npcFrames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "releaseCels": {
+      "sword": [
+        0,
+        1,
+        2
+      ],
+      "lightning": [
+        0,
+        1,
+        2
+      ]
+    },
+    "consoleErrors": 0
+  },
+  "defenseFocusedBrowser": {
+    "command": "node tools/run-playwright.mjs test tests/e2e/gameplay.spec.ts --grep \"Cai Bang Bong keeps|ranged projectile\"",
+    "passed": 2,
+    "seconds": 56.6
+  },
+  "knownLimits": [
+    "Hazard numerical tuning is provisional; human PvP balance not approved.",
+    "Concept approval retained; production cel/runtime approval not inferred from automated tests."
+  ],
+  "evidence": {
+    "fullPipeline": "check-workflow/final-timings.json",
+    "stages": "check-workflow/final-stage-retry.json",
+    "twoClient": "../pvp-escape-final/standalone-pvp/two-client.json",
+    "eightMember": "../pvp-final-observed/standalone-pvp/eight-player-frame-observations.json",
+    "defenseOpening": "../pvp-defense-observed/opening-diagnostic.json"
+  },
+  "supersededBy": "../pvp-repair-browser-final/acceptance.json",
+  "resolvedHistoricalLimits": [
+    "A separate existing Defense progression smoke stops at its statue introduction assertion. Diagnostic retained; its renderer was not changed.",
+    "One eight-player iteration observed seven members after a map transition; not reproduced in the subsequent diagnostic run. Long-duration soak not performed."
+  ]
+}

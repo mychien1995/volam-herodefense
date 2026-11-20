@@ -2,6 +2,7 @@ import { expect, test, type Page } from '@playwright/test';
 import { Client, type Room } from '@colyseus/sdk';
 import { PROTOCOL_VERSION, type LobbyState } from '@volam/game-protocol';
 import { nguDoc } from '@volam/game-core';
+import { captureQaSummon, waitQaSummonTransfer } from '../../tools/qa-skill-browser.mjs';
 import { joinWaiting, startTogether } from './pregame-helper.js';
 
 interface Player {
@@ -408,28 +409,13 @@ test('Ngũ Độc plays in a six-player Phaser room with synced VFX, summon HP b
       .toBeGreaterThan(before.maxHp);
     await am.keyboard.press('Escape');
 
+    const transferBefore = await captureQaSummon(am, reaperId);
     await am.getByRole('button', { name: 'Phó Bản', exact: true }).click();
     await am.locator('[data-destination=forest]').click();
     await expect(am.locator('#dungeon-kind')).toHaveText('Quái thường · Riêng');
     await am.locator('#enter-dungeon').click();
     await expect.poll(async () => (await self(am)).zoneId).toMatch(/^forest_/);
-    const forest = (await self(am)).zoneId;
-    await expect.poll(async () => (await presentation(am)).zoneId).toBe(forest);
-    await expect
-      .poll(async () => (await snapshot(am)).state.creeps[reaperId]?.zoneId)
-      .toBe(forest);
-    await expect
-      .poll(async () =>
-        (await presentation(am)).actors.find((actor) => actor.id === reaperId),
-      )
-      .toMatchObject({ texture: 'ngu-doc-minions', healthBarVisible: true });
-    await expect
-      .poll(async () =>
-        (await presentation(bich)).actors.some(
-          (actor) => actor.id === reaperId,
-        ),
-      )
-      .toBe(false);
+    await waitQaSummonTransfer(am, transferBefore, { zonePattern: '^forest_', texture: 'ngu-doc-minions', peers: [bich] });
     await am.screenshot({ path: info.outputPath('ngu-doc-forest.png') });
     await cast(am, 'KeyE');
     await expect

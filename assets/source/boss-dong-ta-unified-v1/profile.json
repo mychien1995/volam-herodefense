@@ -1,0 +1,123 @@
+{
+  "basic": "dong_ta",
+  "texture": "boss-unified:dong_ta",
+  "folder": "boss-dong-ta-unified-v1",
+  "sourceRows": 7,
+  "sourceColumns": 4,
+  "canvas": [
+    448,
+    384
+  ],
+  "foot": [
+    224,
+    312
+  ],
+  "bodyHeight": 124,
+  "scale": 0.5,
+  "bodyWidth": 80,
+  "rootMode": "monochrome",
+  "poses": [
+    "idle_0",
+    "idle_1",
+    "idle_2",
+    "idle_3",
+    "walk_0",
+    "walk_1",
+    "walk_2",
+    "walk_3",
+    "windup",
+    "thrust",
+    "slash",
+    "flurry",
+    "finger_prepare",
+    "finger_release",
+    "flute_raise",
+    "flute_play",
+    "summon_raise",
+    "summon_release",
+    "guard",
+    "channel",
+    "recover",
+    "step",
+    "flute_turn",
+    "sword_ready",
+    "hurt_0",
+    "hurt_1",
+    "death_0",
+    "death_1"
+  ],
+  "groups": [
+    {
+      "name": "idle",
+      "poses": [
+        "idle_0",
+        "idle_1",
+        "idle_2",
+        "idle_3"
+      ],
+      "durationMs": 700
+    },
+    {
+      "name": "walk",
+      "poses": [
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3"
+      ],
+      "durationMs": 110
+    },
+    {
+      "name": "action_library",
+      "poses": [
+        "windup",
+        "thrust",
+        "slash",
+        "flurry",
+        "finger_prepare",
+        "finger_release",
+        "flute_raise",
+        "flute_play",
+        "summon_raise",
+        "summon_release",
+        "guard",
+        "channel",
+        "recover",
+        "step",
+        "flute_turn",
+        "sword_ready"
+      ],
+      "durationMs": 100
+    },
+    {
+      "name": "hurt",
+      "poses": [
+        "hurt_0",
+        "hurt_1"
+      ],
+      "durationMs": 90
+    },
+    {
+      "name": "death",
+      "poses": [
+        "death_0",
+        "death_1"
+      ],
+      "durationMs": 220
+    }
+  ],
+  "references": [
+    "assets/source/renovation-v3/raw/dong_ta_actions.png",
+    "assets/source/thien-son-dao-unified-v3/raw/sharp-prototype/sheet.png"
+  ],
+  "directionDensityPolicies": {
+    "down": "uniform-source",
+    "down_right": "uniform-source",
+    "right": "uniform-source",
+    "up_right": "uniform-source",
+    "up": "uniform-source",
+    "up_left": "uniform-source",
+    "left": "uniform-source",
+    "down_left": "uniform-source"
+  }
+}

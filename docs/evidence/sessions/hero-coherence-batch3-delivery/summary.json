@@ -1,0 +1,551 @@
+{
+  "status": "PASS scoped presentation checks; candidate awaiting director art approval",
+  "branch": "wip/m3d/25d",
+  "batch": "3 - Thien Son Phien / Dao only",
+  "approvedBaseline": "Cai Bang Chuong/Bong and both Vo Dang branches:24 approved-file byte guards PASS, no re-export",
+  "branches": {
+    "thien_son_phien": {
+      "bodyPNG": "841588fe88d88c595985ec243897354cdcdcb5e3c5994246e2f7bc8b3362f48f",
+      "cels": 224,
+      "nativeTags": 40,
+      "nativeRoundtrip": "exact alpha and visible RGB PASS",
+      "textureMiB": 8.15533447265625,
+      "clients": 6,
+      "idleDirections": 8,
+      "walkDirections": 8,
+      "actionGroups": 48,
+      "acknowledgedCommands": 288,
+      "reactionCases": 40,
+      "authority": "serialized server/client HP at same tick; float32 tolerance0.001",
+      "choreography": {
+        "status": "PASS",
+        "basic": "thien_son_phien",
+        "checks": [
+          {
+            "kind": "fan four body beats and real return",
+            "frames": [
+              "idle_0_down_right",
+              "windup_down_right",
+              "fan_open_down_right",
+              "fan_throw_down_right",
+              "fan_catch_down_right",
+              "idle_1_down_right",
+              "idle_2_down_right"
+            ]
+          },
+          {
+            "kind": "six-pulse spin body",
+            "frames": [
+              "idle_2_down_right",
+              "fan_sweep_left_down_right",
+              "spin_front_down_left",
+              "fan_sweep_right_up_left",
+              "spin_back_up_right",
+              "idle_1_down_right"
+            ]
+          },
+          {
+            "kind": "real E launch/recall/idle",
+            "frames": [
+              "idle_0_down_right",
+              "idle_1_down_right",
+              "idle_2_down_right"
+            ]
+          }
+        ]
+      },
+      "f8": "PASS",
+      "portrait": "url(\"/assets/thien-son-phien-unified-v1/avatar.png\")",
+      "party": {
+        "targetFixture": "96 stationary high-HP server targets; real keyboard hero attacks/hits, no creep AI combat/reward coverage",
+        "creeps": 96,
+        "clients": 6,
+        "hits": 102,
+        "medianMs": 16.600000008940697,
+        "p95Ms": 19.099999994039536,
+        "frames": 214,
+        "framing": [
+          {
+            "id": "pT7OOY_Ck",
+            "visible": true,
+            "bounds": {
+              "x": 761.6966552734374,
+              "y": 552.5000000000001,
+              "right": 797.1966552734374,
+              "bottom": 602.5000000000001
+            },
+            "viewport": {
+              "x": 436.1966552734374,
+              "y": 360.0000000000001,
+              "right": 1119.1966552734375,
+              "bottom": 744.0000000000001
+            },
+            "inside": true
+          },
+          {
+            "id": "44gtJh0PE",
+            "visible": true,
+            "bounds": {
+              "x": 792,
+              "y": 552,
+              "right": 830.5,
+              "bottom": 602
+            },
+            "viewport": {
+              "x": 436.1966552734374,
+              "y": 360.0000000000001,
+              "right": 1119.1966552734375,
+              "bottom": 744.0000000000001
+            },
+            "inside": true
+          },
+          {
+            "id": "PdKtlsJxQ",
+            "visible": true,
+            "bounds": {
+              "x": 904,
+              "y": 552.5,
+              "right": 939.5,
+              "bottom": 602.5
+            },
+            "viewport": {
+              "x": 436.1966552734374,
+              "y": 360.0000000000001,
+              "right": 1119.1966552734375,
+              "bottom": 744.0000000000001
+            },
+            "inside": true
+          },
+          {
+            "id": "tX2tSgCuv",
+            "visible": true,
+            "bounds": {
+              "x": 680,
+              "y": 638,
+              "right": 720.5,
+              "bottom": 690
+            },
+            "viewport": {
+              "x": 436.1966552734374,
+              "y": 360.0000000000001,
+              "right": 1119.1966552734375,
+              "bottom": 744.0000000000001
+            },
+            "inside": true
+          },
+          {
+            "id": "_xSDSXetC",
+            "visible": true,
+            "bounds": {
+              "x": 794.5,
+              "y": 638.5,
+              "right": 826,
+              "bottom": 687.5
+            },
+            "viewport": {
+              "x": 436.1966552734374,
+              "y": 360.0000000000001,
+              "right": 1119.1966552734375,
+              "bottom": 744.0000000000001
+            },
+            "inside": true
+          },
+          {
+            "id": "czK5KR_kb",
+            "visible": true,
+            "bounds": {
+              "x": 898.5,
+              "y": 639.5,
+              "right": 942,
+              "bottom": 688.5
+            },
+            "viewport": {
+              "x": 436.1966552734374,
+              "y": 360.0000000000001,
+              "right": 1119.1966552734375,
+              "bottom": 744.0000000000001
+            },
+            "inside": true
+          }
+        ]
+      }
+    },
+    "thien_son_dao": {
+      "bodyPNG": "a1f87e73b613f8b179132ae1fb8777df3f6400f09adb82b333f80899f6d1f8ab",
+      "cels": 256,
+      "nativeTags": 40,
+      "nativeRoundtrip": "exact alpha and visible RGB PASS",
+      "textureMiB": 9.764533996582031,
+      "clients": 6,
+      "idleDirections": 8,
+      "walkDirections": 8,
+      "actionGroups": 48,
+      "acknowledgedCommands": 288,
+      "reactionCases": 40,
+      "authority": "serialized server/client HP at same tick; float32 tolerance0.001",
+      "choreography": {
+        "status": "PASS",
+        "basic": "thien_son_dao",
+        "checks": [
+          {
+            "kind": "three A swings / six actual hits unlock S and three Tam Lien passes",
+            "attempts": [
+              "dao_swing_1",
+              "dao_swing_1",
+              "dao_swing_1",
+              "dao_swing_1",
+              "dao_swing_1",
+              "dao_swing_0",
+              "dao_swing_1",
+              "dao_swing_0",
+              "dao_swing_0",
+              "dao_swing_1",
+              "dao_swing_1",
+              "dao_swing_1",
+              "dao_swing_1",
+              "dao_swing_2"
+            ],
+            "pulses": [
+              {
+                "tick": 11691,
+                "protocolVersion": 46,
+                "id": 4443,
+                "kind": "pulse",
+                "sourceId": "pT7OOY_Ck",
+                "targetId": "ts_extra_0",
+                "abilityId": "tam_lien_tram",
+                "x": 665.9411254969543,
+                "y": 649.9411254969543,
+                "damage": 0,
+                "critical": false,
+                "zoneId": "arena",
+                "fx": 0.8395701571521512,
+                "fy": 0.5432512781572743,
+                "radius": 161.9876538505327,
+                "stage": "cross_0"
+              },
+              {
+                "tick": 11696,
+                "protocolVersion": 46,
+                "id": 4450,
+                "kind": "pulse",
+                "sourceId": "pT7OOY_Ck",
+                "targetId": "ts_extra_0",
+                "abilityId": "tam_lien_tram",
+                "x": 801.9411254969543,
+                "y": 649.9411254969543,
+                "damage": 0,
+                "critical": false,
+                "zoneId": "arena",
+                "fx": -0.8395701571521512,
+                "fy": 0.5432512781572743,
+                "radius": 161.9876538505327,
+                "stage": "cross_1"
+              },
+              {
+                "tick": 11701,
+                "protocolVersion": 46,
+                "id": 4462,
+                "kind": "pulse",
+                "sourceId": "pT7OOY_Ck",
+                "targetId": "ts_extra_0",
+                "abilityId": "tam_lien_tram",
+                "x": 733.9411254969543,
+                "y": 638.9411254969543,
+                "damage": 0,
+                "critical": false,
+                "zoneId": "arena",
+                "fx": 0,
+                "fy": 1,
+                "radius": 110,
+                "stage": "cross_2"
+              }
+            ],
+            "frames": [
+              "idle_0_down_right",
+              "cross_0_down_right",
+              "cross_1_down_left",
+              "cross_2_down",
+              "idle_1_down",
+              "idle_2_down"
+            ]
+          },
+          {
+            "kind": "real E retreat preserves server facing",
+            "before": {
+              "x": 700,
+              "y": 660,
+              "fx": 1,
+              "fy": 1
+            },
+            "after": {
+              "x": 525.9999999999976,
+              "y": 485.9999999999981,
+              "fx": 1,
+              "fy": 1
+            }
+          },
+          {
+            "kind": "four canonical X bodies / fixed offsets / native fade and cleanup",
+            "samples": 123,
+            "full": {
+              "tick": 11906,
+              "shadows": [
+                {
+                  "id": "shadow:pT7OOY_Ck:0",
+                  "texture": "hero-unified:thien_son_dao",
+                  "frame": "windup_down_right",
+                  "alpha": 0.9,
+                  "x": 588,
+                  "y": 594,
+                  "scale": [
+                    0.5,
+                    0.5
+                  ],
+                  "origin": [
+                    0.5,
+                    0.7777777777777778
+                  ]
+                },
+                {
+                  "id": "shadow:pT7OOY_Ck:1",
+                  "texture": "hero-unified:thien_son_dao",
+                  "frame": "windup_down_left",
+                  "alpha": 0.9,
+                  "x": 812,
+                  "y": 594,
+                  "scale": [
+                    0.5,
+                    0.5
+                  ],
+                  "origin": [
+                    0.5,
+                    0.7777777777777778
+                  ]
+                },
+                {
+                  "id": "shadow:pT7OOY_Ck:2",
+                  "texture": "hero-unified:thien_son_dao",
+                  "frame": "windup_up_right",
+                  "alpha": 0.9,
+                  "x": 588,
+                  "y": 726,
+                  "scale": [
+                    0.5,
+                    0.5
+                  ],
+                  "origin": [
+                    0.5,
+                    0.7777777777777778
+                  ]
+                },
+                {
+                  "id": "shadow:pT7OOY_Ck:3",
+                  "texture": "hero-unified:thien_son_dao",
+                  "frame": "windup_up_left",
+                  "alpha": 0.9,
+                  "x": 812,
+                  "y": 726,
+                  "scale": [
+                    0.5,
+                    0.5
+                  ],
+                  "origin": [
+                    0.5,
+                    0.7777777777777778
+                  ]
+                }
+              ]
+            },
+            "poses": [
+              "ready_down_right",
+              "ready_down_left",
+              "ready_up_right",
+              "ready_up_left",
+              "windup_down_right",
+              "windup_down_left",
+              "windup_up_right",
+              "windup_up_left",
+              "flurry_sweep_down_right",
+              "flurry_sweep_down_left",
+              "flurry_sweep_up_right",
+              "flurry_sweep_up_left",
+              "follow_down_right",
+              "follow_down_left",
+              "follow_up_right",
+              "follow_up_left"
+            ]
+          }
+        ]
+      },
+      "f8": "PASS",
+      "portrait": "url(\"/assets/thien-son-dao-unified-v1/avatar.png\")",
+      "party": {
+        "targetFixture": "96 stationary high-HP server targets; real keyboard hero attacks/hits, no creep AI combat/reward coverage",
+        "creeps": 96,
+        "clients": 6,
+        "hits": 132,
+        "medianMs": 16.799999997019768,
+        "p95Ms": 19.200000002980232,
+        "frames": 218,
+        "framing": [
+          {
+            "id": "pT7OOY_Ck",
+            "visible": true,
+            "bounds": {
+              "x": 928.1966552734374,
+              "y": 726.9999999999999,
+              "right": 971.1966552734374,
+              "bottom": 776.9999999999999
+            },
+            "viewport": {
+              "x": 610.1966552734374,
+              "y": 533.9999999999999,
+              "right": 1293.1966552734375,
+              "bottom": 917.9999999999999
+            },
+            "inside": true
+          },
+          {
+            "id": "44gtJh0PE",
+            "visible": true,
+            "bounds": {
+              "x": 962.4999999999999,
+              "y": 726.9999999999999,
+              "right": 1000.4999999999999,
+              "bottom": 775.9999999999999
+            },
+            "viewport": {
+              "x": 610.1966552734374,
+              "y": 533.9999999999999,
+              "right": 1293.1966552734375,
+              "bottom": 917.9999999999999
+            },
+            "inside": true
+          },
+          {
+            "id": "PdKtlsJxQ",
+            "visible": true,
+            "bounds": {
+              "x": 1072.5,
+              "y": 727,
+              "right": 1110.5,
+              "bottom": 776
+            },
+            "viewport": {
+              "x": 610.1966552734374,
+              "y": 533.9999999999999,
+              "right": 1293.1966552734375,
+              "bottom": 917.9999999999999
+            },
+            "inside": true
+          },
+          {
+            "id": "tX2tSgCuv",
+            "visible": true,
+            "bounds": {
+              "x": 852.4999999999999,
+              "y": 811.9999999999999,
+              "right": 890.4999999999999,
+              "bottom": 860.9999999999999
+            },
+            "viewport": {
+              "x": 610.1966552734374,
+              "y": 533.9999999999999,
+              "right": 1293.1966552734375,
+              "bottom": 917.9999999999999
+            },
+            "inside": true
+          },
+          {
+            "id": "_xSDSXetC",
+            "visible": true,
+            "bounds": {
+              "x": 962.4999999999999,
+              "y": 811.9999999999999,
+              "right": 1000.4999999999999,
+              "bottom": 860.9999999999999
+            },
+            "viewport": {
+              "x": 610.1966552734374,
+              "y": 533.9999999999999,
+              "right": 1293.1966552734375,
+              "bottom": 917.9999999999999
+            },
+            "inside": true
+          },
+          {
+            "id": "czK5KR_kb",
+            "visible": true,
+            "bounds": {
+              "x": 1072.4999999999998,
+              "y": 811.9999999999999,
+              "right": 1110.4999999999998,
+              "bottom": 860.9999999999999
+            },
+            "viewport": {
+              "x": 610.1966552734374,
+              "y": 533.9999999999999,
+              "right": 1293.1966552734375,
+              "bottom": 917.9999999999999
+            },
+            "inside": true
+          }
+        ]
+      }
+    }
+  },
+  "validation": {
+    "focusedUnits": "23 PASS /4files through check:quick, then final Thien Son policy7 PASS after native-duration sampler update:24 distinct cases",
+    "typecheck": [
+      "pnpm exec tsc -b apps/game-client",
+      "pnpm exec tsc -p tsconfig.tools.json --noEmit"
+    ],
+    "native": "224+256 cels,40+40 exact tag ranges/durations, visible RGB/alpha roundtrip, trim/bounds/public-copy/body/alpha hashes",
+    "browserCommand": "node tools/run-playwright.mjs test --config playwright.hero-coherence-batch3.config.ts",
+    "sessions": {
+      "baseline": "hero-coherence-batch3-baseline: expected mixed-texture rejection reproduced for both branches",
+      "pilot": "hero-coherence-batch3-pilot: exposed missing fan contact after native animator reset",
+      "pilotContact": "hero-coherence-batch3-pilot-contact:two clients actual A contact PASS before bulk",
+      "iteration": "hero-coherence-batch3-iteration:two clients,two directions; Phien PASS; Dao action/reaction stages complete then helper wrong-Q FAIL retained",
+      "extrasFailed": "hero-coherence-batch3-extras: bounded6-hit RNG variant assumption FAIL retained",
+      "extrasS": "hero-coherence-batch3-extras-S:two clients, correct S binding,three passes/retreat/X bodies PASS",
+      "final": "hero-coherence-batch3-final:six clients,both branches,all eight directions/actions/reactions/choreography/F8/portrait/party PASS"
+    },
+    "ports": "QA3002/5602,isolated from retained Cai Bang/Vo Dang review rooms",
+    "fullSuite": "Not run, per requested focused scope",
+    "recordings": "None; video/trace off"
+  },
+  "knownLimits": [
+    "Thien Son remains candidate pending director normal-zoom art approval; stop before Thieu Lam.",
+    "Liet Phong retains native four-cardinal body/VFX views for diagonal inputs; other actions and locomotion use authored eight facings.",
+    "Party target fixture:96 stationary high-HP server targets,real accepted keyboard attacks/hits; no creep AI/reward or legacy creep-art fallback acceptance.",
+    "Frame samples from six browser contexts are diagnostic,not a normal-play FPS guarantee.",
+    "Initial native extent/landmark failures and original sources remain retained; only defective poses were redrawn, with measured tolerance notes in profiles."
+  ],
+  "room": {
+    "status": "READY",
+    "url": "http://127.0.0.1:5603/?debug=1",
+    "roomId": "00bQVpdpO",
+    "sessionId": "DuY_OChWz",
+    "basic": "thien_son_phien",
+    "level": 30,
+    "slots": [
+      "lien_hoa_phien",
+      "luc_duong_chuong",
+      "luu_phong_bo",
+      "chiet_mai_thu",
+      "bach_phien_phong_bao"
+    ],
+    "ranks": {
+      "lien_hoa_phien": 4,
+      "luc_duong_chuong": 4,
+      "luu_phong_bo": 4,
+      "chiet_mai_thu": 4,
+      "bach_phien_phong_bao": 4
+    },
+    "body": "hero-unified:thien_son_phien",
+    "f8": "ON; keyboard toggle verified",
+    "errors": []
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "runId": "0be14050-4fbb-4460-85ec-e487dd2d7a51",
+  "mode": "browser",
+  "args": [
+    "--config",
+    "playwright.ngu-doc-game.config.ts",
+    "--grep",
+    "Ngũ Độc plays",
+    "--reporter=line",
+    "--output",
+    "artifacts/qa-skill-profiles-ngu-doc"
+  ],
+  "startedAt": "2026-11-19T19:53:07.996Z",
+  "status": "PASS",
+  "stages": [
+    {
+      "label": "environment preflight",
+      "seconds": 1.195,
+      "status": "PASS",
+      "checks": [
+        {
+          "id": "workspace",
+          "status": "PASS",
+          "detail": {
+            "mode": "browser",
+            "stage": "before-build",
+            "managed": true
+          }
+        },
+        {
+          "id": "session",
+          "status": "PASS",
+          "detail": {
+            "serverPort": 2802,
+            "clientPort": 5581
+          }
+        },
+        {
+          "id": "ports",
+          "status": "PASS"
+        },
+        {
+          "id": "node",
+          "status": "PASS",
+          "detail": "26.0.0"
+        },
+        {
+          "id": "installation",
+          "status": "PASS",
+          "detail": "pnpm@11.25.0"
+        },
+        {
+          "id": "tools",
+          "status": "PASS",
+          "detail": {
+            "typescript": "7.0.2",
+            "vitest": "5.0.5",
+            "vite": "8.3.5",
+            "@playwright/test": "1.64.1"
+          }
+        },
+        {
+          "id": "chromium",
+          "status": "PASS",
+          "detail": {
+            "channels": [
+              "chrome"
+            ],
+            "executable": null,
+            "verified": "headless launch + close"
+          }
+        }
+      ]
+    },
+    {
+      "label": "prepare assets (once)",
+      "seconds": 19.67,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-ngu-doc\\check-workflow\\0be14050-4fbb-4460-85ec-e487dd2d7a51\\1-prepare-assets-once-.log",
+      "outputBytes": 738
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 1.21,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-ngu-doc\\check-workflow\\0be14050-4fbb-4460-85ec-e487dd2d7a51\\2-compile-TypeScript.log",
+      "outputBytes": 0
+    },
+    {
+      "label": "production client build",
+      "seconds": 10.91,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-ngu-doc\\check-workflow\\0be14050-4fbb-4460-85ec-e487dd2d7a51\\3-production-client-build.log",
+      "outputBytes": 12622
+    },
+    {
+      "label": "browser verification",
+      "seconds": 40.5,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-ngu-doc\\check-workflow\\0be14050-4fbb-4460-85ec-e487dd2d7a51\\4-browser-verification.log",
+      "outputBytes": 1034
+    }
+  ],
+  "totalSeconds": 73.49
+}

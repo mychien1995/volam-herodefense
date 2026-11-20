@@ -1,0 +1,16 @@
+[
+  {
+    "label": "invalid-workers",
+    "exitCode": 1,
+    "error": "VOLAM_CORE_WORKERS must be an integer from 1 to 4",
+    "stages": []
+  },
+  {
+    "label": "room-rejected",
+    "exitCode": 1,
+    "error": "Not a pure-core dependency: tests/room.test.ts -> @colyseus/core; use check:quick",
+    "stages": [
+      "environment preflight"
+    ]
+  }
+]

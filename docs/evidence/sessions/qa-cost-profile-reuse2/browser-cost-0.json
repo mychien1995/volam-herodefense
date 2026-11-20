@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "status": "failed",
+  "spawnedAt": 1795157531016,
+  "loadedAt": 1795157531685,
+  "beginAt": 1795157532502,
+  "endAt": 1795157593879,
+  "tests": [
+    {
+      "title": "iteration starts fresh and replicates movement in two real Phaser clients",
+      "startedAt": 1795157533631,
+      "status": "timedOut",
+      "milliseconds": 60018
+    }
+  ],
+  "steps": [
+    {
+      "category": "pw:api",
+      "title": "Navigate",
+      "count": 1,
+      "milliseconds": 731
+    },
+    {
+      "category": "fixture",
+      "title": "Fixture \"browser\"",
+      "count": 2,
+      "milliseconds": 162
+    },
+    {
+      "category": "pw:api",
+      "title": "Create page",
+      "count": 2,
+      "milliseconds": 159
+    },
+    {
+      "category": "hook",
+      "title": "Before Hooks",
+      "count": 1,
+      "milliseconds": 131
+    },
+    {
+      "category": "pw:api",
+      "title": "Launch browser",
+      "count": 1,
+      "milliseconds": 113
+    },
+    {
+      "category": "hook",
+      "title": "Worker Cleanup",
+      "count": 1,
+      "milliseconds": 48
+    },
+    {
+      "category": "hook",
+      "title": "After Hooks",
+      "count": 1,
+      "milliseconds": 21
+    },
+    {
+      "category": "pw:api",
+      "title": "GET",
+      "count": 1,
+      "milliseconds": 15
+    },
+    {
+      "category": "pw:api",
+      "title": "Create context",
+      "count": 2,
+      "milliseconds": 15
+    },
+    {
+      "category": "fixture",
+      "title": "Fixture \"request\"",
+      "count": 2,
+      "milliseconds": 11
+    },
+    {
+      "category": "pw:api",
+      "title": "Create request context",
+      "count": 1,
+      "milliseconds": 6
+    },
+    {
+      "category": "expect",
+      "title": "Expect \"toEqual\"",
+      "count": 1,
+      "milliseconds": 1
+    }
+  ],
+  "limits": "Reporter milestones use wall timestamps in one host. Fixture/API step durations can overlap; do not sum them as disjoint phases."
+}

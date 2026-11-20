@@ -1,0 +1,92 @@
+{
+  "status": "PASS",
+  "batch": 7,
+  "sourceSession": "hero-coherence-batch7-final",
+  "ports": [
+    3013,
+    5613
+  ],
+  "branches": {
+    "ngu_doc_ta_hiep": {
+      "clients": 6,
+      "nativeFrames": 192,
+      "nativeTags": 40,
+      "bodyPNG": "7113cb6ad9deff8a83f42d90868077d09482433dbe5918f98dec69a381459fd3",
+      "idleDirections": 8,
+      "walkDirections": 8,
+      "publicActionGroups": 40,
+      "reactionCases": 40,
+      "party": {
+        "hits": 55,
+        "medianMs": 16.799999997019768,
+        "p95Ms": 19.200000002980232
+      },
+      "extraChecks": [
+        {
+          "kind": "Q poison toggle + canonical palm attachment",
+          "sample": {
+            "frame": "idle_1_down_right",
+            "effects": [
+              {
+                "name": "ngu-doc:hand:ZYTZw9oK7:0",
+                "frame": "hand_flame_1",
+                "x": 693,
+                "y": 647,
+                "alpha": 1,
+                "flipX": true,
+                "rotation": 0,
+                "returning": false
+              },
+              {
+                "name": "ngu-doc:hand:ZYTZw9oK7:1",
+                "frame": "hand_flame_2",
+                "x": 707.5,
+                "y": 646.5,
+                "alpha": 1,
+                "flipX": false,
+                "rotation": 0,
+                "returning": false
+              }
+            ]
+          }
+        },
+        {
+          "kind": "real toxic A, hurt, Q off and effect cleanup"
+        },
+        {
+          "kind": "unchanged passive R, no manufactured cast"
+        }
+      ]
+    },
+    "ngu_doc_co_su": {
+      "clients": 6,
+      "nativeFrames": 224,
+      "nativeTags": 40,
+      "bodyPNG": "eb4fb40dd87b493ca6d042338503949eee1fb986b2087f64928c0f3d00c9ab20",
+      "idleDirections": 8,
+      "walkDirections": 8,
+      "publicActionGroups": 40,
+      "reactionCases": 40,
+      "party": {
+        "hits": 74,
+        "medianMs": 16.700000002980232,
+        "p95Ms": 18.899999991059303
+      },
+      "extraChecks": [
+        {
+          "kind": "real W summons four retained original minions per owner"
+        },
+        {
+          "kind": "real T ritual with retained original reaper art"
+        },
+        {
+          "kind": "unchanged passive R, no manufactured cast"
+        }
+      ]
+    }
+  },
+  "recordings": false,
+  "approval": "Candidate; continue all branches authorized",
+  "testScope": "Focused policies/types/native and two-client iteration, six-client all directions and reactions; controlled targets, no balance/AI/rewards coverage",
+  "note": "Crops show independent idle/A moments. Originals retained beside boards. No sprite repaint or motion recording."
+}

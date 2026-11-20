@@ -1,0 +1,66 @@
+{
+  "runId": "38f9ac1e-7223-407b-8616-8b44a08623c5",
+  "mode": "browser",
+  "args": [
+    "--config",
+    "playwright.duong-mon-game.config.ts",
+    "--grep",
+    "Đường Môn starts",
+    "--reporter=line"
+  ],
+  "startedAt": "2026-11-19T19:49:36.351Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "environment preflight",
+      "seconds": 0.034,
+      "status": "FAIL",
+      "checks": [
+        {
+          "id": "workspace",
+          "status": "PASS",
+          "detail": {
+            "mode": "browser",
+            "stage": "before-build",
+            "managed": true
+          }
+        },
+        {
+          "id": "session",
+          "status": "PASS",
+          "detail": {
+            "serverPort": 28791,
+            "clientPort": 28792
+          }
+        },
+        {
+          "id": "ports",
+          "status": "FAIL",
+          "message": "QA port 28791 unavailable; choose VOLAM_QA_SERVER_PORT/VOLAM_QA_CLIENT_PORT. Existing services will not be reused or stopped.",
+          "remedy": "Choose unused VOLAM_QA_SERVER_PORT/VOLAM_QA_CLIENT_PORT; do not borrow or stop another service."
+        },
+        {
+          "id": "node",
+          "status": "PASS",
+          "detail": "26.0.0"
+        },
+        {
+          "id": "installation",
+          "status": "PASS",
+          "detail": "pnpm@11.25.0"
+        },
+        {
+          "id": "tools",
+          "status": "PASS",
+          "detail": {
+            "typescript": "7.0.2",
+            "vitest": "5.0.5",
+            "vite": "8.3.5",
+            "@playwright/test": "1.64.1"
+          }
+        }
+      ]
+    }
+  ],
+  "totalSeconds": 0.04
+}

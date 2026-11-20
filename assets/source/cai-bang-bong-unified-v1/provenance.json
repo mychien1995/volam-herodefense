@@ -1,0 +1,128 @@
+{
+  "status": "prototype pending director review",
+  "identity": "Existing sharp Cái Bang Bổng project art; same branch red tunic, cream cuffs, gold belt and red/gold staff",
+  "ownership": "Original project artwork and original built-in imagegen derivatives; no third-party proprietary game art imported",
+  "master": "references/master-idle.png",
+  "rawSources": "raw/*.png and raw/contacts/*.png; exact prompts and UTC request timestamps retained",
+  "nativeSource": "body.aseprite; 224 cels,40 exact tag ranges, visible RGB/alpha roundtrip validated",
+  "productionSelection": {
+    "directionalSheets": [
+      "down.png",
+      "down_right.png",
+      "right.png",
+      "up_right.png",
+      "up.png",
+      "up_left.png",
+      "left.png",
+      "down_left.png"
+    ],
+    "celGroupOverrides": [
+      {
+        "direction": "down_left",
+        "path": "raw/actions-down_left.png",
+        "rows": 4,
+        "columns": 4,
+        "start": 8
+      },
+      {
+        "direction": "down",
+        "path": "raw/actions-down.png",
+        "rows": 4,
+        "columns": 4,
+        "start": 8
+      },
+      {
+        "direction": "up",
+        "path": "raw/actions-up.png",
+        "rows": 4,
+        "columns": 4,
+        "start": 8
+      },
+      {
+        "direction": "down",
+        "path": "raw/neutral-down.png",
+        "start": 0,
+        "rows": 2,
+        "columns": 4
+      }
+    ],
+    "poseOverrides": [
+      {
+        "frame": "slam_contact_right",
+        "path": "raw/contacts/r8-r2-right.png",
+        "sourceRoot": [
+          278,
+          589
+        ],
+        "sourceBodyTop": 233,
+        "sourceTip": [
+          1954,
+          532
+        ],
+        "expectedTipWorld": [
+          200,
+          5.17627
+        ],
+        "tipTolerance": 20
+      },
+      {
+        "frame": "slam_contact_left",
+        "path": "raw/contacts/r8-r2-left.png",
+        "sourceRoot": [
+          1755,
+          660
+        ],
+        "sourceBodyTop": 273,
+        "sourceTip": [
+          49,
+          565
+        ],
+        "expectedTipWorld": [
+          -200,
+          5.17627
+        ],
+        "tipTolerance": 25,
+        "bodyHeight": 83
+      },
+      {
+        "frame": "slam_contact_down",
+        "path": "raw/contacts/r8-down.png",
+        "sourceRoot": [
+          449,
+          529
+        ],
+        "sourceBodyTop": 116,
+        "sourceTip": [
+          453,
+          1670
+        ],
+        "expectedTipWorld": [
+          0.23194,
+          128
+        ],
+        "tipTolerance": 20
+      },
+      {
+        "frame": "slam_contact_up",
+        "path": "raw/contacts/r8-up-r3.png",
+        "sourceRoot": [
+          560,
+          1282
+        ],
+        "sourceBodyTop": 927,
+        "bodyHeight": 78,
+        "sourceTip": [
+          560,
+          62
+        ],
+        "expectedTipWorld": [
+          1.59238,
+          -128
+        ],
+        "tipTolerance": 12
+      }
+    ]
+  },
+  "retainedAlternatives": "Original short-staff pilot, initial contact and unselected raw action groups retained for provenance; these are not the production body",
+  "rendering": "One trimmed atlas, scale0.5, common logical foot anchor. Separate legacy VFX unchanged. Independent pose groups registered by physical head density, never by weapon bounding box. Four cardinal Phá Giáp views retained as choreography routing; diagonal locomotion/A/other actions are authored eight-facing."
+}

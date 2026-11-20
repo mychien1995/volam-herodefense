@@ -1,3 +1,7 @@
+## Lôi Đài độc lập · phạm vi được yêu cầu 2026-11-19
+
+Người dùng yêu cầu triển khai tính năng standalone theo [đặc tả riêng](docs/LOI_DAI_STANDALONE_SPEC.md) trên `wip/m3d/pvp`, cùng bộ concept đã duyệt. Phạm vi này không đánh dấu hoàn tất M4/M6 hoặc thay thế Lôi Đài trong Defense. [Trạng thái tích hợp](docs/LOI_DAI_STANDALONE_IMPLEMENTATION.md).
+
 ## Campaign balance và thử lại boss — 2026-11-06
 
 Director yêu cầu một batch cân bằng/progression/retry trên baseline M3D hiện tại, bao gồm Long Châu và gate cuối. Đây là phạm vi được yêu cầu rõ ràng; không tự mở rộng PvP hoặc milestone khác. Chỉ đánh dấu kiểm chứng theo báo cáo thực tế. [Quy tắc, cấu hình và kiểm chứng](docs/CAMPAIGN_BALANCE_2026_11_06.md).

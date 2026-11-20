@@ -1,0 +1,92 @@
+{
+  "runId": "0a2c6f5a-5da4-4926-8fc8-76993437f6fd",
+  "mode": "core",
+  "args": [
+    "tests/combat.test.ts",
+    "tests/practice.test.ts"
+  ],
+  "startedAt": "2026-11-19T14:38:22.615Z",
+  "status": "PASS",
+  "stages": [
+    {
+      "label": "environment preflight",
+      "status": "PASS",
+      "seconds": 0.007,
+      "checks": [
+        {
+          "id": "workspace",
+          "status": "PASS",
+          "detail": {
+            "mode": "quick",
+            "stage": "before-build",
+            "managed": false
+          }
+        },
+        {
+          "id": "session",
+          "status": "PASS",
+          "detail": "No managed service ports for this profile"
+        },
+        {
+          "id": "node",
+          "status": "PASS",
+          "detail": "26.0.0"
+        },
+        {
+          "id": "installation",
+          "status": "PASS",
+          "detail": "pnpm@11.25.0"
+        },
+        {
+          "id": "tools",
+          "status": "PASS",
+          "detail": {
+            "typescript": "7.0.2",
+            "vitest": "5.0.5"
+          }
+        }
+      ]
+    },
+    {
+      "label": "pure-core import boundary",
+      "status": "PASS",
+      "seconds": 0.6967689,
+      "tests": [
+        "tests/combat.test.ts",
+        "tests/practice.test.ts"
+      ],
+      "modules": 125
+    },
+    {
+      "label": "prepared simulation data",
+      "status": "PASS",
+      "hit": true,
+      "input": "246ce972ec5f3d8eaaaa041c972837d8a5d4600e744aa6bab2cf469785f35840",
+      "output": "8eaf371483c4bdaec0ca3057e546d6b3792fc57298c312d3e375dc1261db4704"
+    },
+    {
+      "label": "compile pure-core artifacts (force)",
+      "seconds": 0.983,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\core-fast-probe-repair\\check-core\\0a2c6f5a-5da4-4926-8fc8-76993437f6fd\\3-compile-pure-core-artifacts-force-.log",
+      "outputBytes": 0
+    },
+    {
+      "label": "compiled pure-core artifacts",
+      "status": "PASS",
+      "hit": false,
+      "input": "71d15ac97a364236d4b981ad391ff06b106548ba4d3c280178f1ba6a84ca5992",
+      "output": "cb97c4ecc163400f23861a5e0740f6922908d254fbedc84a664237a7601b827d"
+    },
+    {
+      "label": "fresh pure-core tests",
+      "seconds": 2.488,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\core-fast-probe-repair\\check-core\\0a2c6f5a-5da4-4926-8fc8-76993437f6fd\\5-fresh-pure-core-tests.log",
+      "outputBytes": 193
+    }
+  ],
+  "totalSeconds": 6.477
+}

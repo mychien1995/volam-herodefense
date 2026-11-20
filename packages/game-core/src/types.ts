@@ -693,6 +693,8 @@ export interface CombatArea extends Point {
   trappedIds?: string[];
 }
 export interface World {
+  /** Server-only private practice targets: hittable but cannot die or grant rewards. */
+  practiceTargets?: ReadonlySet<string>;
   nguDocMarks?: (Point & {
     ownerId: string;
     targetId: string;
@@ -701,6 +703,8 @@ export interface World {
   })[];
   /** Present only in the isolated Lôi Đài world. */
   duel?: ReadonlySet<string>;
+  /** Standalone team PvP only; absent preserves the historical 1v1 duel. */
+  duelTeams?: ReadonlyMap<string, string>;
   duelWalkWalls?: Rect[];
   pendingScatters?: Array<{
     tick: number;

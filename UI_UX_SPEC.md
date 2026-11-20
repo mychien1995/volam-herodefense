@@ -1,3 +1,15 @@
+## Tỉ lệ map và form PvP/Practice · 2026-11-19
+
+Dùng native gameplay zoom Defense, camera theo hero và clamped theo map; khán giả pan trong bounds. Không zoom out để chứa toàn sân, không thêm dải ảnh lặp ngoài map. Các nút utility giữ đúng cỡ từng nút Defense dù chỉ còn2/3nút. Form tên Practice dùng label/input/button một hàng khi đủ chỗ, không bẻ chữ label/nút; chỉ chuyển hàng có chủ đích ở viewport hẹp. Nhát chém raster giữ đúng tỉ lệ, quét theo tick, cảnh báo đúng nửa sân. [Kiểm chứng](docs/PVP_VISUAL_REPAIR.md).
+
+## Phòng test · 2026-11-19
+
+Thêm Phòng test vào menu chính, nhập tên rồi dùng chung lưới phái/popup hệ của Defense. Giữ màn tải trước khi map sẵn sàng. Gameplay một viewport Rừng Trúc, nhãn chế độ gọn, HUD/hotbar hiện tại và hai nút Thoát/Cài đặt; nhãn Phòng test có nút Đổi phái/hệ phái mở lưới phái/popup hệ Defense trên nền map trong viewport, Hủy/Escape và chặn hotkey. Không có panel bên ngoài. [Chi tiết](docs/PRACTICE_ROOM.md).
+
+## Menu Lôi Đài · 2026-11-19
+
+Menu Lôi Đài dùng cùng khung gỗ, tiêu đề, nút xanh và font tiếng Việt của Defense. Nút riêng mở lưới chọn phái rồi popup hai hệ; chỉ Xác nhận mới gửi lựa chọn, hủy không đánh dấu ready. Cài đặt có checkbox sát nhãn cùng mô tả hiểm họa của từng map. Thông báo thắng hiệp/ván dùng font hỗ trợ đầy đủ tiếng Việt. [Bản sửa và kiểm chứng](docs/PVP_MENU_REWORK.md).
+
 ## Menu chính trước màn biệt danh · 2026-11-15
 
 Vào game mở ô biệt danh. Hướng dẫn có ba tab Cơ chế chung, Môn phái và Boss. Cài đặt có âm lượng, công tắc tự đánh thường, lựa chọn Bàn phím/Chuột và mẫu con trỏ, dấu X. Nút Cài đặt trong trận mở các điều khiển tương ứng trong viewport và áp dụng ngay. Màn nhập biệt danh dùng Escape để về menu chính. Trong trận, con trỏ tùy chỉnh áp trên vùng canvas ở chế độ chuột; dấu X nằm tại tọa độ thế giới đã bấm.
@@ -56,9 +68,9 @@ The current director request supersedes the older HUD arrangement for the arena:
 
 The game must feel like a **complete 2D pixel-art RPG**. Once a player joins a match, the **world is the main screen**. Health, mana, EXP, hotbar, gold, inventory, dungeon/merchant/crafting/skill menus, PvP waiting room, and boss loot rolls are **drawn over, or anchored within, the same game viewport**. Never shrink the playfield to make space for persistent web-app sidebars, a page header, a status column, or a separate dashboard below the game.
 
-**The current Codex prototype screenshot is an anti-reference** (`assets/references/current_codex_dashboard_anti_reference.png`): title/description outside the game, map embedded on the left, persistent `Temporary practice room`, character stats, players, and training creeps on a right column, footer/tool text beneath. Replace this in-match presentation. It may survive only in an explicitly toggled developer debug overlay (off in regular gameplay).
+**The historical Codex dashboard screenshot is an anti-reference** (`assets/references/anti-reference/dashboard_layout.png`): title/description outside the game, map embedded on the left, persistent `Temporary practice room`, character stats, players, and training creeps on a right column, footer/tool text beneath. Replace this in-match presentation. It may survive only in an explicitly toggled developer debug overlay (off in regular gameplay).
 
-**Positive visual references:** `assets/references/in_game_world_reference.png` for wuxia pixel-art scene composition; `assets/references/cai_bang_character_reference.png`, `thien_son_thieu_lam_character_reference.png`, and `vo_dang_art_direction_reference.png` for chibi character styling. These **are reference/concept sheets, not ready-to-import animated spritesheets or a finished UI atlas**. The sample in-game scene is an art target, not a pixel-perfect UI layout requirement. No borrowed proprietary assets.
+**Positive visual references:** `assets/references/mood/world/wuxia_town_reference.png` for wuxia pixel-art scene composition; `assets/references/mood/characters/cai_bang_character_reference.png` and `assets/references/mood/characters/vo_dang_character_reference.png` for chibi character identity. Use actual approved school sources for Thiên Sơn/Thiếu Lâm, not the old town image with a school filename. These **are reference/concept sheets, not ready-to-import animated spritesheets or a finished UI atlas**. The sample in-game scene is an art target, not a pixel-perfect UI layout requirement. No borrowed proprietary assets.
 
 ## 2. Display hierarchy (CONFIRMED vs PROPOSED)
 
@@ -178,7 +190,7 @@ Engineering constraints:
 - [ ] Clicking UI does not unintentionally move/attack/activate skills; modal keyboard focus is safe.
 - [ ] Server keeps simulating and waves/alerts remain visible while inventory/shop is open; no artificial multiplayer pause.
 - [ ] UI stays usable with different desktop sizes; no off-screen modal/window or disappearing HUD.
-- [ ] Real screenshots of both normal gameplay and one menu-open state are reviewed against `in_game_world_reference.png` and `current_codex_dashboard_anti_reference.png`.
+- [ ] Real screenshots of both normal gameplay and one menu-open state are reviewed against `assets/references/mood/world/wuxia_town_reference.png` and `assets/references/anti-reference/dashboard_layout.png`.
 - [ ] No change to authoritative gameplay logic and no invented feature claims (e.g. fake item purchase / dungeon entry).
 
 ## 8. Unresolved details (do not silently declare approved)
@@ -193,18 +205,18 @@ The user has explicitly approved **in-world HUD and menus instead of external pa
 
 ## 9. v1.5 reference images to inspect before UI work
 
-Before making or refactoring any in-match UI, inspect these files:
+Before making or refactoring in-match UI, use [the reference index](assets/references/README.md), inspect current baseline evidence and the actual dashboard negative, then select relevant positive concepts from the list below. Unchanged references already inspected in the same task can be reused; do not load unrelated dungeon concepts for a small UI fix:
 
-- `assets/references/central_arena_hub_reference.png` — full in-game hub composition.
-- `assets/references/arena_battle_reference.png` — arena battle HUD composition.
-- `assets/references/forest_dungeon_reference.png`
-- `assets/references/desert_dungeon_reference.png`
-- `assets/references/sea_dungeon_reference.png`
-- `assets/references/hell_dungeon_reference.png`
-- `assets/references/dungeon_selection_menu_reference.png` — desired dungeon menu overlay.
-- `assets/references/merchant_shop_menu_reference.png` — desired merchant overlay.
-- `assets/references/inventory_menu_reference.png` — desired inventory/equipment overlay.
-- `assets/references/current_codex_dashboard_anti_reference.png` — anti-reference showing what not to do.
+- `assets/references/mood/world/central_arena_hub_reference.png` — full in-game hub composition.
+- `assets/references/mood/world/arena_battle_reference.png` — arena battle HUD composition.
+- `assets/references/mood/world/forest_dungeon_reference.png`
+- `assets/references/mood/world/desert_dungeon_reference.png`
+- `assets/references/mood/world/sea_dungeon_reference.png`
+- `assets/references/mood/world/hell_dungeon_reference.png`
+- `assets/references/mood/ui/dungeon_selection_menu_reference.png` — desired dungeon menu overlay.
+- `assets/references/mood/ui/merchant_shop_menu_reference.png` — desired merchant overlay.
+- `assets/references/mood/ui/inventory_menu_reference.png` — desired inventory/equipment overlay.
+- `assets/references/anti-reference/dashboard_layout.png` — anti-reference showing what not to do.
 
 These references lock in the intended pattern:
 - world fills the screen,

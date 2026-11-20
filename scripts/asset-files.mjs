@@ -10,6 +10,15 @@ import { fileURLToPath } from 'node:url';
 
 const path = (value) => (value instanceof URL ? fileURLToPath(value) : value);
 export const assetWrites = { changed: 0, unchanged: 0 };
+let outputObserver;
+// Optional owned-iteration observer only; normal preparation/final never installs it.
+export function observeAssetOutputs(observer) {
+  if (outputObserver) throw Error('Asset output observer already installed');
+  outputObserver = observer;
+  return () => {
+    outputObserver = undefined;
+  };
+}
 
 // Compare bytes, not mtimes: restored/corrupted outputs must also be repaired.
 export function writeIfChanged(destination, content) {
@@ -17,10 +26,12 @@ export function writeIfChanged(destination, content) {
   const bytes = Buffer.isBuffer(content) ? content : Buffer.from(content);
   if (existsSync(target) && readFileSync(target).equals(bytes)) {
     assetWrites.unchanged++;
+    outputObserver?.(target, bytes);
     return false;
   }
   mkdirSync(dirname(target), { recursive: true });
   writeFileSync(target, bytes);
+  outputObserver?.(target, bytes);
   assetWrites.changed++;
   return true;
 }

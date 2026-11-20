@@ -1,3 +1,4 @@
+from reference_paths import resolve_reference_path
 """Validate native art/registration; does not approve artwork or infer gameplay PASS."""
 import hashlib,json,sys
 from pathlib import Path
@@ -7,7 +8,7 @@ root=Path(__file__).resolve().parents[1];src=root/'assets/source/renovation-v3';
 read=lambda p:json.loads(p.read_text('utf8'))
 provenance=read(src/'provenance.json')
 for item in provenance['raw']+provenance['references']+provenance.get('rejected',[]):
-    assert hashlib.sha256((root/item['file']).read_bytes()).hexdigest()==item['sha256'],item['file']
+    assert hashlib.sha256(resolve_reference_path(root,item['file']).read_bytes()).hexdigest()==item['sha256'],item['file']
 jobs=read(src/'generation-jobs.json')['jobs']+read(src/'extra-jobs.json')['jobs']
 alphaChecks=[]
 for j in jobs+[{'id':'chiet_mai_clean','kind':'vfx','grid':[2,2]}]:

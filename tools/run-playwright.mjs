@@ -1,3 +1,4 @@
+import { qaBrowserEnvironment } from './qa-preflight.mjs';
 import { spawn } from 'node:child_process';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
@@ -9,12 +10,7 @@ const child = spawn(
   {
     cwd: root,
     stdio: 'inherit',
-    env: {
-      ...process.env,
-      PLAYWRIGHT_BROWSERS_PATH:
-        process.env['PLAYWRIGHT_BROWSERS_PATH'] ??
-        fileURLToPath(new URL('../.cache/ms-playwright', import.meta.url)),
-    },
+    env: qaBrowserEnvironment(process.env, root),
   },
 );
 child.on('error', (error) => {

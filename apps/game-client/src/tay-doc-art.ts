@@ -2,6 +2,7 @@ import { markImpactTarget } from './m3d-hit-art.js';
 import { releaseBeat } from './m3d-approved-boss-body.js';
 import { WaveBossFeedbackArt } from './wave-boss-feedback-art.js';
 import Phaser from 'phaser';
+import { tayDocBodyForm } from './boss-unified-policy.js';
 import {
   presentRenovatedBody,
   renovationEnabled,
@@ -322,7 +323,7 @@ export class TayDocRenderer {
       presentRenovatedBody(
         this.scene,
         actor.image,
-        p2 ? 'tay_doc_cap_mo' : 'tay_doc',
+        tayDocBodyForm(data.phase, data.transitionAt, this.tick),
         boss.hp <= 0 ? 'death' : c ? 'action' : boss.pose,
         boss.fx,
         boss.fy,
@@ -338,7 +339,23 @@ export class TayDocRenderer {
                     )
                   : releaseBeat(this.tick, c.activeAt),
             }
-          : undefined,
+          : data.phase === 'transition'
+            ? {
+                beat:
+                  this.tick - data.transitionAt < 36
+                    ? 0
+                    : this.tick - data.transitionAt < 55
+                      ? 1
+                      : 2,
+              }
+            : data.phase === 'dead'
+              ? {
+                  elapsedMs: Math.max(
+                    0,
+                    ((this.tick - data.deathAt) * 1000) / 30,
+                  ),
+                }
+              : undefined,
       );
       markImpactTarget(actor.image, data.bossId);
       this.health(

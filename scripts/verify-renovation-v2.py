@@ -1,3 +1,4 @@
+from reference_paths import resolve_reference_path
 import json,hashlib,sys
 from pathlib import Path
 from PIL import Image
@@ -5,7 +6,7 @@ root=Path(__file__).resolve().parents[1];src=root/'assets/source/renovation-v2';
 plan=json.loads((src/'override-plan.json').read_text('utf8'));entries=[];atlases={};count=0;pixels=0
 provenance=json.loads((src/'provenance.json').read_text('utf8'))
 for item in provenance['raw']+provenance['references']:
-    assert hashlib.sha256((root/item['file']).read_bytes()).hexdigest()==item['sha256'],item['file']
+    assert hashlib.sha256(resolve_reference_path(root,item['file']).read_bytes()).hexdigest()==item['sha256'],item['file']
 for name in ['vo_dang_cast','thien_son_throw','thien_son_cast','vo_dang_attack','arena-ground']:
     assert (src/(name+'.aseprite')).is_file()
 assert len(list((src/'effects').glob('*.aseprite')))==11

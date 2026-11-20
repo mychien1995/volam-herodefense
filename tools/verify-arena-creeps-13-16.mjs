@@ -1,16 +1,9 @@
+import { startOwnedGameQa } from './qa-game-services.mjs';
 import { ColyseusTestServer } from '@colyseus/testing';
-import { createServer, preview } from 'vite';
 import { PROTOCOL_VERSION } from '@volam/game-protocol';
 import { experienceAtLevel, gainExperience } from '@volam/game-core';
-import {
-  qaSession,
-  requireFreePorts,
-  verifyQaIdentity,
-  qaIdentityPlugin,
-  ownedQaServices,
-} from './qa-session.mjs';
+import { qaSession, ownedQaServices } from './qa-session.mjs';
 import { waitForQa, requireQaActor } from './qa-wait.mjs';
-import { createGameServer } from '../apps/game-server/dist/app.config.js';
 import { m1Config } from '../packages/game-data/dist/index.js';
 import { readFileSync, mkdirSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -21,14 +14,12 @@ import {
   arenaCreepSavedReport,
 } from './arena-creep-qa-options.mjs';
 const production = process.env.VOLAM_QA_ARENA_PRODUCTION === '1';
-if (production) process.env.NODE_ENV = 'production';
 const options = arenaCreepQaOptions(process.argv.slice(2));
 const session = qaSession({
   profile: 'arena-creeps',
   serverPort: 2588,
   clientPort: 5186,
 });
-process.env.VOLAM_QA_RUN_ID = session.runId;
 const owned = ownedQaServices();
 const root = resolve('.'),
   out = resolve(root, options.evidenceDirectory);
@@ -51,7 +42,7 @@ const errors = [],
   poseEvidence = [],
   shots = [],
   sourceStats = new Map();
-let server, client, browser;
+let server, browser;
 const wait = (fn, label, timeout = 12000) =>
   waitForQa(fn, label, {
     timeout,
@@ -85,49 +76,16 @@ const shot = async (p, n) => {
   shots.push(n);
 };
 try {
-  await requireFreePorts(session);
-  const gameServer = createGameServer();
-  await gameServer.listen(session.serverPort);
-  server = new ColyseusTestServer(gameServer);
-  owned.add(() => server.shutdown());
-  await verifyQaIdentity(`${session.serverUrl}/health`, {
-    service: 'volam-game-server',
-    runId: session.runId,
-    protocolVersion: PROTOCOL_VERSION,
+  const stopServices = await startOwnedGameQa({
+    session,
+    clientMode: production ? 'preview' : 'development',
+    environment: production ? { NODE_ENV: 'production' } : {},
+    client: { ...(session.cacheDir ? { cacheDir: session.cacheDir } : {}) },
+    configure(gameServer) {
+      server = new ColyseusTestServer(gameServer);
+    },
   });
-  const vite = {
-    root: resolve(root, 'apps/game-client'),
-    configFile: false,
-    cacheDir: session.cacheDir,
-    plugins: [qaIdentityPlugin(session)],
-  };
-  const address = {
-    host: '127.0.0.1',
-    port: session.clientPort,
-    strictPort: true,
-  };
-  if (production) {
-    client = await preview({ ...vite, preview: address });
-    owned.add(() => client.close());
-    await verifyQaIdentity(`${session.clientUrl}/volam-build-endpoint.json`, {
-      serverUrl: session.serverUrl,
-    });
-  } else {
-    client = await createServer({
-      ...vite,
-      server: { ...address, watch: null, hmr: false },
-      define: {
-        'import.meta.env.VITE_SERVER_URL': JSON.stringify(session.serverUrl),
-      },
-    });
-    owned.add(() => client.close());
-    await client.listen();
-  }
-  await verifyQaIdentity(`${session.clientUrl}/__volam_qa_identity`, {
-    service: 'volam-qa-client',
-    runId: session.runId,
-    serverUrl: session.serverUrl,
-  });
+  owned.add(stopServices);
   mark('owned service startup');
   browser = await chromium.launch({ headless: true });
   mark('browser launch');

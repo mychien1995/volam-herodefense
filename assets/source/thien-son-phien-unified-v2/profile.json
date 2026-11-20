@@ -1,0 +1,290 @@
+{
+  "basic": "thien_son_phien",
+  "texture": "hero-unified:thien_son_phien",
+  "folder": "thien-son-phien-unified-v2",
+  "sourceRows": 7,
+  "sourceColumns": 4,
+  "canvas": [
+    320,
+    288
+  ],
+  "foot": [
+    160,
+    224
+  ],
+  "bodyHeight": 89,
+  "scale": 0.5,
+  "bodyWidth": 58,
+  "rootMode": "monochrome",
+  "poses": [
+    "idle_0",
+    "idle_1",
+    "idle_2",
+    "idle_3",
+    "walk_0",
+    "walk_1",
+    "walk_2",
+    "walk_3",
+    "windup",
+    "fan_open",
+    "fan_throw",
+    "fan_catch",
+    "palm_charge",
+    "palm_release",
+    "fan_sweep_left",
+    "fan_sweep_right",
+    "lotus_open",
+    "lotus_hold",
+    "guard",
+    "channel",
+    "spin_front",
+    "spin_back",
+    "storm_raise",
+    "storm_release",
+    "hurt_0",
+    "hurt_1",
+    "death_0",
+    "death_1"
+  ],
+  "references": [
+    "assets/source/renovation-v2/raw/thien_son_throw.png",
+    "assets/exports/renovation-v2/thien_son_throw.png",
+    "assets/exports/renovation-v2/thien_son_throw.json"
+  ],
+  "groups": [
+    {
+      "name": "idle",
+      "poses": [
+        "idle_0",
+        "idle_1",
+        "idle_2",
+        "idle_3"
+      ],
+      "durationMs": 700
+    },
+    {
+      "name": "walk",
+      "poses": [
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3"
+      ],
+      "durationMs": 110
+    },
+    {
+      "name": "action_library",
+      "poses": [
+        "windup",
+        "fan_open",
+        "fan_throw",
+        "fan_catch",
+        "palm_charge",
+        "palm_release",
+        "fan_sweep_left",
+        "fan_sweep_right",
+        "lotus_open",
+        "lotus_hold",
+        "guard",
+        "channel",
+        "spin_front",
+        "spin_back",
+        "storm_raise",
+        "storm_release"
+      ],
+      "durationMs": 100
+    },
+    {
+      "name": "hurt",
+      "poses": [
+        "hurt_0",
+        "hurt_1"
+      ],
+      "durationMs": 90
+    },
+    {
+      "name": "death",
+      "poses": [
+        "death_0",
+        "death_1"
+      ],
+      "durationMs": 220
+    }
+  ],
+  "registrationPolicy": "Fixed physical body/head density per locomotion/action/reaction group; boots anchored; never fit by weapon or fan extent.",
+  "sourceSegmentationCuts": {
+    "down_right": [
+      [
+        280,
+        1095,
+        510,
+        1096
+      ]
+    ]
+  },
+  "poseOverrides": [
+    {
+      "frame": "lotus_hold_down_right",
+      "path": "raw/repairs/lotus_hold.png",
+      "sourceRoot": [
+        283.1619404906396,
+        689.0
+      ],
+      "sourceBodyTop": 15.0,
+      "bodyHeight": 89
+    },
+    {
+      "frame": "spin_back_down_right",
+      "path": "raw/repairs/spin_back.png",
+      "sourceRoot": [
+        274.7813540510544,
+        691.0
+      ],
+      "sourceBodyTop": 37.0,
+      "bodyHeight": 89
+    },
+    {
+      "frame": "lotus_hold_up",
+      "path": "raw/repairs/lotus_hold_up.png",
+      "sourceRoot": [
+        201.07515378443435,
+        596.0
+      ],
+      "sourceBodyTop": 12.0,
+      "bodyHeight": 89
+    },
+    {
+      "frame": "channel_up",
+      "path": "raw/repairs/channel_up.png",
+      "sourceRoot": [
+        197.33711879545746,
+        596.0
+      ],
+      "sourceBodyTop": 14.0,
+      "bodyHeight": 89
+    },
+    {
+      "frame": "idle_0_down_right",
+      "path": "raw/sharp-prototype/0.png",
+      "sourceRoot": [
+        130.20597753664572,
+        312.0
+      ],
+      "sourceBodyTop": 11.0,
+      "sourceScale": 0.29519071310116085
+    },
+    {
+      "frame": "idle_1_down_right",
+      "path": "raw/sharp-prototype/1.png",
+      "sourceRoot": [
+        138.82418456642802,
+        312.0
+      ],
+      "sourceBodyTop": 11.0,
+      "sourceScale": 0.29519071310116085
+    },
+    {
+      "frame": "idle_2_down_right",
+      "path": "raw/sharp-prototype/2.png",
+      "sourceRoot": [
+        125.13815203845469,
+        311.0
+      ],
+      "sourceBodyTop": 11.0,
+      "sourceScale": 0.29519071310116085
+    },
+    {
+      "frame": "idle_3_down_right",
+      "path": "raw/sharp-prototype/3.png",
+      "sourceRoot": [
+        124.49952570669703,
+        310.0
+      ],
+      "sourceBodyTop": 10.0,
+      "sourceScale": 0.29519071310116085
+    },
+    {
+      "frame": "walk_0_down_right",
+      "path": "raw/sharp-prototype/4.png",
+      "sourceRoot": [
+        133.55749454658772,
+        305.0
+      ],
+      "sourceBodyTop": 10.0,
+      "sourceScale": 0.29519071310116085
+    },
+    {
+      "frame": "walk_1_down_right",
+      "path": "raw/sharp-prototype/5.png",
+      "sourceRoot": [
+        123.78605322880132,
+        308.0
+      ],
+      "sourceBodyTop": 8.0,
+      "sourceScale": 0.29519071310116085
+    },
+    {
+      "frame": "walk_2_down_right",
+      "path": "raw/sharp-prototype/6.png",
+      "sourceRoot": [
+        140.3921568627451,
+        304.0
+      ],
+      "sourceBodyTop": 9.0,
+      "sourceScale": 0.29519071310116085
+    },
+    {
+      "frame": "walk_3_down_right",
+      "path": "raw/sharp-prototype/7.png",
+      "sourceRoot": [
+        122.4601226993865,
+        308.0
+      ],
+      "sourceBodyTop": 8.0,
+      "sourceScale": 0.29519071310116085
+    },
+    {
+      "frame": "windup_down_right",
+      "path": "raw/sharp-prototype/8.png",
+      "sourceRoot": [
+        139.7067759003243,
+        303.0
+      ],
+      "sourceBodyTop": 12.0,
+      "sourceScale": 0.29519071310116085
+    },
+    {
+      "frame": "fan_open_down_right",
+      "path": "raw/sharp-prototype/9.png",
+      "sourceRoot": [
+        145.0691856452726,
+        305.0
+      ],
+      "sourceBodyTop": 12.0,
+      "sourceScale": 0.29519071310116085
+    },
+    {
+      "frame": "fan_throw_down_right",
+      "path": "raw/sharp-prototype/10.png",
+      "sourceRoot": [
+        137.88540312093627,
+        310.0
+      ],
+      "sourceBodyTop": 12.0,
+      "sourceScale": 0.29519071310116085
+    },
+    {
+      "frame": "fan_catch_down_right",
+      "path": "raw/sharp-prototype/11.png",
+      "sourceRoot": [
+        135.6889729915706,
+        309.0
+      ],
+      "sourceBodyTop": 11.0,
+      "sourceScale": 0.29519071310116085
+    }
+  ],
+  "idlePhysicalHeightTolerance": 3.5,
+  "idleMeasurementNote": "Dense-alpha head-top estimate varies3.37 atlas pixels because ornate fan/ribbon width changes its threshold; actual visible idle extents vary at most2 pixels across any direction. Same group scale/foot anchor, visible extent tolerance3 and alpha checks retained.",
+  "prototypeScope": "ONLY down_right idle4/walk4/basic4; remaining directions/actions reuse previous version byte-exact."
+}

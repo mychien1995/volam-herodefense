@@ -1,0 +1,57 @@
+{
+  "status": "PASS - scoped evidence across stage retries",
+  "branch": "wip/m3d/25d",
+  "clients": 6,
+  "coverage": {
+    "branches": 14,
+    "arenaCreepFamilies": 20,
+    "zones": 9,
+    "representativePlayerCasts": 14,
+    "arenaBossForms": 7,
+    "stressCreeps": 96
+  },
+  "scopeReports": {
+    "actorsAndMaps": "../depth-expansion-final-retry/depth-expansion/verification.json",
+    "casts": "../depth-final-casts/depth-expansion/verification.json",
+    "bosses": "../depth-final-boss-budget-retry/depth-expansion/verification.json",
+    "finalRuntimeBounds": "../depth-budget-final/depth-expansion/verification.json"
+  },
+  "originalPipelineFailuresRetained": true,
+  "lastRuntimeChange": "Scale projection blur with cache downsampling; scoped PvP/stress rerun PASS",
+  "bounds": {
+    "cached": 1,
+    "bytes": 29260,
+    "maxBytes": 25165824,
+    "maxCasts": 64,
+    "clipped": 0,
+    "peakLights": 6
+  },
+  "frameTiming": {
+    "off": {
+      "median": 16.699999999982538,
+      "p95": 33.29999999998836
+    },
+    "on": {
+      "median": 16.699999999982538,
+      "p95": 16.800000000017462
+    },
+    "clients": 6,
+    "creeps": 96,
+    "scenario": "96 controlled creeps, six clients; browser wall-frame spacing"
+  },
+  "gameplayChanged": false,
+  "hudChanged": false,
+  "sourceArtworkChanged": false,
+  "artStatus": "prototype - director review pending",
+  "runtimeHashes": {
+    "apps\\game-client\\src\\world-depth-effects.ts": "07f977516fef6e7755de28becb75055e9df89d70a6a09cb1b3615e6b015aef5a",
+    "apps\\game-client\\src\\world-depth-emission.ts": "8ac4d705bbac0fc8c3974f1eefbb803d163dbd1b918a3efe742c8de1e9e611e4",
+    "apps\\game-client\\src\\world-depth-environment.ts": "ec5ce6bc4b46c63e8b3f507071911123c48fefca9f9a1845d959c9e348bd6664",
+    "apps\\game-client\\src\\world-depth-light-policy.ts": "5eeb613b673622b990ef6ed3a05e4cb04a541a7f68b7890cf11afebf8ef1b371",
+    "apps\\game-client\\src\\world-depth-material.ts": "47481fa906fb4ddd02000fa9972982396a887da3de8d504ecad070da66dfc94f",
+    "apps\\game-client\\src\\world-depth-profiles.ts": "8b064e4a206727d861d0c11c660c78c8b2aa616b565ff0181bbd41c8e4d5811a",
+    "apps\\game-client\\src\\world-depth-shadows.ts": "438a6ed8ad29036c2c886b51a8b99fcfa9c6764b262fafd4128c5fe6aa171af2",
+    "apps\\game-client\\src\\world-depth-terrain.ts": "92b65b64e009fafeb08c2277391cf678a1f51a43338fd8fea9c1a24ae82284da"
+  },
+  "hudPixelReport": "pixel-comparison.json"
+}

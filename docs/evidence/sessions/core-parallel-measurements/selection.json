@@ -1,0 +1,332 @@
+{
+  "eligible": [
+    "tests/animation-change.test.ts",
+    "tests/bac-cai-runtime.test.ts",
+    "tests/boss-banter.test.ts",
+    "tests/cai-bang-skills.test.ts",
+    "tests/combat.test.ts",
+    "tests/con-luan.test.ts",
+    "tests/core.test.ts",
+    "tests/crafting.test.ts",
+    "tests/creep-feedback-r2.test.ts",
+    "tests/creep-feedback-r3.test.ts",
+    "tests/creep-feedback-r4.test.ts",
+    "tests/dong-ta-m3d-merge.test.ts",
+    "tests/dong-ta.test.ts",
+    "tests/dungeons.test.ts",
+    "tests/duong-mon.test.ts",
+    "tests/fixed-gameplay.test.ts",
+    "tests/kim-luan.test.ts",
+    "tests/loi-dai.test.ts",
+    "tests/ly-mac-sau.test.ts",
+    "tests/m3c3-feedback.test.ts",
+    "tests/m3d-feedback-party.test.ts",
+    "tests/m3d-feedback-skills.test.ts",
+    "tests/m3d-playtest-followup.test.ts",
+    "tests/m3d-tay-doc-integration.test.ts",
+    "tests/m3d-vo-anh-regression.test.ts",
+    "tests/ngu-doc.test.ts",
+    "tests/practice.test.ts",
+    "tests/progression.test.ts",
+    "tests/renovation-navigation.test.ts",
+    "tests/renovation-v5-combat.test.ts",
+    "tests/standalone-loi-dai.test.ts",
+    "tests/tay-doc.test.ts",
+    "tests/thien-son-rework.test.ts",
+    "tests/thien-son-skills.test.ts",
+    "tests/thieu-lam-skills.test.ts",
+    "tests/vo-dang-skills.test.ts",
+    "tests/vuong-trung-duong.test.ts",
+    "tests/wave-boss-feedback-runtime.test.ts"
+  ],
+  "excluded": [
+    {
+      "file": "tests/animation-review.test.ts",
+      "reason": "Not a pure-core dependency: tests/animation-review.test.ts -> node:fs; use check:quick"
+    },
+    {
+      "file": "tests/arena-creep-presentation.test.ts",
+      "reason": "Not a pure-core dependency: tests/arena-creep-presentation.test.ts -> node:fs; use check:quick"
+    },
+    {
+      "file": "tests/arena-layout.test.ts",
+      "reason": "Not a pure-core dependency: tests/arena-layout.test.ts -> node:fs; use check:quick"
+    },
+    {
+      "file": "tests/assets.test.ts",
+      "reason": "Not a pure-core dependency: tests/assets.test.ts -> node:fs; use check:quick"
+    },
+    {
+      "file": "tests/bac-cai-preview.test.ts",
+      "reason": "Not a pure-core dependency: tests/bac-cai-preview.test.ts -> ../apps/game-client/src/bac-cai-preview-model.js; use check:quick"
+    },
+    {
+      "file": "tests/bac-cai-room.test.ts",
+      "reason": "Not a pure-core dependency: tests/room-test-server.ts -> node:http; use check:quick"
+    },
+    {
+      "file": "tests/bamboo-map.test.ts",
+      "reason": "Not a pure-core dependency: tests/bamboo-map.test.ts -> node:fs; use check:quick"
+    },
+    {
+      "file": "tests/beach-dungeon.test.ts",
+      "reason": "Not a pure-core dependency: tests/beach-dungeon.test.ts -> @volam/game-protocol; use check:quick"
+    },
+    {
+      "file": "tests/boundaries.test.ts",
+      "reason": "Not a pure-core dependency: tests/boundaries.test.ts -> node:fs; use check:quick"
+    },
+    {
+      "file": "tests/campaign.test.ts",
+      "reason": "Not a pure-core dependency: tests/campaign.test.ts -> @volam/game-protocol; use check:quick"
+    },
+    {
+      "file": "tests/character-revision.test.ts",
+      "reason": "Not a pure-core dependency: tests/character-revision.test.ts -> ../apps/game-client/src/character-revision.js; use check:quick"
+    },
+    {
+      "file": "tests/chu-ba-thong.test.ts",
+      "reason": "Not a pure-core dependency: tests/chu-ba-thong.test.ts -> @volam/game-protocol; use check:quick"
+    },
+    {
+      "file": "tests/chu-room.test.ts",
+      "reason": "Not a pure-core dependency: tests/chu-room.test.ts -> @colyseus/sdk; use check:quick"
+    },
+    {
+      "file": "tests/clean-spawn-room.test.ts",
+      "reason": "Not a pure-core dependency: tests/room-test-server.ts -> node:http; use check:quick"
+    },
+    {
+      "file": "tests/contact-impacts.test.ts",
+      "reason": "Not a pure-core dependency: tests/contact-impacts.test.ts -> @volam/game-protocol; use check:quick"
+    },
+    {
+      "file": "tests/creep-feedback-r5.test.ts",
+      "reason": "Not a pure-core dependency: tests/creep-feedback-r5.test.ts -> ../apps/game-client/src/creep-combat-visual.js; use check:quick"
+    },
+    {
+      "file": "tests/creep-preview.test.ts",
+      "reason": "Not a pure-core dependency: tests/creep-preview.test.ts -> @volam/game-protocol; use check:quick"
+    },
+    {
+      "file": "tests/creep-upgrade-room.test.ts",
+      "reason": "Not a pure-core dependency: tests/creep-upgrade-room.test.ts -> @volam/game-protocol; use check:quick"
+    },
+    {
+      "file": "tests/creep-upgrade.test.ts",
+      "reason": "Not a pure-core dependency: tests/creep-upgrade.test.ts -> ../apps/game-server/src/invasion-config.js; use check:quick"
+    },
+    {
+      "file": "tests/default-builds.test.ts",
+      "reason": "Not a pure-core dependency: tests/default-builds.test.ts -> @volam/game-protocol; use check:quick"
+    },
+    {
+      "file": "tests/desert-dungeon.test.ts",
+      "reason": "Not a pure-core dependency: tests/desert-dungeon.test.ts -> @volam/game-protocol; use check:quick"
+    },
+    {
+      "file": "tests/dong-ta-assets.test.ts",
+      "reason": "Not a pure-core dependency: tests/dong-ta-assets.test.ts -> node:fs; use check:quick"
+    },
+    {
+      "file": "tests/dong-ta-room.test.ts",
+      "reason": "Not a pure-core dependency: tests/dong-ta-room.test.ts -> @volam/game-protocol; use check:quick"
+    },
+    {
+      "file": "tests/dungeon-room.test.ts",
+      "reason": "Not a pure-core dependency: tests/dungeon-room.test.ts -> @colyseus/sdk; use check:quick"
+    },
+    {
+      "file": "tests/economy-room.test.ts",
+      "reason": "Not a pure-core dependency: tests/room-test-server.ts -> node:http; use check:quick"
+    },
+    {
+      "file": "tests/economy.test.ts",
+      "reason": "Not a pure-core dependency: tests/economy.test.ts -> @volam/game-protocol; use check:quick"
+    },
+    {
+      "file": "tests/feedback-v2-art.test.ts",
+      "reason": "Not a pure-core dependency: tests/feedback-v2-art.test.ts -> node:fs; use check:quick"
+    },
+    {
+      "file": "tests/forest-creep-art.test.ts",
+      "reason": "Not a pure-core dependency: tests/forest-creep-art.test.ts -> node:fs; use check:quick"
+    },
+    {
+      "file": "tests/hell-dungeon.test.ts",
+      "reason": "Not a pure-core dependency: tests/hell-dungeon.test.ts -> @volam/game-protocol; use check:quick"
+    },
+    {
+      "file": "tests/hong-liet.test.ts",
+      "reason": "Not a pure-core dependency: tests/hong-liet.test.ts -> @volam/game-protocol; use check:quick"
+    },
+    {
+      "file": "tests/invasion-room.test.ts",
+      "reason": "Not a pure-core dependency: tests/invasion-room.test.ts -> @volam/game-protocol; use check:quick"
+    },
+    {
+      "file": "tests/invasions.test.ts",
+      "reason": "Not a pure-core dependency: tests/invasions.test.ts -> ../apps/game-server/src/invasion-config.js; use check:quick"
+    },
+    {
+      "file": "tests/kim-assets.test.ts",
+      "reason": "Not a pure-core dependency: tests/kim-assets.test.ts -> node:fs; use check:quick"
+    },
+    {
+      "file": "tests/kim-luan-room.test.ts",
+      "reason": "Not a pure-core dependency: tests/kim-luan-room.test.ts -> @colyseus/sdk; use check:quick"
+    },
+    {
+      "file": "tests/legacy-vfx-visibility.test.ts",
+      "reason": "Not a pure-core dependency: tests/legacy-vfx-visibility.test.ts -> node:events; use check:quick"
+    },
+    {
+      "file": "tests/local-movement.test.ts",
+      "reason": "Not a pure-core dependency: tests/local-movement.test.ts -> ../apps/game-client/src/local-movement.js; use check:quick"
+    },
+    {
+      "file": "tests/m3d-bac-cai-integration.test.ts",
+      "reason": "Not a pure-core dependency: tests/m3d-bac-cai-integration.test.ts -> @volam/game-protocol; use check:quick"
+    },
+    {
+      "file": "tests/m3d-feedback-integration.test.ts",
+      "reason": "Not a pure-core dependency: tests/m3d-feedback-integration.test.ts -> node:fs; use check:quick"
+    },
+    {
+      "file": "tests/m3d-feedback-room.test.ts",
+      "reason": "Not a pure-core dependency: tests/m3d-feedback-room.test.ts -> @colyseus/sdk; use check:quick"
+    },
+    {
+      "file": "tests/m3d-feedback-tech.test.ts",
+      "reason": "Not a pure-core dependency: tests/m3d-feedback-tech.test.ts -> @volam/game-protocol; use check:quick"
+    },
+    {
+      "file": "tests/m3d-hell-integration.test.ts",
+      "reason": "Not a pure-core dependency: tests/m3d-hell-integration.test.ts -> @volam/game-protocol; use check:quick"
+    },
+    {
+      "file": "tests/m3d-kim-integration.test.ts",
+      "reason": "Not a pure-core dependency: tests/m3d-kim-integration.test.ts -> @volam/game-protocol; use check:quick"
+    },
+    {
+      "file": "tests/m3d-nam-de-integration.test.ts",
+      "reason": "Not a pure-core dependency: tests/m3d-nam-de-integration.test.ts -> @volam/game-protocol; use check:quick"
+    },
+    {
+      "file": "tests/m3d-r3-assets.test.ts",
+      "reason": "Not a pure-core dependency: tests/m3d-r3-assets.test.ts -> node:fs; use check:quick"
+    },
+    {
+      "file": "tests/m3d-review.test.ts",
+      "reason": "Not a pure-core dependency: tests/m3d-review.test.ts -> node:crypto; use check:quick"
+    },
+    {
+      "file": "tests/nam-de-room.test.ts",
+      "reason": "Not a pure-core dependency: tests/room-test-server.ts -> node:http; use check:quick"
+    },
+    {
+      "file": "tests/nam-de.test.ts",
+      "reason": "Not a pure-core dependency: tests/nam-de.test.ts -> @volam/game-protocol; use check:quick"
+    },
+    {
+      "file": "tests/practice-room.test.ts",
+      "reason": "Not a pure-core dependency: tests/practice-room.test.ts -> @volam/game-protocol; use check:quick"
+    },
+    {
+      "file": "tests/progression-room.test.ts",
+      "reason": "Not a pure-core dependency: tests/room-test-server.ts -> node:http; use check:quick"
+    },
+    {
+      "file": "tests/protocol.test.ts",
+      "reason": "Not a pure-core dependency: tests/protocol.test.ts -> @volam/game-protocol; use check:quick"
+    },
+    {
+      "file": "tests/renovation-actions.test.ts",
+      "reason": "Not a pure-core dependency: tests/renovation-actions.test.ts -> node:fs; use check:quick"
+    },
+    {
+      "file": "tests/renovation-routing.test.ts",
+      "reason": "Not a pure-core dependency: tests/renovation-routing.test.ts -> ../apps/game-client/src/renovation-model.js; use check:quick"
+    },
+    {
+      "file": "tests/renovation-v5-policy.test.ts",
+      "reason": "Not a pure-core dependency: tests/renovation-v5-policy.test.ts -> ../apps/game-client/src/renovation-policy.js; use check:quick"
+    },
+    {
+      "file": "tests/renovation-v6.test.ts",
+      "reason": "Not a pure-core dependency: tests/renovation-v6.test.ts -> ../apps/game-client/src/renovation-followup-model.js; use check:quick"
+    },
+    {
+      "file": "tests/renovation-v7-combat.test.ts",
+      "reason": "Not a pure-core dependency: tests/renovation-v7-combat.test.ts -> ../apps/game-client/src/renovation-followup-model.js; use check:quick"
+    },
+    {
+      "file": "tests/renovation-v8-presentation.test.ts",
+      "reason": "Not a pure-core dependency: tests/renovation-v8-presentation.test.ts -> ../apps/game-client/src/renovation-followup-model.js; use check:quick"
+    },
+    {
+      "file": "tests/room.test.ts",
+      "reason": "Not a pure-core dependency: tests/room.test.ts -> @colyseus/core; use check:quick"
+    },
+    {
+      "file": "tests/skill-assets.test.ts",
+      "reason": "Not a pure-core dependency: tests/skill-assets.test.ts -> node:fs; use check:quick"
+    },
+    {
+      "file": "tests/skill-review-mode.test.ts",
+      "reason": "Not a pure-core dependency: tests/room-test-server.ts -> node:http; use check:quick"
+    },
+    {
+      "file": "tests/skill-room.test.ts",
+      "reason": "Not a pure-core dependency: tests/skill-room.test.ts -> @volam/game-protocol; use check:quick"
+    },
+    {
+      "file": "tests/standalone-loi-dai-room.test.ts",
+      "reason": "Not a pure-core dependency: tests/standalone-loi-dai-room.test.ts -> @volam/game-protocol; use check:quick"
+    },
+    {
+      "file": "tests/tay-doc-room.test.ts",
+      "reason": "Not a pure-core dependency: tests/tay-doc-room.test.ts -> @volam/game-protocol; use check:quick"
+    },
+    {
+      "file": "tests/thien-son-room.test.ts",
+      "reason": "Not a pure-core dependency: tests/room-test-server.ts -> node:http; use check:quick"
+    },
+    {
+      "file": "tests/thieu-lam-room.test.ts",
+      "reason": "Not a pure-core dependency: tests/room-test-server.ts -> node:http; use check:quick"
+    },
+    {
+      "file": "tests/ui-camera-policy.test.ts",
+      "reason": "Not a pure-core dependency: tests/ui-camera-policy.test.ts -> ../apps/game-client/src/camera-policy.js; use check:quick"
+    },
+    {
+      "file": "tests/vo-dang-room.test.ts",
+      "reason": "Not a pure-core dependency: tests/room-test-server.ts -> node:http; use check:quick"
+    },
+    {
+      "file": "tests/wave-boss-feedback-assets.test.ts",
+      "reason": "Not a pure-core dependency: tests/wave-boss-feedback-assets.test.ts -> node:fs; use check:quick"
+    },
+    {
+      "file": "tests/wave-boss-feedback-v02-runtime.test.ts",
+      "reason": "Computed import is unsupported: tests/wave-boss-feedback-v02-runtime.test.ts"
+    },
+    {
+      "file": "tests/wave-boss-test-room.test.ts",
+      "reason": "Not a pure-core dependency: tests/room-test-server.ts -> node:http; use check:quick"
+    },
+    {
+      "file": "tests/wave-boss-test.test.ts",
+      "reason": "Not a pure-core dependency: tests/wave-boss-test.test.ts -> ../apps/game-server/src/wave-boss-test-config.js; use check:quick"
+    },
+    {
+      "file": "tests/wave-boss-vfx-preview-v02.test.ts",
+      "reason": "Not a pure-core dependency: tests/wave-boss-vfx-preview-v02.test.ts -> node:fs; use check:quick"
+    },
+    {
+      "file": "tests/wave-boss-vfx-preview.test.ts",
+      "reason": "Not a pure-core dependency: tests/wave-boss-vfx-preview.test.ts -> node:fs; use check:quick"
+    }
+  ]
+}

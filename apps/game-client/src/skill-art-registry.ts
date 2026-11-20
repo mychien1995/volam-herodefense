@@ -45,8 +45,14 @@ export function registerRasterAnimations(
   scene: Phaser.Scene,
   assets: readonly RasterComponent[],
 ): void {
+  const depth = (scene.registry.get('world-depth:raster') ?? {}) as Record<
+    string,
+    { skillId: string; kind: string }
+  >;
+  scene.registry.set('world-depth:raster', depth);
   const keys = new Set<string>();
   for (const asset of assets) {
+    depth[asset.id] = { skillId: asset.skillId, kind: asset.kind };
     if (!scene.textures.exists(asset.id))
       throw new Error(`Required skill texture missing: ${asset.id}`);
     setArtFilter(

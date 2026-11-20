@@ -1,0 +1,66 @@
+{
+  "attempts": [
+    {
+      "label": "full-original",
+      "artifactDirectory": "qa-cost-final/gameplay",
+      "result": {
+        "status": "failed",
+        "failedTests": [
+          "8639f67bea7057add2c6-888f023f82abbf6128a6"
+        ]
+      }
+    },
+    {
+      "label": "single-original",
+      "artifactDirectory": "qa-cost-browser-retry",
+      "result": {
+        "status": "failed",
+        "failedTests": [
+          "8639f67bea7057add2c6-888f023f82abbf6128a6"
+        ]
+      }
+    },
+    {
+      "label": "single-original-without-trace",
+      "artifactDirectory": "qa-cost-browser-no-trace",
+      "result": {
+        "status": "failed",
+        "failedTests": [
+          "8639f67bea7057add2c6-888f023f82abbf6128a6"
+        ]
+      }
+    },
+    {
+      "label": "intermediate-invalid-range-candidate",
+      "artifactDirectory": "qa-cost-browser-target-fix",
+      "result": {
+        "status": "failed",
+        "failedTests": [
+          "8639f67bea7057add2c6-888f023f82abbf6128a6"
+        ]
+      }
+    },
+    {
+      "label": "legal-range-with-trace",
+      "artifactDirectory": "qa-cost-browser-target-final",
+      "result": {
+        "status": "failed",
+        "failedTests": [
+          "8639f67bea7057add2c6-888f023f82abbf6128a6"
+        ]
+      }
+    },
+    {
+      "label": "legal-range-trace-off-completion",
+      "artifactDirectory": "qa-cost-browser-completion",
+      "result": {
+        "status": "passed",
+        "failedTests": []
+      }
+    }
+  ],
+  "intermediateCandidateNote": "Ability.range was rejected by TS2339; corrected to a narrowed projectile effect.range and typechecked successfully before final retry. Intermediate browser results do not count as successful coverage.",
+  "finalAssertionsUnchanged": true,
+  "finalBrowserTestsPassed": 4,
+  "finalBrowserSeconds": 45.2
+}

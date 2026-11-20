@@ -122,7 +122,8 @@ export function createHongLietArena(
       .setScale(S)
       .setOrigin(0.5, 368 / 384)
       .setDepth(ground ? -9500 : (o.y ?? 0) * S)
-      .setName('hong_liet:' + o.name);
+      .setName('hong_liet:' + o.name)
+      .setData('world-depth-prop', !ground);
     props.push(image);
     replaceR3ArenaProp(image, 'hong_liet', o.name, S);
   }
@@ -245,6 +246,18 @@ export class HongLietRenderer {
   private actor(id: string, a: CreepState): void {
     const d = dir(a.fx, a.fy),
       boss = a.archetypeId === 'hoan_nhan_hong_liet';
+    const previousAbility = this.views
+      .get(id)
+      ?.image.getData('renovation-action')?.ability;
+    // Native artillery detaches at release and immediately clears castAbilityId.
+    // Retain only the body contact/recovery for ten ticks of that real release.
+    const cannonTail =
+      boss &&
+      !a.castAbilityId &&
+      previousAbility === 'hoa_phao_thien_la' &&
+      a.actionActiveAt > 0 &&
+      this.tick >= a.actionActiveAt &&
+      this.tick < a.actionActiveAt + 10;
     let asset = boss
       ? 'boss_locomotion'
       : a.archetypeId === 'mongol_archer'
@@ -316,15 +329,17 @@ export class HongLietRenderer {
         ? 'death'
         : a.pose === 'hurt'
           ? 'hurt'
-          : boss && !!a.castAbilityId && this.tick < a.actionEndsAt
+          : cannonTail
             ? 'action'
-            : asset === 'boss_locomotion' ||
-                (!boss && a.pose !== 'basic_attack')
-              ? a.pose
-              : 'action',
+            : boss && !!a.castAbilityId && this.tick < a.actionEndsAt
+              ? 'action'
+              : asset === 'boss_locomotion' ||
+                  (!boss && a.pose !== 'basic_attack')
+                ? a.pose
+                : 'action',
       a.fx,
       a.fy,
-      a.castAbilityId,
+      cannonTail ? 'hoa_phao_thien_la' : a.castAbilityId,
       a.actionActiveAt > 0
         ? { beat: releaseBeat(this.tick, a.actionActiveAt) }
         : undefined,

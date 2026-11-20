@@ -1,0 +1,87 @@
+{
+  "runId": "5697478c-ba31-4091-a612-34bc5a4be542",
+  "mode": "browser",
+  "args": [
+    "--config",
+    "playwright.ui-camera.config.ts",
+    "--grep",
+    "shared UI and camera|practice presentation"
+  ],
+  "startedAt": "2026-11-19T08:47:27.235Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "environment preflight",
+      "seconds": 0.712,
+      "status": "PASS",
+      "checks": [
+        {
+          "id": "workspace",
+          "status": "PASS",
+          "detail": {
+            "mode": "browser",
+            "stage": "before-build",
+            "managed": true
+          }
+        },
+        {
+          "id": "session",
+          "status": "PASS",
+          "detail": {
+            "serverPort": 28771,
+            "clientPort": 28772
+          }
+        },
+        {
+          "id": "ports",
+          "status": "PASS"
+        },
+        {
+          "id": "node",
+          "status": "PASS",
+          "detail": "26.0.0"
+        },
+        {
+          "id": "installation",
+          "status": "PASS",
+          "detail": "pnpm@11.25.0"
+        },
+        {
+          "id": "tools",
+          "status": "PASS",
+          "detail": {
+            "typescript": "7.0.2",
+            "vitest": "5.0.5",
+            "vite": "8.3.5",
+            "@playwright/test": "1.64.1"
+          }
+        },
+        {
+          "id": "chromium",
+          "status": "PASS",
+          "detail": {
+            "version": "156.0.8078.4",
+            "cache": "D:\\Projects\\volam-hero-defense\\.cache\\ms-playwright"
+          }
+        }
+      ]
+    },
+    {
+      "label": "prepare assets (once)",
+      "seconds": 16.71,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\ui-camera-iteration\\check-workflow\\5697478c-ba31-4091-a612-34bc5a4be542\\1-prepare-assets-once-.log",
+      "outputBytes": 738
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 1.17,
+      "status": "FAIL",
+      "exitCode": 2,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\ui-camera-iteration\\check-workflow\\5697478c-ba31-4091-a612-34bc5a4be542\\2-compile-TypeScript.log",
+      "outputBytes": 1041
+    }
+  ],
+  "totalSeconds": 18.6
+}

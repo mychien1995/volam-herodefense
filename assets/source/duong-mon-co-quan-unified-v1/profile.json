@@ -1,0 +1,132 @@
+{
+  "basic": "duong_mon_co_quan",
+  "texture": "hero-unified:duong_mon_co_quan",
+  "folder": "duong-mon-co-quan-unified-v1",
+  "sourceRows": 8,
+  "sourceColumns": 4,
+  "canvas": [
+    384,
+    320
+  ],
+  "foot": [
+    192,
+    248
+  ],
+  "bodyHeight": 89,
+  "scale": 0.5,
+  "bodyWidth": 60,
+  "rootMode": "face",
+  "poses": [
+    "idle_0",
+    "idle_1",
+    "idle_2",
+    "idle_3",
+    "walk_0",
+    "walk_1",
+    "walk_2",
+    "walk_3",
+    "windup",
+    "release",
+    "trap",
+    "spin",
+    "hover_0",
+    "hover_1",
+    "flight_0",
+    "flight_1",
+    "fold",
+    "shell_0",
+    "shell_1",
+    "coil",
+    "laser_charge",
+    "laser_release",
+    "wing_lunge",
+    "recover",
+    "flight_hurt",
+    "shell_hurt",
+    "wing_raise",
+    "wing_lower",
+    "hurt_0",
+    "hurt_1",
+    "death_0",
+    "death_1"
+  ],
+  "references": [
+    "assets/reviews/duong-mon-vfx/source/tuan-sa-action.png",
+    "assets/reviews/duong-mon-vfx/source/tuan-sa-walk.png"
+  ],
+  "groups": [
+    {
+      "name": "idle",
+      "poses": [
+        "idle_0",
+        "idle_1",
+        "idle_2",
+        "idle_3"
+      ],
+      "durationMs": 700
+    },
+    {
+      "name": "walk",
+      "poses": [
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3"
+      ],
+      "durationMs": 110
+    },
+    {
+      "name": "action_library",
+      "poses": [
+        "windup",
+        "release",
+        "trap",
+        "spin",
+        "hover_0",
+        "hover_1",
+        "flight_0",
+        "flight_1",
+        "fold",
+        "shell_0",
+        "shell_1",
+        "coil",
+        "laser_charge",
+        "laser_release",
+        "wing_lunge",
+        "recover",
+        "flight_hurt",
+        "shell_hurt",
+        "wing_raise",
+        "wing_lower"
+      ],
+      "durationMs": 100
+    },
+    {
+      "name": "hurt",
+      "poses": [
+        "hurt_0",
+        "hurt_1"
+      ],
+      "durationMs": 90
+    },
+    {
+      "name": "death",
+      "poses": [
+        "death_0",
+        "death_1"
+      ],
+      "durationMs": 220
+    }
+  ],
+  "registrationPolicy": "Constant physical body/head density per group and boot anchor, wings do not alter body scaling. Explicit form cels retain the same gear/identity. Face skin landmark sets head density independently of folded/spread wings, mask, ponytail and flowing sleeves. Back-facing sheets without an exposed face use one authored source density across all groups instead of measuring wings/raised hands as a face.",
+  "directionRootModes": {
+    "up": "monochrome",
+    "up_left": "monochrome",
+    "up_right": "monochrome"
+  },
+  "directionDensityPolicies": {
+    "up": "uniform-source",
+    "up_left": "uniform-source",
+    "up_right": "uniform-source"
+  }
+}

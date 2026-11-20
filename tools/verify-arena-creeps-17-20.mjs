@@ -1,6 +1,6 @@
+import { startOwnedGameQa } from './qa-game-services.mjs';
+import { qaSession, ownedQaServices } from './qa-session.mjs';
 import { ColyseusTestServer } from '@colyseus/testing';
-import { createServer } from 'vite';
-import { createGameServer } from '../apps/game-server/dist/app.config.js';
 import { m1Config } from '../packages/game-data/dist/index.js';
 import { readFileSync, mkdirSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -16,7 +16,8 @@ const errors = [],
   poseEvidence = [],
   shots = [],
   sourceStats = new Map();
-let server, client, browser;
+let server, browser;
+const owners = ownedQaServices();
 const wait = async (fn, label, timeout = 12000) => {
   const end = Date.now() + timeout;
   while (Date.now() < end) {
@@ -32,31 +33,19 @@ const shot = async (p, n) => {
   shots.push(n);
 };
 try {
-  const gameServer = createGameServer();
-  await gameServer.listen(2598);
-  server = new ColyseusTestServer(gameServer);
-  assert(
-    (await fetch('http://127.0.0.1:2598/health')).ok,
-    'test server health',
-  );
-  process.env.VITE_SERVER_URL = 'http://127.0.0.1:2598';
-  client = await createServer({
-    root: resolve(root, 'apps/game-client'),
-    configFile: false,
-    server: {
-      host: '127.0.0.1',
-      port: 5198,
-      strictPort: true,
-      watch: null,
-      hmr: false,
-    },
-    define: {
-      'import.meta.env.VITE_SERVER_URL': JSON.stringify(
-        'http://127.0.0.1:2598',
-      ),
+  const session = qaSession({
+    profile: 'arena-creeps-final',
+    serverPort: 2598,
+    clientPort: 5198,
+  });
+  const stopServices = await startOwnedGameQa({
+    session,
+    clientMode: 'development',
+    configure(gameServer) {
+      server = new ColyseusTestServer(gameServer);
     },
   });
-  await client.listen();
+  owners.add(stopServices);
   browser = await chromium.launch({ headless: true });
   const pages = [];
   let roomId;
@@ -79,7 +68,8 @@ try {
       errors.push(r.url() + ' ' + r.failure()?.errorText),
     );
     await p.goto('http://127.0.0.1:5198/?debug=1');
-    await p.locator('[data-action=play]').click(); await p.locator('#pre-nickname').fill('Creep QA ' + (n + 1));
+    await p.locator('[data-action=play]').click();
+    await p.locator('#pre-nickname').fill('Creep QA ' + (n + 1));
     await p.getByRole('button', { name: 'Vào game', exact: true }).click();
     if (roomId) {
       await p.getByLabel('Room code', { exact: true }).fill(roomId);
@@ -630,9 +620,11 @@ try {
   );
   throw e;
 } finally {
-  for (const c of contexts) await c.close();
-  await browser?.close();
-  await client?.close();
-  await server?.shutdown();
+  try {
+    await Promise.allSettled(contexts.map((c) => c.close()));
+    await browser?.close();
+  } finally {
+    await owners.close();
+  }
   if (failed) process.exitCode = 1;
 }

@@ -1,0 +1,129 @@
+{
+  "runId": "77a49605-2b9b-48c0-b55b-7b8a7d63f428",
+  "mode": "cold",
+  "startedAt": "2026-11-20T06:11:51.984Z",
+  "status": "FAIL",
+  "rounds": [
+    {
+      "index": 0,
+      "options": {
+        "grep": "iteration starts fresh"
+      },
+      "status": "FAIL",
+      "preflight": {
+        "status": "PASS",
+        "mode": "quick",
+        "stage": "before-build",
+        "milliseconds": 4,
+        "checks": [
+          {
+            "id": "workspace",
+            "status": "PASS",
+            "detail": {
+              "mode": "quick",
+              "stage": "before-build",
+              "managed": false
+            }
+          },
+          {
+            "id": "session",
+            "status": "PASS",
+            "detail": "No managed service ports for this profile"
+          },
+          {
+            "id": "node",
+            "status": "PASS",
+            "detail": "26.0.0"
+          },
+          {
+            "id": "installation",
+            "status": "PASS",
+            "detail": "pnpm@11.25.0"
+          },
+          {
+            "id": "tools",
+            "status": "PASS",
+            "detail": {
+              "typescript": "7.0.2",
+              "vitest": "5.0.5"
+            }
+          }
+        ]
+      },
+      "prepareSeconds": 104.0136299,
+      "compiler": {
+        "reused": false,
+        "pid": 24436,
+        "input": "4d2537e83b7430a70e7492e29c1103d2315da72c9907f243c6622a6ec30b4759",
+        "output": "a36ccbb5bf894c450b5d8f58cd7817182aa8f0017a93d0e4479d6a9b628687e1"
+      },
+      "compileSeconds": 5.749507299999998,
+      "service": {
+        "runId": "52581745-5a3e-4b49-b24d-5b8781569964",
+        "pid": 12084
+      },
+      "error": "Error: Command failed (1); D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-iteration-cold-1\\browser-0.log",
+      "seconds": 182.57022659999998
+    }
+  ],
+  "preflight": {
+    "status": "PASS",
+    "mode": "browser",
+    "stage": "before-build",
+    "milliseconds": 614,
+    "checks": [
+      {
+        "id": "workspace",
+        "status": "PASS",
+        "detail": {
+          "mode": "browser",
+          "stage": "before-build",
+          "managed": true
+        }
+      },
+      {
+        "id": "session",
+        "status": "PASS",
+        "detail": {
+          "serverPort": 2886,
+          "clientPort": 5486
+        }
+      },
+      {
+        "id": "ports",
+        "status": "PASS"
+      },
+      {
+        "id": "node",
+        "status": "PASS",
+        "detail": "26.0.0"
+      },
+      {
+        "id": "installation",
+        "status": "PASS",
+        "detail": "pnpm@11.25.0"
+      },
+      {
+        "id": "tools",
+        "status": "PASS",
+        "detail": {
+          "typescript": "7.0.2",
+          "vitest": "5.0.5",
+          "vite": "8.3.5",
+          "@playwright/test": "1.64.1"
+        }
+      },
+      {
+        "id": "chromium",
+        "status": "PASS",
+        "detail": {
+          "version": "156.0.8078.4",
+          "cache": "D:\\Projects\\volam-hero-defense\\.cache\\ms-playwright"
+        }
+      }
+    ]
+  },
+  "error": "Error: Command failed (1); D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-iteration-cold-1\\browser-0.log",
+  "cleanup": "PASS",
+  "seconds": 183.2478218
+}

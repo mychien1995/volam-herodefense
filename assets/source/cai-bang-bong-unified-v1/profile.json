@@ -1,0 +1,226 @@
+{
+  "basic": "cai_bang_bong",
+  "texture": "hero-unified:cai_bang_bong",
+  "folder": "cai-bang-bong-unified-v1",
+  "sourceRows": 7,
+  "sourceColumns": 4,
+  "canvas": [
+    864,
+    720
+  ],
+  "foot": [
+    432,
+    352
+  ],
+  "bodyHeight": 89,
+  "scale": 0.5,
+  "bodyWidth": 58,
+  "poses": [
+    "idle_0",
+    "idle_1",
+    "idle_2",
+    "idle_3",
+    "walk_0",
+    "walk_1",
+    "walk_2",
+    "walk_3",
+    "windup",
+    "thrust",
+    "sweep",
+    "rising",
+    "overhead",
+    "recover",
+    "pull",
+    "charge",
+    "slam_raise",
+    "slam_contact",
+    "stomp",
+    "finisher_raise",
+    "channel",
+    "thrust_windup",
+    "sweep_windup",
+    "overhead_windup",
+    "hurt_0",
+    "hurt_1",
+    "death_0",
+    "death_1"
+  ],
+  "references": [
+    "assets/source/cai-bang-bong-unified-v1/existing-sharp-reference.png",
+    "assets/source/skills/cai-bang/bong-combo-review/right.png",
+    "assets/exports/cai-bang-bong-reach/bong.png",
+    "assets/exports/cai-bang-bong-reach/bong.json",
+    "assets/exports/skills/cai-bang/pha-giap-lava/body.png",
+    "assets/exports/skills/cai-bang/pha-giap-lava/body.json",
+    "assets/exports/renovation-v8/staff_long_body.png",
+    "assets/exports/renovation-v8/staff_long_body.json",
+    "apps/game-client/src/renovation-reach.generated.json"
+  ],
+  "groups": [
+    {
+      "name": "idle",
+      "poses": [
+        "idle_0",
+        "idle_1",
+        "idle_2",
+        "idle_3"
+      ],
+      "durationMs": 700
+    },
+    {
+      "name": "walk",
+      "poses": [
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3"
+      ],
+      "durationMs": 110
+    },
+    {
+      "name": "action_library",
+      "poses": [
+        "windup",
+        "thrust",
+        "sweep",
+        "rising",
+        "overhead",
+        "recover",
+        "pull",
+        "charge",
+        "slam_raise",
+        "slam_contact",
+        "stomp",
+        "finisher_raise",
+        "channel",
+        "thrust_windup",
+        "sweep_windup",
+        "overhead_windup"
+      ],
+      "durationMs": 100
+    },
+    {
+      "name": "hurt",
+      "poses": [
+        "hurt_0",
+        "hurt_1"
+      ],
+      "durationMs": 90
+    },
+    {
+      "name": "death",
+      "poses": [
+        "death_0",
+        "death_1"
+      ],
+      "durationMs": 220
+    }
+  ],
+  "registrationPolicy": "Consistent scale per locomotion/action/reaction pose group, calibrated to the same physical head width. Never fit by weapon bounds.",
+  "poseOverrides": [
+    {
+      "frame": "slam_contact_right",
+      "path": "raw/contacts/r8-r2-right.png",
+      "sourceRoot": [
+        278,
+        589
+      ],
+      "sourceBodyTop": 233,
+      "sourceTip": [
+        1954,
+        532
+      ],
+      "expectedTipWorld": [
+        200,
+        5.17627
+      ],
+      "tipTolerance": 20
+    },
+    {
+      "frame": "slam_contact_left",
+      "path": "raw/contacts/r8-r2-left.png",
+      "sourceRoot": [
+        1755,
+        660
+      ],
+      "sourceBodyTop": 273,
+      "sourceTip": [
+        49,
+        565
+      ],
+      "expectedTipWorld": [
+        -200,
+        5.17627
+      ],
+      "tipTolerance": 25,
+      "bodyHeight": 83
+    },
+    {
+      "frame": "slam_contact_down",
+      "path": "raw/contacts/r8-down.png",
+      "sourceRoot": [
+        449,
+        529
+      ],
+      "sourceBodyTop": 116,
+      "sourceTip": [
+        453,
+        1670
+      ],
+      "expectedTipWorld": [
+        0.23194,
+        128
+      ],
+      "tipTolerance": 20
+    },
+    {
+      "frame": "slam_contact_up",
+      "path": "raw/contacts/r8-up-r3.png",
+      "sourceRoot": [
+        560,
+        1282
+      ],
+      "sourceBodyTop": 927,
+      "bodyHeight": 78,
+      "sourceTip": [
+        560,
+        62
+      ],
+      "expectedTipWorld": [
+        1.59238,
+        -128
+      ],
+      "tipTolerance": 12
+    }
+  ],
+  "celGroupOverrides": [
+    {
+      "direction": "down_left",
+      "path": "raw/actions-down_left.png",
+      "rows": 4,
+      "columns": 4,
+      "start": 8
+    },
+    {
+      "direction": "down",
+      "path": "raw/actions-down.png",
+      "rows": 4,
+      "columns": 4,
+      "start": 8
+    },
+    {
+      "direction": "up",
+      "path": "raw/actions-up.png",
+      "rows": 4,
+      "columns": 4,
+      "start": 8
+    },
+    {
+      "direction": "down",
+      "path": "raw/neutral-down.png",
+      "start": 0,
+      "rows": 2,
+      "columns": 4
+    }
+  ]
+}

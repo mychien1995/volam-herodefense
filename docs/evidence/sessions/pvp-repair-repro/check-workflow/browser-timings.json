@@ -1,0 +1,39 @@
+{
+  "runId": "2bf14e3e-33bd-4fb1-b840-b2f6b501251c",
+  "mode": "browser",
+  "args": [
+    "--config",
+    "playwright.pvp-regressions.config.ts",
+    "--grep",
+    "statue opening"
+  ],
+  "startedAt": "2026-11-18T20:37:56.625Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "prepare assets (once)",
+      "seconds": 24.13,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 1.44,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "production client build",
+      "seconds": 13.4,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "browser verification",
+      "seconds": 26.15,
+      "status": "FAIL",
+      "exitCode": 1
+    }
+  ],
+  "totalSeconds": 65.13
+}

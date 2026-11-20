@@ -1,0 +1,107 @@
+{
+  "runId": "146841a5-9a40-4d8a-9bb4-a09e5c269be5",
+  "mode": "browser",
+  "args": [
+    "--config",
+    "playwright.duong-mon-game.config.ts",
+    "--reporter=line",
+    "--output",
+    "artifacts/qa-ownership-duong-mon"
+  ],
+  "startedAt": "2026-11-20T04:05:03.862Z",
+  "status": "PASS",
+  "stages": [
+    {
+      "label": "environment preflight",
+      "seconds": 1.305,
+      "status": "PASS",
+      "checks": [
+        {
+          "id": "workspace",
+          "status": "PASS",
+          "detail": {
+            "mode": "browser",
+            "stage": "before-build",
+            "managed": true
+          }
+        },
+        {
+          "id": "session",
+          "status": "PASS",
+          "detail": {
+            "serverPort": 2667,
+            "clientPort": 28932
+          }
+        },
+        {
+          "id": "ports",
+          "status": "PASS"
+        },
+        {
+          "id": "node",
+          "status": "PASS",
+          "detail": "26.0.0"
+        },
+        {
+          "id": "installation",
+          "status": "PASS",
+          "detail": "pnpm@11.25.0"
+        },
+        {
+          "id": "tools",
+          "status": "PASS",
+          "detail": {
+            "typescript": "7.0.2",
+            "vitest": "5.0.5",
+            "vite": "8.3.5",
+            "@playwright/test": "1.64.1"
+          }
+        },
+        {
+          "id": "chromium",
+          "status": "PASS",
+          "detail": {
+            "channels": [
+              "chrome"
+            ],
+            "executable": null,
+            "verified": "headless launch + close"
+          }
+        }
+      ]
+    },
+    {
+      "label": "prepare assets (once)",
+      "seconds": 114.39,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-ownership-duong-mon\\check-workflow\\146841a5-9a40-4d8a-9bb4-a09e5c269be5\\1-prepare-assets-once-.log",
+      "outputBytes": 738
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 1.09,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-ownership-duong-mon\\check-workflow\\146841a5-9a40-4d8a-9bb4-a09e5c269be5\\2-compile-TypeScript.log",
+      "outputBytes": 0
+    },
+    {
+      "label": "production client build",
+      "seconds": 16.03,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-ownership-duong-mon\\check-workflow\\146841a5-9a40-4d8a-9bb4-a09e5c269be5\\3-production-client-build.log",
+      "outputBytes": 12624
+    },
+    {
+      "label": "browser verification",
+      "seconds": 35.31,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-ownership-duong-mon\\check-workflow\\146841a5-9a40-4d8a-9bb4-a09e5c269be5\\4-browser-verification.log",
+      "outputBytes": 1016
+    }
+  ],
+  "totalSeconds": 168.13
+}

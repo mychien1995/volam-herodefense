@@ -1,0 +1,257 @@
+{
+  "basic": "thien_son_dao",
+  "texture": "hero-unified:thien_son_dao",
+  "folder": "thien-son-dao-unified-v3",
+  "sourceRows": 8,
+  "sourceColumns": 4,
+  "canvas": [
+    320,
+    288
+  ],
+  "foot": [
+    160,
+    224
+  ],
+  "bodyHeight": 89,
+  "scale": 0.5,
+  "bodyWidth": 58,
+  "rootMode": "monochrome",
+  "poses": [
+    "idle_0",
+    "idle_1",
+    "idle_2",
+    "idle_3",
+    "walk_0",
+    "walk_1",
+    "walk_2",
+    "walk_3",
+    "windup",
+    "sweep_right",
+    "sweep_left",
+    "overhead",
+    "recover",
+    "dash_slash",
+    "cut_first",
+    "cut_second",
+    "retreat",
+    "guard",
+    "charge",
+    "blade_raise",
+    "slam_contact",
+    "channel",
+    "ready",
+    "follow",
+    "cross_0",
+    "cross_1",
+    "cross_2",
+    "flurry_sweep",
+    "hurt_0",
+    "hurt_1",
+    "death_0",
+    "death_1"
+  ],
+  "references": [
+    "assets/source/characters/thien-son-dao-weapon-options-2026-11-09/han-nguyet-attack.png",
+    "assets/source/characters/thien-son-dao-weapon-options-2026-11-09/han-nguyet-locomotion.png",
+    "assets/exports/characters/thien-son-han-nguyet/han-nguyet.png",
+    "assets/source/thien-son-phien-unified-v1/raw/down_right.png"
+  ],
+  "groups": [
+    {
+      "name": "idle",
+      "poses": [
+        "idle_0",
+        "idle_1",
+        "idle_2",
+        "idle_3"
+      ],
+      "durationMs": 700
+    },
+    {
+      "name": "walk",
+      "poses": [
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3"
+      ],
+      "durationMs": 110
+    },
+    {
+      "name": "action_library",
+      "poses": [
+        "windup",
+        "sweep_right",
+        "sweep_left",
+        "overhead",
+        "recover",
+        "dash_slash",
+        "cut_first",
+        "cut_second",
+        "retreat",
+        "guard",
+        "charge",
+        "blade_raise",
+        "slam_contact",
+        "channel",
+        "ready",
+        "follow",
+        "cross_0",
+        "cross_1",
+        "cross_2",
+        "flurry_sweep"
+      ],
+      "durationMs": 100
+    },
+    {
+      "name": "hurt",
+      "poses": [
+        "hurt_0",
+        "hurt_1"
+      ],
+      "durationMs": 90
+    },
+    {
+      "name": "death",
+      "poses": [
+        "death_0",
+        "death_1"
+      ],
+      "durationMs": 220
+    }
+  ],
+  "registrationPolicy": "V2 redraw: fan-branch rendering quality, retained Han Nguyet identity. Constant source density across each directional sheet, no hair/weapon-extent rescaling. Fixed foot pivot and runtime scale .5.",
+  "directionDensityPolicies": {
+    "down": "uniform-source",
+    "down_right": "uniform-source",
+    "right": "uniform-source",
+    "up_right": "uniform-source",
+    "up": "uniform-source",
+    "up_left": "uniform-source",
+    "left": "uniform-source",
+    "down_left": "uniform-source"
+  },
+  "poseOverrides": [
+    {
+      "frame": "idle_0_down_right",
+      "path": "raw/sharp-prototype/0.png",
+      "sourceRoot": [
+        140.10137457044672,
+        307.0
+      ],
+      "sourceBodyTop": 9.0,
+      "sourceScale": 0.30016863406408095
+    },
+    {
+      "frame": "idle_1_down_right",
+      "path": "raw/sharp-prototype/1.png",
+      "sourceRoot": [
+        138.17884172425138,
+        307.0
+      ],
+      "sourceBodyTop": 10.0,
+      "sourceScale": 0.30016863406408095
+    },
+    {
+      "frame": "idle_2_down_right",
+      "path": "raw/sharp-prototype/2.png",
+      "sourceRoot": [
+        138.03089264379588,
+        303.0
+      ],
+      "sourceBodyTop": 9.0,
+      "sourceScale": 0.30016863406408095
+    },
+    {
+      "frame": "idle_3_down_right",
+      "path": "raw/sharp-prototype/3.png",
+      "sourceRoot": [
+        130.5773710482529,
+        303.0
+      ],
+      "sourceBodyTop": 9.0,
+      "sourceScale": 0.30016863406408095
+    },
+    {
+      "frame": "walk_0_down_right",
+      "path": "raw/sharp-prototype/4.png",
+      "sourceRoot": [
+        137.63778705636744,
+        302.0
+      ],
+      "sourceBodyTop": 9.0,
+      "sourceScale": 0.30016863406408095
+    },
+    {
+      "frame": "walk_1_down_right",
+      "path": "raw/sharp-prototype/5.png",
+      "sourceRoot": [
+        135.582561858273,
+        277.0
+      ],
+      "sourceBodyTop": 9.0,
+      "sourceScale": 0.30016863406408095
+    },
+    {
+      "frame": "walk_2_down_right",
+      "path": "raw/sharp-prototype/6.png",
+      "sourceRoot": [
+        148.5775075987842,
+        302.0
+      ],
+      "sourceBodyTop": 10.0,
+      "sourceScale": 0.30016863406408095
+    },
+    {
+      "frame": "walk_3_down_right",
+      "path": "raw/sharp-prototype/7.png",
+      "sourceRoot": [
+        131.446793134598,
+        293.0
+      ],
+      "sourceBodyTop": 9.0,
+      "sourceScale": 0.30016863406408095
+    },
+    {
+      "frame": "windup_down_right",
+      "path": "raw/sharp-prototype/8.png",
+      "sourceRoot": [
+        140.36040609137055,
+        301.0
+      ],
+      "sourceBodyTop": 8.0,
+      "sourceScale": 0.30016863406408095
+    },
+    {
+      "frame": "sweep_right_down_right",
+      "path": "raw/sharp-prototype/9.png",
+      "sourceRoot": [
+        143.67068776437412,
+        295.0
+      ],
+      "sourceBodyTop": 20.0,
+      "sourceScale": 0.30016863406408095
+    },
+    {
+      "frame": "sweep_left_down_right",
+      "path": "raw/sharp-prototype/10.png",
+      "sourceRoot": [
+        144.8788267350537,
+        299.0
+      ],
+      "sourceBodyTop": 15.0,
+      "sourceScale": 0.30016863406408095
+    },
+    {
+      "frame": "overhead_down_right",
+      "path": "raw/sharp-prototype/11.png",
+      "sourceRoot": [
+        147.78072326080294,
+        309.0
+      ],
+      "sourceBodyTop": 9.0,
+      "sourceScale": 0.30016863406408095
+    }
+  ],
+  "prototypeScope": "ONLY down_right idle4/walk4/basic4; remaining directions/actions reuse previous version byte-exact."
+}

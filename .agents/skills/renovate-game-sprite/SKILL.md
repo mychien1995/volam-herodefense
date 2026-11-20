@@ -1,37 +1,39 @@
 ---
 name: renovate-game-sprite
-description: Renovate existing 2D game sprites, VFX or associated scene art for sharper native-scale rendering and coherent animation. Use when asked to redraw, sharpen or modernize old assets while retaining their identity, or to repeat the Võ Đang visual-upgrade-2 process. Covers reference-driven image generation, alpha-preserving exports and live Phaser review.
+description: Sharpen or renovate existing 2D character sprites, skill VFX and associated scene art while preserving identity, proportions and action continuity. Use for blurry game-size art, inconsistent idle/walk/attack/skill bodies, or visual skill attachments and choreography. Covers versioned raster production, atlas integration and live game review; gameplay ability changes remain a separate scope.
 ---
 
 # Renovate game sprites
 
-Produce a versioned replacement that reads clearly at its intended gameplay size. Preserve the identity, perspective, weapon and school palette specified by the user. For Võ Lâm Hero Defense, use the visual-upgrade-2 hero and arena as a rendering-quality benchmark.
+Produce a versioned replacement that reads clearly at gameplay size and stays recognizable through the requested states. Preserve the chosen identity, perspective, weapons and palette. Treat body art, animation sampling and skill effects as related parts with separate owners.
 
-Read [references/process.md](references/process.md) for the production decisions and [references/request-templates.md](references/request-templates.md) when interpreting or preparing a request. The measured Võ Đang example, paths and reusable export recipe are in [references/volam-example.md](references/volam-example.md).
+Read only the guidance relevant to the defect:
 
-## Establish the replacement contract
+- For sharpness, source production, alpha and render density, read [process.md](references/process.md).
+- For body continuity, state transitions, skill choreography or VFX sockets, read [coherence-and-vfx.md](references/coherence-and-vfx.md).
+- For request/prompt examples, use [request-templates.md](references/request-templates.md).
+- In Võ Lâm Hero Defense, [volam-example.md](references/volam-example.md) maps retained examples and existing tools. Discover current paths and versions; historical measurements and test results are not defaults or current acceptance.
 
-- Locate the requested asset through its normal loader and animation registry. Inspect an actual runtime screenshot, the source PNG, atlas metadata, approved design and the nearest suitable visual reference. Record current frame dimensions, body size, foot pivot, facings and action timings.
-- Infer routine choices from the repo and user context. Resolve only consequential missing identity, scope or destination information with the user.
-- Record whether the user requests a static comparison, an interactive art preview, or replacement in a server-backed match. Keep that choice visible in the deliverable and test scope.
-- Work in the requested checkout. Create sibling versioned source/exports so reviewed originals remain available.
+## Establish the scope
 
-## Produce and inspect
+Locate the normal loader, atlas, animation/body presenter and relevant effect owner. Inspect source art, exported PNG/JSON and a real runtime frame. Reproduce the reported action before choosing a fix. Record the renderer/camera scale, physical body size, foot pivot, facings and timing needed for that comparison.
 
-- Use the available imagegen workflow for new original raster artwork. Use the old sprite/design for identity, the approved scene for render quality and a real gameplay frame for perspective and proportions. Preserve those roles in the generation prompt.
-- Start with one representative cel, pass it through the actual export path and inspect it at target size before expanding the requested actions. Treat this as an internal quality check. Apply user/repository approval gates at their stated scope, carrying forward authorization already given.
-- Generate coherent pose groups with stable body proportions, costume, handedness and a fixed camera. Provide genuine alternating walk poses and the action poses needed by the request. Retain valid sources and retry the defective group.
-- Separate body, VFX, ground and occluding props. Inspect actual alpha, cell gutters, blade clearance and frame edges. Preserve continuous outlines through resizing and compositing.
-- Reuse an existing exporter where it fits. Align frames by feet and use one consistent scale per coherent pose group. Export actual editable Aseprite sources and PNG/JSON atlases, with tags, durations and pivots.
+Distinguish a still preview, a limited playable prototype and a full match replacement. Identify which facings/states are new and which remain reused. For visual-only work, preserve gameplay, authority, controls, HUD and existing comparison toggles. Infer routine choices from the project and existing authorization.
 
-## Verify the displayed result
+Work in the requested checkout and retain reviewed originals in their existing version. Use sibling source/exports for replacements. A request for a sample before expansion stops at that sample; authorization to complete all branches can permit staged continuation without another approval pause. Neither automation PASS nor an earlier version's approval approves newly generated art.
 
-- Compare old and renovated sprites at equal visible body height, on the same background and camera view. Measure actual canvas/CSS dimensions and sprite bounds.
-- Select filtering and render density for the requested visual language. The accepted Võ Đang experiment uses native screen-sized rendering, retained edge alpha and linear sampling. Strict hand-pixelled styles can need nearest sampling. Validate the result in the actual target renderer.
-- Check frame changes, foot contact, facing/handedness, silhouettes, weapon continuity, foreground occlusion and VFX cleanup live. A sprite moving across the screen should show the requested authored gait.
-- For an art preview, label scene-only effects and any shared cast poses accurately. For a match replacement, verify the normal client entry point, server-owned events, two-client synchronization and required six-player combat/readability checks.
-- Follow the repository's final validation command after the last implementation change. For metadata-only skill/approval edits, validate affected metadata and guards. Use PNGs and live frame observations under the repo's recording policy.
-- Deliver the review link, native-scale screenshot, original PNG/JSON, editable sources, generation prompts, provenance and measured checks. State any reused/fallback poses and remaining approval or integration work.
+## Produce and integrate
 
-A skill invocation authorizes the requested art work within its stated scope. Asset-specific drawings, collision data, gameplay rules and unrelated milestones remain governed by the user's current request and repository instructions.
+Use the available image-generation workflow for original raster redraws, separating identity, quality and runtime reference roles. Export a representative sample and inspect it in the actual renderer before expanding within the authorized scope. Correct the layer responsible for the defect: source drawing, registration/export, animation sampling or rendering.
 
+Register coherent poses at stable anatomical density and feet pivots; inspect camera and display transforms together. Keep body and VFX separate, preserve required weapon/contact phases, and disclose shared poses or derived transformation cels. Validate real alpha, transparent gutters and complete silhouettes before integration. Retain originals, exact prompts, provenance and rejected takes needed to explain a retry.
+
+## Verify and hand off
+
+Compare equivalent states at the same gameplay zoom and body size; prefer the same facing and neutral/blink phase. Label independent moments or different attack variants. Keep original runtime PNGs alongside crops. PNGs document appearance; observe frame changes, cadence, foot contact, facing, status recovery and effect cleanup live to verify motion.
+
+Validate affected assets/native sources, relevant policies and the running client. For match replacements, use real accepted inputs, server acknowledgments and applicable multiplayer checks. Follow the repository's validation and recording rules, narrowed by the user's explicit scope. Skill/documentation-only edits need skill validation, not a game rebuild or gameplay run.
+
+Preserve failed evidence and retry the affected stage with its actual dependencies. Report what ran, what remains reused or untested, and whether the result is a candidate or approved. Deliver versioned PNG/JSON/native assets, provenance, useful before/after PNGs and a playable review when requested. Stop at the agreed review boundary.
+
+Invoking this skill authorizes the requested art work within its stated scope, not unrelated gameplay changes, bulk expansion or external publication.

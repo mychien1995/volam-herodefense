@@ -1,0 +1,395 @@
+{
+  "runId": "158563d8-fed8-4630-a081-39660940cd0f",
+  "mode": "final",
+  "args": [
+    "--config",
+    "playwright.qa-skill-prerequisites.config.ts",
+    "--reporter=line"
+  ],
+  "startedAt": "2026-11-19T19:54:40.604Z",
+  "status": "PASS",
+  "stages": [
+    {
+      "label": "environment preflight",
+      "seconds": 0.58,
+      "status": "PASS",
+      "checks": [
+        {
+          "id": "workspace",
+          "status": "PASS",
+          "detail": {
+            "mode": "final",
+            "stage": "before-build",
+            "managed": true
+          }
+        },
+        {
+          "id": "session",
+          "status": "PASS",
+          "detail": {
+            "serverPort": 2567,
+            "clientPort": 5173
+          }
+        },
+        {
+          "id": "ports",
+          "status": "PASS"
+        },
+        {
+          "id": "node",
+          "status": "PASS",
+          "detail": "26.0.0"
+        },
+        {
+          "id": "installation",
+          "status": "PASS",
+          "detail": "pnpm@11.25.0"
+        },
+        {
+          "id": "tools",
+          "status": "PASS",
+          "detail": {
+            "typescript": "7.0.2",
+            "vitest": "5.0.5",
+            "vite": "8.3.5",
+            "@playwright/test": "1.64.1"
+          }
+        },
+        {
+          "id": "chromium",
+          "status": "PASS",
+          "detail": {
+            "version": "156.0.8078.4",
+            "cache": "D:\\Projects\\volam-hero-defense\\.cache\\ms-playwright"
+          }
+        },
+        {
+          "id": "python",
+          "status": "PASS",
+          "detail": "Python 3.13.5"
+        }
+      ]
+    },
+    {
+      "label": "prepare assets (once)",
+      "seconds": 15.96,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\1-prepare-assets-once-.log",
+      "outputBytes": 738
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 1.06,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\2-compile-TypeScript.log",
+      "outputBytes": 0
+    },
+    {
+      "label": "typecheck tests and tools",
+      "seconds": 1.99,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\3-typecheck-tests-and-tools.log",
+      "outputBytes": 0
+    },
+    {
+      "label": "workflow regression checks",
+      "seconds": 3.18,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\4-workflow-regression-checks.log",
+      "outputBytes": 4171
+    },
+    {
+      "label": "all unit/integration tests",
+      "seconds": 208.71,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\5-all-unit-integration-tests.log",
+      "outputBytes": 393
+    },
+    {
+      "label": "production client build",
+      "seconds": 14.27,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\6-production-client-build.log",
+      "outputBytes": 12624
+    },
+    {
+      "label": "scripts/verify-assets.py",
+      "seconds": 0.34,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\7-scripts-verify-assets-py.log",
+      "outputBytes": 160
+    },
+    {
+      "label": "scripts/verify-arena-art01.py",
+      "seconds": 0.59,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\8-scripts-verify-arena-art01-py.log",
+      "outputBytes": 132
+    },
+    {
+      "label": "scripts/verify-arena-v2.py",
+      "seconds": 0.47,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\9-scripts-verify-arena-v2-py.log",
+      "outputBytes": 135
+    },
+    {
+      "label": "scripts/verify-thien-son.py",
+      "seconds": 0.39,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\10-scripts-verify-thien-son-py.log",
+      "outputBytes": 205
+    },
+    {
+      "label": "scripts/verify-vo-dang.py",
+      "seconds": 0.39,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\11-scripts-verify-vo-dang-py.log",
+      "outputBytes": 232
+    },
+    {
+      "label": "scripts/verify-thieu-lam.py",
+      "seconds": 6.95,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\12-scripts-verify-thieu-lam-py.log",
+      "outputBytes": 200
+    },
+    {
+      "label": "scripts/verify-thieu-lam-skills.py",
+      "seconds": 10.86,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\13-scripts-verify-thieu-lam-skills-py.log",
+      "outputBytes": 688
+    },
+    {
+      "label": "scripts/verify-thien-son-skills.py",
+      "seconds": 1.33,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\14-scripts-verify-thien-son-skills-py.log",
+      "outputBytes": 521
+    },
+    {
+      "label": "scripts/verify-vo-dang-skills.py",
+      "seconds": 1.71,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\15-scripts-verify-vo-dang-skills-py.log",
+      "outputBytes": 730
+    },
+    {
+      "label": "scripts/verify-bamboo-forest.py",
+      "seconds": 0.47,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\16-scripts-verify-bamboo-forest-py.log",
+      "outputBytes": 173
+    },
+    {
+      "label": "scripts/verify-desert.py",
+      "seconds": 2.93,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\17-scripts-verify-desert-py.log",
+      "outputBytes": 133
+    },
+    {
+      "label": "scripts/verify-forest-creeps.py",
+      "seconds": 6.5,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\18-scripts-verify-forest-creeps-py.log",
+      "outputBytes": 2233
+    },
+    {
+      "label": "scripts/verify-beach.py",
+      "seconds": 1.48,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\19-scripts-verify-beach-py.log",
+      "outputBytes": 156
+    },
+    {
+      "label": "scripts/verify-hell.py",
+      "seconds": 0.89,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\20-scripts-verify-hell-py.log",
+      "outputBytes": 202
+    },
+    {
+      "label": "scripts/verify-chu-art.py",
+      "seconds": 0.38,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\21-scripts-verify-chu-art-py.log",
+      "outputBytes": 89
+    },
+    {
+      "label": "scripts/verify-ly-mac-sau.py",
+      "seconds": 1.91,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\22-scripts-verify-ly-mac-sau-py.log",
+      "outputBytes": 202
+    },
+    {
+      "label": "scripts/verify-inventory-ui.py",
+      "seconds": 0.81,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\23-scripts-verify-inventory-ui-py.log",
+      "outputBytes": 121
+    },
+    {
+      "label": "scripts/verify-tay-doc.py",
+      "seconds": 0.76,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\24-scripts-verify-tay-doc-py.log",
+      "outputBytes": 149
+    },
+    {
+      "label": "scripts/verify-nam-de.py",
+      "seconds": 0.31,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\25-scripts-verify-nam-de-py.log",
+      "outputBytes": 138
+    },
+    {
+      "label": "scripts/verify-bac-cai-preview.py",
+      "seconds": 0.95,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\26-scripts-verify-bac-cai-preview-py.log",
+      "outputBytes": 162
+    },
+    {
+      "label": "scripts/verify-vuong-trung-duong.py",
+      "seconds": 0.77,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\27-scripts-verify-vuong-trung-duong-py.log",
+      "outputBytes": 97
+    },
+    {
+      "label": "scripts/verify-renovation.py",
+      "seconds": 5.97,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\28-scripts-verify-renovation-py.log",
+      "outputBytes": 201
+    },
+    {
+      "label": "scripts/verify-renovation-runtime.py",
+      "seconds": 1.46,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\29-scripts-verify-renovation-runtime-py.log",
+      "outputBytes": 141
+    },
+    {
+      "label": "scripts/verify-renovation-v2.py",
+      "seconds": 0.59,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\30-scripts-verify-renovation-v2-py.log",
+      "outputBytes": 439
+    },
+    {
+      "label": "scripts/verify-renovation-v3.py",
+      "seconds": 3.34,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\31-scripts-verify-renovation-v3-py.log",
+      "outputBytes": 2933
+    },
+    {
+      "label": "scripts/verify-renovation-v4.py",
+      "seconds": 2.15,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\32-scripts-verify-renovation-v4-py.log",
+      "outputBytes": 132
+    },
+    {
+      "label": "scripts/verify-renovation-v5.py",
+      "seconds": 0.63,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\33-scripts-verify-renovation-v5-py.log",
+      "outputBytes": 93
+    },
+    {
+      "label": "scripts/verify-renovation-v6.py",
+      "seconds": 0.43,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\34-scripts-verify-renovation-v6-py.log",
+      "outputBytes": 110
+    },
+    {
+      "label": "scripts/verify-renovation-v7.py",
+      "seconds": 0.76,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\35-scripts-verify-renovation-v7-py.log",
+      "outputBytes": 115
+    },
+    {
+      "label": "scripts/verify-renovation-v8.py",
+      "seconds": 0.51,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\36-scripts-verify-renovation-v8-py.log",
+      "outputBytes": 122
+    },
+    {
+      "label": "scripts/verify-loi-dai.py",
+      "seconds": 0.52,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\37-scripts-verify-loi-dai-py.log",
+      "outputBytes": 165
+    },
+    {
+      "label": "scripts/verify-contact-impacts.py",
+      "seconds": 1.23,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\38-scripts-verify-contact-impacts-py.log",
+      "outputBytes": 78
+    },
+    {
+      "label": "scripts/verify-pvp.py",
+      "seconds": 2.13,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\39-scripts-verify-pvp-py.log",
+      "outputBytes": 169
+    },
+    {
+      "label": "browser verification",
+      "seconds": 46.66,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-final\\check-workflow\\158563d8-fed8-4630-a081-39660940cd0f\\40-browser-verification.log",
+      "outputBytes": 1331
+    }
+  ],
+  "totalSeconds": 353.33
+}

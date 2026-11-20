@@ -1,0 +1,13 @@
+# Ngũ Độc — coherent body candidate, 2026-11-20
+
+Đợt7 trên `wip/m3d/25d`, hoàn tất hai nhánh cuối theo authorization làm hết không chờ từng đợt. Candidate chưa tự nhận director-approved. Gameplay/core/server/protocol, HUD geometry và F8 giữ nguyên.
+
+Tà Hiệp192 authored/native cels; Cổ Sư224, tổng416 frames/80 Aseprite tags, tám hướng. Một atlas/nhánh và portrait cùng master cho idle bốn cel thật, walk bốn cel, A/skill/hurt/status/death/respawn, constant scale0.5/pivot. Tà Hiệp giữ búi tóc, hai bím vòng, trang sức đồng/ngọc và áo xanh; Cổ Sư giữ hood/áo choàng và trượng đầu lâu cả khi nghi thức. Không trộn body R5/R6 hoặc native action khác bộ. Source density nhất quán trong cả thư viện từng hướng; staff skull/hand extent không quyết định chiều cao thân.
+
+Lửa độc dùng lại đúng hai effect objects, frame/timing/scale cũ, đo lại socket trên body mới sau canonical sampling. Có192 frame records, hai điểm trên mỗi living cel và không điểm trên corpse; bốn bulk-direction overrides đo trên raster, đúng một bàn tay thật sự bị che ở back-facing palm được đặt sau thân. `hands-contact.png`/`hands-review.json` và profile giữ minh chứng. Không tạo damage hoặc VFX mới.
+
+37 focused policy tests/8 files PASS; `pnpm exec tsc --noEmit -p apps/game-client/tsconfig.json` và `pnpm exec tsc --noEmit -p tsconfig.tools.json` PASS. PNG/alpha/visible RGB/native roundtrip416 frames,80tags/public copies/bounds/idle consistency và36 approved locks PASS. Hai-client pilot/contact, full down-right/up-left iteration PASS trước final.
+
+Final `node tools/run-playwright.mjs test --config playwright.hero-coherence-batch7.config.ts`, session `hero-coherence-batch7-final`, ports3013/5613, branch both, players6: PASS. Mỗi nhánh8idle/8walk,40 public action groups×6=240 acknowledgments,40 reaction/natural arena respawn cases, same-tick HP authority, portrait/F8/crowd96 controlled targets. Tà Hiệp kiểm tra Q on/off, A toxic thật, hurt khi độc bật, hai flame attachments và cleanup. Cổ Sư W sinh đúng4 cương thi/owner và T sinh reaper thật trong nghi thức; giữ art minion/reaper cũ. R cả hai là nội tại, không ép cast giả. Đây là focused body/visual coverage, không phải balance/AI/reward test hoặc cam kết FPS. Không video/trace.
+
+[Summary](evidence/sessions/hero-coherence-batch7-delivery/summary.json), PNG [Tà Hiệp trước–sau](evidence/sessions/hero-coherence-batch7-delivery/ta-hiep-before-after.png) / [Cổ Sư trước–sau](evidence/sessions/hero-coherence-batch7-delivery/co-su-before-after.png), [độc chưởng thật](evidence/sessions/hero-coherence-batch7-delivery/ta-hiep-poison-basic.png), [nghi thức thật](evidence/sessions/hero-coherence-batch7-delivery/co-su-reaper-ritual.png). Các crop là source pixels ở những thời điểm độc lập; giữ full originals, không repaint.

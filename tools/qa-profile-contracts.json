@@ -1,0 +1,1422 @@
+{
+  "schemaVersion": 1,
+  "profiles": {
+    "playwright.animation-change.config.ts": {
+      "profile": "animation-change",
+      "ports": "fixed",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2838,
+          "clientPort": 5442
+        },
+        {
+          "serverPort": 2836,
+          "clientPort": 5440
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/animation-change-setup.ts"
+    },
+    "playwright.arena-creeps-final.config.ts": {
+      "profile": "arena-creeps-final",
+      "ports": "fixed",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2598,
+          "clientPort": 5198
+        }
+      ],
+      "channels": [null],
+      "setup": null
+    },
+    "playwright.arena-creeps.config.ts": {
+      "profile": "arena-creeps",
+      "ports": "shared",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2588,
+          "clientPort": 5186
+        }
+      ],
+      "channels": [null],
+      "setup": null,
+      "finalClientMode": "preview",
+      "productionEnv": "VOLAM_QA_ARENA_PRODUCTION"
+    },
+    "playwright.bac-cai.config.ts": {
+      "profile": "bac-cai",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2797,
+          "clientPort": 5397
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/bac-cai-setup.ts"
+    },
+    "playwright.bamboo.config.ts": {
+      "profile": "bamboo",
+      "ports": "fixed",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2587,
+          "clientPort": 5187
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/bamboo-setup.ts"
+    },
+    "playwright.beach.config.ts": {
+      "profile": "beach",
+      "ports": "fixed",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2698,
+          "clientPort": 5298
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/beach-setup.ts"
+    },
+    "playwright.boss-coherence-batch2-full.config.ts": {
+      "profile": "boss-coherence-batch2-full",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2926,
+          "clientPort": 5529
+        }
+      ],
+      "channels": ["chrome"],
+      "setup": null
+    },
+    "playwright.boss-coherence-batch2.config.ts": {
+      "profile": "boss-coherence-batch2",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2926,
+          "clientPort": 5529
+        }
+      ],
+      "channels": ["chrome"],
+      "setup": null
+    },
+    "playwright.boss-coherence-lifecycle.config.ts": {
+      "profile": "boss-coherence-lifecycle",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2926,
+          "clientPort": 5529
+        }
+      ],
+      "channels": ["chrome"],
+      "setup": null
+    },
+    "playwright.boss-coherence-remaining-full.config.ts": {
+      "profile": "boss-coherence-remaining-full",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2926,
+          "clientPort": 5529
+        }
+      ],
+      "channels": ["chrome"],
+      "setup": null
+    },
+    "playwright.boss-coherence-rest.config.ts": {
+      "profile": "boss-coherence-rest",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2926,
+          "clientPort": 5529
+        }
+      ],
+      "channels": ["chrome"],
+      "setup": null
+    },
+    "playwright.boss-coherence.config.ts": {
+      "profile": "boss-coherence",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2926,
+          "clientPort": 5529
+        }
+      ],
+      "channels": ["chrome"],
+      "setup": null
+    },
+    "playwright.boss-game.config.ts": {
+      "profile": "boss-game",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 45099,
+          "clientPort": 59763
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/boss-game-setup.ts"
+    },
+    "playwright.campaign.config.ts": {
+      "profile": "campaign",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2946,
+          "clientPort": 5546
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/campaign-setup.ts"
+    },
+    "playwright.chu-ba-thong.config.ts": {
+      "profile": "chu-ba-thong",
+      "ports": "fixed",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2799,
+          "clientPort": 5399
+        }
+      ],
+      "channels": ["msedge"],
+      "setup": "./tests/e2e/chu-setup.ts"
+    },
+    "playwright.chuong-unified.config.ts": {
+      "profile": "chuong-unified",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2926,
+          "clientPort": 5529
+        }
+      ],
+      "channels": ["chrome"],
+      "setup": null
+    },
+    "playwright.clean-match.config.ts": {
+      "profile": "clean-match",
+      "ports": "fixed",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2592,
+          "clientPort": 5196
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/clean-match-setup.ts"
+    },
+    "playwright.config.ts": {
+      "profile": "gameplay",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2567,
+          "clientPort": 5173
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/global-setup.ts"
+    },
+    "playwright.creep-upgrade.config.ts": {
+      "profile": "creep-upgrade",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2928,
+          "clientPort": 5528
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/creep-upgrade-setup.ts"
+    },
+    "playwright.desert.config.ts": {
+      "profile": "desert",
+      "ports": "fixed",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2596,
+          "clientPort": 5196
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/desert-setup.ts"
+    },
+    "playwright.diamond-palm.config.ts": {
+      "profile": "diamond-palm",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2567,
+          "clientPort": 5173
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/diamond-palm-setup.ts"
+    },
+    "playwright.dong-ta-m3d-regression.config.ts": {
+      "profile": "dong-ta-m3d-regression",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2567,
+          "clientPort": 5173
+        }
+      ],
+      "channels": ["msedge"],
+      "extraPorts": [
+        {
+          "port": 2878,
+          "env": "VOLAM_QA_FIXTURE_PORT"
+        }
+      ],
+      "developmentEnv": "VOLAM_QA_DEV_CLIENT",
+      "setup": "./tests/e2e/m3d-r3-setup.ts"
+    },
+    "playwright.dong-ta.config.ts": {
+      "profile": "dong-ta",
+      "ports": "shared",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2716,
+          "clientPort": 5316
+        }
+      ],
+      "channels": ["msedge"],
+      "setup": "./tests/e2e/dong-ta-setup.ts"
+    },
+    "playwright.duong-mon-game.config.ts": {
+      "profile": "duong-mon-game",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2794,
+          "clientPort": 5574
+        }
+      ],
+      "channels": ["chrome"],
+      "externalFlags": ["VOLAM_DUONG_MON_USE_LIVE"],
+      "setup": "./tests/e2e/duong-mon-game-setup.ts"
+    },
+    "playwright.duong-mon.config.ts": {
+      "profile": "duong-mon",
+      "ports": "fixed",
+      "clientMode": "preview",
+      "services": [
+        {
+          "clientPort": 5557
+        }
+      ],
+      "channels": ["chrome"],
+      "setup": "./tests/e2e/duong-mon-setup.ts"
+    },
+    "playwright.feedback-v2.config.ts": {
+      "profile": "feedback-v2",
+      "ports": "fixed",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2628,
+          "clientPort": 5232
+        },
+        {
+          "serverPort": 2626,
+          "clientPort": 5230
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/feedback-v2-setup.ts"
+    },
+    "playwright.feedback.config.ts": {
+      "profile": "feedback",
+      "ports": "fixed",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2608,
+          "clientPort": 5212
+        },
+        {
+          "serverPort": 2606,
+          "clientPort": 5210
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/feedback-setup.ts"
+    },
+    "playwright.forest-creeps.config.ts": {
+      "profile": "forest-creeps",
+      "ports": "fixed",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2587,
+          "clientPort": 5187
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/bamboo-setup.ts"
+    },
+    "playwright.forest-natural.config.ts": {
+      "profile": "forest-natural",
+      "ports": "fixed",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2587,
+          "clientPort": 5187
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/bamboo-setup.ts"
+    },
+    "playwright.hell-m3d.config.ts": {
+      "profile": "hell-m3d",
+      "ports": "fixed",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2700,
+          "clientPort": 5300
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/hell-setup.ts"
+    },
+    "playwright.hell.config.ts": {
+      "profile": "hell",
+      "ports": "fixed",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2700,
+          "clientPort": 5300
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/hell-setup.ts"
+    },
+    "playwright.hero-coherence-batch1.config.ts": {
+      "profile": "hero-coherence-batch1",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2926,
+          "clientPort": 5529
+        }
+      ],
+      "channels": ["chrome"],
+      "setup": null
+    },
+    "playwright.hero-coherence-batch2.config.ts": {
+      "profile": "hero-coherence-batch2",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2926,
+          "clientPort": 5529
+        }
+      ],
+      "channels": ["chrome"],
+      "setup": null
+    },
+    "playwright.hero-coherence-batch3.config.ts": {
+      "profile": "hero-coherence-batch3",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2926,
+          "clientPort": 5529
+        }
+      ],
+      "channels": ["chrome"],
+      "setup": null
+    },
+    "playwright.hero-coherence-batch4.config.ts": {
+      "profile": "hero-coherence-batch4",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2926,
+          "clientPort": 5529
+        }
+      ],
+      "channels": ["chrome"],
+      "setup": null
+    },
+    "playwright.hero-coherence-batch5.config.ts": {
+      "profile": "hero-coherence-batch5",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2926,
+          "clientPort": 5529
+        }
+      ],
+      "channels": ["chrome"],
+      "setup": null
+    },
+    "playwright.hero-coherence-batch6.config.ts": {
+      "profile": "hero-coherence-batch6",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2926,
+          "clientPort": 5529
+        }
+      ],
+      "channels": ["chrome"],
+      "setup": null
+    },
+    "playwright.hero-coherence-batch7.config.ts": {
+      "profile": "hero-coherence-batch7",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2926,
+          "clientPort": 5529
+        }
+      ],
+      "channels": ["chrome"],
+      "setup": null
+    },
+    "playwright.hero-finish.config.ts": {
+      "profile": "hero-finish",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2926,
+          "clientPort": 5529
+        }
+      ],
+      "channels": ["chrome"],
+      "setup": null
+    },
+    "playwright.hong-liet.config.ts": {
+      "profile": "hong-liet",
+      "ports": "alias",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2791,
+          "clientPort": 5391
+        }
+      ],
+      "channels": [null],
+      "serverEnv": "HONG_LIET_QA_SERVER_PORT",
+      "clientEnv": "HONG_LIET_QA_CLIENT_PORT",
+      "setup": "./tests/e2e/hong-liet-setup.ts"
+    },
+    "playwright.invasion.config.ts": {
+      "profile": "invasion",
+      "ports": "fixed",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2570,
+          "clientPort": 5174
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/invasion-setup.ts"
+    },
+    "playwright.kim-luan-m3d.config.ts": {
+      "profile": "kim-luan-m3d",
+      "ports": "fixed",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2794,
+          "clientPort": 5394
+        },
+        {
+          "serverPort": 2709,
+          "clientPort": 5309
+        }
+      ],
+      "channels": [null, "msedge"],
+      "setup": "./tests/e2e/kim-luan-m3d-setup.ts",
+      "unsupportedEnv": ["KIM_LUAN_QA_SERVER_PORT", "KIM_LUAN_QA_CLIENT_PORT"]
+    },
+    "playwright.kim-luan.config.ts": {
+      "profile": "kim-luan",
+      "ports": "alias",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2794,
+          "clientPort": 5394
+        }
+      ],
+      "channels": [null],
+      "serverEnv": "KIM_LUAN_QA_SERVER_PORT",
+      "clientEnv": "KIM_LUAN_QA_CLIENT_PORT",
+      "setup": "./tests/e2e/kim-luan-setup.ts"
+    },
+    "playwright.loi-dai.config.ts": {
+      "profile": "loi-dai",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2567,
+          "clientPort": 5173
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/loi-dai-setup.ts"
+    },
+    "playwright.ly-mac-sau.config.ts": {
+      "profile": "ly-mac-sau",
+      "ports": "shared",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2709,
+          "clientPort": 5309
+        }
+      ],
+      "channels": ["msedge"],
+      "setup": "./tests/e2e/ly-mac-sau-setup.ts"
+    },
+    "playwright.m3a-regression.config.ts": {
+      "profile": "m3a-regression",
+      "ports": "fixed",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2572,
+          "clientPort": 5176
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/skills-setup.ts"
+    },
+    "playwright.m3c1.config.ts": {
+      "profile": "m3c1",
+      "ports": "fixed",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2576,
+          "clientPort": 5180
+        },
+        {
+          "serverPort": 2574,
+          "clientPort": 5178
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/m3c1-setup.ts"
+    },
+    "playwright.m3c2.config.ts": {
+      "profile": "m3c2",
+      "ports": "fixed",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2584,
+          "clientPort": 5188
+        },
+        {
+          "serverPort": 2582,
+          "clientPort": 5186
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/m3c2-setup.ts"
+    },
+    "playwright.m3c3.config.ts": {
+      "profile": "m3c3",
+      "ports": "fixed",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2588,
+          "clientPort": 5192
+        },
+        {
+          "serverPort": 2586,
+          "clientPort": 5190
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/m3c3-setup.ts",
+      "unsupportedEnv": ["VOLAM_TEST_PORT_OFFSET"]
+    },
+    "playwright.m3d-feedback.config.ts": {
+      "profile": "m3d-feedback",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2567,
+          "clientPort": 5173
+        }
+      ],
+      "channels": [null],
+      "extraPorts": [
+        {
+          "port": 2878,
+          "env": "VOLAM_QA_FIXTURE_PORT"
+        }
+      ],
+      "developmentEnv": "VOLAM_QA_DEV_CLIENT",
+      "setup": "./tests/e2e/m3d-feedback-setup.ts"
+    },
+    "playwright.m3d-followup.config.ts": {
+      "profile": "m3d-followup",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2567,
+          "clientPort": 5173
+        }
+      ],
+      "channels": [null],
+      "extraPorts": [
+        {
+          "port": 2878,
+          "env": "VOLAM_QA_FIXTURE_PORT"
+        }
+      ],
+      "developmentEnv": "VOLAM_QA_DEV_CLIENT",
+      "setup": "./tests/e2e/m3d-r3-setup.ts"
+    },
+    "playwright.m3d-hit-continuity.config.ts": {
+      "profile": "m3d-hit-continuity",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2926,
+          "clientPort": 5529
+        }
+      ],
+      "channels": [null],
+      "setup": null
+    },
+    "playwright.m3d-integration.config.ts": {
+      "profile": "m3d-integration",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2567,
+          "clientPort": 5173
+        }
+      ],
+      "channels": [null],
+      "extraPorts": [
+        {
+          "port": 2878,
+          "env": "VOLAM_QA_FIXTURE_PORT"
+        }
+      ],
+      "developmentEnv": "VOLAM_QA_DEV_CLIENT",
+      "setup": "./tests/e2e/m3d-feedback-setup.ts"
+    },
+    "playwright.m3d-milestone.config.ts": {
+      "profile": "m3d-milestone",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2567,
+          "clientPort": 5173
+        }
+      ],
+      "channels": [null],
+      "extraPorts": [
+        {
+          "port": 2878,
+          "env": "VOLAM_QA_FIXTURE_PORT"
+        }
+      ],
+      "developmentEnv": "VOLAM_QA_DEV_CLIENT",
+      "setup": "./tests/e2e/m3d-r3-setup.ts"
+    },
+    "playwright.m3d-r3.config.ts": {
+      "profile": "m3d-r3",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2567,
+          "clientPort": 5173
+        }
+      ],
+      "channels": [null],
+      "extraPorts": [
+        {
+          "port": 2878,
+          "env": "VOLAM_QA_FIXTURE_PORT"
+        }
+      ],
+      "developmentEnv": "VOLAM_QA_DEV_CLIENT",
+      "setup": "./tests/e2e/m3d-r3-setup.ts"
+    },
+    "playwright.nam-de-gameplay.config.ts": {
+      "profile": "nam-de-gameplay",
+      "ports": "fixed",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2813,
+          "clientPort": 5415
+        }
+      ],
+      "channels": ["msedge"],
+      "setup": "./tests/e2e/nam-de-setup.ts"
+    },
+    "playwright.nam-de.config.ts": {
+      "profile": "nam-de",
+      "ports": "fixed",
+      "clientMode": "static",
+      "services": [
+        {
+          "clientPort": 5413
+        }
+      ],
+      "channels": ["msedge"],
+      "setup": null
+    },
+    "playwright.ngu-doc-game.config.ts": {
+      "profile": "ngu-doc-game",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2802,
+          "clientPort": 5581
+        }
+      ],
+      "channels": ["chrome"],
+      "externalFlags": ["VOLAM_NGU_DOC_USE_LIVE"],
+      "setup": "./tests/e2e/ngu-doc-game-setup.ts"
+    },
+    "playwright.ngu-doc-preview.config.ts": {
+      "profile": "ngu-doc-preview",
+      "ports": "fixed",
+      "clientMode": "preview",
+      "services": [
+        {
+          "clientPort": 5535
+        }
+      ],
+      "channels": [null],
+      "executableEnv": "VOLAM_REVIEW_CHROMIUM",
+      "setup": "./tests/e2e/ngu-doc-preview-setup.ts"
+    },
+    "playwright.practice.config.ts": {
+      "profile": "practice",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2567,
+          "clientPort": 5173
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/pvp-repair-setup.ts"
+    },
+    "playwright.presentation-polish.config.ts": {
+      "profile": "presentation-polish",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2926,
+          "clientPort": 5529
+        }
+      ],
+      "channels": ["chrome"],
+      "setup": null
+    },
+    "playwright.progression.config.ts": {
+      "profile": "progression",
+      "ports": "fixed",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2574,
+          "clientPort": 5178
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/progression-setup.ts"
+    },
+    "playwright.pvp-regressions.config.ts": {
+      "profile": "pvp-regressions",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2567,
+          "clientPort": 5173
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/pvp-repair-setup.ts"
+    },
+    "playwright.qa-helpers.config.ts": {
+      "profile": "qa-helpers",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2567,
+          "clientPort": 5173
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/qa-helpers-setup.ts"
+    },
+    "playwright.qa-iteration.config.ts": {
+      "profile": "qa-iteration",
+      "ports": "shared",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2886,
+          "clientPort": 5486
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/qa-iteration-setup.ts"
+    },
+    "playwright.qa-owned-lifecycle.config.ts": {
+      "profile": "qa-owned-lifecycle",
+      "ports": "fixed",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2576,
+          "clientPort": 5180
+        },
+        {
+          "serverPort": 2574,
+          "clientPort": 5178
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/m3c1-setup.ts"
+    },
+    "playwright.qa-skill-prerequisites.config.ts": {
+      "profile": "qa-skill-prerequisites",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2567,
+          "clientPort": 5173
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/qa-skill-prerequisites-setup.ts"
+    },
+    "playwright.renovation-runtime.config.ts": {
+      "profile": "renovation-runtime",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2926,
+          "clientPort": 5529
+        }
+      ],
+      "channels": [null],
+      "executableEnv": "VOLAM_REVIEW_CHROMIUM",
+      "setup": null
+    },
+    "playwright.renovation-v10.config.ts": {
+      "profile": "renovation-v10",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2926,
+          "clientPort": 5529
+        }
+      ],
+      "channels": [null],
+      "executableEnv": "VOLAM_REVIEW_CHROMIUM",
+      "setup": null
+    },
+    "playwright.renovation-v3.config.ts": {
+      "profile": "renovation-v3",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2926,
+          "clientPort": 5529
+        }
+      ],
+      "channels": [null],
+      "executableEnv": "VOLAM_REVIEW_CHROMIUM",
+      "setup": null
+    },
+    "playwright.renovation-v4.config.ts": {
+      "profile": "renovation-v4",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2926,
+          "clientPort": 5529
+        }
+      ],
+      "channels": [null],
+      "executableEnv": "VOLAM_REVIEW_CHROMIUM",
+      "setup": null
+    },
+    "playwright.renovation-v5.config.ts": {
+      "profile": "renovation-v5",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2926,
+          "clientPort": 5529
+        }
+      ],
+      "channels": [null],
+      "executableEnv": "VOLAM_REVIEW_CHROMIUM",
+      "setup": null
+    },
+    "playwright.renovation-v6.config.ts": {
+      "profile": "renovation-v6",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2926,
+          "clientPort": 5529
+        }
+      ],
+      "channels": [null],
+      "executableEnv": "VOLAM_REVIEW_CHROMIUM",
+      "setup": null
+    },
+    "playwright.renovation-v7.config.ts": {
+      "profile": "renovation-v7",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2926,
+          "clientPort": 5529
+        }
+      ],
+      "channels": [null],
+      "executableEnv": "VOLAM_REVIEW_CHROMIUM",
+      "setup": null
+    },
+    "playwright.renovation-v8.config.ts": {
+      "profile": "renovation-v8",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2926,
+          "clientPort": 5529
+        }
+      ],
+      "channels": [null],
+      "executableEnv": "VOLAM_REVIEW_CHROMIUM",
+      "setup": null
+    },
+    "playwright.renovation-v9.config.ts": {
+      "profile": "renovation-v9",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2926,
+          "clientPort": 5529
+        }
+      ],
+      "channels": [null],
+      "executableEnv": "VOLAM_REVIEW_CHROMIUM",
+      "setup": null
+    },
+    "playwright.renovation.config.ts": {
+      "profile": "renovation",
+      "ports": "fixed",
+      "clientMode": "preview",
+      "services": [
+        {
+          "clientPort": 5528
+        }
+      ],
+      "channels": [null],
+      "executableEnv": "VOLAM_REVIEW_CHROMIUM",
+      "setup": "./tests/e2e/renovation-setup.ts"
+    },
+    "playwright.runtime-art-review.config.ts": {
+      "profile": "runtime-art-review",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2904,
+          "clientPort": 5504
+        }
+      ],
+      "channels": ["chrome"],
+      "extraPorts": [
+        {
+          "port": 2878,
+          "env": "VOLAM_QA_FIXTURE_PORT"
+        }
+      ],
+      "setup": "./tests/e2e/runtime-art-review-setup.ts"
+    },
+    "playwright.shaolin-dao.config.ts": {
+      "profile": "shaolin-dao",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2567,
+          "clientPort": 5173
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/shaolin-dao-match-setup.ts"
+    },
+    "playwright.skills.config.ts": {
+      "profile": "skills",
+      "ports": "fixed",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2572,
+          "clientPort": 5176
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/skills-setup.ts"
+    },
+    "playwright.small-gameplay.config.ts": {
+      "profile": "small-gameplay",
+      "ports": "fixed",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2667,
+          "clientPort": 5207
+        }
+      ],
+      "channels": [null],
+      "extraPorts": [
+        {
+          "port": 2668
+        }
+      ],
+      "setup": "./tests/e2e/small-gameplay-setup.ts"
+    },
+    "playwright.standalone-pvp.config.ts": {
+      "profile": "standalone-pvp",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2567,
+          "clientPort": 5173
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/global-setup.ts"
+    },
+    "playwright.tay-doc-preview.config.ts": {
+      "profile": "tay-doc-preview",
+      "ports": "fixed",
+      "clientMode": "static",
+      "services": [
+        {
+          "clientPort": 5398
+        }
+      ],
+      "channels": [null],
+      "setup": null
+    },
+    "playwright.tay-doc.config.ts": {
+      "profile": "tay-doc",
+      "ports": "fixed",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2798,
+          "clientPort": 5399
+        }
+      ],
+      "channels": [null],
+      "extraPorts": [
+        {
+          "port": 2799
+        }
+      ],
+      "setup": "./tests/e2e/tay-doc-setup.ts"
+    },
+    "playwright.thien-son-sharp-prototype.config.ts": {
+      "profile": "thien-son-sharp-prototype",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2926,
+          "clientPort": 5529
+        }
+      ],
+      "channels": ["chrome"],
+      "setup": null
+    },
+    "playwright.thien-son-skills.config.ts": {
+      "profile": "thien-son-skills",
+      "ports": "fixed",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2596,
+          "clientPort": 5196
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/thien-son-skills-setup.ts"
+    },
+    "playwright.thien-son.config.ts": {
+      "profile": "thien-son",
+      "ports": "fixed",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2599,
+          "clientPort": 5189
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/thien-son-setup.ts"
+    },
+    "playwright.thieu-lam-skills.config.ts": {
+      "profile": "thieu-lam-skills",
+      "ports": "fixed",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2606,
+          "clientPort": 5196
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/thieu-lam-skills-setup.ts"
+    },
+    "playwright.thieu-lam.config.ts": {
+      "profile": "thieu-lam",
+      "ports": "fixed",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2603,
+          "clientPort": 5193
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/thieu-lam-setup.ts"
+    },
+    "playwright.ui-camera.config.ts": {
+      "profile": "ui-camera",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2567,
+          "clientPort": 5173
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/qa-helpers-setup.ts"
+    },
+    "playwright.visual-upgrade.config.ts": {
+      "profile": "visual-upgrade",
+      "ports": "fixed",
+      "clientMode": "preview",
+      "services": [
+        {
+          "clientPort": 5527
+        }
+      ],
+      "channels": [null],
+      "executableEnv": "VOLAM_REVIEW_CHROMIUM",
+      "setup": "./tests/e2e/visual-upgrade-setup.ts"
+    },
+    "playwright.vo-dang-kiem.config.ts": {
+      "profile": "vo-dang-kiem",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2567,
+          "clientPort": 5173
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/vo-dang-kiem-setup.ts"
+    },
+    "playwright.vo-dang-quyen.config.ts": {
+      "profile": "vo-dang-quyen",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2567,
+          "clientPort": 5173
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/vo-dang-quyen-setup.ts"
+    },
+    "playwright.vo-dang-skills.config.ts": {
+      "profile": "vo-dang-skills",
+      "ports": "fixed",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2626,
+          "clientPort": 5216
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/vo-dang-skills-setup.ts"
+    },
+    "playwright.vo-dang.config.ts": {
+      "profile": "vo-dang",
+      "ports": "fixed",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2602,
+          "clientPort": 5192
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/vo-dang-setup.ts"
+    },
+    "playwright.vuong-trung-duong.config.ts": {
+      "profile": "vuong-trung-duong",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2932,
+          "clientPort": 5532
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/vuong-trung-duong-setup.ts"
+    },
+    "playwright.wave-boss-feedback.config.ts": {
+      "profile": "wave-boss-feedback",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2904,
+          "clientPort": 5504
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/wave-boss-feedback-setup.ts"
+    },
+    "playwright.wave-boss-test.config.ts": {
+      "profile": "wave-boss-test",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2896,
+          "clientPort": 5496
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/wave-boss-test-setup.ts"
+    },
+    "playwright.wave-vfx-preview-v02.config.ts": {
+      "profile": "wave-vfx-preview-v02",
+      "ports": "fixed",
+      "clientMode": "static",
+      "services": [
+        {
+          "clientPort": 5462
+        }
+      ],
+      "channels": [null],
+      "setup": null
+    },
+    "playwright.wave-vfx-preview.config.ts": {
+      "profile": "wave-vfx-preview",
+      "ports": "fixed",
+      "clientMode": "static",
+      "services": [
+        {
+          "clientPort": 5458
+        }
+      ],
+      "channels": [null],
+      "setup": null
+    },
+    "playwright.world-depth-expansion.config.ts": {
+      "profile": "world-depth-expansion",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2926,
+          "clientPort": 5529
+        }
+      ],
+      "channels": ["chrome"],
+      "setup": null
+    }
+  }
+}

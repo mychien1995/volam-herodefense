@@ -1,0 +1,235 @@
+{
+  "runId": "b85165a1-4232-4dc4-88fe-9b719fca71f4",
+  "mode": "owned-reuse",
+  "startedAt": "2026-11-20T06:29:14.089Z",
+  "status": "PASS",
+  "rounds": [
+    {
+      "index": 0,
+      "options": {
+        "grep": "iteration starts fresh"
+      },
+      "status": "PASS",
+      "preflight": {
+        "status": "PASS",
+        "mode": "quick",
+        "stage": "before-build",
+        "milliseconds": 4,
+        "checks": [
+          {
+            "id": "workspace",
+            "status": "PASS",
+            "detail": {
+              "mode": "quick",
+              "stage": "before-build",
+              "managed": false
+            }
+          },
+          {
+            "id": "session",
+            "status": "PASS",
+            "detail": "No managed service ports for this profile"
+          },
+          {
+            "id": "node",
+            "status": "PASS",
+            "detail": "26.0.0"
+          },
+          {
+            "id": "installation",
+            "status": "PASS",
+            "detail": "pnpm@11.25.0"
+          },
+          {
+            "id": "tools",
+            "status": "PASS",
+            "detail": {
+              "typescript": "7.0.2",
+              "vitest": "5.0.5"
+            }
+          }
+        ]
+      },
+      "prepareSeconds": 16.745840400000002,
+      "compiler": {
+        "reused": false,
+        "pid": 23796,
+        "nativePid": 9756,
+        "input": "83198a58f41db41b274d96bd3522b78e5530d30fe4cb711c276a576bb168cf66",
+        "output": "a36ccbb5bf894c450b5d8f58cd7817182aa8f0017a93d0e4479d6a9b628687e1"
+      },
+      "compileSeconds": 3.6911358999999977,
+      "service": {
+        "runId": "55e764e5-c3c5-48a7-9945-c88a1024dd0f",
+        "pid": 25160
+      },
+      "fingerprint": "a146bd337c16191c0214c178d28ff7493a19637cbbbe435d5f6bed77685dc32e",
+      "reused": false,
+      "before": {
+        "type": "reset-result",
+        "runId": "55e764e5-c3c5-48a7-9945-c88a1024dd0f",
+        "requestId": "f8b9bb08-01c7-4c1f-b368-ef43c4a6ffbc",
+        "pid": 25160,
+        "disposed": 0,
+        "remaining": 0,
+        "sockets": 0
+      },
+      "after": {
+        "type": "reset-result",
+        "runId": "55e764e5-c3c5-48a7-9945-c88a1024dd0f",
+        "requestId": "007aae68-d61f-4f98-aa6f-3946dba5b283",
+        "pid": 25160,
+        "disposed": 2,
+        "remaining": 0,
+        "sockets": 0
+      },
+      "result": {
+        "seconds": 30.850381899999995
+      },
+      "seconds": 66.9014222
+    },
+    {
+      "index": 1,
+      "options": {
+        "grep": "iteration starts fresh"
+      },
+      "status": "PASS",
+      "preflight": {
+        "status": "PASS",
+        "mode": "quick",
+        "stage": "before-build",
+        "milliseconds": 5,
+        "checks": [
+          {
+            "id": "workspace",
+            "status": "PASS",
+            "detail": {
+              "mode": "quick",
+              "stage": "before-build",
+              "managed": false
+            }
+          },
+          {
+            "id": "session",
+            "status": "PASS",
+            "detail": "No managed service ports for this profile"
+          },
+          {
+            "id": "node",
+            "status": "PASS",
+            "detail": "26.0.0"
+          },
+          {
+            "id": "installation",
+            "status": "PASS",
+            "detail": "pnpm@11.25.0"
+          },
+          {
+            "id": "tools",
+            "status": "PASS",
+            "detail": {
+              "typescript": "7.0.2",
+              "vitest": "5.0.5"
+            }
+          }
+        ]
+      },
+      "prepareSeconds": 48.1647289,
+      "compiler": {
+        "reused": true,
+        "pid": 23796,
+        "nativePid": 9756,
+        "input": "83198a58f41db41b274d96bd3522b78e5530d30fe4cb711c276a576bb168cf66",
+        "output": "a36ccbb5bf894c450b5d8f58cd7817182aa8f0017a93d0e4479d6a9b628687e1"
+      },
+      "compileSeconds": 0.44805539999999744,
+      "service": {
+        "runId": "55e764e5-c3c5-48a7-9945-c88a1024dd0f",
+        "pid": 25160
+      },
+      "fingerprint": "a146bd337c16191c0214c178d28ff7493a19637cbbbe435d5f6bed77685dc32e",
+      "reused": true,
+      "before": {
+        "type": "reset-result",
+        "runId": "55e764e5-c3c5-48a7-9945-c88a1024dd0f",
+        "requestId": "e9be57df-6719-46d1-a499-2db42d851a16",
+        "pid": 25160,
+        "disposed": 0,
+        "remaining": 0,
+        "sockets": 0
+      },
+      "after": {
+        "type": "reset-result",
+        "runId": "55e764e5-c3c5-48a7-9945-c88a1024dd0f",
+        "requestId": "6962cc21-0964-430c-a8e9-748ad1588639",
+        "pid": 25160,
+        "disposed": 2,
+        "remaining": 0,
+        "sockets": 0
+      },
+      "result": {
+        "seconds": 27.669586700000014
+      },
+      "seconds": 92.3156998
+    }
+  ],
+  "preflight": {
+    "status": "PASS",
+    "mode": "browser",
+    "stage": "before-build",
+    "milliseconds": 587,
+    "checks": [
+      {
+        "id": "workspace",
+        "status": "PASS",
+        "detail": {
+          "mode": "browser",
+          "stage": "before-build",
+          "managed": true
+        }
+      },
+      {
+        "id": "session",
+        "status": "PASS",
+        "detail": {
+          "serverPort": 2886,
+          "clientPort": 5486
+        }
+      },
+      {
+        "id": "ports",
+        "status": "PASS"
+      },
+      {
+        "id": "node",
+        "status": "PASS",
+        "detail": "26.0.0"
+      },
+      {
+        "id": "installation",
+        "status": "PASS",
+        "detail": "pnpm@11.25.0"
+      },
+      {
+        "id": "tools",
+        "status": "PASS",
+        "detail": {
+          "typescript": "7.0.2",
+          "vitest": "5.0.5",
+          "vite": "8.3.5",
+          "@playwright/test": "1.64.1"
+        }
+      },
+      {
+        "id": "chromium",
+        "status": "PASS",
+        "detail": {
+          "version": "156.0.8078.4",
+          "cache": "D:\\Projects\\volam-hero-defense\\.cache\\ms-playwright"
+        }
+      }
+    ]
+  },
+  "cleanup": "PASS",
+  "seconds": 159.86319100000003
+}

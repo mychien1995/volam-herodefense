@@ -1,0 +1,204 @@
+{
+  "status": "PASS",
+  "clients": 2,
+  "basic": "thien_son_dao",
+  "partial": false,
+  "scope": "authored choreography / swordless lifecycle only",
+  "idle": [],
+  "walk": [],
+  "actions": [],
+  "reactions": [],
+  "authority": [],
+  "notes": [
+    "Profile-scoped body art only. Status and hit fixtures are server-owned, body clocks never send combat commands."
+  ],
+  "extraChecks": {
+    "status": "PASS",
+    "basic": "thien_son_dao",
+    "checks": [
+      {
+        "kind": "three A swings / six actual hits unlock S and three Tam Lien passes",
+        "attempts": [
+          "dao_swing_0",
+          "dao_swing_2",
+          "dao_swing_1",
+          "dao_swing_1",
+          "dao_swing_1",
+          "dao_swing_0"
+        ],
+        "pulses": [
+          {
+            "tick": 144,
+            "protocolVersion": 46,
+            "id": 25,
+            "kind": "pulse",
+            "sourceId": "F_4pJGuQ1",
+            "targetId": "ts_extra_0",
+            "abilityId": "tam_lien_tram",
+            "x": 665.9411254969543,
+            "y": 649.9411254969543,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 0.8395701571521512,
+            "fy": 0.5432512781572743,
+            "radius": 161.9876538505327,
+            "stage": "cross_0"
+          },
+          {
+            "tick": 149,
+            "protocolVersion": 46,
+            "id": 29,
+            "kind": "pulse",
+            "sourceId": "F_4pJGuQ1",
+            "targetId": "ts_extra_0",
+            "abilityId": "tam_lien_tram",
+            "x": 801.9411254969543,
+            "y": 649.9411254969543,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": -0.8395701571521512,
+            "fy": 0.5432512781572743,
+            "radius": 161.9876538505327,
+            "stage": "cross_1"
+          },
+          {
+            "tick": 154,
+            "protocolVersion": 46,
+            "id": 33,
+            "kind": "pulse",
+            "sourceId": "F_4pJGuQ1",
+            "targetId": "ts_extra_0",
+            "abilityId": "tam_lien_tram",
+            "x": 733.9411254969543,
+            "y": 638.9411254969543,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 0,
+            "fy": 1,
+            "radius": 110,
+            "stage": "cross_2"
+          }
+        ],
+        "frames": [
+          "idle_2_down_right",
+          "cross_0_down_right",
+          "cross_1_down_left",
+          "cross_2_down",
+          "idle_3_down",
+          "idle_0_down"
+        ]
+      },
+      {
+        "kind": "real E retreat preserves server facing",
+        "before": {
+          "x": 700,
+          "y": 660,
+          "fx": 1,
+          "fy": 1
+        },
+        "after": {
+          "x": 525.9999999999976,
+          "y": 485.9999999999981,
+          "fx": 1,
+          "fy": 1
+        }
+      },
+      {
+        "kind": "four canonical X bodies / fixed offsets / native fade and cleanup",
+        "samples": 126,
+        "full": {
+          "tick": 239,
+          "shadows": [
+            {
+              "id": "shadow:F_4pJGuQ1:0",
+              "texture": "hero-unified:thien_son_dao",
+              "frame": "windup_down_right",
+              "alpha": 0.9,
+              "x": 588,
+              "y": 594,
+              "scale": [
+                0.5,
+                0.5
+              ],
+              "origin": [
+                0.5,
+                0.7777777777777778
+              ]
+            },
+            {
+              "id": "shadow:F_4pJGuQ1:1",
+              "texture": "hero-unified:thien_son_dao",
+              "frame": "windup_down_left",
+              "alpha": 0.9,
+              "x": 812,
+              "y": 594,
+              "scale": [
+                0.5,
+                0.5
+              ],
+              "origin": [
+                0.5,
+                0.7777777777777778
+              ]
+            },
+            {
+              "id": "shadow:F_4pJGuQ1:2",
+              "texture": "hero-unified:thien_son_dao",
+              "frame": "windup_up_right",
+              "alpha": 0.9,
+              "x": 588,
+              "y": 726,
+              "scale": [
+                0.5,
+                0.5
+              ],
+              "origin": [
+                0.5,
+                0.7777777777777778
+              ]
+            },
+            {
+              "id": "shadow:F_4pJGuQ1:3",
+              "texture": "hero-unified:thien_son_dao",
+              "frame": "windup_up_left",
+              "alpha": 0.9,
+              "x": 812,
+              "y": 726,
+              "scale": [
+                0.5,
+                0.5
+              ],
+              "origin": [
+                0.5,
+                0.7777777777777778
+              ]
+            }
+          ]
+        },
+        "poses": [
+          "ready_down_right",
+          "ready_down_left",
+          "ready_up_right",
+          "ready_up_left",
+          "windup_down_right",
+          "windup_down_left",
+          "windup_up_right",
+          "windup_up_left",
+          "flurry_sweep_down_right",
+          "flurry_sweep_down_left",
+          "flurry_sweep_up_right",
+          "flurry_sweep_up_left",
+          "follow_down_right",
+          "follow_down_left",
+          "follow_up_right",
+          "follow_up_left"
+        ]
+      }
+    ]
+  },
+  "f8": "PASS",
+  "portrait": "url(\"/assets/thien-son-dao-unified-v1/avatar.png\")"
+}

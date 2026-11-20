@@ -2,7 +2,7 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 46;
+export const PROTOCOL_VERSION = 48;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -658,9 +658,13 @@ export const VuongState = schema(
   { snapshot: t.string().default('') },
   'VuongArenaEncounter',
 );
+export const PvpState = schema({enabled:t.boolean().default(false),json:t.string().default('')},'StandaloneLoiDaiState');
+export const PracticeState=schema({enabled:t.boolean().default(false)},'PracticeState');
 export const LobbyState = schema(
   {
     protocolVersion: t.number().default(PROTOCOL_VERSION),
+    pvp: t.ref(PvpState).default(() => new PvpState()),
+    practice: t.ref(PracticeState).default(() => new PracticeState()),
     phase: t.string().default('WAITING_LOBBY'),
     hostId: t.string().default(''),
     matchElapsedMs: t.number().default(0),
@@ -703,3 +707,27 @@ export const lobbyActionSchema = z.discriminatedUnion('action', [
   z.strictObject({ action: z.literal('confirm') }),
 ]);
 export type LobbyAction = z.infer<typeof lobbyActionSchema>;
+
+export const PRACTICE_ROOM='practice';
+export const practiceJoinOptionsSchema=joinOptionsSchema.pick({nickname:true,protocolVersion:true}).extend({schoolId:schoolIdSchema,branchId:assetId});
+export type PracticeJoinOptions=z.infer<typeof practiceJoinOptionsSchema>;
+export const practiceSelectSchema = z.strictObject({
+  protocolVersion: z.literal(PROTOCOL_VERSION),
+  sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
+  schoolId: schoolIdSchema,
+  branchId: assetId,
+});
+export type PracticeSelection = z.infer<typeof practiceSelectSchema>;
+
+export const PVP_ROOM = 'loi_dai';
+export const pvpMapIdSchema = z.enum(['hong_moc','rung_truc','dia_nguc','tuong_duong','kiem_ho']);
+export const pvpJoinOptionsSchema = joinOptionsSchema.extend({pvp:z.literal(true),mapId:pvpMapIdSchema.optional()});
+export type PvpJoinOptions=z.infer<typeof pvpJoinOptionsSchema>;
+const pvpActionBase = {protocolVersion:z.literal(PROTOCOL_VERSION),sequence:z.number().int().positive().max(Number.MAX_SAFE_INTEGER)};
+export const pvpActionSchema = z.discriminatedUnion('action',[
+  z.strictObject({...pvpActionBase,action:z.literal('choose'),schoolId:schoolIdSchema,branchId:assetId}),
+  z.strictObject({...pvpActionBase,action:z.literal('assign'),playerId:z.string().min(1).max(128),team:z.enum(['chinh','ta','spectator'])}),
+  z.strictObject({...pvpActionBase,action:z.literal('settings'),mapId:pvpMapIdSchema,hazardsEnabled:z.boolean()}),
+  z.strictObject({...pvpActionBase,action:z.literal('start')}),
+]);
+export type PvpAction = z.infer<typeof pvpActionSchema>;

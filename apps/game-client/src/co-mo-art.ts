@@ -119,7 +119,8 @@ export function createCoMoArt(scene: Phaser.Scene): Phaser.GameObjects.Image[] {
       .setScale(S)
       .setOrigin(0.5, 168 / 192)
       .setDepth(p.y! * S)
-      .setName(`co_mo:${p.name}`);
+      .setName(`co_mo:${p.name}`)
+      .setData('world-depth-prop', true);
     replaceR3ArenaProp(image, 'co_mo', p.name, S);
     if (
       [

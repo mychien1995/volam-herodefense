@@ -1,0 +1,1 @@
+Superseded comparison layouts: Vương p1 shield prerequisites differed and Ly after used a closer fixture placement. Original runtime PNGs remain valid individual captures. Use the parent final comparisons with matched prerequisites/placement.

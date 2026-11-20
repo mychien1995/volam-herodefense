@@ -178,11 +178,33 @@ test('client middleware identifies the actual owned run and cleanup attempts all
     throw Error('close failure');
   });
   await assert.rejects(owned.close(), /cleanup failed/);
-  await owned.close();
+  await assert.rejects(owned.close(), /cleanup failed/);
   assert.deepEqual(calls, ['client', 'server']);
 });
 
 test('workflow selects the managed profile rather than forcing every run to gameplay ports', () => {
+  const uiCamera = qaWorkflowSession(
+    'final',
+    ['--config', 'playwright.ui-camera.config.ts'],
+    {
+      VOLAM_QA_SERVER_PORT: '28771',
+      VOLAM_QA_CLIENT_PORT: '28772',
+      VITE_SERVER_URL: 'http://localhost:28771',
+    },
+  );
+  assert.equal(uiCamera.serverPort, 28771);
+  assert.equal(uiCamera.clientPort, 28772);
+  assert.throws(
+    () =>
+      qaWorkflowSession(
+        'browser',
+        ['--config=playwright.ui-camera.config.ts'],
+        {
+          VITE_SERVER_URL: 'https://independent.example:8443',
+        },
+      ),
+    /configured local server port/,
+  );
   const env = { VITE_SERVER_URL: 'http://localhost:2588' };
   for (const args of [
     ['--config', 'playwright.arena-creeps.config.ts'],
@@ -197,7 +219,7 @@ test('workflow selects the managed profile rather than forcing every run to game
   for (const [mode, args] of [
     ['quick', ['tests/forest-creep-art.test.ts']],
     ['browser', ['--config', 'playwright.forest.config.ts']],
-    ['final', ['--config=playwright.skills.config.ts']],
+    ['final', ['--config=playwright.unregistered.config.ts']],
   ]) {
     assert.doesNotThrow(() =>
       qaWorkflowSession(mode, args, {

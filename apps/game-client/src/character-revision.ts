@@ -15,13 +15,8 @@ export function isRevisedHero(id: string): boolean {
 export function characterFolder(id: string): string {
   return isRevisedHero(id) ? 'characters/visual_improvement_v02' : 'characters';
 }
-export function heroIdleUrl(id: string): string {
-  if (id.startsWith('duong-mon-'))
-    return `/assets/duong-mon/icons/${id}.png`;
-  if (id.startsWith('hero_con_luan_'))
-    return `/assets/characters/con_luan_skill_preview/icons/${id}.png`;
-  return `/assets/${characterFolder(id)}/${id}_idle.png`;
-}
+export { heroBodyUrl as heroIdleUrl } from './hero-portraits.js';
+
 interface Body {
   texture: string;
   animation: string;

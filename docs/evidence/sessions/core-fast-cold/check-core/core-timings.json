@@ -1,0 +1,86 @@
+{
+  "runId": "ebbce154-2136-49ea-b51b-fcfb49805faf",
+  "mode": "core",
+  "args": [
+    "tests/combat.test.ts",
+    "tests/practice.test.ts"
+  ],
+  "startedAt": "2026-11-19T14:27:37.293Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "environment preflight",
+      "status": "PASS",
+      "seconds": 0.006,
+      "checks": [
+        {
+          "id": "workspace",
+          "status": "PASS",
+          "detail": {
+            "mode": "quick",
+            "stage": "before-build",
+            "managed": false
+          }
+        },
+        {
+          "id": "session",
+          "status": "PASS",
+          "detail": "No managed service ports for this profile"
+        },
+        {
+          "id": "node",
+          "status": "PASS",
+          "detail": "26.0.0"
+        },
+        {
+          "id": "installation",
+          "status": "PASS",
+          "detail": "pnpm@11.25.0"
+        },
+        {
+          "id": "tools",
+          "status": "PASS",
+          "detail": {
+            "typescript": "7.0.2",
+            "vitest": "5.0.5"
+          }
+        }
+      ]
+    },
+    {
+      "label": "pure-core import boundary",
+      "status": "PASS",
+      "seconds": 0.5924372000000001,
+      "tests": [
+        "tests/combat.test.ts",
+        "tests/practice.test.ts"
+      ],
+      "modules": 125
+    },
+    {
+      "label": "prepare data (full guarded preparation)",
+      "seconds": 16.308,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\core-fast-cold\\check-core\\ebbce154-2136-49ea-b51b-fcfb49805faf\\2-prepare-data-full-guarded-preparation-.log",
+      "outputBytes": 738
+    },
+    {
+      "label": "prepared simulation data",
+      "status": "PASS",
+      "hit": false,
+      "input": "c9ff0429a6d0563f91e61cc8fc03aa2b525b39384a0246326f75a644a6d83c34",
+      "output": "8eaf371483c4bdaec0ca3057e546d6b3792fc57298c312d3e375dc1261db4704"
+    },
+    {
+      "label": "compile pure-core artifacts (force)",
+      "seconds": 0.111,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\core-fast-cold\\check-core\\ebbce154-2136-49ea-b51b-fcfb49805faf\\4-compile-pure-core-artifacts-force-.log",
+      "outputBytes": 0
+    }
+  ],
+  "error": "Compiler did not produce required core/data entries",
+  "totalSeconds": 72.757
+}

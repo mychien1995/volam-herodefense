@@ -1,0 +1,58 @@
+{
+  "runId": "4e67b933-59b0-437e-9bda-825fdc009208",
+  "mode": "core",
+  "args": [
+    "tests/room.test.ts"
+  ],
+  "startedAt": "2026-11-20T02:41:22.216Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "environment preflight",
+      "status": "PASS",
+      "seconds": 0.006,
+      "checks": [
+        {
+          "id": "workspace",
+          "status": "PASS",
+          "detail": {
+            "mode": "quick",
+            "stage": "before-build",
+            "managed": false
+          }
+        },
+        {
+          "id": "session",
+          "status": "PASS",
+          "detail": "No managed service ports for this profile"
+        },
+        {
+          "id": "node",
+          "status": "PASS",
+          "detail": "26.0.0"
+        },
+        {
+          "id": "installation",
+          "status": "PASS",
+          "detail": "pnpm@11.25.0"
+        },
+        {
+          "id": "tools",
+          "status": "PASS",
+          "detail": {
+            "typescript": "7.0.2",
+            "vitest": "5.0.5"
+          }
+        }
+      ]
+    }
+  ],
+  "execution": {
+    "pool": "forks",
+    "isolate": true,
+    "fileParallelism": true,
+    "maxWorkers": 2
+  },
+  "error": "Not a pure-core dependency: tests/room.test.ts -> @colyseus/core; use check:quick",
+  "totalSeconds": 0.019
+}

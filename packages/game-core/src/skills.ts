@@ -1950,7 +1950,7 @@ function supportAllies(
 ): void {
   for (const ally of world.heroes.values()) {
     if (
-      (world.duel && ally.id !== hero.id) ||
+      (world.duel && ally.id !== hero.id && (!world.duelTeams || world.duelTeams.get(ally.id) !== world.duelTeams.get(hero.id))) ||
       ally.hp <= 0 ||
       distance(hero, ally) > effect.radius ||
       config.collision.some((w) => segmentRect(hero, ally, w) !== undefined)

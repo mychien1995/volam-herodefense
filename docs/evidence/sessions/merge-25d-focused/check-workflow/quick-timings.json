@@ -1,0 +1,85 @@
+{
+  "runId": "9ea1e396-0d44-4cd8-9cb6-a56d178fec34",
+  "mode": "quick",
+  "args": [
+    "tests/boss-unified-policy.test.ts",
+    "tests/cai-bang-chuong-body.test.ts",
+    "tests/unified-hero-policy.test.ts",
+    "tests/vo-dang-unified-policy.test.ts",
+    "tests/thien-son-unified-policy.test.ts",
+    "tests/shaolin-unified-policy.test.ts",
+    "tests/con-luan-unified-policy.test.ts",
+    "tests/duong-mon-unified-policy.test.ts",
+    "tests/ngu-doc-unified-policy.test.ts",
+    "tests/hero-finish-policy.test.ts",
+    "tests/ui-camera-policy.test.ts"
+  ],
+  "startedAt": "2026-11-20T06:59:04.684Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "environment preflight",
+      "seconds": 0.008,
+      "status": "PASS",
+      "checks": [
+        {
+          "id": "workspace",
+          "status": "PASS",
+          "detail": {
+            "mode": "quick",
+            "stage": "before-build",
+            "managed": false
+          }
+        },
+        {
+          "id": "session",
+          "status": "PASS",
+          "detail": "No managed service ports for this profile"
+        },
+        {
+          "id": "node",
+          "status": "PASS",
+          "detail": "26.0.0"
+        },
+        {
+          "id": "installation",
+          "status": "PASS",
+          "detail": "pnpm@11.25.0"
+        },
+        {
+          "id": "tools",
+          "status": "PASS",
+          "detail": {
+            "typescript": "7.0.2",
+            "vitest": "5.0.5"
+          }
+        }
+      ]
+    },
+    {
+      "label": "prepare assets (once)",
+      "seconds": 13.2,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\merge-25d-focused\\check-workflow\\9ea1e396-0d44-4cd8-9cb6-a56d178fec34\\1-prepare-assets-once-.log",
+      "outputBytes": 738
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 0.16,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\merge-25d-focused\\check-workflow\\9ea1e396-0d44-4cd8-9cb6-a56d178fec34\\2-compile-TypeScript.log",
+      "outputBytes": 0
+    },
+    {
+      "label": "focused tests",
+      "seconds": 6.88,
+      "status": "FAIL",
+      "exitCode": 1,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\merge-25d-focused\\check-workflow\\9ea1e396-0d44-4cd8-9cb6-a56d178fec34\\3-focused-tests.log",
+      "outputBytes": 1373
+    }
+  ],
+  "totalSeconds": 20.26
+}

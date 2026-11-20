@@ -1,3 +1,4 @@
+import { unifiedHeroProfile } from './unified-hero-body.js';
 import { zoneTick } from './zone-tick.js';
 import Phaser from 'phaser';
 import { tamLienTram, type CombatEvent } from '@volam/game-core';
@@ -31,7 +32,7 @@ export function preloadThienSonRework(scene: Phaser.Scene) {
     [fan, 'bao-vu-cuong-phong'],
     [crescents, 'bach-liet-x-flurry'],
   ])
-    scene.load.atlas(
+    if (key !== shadows || !unifiedHeroProfile('thien_son_dao')) scene.load.atlas(
       key!,
       skillPath + name + '.png',
       skillPath + name + '.json',
@@ -146,15 +147,17 @@ export class ThienSonRework {
       alpha: image.alpha,
       x: image.x,
       y: image.y,
+      scale: [image.scaleX, image.scaleY],
+      origin: [image.originX, image.originY],
     }));
   }
 
   private image(id: string, texture: string, frame: string) {
     let image = this.sprites.get(id);
     if (!image) {
-      image = this.scene.add.image(0, 0, texture, frame);
+      image = this.scene.add.image(0, 0, texture, frame).setName('ts-rework:' + id);
       this.sprites.set(id, image);
-    } else image.setFrame(frame);
+    } else image.setTexture(texture, frame);
     return image;
   }
 
@@ -208,13 +211,16 @@ export class ThienSonRework {
                     : beat < 0.66
                       ? 'ready'
                       : 'windup';
+        const coherent = unifiedHeroProfile('thien_son_dao');
+        const coherentPose = { ready: 'ready', windup: 'windup', sweep: 'flurry_sweep', follow: 'follow' }[pose];
         directions.forEach((direction, row) => {
           const key = `shadow:${id}:${row}`;
           const x = origin.x + (row % 2 ? 1 : -1) * pattern.offsetX * spread;
           const y = origin.y + (row < 2 ? -1 : 1) * pattern.offsetY * spread;
-          this.image(key, shadows, `${direction}_${pose}`)
-            .setOrigin(0.5, 0.8)
-            .setScale(0.88)
+          this.image(key, coherent?.texture ?? shadows,
+            coherent ? `${coherentPose}_${direction}` : `${direction}_${pose}`)
+            .setOrigin(coherent?.pivot[0] ?? 0.5, coherent?.pivot[1] ?? 0.8)
+            .setScale(coherent?.scale ?? 0.88)
             .setPosition(Math.round(x), Math.round(y))
             .setAlpha(0.9 * fade * spread)
             .setDepth(y);

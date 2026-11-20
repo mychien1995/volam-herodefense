@@ -1,0 +1,37 @@
+# Sửa trình bày Phòng test và Lôi Đài — 2026-11-19
+
+Worktree `wip/m3d/pvp`. Phạm vi là sáu phản hồi của người dùng: form nhập tên bị co, world zoom nhỏ, nhát chém Độc Cô bị kéo dãn, tăng nhịp dùng chiêu20%, HUD Kiếm Hồ quá lớn và hai viền nền Địa Ngục.
+
+## Nguyên nhân và thay đổi
+
+1. `.pre-window form:not(#landing-form)` có specificity cao hơn `#practice-name-form`, ép form thành flex. Ô input100% cạnh hai item co lại khiến label30px và nút106px bị xuống nhiều dòng; cả hàng cao81px. Selector mới `#practice-ui #practice-name-form` là grid ba cột có label/nút nowrap, input min-width0 và cao44px. Form rộng tối đa720px. Dưới580px dùng hai hàng chủ động, vẫn không bẻ chữ label/nút.
+2. `fitPvpCamera` dùng min(width/mapWidth,height/mapHeight) và bỏ camera bounds, thu toàn sân cùng hero vào màn hình. Camera mới dùng đúng native zoom Defense (2 ở desktop,1 ở viewport nhỏ), tăng tối thiểu khi cần phủ kín viewport và setBounds theo map. Camera theo đấu thủ/hero Phòng test như Defense; khán giả/người chết tiếp tục pan trong bounds. Không đổi kích thước map, hitbox hoặc tọa độ server.
+3. Các map nền còn có TileSprite vật liệu rộng gấp bốn map để lấp phần ngoài bounds. Nó khác độ lớn/pattern với lớp dung nham động nên tạo viền vuông ở mép trái/dưới Địa Ngục. Đã bỏ apron ở bốn map PNG và giới hạn camera vào map; các lớp PNG phủ đúng cả chiều rộng/cao để không hở mép do làm tròn tỉ lệ nguồn. Giữ nền Hồng Mộc hiện hành, cùng bounds/zoom mới.
+4. Utility nav phân phối flex1 theo tổng chiều rộng cố định dành cho năm nút. Khi PvP ẩn hai nút, ba nút còn lại phình ra. PvP/Practice dùng cùng chiều rộng mỗi nút Defense, nav tự ôm số nút đang hiện; không đổi hình học HUD Defense. Đo48px ở1280,68,8px ở1872.
+5. Nhát chém trước đây ép cel512×256 thành1400×535 ở Kiếm Hồ, vừa kéo khác tỉ lệ vừa phóng lớn. `PvpSwordArt` giữ scaleX=scaleY≤1, dùng ba cel hiện có ở tick server, quét từ NPC ra mép theo pháp tuyến hiểm họa. Lớp terrain raster được tint/crop UV để cảnh báo chính xác nửa sân mà server tính bằng dot product; không lấy silhouette của đường kiếm làm hitbox. Warning36tick, pha đánh12tick và sát thương40% ở server giữ nguyên. Client phát one-shot danh nghĩa400ms và giữ đủ ba cel khi frame render chậm; giới hạn bước đồng hồ hình ảnh tối đa một cel mỗi lần render, không điều khiển tick/hit/damage. Clip đã nhận hoàn tất dù patch kế tiếp đã gỡ hazard. Không tạo ảnh, không sửa byte source/PNG/JSON/approval lock.
+6. Tăng tần suất20% tương đương chia khoảng chờ cho1,2: sword360→300tick (12→10s), lightning270→225tick (9→7,5s). Giữ shuffle theo cặp, seed, warning, damage, số điểm sét và mọi hệ phái. Đây là nhịp giữa các lần NPC chọn chiêu, không làm ngắn animation hoặc tăng damage.
+
+Phaser4.2.1 và API camera bounds/world-view/zoom đã đối chiếu [tài liệu Cameras](https://docs.phaser.io/phaser/concepts/cameras) cùng type bản cài. Cảnh báo chém dùng Image.setCrop trên terrain gốc, đã đối chiếu Crop component bản cài và [tài liệu Image](https://docs.phaser.io/api-documentation/class/gameobjects-image). Cách này giữ chính xác nửa vùng raster ở cả Canvas/WebGL và không cần hai pass mask shader; cơ chế mask dung nham hiện hành giữ nguyên. Protocol vẫn48; không thêm message hoặc client-authoritative hit.
+
+## Kiểm chứng thực tế
+
+- Reproduce trên preview cũ: label30,3px, input267,9px, button105,8px; tất cả cao81px. Camera1872×800 zoom1,111 với world originX≈−202,4, lộ nền ngoài map. [Dữ liệu trước sửa](evidence/sessions/pvp-visual-repro/before.json).
+- Mô phỏng tập trung: `pnpm exec vitest run tests/standalone-loi-dai.test.ts` **19 PASS**, gồm so lịch NPC ở seed11/42/193, cùng cửa sổ9000tick và đấu thủ bất tử chỉ để không kết thúc phép đo. Kiểm tra khoảng giữa hai lần chọn chiêu theo đúng loại trước đó và tỉ lệ số lần tăng trong cửa sổ hữu hạn, giữ warning36tick. Không mô phỏng hoặc tuyên bố cân bằng người chơi tối ưu.
+- `pnpm check:browser --config playwright.practice.config.ts --grep 'practice presentation|eight players'`: **2 PASS** trong273,78s. Hai browser Phaser và sáu SDK peer trong phòng8; đủ cả năm map, NPC10frame, hazard thật, giới hạn ghế và host closure. [Timing](evidence/sessions/pvp-visual-focus/check-workflow/browser-timings.json).
+- Đã xem PNG: form672×419 có label16px cao, input44px, nút45px và tất cả cùng hàng; Rừng Trúc1872×800 ở zoom2, worldView936×400 nằm trọn trong map; utility68,8px. Ở1280×720 zoom2/view640×360; ở850×480 zoom1/view850×480. [Số đo](evidence/sessions/pvp-visual-focus/practice/presentation.json).
+- Đã xem ảnh Địa Ngục1872×800, không còn đường ghép vuông ở mép; các nút Kiếm Hồ theo đúng kích thước Defense. Reference đã đối chiếu: in_game_world_reference, current_codex_dashboard_anti_reference (file này thực tế là sheet Võ Đang), current_game_2026_10_29_placeholder_anti_reference, cùng screenshot người dùng và PNG map/FX hiện hành.
+- Frame-observation cuối kiểm tra riêng đủ ba cel chém, chuyển vị trí theo tick, scale đồng nhất và warning đúng nửa diện tích map. Một PNG giữ lúc cel giữa còn rõ, không dùng ảnh cuối pha đã fade để đánh giá VFX. Không quay video hoặc trace screenshot stream.
+
+## Pipeline cuối
+
+Lượt đầy đủ `pnpm check:final --config playwright.practice.config.ts --grep 'practice presentation|practice switches|private practice:|eight players|entry, link|two clients agree|ranged projectile'`: **109 file / 1.152 unit/integration PASS**, **18 workflow PASS**, typecheck/build/toàn bộ asset validator PASS. Browser6PASS/1FAIL ở phép đo chuyển động chém bằng IPC. [Report FAIL gốc giữ nguyên](evidence/sessions/pvp-visual-final/check-workflow/final-timings.json).
+
+Đã tách ca Kiếm Hồ, chuyển sang rAF trong tab và giữ clip đủ cel khi render chậm; crop UV thay mask shader cho cảnh báo. Có một lượt sai regex của fixture và một lượt hết thời gian vì vòng poll8người chưa gộp kết quả rAF; giữ nguyên các session đó. Không tăng timeout hoặc bỏ các assertion ba cel, chuyển động,10cel NPC hay phòng8.
+
+Sau sửa client, **compile/build PASS** qua `pnpm check:browser --config playwright.practice.config.ts --grep 'Doc Co sweep|eight players' --max-failures=1`; ca chém riêng **PASS** và PNG native đã mở: đủ ba cel, scale1, cùng hazard có vị trí(560,315)→(560,210)→(560,105). Quan sát và ảnh ở [session clip hoàn chỉnh](evidence/sessions/pvp-visual-complete/standalone-pvp/isolated-observed-frames.json), [PNG pha giữa](evidence/sessions/pvp-visual-complete/standalone-pvp/doc-co-isolated.png).
+
+Đồng bộ bộ gom mẫu rồi typecheck tools PASS; chạy lại riêng `node tools/run-playwright.mjs test --config playwright.practice.config.ts --grep 'eight players'`, cùng build/endpoint2796, session `pvp-eight-native-verified`: **PASS**, cả năm map,10cel NPC, ba cel chém có chuyển động, mask/crop đúng nửa sân,8ghế và host closure; hai browser không console error. [Quan sát](evidence/sessions/pvp-eight-native-verified/standalone-pvp/eight-player-frame-observations.json), [biên bản/hash](evidence/sessions/pvp-eight-native-verified/acceptance.json).
+
+Tổng cộng **8 ca browser khác nhau đã PASS qua các lượt**. Sáu ca ban đầu vẫn giữ kết quả; thay đổi cuối chỉ ở renderer chém và bộ quan sát, đã build/typecheck và kiểm tra lại đúng phạm vi. Không lặp lại toàn unit suite chỉ để ghi metadata.
+
+Preview thường tại http://127.0.0.1:5596/ đã chạy bản cuối, server/client cùng runId, protocol48 và đúng endpoint; [kiểm tra preview](evidence/sessions/pvp-eight-native-verified/normal-preview.json). Tải lại và tạo room mới. Không tạo recording.

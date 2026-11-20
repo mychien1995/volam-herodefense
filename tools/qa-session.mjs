@@ -1,8 +1,9 @@
 import { createServer } from 'node:net';
 import { randomUUID } from 'node:crypto';
 import { basename, resolve } from 'node:path';
+import { qaProfile, qaProfilePorts } from './qa-profiles.mjs';
 
-/** Shared by the default smoke and arena art profiles. No service is borrowed. */
+/** Shared session paths and local endpoints. No service is borrowed. */
 export function qaSession(defaults = {}, env = process.env) {
   const profile = defaults.profile ?? 'gameplay';
   const session = env.VOLAM_QA_SESSION;
@@ -54,41 +55,39 @@ export function qaSession(defaults = {}, env = process.env) {
   };
 }
 
-/** Only managed browser profiles own endpoint validation; quick/legacy checks do not. */
+/** Only registered browser profiles own endpoint validation; quick checks do not. */
+export function qaManagedProfile(mode, args = []) {
+  const contract = qaProfile(mode, args);
+  if (!contract) return null;
+  const first = contract.services[0];
+  return { profile: contract.profile, ...first, contract };
+}
+
 export function qaWorkflowSession(mode, args = [], env = process.env) {
-  let config;
-  if (mode !== 'quick')
-    for (let i = 0; i < args.length; i++) {
-      if (args[i] === '--config' || args[i] === '-c') {
-        config = args[++i];
-        if (!config || config.startsWith('-'))
-          throw Error('--config requires a path');
-      } else if (args[i].startsWith('--config=') || args[i].startsWith('-c='))
-        config = args[i].slice(args[i].indexOf('=') + 1);
-    }
-  const name = config?.split(/[\\/]/).at(-1);
-  if (
-    mode === 'quick' ||
-    (name &&
-      ![
-        'playwright.config.ts',
-        'playwright.arena-creeps.config.ts',
-        'playwright.vo-dang-quyen.config.ts',
-        'playwright.vo-dang-kiem.config.ts',
-        'playwright.diamond-palm.config.ts',
-        'playwright.shaolin-dao.config.ts',
-      ].includes(name))
-  ) {
+  const defaults = qaManagedProfile(mode, args);
+  if (defaults === null) {
     const pathsEnvironment = { ...env };
     delete pathsEnvironment.VITE_SERVER_URL;
     return qaSession({}, pathsEnvironment);
   }
-  return qaSession(
-    name === 'playwright.arena-creeps.config.ts'
-      ? { profile: 'arena-creeps', serverPort: 2588, clientPort: 5186 }
-      : {},
-    env,
-  );
+  const { contract } = defaults;
+  const resolved = qaProfilePorts(contract, env);
+  const first = resolved.services[0];
+  const session = qaSession({ profile: contract.profile, ...first }, env);
+  return {
+    ...session,
+    contract: {
+      ...contract,
+      ...resolved,
+      clientMode:
+        (mode === 'final' && contract.finalClientMode) ||
+        (contract.productionEnv && env[contract.productionEnv] === '1')
+          ? 'preview'
+          : contract.developmentEnv && env[contract.developmentEnv] === '1'
+            ? 'development'
+            : contract.clientMode,
+    },
+  };
 }
 
 export function qaEvidenceDirectory(defaultDirectory, env = process.env) {
@@ -102,7 +101,13 @@ export function qaEvidenceDirectory(defaultDirectory, env = process.env) {
 
 /** Refuse occupied ports early; listen() remains the authority if a race follows. */
 export async function requireFreePorts(session) {
-  for (const port of [session.serverPort, session.clientPort]) {
+  return requireQaPorts([session.serverPort, session.clientPort]);
+}
+
+export async function requireQaPorts(ports) {
+  for (const port of [...new Set(ports)]) {
+    if (!Number.isInteger(port) || port < 1 || port > 65535)
+      throw Error('QA ports must be integers from 1 to 65535');
     await new Promise((done, reject) => {
       const probe = createServer();
       probe.once('error', (cause) =>
@@ -168,20 +173,28 @@ export function qaIdentityPlugin(session) {
 /** Cleanup is idempotent and attempts every owned closer, including after failure. */
 export function ownedQaServices() {
   const closers = [];
+  let closing;
   return {
-    add: (close) => closers.push(close),
-    async close() {
-      const results = await Promise.allSettled(
-        closers
-          .splice(0)
-          .reverse()
-          .map((close) => Promise.resolve().then(close)),
-      );
-      const errors = results
-        .filter((r) => r.status === 'rejected')
-        .map((r) => r.reason);
-      if (errors.length)
-        throw new AggregateError(errors, 'QA service cleanup failed');
+    add(close) {
+      if (closing)
+        throw Error(
+          'QA cleanup already started; cannot register another owner',
+        );
+      closers.push(close);
+    },
+    close() {
+      return (closing ??= Promise.resolve().then(async () => {
+        const errors = [];
+        for (const close of closers.splice(0).reverse()) {
+          try {
+            await close();
+          } catch (error) {
+            errors.push(error);
+          }
+        }
+        if (errors.length)
+          throw new AggregateError(errors, 'QA service cleanup failed');
+      }));
     },
   };
 }

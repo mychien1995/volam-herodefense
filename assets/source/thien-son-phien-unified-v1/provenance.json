@@ -1,0 +1,102 @@
+{
+  "status": "prototype pending director review",
+  "identity": "Existing sharp original Thien Son phien project hero; white/slate-blue wind palette; Fan keeps jade crest/beads and embroidered robes, Dao keeps Han Nguyet curved silver blade/jade guard and white bow",
+  "ownership": "Original project artwork and original built-in imagegen derivatives; no third-party proprietary game sprites imported",
+  "generator": "Built-in image_gen only. Exact prompts, UTC request intervals and selected raw paths retained. No video.",
+  "references": [
+    {
+      "path": "assets/source/renovation-v2/raw/thien_son_throw.png",
+      "sha256": "694fb4c3f803904fb5acb888c3594d925f0fa33ab251786ede4544fdfe05f571"
+    },
+    {
+      "path": "assets/exports/renovation-v2/thien_son_throw.png",
+      "sha256": "7aef629af04ea6bfb22ac5c86c7675ec8a4b9b50745636d9e0454340264157e8"
+    },
+    {
+      "path": "assets/exports/renovation-v2/thien_son_throw.json",
+      "sha256": "d1dbf2958072a51fdd8e76825cc20ebc7341ca7be4c35fa7f89cf56719d341ba"
+    },
+    {
+      "path": "assets/references/thien_son_thieu_lam_character_reference.png",
+      "sha256": "34dcde54031a4e6fbe565ca3dcbf1c458337fefdb5cb8b06e5967897c51d70e6"
+    },
+    {
+      "path": "assets/references/current_game_2026_10_29_placeholder_anti_reference.png",
+      "sha256": "7650239f6117b3d92ed6e8b1efdafe7213680f258c979808a09a82d2d6c2cdc5"
+    }
+  ],
+  "referenceReadout": "Inspected mandatory thien_son_thieu_lam_character_reference.png: actual content is a wuxia town, not a character sheet. Used retained sharp school-specific body sources for exact identity/costume/weapon, actual Phaser baseline for camera and scale, current placeholder anti-reference as negative. Reused unchanged arena/HUD standards from the approved rollout.",
+  "production": {
+    "directionalSheets": [
+      "raw/down.png",
+      "raw/down_right.png",
+      "raw/right.png",
+      "raw/up_right.png",
+      "raw/up.png",
+      "raw/up_left.png",
+      "raw/left.png",
+      "raw/down_left.png"
+    ],
+    "sourceSegmentationCuts": {
+      "down_right": [
+        [
+          280,
+          1095,
+          510,
+          1096
+        ]
+      ]
+    },
+    "poseOverrides": [
+      {
+        "frame": "lotus_hold_down_right",
+        "path": "raw/repairs/lotus_hold.png",
+        "sourceRoot": [
+          283.1619404906396,
+          689.0
+        ],
+        "sourceBodyTop": 15.0,
+        "bodyHeight": 89
+      },
+      {
+        "frame": "spin_back_down_right",
+        "path": "raw/repairs/spin_back.png",
+        "sourceRoot": [
+          274.7813540510544,
+          691.0
+        ],
+        "sourceBodyTop": 37.0,
+        "bodyHeight": 89
+      },
+      {
+        "frame": "lotus_hold_up",
+        "path": "raw/repairs/lotus_hold_up.png",
+        "sourceRoot": [
+          201.07515378443435,
+          596.0
+        ],
+        "sourceBodyTop": 12.0,
+        "bodyHeight": 89
+      },
+      {
+        "frame": "channel_up",
+        "path": "raw/repairs/channel_up.png",
+        "sourceRoot": [
+          197.33711879545746,
+          596.0
+        ],
+        "sourceBodyTop": 14.0,
+        "bodyHeight": 89
+      }
+    ],
+    "native": "body.aseprite",
+    "cels": 224,
+    "tags": 40,
+    "nativeSha256": "bc97e128e4dc05bd577eaaa9fc484c511893291b702a6eb14d1f7add8e913b0a",
+    "bodyPNG": "841588fe88d88c595985ec243897354cdcdcb5e3c5994246e2f7bc8b3362f48f",
+    "roundtrip": "exact alpha and visible RGB PASS"
+  },
+  "registration": "Fixed boots root, one density per normal pose group, scale0.5. Independent repair sources explicitly register physical body height89; one high-resolution idle uses reference-density landmark annotation. No alpha fade or whole-body scale animation in idle.",
+  "measurementNote": "Dense-alpha head-top estimate varies3.37 atlas pixels because ornate fan/ribbon width changes its threshold; actual visible idle extents vary at most2 pixels across any direction. Same group scale/foot anchor, visible extent tolerance3 and alpha checks retained.",
+  "scope": "Body and portrait, including four Dao X body doubles; VFX, server/core/protocol, damage, movement, native hit timing, HUD geometry and F8 retained."
+}

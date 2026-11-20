@@ -620,3 +620,15 @@ assets/source/cai-bang-bong-reach/export.lua -text -eol whitespace=blank-at-eol,
 
 # Preserve exact Côn Luân atlas metadata bytes for source-manifest hashes.
 assets/exports/characters/con_luan_*/*.json -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# Keep canonical hero atlas/source metadata byte-exact for approval and native validation hashes.
+assets/exports/*-unified-v1/*.json -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/source/*-unified-v1/*.json -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# Versioned hero corrections retain exact source/atlas metadata bytes.
+assets/exports/*-unified-v2/*.json -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/source/*-unified-v2/*.json -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# Sharpness prototype metadata byte preservation.
+assets/source/*-unified-v3/*.json -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/exports/*-unified-v3/*.json -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

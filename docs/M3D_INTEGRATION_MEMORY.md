@@ -1,3 +1,7 @@
+## Lôi Đài độc lập và Phòng test — duyệt 2026-11-19
+
+Người dùng duyệt toàn bộ bản chơi và yêu cầu tích hợp/commit vào milestone/m3d. Protocol48, phòng8 người/Chính-Tà, năm map, Practice cấp30/full skill/đổi hero ngay trong room; camera/HUD/VFX đã sửa, nhịp Độc Cô +20%. [Phạm vi và kiểm chứng](PVP_M3D_INTEGRATION.md).
+
 ## Ngũ Độc đã duyệt
 
 Bích Cổ và Âm Linh vào trận thường của `milestone/m3d` với protocol 46. Màn chọn phái hai hàng hiển thị Bích Cổ toàn thân và mở popup nhánh có icon đánh thường. Triệu hồi do server quản lý, giữ ID và HP Thần Chết qua chuyển khu vực. Trình chọn mục tiêu bằng chuột nhận biết chủ của minion. [Kỹ năng, thông số, ảnh và kiểm chứng](NGU_DOC_PLAYTEST.md).
@@ -184,3 +188,52 @@ Thiếu Lâm Đao dùng cùng atlas đao vàng cho phản ứng trúng đòn, Ki
 ## Ổn định chọn phái trong phòng sáu client — 2026-11-12
 
 Các bản vá roster cập nhật danh sách và số người sẵn sàng mà giữ nút chọn phái của người chơi hiện tại. Phaser tạm dừng vòng render khi sảnh che đấu trường và tiếp tục khi người chơi vào trận. Giữ xác nhận và điều kiện bắt đầu do phòng Colyseus quyết định. [Kiểm tra sảnh và 44 lượt boss trong trận sáu client](evidence/sessions/m3d-six-lobby-verified/m3d-hit-continuity/README.md)
+
+## Visual depth và motion R6 — 2026-11-19
+
+Worktree `wip/m3d/25d`: world depth cho arena/dungeon/PvP, avatar đúng14 nhánh, locomotion tám hướng và idle nhiều cel. R6 thêm pose A/kỹ năng chéo và tối ưu tài nguyên trình diễn. Giữ native cardinal choreography và các dạng biến thân riêng, gameplay/HUD/control/authority không đổi; F8 chỉ local visual depth. Đường bóng chó hoang đã dùng budget chung; đọc pixel viền bóng chỉ chạy ở QA. Nguồn editable/hash, phạm vi reuse, kiểm chứng thực và giới hạn art approval tại `PRESENTATION_FINISH_R6.md`. Artwork prototype chờ director review; không coi automation PASS là art approval. Chỉ commit trên nhánh này, không merge.
+
+## Cái Bang Chưởng — body thống nhất, bản thử 2026-11-19
+
+`wip/m3d/25d`: chỉ Cái Bang Chưởng chuyển sang atlas chung tám hướng/160 cel cho idle, walk, A, skill, hurt/stun và death; portrait cùng neutral. Chuẩn identity/độ nét là raw R1/R3 nét đang có; không còn xen R5/R6 và cardinal action khác bộ ở phái này. Gameplay/HUD geometry/F8 giữ nguyên. Sáu client, source continuity/authority, status expiry và arena respawn tự nhiên đã kiểm chứng theo scoped stages. Chờ director chơi duyệt trước khi làm phái khác; xem `CAI_BANG_CHUONG_COHERENCE.md`.
+
+## Director duyệt Chưởng và rollout body đợt1 — 2026-11-19
+
+Director đã duyệt Cái Bang Chưởng trong chat; sáu file canonical khóa tại `assets/approvals/hero-coherence/cai_bang_chuong.json`. Chỉ Cái Bang Bổng được triển khai tiếp theo quy trình staged, một atlas224 cel/8 facing/40 native tags + portrait cùng neutral. Server/gameplay/HUD geometry/F8 giữ nguyên; Phá Giáp vẫn cardinal theo VFX cũ. Các phase A/QWERT và lifecycle được kiểm chứng sáu client qua scoped stages, không đổi báo cáo FAIL thành PASS. Bổng là candidate chờ director PNG/chơi; **dừng trước Võ Đang và các phái khác**. Chi tiết/giới hạn tip contact, fixture creep placeholder ngoài phạm vi, test scope và phòng review: `CAI_BANG_BONG_COHERENCE.md`; kế hoạch còn lại: `HERO_COHERENCE_ROLLOUT.md`.
+
+## Thống nhất sprite Võ Đang — đợt2, 2026-11-19
+
+Director đã duyệt Cái Bang Bổng, khóa thêm sáu file canonical bên cạnh sáu file Chưởng (không re-export approved). Chỉ mở đợt2 Võ Đang Quyền/Kiếm; hai nhánh mới là candidate chờ director review trước Thiên Sơn. Quyền192 cel/40 tag, Kiếm320 cel/72 tag, tám hướng cùng atlas cho idle/walk/A/QWERT/hurt/status/death/respawn và portrait. Kiếm có bộ tay không riêng trong cùng atlas cho projectile Nhân Kiếm thật. Body đọc cue native để giữ hai tay chưởng, sáu nhịp trận, năm thế A và bảy cut; không đổi VFX, core/server/protocol, gameplay/HUD/F8. Nguồn, texture budget, focused tests, PNG và review fixture: `VO_DANG_COHERENCE.md`; tiến độ còn lại: `HERO_COHERENCE_ROLLOUT.md`. Chỉ commit trên `wip/m3d/25d`, không merge/push.
+
+## Thống nhất sprite Thiên Sơn — đợt3, 2026-11-19
+
+Director duyệt cả Võ Đang; khóa thêm12 file canonical, tổng24 file approved hero không re-export. Đợt3 chỉ Thiên Sơn Phiến/Đao, candidate chờ review trước Thiếu Lâm.480 cel/80 tag/tám hướng, cùng atlas và portrait qua các trạng thái; bốn bóng X cũng dùng atlas Đao, giữ vị trí/fade/cleanup. Phiến lấy nhịp trình diễn từ server action/native duration để tránh Sprite.anims khởi động lại cel0. Đao giữ ba RNG A, sáu hit thật mởS/Tam Liên ba pass, Liệt Phong native cardinal. Gameplay/core/server/protocol/HUD/F8/VFX không đổi.24 distinct focused unit cases, native/hash guards, hai-client iteration và six-client full character profiles PASS qua scoped retries; không full suite/video. Source/limitations/PNG/review fixture: `THIEN_SON_COHERENCE.md`. Chỉ commit `wip/m3d/25d`, không merge/push.
+
+
+## Hoàn tất sprite thống nhất tất cả hệ phái — 2026-11-20
+
+Canonical override mới: user duyệt Thiên Sơn và yêu cầu làm hết các phái còn lại, không chờ approval giữa đợt. Thiên Sơn khóa thêm12 file, tổng36 approved file; không re-export approved. Đợt4–7 hoàn tất Thiếu Lâm Quyền/Đao, Côn Luân Thiền Sư/Kiếm Tôn, Đường Môn Cơ Quan/Ám Khí, Ngũ Độc Tà Hiệp/Cổ Sư. Cả14 nhánh đã canonical, tám nhánh mới vẫn candidate.1904 frames (1792 authored +112 Chaos derived),328 native tags; fixed scale/pivot, một atlas/nhánh và avatar cùng master. Choreography đặc thù/biến thân/weapon-away/summons/private trap/passive R/VFX giữ chủ sở hữu cũ; chỉ Ngũ Độc flame sockets căn lại trên body mới.
+
+Gameplay/core/server/protocol/HUD geometry/control/F8 không đổi. Mỗi đợt có pilot hai client và final sáu client full8direction/lifecycle/authority/PNG;37 focused policy cases và client/tools typechecks PASS, native/source/hash checks PASS. Đường Môn giữ FAIL ban đầu và scoped diagnostics/retry, không sửa gameplay để qua capture. Không full balance suite hoặc recording. Git metadata byte rules bảo toàn36 approval locks trong index/fresh checkout. Review fixture local hỗ trợ cả14 nhánh cấp30/rank4, normal gameplay trong trận. Chi tiết giới hạn, PNG và summaries: `HERO_COHERENCE_ROLLOUT.md`, `THIEU_LAM_COHERENCE.md`, `CON_LUAN_COHERENCE.md`, `DUONG_MON_COHERENCE.md`, `NGU_DOC_COHERENCE.md`. Chỉ commit `wip/m3d/25d`, không merge/push.
+
+
+## Sprite correction — 2026-11-20
+
+User phản hồi Thiên Sơn Đao khác style Phiến và hai Côn Luân nhỏ khi A. Current runtime chuyển ba nhánh này sang sibling `*-unified-v2`; v1/36 approved byte locks giữ nguyên. Đao redraw256cel/tám hướng theo material/contour Phiến, chưa director-approved. Côn Luân giữ nguyên nguồn art, sửa action export density và xử lý idle replacement khác resolution; renderer scale vẫn0.5. Native848frames/128tags PASS,16focused cases/types PASS; six-client coverage qua scoped stages, giữ các FAIL và retry đã ghi. Chi tiết/PNG: [SPRITE_CORRECTIONS_2026_11_20.md](SPRITE_CORRECTIONS_2026_11_20.md).
+
+
+## Thiên Sơn sharpness sample — 2026-11-20
+
+Latest user scope is a SAMPLE before all actions. Phiến now references unified-v2 and Đao unified-v3, with ONLY down_right idle4/walk4/A4 reauthored each.24changed/456retained cels, unchanged HUD portraits/pivots/scale/F8/gameplay. Other facings/skills remain previous artwork deliberately. Native480frames/80tags,13focused policy cases, types and two-/six-client directional sample checks PASS. Do not expand automatically; collect user feedback on sample first. Source receipts, runtime PNGs, exact-scope guard and room links: [THIEN_SON_SHARP_PROTOTYPE.md](THIEN_SON_SHARP_PROTOTYPE.md).
+
+
+## Boss body coherence — 2026-11-20
+
+User authorized the renovate-game-sprite process for bosses on `wip/m3d/25d`.9main bosses /11 identities now use sibling unified-v1 sources/exports,2528packed native frames /456tags (2472unique authored drawings; Bắc Cái rest shared south). Actual idle/walk cycles,8facing locomotion/reactions, original cardinal action choreography, fixed density/feet/scale0.5. Native transforms/corpses, Bắc doubles/rest, Chu spin afterimages, Kim weapon-away, Ly native clip aliases/release clock and detached Hồng cannon body contact are integrated. Gameplay/core/server/protocol/HUD/controls/F8 and existing VFX rasters/owners are unchanged; named support/minion art retained.
+
+11native/hash profiles,8focused policy cases, types/scoped build,2-/6-client body/cast/peer checks and accepted-arrow/A lifecycle coverage complete through documented scoped retries. Preserve FAIL reports; no natural campaign/QTE/loot/balance acceptance or video claim. All new boss art candidate, pending director approval. PNG comparisons, exact evidence, limitations and isolated level30/max-rank review tools: [BOSS_COHERENCE_ROLLOUT.md](BOSS_COHERENCE_ROLLOUT.md). Commit only this branch, no merge/push.
+
+
+## Boss director approval and merge authorization — 2026-11-20
+
+User explicitly approved the9main bosses/11body identities reviewed at54ede68b and requested merge into `milestone/m3d` plus commit. This supersedes the earlier commit-only/no-merge restriction for this integration.44exact body/native/manifest SHA-256 snapshots and approval scope are recorded in `assets/approvals/boss-coherence/v1.json`; original candidate reports remain historical. VFX/supporting actor art remains unchanged.

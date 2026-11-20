@@ -1,0 +1,1510 @@
+{
+  "status": "PASS",
+  "before": false,
+  "clients": 2,
+  "scope": "server-owned spawn/phase/schedule prerequisites, native controller releases and replicated body presentation; not natural progression, balance, successful QTE or loot acceptance",
+  "cases": [
+    {
+      "id": "hoan_nhan_hong_liet",
+      "idle": {
+        "frames": [
+          "idle_0_down_right",
+          "idle_1_down_right",
+          "idle_2_down_right",
+          "idle_3_down_right"
+        ],
+        "textures": [
+          "boss-unified:hoan_nhan_hong_liet"
+        ],
+        "scales": [
+          "[0.5,0.5]"
+        ],
+        "maxBodies": 1
+      },
+      "directions": [
+        "right",
+        "down_right",
+        "down",
+        "down_left",
+        "left",
+        "up_left",
+        "up",
+        "up_right"
+      ],
+      "cases": [
+        {
+          "ability": "hong_liet_a1",
+          "startedAt": 171,
+          "activeAt": 183,
+          "peers": [
+            {
+              "ability": "hong_liet_a1",
+              "mode": "replicated native effect",
+              "startedAt": 171,
+              "activeAt": 183
+            },
+            {
+              "ability": "hong_liet_a1",
+              "mode": "replicated native effect",
+              "startedAt": 171,
+              "activeAt": 183
+            }
+          ],
+          "release": {
+            "mode": "native release flag",
+            "tick": 183,
+            "activeAt": 183
+          },
+          "observations": [
+            {
+              "frames": [
+                "idle_2_down_right",
+                "windup_down",
+                "attack_1_down",
+                "recover_down",
+                "idle_0_down_right",
+                "idle_1_down_right"
+              ],
+              "textures": [
+                "boss-unified:hoan_nhan_hong_liet"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            },
+            {
+              "frames": [
+                "idle_1_down_right",
+                "windup_down",
+                "attack_1_down",
+                "recover_down",
+                "idle_2_down_right",
+                "idle_3_down_right",
+                "idle_0_down_right"
+              ],
+              "textures": [
+                "boss-unified:hoan_nhan_hong_liet"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            }
+          ]
+        },
+        {
+          "ability": "hong_liet_a2",
+          "startedAt": 249,
+          "activeAt": 261,
+          "peers": [
+            {
+              "ability": "hong_liet_a2",
+              "mode": "replicated native effect",
+              "startedAt": 249,
+              "activeAt": 261
+            },
+            {
+              "ability": "hong_liet_a2",
+              "mode": "replicated native effect",
+              "startedAt": 249,
+              "activeAt": 261
+            }
+          ],
+          "release": {
+            "mode": "native release flag",
+            "tick": 261,
+            "activeAt": 261
+          },
+          "observations": [
+            {
+              "frames": [
+                "idle_2_down_right",
+                "windup_down",
+                "attack_2_down",
+                "recover_down",
+                "idle_0_down_right",
+                "idle_1_down_right"
+              ],
+              "textures": [
+                "boss-unified:hoan_nhan_hong_liet"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            },
+            {
+              "frames": [
+                "idle_0_down_right",
+                "idle_1_down_right",
+                "windup_down",
+                "attack_2_down",
+                "recover_down",
+                "idle_2_down_right",
+                "idle_3_down_right"
+              ],
+              "textures": [
+                "boss-unified:hoan_nhan_hong_liet"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            }
+          ]
+        },
+        {
+          "ability": "dung_nham_liet_dia",
+          "startedAt": 328,
+          "activeAt": 358,
+          "peers": [
+            {
+              "ability": "dung_nham_liet_dia",
+              "mode": "replicated native effect",
+              "startedAt": 328,
+              "activeAt": 358
+            },
+            {
+              "ability": "dung_nham_liet_dia",
+              "mode": "replicated native effect",
+              "startedAt": 328,
+              "activeAt": 358
+            }
+          ],
+          "release": {
+            "mode": "native release flag",
+            "tick": 358,
+            "activeAt": 358
+          },
+          "observations": [
+            {
+              "frames": [
+                "idle_2_down_right",
+                "cast_0_down",
+                "cast_1_down",
+                "recover_down",
+                "idle_0_down_right",
+                "idle_1_down_right"
+              ],
+              "textures": [
+                "boss-unified:hoan_nhan_hong_liet"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            },
+            {
+              "frames": [
+                "idle_0_down_right",
+                "cast_0_down",
+                "cast_1_down",
+                "recover_down"
+              ],
+              "textures": [
+                "boss-unified:hoan_nhan_hong_liet"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            }
+          ]
+        },
+        {
+          "ability": "hoa_son_bao_phat",
+          "startedAt": 405,
+          "activeAt": 438,
+          "peers": [
+            {
+              "ability": "hoa_son_bao_phat",
+              "mode": "replicated native effect",
+              "startedAt": 405,
+              "activeAt": 438
+            },
+            {
+              "ability": "hoa_son_bao_phat",
+              "mode": "replicated native effect",
+              "startedAt": 405,
+              "activeAt": 438
+            }
+          ],
+          "release": {
+            "mode": "native release flag",
+            "tick": 440,
+            "activeAt": 438
+          },
+          "observations": [
+            {
+              "frames": [
+                "idle_1_down_right",
+                "idle_2_down_right",
+                "cast_2_down",
+                "cast_3_down",
+                "recover_down"
+              ],
+              "textures": [
+                "boss-unified:hoan_nhan_hong_liet"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            },
+            {
+              "frames": [
+                "idle_0_down_right",
+                "cast_2_down",
+                "cast_3_down",
+                "recover_down"
+              ],
+              "textures": [
+                "boss-unified:hoan_nhan_hong_liet"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            }
+          ]
+        },
+        {
+          "ability": "liet_diem_phong_toa",
+          "startedAt": 484,
+          "activeAt": 514,
+          "peers": [
+            {
+              "ability": "liet_diem_phong_toa",
+              "mode": "replicated native effect",
+              "startedAt": 484,
+              "activeAt": 514
+            },
+            {
+              "ability": "liet_diem_phong_toa",
+              "mode": "replicated native effect",
+              "startedAt": 484,
+              "activeAt": 514
+            }
+          ],
+          "release": {
+            "mode": "native release flag",
+            "tick": 515,
+            "activeAt": 514
+          },
+          "observations": [
+            {
+              "frames": [
+                "idle_1_down_right",
+                "cast_4_down",
+                "cast_5_down",
+                "channel_down",
+                "idle_0_down_right",
+                "walk_2_up_left",
+                "walk_3_up_left",
+                "walk_0_up_left",
+                "walk_1_up_left"
+              ],
+              "textures": [
+                "boss-unified:hoan_nhan_hong_liet"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            },
+            {
+              "frames": [
+                "idle_0_down_right",
+                "cast_4_down",
+                "cast_5_down",
+                "channel_down",
+                "idle_3_down_right",
+                "walk_0_up_left",
+                "walk_1_up_left",
+                "walk_2_up_left",
+                "walk_3_up_left"
+              ],
+              "textures": [
+                "boss-unified:hoan_nhan_hong_liet"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            }
+          ]
+        },
+        {
+          "ability": "hoa_tien_te_phat",
+          "startedAt": 562,
+          "activeAt": 592,
+          "peers": [
+            {
+              "ability": "hoa_tien_te_phat",
+              "pose": "cast",
+              "actionEndsAt": 607
+            },
+            {
+              "ability": "hoa_tien_te_phat",
+              "pose": "cast",
+              "actionEndsAt": 607
+            }
+          ],
+          "release": {
+            "mode": "native release flag",
+            "tick": 594,
+            "activeAt": 592
+          },
+          "observations": [
+            {
+              "frames": [
+                "walk_2_up_left",
+                "walk_3_up_left",
+                "cast_2_down",
+                "cast_5_down",
+                "recover_down",
+                "idle_0_down_right",
+                "idle_1_down_right"
+              ],
+              "textures": [
+                "boss-unified:hoan_nhan_hong_liet"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            },
+            {
+              "frames": [
+                "walk_0_up_left",
+                "walk_1_up_left",
+                "cast_2_down",
+                "cast_5_down",
+                "recover_down",
+                "idle_2_down_right",
+                "idle_3_down_right",
+                "idle_0_down_right"
+              ],
+              "textures": [
+                "boss-unified:hoan_nhan_hong_liet"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            }
+          ]
+        },
+        {
+          "ability": "thiet_ky_trieu_binh",
+          "startedAt": 641,
+          "activeAt": 671,
+          "peers": [
+            {
+              "ability": "thiet_ky_trieu_binh",
+              "pose": "cast",
+              "actionEndsAt": 686
+            },
+            {
+              "ability": "thiet_ky_trieu_binh",
+              "pose": "cast",
+              "actionEndsAt": 686
+            }
+          ],
+          "release": {
+            "mode": "native release flag",
+            "tick": 671,
+            "activeAt": 671
+          },
+          "observations": [
+            {
+              "frames": [
+                "idle_1_down_right",
+                "cast_4_down",
+                "cast_5_down",
+                "channel_down",
+                "idle_0_down_right"
+              ],
+              "textures": [
+                "boss-unified:hoan_nhan_hong_liet"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            },
+            {
+              "frames": [
+                "idle_0_down_right",
+                "cast_4_down",
+                "cast_5_down",
+                "channel_down",
+                "idle_1_down_right",
+                "idle_2_down_right",
+                "idle_3_down_right"
+              ],
+              "textures": [
+                "boss-unified:hoan_nhan_hong_liet"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            }
+          ]
+        },
+        {
+          "ability": "van_ly_nham_hoa",
+          "startedAt": 720,
+          "activeAt": 756,
+          "peers": [
+            {
+              "ability": "van_ly_nham_hoa",
+              "mode": "replicated native effect",
+              "startedAt": 720,
+              "activeAt": 756
+            },
+            {
+              "ability": "van_ly_nham_hoa",
+              "mode": "replicated native effect",
+              "startedAt": 720,
+              "activeAt": 756
+            }
+          ],
+          "release": {
+            "mode": "native release flag",
+            "tick": 757,
+            "activeAt": 756
+          },
+          "observations": [
+            {
+              "frames": [
+                "idle_0_down_right",
+                "idle_1_down_right",
+                "cast_6_down",
+                "cast_7_down",
+                "recover_down"
+              ],
+              "textures": [
+                "boss-unified:hoan_nhan_hong_liet"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            },
+            {
+              "frames": [
+                "idle_0_down_right",
+                "cast_6_down",
+                "cast_7_down",
+                "recover_down"
+              ],
+              "textures": [
+                "boss-unified:hoan_nhan_hong_liet"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            }
+          ]
+        },
+        {
+          "ability": "hoa_phao_thien_la",
+          "startedAt": 799,
+          "activeAt": 847,
+          "peers": [
+            {
+              "ability": "hoa_phao_thien_la",
+              "mode": "replicated native effect",
+              "startedAt": 799,
+              "activeAt": 847
+            },
+            {
+              "ability": "hoa_phao_thien_la",
+              "mode": "replicated native effect",
+              "startedAt": 799,
+              "activeAt": 847
+            }
+          ],
+          "release": {
+            "mode": "native release flag",
+            "tick": 849,
+            "activeAt": 847
+          },
+          "observations": [
+            {
+              "frames": [
+                "recover_down",
+                "idle_0_down_right",
+                "cast_2_down",
+                "cast_3_down",
+                "channel_down"
+              ],
+              "textures": [
+                "boss-unified:hoan_nhan_hong_liet"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            },
+            {
+              "frames": [
+                "recover_down",
+                "idle_3_down_right",
+                "idle_0_down_right",
+                "cast_2_down",
+                "cast_3_down",
+                "channel_down",
+                "idle_1_down_right",
+                "idle_2_down_right"
+              ],
+              "textures": [
+                "boss-unified:hoan_nhan_hong_liet"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kim_luan",
+      "idle": {
+        "frames": [
+          "walk_2_down_right",
+          "walk_3_down_right",
+          "walk_0_down_right",
+          "walk_1_down_right",
+          "walk_3_up_left",
+          "walk_0_up_left",
+          "walk_1_up_left",
+          "walk_2_up_left"
+        ],
+        "textures": [
+          "boss-unified:kim_luan"
+        ],
+        "scales": [
+          "[0.5,0.5]"
+        ],
+        "maxBodies": 1
+      },
+      "directions": [
+        "right",
+        "down_right",
+        "down",
+        "down_left",
+        "left",
+        "up_left",
+        "up",
+        "up_right"
+      ],
+      "cases": [
+        {
+          "ability": "kim_sweep",
+          "startedAt": 171,
+          "activeAt": 182,
+          "peers": [
+            {
+              "ability": "kim_sweep",
+              "start": 171,
+              "activeAt": 182,
+              "pulse": 0
+            },
+            {
+              "ability": "kim_sweep",
+              "start": 171,
+              "activeAt": 182,
+              "pulse": 0
+            }
+          ],
+          "release": {
+            "mode": "native pulse",
+            "tick": 183,
+            "activeAt": 182
+          },
+          "observations": [
+            {
+              "frames": [
+                "walk_1_down_right",
+                "walk_2_down_right",
+                "windup_right",
+                "attack_3_right",
+                "recover_right",
+                "idle_1_down_right",
+                "walk_3_down_right",
+                "walk_0_down_right",
+                "walk_0_up_left",
+                "walk_1_up_left",
+                "walk_2_up_left",
+                "walk_3_up_left"
+              ],
+              "textures": [
+                "boss-unified:kim_luan"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            },
+            {
+              "frames": [
+                "walk_3_down_right",
+                "walk_0_down_right",
+                "windup_right",
+                "attack_3_right",
+                "recover_right",
+                "idle_0_down_right",
+                "walk_1_down_right",
+                "walk_2_down_right",
+                "walk_2_up_left",
+                "walk_3_up_left",
+                "walk_0_up_left",
+                "walk_1_up_left"
+              ],
+              "textures": [
+                "boss-unified:kim_luan"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            }
+          ]
+        },
+        {
+          "ability": "kim_hand_chop",
+          "startedAt": 249,
+          "activeAt": 260,
+          "peers": [
+            {
+              "ability": "kim_hand_chop",
+              "start": 249,
+              "activeAt": 260,
+              "pulse": 0
+            },
+            {
+              "ability": "kim_hand_chop",
+              "start": 249,
+              "activeAt": 260,
+              "pulse": 0
+            }
+          ],
+          "release": {
+            "mode": "native pulse",
+            "tick": 261,
+            "activeAt": 260
+          },
+          "observations": [
+            {
+              "frames": [
+                "walk_1_up_left",
+                "walk_1_down_right",
+                "cast_2_right",
+                "attack_2_right",
+                "recover_right",
+                "idle_1_down_right",
+                "walk_2_down_right",
+                "walk_3_down_right",
+                "walk_0_down_right",
+                "walk_0_up_left",
+                "walk_2_up_left",
+                "walk_3_up_left"
+              ],
+              "textures": [
+                "boss-unified:kim_luan"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            },
+            {
+              "frames": [
+                "walk_3_up_left",
+                "walk_3_down_right",
+                "walk_0_down_right",
+                "cast_2_right",
+                "attack_2_right",
+                "recover_right",
+                "idle_0_down_right",
+                "walk_1_down_right",
+                "walk_2_down_right",
+                "walk_0_up_left",
+                "walk_1_up_left",
+                "walk_2_up_left"
+              ],
+              "textures": [
+                "boss-unified:kim_luan"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            }
+          ]
+        },
+        {
+          "ability": "kim_luan_truy_hon",
+          "startedAt": 327,
+          "activeAt": 348,
+          "peers": [
+            {
+              "ability": "kim_luan_truy_hon",
+              "start": 327,
+              "activeAt": 348,
+              "pulse": 0
+            },
+            {
+              "ability": "kim_luan_truy_hon",
+              "start": 327,
+              "activeAt": 348,
+              "pulse": 0
+            }
+          ],
+          "release": {
+            "mode": "native pulse",
+            "tick": 349,
+            "activeAt": 348
+          },
+          "observations": [
+            {
+              "frames": [
+                "walk_0_up_left",
+                "walk_1_up_left",
+                "windup_down",
+                "attack_1_down",
+                "channel_down",
+                "idle_1_down_right",
+                "walk_0_down_right",
+                "walk_1_down_right",
+                "walk_2_down_right",
+                "walk_3_down_right",
+                "walk_3_up_left",
+                "walk_2_up_left"
+              ],
+              "textures": [
+                "boss-unified:kim_luan"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            },
+            {
+              "frames": [
+                "walk_3_up_left",
+                "windup_down",
+                "attack_1_down",
+                "channel_down",
+                "idle_0_down_right",
+                "walk_2_down_right",
+                "walk_3_down_right",
+                "walk_0_down_right",
+                "walk_1_down_right",
+                "walk_2_up_left",
+                "walk_0_up_left",
+                "walk_1_up_left"
+              ],
+              "textures": [
+                "boss-unified:kim_luan"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            }
+          ]
+        },
+        {
+          "ability": "ngu_luan_ho_the",
+          "startedAt": 406,
+          "activeAt": 424,
+          "peers": [
+            {
+              "ability": "ngu_luan_ho_the",
+              "start": 406,
+              "activeAt": 424,
+              "pulse": 0
+            },
+            {
+              "ability": "ngu_luan_ho_the",
+              "start": 406,
+              "activeAt": 424,
+              "pulse": 0
+            }
+          ],
+          "release": {
+            "mode": "native pulse",
+            "tick": 424,
+            "activeAt": 424
+          },
+          "observations": [
+            {
+              "frames": [
+                "walk_0_down_right",
+                "walk_1_down_right",
+                "cast_0_down",
+                "cast_1_down",
+                "channel_down"
+              ],
+              "textures": [
+                "boss-unified:kim_luan"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            },
+            {
+              "frames": [
+                "walk_2_down_right",
+                "walk_3_down_right",
+                "cast_0_down",
+                "cast_1_down",
+                "channel_down"
+              ],
+              "textures": [
+                "boss-unified:kim_luan"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            }
+          ]
+        },
+        {
+          "ability": "ngu_luan_phong_toa",
+          "startedAt": 485,
+          "activeAt": 509,
+          "peers": [
+            {
+              "ability": "ngu_luan_phong_toa",
+              "start": 485,
+              "activeAt": 509,
+              "pulse": 0
+            },
+            {
+              "ability": "ngu_luan_phong_toa",
+              "start": 485,
+              "activeAt": 509,
+              "pulse": 0
+            }
+          ],
+          "release": {
+            "mode": "native pulse",
+            "tick": 509,
+            "activeAt": 509
+          },
+          "observations": [
+            {
+              "frames": [
+                "channel_down",
+                "cast_0_down",
+                "cast_1_down"
+              ],
+              "textures": [
+                "boss-unified:kim_luan"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            },
+            {
+              "frames": [
+                "channel_down",
+                "cast_0_down",
+                "cast_1_down"
+              ],
+              "textures": [
+                "boss-unified:kim_luan"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            }
+          ]
+        },
+        {
+          "ability": "long_tuong_chan_thien",
+          "startedAt": 563,
+          "activeAt": 577,
+          "peers": [
+            {
+              "ability": "long_tuong_chan_thien",
+              "start": 563,
+              "activeAt": 577,
+              "pulse": 0
+            },
+            {
+              "ability": "long_tuong_chan_thien",
+              "start": 563,
+              "activeAt": 577,
+              "pulse": 0
+            }
+          ],
+          "release": {
+            "mode": "native pulse",
+            "tick": 577,
+            "activeAt": 577
+          },
+          "observations": [
+            {
+              "frames": [
+                "channel_down",
+                "cast_4_down",
+                "cast_6_down",
+                "recover_down",
+                "walk_2_down_right",
+                "walk_3_down_right",
+                "walk_0_down_right",
+                "walk_1_down_right",
+                "walk_1_up_left",
+                "walk_2_up_left",
+                "walk_3_up_left"
+              ],
+              "textures": [
+                "boss-unified:kim_luan"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            },
+            {
+              "frames": [
+                "channel_down",
+                "cast_4_down",
+                "cast_6_down",
+                "recover_down",
+                "walk_0_down_right",
+                "walk_1_down_right",
+                "walk_2_down_right",
+                "walk_3_down_right",
+                "walk_0_up_left",
+                "walk_1_up_left"
+              ],
+              "textures": [
+                "boss-unified:kim_luan"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            }
+          ]
+        },
+        {
+          "ability": "long_tuong_bat_nha_cong",
+          "startedAt": 641,
+          "activeAt": 665,
+          "peers": [
+            {
+              "ability": "long_tuong_bat_nha_cong",
+              "start": 641,
+              "activeAt": 665,
+              "pulse": 0
+            },
+            {
+              "ability": "long_tuong_bat_nha_cong",
+              "start": 641,
+              "activeAt": 665,
+              "pulse": 0
+            }
+          ],
+          "release": {
+            "mode": "native pulse",
+            "tick": 667,
+            "activeAt": 665
+          },
+          "observations": [
+            {
+              "frames": [
+                "walk_0_down_right",
+                "walk_0_up_left",
+                "cast_4_down",
+                "cast_5_down",
+                "cast_7_down"
+              ],
+              "textures": [
+                "boss-unified:kim_luan"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            },
+            {
+              "frames": [
+                "walk_2_down_right",
+                "walk_2_up_left",
+                "walk_3_up_left",
+                "cast_4_down",
+                "cast_5_down",
+                "cast_7_down"
+              ],
+              "textures": [
+                "boss-unified:kim_luan"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            }
+          ]
+        },
+        {
+          "ability": "long_tuong_bat_nha_thap_tang",
+          "startedAt": 720,
+          "activeAt": 720,
+          "peers": [
+            {
+              "ability": "long_tuong_bat_nha_thap_tang",
+              "start": 720,
+              "activeAt": 720,
+              "pulse": 1
+            },
+            {
+              "ability": "long_tuong_bat_nha_thap_tang",
+              "start": 720,
+              "activeAt": 720,
+              "pulse": 1
+            }
+          ],
+          "release": {
+            "mode": "native pulse",
+            "tick": 722,
+            "activeAt": 720
+          },
+          "observations": [
+            {
+              "frames": [
+                "cast_7_down",
+                "cast_5_down"
+              ],
+              "textures": [
+                "boss-unified:kim_luan"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            },
+            {
+              "frames": [
+                "cast_7_down",
+                "cast_5_down"
+              ],
+              "textures": [
+                "boss-unified:kim_luan"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ly_mac_sau",
+      "idle": {
+        "frames": [
+          "idle_0_down_right",
+          "idle_1_down_right",
+          "idle_2_down_right",
+          "idle_3_down_right"
+        ],
+        "textures": [
+          "boss-unified:ly_mac_sau"
+        ],
+        "scales": [
+          "[0.5,0.5]"
+        ],
+        "maxBodies": 1
+      },
+      "directions": [
+        "right",
+        "down_right",
+        "down",
+        "down_left",
+        "left",
+        "up_left",
+        "up",
+        "up_right"
+      ],
+      "cases": [
+        {
+          "ability": "ly_mac_sau_basic",
+          "startedAt": 151,
+          "activeAt": 160,
+          "peers": [
+            {
+              "ability": "ly_mac_sau_basic",
+              "pose": "basic_attack",
+              "actionEndsAt": 0
+            },
+            {
+              "ability": "ly_mac_sau_basic",
+              "pose": "basic_attack",
+              "actionEndsAt": 0
+            }
+          ],
+          "release": {
+            "mode": "native release flag",
+            "tick": 160,
+            "activeAt": 160
+          },
+          "observations": [
+            {
+              "frames": [
+                "idle_1_down_right",
+                "windup_down",
+                "attack_1_down",
+                "recover_down",
+                "idle_2_down_right",
+                "idle_3_down_right",
+                "idle_0_down_right"
+              ],
+              "textures": [
+                "boss-unified:ly_mac_sau"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            },
+            {
+              "frames": [
+                "idle_0_down_right",
+                "windup_down",
+                "attack_1_down",
+                "recover_down",
+                "idle_1_down_right",
+                "idle_2_down_right"
+              ],
+              "textures": [
+                "boss-unified:ly_mac_sau"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            }
+          ]
+        },
+        {
+          "ability": "bang_phach_ngan_cham",
+          "startedAt": 230,
+          "activeAt": 248,
+          "peers": [
+            {
+              "ability": "bang_phach_ngan_cham",
+              "pose": "cast",
+              "actionEndsAt": 0
+            },
+            {
+              "ability": "bang_phach_ngan_cham",
+              "pose": "cast",
+              "actionEndsAt": 0
+            }
+          ],
+          "release": {
+            "mode": "native release flag",
+            "tick": 248,
+            "activeAt": 248
+          },
+          "observations": [
+            {
+              "frames": [
+                "recover_down",
+                "cast_0_down",
+                "cast_1_down",
+                "idle_2_down_right",
+                "idle_3_down_right",
+                "idle_0_down_right",
+                "cast_4_down"
+              ],
+              "textures": [
+                "boss-unified:ly_mac_sau"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            },
+            {
+              "frames": [
+                "recover_down",
+                "cast_0_down",
+                "cast_1_down",
+                "idle_1_down_right",
+                "idle_2_down_right",
+                "idle_3_down_right",
+                "cast_4_down"
+              ],
+              "textures": [
+                "boss-unified:ly_mac_sau"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            }
+          ]
+        },
+        {
+          "ability": "xich_luyen_chuong",
+          "startedAt": 308,
+          "activeAt": 335,
+          "peers": [
+            {
+              "ability": "xich_luyen_chuong",
+              "pose": "cast",
+              "actionEndsAt": 0
+            },
+            {
+              "ability": "xich_luyen_chuong",
+              "pose": "cast",
+              "actionEndsAt": 0
+            }
+          ],
+          "release": {
+            "mode": "native release flag",
+            "tick": 335,
+            "activeAt": 335
+          },
+          "observations": [
+            {
+              "frames": [
+                "cast_4_down",
+                "cast_5_down",
+                "recover_down",
+                "idle_3_down_right",
+                "idle_0_down_right",
+                "windup_down"
+              ],
+              "textures": [
+                "boss-unified:ly_mac_sau"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            },
+            {
+              "frames": [
+                "cast_4_down",
+                "cast_5_down",
+                "recover_down",
+                "idle_1_down_right",
+                "idle_2_down_right",
+                "idle_3_down_right",
+                "windup_down"
+              ],
+              "textures": [
+                "boss-unified:ly_mac_sau"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            }
+          ]
+        },
+        {
+          "ability": "phat_tran_cong",
+          "startedAt": 387,
+          "activeAt": 399,
+          "peers": [
+            {
+              "ability": "phat_tran_cong",
+              "pose": "cast",
+              "actionEndsAt": 0
+            },
+            {
+              "ability": "phat_tran_cong",
+              "pose": "cast",
+              "actionEndsAt": 0
+            }
+          ],
+          "release": {
+            "mode": "native release flag",
+            "tick": 399,
+            "activeAt": 399
+          },
+          "observations": [
+            {
+              "frames": [
+                "windup_down",
+                "cast_2_down",
+                "cast_3_down",
+                "channel_down",
+                "idle_2_down_right",
+                "idle_3_down_right",
+                "idle_0_down_right",
+                "cast_0_down"
+              ],
+              "textures": [
+                "boss-unified:ly_mac_sau"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            },
+            {
+              "frames": [
+                "windup_down",
+                "cast_2_down",
+                "cast_3_down",
+                "channel_down",
+                "idle_0_down_right",
+                "idle_1_down_right",
+                "idle_2_down_right",
+                "cast_0_down"
+              ],
+              "textures": [
+                "boss-unified:ly_mac_sau"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            }
+          ]
+        },
+        {
+          "ability": "co_mo_kiem_phap",
+          "startedAt": 465,
+          "activeAt": 488,
+          "peers": [
+            {
+              "ability": "co_mo_kiem_phap",
+              "pose": "cast",
+              "actionEndsAt": 0
+            },
+            {
+              "ability": "co_mo_kiem_phap",
+              "pose": "cast",
+              "actionEndsAt": 0
+            }
+          ],
+          "release": {
+            "mode": "native release flag",
+            "tick": 490,
+            "activeAt": 488
+          },
+          "observations": [
+            {
+              "frames": [
+                "cast_0_down",
+                "windup_down",
+                "attack_3_down",
+                "recover_down",
+                "idle_2_down_right",
+                "idle_3_down_right",
+                "idle_0_down_right",
+                "cast_6_down"
+              ],
+              "textures": [
+                "boss-unified:ly_mac_sau"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            },
+            {
+              "frames": [
+                "cast_0_down",
+                "windup_down",
+                "attack_3_down",
+                "recover_down",
+                "idle_0_down_right",
+                "idle_1_down_right",
+                "idle_2_down_right",
+                "cast_6_down"
+              ],
+              "textures": [
+                "boss-unified:ly_mac_sau"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            }
+          ]
+        },
+        {
+          "ability": "ngu_doc_chuong",
+          "startedAt": 544,
+          "activeAt": 574,
+          "peers": [
+            {
+              "ability": "ngu_doc_chuong",
+              "pose": "cast",
+              "actionEndsAt": 0
+            },
+            {
+              "ability": "ngu_doc_chuong",
+              "pose": "cast",
+              "actionEndsAt": 0
+            }
+          ],
+          "release": {
+            "mode": "native release flag",
+            "tick": 575,
+            "activeAt": 574
+          },
+          "observations": [
+            {
+              "frames": [
+                "cast_6_down",
+                "cast_7_down",
+                "channel_down",
+                "idle_2_down_right",
+                "idle_3_down_right",
+                "idle_0_down_right"
+              ],
+              "textures": [
+                "boss-unified:ly_mac_sau"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            },
+            {
+              "frames": [
+                "cast_6_down",
+                "cast_7_down",
+                "channel_down",
+                "idle_0_down_right",
+                "idle_1_down_right",
+                "idle_2_down_right"
+              ],
+              "textures": [
+                "boss-unified:ly_mac_sau"
+              ],
+              "scales": [
+                "[0.5,0.5]"
+              ],
+              "maxBodies": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

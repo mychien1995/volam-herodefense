@@ -1,0 +1,46 @@
+{
+  "status": "PASS",
+  "batch": 6,
+  "sourceSession": "hero-coherence-batch6-final-retry",
+  "ports": [
+    3012,
+    5612
+  ],
+  "branches": {
+    "duong_mon_co_quan": {
+      "clients": 6,
+      "nativeFrames": 256,
+      "nativeTags": 40,
+      "bodyPNG": "4282337cfd539c9b52f928cbaa9d08de1d9ee1d329f3040c0b52139175a589c0",
+      "idleDirections": 8,
+      "walkDirections": 8,
+      "publicActionGroups": 48,
+      "reactionCases": 40,
+      "party": {
+        "hits": 48,
+        "medianMs": 16.700000002980232,
+        "p95Ms": 19.100000008940697
+      },
+      "privateAndPassiveScope": "Actual W flight/feather A, movement/lift, toggle off, R shell/input block/expiry"
+    },
+    "duong_mon_am_khi": {
+      "clients": 6,
+      "nativeFrames": 192,
+      "nativeTags": 40,
+      "bodyPNG": "1498f51e06bb7d863faa7d17f346e0838c14c4147bf9f1c49bd6b21c04cb6b1c",
+      "idleDirections": 8,
+      "walkDirections": 8,
+      "publicActionGroups": 32,
+      "reactionCases": 40,
+      "party": {
+        "hits": 155,
+        "medianMs": 16.700000002980232,
+        "p95Ms": 18.700000002980232
+      },
+      "privateAndPassiveScope": "Q eight owner-body directions and each-owner event ack; R passive, five real A elements"
+    }
+  },
+  "recordings": false,
+  "approval": "Candidate; continue all branches authorized",
+  "testScope": "Focused body policy/types/native checks; two-client iteration and southwest repair; six-client final retry after render-clock observation gate"
+}

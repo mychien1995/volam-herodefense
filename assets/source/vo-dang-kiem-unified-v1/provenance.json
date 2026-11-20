@@ -1,0 +1,70 @@
+{
+  "status": "prototype pending director review",
+  "identity": "Existing sharp original Vo Dang kiem project art: monochrome white/charcoal robe, black bun/Yin-Yang clasp, white ribbons; no costume redesign",
+  "ownership": "Original project artwork and built-in imagegen derivatives. No third-party game artwork imported.",
+  "generator": "Built-in image_gen only; exact prompts, selected raw outputs and UTC request intervals retained in generation-timing.json and prompts/",
+  "masterReferences": [
+    {
+      "path": "assets/source/vo-dang-kiem-rework/body-right.png",
+      "sha256": "b728daa652a8c20b7d53ac10119b9022408079475bd4e39e4dc9ca047b59e834"
+    },
+    {
+      "path": "assets/exports/vo-dang-kiem-rework/body.png",
+      "sha256": "a4a5765d5d6036d6b34d794552afd5582b12e3033a9c80e959d0aabd2a42d185"
+    },
+    {
+      "path": "assets/exports/vo-dang-kiem-rework/body.json",
+      "sha256": "3e6f822a62d16775540195613fd602874dc065324c240d8708fb4fc10fda79c5"
+    },
+    {
+      "path": "assets/references/vo_dang_character_reference.png",
+      "sha256": "a31a5bdebe5afff273f1e68f0741162e17f3a38e9ee98d1a273d0a797f93c6fd"
+    },
+    {
+      "path": "assets/references/current_game_2026_10_29_placeholder_anti_reference.png",
+      "sha256": "7650239f6117b3d92ed6e8b1efdafe7213680f258c979808a09a82d2d6c2cdc5"
+    }
+  ],
+  "referencePathNote": "Historical assets/references/vo_dang_art_direction_reference.png is absent. Current mapped positive character reference inspected instead. Unchanged arena/HUD references reused from this rollout.",
+  "nativeSource": {
+    "path": "body.aseprite",
+    "cels": 320,
+    "tags": 72,
+    "sha256": "447d1244d336c31d80f84df90c78921482288a918e99866f6869d0f0e07e9ca0",
+    "roundtrip": "exact alpha and visible RGB PASS"
+  },
+  "productionSelection": {
+    "directionalSheets": [
+      "raw/down.png",
+      "raw/down_right.png",
+      "raw/right.png",
+      "raw/up_right.png",
+      "raw/up.png",
+      "raw/up_left.png",
+      "raw/left.png",
+      "raw/down_left.png"
+    ],
+    "extraSources": [
+      {
+        "pattern": "raw/swordless/{direction}.png",
+        "rows": 3,
+        "columns": 4
+      }
+    ],
+    "celGroupOverrides": [
+      {
+        "direction": "up_right",
+        "path": "raw/swordless/up_right-hurt-repair.png",
+        "rows": 3,
+        "columns": 4,
+        "start": 36,
+        "indices": [
+          8,
+          9
+        ]
+      }
+    ]
+  },
+  "registration": "Fixed boots pivot and physical body size; group scale, never scale by weapon extents or change alpha between idle cels. Swordless neutral groups use physical head-to-feet height.",
+  "scope": "Body and portrait only; native event-driven choreography and VFX remain; gameplay/HUD/F8 unchanged; no recordings."
+}

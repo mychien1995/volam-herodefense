@@ -1,3 +1,17 @@
+## Trình bày Phòng test/Lôi Đài và nhịp Độc Cô · 2026-11-19
+
+Theo phản hồi người dùng: giữ label/nút nhập tên một dòng khi đủ chỗ, đưa map/hero về tỉ lệ gameplay Defense với camera trong bounds, thống nhất cỡ nút HUD và sửa nhát chém không kéo dãn ảnh. Tăng tần suất hai chiêu Độc Cô20% bằng khoảng chờ300/225tick, giữ warning/damage. [Nguyên nhân, triển khai và kiểm chứng](docs/PVP_VISUAL_REPAIR.md).
+
+## Phòng test · 2026-11-19
+
+Yêu cầu người dùng: nhập tên, chọn hero, vào Rừng Trúc không hiểm họa; cấp30/max kỹ năng, bất tử, nội lực vô hạn, không hồi chiêu; ba Chó Hoang đứng yên, máu bất tử. Triển khai mặc định mỗi người một room riêng; quyền thử nghiệm giới hạn namespace `practice`. Yêu cầu bổ sung: nút Đổi phái/hệ phái ngay trong room, dùng menu Defense; xác nhận đổi hero tại chỗ, không cần thoát phòng. [Luồng, mặc định và kiểm chứng](docs/PRACTICE_ROOM.md).
+
+## Lôi Đài độc lập · 2026-11-19
+
+Người dùng duyệt concept và yêu cầu triển khai trên `wip/m3d/pvp`: phòng riêng tối đa 8 người, Chính/Tà tối đa 4 mỗi phe, chọn phái/hệ mới ready, host chia phe, thắng 3 hiệp, mỗi hiệp 3 phút, hòa đánh lại; đấu thủ mất kết nối thua cả ván, host rời đóng phòng. Cấp 30/max kỹ năng, không đồ/bình, năm map và tùy chọn hiểm họa. Luật này chỉ áp dụng namespace mới, không sửa Defense. [Đặc tả](docs/LOI_DAI_STANDALONE_SPEC.md) · [Tích hợp/mặc định thử](docs/LOI_DAI_STANDALONE_IMPLEMENTATION.md).
+
+> Reference-path maintenance — 2026-11-19: image naming/location issues are resolved in [the current index](assets/references/README.md) and [old-to-new manifest](assets/references/manifest.json). Original paths in historical entries below remain as recorded; they are not open asset requests. The cleanup changes no gameplay or art approval.
+
 ## Ngũ Độc · Bích Cổ và Âm Linh
 
 Màn chọn phái dùng lưới 4 trên, 3 dưới và mở popup chọn hệ phái. Lượt Ngũ Độc này sửa tay chưởng hướng trái, làm mượt Thần Chết khi theo chủ, mở rộng Âm Phong Thực Cốt và cho trùng của Tâm Hình Cổ tự bay về.

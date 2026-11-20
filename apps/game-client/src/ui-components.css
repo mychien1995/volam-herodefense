@@ -1,0 +1,51 @@
+/* Shared Defense / Lôi Đài / Practice skin. Mode sheets own only layout/density. */
+:is(#pregame, #pvp-ui, #practice-ui) button,
+#practice-change {
+  background: linear-gradient(#276344, #12472f);
+  border: 3px solid #ac8e5c;
+  box-shadow:
+    inset 0 0 0 2px #092e26,
+    0 2px 0 #1c110d;
+  color: #ffe5ad;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+:is(#pregame, #pvp-ui, #practice-ui) button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+:is(#pregame, #pvp-ui, #practice-ui) button:focus-visible {
+  outline: 3px solid #fff2a5;
+  outline-offset: 3px;
+}
+.pre-window {
+  width: min(930px, 100%);
+  padding: 28px 38px 20px;
+  background: linear-gradient(100deg, #2d1b16ed, #513222f5, #2c1c17f5);
+  border: 8px ridge #9a734d;
+  box-shadow:
+    0 0 0 3px #182e23,
+    0 12px 45px #000a;
+  position: relative;
+  text-align: center;
+  max-height: calc(100% - 10px);
+  overflow: auto;
+}
+.pre-title {
+  background: linear-gradient(#285d46, #163d30);
+  border: 4px ridge #ad8d5a;
+  padding: 12px 25px;
+  width: fit-content;
+  margin: 0 auto 24px;
+  text-transform: uppercase;
+  color: #ffe6b4;
+  font-size: 32px;
+  text-shadow: 2px 3px #20140c;
+}
+.pre-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 20px;
+}

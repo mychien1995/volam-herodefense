@@ -1,4 +1,5 @@
-import { namDeView } from '@volam/game-core';
+import { namDeView, PracticeMatch } from '@volam/game-core';
+import { practiceDefinition } from '@volam/game-data';
 import { serverWaveBossTestOptions } from '../wave-boss-test-config.js';
 import {
   prepareSkillReviewHero,
@@ -19,6 +20,7 @@ import { serverInvasionDefinition } from '../invasion-config.js';
 import { CreepPreviewSession } from '../creep-preview.js';
 import {
   lobbyConfig,
+  pvpDefinition,
   m1Config,
   creepDungeon,
   desertDungeon,
@@ -37,6 +39,7 @@ import {
 } from '@volam/game-data';
 import {
   DungeonMatch,
+  StandaloneLoiDai,
   conLuan,
   duongMon,
   nguDoc,
@@ -61,6 +64,7 @@ import {
 } from '@volam/game-core';
 import {
   lobbyActionSchema,
+  pvpActionSchema,
   buildActionSchema,
   LobbyState,
   LobbyPlayer,
@@ -94,7 +98,7 @@ export class MatchRoom extends Room<{
   state: LobbyState;
   client: MatchClient;
 }> {
-  override maxClients = lobbyConfig.maxPlayers;
+  override maxClients: number = lobbyConfig.maxPlayers;
   override maxMessagesPerSecond = lobbyConfig.maxMessagesPerSecond;
   override state = new LobbyState();
   readonly seed = randomInt(1, 0x1_0000_0000);
@@ -102,7 +106,13 @@ export class MatchRoom extends Room<{
     process.env['NODE_ENV'] !== 'production' &&
     process.env['VOLAM_DEV_CREEP_TEST'] === '1';
   readonly waveBossTestOptions = serverWaveBossTestOptions(m1Config.tickRate);
-  readonly simulation = new DungeonMatch(
+  protected get standaloneLoiDai(): boolean { return false; }
+  protected get standalonePractice(): boolean { return false; }
+  readonly simulation: DungeonMatch = this.standalonePractice
+    ? new PracticeMatch(m1Config,creepDungeon,structuredClone(practiceDefinition),this.seed)
+    : this.standaloneLoiDai
+    ? new StandaloneLoiDai(m1Config, creepDungeon, structuredClone(pvpDefinition), this.seed)
+    : new DungeonMatch(
     {
       ...m1Config,
       ...(!this.devCreepTest &&
@@ -248,7 +258,8 @@ export class MatchRoom extends Room<{
     }
   }
 
-  override messages = {
+  protected getMatchMessages() { return {
+    'pvp-action':validate(pvpActionSchema,(client:MatchClient,action)=>client.send('command-rejected',{protocolVersion:PROTOCOL_VERSION,sequence:action.sequence,reason:'Phòng này không phải Lôi Đài độc lập.'})),
     'loi-dai-action': validate(
       loiDaiActionSchema,
       (client: MatchClient, input) => {
@@ -780,7 +791,8 @@ export class MatchRoom extends Room<{
           reason,
         });
     }),
-  };
+  }; }
+  override messages = this.getMatchMessages();
   override onCreate(
     options: { portalCount?: unknown; creepPreview?: unknown } = {},
   ): void {
@@ -1052,7 +1064,7 @@ export class MatchRoom extends Room<{
     this.world.vuong?.clear(this.world);
     this.simulation.tayDoc?.dispose(this.world);
   }
-  private syncState(): void {
+  protected syncState(): void {
     let tayDoc = this.state.tayDoc.get('arena');
     if (!tayDoc) {
       tayDoc = new TayDocState();

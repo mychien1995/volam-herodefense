@@ -75,7 +75,7 @@ const waveBossArt = {
   },
 };
 
-export type DeferredArtPack = DungeonDestination | 'wave-bosses' | 'loi_dai';
+export type DeferredArtPack = DungeonDestination | 'wave-bosses' | 'loi_dai' | 'pvp';
 const zoneArt: Partial<
   Record<
     DeferredArtPack,
@@ -87,6 +87,7 @@ const zoneArt: Partial<
 > = {
   'wave-bosses': waveBossArt,
   loi_dai: { preload: preloadLoiDai },
+  pvp: { preload: (scene) => {preloadLoiDai(scene);preloadPvpArt(scene);} },
   desert: { preload: preloadDesertArt, register: registerDesertArt },
   chu_ba_thong: { preload: preloadChu, register: registerChu },
   hong_liet: { preload: preloadHongLietArt, register: registerHongLietArt },
@@ -97,7 +98,7 @@ export function preloadArtPack(
   scene: Phaser.Scene,
   pack: DeferredArtPack,
 ): void {
-  if (pack !== 'loi_dai') preloadRenovation(scene, pack);
+  if (pack !== 'loi_dai' && pack !== 'pvp') preloadRenovation(scene, pack);
   zoneArt[pack]?.preload(scene);
 }
 
@@ -362,3 +363,4 @@ import { preloadVuongArt } from './vuong-art.js';
 import { preloadBacCaiArt } from './bac-cai-art.js';
 import { preloadCreepCombat } from './creep-combat-art.js';
 import { preloadLoiDai } from './loi-dai-art.js';
+import {preloadPvpArt} from './pvp-art.js';

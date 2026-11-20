@@ -55,7 +55,7 @@ export function hurt(
     comboTargets?: Record<string, boolean> | undefined;
   },
 ): boolean {
-  if (world.duel && opponent(world, sourceId, target.id) !== target)
+  if (world.duel && !(world.duelTeams && sourceId === 'pvp_environment') && opponent(world, sourceId, target.id) !== target)
     return false;
   if (world.waveBossTest && world.heroes.has(target.id)) return false;
   if (
@@ -391,7 +391,8 @@ export function hurt(
   }
   if (enemy && world.vuong?.bossId === enemy.id)
     damage = world.vuong.limitIncoming(enemy, damage);
-  target.hp = Math.max(0, target.hp - damage);
+  const practiceTarget = world.practiceTargets?.has(target.id) ?? false;
+  target.hp = Math.max(practiceTarget ? 1 : 0, target.hp - damage);
   reflectCreepDamage(
     world,
     target,
@@ -547,6 +548,8 @@ export function hurt(
         Number.EPSILON * Math.max(1, target.maxHp) * 8
   )
     releaseGuardCounter(world, target.id, guardCounter, config);
+  // Preserve real damage/on-hit/status processing, then refill before the next hit.
+  if (practiceTarget) target.hp = target.maxHp;
   return true;
 }
 /** Consume before emitting or hurting anything: one radial reflection, never a recursive proc. */
