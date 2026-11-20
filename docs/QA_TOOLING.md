@@ -4,6 +4,8 @@ Implemented 2026-11-19. Tooling/fixture changes only; game rules and runtime ass
 
 Optional owned development iteration now uses `pnpm qa:iterate --plan rounds.json`: fresh tests and asset guards, byte-verified live compiler/service reuse, room/socket reset and scoped teardown. Only the dedicated smoke and explicitly selected default gameplay tests are supported. [Commands, measurements and limitations](QA_ITERATION_REUSE_2026_11_20.md). Final remains independent.
 
+Add `--profile` for scoped preparation/hash CPU/IO, owned lifecycle, Playwright startup/fixture and bounded page-resource measurements. Unresolved merge conflicts fail before iteration starts; the guard never resolves or stages them. [Post-merge profiling, observer overhead and the decision to retain the current adapter scope](QA_COST_PROFILING_2026_11_20.md). Measurements and nested/request durations are not cached test success or additive critical-path timings.
+
 ## Start a session
 
 ```powershell

@@ -1,5 +1,6 @@
 import { fileSnapshot } from './core-test-cache.mjs';
 import { readdirSync, existsSync } from 'node:fs';
+import { profileSync } from './qa-cost-profile.mjs';
 
 const projects = [
   'packages/game-core',
@@ -7,7 +8,7 @@ const projects = [
   'packages/game-protocol',
   'apps/game-server',
 ];
-export function iterationSnapshot(root, kind) {
+export function iterationSnapshot(root, kind, observe) {
   const configs = readdirSync(root).filter((p) =>
     /^(?:tsconfig.*\.json|.*\.config\.[tm]s|package\.json|pnpm.*\.yaml|\.env.*)$/.test(
       p,
@@ -49,7 +50,13 @@ export function iterationSnapshot(root, kind) {
             'scripts',
             'tests/e2e',
           ];
-  return fileSnapshot(root, paths).digest;
+  if (!observe) return fileSnapshot(root, paths).digest;
+  const { value, cost } = profileSync(
+    () => fileSnapshot(root, paths).digest,
+    root,
+  );
+  observe({ kind, ...cost });
+  return value;
 }
 
 /** No disk receipt and no cached success: only this owner's live handles qualify. */

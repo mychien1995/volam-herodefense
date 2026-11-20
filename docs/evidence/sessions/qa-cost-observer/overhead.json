@@ -1,0 +1,66 @@
+{
+  "scenario": "fixed 16 MiB synthetic sync byte/hash workload; five alternating pairs after one warmup; not game/session performance",
+  "allDigestsEqual": true,
+  "rows": [
+    {
+      "pair": 0,
+      "mode": "plain",
+      "milliseconds": 39.95779999999996
+    },
+    {
+      "pair": 0,
+      "mode": "profile",
+      "milliseconds": 44.49129999999997,
+      "profileIoCalls": 19,
+      "profileHashBytes": 16778551
+    },
+    {
+      "pair": 1,
+      "mode": "profile",
+      "milliseconds": 40.34129999999999,
+      "profileIoCalls": 19,
+      "profileHashBytes": 16778551
+    },
+    {
+      "pair": 1,
+      "mode": "plain",
+      "milliseconds": 37.97089999999997
+    },
+    {
+      "pair": 2,
+      "mode": "plain",
+      "milliseconds": 36.87829999999997
+    },
+    {
+      "pair": 2,
+      "mode": "profile",
+      "milliseconds": 41.29290000000003,
+      "profileIoCalls": 19,
+      "profileHashBytes": 16778551
+    },
+    {
+      "pair": 3,
+      "mode": "profile",
+      "milliseconds": 41.0249,
+      "profileIoCalls": 19,
+      "profileHashBytes": 16778551
+    },
+    {
+      "pair": 3,
+      "mode": "plain",
+      "milliseconds": 42.52290000000005
+    },
+    {
+      "pair": 4,
+      "mode": "plain",
+      "milliseconds": 37.42700000000002
+    },
+    {
+      "pair": 4,
+      "mode": "profile",
+      "milliseconds": 40.099500000000035,
+      "profileIoCalls": 19,
+      "profileHashBytes": 16778551
+    }
+  ]
+}

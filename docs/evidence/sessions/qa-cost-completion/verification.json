@@ -1,0 +1,85 @@
+{
+  "baseline": "526c82b3",
+  "head": "526c82b3",
+  "fullFinalInitialStatus": "FAIL at browser: 3 passed, one transient-projectile observation failure",
+  "passingFinalStagesRetained": 40,
+  "workflowTests": 65,
+  "unitIntegrationTests": 1208,
+  "unitFiles": 120,
+  "validators": 33,
+  "browserCompletion": {
+    "status": "PASS",
+    "tests": 4,
+    "seconds": 45.2,
+    "command": "node tools/run-playwright.mjs test --config playwright.qa-helpers.config.ts --grep 'QA helper|ranged projectile' --reporter=line --output artifacts/qa-cost-browser-completion",
+    "freshReadyPreflight": "PASS 8 checks",
+    "testToolTypecheckAfterQaFixtureConfigFix": "PASS; node node_modules/typescript/bin/tsc -p tsconfig.tools.json --noEmit"
+  },
+  "coverageNote": "Final guards complete across the full attempt and affected-stage retry; original FAIL is retained, not relabeled. No passing unit/build/validator stages repeated for QA-only fixture/diagnostic corrections.",
+  "canonicalGuardsUnchanged": {
+    "scripts/check-workflow.mjs": true,
+    "scripts/check-core.mjs": true,
+    "tools/core-test-cache.mjs": true,
+    "tools/core-test-execution.mjs": true,
+    "vitest.config.ts": true,
+    "vitest.core.config.ts": true,
+    "tools/qa-session.mjs": true,
+    "tools/qa-fixture.mjs": true,
+    "tools/qa-game-services.mjs": true,
+    "tools/qa-profile-contracts.json": true,
+    "package.json": true
+  },
+  "postMergeOutsideWipEntries": 359,
+  "outsideWipEntriesWithIdenticalBytesAndStatus": 358,
+  "observedOutsideWipChanges": [
+    {
+      "path": "assets/sounds/skills/vo-dang-kiem-T.mp3",
+      "beforeSha256": "237f377ea37c6f71d364e3e34c9319b72c549f25a078c6761c09914de6576951",
+      "observedSha256": "59f0564c683c2c88dfaff816181c6564b16774c1ed910c655cbe4384bb642e0e",
+      "beforeStatus": "??",
+      "observedStatus": "??"
+    }
+  ],
+  "newOutsideTaskPathsObserved": [
+    "assets/sounds/skills/thieu-lam-dao-A.mp3",
+    "assets/sounds/skills/thieu-lam-dao-Q.mp3",
+    "assets/sounds/skills/thieu-lam-dao-T.mp3",
+    "assets/sounds/skills/thieu-lam-quyen-T.mp3",
+    "assets/sounds/skills/thieu-lam-quyen-da-E.mp3",
+    "assets/sounds/skills/thieu-lam-quyen-da-Q.mp3",
+    "assets/sounds/skills/thieu-lam-quyen-da-W.mp3",
+    "assets/sounds/skills/thieu-lam-quyen-dam-E.mp3",
+    "assets/sounds/skills/thieu-lam-quyen-dam-W.mp3",
+    "assets/sounds/skills/vo-dang-kiem-E.mp3"
+  ],
+  "outsideWipPolicy": "Current bytes retained; no writer attribution or rollback of unrelated work. User merge was observed, never repaired/staged/committed by this task.",
+  "taskSourceFiles": [
+    "docs/QA_COST_PROFILING_2026_11_20.md",
+    "docs/QA_TOOLING.md",
+    "docs/SESSION_EXECUTION_LESSONS.md",
+    "playwright.qa-helpers.config.ts",
+    "scripts/qa-iterate.mjs",
+    "scripts/tests/qa-checkout-state.test.mjs",
+    "scripts/tests/qa-cost-profile.test.mjs",
+    "tests/e2e/qa-helpers-setup.ts",
+    "tests/e2e/qa-iteration.spec.ts",
+    "tools/qa-checkout-state.mjs",
+    "tools/qa-compiler-watch.mjs",
+    "tools/qa-cost-preload.mjs",
+    "tools/qa-cost-profile.mjs",
+    "tools/qa-cost-reporter.mjs",
+    "tools/qa-iteration-service.mjs",
+    "tools/qa-iteration-state.mjs",
+    "tools/qa-page-cost.d.mts",
+    "tools/qa-page-cost.mjs"
+  ],
+  "sourceValidatorMetadataRestoredToExactBeforeBytes": true,
+  "stagedFiles": 0,
+  "taskCommitsCreated": 0,
+  "existingBrowserAssertionsAndInputHelpersUnchanged": {
+    "tests/e2e/qa-helpers.spec.ts": true,
+    "tests/e2e/gameplay.spec.ts": true,
+    "tests/e2e/pregame-helper.ts": true,
+    "tools/qa-browser.mjs": true
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "runId": "afe2f54a-55ad-464a-be68-6c4938ef5324",
+  "mode": "owned-reuse",
+  "startedAt": "2026-11-20T06:51:09.608Z",
+  "status": "FAIL",
+  "profiling": true,
+  "rounds": [
+    {
+      "index": 0,
+      "options": {
+        "grep": "iteration starts fresh"
+      },
+      "status": "FAIL",
+      "hashCosts": [],
+      "lifecycleCosts": [],
+      "preflight": {
+        "status": "PASS",
+        "mode": "quick",
+        "stage": "before-build",
+        "milliseconds": 3,
+        "checks": [
+          {
+            "id": "workspace",
+            "status": "PASS",
+            "detail": {
+              "mode": "quick",
+              "stage": "before-build",
+              "managed": false
+            }
+          },
+          {
+            "id": "session",
+            "status": "PASS",
+            "detail": "No managed service ports for this profile"
+          },
+          {
+            "id": "node",
+            "status": "PASS",
+            "detail": "26.0.0"
+          },
+          {
+            "id": "installation",
+            "status": "PASS",
+            "detail": "pnpm@11.25.0"
+          },
+          {
+            "id": "tools",
+            "status": "PASS",
+            "detail": {
+              "typescript": "7.0.2",
+              "vitest": "5.0.5"
+            }
+          }
+        ]
+      },
+      "error": "Error: Command failed (1); D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-cost-profile-reuse\\prepare-0.log",
+      "seconds": 0.07786309999999992
+    }
+  ],
+  "preflight": {
+    "status": "PASS",
+    "mode": "browser",
+    "stage": "before-build",
+    "milliseconds": 525,
+    "checks": [
+      {
+        "id": "workspace",
+        "status": "PASS",
+        "detail": {
+          "mode": "browser",
+          "stage": "before-build",
+          "managed": true
+        }
+      },
+      {
+        "id": "session",
+        "status": "PASS",
+        "detail": {
+          "serverPort": 2886,
+          "clientPort": 5486
+        }
+      },
+      {
+        "id": "ports",
+        "status": "PASS"
+      },
+      {
+        "id": "node",
+        "status": "PASS",
+        "detail": "26.0.0"
+      },
+      {
+        "id": "installation",
+        "status": "PASS",
+        "detail": "pnpm@11.25.0"
+      },
+      {
+        "id": "tools",
+        "status": "PASS",
+        "detail": {
+          "typescript": "7.0.2",
+          "vitest": "5.0.5",
+          "vite": "8.3.5",
+          "@playwright/test": "1.64.1"
+        }
+      },
+      {
+        "id": "chromium",
+        "status": "PASS",
+        "detail": {
+          "version": "156.0.8078.4",
+          "cache": "D:\\Projects\\volam-hero-defense\\.cache\\ms-playwright"
+        }
+      }
+    ]
+  },
+  "error": "Error: Command failed (1); D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-cost-profile-reuse\\prepare-0.log",
+  "cleanup": "PASS",
+  "seconds": 0.6075764
+}

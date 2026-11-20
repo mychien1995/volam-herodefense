@@ -18,13 +18,14 @@ export async function compilerExecutable() {
 }
 
 export class QaCompilerWatch {
-  constructor(root, log) {
+  constructor(root, log, observe) {
     this.root = root;
     this.log = log;
+    this.observe = observe;
   }
   async ensure() {
-    const input = iterationSnapshot(this.root, 'input');
-    const output = iterationSnapshot(this.root, 'output');
+    const input = iterationSnapshot(this.root, 'input', this.observe);
+    const output = iterationSnapshot(this.root, 'output', this.observe);
     if (
       this.child &&
       this.child.exitCode === null &&
@@ -89,19 +90,19 @@ export class QaCompilerWatch {
           buffer = buffer.slice(line + 1);
           if (/Starting (?:compilation|incremental compilation)/.test(text)) {
             this.receipt = undefined;
-            pending = iterationSnapshot(this.root, 'input');
+            pending = iterationSnapshot(this.root, 'input', this.observe);
           }
           const match =
             /Found (\d+) errors?\. Watching for file changes\./.exec(text);
           if (match) {
-            const now = iterationSnapshot(this.root, 'input');
+            const now = iterationSnapshot(this.root, 'input', this.observe);
             if (match[1] !== '0' || now !== pending) {
               this.receipt = undefined;
               finish(Error(`Compiler watch rejected cycle: ${text.trim()}`));
             } else {
               this.receipt = {
                 input: now,
-                output: iterationSnapshot(this.root, 'output'),
+                output: iterationSnapshot(this.root, 'output', this.observe),
               };
               finish();
             }

@@ -21,10 +21,17 @@ export default function setup() {
         prepared.add(room);
         room.world.creeps.clear();
         const config = room.simulation.arena.config;
+        // Keep the real shot in flight long enough for two-client presentation
+        // load: the old 160px target could be hit before the first client patch.
+        // Use the existing basic's legal range; do not extend projectile lifetime.
+        const effect = config.basics[hero.basicId]!.effect;
+        if (effect.mode !== 'projectile')
+          throw Error('QA helper target requires a projectile basic');
+        const targetDistance = effect.range;
         const target = addCreep(
           room.world,
           'qa_helper_target',
-          { x: hero.x + 160, y: hero.y },
+          { x: hero.x + targetDistance, y: hero.y },
           config,
         );
         Object.assign(target, {

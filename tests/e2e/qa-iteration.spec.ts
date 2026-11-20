@@ -4,6 +4,7 @@ import { MATCH_ROOM } from '@volam/game-protocol';
 import { qaSession } from '../../tools/qa-session.mjs';
 import { joinWaiting, startTogether } from './pregame-helper.js';
 import { observeQa } from '../../tools/qa-browser.mjs';
+import { profileQaPage } from '../../tools/qa-page-cost.mjs';
 
 test('iteration starts fresh and replicates movement in two real Phaser clients', async ({
   browser,
@@ -23,6 +24,9 @@ test('iteration starts fresh and replicates movement in two real Phaser clients'
     ),
   );
   const [a, b] = await Promise.all(contexts.map((c) => c.newPage()));
+  const pageCosts = process.env['VOLAM_QA_BROWSER_COST_OUTPUT']
+    ? await Promise.all([a!, b!].map(profileQaPage))
+    : [];
   const errors: string[] = [];
   const stages: Array<{ label: string; milliseconds: number }> = [];
   const started = performance.now();
@@ -121,6 +125,15 @@ test('iteration starts fresh and replicates movement in two real Phaser clients'
     );
     throw cause;
   } finally {
+    for (let index = 0; index < pageCosts.length; index++) {
+      const data = await pageCosts[index]!().catch((error: Error) => ({
+        error: error.message,
+      }));
+      writeFileSync(
+        info.outputPath(`page-cost-${index}.json`),
+        JSON.stringify(data, null, 2),
+      );
+    }
     writeFileSync(
       info.outputPath('iteration-stages.json'),
       JSON.stringify(stages, null, 2),

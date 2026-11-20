@@ -2,6 +2,7 @@ import { fork } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
 import { openSync, closeSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { stopQaChild } from './qa-children.mjs';
 import { requireFreePorts, verifyQaIdentity } from './qa-session.mjs';
 
@@ -9,6 +10,7 @@ export async function startIterationService(
   session,
   directory,
   protocolVersion,
+  { profiling = false } = {},
 ) {
   await requireFreePorts(session);
   const runId = randomUUID();
@@ -16,9 +18,22 @@ export async function startIterationService(
   let child;
   try {
     child = fork(resolve('tools/qa-iteration-child.mjs'), [], {
-      env: { ...process.env, VOLAM_QA_RUN_ID: runId },
+      env: {
+        ...process.env,
+        VOLAM_QA_RUN_ID: runId,
+        ...(profiling
+          ? {
+              VOLAM_QA_COST_OUTPUT: resolve(
+                directory,
+                `service-${runId}-cost.json`,
+              ),
+            }
+          : {}),
+      },
       stdio: ['ignore', fd, fd, 'ipc'],
-      execArgv: [],
+      execArgv: profiling
+        ? ['--import', pathToFileURL(resolve('tools/qa-cost-preload.mjs')).href]
+        : [],
       windowsHide: true,
     });
   } finally {

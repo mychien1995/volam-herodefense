@@ -1,5 +1,5 @@
-import { resolve, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { resolve } from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import {
   readFileSync,
   mkdirSync,
@@ -23,17 +23,21 @@ import {
 } from '../tools/qa-iteration-state.mjs';
 import { startIterationService } from '../tools/qa-iteration-service.mjs';
 import { createRequire } from 'node:module';
+import { costPoint, costSince } from '../tools/qa-cost-profile.mjs';
+import { requireQaCheckoutReady } from '../tools/qa-checkout-state.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 if (resolve('.') !== resolve(root))
   throw Error('Run qa:iterate from the checkout root');
 const args = process.argv.slice(2);
 const cold = args.includes('--cold');
+const profiling = args.includes('--profile');
 const planIndex = args.indexOf('--plan');
 if (
   args.some(
     (x, i) =>
       x !== '--cold' &&
+      x !== '--profile' &&
       x !== '--plan' &&
       !(planIndex >= 0 && i === planIndex + 1),
   ) ||
@@ -41,7 +45,7 @@ if (
   args.filter((x) => x === '--plan').length > 1
 )
   throw Error(
-    'Usage: qa:iterate [--cold] [--plan rounds.json]; otherwise read one round JSON per stdin line',
+    'Usage: qa:iterate [--cold] [--profile] [--plan rounds.json]; otherwise read one round JSON per stdin line',
   );
 const plan =
   planIndex >= 0 ? JSON.parse(readFileSync(args[planIndex + 1], 'utf8')) : null;
@@ -66,6 +70,7 @@ const report = {
   mode: cold ? 'cold' : 'owned-reuse',
   startedAt: new Date().toISOString(),
   status: 'RUNNING',
+  profiling,
   rounds: [],
 };
 const save = () =>
@@ -73,18 +78,39 @@ const save = () =>
     resolve(directory, 'iteration.json'),
     JSON.stringify(report, null, 2) + '\n',
   );
-const compiler = new QaCompilerWatch(root, resolve(directory, 'compiler.log'));
+let activeRound;
+const observe = profiling
+  ? (data) => activeRound?.hashCosts.push(data)
+  : undefined;
+const compiler = new QaCompilerWatch(
+  root,
+  resolve(directory, 'compiler.log'),
+  observe,
+);
 const lease = new IterationLease();
 let active;
-async function run(script, params, env, log) {
+async function run(script, params, env, log, preload = false) {
   const fd = openSync(log, 'wx');
   try {
-    active = spawn(process.execPath, [script, ...params], {
-      cwd: root,
-      env,
-      stdio: ['ignore', fd, fd],
-      windowsHide: true,
-    });
+    active = spawn(
+      process.execPath,
+      [
+        ...(preload
+          ? [
+              '--import',
+              pathToFileURL(resolve('tools/qa-cost-preload.mjs')).href,
+            ]
+          : []),
+        script,
+        ...params,
+      ],
+      {
+        cwd: root,
+        env,
+        stdio: ['ignore', fd, fd],
+        windowsHide: true,
+      },
+    );
     return await new Promise((done, reject) => {
       active.once('error', reject);
       active.once('exit', (code, signal) =>
@@ -116,6 +142,7 @@ for (const signal of ['SIGINT', 'SIGTERM'])
 const started = performance.now();
 save();
 try {
+  report.checkout = requireQaCheckoutReady(root);
   const preflight = await qaPreflight({
     mode: 'browser',
     args: ['--config', config],
@@ -138,10 +165,25 @@ try {
       );
     const index = report.rounds.length;
     const entry = { index, options, status: 'RUNNING' };
+    if (profiling) {
+      entry.hashCosts = [];
+      entry.lifecycleCosts = [];
+    }
+    activeRound = entry;
+    const timed = async (label, action) => {
+      const before = costPoint();
+      try {
+        return await action();
+      } finally {
+        if (profiling)
+          entry.lifecycleCosts.push({ label, ...costSince(before) });
+      }
+    };
     report.rounds.push(entry);
     save();
     const t = performance.now();
     try {
+      entry.checkout = requireQaCheckoutReady(root);
       if (cold) await stop();
       entry.preflight = await qaPreflight({ mode: 'quick' });
       if (entry.preflight.status !== 'PASS')
@@ -151,9 +193,25 @@ try {
       await run(
         'scripts/prepare-assets.mjs',
         [],
-        process.env,
+        profiling
+          ? {
+              ...process.env,
+              VOLAM_QA_COST_OUTPUT: resolve(
+                directory,
+                `prepare-cost-${index}.json`,
+              ),
+            }
+          : process.env,
         resolve(directory, `prepare-${index}.log`),
+        profiling,
       );
+      if (profiling)
+        entry.preparationCost = JSON.parse(
+          readFileSync(
+            resolve(directory, `prepare-cost-${index}.json`),
+            'utf8',
+          ),
+        );
       entry.prepareSeconds = (performance.now() - prep) / 1000;
       const compile = performance.now();
       entry.compiler = await compiler.ensure();
@@ -161,24 +219,39 @@ try {
       const protocol = await import(
         '../packages/game-protocol/dist/index.js?' + randomUUID()
       );
-      const fingerprint = () => iterationSnapshot(root, 'service');
+      const fingerprint = () => iterationSnapshot(root, 'service', observe);
       const result = await lease.round({
         fingerprint,
         start: () =>
-          startIterationService(session, directory, protocol.PROTOCOL_VERSION),
+          timed('start owned services', () =>
+            startIterationService(
+              session,
+              directory,
+              protocol.PROTOCOL_VERSION,
+              { profiling },
+            ),
+          ),
         verify: async (service) => {
           if (
             !compiler.receipt ||
-            compiler.receipt.input !== iterationSnapshot(root, 'input') ||
-            compiler.receipt.output !== iterationSnapshot(root, 'output')
+            compiler.receipt.input !==
+              iterationSnapshot(root, 'input', observe) ||
+            compiler.receipt.output !==
+              iterationSnapshot(root, 'output', observe)
           )
             throw Error(
               'Compiler receipt changed or unavailable during iteration',
             );
-          await service.verify();
+          await timed('verify owned HTTP identity', () => service.verify());
         },
-        reset: (service) => service.reset(),
+        reset: (service) =>
+          timed('reset owned rooms and sockets', () => service.reset()),
         execute: async (service) => {
+          const checkout = requireQaCheckoutReady(root);
+          if (checkout.head !== entry.checkout.head)
+            throw Error(
+              'QA HEAD changed before browser execution; start a fresh round on the new baseline',
+            );
           entry.service = { runId: service.runId, pid: service.pid };
           const browserStart = performance.now();
           const require = createRequire(import.meta.url);
@@ -193,16 +266,37 @@ try {
                 : 'tests/e2e/qa-iteration.spec.ts',
               '--grep',
               options.grep,
-              '--reporter=line',
+              profiling
+                ? '--reporter=line,./tools/qa-cost-reporter.mjs'
+                : '--reporter=line',
               '--output',
               resolve('artifacts', session.runId, `round-${index}`),
             ],
             qaBrowserEnvironment({
               ...process.env,
               VOLAM_QA_ITERATION_RUN_ID: service.runId,
+              ...(profiling
+                ? {
+                    VOLAM_QA_BROWSER_COST_OUTPUT: resolve(
+                      directory,
+                      `browser-cost-${index}.json`,
+                    ),
+                    VOLAM_QA_BROWSER_SPAWNED_AT: String(Date.now()),
+                  }
+                : {}),
             }),
             resolve(directory, `browser-${index}.log`),
           );
+          if (profiling) {
+            entry.browserCost = JSON.parse(
+              readFileSync(
+                resolve(directory, `browser-cost-${index}.json`),
+                'utf8',
+              ),
+            );
+            if (entry.browserCost.status !== 'passed')
+              throw Error('Browser cost receipt did not report passed tests');
+          }
           return { seconds: (performance.now() - browserStart) / 1000 };
         },
       });
@@ -213,6 +307,7 @@ try {
       throw error;
     } finally {
       entry.seconds = (performance.now() - t) / 1000;
+      activeRound = undefined;
       save();
       console.log(
         `[iterate] round ${index}: ${entry.status}, ${entry.seconds.toFixed(2)}s, service reused=${entry.reused ?? false}`,
