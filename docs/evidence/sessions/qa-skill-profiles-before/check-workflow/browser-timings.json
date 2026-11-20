@@ -1,0 +1,89 @@
+{
+  "runId": "01c43dec-01c0-46ae-971c-98252c331a00",
+  "mode": "browser",
+  "args": [
+    "--config",
+    "playwright.duong-mon-game.config.ts",
+    "--grep",
+    "Đường Môn starts",
+    "--reporter=line"
+  ],
+  "startedAt": "2026-11-19T19:29:28.650Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "environment preflight",
+      "seconds": 0.015,
+      "status": "PASS",
+      "checks": [
+        {
+          "id": "workspace",
+          "status": "PASS",
+          "detail": {
+            "mode": "browser",
+            "stage": "before-build",
+            "managed": false
+          }
+        },
+        {
+          "id": "session",
+          "status": "PASS",
+          "detail": "No managed service ports for this profile"
+        },
+        {
+          "id": "node",
+          "status": "PASS",
+          "detail": "26.0.0"
+        },
+        {
+          "id": "installation",
+          "status": "PASS",
+          "detail": "pnpm@11.25.0"
+        },
+        {
+          "id": "tools",
+          "status": "PASS",
+          "detail": {
+            "typescript": "7.0.2",
+            "vitest": "5.0.5",
+            "vite": "8.3.5",
+            "@playwright/test": "1.64.1"
+          }
+        }
+      ]
+    },
+    {
+      "label": "prepare assets (once)",
+      "seconds": 98,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-before\\check-workflow\\01c43dec-01c0-46ae-971c-98252c331a00\\1-prepare-assets-once-.log",
+      "outputBytes": 738
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 1.57,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-before\\check-workflow\\01c43dec-01c0-46ae-971c-98252c331a00\\2-compile-TypeScript.log",
+      "outputBytes": 0
+    },
+    {
+      "label": "production client build",
+      "seconds": 21.39,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-before\\check-workflow\\01c43dec-01c0-46ae-971c-98252c331a00\\3-production-client-build.log",
+      "outputBytes": 12624
+    },
+    {
+      "label": "browser verification",
+      "seconds": 68.1,
+      "status": "FAIL",
+      "exitCode": 1,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\qa-skill-profiles-before\\check-workflow\\01c43dec-01c0-46ae-971c-98252c331a00\\4-browser-verification.log",
+      "outputBytes": 4167
+    }
+  ],
+  "totalSeconds": 189.08
+}

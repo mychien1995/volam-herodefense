@@ -219,7 +219,7 @@ test('workflow selects the managed profile rather than forcing every run to game
   for (const [mode, args] of [
     ['quick', ['tests/forest-creep-art.test.ts']],
     ['browser', ['--config', 'playwright.forest.config.ts']],
-    ['final', ['--config=playwright.skills.config.ts']],
+    ['final', ['--config=playwright.unregistered.config.ts']],
   ]) {
     assert.doesNotThrow(() =>
       qaWorkflowSession(mode, args, {

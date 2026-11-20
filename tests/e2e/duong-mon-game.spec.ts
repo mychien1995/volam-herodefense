@@ -3,6 +3,7 @@ import { Client, type Room } from '@colyseus/sdk';
 import { PROTOCOL_VERSION, type LobbyState } from '@volam/game-protocol';
 import { duongMon } from '@volam/game-core';
 import { skillIcon } from '@volam/game-data';
+import { placeQaOwnerOnlyArea } from '../../tools/qa-skill-browser.mjs';
 import { joinWaiting, startTogether } from './pregame-helper.js';
 
 interface Event {
@@ -298,24 +299,7 @@ test('Đường Môn starts at level 6 in a real room and plays the approved ass
     await a.screenshot({ path: info.outputPath('tuan-sa-laser.png') });
     await cast(b, 'KeyA');
     await received(a, second.sessionId, duongMon.amKhi, 'attack');
-    await cast(b, 'KeyQ');
-    await expect
-      .poll(async () =>
-        Object.values((await snapshot(b)).state.areas).some(
-          (e) => e.abilityId === duongMon.trap,
-        ),
-      )
-      .toBe(true);
-    expect(
-      Object.values((await snapshot(a)).state.areas).some(
-        (e) => e.abilityId === duongMon.trap,
-      ),
-    ).toBe(false);
-    expect(
-      (await snapshot(a)).events.some(
-        (e) => e.abilityId === duongMon.trap && e.kind === 'cast',
-      ),
-    ).toBe(false);
+    await placeQaOwnerOnlyArea(b, [a], { key: 'KeyQ', abilityId: duongMon.trap });
     await cast(b, 'KeyW');
     await received(a, second.sessionId, duongMon.knives, 'cast');
     await cast(b, 'KeyE');

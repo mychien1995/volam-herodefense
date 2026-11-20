@@ -6,6 +6,7 @@ import { spawnSync } from 'node:child_process';
 import {
   qaWorkflowSession,
   requireFreePorts,
+  requireQaPorts,
   qaManagedProfile,
 } from './qa-session.mjs';
 
@@ -36,13 +37,23 @@ export function supportsNode(version, range) {
   });
 }
 
-// Only these existing profiles inherit the shared port/Chromium contract.
-// Do not guess ports or browser channels for legacy profiles.
+// Explicit audited contracts include legacy ports, fixture ports and browser channels.
 export function managedQaProfile(mode, args = []) {
   return qaManagedProfile(mode, args) !== null;
 }
 
 export function verifyQaBuild(root, session) {
+  const contract = session.contract;
+  const clientOnly = contract?.services.every(
+    (service) => service.serverPort === undefined,
+  );
+  if (contract?.clientMode === 'static')
+    return { client: 'static review; no game build consumed' };
+  if (clientOnly) {
+    if (!existsSync(resolve(root, 'apps/game-client/dist/index.html')))
+      throw Error('Missing built preview client');
+    return { client: 'preview-only; no game server consumed' };
+  }
   if (!existsSync(resolve(root, 'apps/game-server/dist/app.config.js')))
     throw Error('Missing compiled server application');
   const source = readFileSync(
@@ -56,6 +67,11 @@ export function verifyQaBuild(root, session) {
   const version = (text) => /PROTOCOL_VERSION\s*=\s*(\d+)/.exec(text)?.[1];
   if (!version(source) || version(source) !== version(compiled))
     throw Error('Compiled/source protocol mismatch');
+  if (contract?.clientMode === 'development')
+    return {
+      protocol: version(source),
+      client: 'fixture-owned Vite development client',
+    };
   const endpoint = JSON.parse(
     readFileSync(
       resolve(root, 'apps/game-client/dist/volam-build-endpoint.json'),
@@ -129,7 +145,10 @@ export async function qaPreflight({
     if (configured && managed)
       await check(
         'ports',
-        () => requireFreePorts(session),
+        () =>
+          session.contract
+            ? requireQaPorts(session.contract.ports)
+            : requireFreePorts(session),
         'Choose unused VOLAM_QA_SERVER_PORT/VOLAM_QA_CLIENT_PORT; do not borrow or stop another service.',
       );
     await check(
@@ -203,6 +222,50 @@ export async function qaPreflight({
         await check(
           'chromium',
           () => {
+            const channels = session.contract?.channels ?? [null];
+            const configuredExecutable = session.contract?.executableEnv
+              ? env[session.contract.executableEnv]
+              : undefined;
+            if (configuredExecutable || channels.some(Boolean)) {
+              if (configuredExecutable && !existsSync(configuredExecutable))
+                throw Error(
+                  'Missing configured browser executable: ' +
+                    configuredExecutable,
+                );
+              const options = configuredExecutable
+                ? [{ executablePath: configuredExecutable }]
+                : [...new Set(channels)].map((channel) =>
+                    channel ? { channel } : {},
+                  );
+              const script =
+                "const{createRequire}=require('node:module');const r=createRequire(process.argv[1]);(async()=>{for(const options of JSON.parse(process.argv[2])){const b=await r('@playwright/test').chromium.launch({...options,headless:true,timeout:5000});try{if(!b.isConnected())throw Error('Browser did not connect');}finally{await b.close();}}process.stdout.write('configured browser launch/close verified');})().catch(e=>{console.error(e.message);process.exitCode=1;});";
+              const result = spawnSync(
+                process.execPath,
+                [
+                  '-e',
+                  script,
+                  resolve(root, 'package.json'),
+                  JSON.stringify(options),
+                ],
+                {
+                  cwd: root,
+                  env: qaBrowserEnvironment(env, root),
+                  encoding: 'utf8',
+                  timeout: 20000,
+                  windowsHide: true,
+                },
+              );
+              if (result.error || result.status !== 0)
+                throw Error(
+                  'Configured browser unavailable: ' +
+                    (result.error?.message ?? result.stderr.slice(-500)),
+                );
+              return {
+                channels,
+                executable: configuredExecutable ?? null,
+                verified: 'headless launch + close',
+              };
+            }
             // Public executablePath(), in a child so per-run cache overrides never mutate global state.
             const script =
               "const {createRequire}=require('node:module');const r=createRequire(process.argv[1]);process.stdout.write(r('@playwright/test').chromium.executablePath());";
@@ -282,7 +345,7 @@ export async function qaPreflight({
               cache: qaBrowserEnvironment(env, root).PLAYWRIGHT_BROWSERS_PATH,
             };
           },
-          'Run pnpm install:browsers with the same PLAYWRIGHT_BROWSERS_PATH as this check.',
+          "Install the profile's configured Chrome/Edge or browser cache; use pnpm install:browsers for bundled Chromium with the same PLAYWRIGHT_BROWSERS_PATH.",
         );
     }
     if (mode === 'final')

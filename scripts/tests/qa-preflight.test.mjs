@@ -68,7 +68,7 @@ test('Node engine minimums, browser environment and legacy profile boundaries', 
   assert.equal(managedQaProfile('quick'), false);
   assert.equal(
     managedQaProfile('browser', ['--config', 'playwright.skills.config.ts']),
-    false,
+    true,
   );
   assert.equal(
     qaBrowserEnvironment({}, '/repo').PLAYWRIGHT_BROWSERS_PATH,
@@ -228,6 +228,70 @@ test('ready checks reject stale protocol and wrong built endpoints without accep
       protocol: '46',
       serverUrl: session.serverUrl,
     });
+  } finally {
+    f.close();
+  }
+});
+
+test('ready respects static, preview-only and development fixtures without weakening protocol guards', () => {
+  const f = fixture();
+  const session = (clientMode, services) => ({
+    serverUrl: 'http://127.0.0.1:2799',
+    contract: { clientMode, services },
+  });
+  try {
+    assert.match(
+      verifyQaBuild(f.root, session('static', [{ clientPort: 5413 }])).client,
+      /static review/,
+    );
+    assert.throws(
+      () => verifyQaBuild(f.root, session('preview', [{ clientPort: 5557 }])),
+      /Missing built preview/,
+    );
+    f.write('apps/game-client/dist/index.html', '<html></html>');
+    assert.match(
+      verifyQaBuild(f.root, session('preview', [{ clientPort: 5557 }])).client,
+      /preview-only/,
+    );
+    const development = session('development', [
+      { serverPort: 2799, clientPort: 5399 },
+    ]);
+    assert.throws(
+      () => verifyQaBuild(f.root, development),
+      /Missing compiled server/,
+    );
+    f.write(
+      'apps/game-server/dist/app.config.js',
+      'export const ready = true;',
+    );
+    f.write(
+      'packages/game-protocol/src/index.ts',
+      'export const PROTOCOL_VERSION = 46;',
+    );
+    f.write(
+      'packages/game-protocol/dist/index.js',
+      'export const PROTOCOL_VERSION = 45;',
+    );
+    assert.throws(
+      () => verifyQaBuild(f.root, development),
+      /protocol mismatch/,
+    );
+    f.write(
+      'packages/game-protocol/dist/index.js',
+      'export const PROTOCOL_VERSION = 46;',
+    );
+    assert.match(
+      verifyQaBuild(f.root, development).client,
+      /development client/,
+    );
+    assert.throws(
+      () =>
+        verifyQaBuild(
+          f.root,
+          session('preview', development.contract.services),
+        ),
+      /ENOENT/,
+    );
   } finally {
     f.close();
   }

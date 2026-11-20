@@ -121,6 +121,8 @@ if (preflight.status !== 'PASS') {
 }
 // Validate overrides before asset preparation; no cached stage success is consumed.
 const session = qaWorkflowSession(mode, args);
+if (session.contract && mode !== 'quick')
+  process.env.VITE_SERVER_URL ??= session.serverUrl;
 if (mode === 'final' && session.profile === 'arena-creeps') {
   process.env.VITE_SERVER_URL ??= session.serverUrl;
   process.env.VOLAM_QA_ARENA_PRODUCTION = '1';

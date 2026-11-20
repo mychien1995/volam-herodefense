@@ -1,5 +1,13 @@
 import type { Plugin } from 'vite';
 export interface QaSession {
+  contract?: {
+    name: string;
+    ports: number[];
+    services: Array<{ serverPort?: number; clientPort: number }>;
+    channels: Array<string | null>;
+    clientMode: string;
+    executableEnv?: string;
+  };
   profile: string;
   serverPort: number;
   clientPort: number;
@@ -23,6 +31,7 @@ export function qaEvidenceDirectory(
   env?: NodeJS.ProcessEnv,
 ): string;
 export function requireFreePorts(session: QaSession): Promise<void>;
+export function requireQaPorts(ports: number[]): Promise<void>;
 export function verifyQaIdentity(
   url: string,
   expected: Record<string, unknown>,
