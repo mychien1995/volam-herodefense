@@ -8,7 +8,7 @@ const projects = [
   'packages/game-protocol',
   'apps/game-server',
 ];
-export function iterationSnapshot(root, kind, observe) {
+export function iterationSnapshot(root, kind, observe, preparation) {
   const configs = readdirSync(root).filter((p) =>
     /^(?:tsconfig.*\.json|.*\.config\.[tm]s|package\.json|pnpm.*\.yaml|\.env.*)$/.test(
       p,
@@ -50,11 +50,16 @@ export function iterationSnapshot(root, kind, observe) {
             'scripts',
             'tests/e2e',
           ];
-  if (!observe) return fileSnapshot(root, paths).digest;
-  const { value, cost } = profileSync(
-    () => fileSnapshot(root, paths).digest,
-    root,
-  );
+  if (preparation && kind !== 'service')
+    throw Error(
+      'Prepared observation is limited to the first service snapshot',
+    );
+  const snapshot = () =>
+    preparation
+      ? preparation.snapshot(paths).digest
+      : fileSnapshot(root, paths).digest;
+  if (!observe) return snapshot();
+  const { value, cost } = profileSync(snapshot, root);
   observe({ kind, ...cost });
   return value;
 }

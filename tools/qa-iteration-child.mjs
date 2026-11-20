@@ -6,6 +6,22 @@ import { startOwnedGameQa } from './qa-game-services.mjs';
 import { WebSocketTransport } from '@colyseus/ws-transport';
 import { createGameServer } from '../apps/game-server/dist/app.config.js';
 import { browserSocketOptions } from '../apps/game-server/dist/socket-config.js';
+import { resolve, dirname, basename } from 'node:path';
+import { realpathSync } from 'node:fs';
+
+const clientMode = process.env.VOLAM_QA_ITERATION_CLIENT_MODE ?? 'development';
+if (!['development', 'preview'].includes(clientMode))
+  throw Error('Unsupported owned iteration client mode');
+const clientDist = process.env.VOLAM_QA_ITERATION_CLIENT_DIST;
+if (clientMode === 'preview') {
+  if (
+    !clientDist ||
+    dirname(realpathSync(clientDist)) !== realpathSync(resolve('.cache')) ||
+    !basename(clientDist).startsWith('qa-iteration-preview-')
+  )
+    throw Error('Preview iteration requires an owned private output');
+} else if (clientDist)
+  throw Error('Development iteration does not consume a preview output');
 
 class IterationTransport extends WebSocketTransport {
   async clearSockets() {
@@ -60,7 +76,8 @@ process.on('message', async (message) => {
 await serveQaChild(session, PROTOCOL_VERSION, () =>
   startOwnedGameQa({
     session,
-    clientMode: 'development',
+    clientMode,
+    ...(clientDist ? { clientDist } : {}),
     serverFactory: () => createGameServer(transport),
     environment: { NODE_ENV: 'development', VOLAM_DEV_PRACTICE_CREEPS: '1' },
   }),

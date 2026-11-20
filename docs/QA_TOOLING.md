@@ -78,6 +78,14 @@ pnpm check:final --config playwright.qa-helpers.config.ts --grep 'QA helper|rang
 
 The dedicated helper fixture uses the existing owned-server setup, removes the initial hostile practice creeps only in its named test rooms and places a durable harmless target. This keeps actors alive while art loads. Real keyboard input, simulation movement, projectile creation and peer replication remain under test. It is not natural-combat, balance, art or long-soak acceptance.
 
+## Fresh preparation observations and private preview
+
+`pnpm qa:iterate --plan rounds.json --profile --prepared-observation` can reuse output hashes observed during the **current successful preparation** for the first service snapshot only. This is opt-in; the default still reads every byte. File inventory/type checks and full post-test byte hashes remain mandatory. A persistent mutation during that interval rejects the result and closes the owned service. This is not an atomic snapshot, an mtime cache or a cached test PASS. The final workflow does not consume these receipts.
+
+Add `--client-mode preview` to compare the same supported tests against a private production bundle. Build inputs, output bytes and endpoint are verified; the directory belongs to the batch and is removed after its service closes. The shared client `dist` is not overwritten. This mode costs additional conservative source/output hashing and was slower in the measured short batch; development remains the default. No school/boss prerequisite adapter was expanded.
+
+See [implementation boundaries, retained failures and before/after evidence](QA_READ_REUSE_2026_11_20.md). Preparation observation removes duplicate reads but slightly increases SHA work; timing samples do not establish billed token savings.
+
 ## Compact logs and measurements
 
 The workflow prints stage summaries and a bounded failure tail. Full stdout/stderr streams to per-run files under the timing report directory, with paths and byte counts in the report. Files can be tailed during long stages. `VOLAM_QA_VERBOSE=1` prints full output after each stage. No assertion, validator or approval gate is removed; no PASS is reused.

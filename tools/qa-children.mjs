@@ -16,6 +16,7 @@ export function stopQaChild(child, runId, timeout) {
         `Owned QA child exited before cleanup: ${child.exitCode ?? child.signalCode}`,
       ),
     );
+  const disconnected = !child.connected;
   return new Promise((done, reject) => {
     let forced = false;
     const timer = setTimeout(() => {
@@ -29,10 +30,10 @@ export function stopQaChild(child, runId, timeout) {
     child.once('exit', (code, signal) => {
       clearTimeout(timer);
       clearTimeout(hardTimer);
-      if (forced || code !== 0 || signal)
+      if (disconnected || forced || code !== 0 || signal)
         reject(
           Error(
-            `Owned QA child cleanup failed: code=${code}, signal=${signal}, forced=${forced}`,
+            `Owned QA child cleanup failed: code=${code}, signal=${signal}, forced=${forced}, disconnected=${disconnected}`,
           ),
         );
       else done();

@@ -10,7 +10,7 @@ export async function startIterationService(
   session,
   directory,
   protocolVersion,
-  { profiling = false } = {},
+  { profiling = false, clientMode = 'development', clientDist } = {},
 ) {
   await requireFreePorts(session);
   const runId = randomUUID();
@@ -21,6 +21,8 @@ export async function startIterationService(
       env: {
         ...process.env,
         VOLAM_QA_RUN_ID: runId,
+        VOLAM_QA_ITERATION_CLIENT_MODE: clientMode,
+        VOLAM_QA_ITERATION_CLIENT_DIST: clientDist ?? '',
         ...(profiling
           ? {
               VOLAM_QA_COST_OUTPUT: resolve(

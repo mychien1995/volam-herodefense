@@ -1,4 +1,4 @@
-import { resolve } from 'node:path';
+import { resolve, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import {
   readFileSync,
@@ -9,7 +9,7 @@ import {
 } from 'node:fs';
 import { spawn } from 'node:child_process';
 import { createInterface } from 'node:readline';
-import { randomUUID } from 'node:crypto';
+import { randomUUID, createHash } from 'node:crypto';
 import { qaWorkflowSession, requireFreePorts } from '../tools/qa-session.mjs';
 import {
   qaPreflight,
@@ -25,6 +25,12 @@ import { startIterationService } from '../tools/qa-iteration-service.mjs';
 import { createRequire } from 'node:module';
 import { costPoint, costSince } from '../tools/qa-cost-profile.mjs';
 import { requireQaCheckoutReady } from '../tools/qa-checkout-state.mjs';
+import { preparedObservation } from '../tools/qa-prepared-observation.mjs';
+import { QaPreviewBuild } from '../tools/qa-preview-build.mjs';
+import {
+  previewInputPaths,
+  previewInputFingerprint,
+} from '../tools/qa-preview-inputs.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 if (resolve('.') !== resolve(root))
@@ -32,20 +38,28 @@ if (resolve('.') !== resolve(root))
 const args = process.argv.slice(2);
 const cold = args.includes('--cold');
 const profiling = args.includes('--profile');
+const usePreparedObservation = args.includes('--prepared-observation');
 const planIndex = args.indexOf('--plan');
+const modeIndex = args.indexOf('--client-mode');
+const clientMode = modeIndex < 0 ? 'development' : args[modeIndex + 1];
 if (
   args.some(
     (x, i) =>
       x !== '--cold' &&
       x !== '--profile' &&
+      x !== '--prepared-observation' &&
+      x !== '--client-mode' &&
       x !== '--plan' &&
-      !(planIndex >= 0 && i === planIndex + 1),
+      !(planIndex >= 0 && i === planIndex + 1) &&
+      !(modeIndex >= 0 && i === modeIndex + 1),
   ) ||
   (planIndex >= 0 && !args[planIndex + 1]) ||
-  args.filter((x) => x === '--plan').length > 1
+  args.filter((x) => x === '--plan').length > 1 ||
+  args.filter((x) => x === '--client-mode').length > 1 ||
+  !['development', 'preview'].includes(clientMode)
 )
   throw Error(
-    'Usage: qa:iterate [--cold] [--profile] [--plan rounds.json]; otherwise read one round JSON per stdin line',
+    'Usage: qa:iterate [--cold] [--profile] [--prepared-observation] [--client-mode development|preview] [--plan rounds.json]',
   );
 const plan =
   planIndex >= 0 ? JSON.parse(readFileSync(args[planIndex + 1], 'utf8')) : null;
@@ -56,7 +70,12 @@ process.env.VOLAM_QA_RUN_ID = randomUUID();
 process.env.VOLAM_QA_SERVER_PORT ??= '2886';
 process.env.VOLAM_QA_CLIENT_PORT ??= '5486';
 process.env.VITE_SERVER_URL ??= `http://127.0.0.1:${process.env.VOLAM_QA_SERVER_PORT}`;
-for (const name of ['VOLAM_RUNTIME_PUBLIC_DIR', 'VOLAM_QA_ITERATION_RUN_ID'])
+for (const name of [
+  'VOLAM_RUNTIME_PUBLIC_DIR',
+  'VOLAM_QA_ITERATION_RUN_ID',
+  'VOLAM_QA_ITERATION_CLIENT_MODE',
+  'VOLAM_QA_ITERATION_CLIENT_DIST',
+])
   if (process.env[name])
     throw Error(`${name} is not supported by this owned iteration entrypoint`);
 const session = qaWorkflowSession('browser', ['--config', config]);
@@ -71,6 +90,8 @@ const report = {
   startedAt: new Date().toISOString(),
   status: 'RUNNING',
   profiling,
+  clientMode,
+  preparedObservation: usePreparedObservation,
   rounds: [],
 };
 const save = () =>
@@ -88,8 +109,40 @@ const compiler = new QaCompilerWatch(
   observe,
 );
 const lease = new IterationLease();
+const require = createRequire(import.meta.url);
+const preview =
+  clientMode === 'preview'
+    ? new QaPreviewBuild(
+        root,
+        session.serverUrl,
+        async (output) => {
+          const pkg = require.resolve('vite/package.json');
+          const command = resolve(
+            dirname(pkg),
+            JSON.parse(readFileSync(pkg, 'utf8')).bin.vite,
+          );
+          await run(
+            command,
+            ['build', '--outDir', output, '--emptyOutDir'],
+            process.env,
+            resolve(directory, `preview-build-${activeRound.index}.log`),
+            false,
+            resolve('apps/game-client'),
+          );
+        },
+        observe,
+      )
+    : undefined;
 let active;
-async function run(script, params, env, log, preload = false) {
+async function run(
+  script,
+  params,
+  env,
+  log,
+  preload = false,
+  cwd = root,
+  prepared = false,
+) {
   const fd = openSync(log, 'wx');
   try {
     active = spawn(
@@ -101,11 +154,17 @@ async function run(script, params, env, log, preload = false) {
               pathToFileURL(resolve('tools/qa-cost-preload.mjs')).href,
             ]
           : []),
+        ...(prepared
+          ? [
+              '--import',
+              pathToFileURL(resolve('tools/qa-prepared-preload.mjs')).href,
+            ]
+          : []),
         script,
         ...params,
       ],
       {
-        cwd: root,
+        cwd,
         env,
         stdio: ['ignore', fd, fd],
         windowsHide: true,
@@ -129,6 +188,11 @@ const stop = async () => {
   const errors = results
     .filter((r) => r.status === 'rejected')
     .map((r) => r.reason);
+  try {
+    await preview?.close();
+  } catch (error) {
+    errors.push(error);
+  }
   if (errors.length)
     throw new AggregateError(errors, 'Iteration cleanup failed');
 };
@@ -189,21 +253,36 @@ try {
       if (entry.preflight.status !== 'PASS')
         throw Error('Fresh iteration installation preflight failed');
       const prep = performance.now();
+      const preparationNonce = randomUUID();
+      const preparationPath = resolve(
+        directory,
+        `prepared-observation-${index}.json`,
+      );
       // Always rerun asset guards/preparation. No prepared-art cache or approval reuse.
       await run(
         'scripts/prepare-assets.mjs',
         [],
-        profiling
-          ? {
-              ...process.env,
-              VOLAM_QA_COST_OUTPUT: resolve(
-                directory,
-                `prepare-cost-${index}.json`,
-              ),
-            }
-          : process.env,
+        {
+          ...process.env,
+          ...(profiling
+            ? {
+                VOLAM_QA_COST_OUTPUT: resolve(
+                  directory,
+                  `prepare-cost-${index}.json`,
+                ),
+              }
+            : {}),
+          ...(usePreparedObservation
+            ? {
+                VOLAM_QA_PREPARED_OUTPUT: preparationPath,
+                VOLAM_QA_PREPARED_NONCE: preparationNonce,
+              }
+            : {}),
+        },
         resolve(directory, `prepare-${index}.log`),
         profiling,
+        root,
+        usePreparedObservation,
       );
       if (profiling)
         entry.preparationCost = JSON.parse(
@@ -216,10 +295,48 @@ try {
       const compile = performance.now();
       entry.compiler = await compiler.ensure();
       entry.compileSeconds = (performance.now() - compile) / 1000;
+      let preparation = usePreparedObservation
+        ? preparedObservation(
+            root,
+            JSON.parse(readFileSync(preparationPath, 'utf8')),
+            preparationNonce,
+          )
+        : undefined;
+      if (preparation) entry.preparedOutputs = preparation.outputs;
       const protocol = await import(
         '../packages/game-protocol/dist/index.js?' + randomUUID()
       );
-      const fingerprint = () => iterationSnapshot(root, 'service', observe);
+      const sourceFingerprint = () => {
+        const observation = preparation;
+        preparation = undefined;
+        return iterationSnapshot(root, 'service', observe, observation);
+      };
+      const combine = (source, output) =>
+        createHash('sha256')
+          .update(JSON.stringify({ source, output, clientMode }))
+          .digest('hex');
+      let firstPreviewFingerprint;
+      const previewPaths = preview ? previewInputPaths(root) : undefined;
+      const previewSources = () =>
+        previewInputFingerprint(root, previewPaths, observe);
+      if (preview) {
+        const source = combine(sourceFingerprint(), previewSources());
+        entry.previewInputPaths = previewPaths;
+        entry.previewBuild = await preview.ensure(source);
+        firstPreviewFingerprint = combine(source, entry.previewBuild.output);
+      }
+      const fingerprint = () => {
+        if (!preview) return sourceFingerprint();
+        if (firstPreviewFingerprint) {
+          const value = firstPreviewFingerprint;
+          firstPreviewFingerprint = undefined;
+          return value;
+        }
+        return combine(
+          combine(sourceFingerprint(), previewSources()),
+          preview.snapshot(),
+        );
+      };
       const result = await lease.round({
         fingerprint,
         start: () =>
@@ -228,7 +345,11 @@ try {
               session,
               directory,
               protocol.PROTOCOL_VERSION,
-              { profiling },
+              {
+                profiling,
+                clientMode,
+                clientDist: entry.previewBuild?.directory,
+              },
             ),
           ),
         verify: async (service) => {
@@ -254,7 +375,6 @@ try {
             );
           entry.service = { runId: service.runId, pid: service.pid };
           const browserStart = performance.now();
-          const require = createRequire(import.meta.url);
           await run(
             require.resolve('@playwright/test/cli'),
             [
