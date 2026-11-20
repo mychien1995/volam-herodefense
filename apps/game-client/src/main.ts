@@ -39,6 +39,7 @@ import './defense-hud.css';
 import './item-menu.css';
 import { PreGame } from './pregame.js';
 import { preferences, type Preferences } from './preferences.js';
+import { playSkillSound } from './skill-sounds.js';
 import { CreepPreview, creepPreviewRequested } from './creep-preview.js';
 import gameOstUrl from '../../../assets/sounds/game-ost.mp3?url';
 import gameOst2Url from '../../../assets/sounds/game-ost-2.mp3?url';
@@ -145,6 +146,7 @@ function syncMatchMusic(active: boolean): void {
     window.removeEventListener('keydown', playMatchMusic, true);
     matchMusic.pause();
     matchMusic.currentTime = 0;
+    game?.sound.stopAll();
   }
 }
 const reviewQuery = new URLSearchParams(location.search);
@@ -233,7 +235,7 @@ async function bootRenderer(): Promise<boolean> {
       scale: { mode: Phaser.Scale.NONE, zoom: 1 },
       scene: scenes,
       input: { keyboard: false, mouse: true, touch: false },
-      audio: { noAudio: true },
+      audio: { noAudio: artPreview },
     });
     game = renderer;
     if (inputTiming)
@@ -604,6 +606,7 @@ async function connect(existing: boolean): Promise<void> {
       );
     });
     joined.onMessage('combat-event', (payload: unknown) => {
+      if (room !== joined) return;
       const parsedEvent = combatEventSchema.safeParse(payload);
       if (
         !parsedEvent.success ||
@@ -613,6 +616,8 @@ async function connect(existing: boolean): Promise<void> {
         return;
       events.push(parsedEvent.data);
       if (events.length > 60) events.shift();
+      if (arenaScene?.presentationReady)
+        playSkillSound(arenaScene, parsedEvent.data, joined.sessionId);
       arenaScene?.combat(parsedEvent.data);
     });
     joined.onMessage('command-rejected', (payload: unknown) => {

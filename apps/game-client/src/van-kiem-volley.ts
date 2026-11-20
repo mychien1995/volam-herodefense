@@ -54,6 +54,7 @@ export class VanKiemVolley {
   private readonly cues: BladeCue[];
   private readonly back: Point;
   private readonly launchDepth: number;
+  private landingSoundPlayed = false;
 
   constructor(
     private readonly scene: Phaser.Scene,
@@ -62,6 +63,7 @@ export class VanKiemVolley {
     launch: Launch,
     landing: Point & { radius: number },
     private readonly density: number,
+    private readonly onLandingSound?: () => void,
   ) {
     this.back = {
       x: launch.x - launch.fx * 24 * density,
@@ -92,6 +94,11 @@ export class VanKiemVolley {
   }
 
   draw(t: number): number {
+    const firstImpact = fallAt + fallDuration;
+    if (!this.landingSoundPlayed && t >= firstImpact - 100) {
+      this.landingSoundPlayed = true;
+      if (t < firstImpact) this.onLandingSound?.();
+    }
     const phase = t < quietAt ? 'rise' : t < fallAt ? 'quiet' : 'fall';
     let landed = 0;
     for (const cue of this.cues) {

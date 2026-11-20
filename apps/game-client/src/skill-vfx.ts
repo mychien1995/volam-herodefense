@@ -650,6 +650,7 @@ export class SkillVfx {
     state: LobbyState | undefined,
     zoneId: string,
     renderPosition?: (id: string) => Phaser.GameObjects.Sprite | undefined,
+    sessionId?: string,
   ): void {
     this.state = state;
     this.r3.sync(state, zoneId, renderPosition);
@@ -662,7 +663,7 @@ export class SkillVfx {
     }
     this.thienSon.sync(state, zoneId);
     this.voDangQuyen.sync(state, zoneId, renderPosition);
-    this.voDangKiem.sync(state, zoneId, renderPosition);
+    this.voDangKiem.sync(state, zoneId, renderPosition, sessionId);
     const actor = (id: string): VfxActor | undefined =>
       state?.players.get(id) ?? state?.creeps.get(id);
     for (const id of this.casts.keys()) {

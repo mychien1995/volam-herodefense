@@ -25,6 +25,7 @@ import {
   preloadConLuanArt,
 } from './con-luan-art.js';
 import Phaser from 'phaser';
+import { preloadSkillSounds } from './skill-sounds.js';
 import {
   DuongMonArt,
   duongMonBody,
@@ -401,16 +402,14 @@ export class ArenaScene extends Phaser.Scene {
   preload(): void {
     this.load.image('click-move-marker', markerArt);
     this.bootArtFailed = false;
-    this.load.once(
-      Phaser.Loader.Events.COMPLETE,
-      (
-        _loader: Phaser.Loader.LoaderPlugin,
-        _loaded: number,
-        failed: number,
-      ) => {
-        this.bootArtFailed = failed > 0;
-      },
-    );
+    const onLoadError = (file: Phaser.Loader.File) => {
+      if (file.type !== 'audio') this.bootArtFailed = true;
+    };
+    this.load.on(Phaser.Loader.Events.FILE_LOAD_ERROR, onLoadError);
+    this.load.once(Phaser.Loader.Events.COMPLETE, () => {
+      this.load.off(Phaser.Loader.Events.FILE_LOAD_ERROR, onLoadError);
+    });
+    preloadSkillSounds(this);
     preloadRuntimeArtReview(this);
     if (this.eagerArt) preloadLoiDai(this);
     preloadArt(this, this.eagerArt);
@@ -1423,7 +1422,12 @@ export class ArenaScene extends Phaser.Scene {
     this.followOffsetY +=
       (introOffset - this.followOffsetY) * Math.min(1, delta / 85);
     camera.setFollowOffset(0, this.followOffsetY);
-    this.vfx?.sync(state, this.zoneId, (id) => this.actors.get(id)?.sprite);
+    this.vfx?.sync(
+      state,
+      this.zoneId,
+      (id) => this.actors.get(id)?.sprite,
+      this.sessionId,
+    );
     this.conLuanArt?.sync(state, this.zoneId);
     this.duongMonArt?.sync(state, this.zoneId);
     this.nguDocArt?.sync(state, this.zoneId);

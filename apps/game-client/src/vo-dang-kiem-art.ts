@@ -1,4 +1,5 @@
 import { zoneTick } from './zone-tick.js';
+import { playVanKiemLandingSound } from './skill-sounds.js';
 import Phaser from 'phaser';
 import type { CombatEvent } from '@volam/game-core';
 import { m1Config } from '@volam/game-data';
@@ -204,6 +205,7 @@ export class VoDangKiemArt {
     state: LobbyState | undefined,
     zone: string,
     point?: (id: string) => Point | undefined,
+    sessionId?: string,
   ): void {
     this.point = point;
     const tick = zoneTick(state, zone);
@@ -235,6 +237,9 @@ export class VoDangKiemArt {
             },
             area,
             0.5,
+            area.ownerId === sessionId
+              ? () => playVanKiemLandingSound(this.scene)
+              : undefined,
           );
           this.skyfalls.set(id, view);
         }
