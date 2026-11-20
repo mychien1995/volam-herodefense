@@ -1,0 +1,103 @@
+{
+  "players": 2,
+  "development": false,
+  "protocol": 46,
+  "timings": [
+    {
+      "phase": "2 joined room",
+      "seconds": 5.94
+    },
+    {
+      "phase": "2 real clients ready",
+      "seconds": 29.53
+    }
+  ],
+  "directions": [],
+  "scenes": [],
+  "fixtures": "Server-owned wave placement/zone entry for coverage; natural keyboard combat and movement checked separately.",
+  "status": "FAIL",
+  "failure": "Error: Timeout: server resolved manual A vuong_trung_duong_p2 after 20012ms (257 observations); {\"hp\":12008,\"invulnerable\":false,\"bossPosition\":[700,650],\"hero\":{\"x\":990,\"y\":616,\"fx\":-0.7071067811865475,\"fy\":-0.7071067811865475,\"basic\":\"vo_dang_quyen\",\"pose\":\"idle\"},\"waveArena\":{\"bossId\":\"vuong_trung_duong\",\"phase\":\"fighting\",\"locked\":true,\"attempt\":1,\"phaseUntil\":0,\"tick\":174,\"bossHp\":0,\"bossMaxHp\":0,\"bounds\":{\"x\":800,\"y\":616,\"radiusX\":324,\"radiusY\":294}},\"events\":[{\"tick\":58,\"hitPhase\":\"left_palm\",\"protocolVersion\":46,\"id\":11,\"kind\":\"hit\",\"sourceId\":\"S0C6JDLYS\",\"targetId\":\"vuong_trung_duong\",\"abilityId\":\"vo_dang_quyen\",\"x\":700,\"y\":650,\"damage\":1,\"critical\":false,\"zoneId\":\"arena\",\"fx\":-0.7071067811865475,\"fy\":-0.7071067811865475},{\"tick\":91,\"protocolVersion\":46,\"id\":12,\"kind\":\"effect\",\"sourceId\":\"vuong_trung_duong\",\"targetId\":\"\",\"abilityId\":\"vtd_bac_dau_kiem_tran\",\"x\":700,\"y\":650,\"damage\":0,\"critical\":false,\"zoneId\":\"arena\",\"stage\":\"boss_shout\"},{\"tick\":163,\"protocolVersion\":46,\"id\":13,\"kind\":\"effect\",\"sourceId\":\"vuong_trung_duong\",\"targetId\":\"\",\"abilityId\":\"vtd_cuu_am_ho_the\",\"x\":700,\"y\":650,\"damage\":0,\"critical\":false,\"zoneId\":\"arena\",\"stage\":\"boss_shout\"},{\"tick\":174,\"protocolVersion\":46,\"id\":14,\"kind\":\"attack\",\"sourceId\":\"S0C6JDLYS\",\"targetId\":\"\",\"abilityId\":\"vo_dang_quyen\",\"x\":720.50609665441,\"y\":670.50609665441,\"damage\":0,\"critical\":false,\"zoneId\":\"arena\",\"fx\":-0.7071067811865475,\"fy\":-0.7071067811865475,\"radius\":80,\"stage\":\"left_palm\"},{\"tick\":174,\"hitPhase\":\"left_palm\",\"protocolVersion\":46,\"id\":15,\"kind\":\"hit\",\"sourceId\":\"S0C6JDLYS\",\"targetId\":\"vuong_trung_duong\",\"abilityId\":\"vo_dang_quyen\",\"x\":700,\"y\":650,\"damage\":1,\"critical\":false,\"zoneId\":\"arena\",\"fx\":-0.7071067811865475,\"fy\":-0.7071067811865475},{\"tick\":174,\"protocolVersion\":46,\"id\":16,\"kind\":\"death\",\"sourceId\":\"S0C6JDLYS\",\"targetId\":\"vuong_trung_duong\",\"abilityId\":\"vo_dang_quyen\",\"x\":700,\"y\":650,\"damage\":0,\"critical\":false,\"zoneId\":\"arena\"},{\"tick\":355,\"protocolVersion\":46,\"id\":17,\"kind\":\"effect\",\"sourceId\":\"vuong_trung_duong\",\"targetId\":\"\",\"abilityId\":\"banter_vuong_trung_duong_7\",\"x\":700,\"y\":650,\"damage\":0,\"critical\":false,\"zoneId\":\"arena\",\"stage\":\"boss_banter\"},{\"tick\":608,\"protocolVersion\":46,\"id\":18,\"kind\":\"effect\",\"sourceId\":\"vuong_trung_duong\",\"targetId\":\"\",\"abilityId\":\"banter_vuong_trung_duong_5\",\"x\":700,\"y\":650,\"damage\":0,\"critical\":false,\"zoneId\":\"arena\",\"stage\":\"boss_banter\"}]}",
+  "errors": [],
+  "serverLobby": {
+    "phase": "IN_GAME",
+    "host": "S0C6JDLYS",
+    "players": [
+      {
+        "id": "S0C6JDLYS",
+        "nickname": "Renovation 1",
+        "school": "vo_dang",
+        "branch": "vo_dang_quyen",
+        "confirmed": true,
+        "connected": true
+      },
+      {
+        "id": "KeF9HWglf",
+        "nickname": "Renovation 2",
+        "school": "cai_bang",
+        "branch": "cai_bang_bong",
+        "confirmed": true,
+        "connected": true
+      }
+    ]
+  },
+  "clientLobby": [
+    {
+      "client": 1,
+      "session": "S0C6JDLYS",
+      "phase": "IN_GAME",
+      "host": "S0C6JDLYS",
+      "players": [
+        {
+          "id": "S0C6JDLYS",
+          "nickname": "Renovation 1",
+          "school": "vo_dang",
+          "branch": "vo_dang_quyen",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "KeF9HWglf",
+          "nickname": "Renovation 2",
+          "school": "cai_bang",
+          "branch": "cai_bang_bong",
+          "confirmed": true,
+          "connected": true
+        }
+      ],
+      "heading": "Chọn môn phái",
+      "schoolControls": 7,
+      "hidden": true,
+      "error": "Không thể đổi lựa chọn ở giai đoạn này.",
+      "focused": true
+    },
+    {
+      "client": 2,
+      "session": "KeF9HWglf",
+      "phase": "IN_GAME",
+      "host": "S0C6JDLYS",
+      "players": [
+        {
+          "id": "S0C6JDLYS",
+          "nickname": "Renovation 1",
+          "school": "vo_dang",
+          "branch": "vo_dang_quyen",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "KeF9HWglf",
+          "nickname": "Renovation 2",
+          "school": "cai_bang",
+          "branch": "cai_bang_bong",
+          "confirmed": true,
+          "connected": true
+        }
+      ],
+      "heading": "Chọn môn phái",
+      "schoolControls": 7,
+      "hidden": true,
+      "error": "",
+      "focused": true
+    }
+  ]
+}

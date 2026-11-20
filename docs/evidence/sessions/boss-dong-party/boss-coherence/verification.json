@@ -1,0 +1,1328 @@
+{
+  "status": "PASS",
+  "before": false,
+  "clients": 6,
+  "fixture": "Isolated server-owned boss spawn/build/location/cooldown prerequisites; actual encounter beginCast/release and replicated effects; not natural progression or defeat coverage",
+  "idle": {
+    "frames": [
+      "idle_0_down_right",
+      "idle_1_down_right",
+      "idle_2_down_right",
+      "idle_3_down_right"
+    ],
+    "scales": [
+      "[0.5,0.5]"
+    ]
+  },
+  "walk": {
+    "frames": [
+      "idle_1_down_right",
+      "walk_0_down_right",
+      "walk_1_down_right",
+      "walk_2_down_right",
+      "walk_3_down_right"
+    ],
+    "scales": [
+      "[0.5,0.5]"
+    ]
+  },
+  "death": {
+    "frames": [
+      "idle_0_down_right",
+      "death_0_down_right",
+      "death_1_down_right"
+    ],
+    "scales": [
+      "[0.5,0.5]"
+    ]
+  },
+  "cases": [
+    {
+      "ability": "ta_kiem_lien_kich",
+      "sourceSince": 0,
+      "body": {
+        "id": "dong_ta",
+        "pose": "action",
+        "direction": "down",
+        "locomotion": false,
+        "name": "dong_ta:dong_ta",
+        "texture": "boss-unified:dong_ta",
+        "source": "/assets/boss-dong-ta-unified-v1/body.png",
+        "density": 1,
+        "effectiveDensity": 2,
+        "action": {
+          "ability": "ta_kiem_lien_kich",
+          "phase": "release",
+          "sourceTexture": "boss-unified:dong_ta",
+          "sourceFrame": "thrust_down"
+        },
+        "screen": [
+          516.122802734375,
+          313.122802734375
+        ],
+        "frame": "thrust_down",
+        "x": 700,
+        "y": 650,
+        "origin": [
+          0.5,
+          0.8125
+        ],
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "depth": 650.5,
+        "visible": true
+      },
+      "cap": {
+        "frames": [
+          "idle_2_down_right",
+          "windup_down",
+          "thrust_down",
+          "recover_down",
+          "idle_0_down_right"
+        ],
+        "scales": [
+          "[0.5,0.5]"
+        ]
+      },
+      "peerEvents": [
+        {
+          "phase": "IN_GAME",
+          "events": []
+        },
+        {
+          "phase": "IN_GAME",
+          "events": []
+        },
+        {
+          "phase": "IN_GAME",
+          "events": []
+        },
+        {
+          "phase": "IN_GAME",
+          "events": []
+        },
+        {
+          "phase": "IN_GAME",
+          "events": []
+        },
+        {
+          "phase": "IN_GAME",
+          "events": []
+        }
+      ],
+      "peerReleases": [
+        {
+          "id": "dong_0_1",
+          "actorId": "dong_ta",
+          "abilityId": "ta_kiem_lien_kich",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 355,
+          "activeAt": 369,
+          "endsAt": 396,
+          "released": true,
+          "nextPulse": 371,
+          "pulse": 1,
+          "pattern": "plus"
+        },
+        {
+          "id": "dong_0_1",
+          "actorId": "dong_ta",
+          "abilityId": "ta_kiem_lien_kich",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 355,
+          "activeAt": 369,
+          "endsAt": 396,
+          "released": true,
+          "nextPulse": 371,
+          "pulse": 1,
+          "pattern": "plus"
+        },
+        {
+          "id": "dong_0_1",
+          "actorId": "dong_ta",
+          "abilityId": "ta_kiem_lien_kich",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 355,
+          "activeAt": 369,
+          "endsAt": 396,
+          "released": true,
+          "nextPulse": 371,
+          "pulse": 1,
+          "pattern": "plus"
+        },
+        {
+          "id": "dong_0_1",
+          "actorId": "dong_ta",
+          "abilityId": "ta_kiem_lien_kich",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 355,
+          "activeAt": 369,
+          "endsAt": 396,
+          "released": true,
+          "nextPulse": 371,
+          "pulse": 1,
+          "pattern": "plus"
+        },
+        {
+          "id": "dong_0_1",
+          "actorId": "dong_ta",
+          "abilityId": "ta_kiem_lien_kich",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 355,
+          "activeAt": 369,
+          "endsAt": 396,
+          "released": true,
+          "nextPulse": 371,
+          "pulse": 1,
+          "pattern": "plus"
+        },
+        {
+          "id": "dong_0_1",
+          "actorId": "dong_ta",
+          "abilityId": "ta_kiem_lien_kich",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 355,
+          "activeAt": 369,
+          "endsAt": 396,
+          "released": true,
+          "nextPulse": 373,
+          "pulse": 2,
+          "pattern": "plus"
+        }
+      ]
+    },
+    {
+      "ability": "lac_anh_normal",
+      "sourceSince": 0,
+      "body": {
+        "id": "dong_ta",
+        "pose": "action",
+        "direction": "up",
+        "locomotion": false,
+        "name": "dong_ta:dong_ta",
+        "texture": "boss-unified:dong_ta",
+        "source": "/assets/boss-dong-ta-unified-v1/body.png",
+        "density": 1,
+        "effectiveDensity": 2,
+        "action": {
+          "ability": "lac_anh_normal",
+          "phase": "release",
+          "sourceTexture": "boss-unified:dong_ta",
+          "sourceFrame": "slash_up"
+        },
+        "screen": [
+          516.122802734375,
+          313.122802734375
+        ],
+        "frame": "slash_up",
+        "x": 700,
+        "y": 650,
+        "origin": [
+          0.5,
+          0.8125
+        ],
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "depth": 650.5,
+        "visible": true
+      },
+      "cap": {
+        "frames": [
+          "idle_0_down_right",
+          "windup_down",
+          "slash_up",
+          "recover_up",
+          "recover_down",
+          "recover_left",
+          "recover_right",
+          "walk_3_down_left",
+          "walk_0_down_left",
+          "walk_1_down_left",
+          "walk_2_down_left",
+          "flute_raise_down"
+        ],
+        "scales": [
+          "[0.5,0.5]"
+        ]
+      },
+      "peerEvents": [
+        {
+          "phase": "IN_GAME",
+          "events": []
+        },
+        {
+          "phase": "IN_GAME",
+          "events": []
+        },
+        {
+          "phase": "IN_GAME",
+          "events": []
+        },
+        {
+          "phase": "IN_GAME",
+          "events": []
+        },
+        {
+          "phase": "IN_GAME",
+          "events": []
+        },
+        {
+          "phase": "IN_GAME",
+          "events": []
+        }
+      ],
+      "peerReleases": [
+        {
+          "id": "dong_0_15",
+          "actorId": "dong_ta",
+          "abilityId": "lac_anh_normal",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 410,
+          "activeAt": 424,
+          "endsAt": 460,
+          "released": true,
+          "nextPulse": 424,
+          "pulse": 0,
+          "pattern": "plus",
+          "path": [
+            {
+              "x": 700,
+              "y": 650
+            },
+            {
+              "x": 950,
+              "y": 386
+            },
+            {
+              "x": 930,
+              "y": 846
+            },
+            {
+              "x": 585,
+              "y": 616
+            },
+            {
+              "x": 950,
+              "y": 386
+            }
+          ],
+          "hitIds": []
+        },
+        {
+          "id": "dong_0_15",
+          "actorId": "dong_ta",
+          "abilityId": "lac_anh_normal",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 410,
+          "activeAt": 424,
+          "endsAt": 460,
+          "released": true,
+          "nextPulse": 424,
+          "pulse": 0,
+          "pattern": "plus",
+          "path": [
+            {
+              "x": 700,
+              "y": 650
+            },
+            {
+              "x": 950,
+              "y": 386
+            },
+            {
+              "x": 930,
+              "y": 846
+            },
+            {
+              "x": 585,
+              "y": 616
+            },
+            {
+              "x": 950,
+              "y": 386
+            }
+          ],
+          "hitIds": []
+        },
+        {
+          "id": "dong_0_15",
+          "actorId": "dong_ta",
+          "abilityId": "lac_anh_normal",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 410,
+          "activeAt": 424,
+          "endsAt": 460,
+          "released": true,
+          "nextPulse": 424,
+          "pulse": 0,
+          "pattern": "plus",
+          "path": [
+            {
+              "x": 700,
+              "y": 650
+            },
+            {
+              "x": 950,
+              "y": 386
+            },
+            {
+              "x": 930,
+              "y": 846
+            },
+            {
+              "x": 585,
+              "y": 616
+            },
+            {
+              "x": 950,
+              "y": 386
+            }
+          ],
+          "hitIds": []
+        },
+        {
+          "id": "dong_0_15",
+          "actorId": "dong_ta",
+          "abilityId": "lac_anh_normal",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 410,
+          "activeAt": 424,
+          "endsAt": 460,
+          "released": true,
+          "nextPulse": 424,
+          "pulse": 0,
+          "pattern": "plus",
+          "path": [
+            {
+              "x": 700,
+              "y": 650
+            },
+            {
+              "x": 950,
+              "y": 386
+            },
+            {
+              "x": 930,
+              "y": 846
+            },
+            {
+              "x": 585,
+              "y": 616
+            },
+            {
+              "x": 950,
+              "y": 386
+            }
+          ],
+          "hitIds": []
+        },
+        {
+          "id": "dong_0_15",
+          "actorId": "dong_ta",
+          "abilityId": "lac_anh_normal",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 410,
+          "activeAt": 424,
+          "endsAt": 460,
+          "released": true,
+          "nextPulse": 424,
+          "pulse": 0,
+          "pattern": "plus",
+          "path": [
+            {
+              "x": 700,
+              "y": 650
+            },
+            {
+              "x": 950,
+              "y": 386
+            },
+            {
+              "x": 930,
+              "y": 846
+            },
+            {
+              "x": 585,
+              "y": 616
+            },
+            {
+              "x": 950,
+              "y": 386
+            }
+          ],
+          "hitIds": []
+        },
+        {
+          "id": "dong_0_15",
+          "actorId": "dong_ta",
+          "abilityId": "lac_anh_normal",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 410,
+          "activeAt": 424,
+          "endsAt": 460,
+          "released": true,
+          "nextPulse": 424,
+          "pulse": 0,
+          "pattern": "plus",
+          "path": [
+            {
+              "x": 700,
+              "y": 650
+            },
+            {
+              "x": 950,
+              "y": 386
+            },
+            {
+              "x": 930,
+              "y": 846
+            },
+            {
+              "x": 585,
+              "y": 616
+            },
+            {
+              "x": 950,
+              "y": 386
+            }
+          ],
+          "hitIds": []
+        }
+      ]
+    },
+    {
+      "ability": "dan_chi_than_cong",
+      "sourceSince": 0,
+      "body": {
+        "id": "dong_ta",
+        "pose": "action",
+        "direction": "down",
+        "locomotion": false,
+        "name": "dong_ta:dong_ta",
+        "texture": "boss-unified:dong_ta",
+        "source": "/assets/boss-dong-ta-unified-v1/body.png",
+        "density": 1,
+        "effectiveDensity": 2,
+        "action": {
+          "ability": "dan_chi_than_cong",
+          "phase": "release",
+          "sourceTexture": "boss-unified:dong_ta",
+          "sourceFrame": "finger_release_down"
+        },
+        "screen": [
+          516.122802734375,
+          313.122802734375
+        ],
+        "frame": "finger_release_down",
+        "x": 700,
+        "y": 650,
+        "origin": [
+          0.5,
+          0.8125
+        ],
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "depth": 650.5,
+        "visible": true
+      },
+      "cap": {
+        "frames": [
+          "idle_0_down_right",
+          "finger_prepare_down",
+          "finger_release_down",
+          "recover_down",
+          "idle_2_down_right"
+        ],
+        "scales": [
+          "[0.5,0.5]"
+        ]
+      },
+      "peerEvents": [
+        {
+          "phase": "IN_GAME",
+          "events": []
+        },
+        {
+          "phase": "IN_GAME",
+          "events": []
+        },
+        {
+          "phase": "IN_GAME",
+          "events": []
+        },
+        {
+          "phase": "IN_GAME",
+          "events": []
+        },
+        {
+          "phase": "IN_GAME",
+          "events": []
+        },
+        {
+          "phase": "IN_GAME",
+          "events": []
+        }
+      ],
+      "peerReleases": [
+        {
+          "id": "dong_0_17",
+          "actorId": "dong_ta",
+          "abilityId": "dan_chi_than_cong",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 487,
+          "activeAt": 505,
+          "endsAt": 520,
+          "released": true,
+          "nextPulse": 505,
+          "pulse": 0,
+          "pattern": "plus"
+        },
+        {
+          "id": "dong_0_17",
+          "actorId": "dong_ta",
+          "abilityId": "dan_chi_than_cong",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 487,
+          "activeAt": 505,
+          "endsAt": 520,
+          "released": true,
+          "nextPulse": 505,
+          "pulse": 0,
+          "pattern": "plus"
+        },
+        {
+          "id": "dong_0_17",
+          "actorId": "dong_ta",
+          "abilityId": "dan_chi_than_cong",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 487,
+          "activeAt": 505,
+          "endsAt": 520,
+          "released": true,
+          "nextPulse": 505,
+          "pulse": 0,
+          "pattern": "plus"
+        },
+        {
+          "id": "dong_0_17",
+          "actorId": "dong_ta",
+          "abilityId": "dan_chi_than_cong",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 487,
+          "activeAt": 505,
+          "endsAt": 520,
+          "released": true,
+          "nextPulse": 505,
+          "pulse": 0,
+          "pattern": "plus"
+        },
+        {
+          "id": "dong_0_17",
+          "actorId": "dong_ta",
+          "abilityId": "dan_chi_than_cong",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 487,
+          "activeAt": 505,
+          "endsAt": 520,
+          "released": true,
+          "nextPulse": 505,
+          "pulse": 0,
+          "pattern": "plus"
+        },
+        {
+          "id": "dong_0_17",
+          "actorId": "dong_ta",
+          "abilityId": "dan_chi_than_cong",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 487,
+          "activeAt": 505,
+          "endsAt": 520,
+          "released": true,
+          "nextPulse": 505,
+          "pulse": 0,
+          "pattern": "plus"
+        }
+      ]
+    },
+    {
+      "ability": "lac_anh_kiem_phap",
+      "sourceSince": 0,
+      "body": {
+        "id": "dong_ta",
+        "pose": "action",
+        "direction": "down",
+        "locomotion": false,
+        "name": "dong_ta:dong_ta",
+        "texture": "boss-unified:dong_ta",
+        "source": "/assets/boss-dong-ta-unified-v1/body.png",
+        "density": 1,
+        "effectiveDensity": 2,
+        "action": {
+          "ability": "lac_anh_kiem_phap",
+          "phase": "release",
+          "sourceTexture": "boss-unified:dong_ta",
+          "sourceFrame": "flurry_down"
+        },
+        "screen": [
+          516.122802734375,
+          313.122802734375
+        ],
+        "frame": "flurry_down",
+        "x": 700,
+        "y": 650,
+        "origin": [
+          0.5,
+          0.8125
+        ],
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "depth": 650.5,
+        "visible": true
+      },
+      "cap": {
+        "frames": [
+          "idle_2_down_right",
+          "windup_down",
+          "flurry_down",
+          "recover_down",
+          "idle_0_down_right",
+          "idle_1_down_right"
+        ],
+        "scales": [
+          "[0.5,0.5]"
+        ]
+      },
+      "peerEvents": [
+        {
+          "phase": "IN_GAME",
+          "events": []
+        },
+        {
+          "phase": "IN_GAME",
+          "events": []
+        },
+        {
+          "phase": "IN_GAME",
+          "events": []
+        },
+        {
+          "phase": "IN_GAME",
+          "events": []
+        },
+        {
+          "phase": "IN_GAME",
+          "events": []
+        },
+        {
+          "phase": "IN_GAME",
+          "events": []
+        }
+      ],
+      "peerReleases": [
+        {
+          "id": "dong_0_29",
+          "actorId": "dong_ta",
+          "abilityId": "lac_anh_kiem_phap",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 534,
+          "activeAt": 555,
+          "endsAt": 576,
+          "released": true,
+          "nextPulse": 555,
+          "pulse": 0,
+          "pattern": "plus"
+        },
+        {
+          "id": "dong_0_29",
+          "actorId": "dong_ta",
+          "abilityId": "lac_anh_kiem_phap",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 534,
+          "activeAt": 555,
+          "endsAt": 576,
+          "released": true,
+          "nextPulse": 555,
+          "pulse": 0,
+          "pattern": "plus"
+        },
+        {
+          "id": "dong_0_29",
+          "actorId": "dong_ta",
+          "abilityId": "lac_anh_kiem_phap",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 534,
+          "activeAt": 555,
+          "endsAt": 576,
+          "released": true,
+          "nextPulse": 555,
+          "pulse": 0,
+          "pattern": "plus"
+        },
+        {
+          "id": "dong_0_29",
+          "actorId": "dong_ta",
+          "abilityId": "lac_anh_kiem_phap",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 534,
+          "activeAt": 555,
+          "endsAt": 576,
+          "released": true,
+          "nextPulse": 555,
+          "pulse": 0,
+          "pattern": "plus"
+        },
+        {
+          "id": "dong_0_29",
+          "actorId": "dong_ta",
+          "abilityId": "lac_anh_kiem_phap",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 534,
+          "activeAt": 555,
+          "endsAt": 576,
+          "released": true,
+          "nextPulse": 555,
+          "pulse": 0,
+          "pattern": "plus"
+        },
+        {
+          "id": "dong_0_29",
+          "actorId": "dong_ta",
+          "abilityId": "lac_anh_kiem_phap",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 534,
+          "activeAt": 555,
+          "endsAt": 576,
+          "released": true,
+          "nextPulse": 555,
+          "pulse": 0,
+          "pattern": "plus"
+        }
+      ]
+    },
+    {
+      "ability": "ngoc_tieu_hoi_phong",
+      "sourceSince": 0,
+      "body": {
+        "id": "dong_ta",
+        "pose": "action",
+        "direction": "down",
+        "locomotion": false,
+        "name": "dong_ta:dong_ta",
+        "texture": "boss-unified:dong_ta",
+        "source": "/assets/boss-dong-ta-unified-v1/body.png",
+        "density": 1,
+        "effectiveDensity": 2,
+        "action": {
+          "ability": "ngoc_tieu_hoi_phong",
+          "phase": "release",
+          "sourceTexture": "boss-unified:dong_ta",
+          "sourceFrame": "flute_play_down"
+        },
+        "screen": [
+          516.122802734375,
+          313.122802734375
+        ],
+        "frame": "flute_play_down",
+        "x": 700,
+        "y": 650,
+        "origin": [
+          0.5,
+          0.8125
+        ],
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "depth": 650.5,
+        "visible": true
+      },
+      "cap": {
+        "frames": [
+          "idle_1_down_right",
+          "flute_raise_down",
+          "flute_play_down",
+          "flute_turn_down",
+          "idle_0_down_right"
+        ],
+        "scales": [
+          "[0.5,0.5]"
+        ]
+      },
+      "peerEvents": [
+        {
+          "phase": "IN_GAME",
+          "events": [
+            {
+              "id": 2,
+              "kind": "effect",
+              "stage": "boss_shout"
+            },
+            {
+              "id": 3,
+              "kind": "cast"
+            }
+          ]
+        },
+        {
+          "phase": "IN_GAME",
+          "events": [
+            {
+              "id": 2,
+              "kind": "effect",
+              "stage": "boss_shout"
+            },
+            {
+              "id": 3,
+              "kind": "cast"
+            }
+          ]
+        },
+        {
+          "phase": "IN_GAME",
+          "events": [
+            {
+              "id": 2,
+              "kind": "effect",
+              "stage": "boss_shout"
+            },
+            {
+              "id": 3,
+              "kind": "cast"
+            }
+          ]
+        },
+        {
+          "phase": "IN_GAME",
+          "events": [
+            {
+              "id": 2,
+              "kind": "effect",
+              "stage": "boss_shout"
+            },
+            {
+              "id": 3,
+              "kind": "cast"
+            }
+          ]
+        },
+        {
+          "phase": "IN_GAME",
+          "events": [
+            {
+              "id": 2,
+              "kind": "effect",
+              "stage": "boss_shout"
+            },
+            {
+              "id": 3,
+              "kind": "cast"
+            }
+          ]
+        },
+        {
+          "phase": "IN_GAME",
+          "events": [
+            {
+              "id": 2,
+              "kind": "effect",
+              "stage": "boss_shout"
+            },
+            {
+              "id": 3,
+              "kind": "cast"
+            }
+          ]
+        }
+      ],
+      "peerReleases": [
+        {
+          "id": "dong_0_34",
+          "actorId": "dong_ta",
+          "abilityId": "ngoc_tieu_hoi_phong",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 592,
+          "activeAt": 625,
+          "endsAt": 649,
+          "released": true,
+          "nextPulse": 625,
+          "pulse": 0,
+          "pattern": "x"
+        },
+        {
+          "id": "dong_0_34",
+          "actorId": "dong_ta",
+          "abilityId": "ngoc_tieu_hoi_phong",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 592,
+          "activeAt": 625,
+          "endsAt": 649,
+          "released": true,
+          "nextPulse": 625,
+          "pulse": 0,
+          "pattern": "x"
+        },
+        {
+          "id": "dong_0_34",
+          "actorId": "dong_ta",
+          "abilityId": "ngoc_tieu_hoi_phong",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 592,
+          "activeAt": 625,
+          "endsAt": 649,
+          "released": true,
+          "nextPulse": 625,
+          "pulse": 0,
+          "pattern": "x"
+        },
+        {
+          "id": "dong_0_34",
+          "actorId": "dong_ta",
+          "abilityId": "ngoc_tieu_hoi_phong",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 592,
+          "activeAt": 625,
+          "endsAt": 649,
+          "released": true,
+          "nextPulse": 625,
+          "pulse": 0,
+          "pattern": "x"
+        },
+        {
+          "id": "dong_0_34",
+          "actorId": "dong_ta",
+          "abilityId": "ngoc_tieu_hoi_phong",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 592,
+          "activeAt": 625,
+          "endsAt": 649,
+          "released": true,
+          "nextPulse": 625,
+          "pulse": 0,
+          "pattern": "x"
+        },
+        {
+          "id": "dong_0_34",
+          "actorId": "dong_ta",
+          "abilityId": "ngoc_tieu_hoi_phong",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 592,
+          "activeAt": 625,
+          "endsAt": 649,
+          "released": true,
+          "nextPulse": 625,
+          "pulse": 0,
+          "pattern": "x"
+        }
+      ]
+    },
+    {
+      "ability": "trieu_hon_dong_hai",
+      "sourceSince": 0,
+      "body": {
+        "id": "dong_ta",
+        "pose": "action",
+        "direction": "down",
+        "locomotion": false,
+        "name": "dong_ta:dong_ta",
+        "texture": "boss-unified:dong_ta",
+        "source": "/assets/boss-dong-ta-unified-v1/body.png",
+        "density": 1,
+        "effectiveDensity": 2,
+        "action": {
+          "ability": "trieu_hon_dong_hai",
+          "phase": "release",
+          "sourceTexture": "boss-unified:dong_ta",
+          "sourceFrame": "summon_release_down"
+        },
+        "screen": [
+          516.122802734375,
+          313.122802734375
+        ],
+        "frame": "summon_release_down",
+        "x": 700,
+        "y": 650,
+        "origin": [
+          0.5,
+          0.8125
+        ],
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "depth": 650.5,
+        "visible": true
+      },
+      "cap": {
+        "frames": [
+          "idle_1_down_right",
+          "summon_raise_down",
+          "summon_release_down",
+          "channel_down",
+          "idle_3_down_right",
+          "idle_0_down_right"
+        ],
+        "scales": [
+          "[0.5,0.5]"
+        ]
+      },
+      "peerEvents": [
+        {
+          "phase": "IN_GAME",
+          "events": []
+        },
+        {
+          "phase": "IN_GAME",
+          "events": []
+        },
+        {
+          "phase": "IN_GAME",
+          "events": []
+        },
+        {
+          "phase": "IN_GAME",
+          "events": []
+        },
+        {
+          "phase": "IN_GAME",
+          "events": []
+        },
+        {
+          "phase": "IN_GAME",
+          "events": []
+        }
+      ],
+      "peerReleases": [
+        {
+          "id": "dong_0_75",
+          "actorId": "dong_ta",
+          "abilityId": "trieu_hon_dong_hai",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 665,
+          "activeAt": 689,
+          "endsAt": 707,
+          "released": true,
+          "nextPulse": 689,
+          "pulse": 0,
+          "pattern": "x"
+        },
+        {
+          "id": "dong_0_75",
+          "actorId": "dong_ta",
+          "abilityId": "trieu_hon_dong_hai",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 665,
+          "activeAt": 689,
+          "endsAt": 707,
+          "released": true,
+          "nextPulse": 689,
+          "pulse": 0,
+          "pattern": "x"
+        },
+        {
+          "id": "dong_0_75",
+          "actorId": "dong_ta",
+          "abilityId": "trieu_hon_dong_hai",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 665,
+          "activeAt": 689,
+          "endsAt": 707,
+          "released": true,
+          "nextPulse": 689,
+          "pulse": 0,
+          "pattern": "x"
+        },
+        {
+          "id": "dong_0_75",
+          "actorId": "dong_ta",
+          "abilityId": "trieu_hon_dong_hai",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 665,
+          "activeAt": 689,
+          "endsAt": 707,
+          "released": true,
+          "nextPulse": 689,
+          "pulse": 0,
+          "pattern": "x"
+        },
+        {
+          "id": "dong_0_75",
+          "actorId": "dong_ta",
+          "abilityId": "trieu_hon_dong_hai",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 665,
+          "activeAt": 689,
+          "endsAt": 707,
+          "released": true,
+          "nextPulse": 689,
+          "pulse": 0,
+          "pattern": "x"
+        },
+        {
+          "id": "dong_0_75",
+          "actorId": "dong_ta",
+          "abilityId": "trieu_hon_dong_hai",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "Cx4oMjvEC",
+          "startedAt": 665,
+          "activeAt": 689,
+          "endsAt": 707,
+          "released": true,
+          "nextPulse": 689,
+          "pulse": 0,
+          "pattern": "x"
+        }
+      ]
+    }
+  ]
+}

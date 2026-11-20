@@ -296,3 +296,50 @@ test('ready respects static, preview-only and development fixtures without weake
     f.close();
   }
 });
+
+test('custom sprite preview verifies its actual bundle instead of the default dist', () => {
+  const f = fixture(),
+    session = { serverUrl: 'http://127.0.0.1:2799' };
+  try {
+    f.write(
+      'apps/game-server/dist/app.config.js',
+      'export const ready = true;',
+    );
+    f.write(
+      'packages/game-protocol/src/index.ts',
+      'export const PROTOCOL_VERSION = 46;',
+    );
+    f.write(
+      'packages/game-protocol/dist/index.js',
+      'export const PROTOCOL_VERSION = 46;',
+    );
+    f.write('apps/game-client/dist/volam-build-endpoint.json', {
+      serverUrl: 'http://127.0.0.1:9999',
+    });
+    f.write('.cache/sprite-dist/volam-build-endpoint.json', {
+      serverUrl: session.serverUrl,
+    });
+    assert.equal(
+      verifyQaBuild(f.root, session, '.cache/sprite-dist').serverUrl,
+      session.serverUrl,
+    );
+    assert.throws(() => verifyQaBuild(f.root, session), /endpoint differs/);
+    f.write('.cache/sprite-dist/volam-build-endpoint.json', {
+      serverUrl: 'http://127.0.0.1:9998',
+    });
+    assert.throws(
+      () => verifyQaBuild(f.root, session, '.cache/sprite-dist'),
+      /endpoint differs/,
+    );
+    f.write(
+      'packages/game-protocol/dist/index.js',
+      'export const PROTOCOL_VERSION = 45;',
+    );
+    assert.throws(
+      () => verifyQaBuild(f.root, session, '.cache/sprite-dist'),
+      /protocol mismatch/,
+    );
+  } finally {
+    f.close();
+  }
+});

@@ -1,0 +1,131 @@
+{
+  "basic": "ngu_doc_co_su",
+  "texture": "hero-unified:ngu_doc_co_su",
+  "folder": "ngu-doc-co-su-unified-v1",
+  "sourceRows": 7,
+  "sourceColumns": 4,
+  "canvas": [
+    384,
+    320
+  ],
+  "foot": [
+    192,
+    248
+  ],
+  "bodyHeight": 89,
+  "scale": 0.5,
+  "bodyWidth": 58,
+  "rootMode": "face",
+  "directionRootModes": {
+    "up": "monochrome",
+    "up_left": "monochrome",
+    "up_right": "monochrome"
+  },
+  "directionDensityPolicies": {
+    "down": "uniform-source",
+    "down_right": "uniform-source",
+    "right": "uniform-source",
+    "up_right": "uniform-source",
+    "up": "uniform-source",
+    "up_left": "uniform-source",
+    "left": "uniform-source",
+    "down_left": "uniform-source"
+  },
+  "bodyColumnTop": true,
+  "handSockets": false,
+  "poses": [
+    "idle_0",
+    "idle_1",
+    "idle_2",
+    "idle_3",
+    "walk_0",
+    "walk_1",
+    "walk_2",
+    "walk_3",
+    "staff_windup",
+    "skull_release",
+    "worm_release",
+    "recover",
+    "summon_raise",
+    "summon_call",
+    "mark_point",
+    "mark_return",
+    "ritual_bend",
+    "ritual_kneel",
+    "ritual_touch",
+    "ritual_rise",
+    "guard",
+    "channel",
+    "palm",
+    "staff_ready",
+    "hurt_0",
+    "hurt_1",
+    "death_0",
+    "death_1"
+  ],
+  "references": [
+    "assets/source/ngu-doc-preview-v01/raw/am-linh-idle.png",
+    "assets/source/ngu-doc-preview-v01/raw/am-linh-ritual.png"
+  ],
+  "groups": [
+    {
+      "name": "idle",
+      "poses": [
+        "idle_0",
+        "idle_1",
+        "idle_2",
+        "idle_3"
+      ],
+      "durationMs": 700
+    },
+    {
+      "name": "walk",
+      "poses": [
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3"
+      ],
+      "durationMs": 110
+    },
+    {
+      "name": "action_library",
+      "poses": [
+        "staff_windup",
+        "skull_release",
+        "worm_release",
+        "recover",
+        "summon_raise",
+        "summon_call",
+        "mark_point",
+        "mark_return",
+        "ritual_bend",
+        "ritual_kneel",
+        "ritual_touch",
+        "ritual_rise",
+        "guard",
+        "channel",
+        "palm",
+        "staff_ready"
+      ],
+      "durationMs": 100
+    },
+    {
+      "name": "hurt",
+      "poses": [
+        "hurt_0",
+        "hurt_1"
+      ],
+      "durationMs": 90
+    },
+    {
+      "name": "death",
+      "poses": [
+        "death_0",
+        "death_1"
+      ],
+      "durationMs": 220
+    }
+  ],
+  "registrationPolicy": "Constant physical head/body density per source group, boot anchor. Exposed face for density; back sheets uniform source density. Staff skull must not define human body height. Palm attachment sockets measured on the new body. Complete source sheet retains one physical source density across all poses; face/hand/staff extent cannot rescale reactions."
+}

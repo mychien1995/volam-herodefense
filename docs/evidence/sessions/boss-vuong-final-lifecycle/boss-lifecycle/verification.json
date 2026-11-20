@@ -1,0 +1,59 @@
+{
+  "status": "PASS",
+  "fixture": "Server-owned phase/HP prerequisites; real acknowledged arrow keys and manual A; not natural campaign progression, lightning/QTE or balance acceptance",
+  "cases": [
+    {
+      "id": "vuong_trung_duong_p2",
+      "beforeHp": 1000000,
+      "hpAtAttack": 1,
+      "afterHp": 0,
+      "transition": false,
+      "motion": {
+        "frames": [
+          "idle_1_down_right",
+          "idle_2_down_right",
+          "death_0_down_right",
+          "death_1_down_right"
+        ],
+        "textures": [
+          "boss-unified:vuong_trung_duong_p2"
+        ]
+      },
+      "peerMotions": [
+        {
+          "frames": [
+            "idle_1_down_right",
+            "idle_2_down_right",
+            "death_0_down_right",
+            "death_1_down_right"
+          ],
+          "textures": [
+            "boss-unified:vuong_trung_duong_p2"
+          ]
+        },
+        {
+          "frames": [
+            "idle_0_down_right",
+            "death_0_down_right",
+            "death_1_down_right"
+          ],
+          "textures": [
+            "boss-unified:vuong_trung_duong_p2"
+          ]
+        }
+      ],
+      "peers": [
+        {
+          "phase": "VICTORY",
+          "tick": 141,
+          "basic": "vo_dang_quyen"
+        },
+        {
+          "phase": "VICTORY",
+          "tick": 141,
+          "basic": "cai_bang_bong"
+        }
+      ]
+    }
+  ]
+}

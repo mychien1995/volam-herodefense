@@ -1,3 +1,4 @@
+import { heroBodyUrl, schoolHeroBasic } from './hero-portraits.js';
 import './school-selection.css';
 import { m1Config, schools, skillIcon } from '@volam/game-data';
 import { nguDoc } from '@volam/game-core';
@@ -20,7 +21,7 @@ export function schoolCards(
   return schools
     .map(
       (s) =>
-        `<button type="button" class="school-card ${selected === s.id ? 'selected' : ''}" ${attribute}="school" data-school="${s.id}" aria-pressed="${selected === s.id}" ${requiresBranch ? 'aria-haspopup="dialog"' : ''} ${disabled ? 'disabled' : ''}><span class="school-portrait ${s.portrait}" aria-hidden="true"></span><h3>${s.name}</h3><span class="school-element">${s.element}</span></button>`,
+        `<button type="button" class="school-card ${selected === s.id ? 'selected' : ''}" ${attribute}="school" data-school="${s.id}" aria-pressed="${selected === s.id}" ${requiresBranch ? 'aria-haspopup="dialog"' : ''} ${disabled ? 'disabled' : ''}><span class="school-portrait ${s.portrait}" style="background-image:url('${heroBodyUrl(schoolHeroBasic(s.id))}')" aria-hidden="true"></span><h3>${s.name}</h3><span class="school-element">${s.element}</span></button>`,
     )
     .join('');
 }

@@ -1,0 +1,162 @@
+{
+  "status": "PASS",
+  "clients": 2,
+  "basic": "thien_son_phien",
+  "partial": false,
+  "scope": "all",
+  "idle": [
+    {
+      "direction": "down_right",
+      "frames": [
+        "idle_1_down_right",
+        "idle_2_down_right",
+        "idle_3_down_right",
+        "idle_0_down_right"
+      ],
+      "alpha": 1,
+      "renderElapsedMs": 2849.899999999998,
+      "wallElapsedMs": 2849.2000000001863
+    }
+  ],
+  "walk": [
+    {
+      "direction": "down_right",
+      "frames": [
+        "walk_2_down_right",
+        "walk_3_down_right",
+        "walk_0_down_right",
+        "walk_1_down_right"
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "direction": "down_right",
+      "key": "KeyA",
+      "ability": "thien_son_phien",
+      "cases": [
+        {
+          "id": "iPEh0ye_H",
+          "event": {
+            "tick": 162,
+            "protocolVersion": 46,
+            "id": 1,
+            "kind": "attack",
+            "sourceId": "iPEh0ye_H",
+            "targetId": "",
+            "abilityId": "thien_son_phien",
+            "x": 700,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 0.7071067811865475,
+            "fy": 0.7071067811865475,
+            "radius": 220
+          },
+          "frames": [
+            "idle_2_down_right",
+            "idle_3_down_right",
+            "windup_down_right",
+            "fan_open_down_right",
+            "fan_throw_down_right",
+            "fan_catch_down_right",
+            "idle_0_down_right"
+          ],
+          "targetHp": 99916
+        },
+        {
+          "id": "5SSrI8R0N",
+          "event": {
+            "tick": 164,
+            "protocolVersion": 46,
+            "id": 2,
+            "kind": "attack",
+            "sourceId": "5SSrI8R0N",
+            "targetId": "",
+            "abilityId": "thien_son_phien",
+            "x": 870,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 0.7071067811865475,
+            "fy": 0.7071067811865475,
+            "radius": 220
+          },
+          "frames": [
+            "idle_2_down_right",
+            "idle_3_down_right",
+            "windup_down_right",
+            "fan_open_down_right",
+            "fan_throw_down_right",
+            "fan_catch_down_right",
+            "idle_0_down_right"
+          ],
+          "targetHp": 99932
+        }
+      ]
+    }
+  ],
+  "reactions": [
+    {
+      "direction": "down_right",
+      "kind": "hurt",
+      "frames": [
+        "idle_0_down_right",
+        "idle_1_down_right",
+        "hurt_0_down_right",
+        "hurt_1_down_right"
+      ]
+    },
+    {
+      "direction": "down_right",
+      "kind": "stun",
+      "alphaAfter": 1
+    },
+    {
+      "direction": "down_right",
+      "kind": "status expiry",
+      "observed": [
+        "slow",
+        "silence",
+        "disarm",
+        "root",
+        "burn",
+        "poison"
+      ],
+      "alphaAfter": 1
+    },
+    {
+      "direction": "down_right",
+      "kind": "death",
+      "frames": [
+        "idle_0_down_right",
+        "death_0_down_right",
+        "death_1_down_right"
+      ]
+    },
+    {
+      "direction": "down_right",
+      "kind": "natural arena revival",
+      "alphaAfter": 1
+    }
+  ],
+  "authority": [
+    {
+      "kind": "resolved-hit",
+      "direction": "down_right",
+      "hitTick": 206,
+      "acknowledged": {
+        "tick": 220,
+        "serverHp": 270,
+        "peerHp": 270
+      }
+    }
+  ],
+  "notes": [
+    "Profile-scoped body art only. Status and hit fixtures are server-owned, body clocks never send combat commands."
+  ],
+  "f8": "PASS",
+  "portrait": "url(\"/assets/thien-son-phien-unified-v2/avatar.png\")"
+}

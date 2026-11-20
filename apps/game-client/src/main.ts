@@ -915,6 +915,8 @@ if (new URLSearchParams(location.search).has('debug') || artPreview) {
               arenaScene?.reviewKim(bundle, clip),
           }
         : {}),
+      reviewWorldDepth: (enabled: boolean) =>
+        arenaScene?.reviewWorldDepth(enabled),
       reviewChu: (
         bundle: string,
         tag: string,

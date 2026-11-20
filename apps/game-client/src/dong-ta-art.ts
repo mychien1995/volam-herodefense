@@ -1,3 +1,4 @@
+import { presentUnifiedBoss } from './boss-unified-body.js';
 import { markImpactTarget } from './m3d-hit-art.js';
 import { releaseBeat } from './m3d-approved-boss-body.js';
 import { WaveBossHealth } from './wave-boss-feedback-art.js';
@@ -333,8 +334,8 @@ export class DongTaRenderer {
         this.corpses.delete(id);
         continue;
       }
-      if (!this.used.has(id))
-        this.cel(
+      if (!this.used.has(id)) {
+        const corpse = this.cel(
           'corpse:' + id,
           c.bundle,
           'death_' + c.direction,
@@ -345,6 +346,23 @@ export class DongTaRenderer {
           0,
           c.y + 0.4,
         );
+        const vector = (
+          { down: [0, 1], up: [0, -1], left: [-1, 0], right: [1, 0] } as Record<
+            string,
+            number[]
+          >
+        )[c.direction] ?? [0, 1];
+        presentUnifiedBoss(
+          this.scene,
+          corpse,
+          id,
+          'death',
+          vector[0]!,
+          vector[1]!,
+          '',
+          { elapsedMs: age * 1000 },
+        );
+      }
     }
     for (const [id, c] of this.contacts) {
       const age = (this.scene.time.now - c.at) / 1000;

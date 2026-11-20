@@ -2,6 +2,7 @@ import type { QaSession } from './qa-session.mjs';
 export function verifyQaBuild(
   root: string,
   session: Pick<QaSession, 'serverUrl' | 'contract'>,
+  clientDist?: string,
 ): Record<string, string>;
 
 export interface QaPreflightReport {

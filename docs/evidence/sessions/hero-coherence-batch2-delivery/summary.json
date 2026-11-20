@@ -1,0 +1,582 @@
+{
+  "status": "Completed scoped presentation stages; batch2 candidate awaiting director approval",
+  "branch": "wip/m3d/25d",
+  "batch": "2 - Vo Dang Quyen / Kiem only",
+  "approvedBaseline": "Cai Bang Chuong and Bong: 12 byte locks PASS; no re-export",
+  "branches": {
+    "vo_dang_quyen": {
+      "bodyPNG": "ea987bf61f4f3f31b18e8651032eacb58414361ba1e34a740786a55ccf46edf8",
+      "cels": 192,
+      "nativeTags": 40,
+      "nativeRoundtrip": "exact alpha and visible RGB PASS",
+      "textureMiB": 6.445247650146484,
+      "clients": 6,
+      "idleDirections": 8,
+      "walkDirections": 8,
+      "actionGroups": 48,
+      "acknowledgedCommands": 288,
+      "reactionCases": 40,
+      "authority": "client HP compared to serialized server state at same tick, tolerance0.001",
+      "finalReportStatus": "PASS",
+      "finalReportFailure": null,
+      "choreography": {
+        "status": "PASS",
+        "basic": "vo_dang_quyen",
+        "checks": [
+          {
+            "kind": "alternating palms",
+            "stages": [
+              "left_palm",
+              "right_palm"
+            ]
+          },
+          {
+            "kind": "six taichi beats",
+            "frames": [
+              "idle_0_down_right",
+              "charge_down_right",
+              "taichi_open_down_right",
+              "taichi_cross_down_right",
+              "taichi_sweep_down_right",
+              "taichi_hold_down_right",
+              "recover_down_right",
+              "idle_2_down_right",
+              "idle_3_down_right"
+            ]
+          }
+        ]
+      },
+      "f8": "PASS",
+      "portrait": "url(\"/assets/vo-dang-quyen-unified-v1/avatar.png\")",
+      "party": {
+        "targetFixture": "96 stationary high-HP server targets; real keyboard hero attacks/hits, no creep AI combat/reward coverage",
+        "creeps": 96,
+        "clients": 6,
+        "hits": 128,
+        "medianMs": 16.799999997019768,
+        "p95Ms": 18.899999991059303,
+        "frames": 214,
+        "framing": [
+          {
+            "id": "ibuPxkXh-",
+            "visible": true,
+            "bounds": {
+              "x": 726.9999999999999,
+              "y": 553.0000000000001,
+              "right": 761.9999999999999,
+              "bottom": 602.0000000000001
+            },
+            "viewport": {
+              "x": 406.4999999999999,
+              "y": 360.0000000000001,
+              "right": 1089.5,
+              "bottom": 744.0000000000001
+            },
+            "inside": true
+          },
+          {
+            "id": "vozYCrpW3",
+            "visible": true,
+            "bounds": {
+              "x": 788.5,
+              "y": 553,
+              "right": 825,
+              "bottom": 601.5
+            },
+            "viewport": {
+              "x": 406.4999999999999,
+              "y": 360.0000000000001,
+              "right": 1089.5,
+              "bottom": 744.0000000000001
+            },
+            "inside": true
+          },
+          {
+            "id": "PwLRZJA21",
+            "visible": true,
+            "bounds": {
+              "x": 898.5,
+              "y": 553,
+              "right": 935,
+              "bottom": 601.5
+            },
+            "viewport": {
+              "x": 406.4999999999999,
+              "y": 360.0000000000001,
+              "right": 1089.5,
+              "bottom": 744.0000000000001
+            },
+            "inside": true
+          },
+          {
+            "id": "U5xju4ShG",
+            "visible": true,
+            "bounds": {
+              "x": 678.5,
+              "y": 638,
+              "right": 715,
+              "bottom": 686.5
+            },
+            "viewport": {
+              "x": 406.4999999999999,
+              "y": 360.0000000000001,
+              "right": 1089.5,
+              "bottom": 744.0000000000001
+            },
+            "inside": true
+          },
+          {
+            "id": "zzA0TkYvs",
+            "visible": true,
+            "bounds": {
+              "x": 788.5,
+              "y": 638,
+              "right": 825,
+              "bottom": 686.5
+            },
+            "viewport": {
+              "x": 406.4999999999999,
+              "y": 360.0000000000001,
+              "right": 1089.5,
+              "bottom": 744.0000000000001
+            },
+            "inside": true
+          },
+          {
+            "id": "9HYeSrIZ0",
+            "visible": true,
+            "bounds": {
+              "x": 898.5,
+              "y": 638,
+              "right": 935,
+              "bottom": 686.5
+            },
+            "viewport": {
+              "x": 406.4999999999999,
+              "y": 360.0000000000001,
+              "right": 1089.5,
+              "bottom": 744.0000000000001
+            },
+            "inside": true
+          }
+        ]
+      },
+      "retryScope": "None"
+    },
+    "vo_dang_kiem": {
+      "bodyPNG": "9cf0afe930fca18bed3b2411ab6ff828b46d6592e1fa277f6b685636b433d37f",
+      "cels": 320,
+      "nativeTags": 72,
+      "nativeRoundtrip": "exact alpha and visible RGB PASS",
+      "textureMiB": 13.641834259033203,
+      "clients": 6,
+      "idleDirections": 8,
+      "walkDirections": 8,
+      "actionGroups": 48,
+      "acknowledgedCommands": 288,
+      "reactionCases": 40,
+      "authority": "client HP compared to serialized server state at same tick, tolerance0.001",
+      "finalReportStatus": "FAIL",
+      "finalReportFailure": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok(returned.frames[id].some(f => /^idle_[0-3]_down_right$/.test(f.frame)))\n",
+      "choreography": {
+        "status": "PASS",
+        "basic": "vo_dang_kiem",
+        "checks": [
+          {
+            "kind": "five real RNG-selected A variants",
+            "attempts": [
+              "cut_down",
+              "cut_right",
+              "cut_down",
+              "thrust",
+              "cut_right",
+              "cut_left",
+              "thrust",
+              "cut_right",
+              "thrust",
+              "thrust",
+              "cut_down",
+              "thrust",
+              "cut_left",
+              "cut_left",
+              "cut_right",
+              "cut_down",
+              "cut_left",
+              "cut_right",
+              "cut_right",
+              "cut_up"
+            ]
+          },
+          {
+            "kind": "seven accepted cut pulses / pose order",
+            "events": [
+              {
+                "tick": 489,
+                "hitIndex": 0,
+                "protocolVersion": 46,
+                "id": 304,
+                "kind": "pulse",
+                "sourceId": "rpIXwZZs7",
+                "targetId": "",
+                "abilityId": "that_tinh_kiem",
+                "x": 700,
+                "y": 660,
+                "damage": 0,
+                "critical": false,
+                "zoneId": "arena",
+                "fx": 1,
+                "fy": 1,
+                "radius": 92,
+                "stage": "sweep"
+              },
+              {
+                "tick": 495,
+                "hitIndex": 1,
+                "protocolVersion": 46,
+                "id": 319,
+                "kind": "pulse",
+                "sourceId": "rpIXwZZs7",
+                "targetId": "",
+                "abilityId": "that_tinh_kiem",
+                "x": 700,
+                "y": 660,
+                "damage": 0,
+                "critical": false,
+                "zoneId": "arena",
+                "fx": 1,
+                "fy": 1,
+                "radius": 92,
+                "stage": "sweep"
+              },
+              {
+                "tick": 501,
+                "hitIndex": 2,
+                "protocolVersion": 46,
+                "id": 331,
+                "kind": "pulse",
+                "sourceId": "rpIXwZZs7",
+                "targetId": "",
+                "abilityId": "that_tinh_kiem",
+                "x": 700,
+                "y": 660,
+                "damage": 0,
+                "critical": false,
+                "zoneId": "arena",
+                "fx": 1,
+                "fy": 1,
+                "radius": 92,
+                "stage": "sweep"
+              },
+              {
+                "tick": 507,
+                "hitIndex": 3,
+                "protocolVersion": 46,
+                "id": 343,
+                "kind": "pulse",
+                "sourceId": "rpIXwZZs7",
+                "targetId": "",
+                "abilityId": "that_tinh_kiem",
+                "x": 700,
+                "y": 660,
+                "damage": 0,
+                "critical": false,
+                "zoneId": "arena",
+                "fx": 1,
+                "fy": 1,
+                "radius": 92,
+                "stage": "sweep"
+              },
+              {
+                "tick": 513,
+                "hitIndex": 4,
+                "protocolVersion": 46,
+                "id": 355,
+                "kind": "pulse",
+                "sourceId": "rpIXwZZs7",
+                "targetId": "",
+                "abilityId": "that_tinh_kiem",
+                "x": 700,
+                "y": 660,
+                "damage": 0,
+                "critical": false,
+                "zoneId": "arena",
+                "fx": 1,
+                "fy": 1,
+                "radius": 92,
+                "stage": "sweep"
+              },
+              {
+                "tick": 519,
+                "hitIndex": 5,
+                "protocolVersion": 46,
+                "id": 367,
+                "kind": "pulse",
+                "sourceId": "rpIXwZZs7",
+                "targetId": "",
+                "abilityId": "that_tinh_kiem",
+                "x": 700,
+                "y": 660,
+                "damage": 0,
+                "critical": false,
+                "zoneId": "arena",
+                "fx": 1,
+                "fy": 1,
+                "radius": 92,
+                "stage": "sweep"
+              },
+              {
+                "tick": 525,
+                "hitIndex": 6,
+                "protocolVersion": 46,
+                "id": 379,
+                "kind": "pulse",
+                "sourceId": "rpIXwZZs7",
+                "targetId": "",
+                "abilityId": "that_tinh_kiem",
+                "x": 700,
+                "y": 660,
+                "damage": 0,
+                "critical": false,
+                "zoneId": "arena",
+                "fx": 1,
+                "fy": 1,
+                "radius": 92,
+                "stage": "sweep"
+              }
+            ],
+            "sequence": [
+              "idle_3_down_right",
+              "cut_up_down_right",
+              "cut_down_down_right",
+              "cut_right_down_right",
+              "cut_down_down_right",
+              "cut_up_down_right",
+              "cut_left_down_right",
+              "cut_right_down_right",
+              "idle_1_down_right",
+              "idle_2_down_right"
+            ]
+          },
+          {
+            "kind": "natural launch / swordless idle-walk-hurt / return",
+            "launch": [
+              "idle_2_down_right",
+              "release_away_down_right",
+              "idle_away_3_down_right",
+              "idle_away_0_down_right"
+            ],
+            "walk": [
+              "idle_away_0_down_right",
+              "walk_away_2_down_right",
+              "walk_away_3_down_right",
+              "walk_away_0_down_right",
+              "walk_away_1_down_right"
+            ],
+            "hurt": [
+              "idle_away_1_down_right",
+              "hurt_away_0_down_right",
+              "hurt_away_1_down_right",
+              "idle_away_2_down_right"
+            ],
+            "attack": [
+              "walk_away_2_down_right",
+              "walk_away_3_down_right",
+              "windup_away_down_right",
+              "release_away_down_right",
+              "idle_away_1_down_right"
+            ],
+            "returnDirection": "down_right",
+            "returned": [
+              "idle_0_down_right"
+            ]
+          },
+          {
+            "kind": "real W recast teleport",
+            "before": {
+              "x": 700,
+              "y": 660
+            },
+            "after": {
+              "x": 838,
+              "y": 798
+            }
+          },
+          {
+            "kind": "skyfall aim, natural strike, idle",
+            "hits": 1
+          }
+        ]
+      },
+      "f8": "PASS",
+      "portrait": "url(\"/assets/vo-dang-kiem-unified-v1/avatar.png\")",
+      "party": {
+        "targetFixture": "96 stationary high-HP server targets; real keyboard hero attacks/hits, no creep AI combat/reward coverage",
+        "creeps": 96,
+        "clients": 6,
+        "hits": 421,
+        "medianMs": 16.599999994039536,
+        "p95Ms": 20,
+        "frames": 212,
+        "framing": [
+          {
+            "id": "rpIXwZZs7",
+            "visible": true,
+            "bounds": {
+              "x": 731.6666870117186,
+              "y": 552.0000000000001,
+              "right": 781.1666870117186,
+              "bottom": 602.0000000000001
+            },
+            "viewport": {
+              "x": 417.16668701171864,
+              "y": 360.0000000000001,
+              "right": 1100.1666870117188,
+              "bottom": 744.0000000000001
+            },
+            "inside": true
+          },
+          {
+            "id": "ZHx1KgBYB",
+            "visible": true,
+            "bounds": {
+              "x": 784.5,
+              "y": 552.5,
+              "right": 833.5,
+              "bottom": 602.5
+            },
+            "viewport": {
+              "x": 417.16668701171864,
+              "y": 360.0000000000001,
+              "right": 1100.1666870117188,
+              "bottom": 744.0000000000001
+            },
+            "inside": true
+          },
+          {
+            "id": "XKbP46yJ4",
+            "visible": true,
+            "bounds": {
+              "x": 894.5,
+              "y": 552.5,
+              "right": 943.5,
+              "bottom": 602.5
+            },
+            "viewport": {
+              "x": 417.16668701171864,
+              "y": 360.0000000000001,
+              "right": 1100.1666870117188,
+              "bottom": 744.0000000000001
+            },
+            "inside": true
+          },
+          {
+            "id": "8oSLnZTGz",
+            "visible": true,
+            "bounds": {
+              "x": 674.5,
+              "y": 637.5,
+              "right": 723.5,
+              "bottom": 687.5
+            },
+            "viewport": {
+              "x": 417.16668701171864,
+              "y": 360.0000000000001,
+              "right": 1100.1666870117188,
+              "bottom": 744.0000000000001
+            },
+            "inside": true
+          },
+          {
+            "id": "mnxA3deGj",
+            "visible": true,
+            "bounds": {
+              "x": 784.5,
+              "y": 637.5,
+              "right": 833.5,
+              "bottom": 687.5
+            },
+            "viewport": {
+              "x": 417.16668701171864,
+              "y": 360.0000000000001,
+              "right": 1100.1666870117188,
+              "bottom": 744.0000000000001
+            },
+            "inside": true
+          },
+          {
+            "id": "KIQmPlFKp",
+            "visible": true,
+            "bounds": {
+              "x": 894.5,
+              "y": 637.5,
+              "right": 943.5,
+              "bottom": 687.5
+            },
+            "viewport": {
+              "x": 417.16668701171864,
+              "y": 360.0000000000001,
+              "right": 1100.1666870117188,
+              "bottom": 744.0000000000001
+            },
+            "inside": true
+          }
+        ]
+      },
+      "retryScope": "extras / choreography / F8 / portrait / party only; unchanged production bundle after server-facing QA assertion fix"
+    }
+  },
+  "validation": {
+    "units": {
+      "command": "pnpm check:quick tests/vo-dang-unified-policy.test.ts tests/unified-hero-policy.test.ts tests/cai-bang-chuong-body.test.ts",
+      "result": "17 passed / 3 files"
+    },
+    "types": [
+      "pnpm exec tsc -b apps/game-client",
+      "pnpm exec tsc -p tsconfig.tools.json --noEmit"
+    ],
+    "assets": "Two native validators: 512 cels / 112 exact tag ranges and timings, alpha / visible RGB roundtrip, bounded textures / pivots / body size / alpha / hashes",
+    "browser": "node tools/run-playwright.mjs test --config playwright.hero-coherence-batch2.config.ts",
+    "sessions": {
+      "baseline": "hero-coherence-batch2-baseline (expected mixed-body FAIL reproduced for both)",
+      "pilot": "hero-coherence-batch2-pilot-contact (two-client directional pilot PASS)",
+      "weaponPilot": "hero-coherence-batch2-weapon-size-fixed (two-client physical body-size fix PASS before other seven swordless directions)",
+      "iteration": "hero-coherence-batch2-iteration-retry (2 clients, down-right/up-left, both branches + extras PASS)",
+      "final": "hero-coherence-batch2-final (6 clients both branches; Quyen PASS; Kiem all8 directions /48actions /40reactions completed then server-facing QA assertion FAIL retained)",
+      "diagnostic": "hero-coherence-batch2-weapon-diagnostic (6 clients reproduced down server-facing / correctly armed idle_down, retained FAIL)",
+      "extras": "hero-coherence-batch2-final-extras (6 clients Kiem, choreography / weapon lifecycle / skyfall / F8 / portrait / crowd PASS)"
+    },
+    "ports": "QA2995/5595; review2995/5597; existing user rooms kept",
+    "scope": "No full balance/gameplay suite. Video/trace off."
+  },
+  "knownLimits": [
+    "Both Vo Dang assets remain candidate pending normal-zoom director art review. Stop before batch3 Thien Son.",
+    "Crowd uses96 stationary high-HP targets and actual accepted keyboard attacks/hits. Creep AI/rewards and legacy creep art fallback are outside this batch.",
+    "Six-context frame samples are diagnostic, not a normal-play FPS guarantee.",
+    "Original FAIL reports remain unchanged; completed stages are aggregated with targeted retries."
+  ],
+  "room": {
+    "status": "READY",
+    "url": "http://127.0.0.1:5597/?debug=1",
+    "roomId": "W71goH-UQ",
+    "sessionId": "ab4oMGMfm",
+    "basic": "vo_dang_quyen",
+    "level": 30,
+    "slots": [
+      "luong_nghi_thu",
+      "huyen_am_chuong",
+      "duong_khi_kich",
+      "thai_cuc_than_cong",
+      "thai_cuc_tran"
+    ],
+    "ranks": {
+      "luong_nghi_thu": 4,
+      "huyen_am_chuong": 4,
+      "duong_khi_kich": 4,
+      "thai_cuc_than_cong": 4,
+      "thai_cuc_tran": 4
+    },
+    "body": "hero-unified:vo_dang_quyen",
+    "f8": "ON; keyboard toggle verified",
+    "errors": []
+  }
+}

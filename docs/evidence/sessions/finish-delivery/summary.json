@@ -1,0 +1,159 @@
+{
+  "status": "PASS_SCOPED_VALIDATION",
+  "branch": "wip/m3d/25d",
+  "productionGameplayChanges": false,
+  "hudGeometryChanges": false,
+  "controlsPreserved": [
+    "arrows",
+    "A",
+    "QWERT",
+    "F",
+    "F8"
+  ],
+  "art": {
+    "branches": 14,
+    "newCels": 896,
+    "nativeSources": 14,
+    "nativeRoundTripPixels": "PASS",
+    "status": "prototype for director review",
+    "specialForms": "retained original four-facing assets"
+  },
+  "checks": {
+    "focusedVitestFiles": 5,
+    "focusedVitestTests": 14,
+    "clientTypecheck": "PASS",
+    "toolsTypecheck": "PASS",
+    "productionBuild2968": "PASS",
+    "playBuild2973": "PASS",
+    "PNGJSONNativeValidator": "PASS",
+    "players": 6,
+    "walkDirections": 112,
+    "idleDirections": 112,
+    "idleCelsPerDirection": 4,
+    "defaultRequests": 336,
+    "acceptedDefaultActions": 324,
+    "passiveNonCasts": 12,
+    "alternateStanceCasts": 12,
+    "specialForms": 4,
+    "dungeons": 8,
+    "PvP": "waiting/spectator idle and lighting, no active duel claimed",
+    "bossForms": 7,
+    "recordingsCreated": 0,
+    "latestShaolinPolicyRegression": "4 tests PASS; shaolin-policy-unit.json",
+    "latestShaolinLive": "PASS; ../finish-shaolin-family/hero-finish/"
+  },
+  "movement": [
+    {
+      "enabled": false,
+      "samples": 131,
+      "frameMedian": 16.599999994039536,
+      "frameP95": 18.5,
+      "reverse": 0,
+      "zero": 0,
+      "meanSpeed": -161.2744563887578,
+      "velocityStdDev": 33.6732514898753
+    },
+    {
+      "enabled": true,
+      "samples": 132,
+      "frameMedian": 16.599999994039536,
+      "frameP95": 18.5,
+      "reverse": 0,
+      "zero": 0,
+      "meanSpeed": -160.46697955237858,
+      "velocityStdDev": 36.081625515429415
+    }
+  ],
+  "movingCombat": [
+    {
+      "enabled": false,
+      "damageTextureCache": {
+        "cached": 84,
+        "hits": 2372,
+        "misses": 84,
+        "max": 256
+      },
+      "seconds": 9.648593800000002,
+      "samples": 463,
+      "median": 17,
+      "p95": 30.900000005960464,
+      "max": 134.90000000596046,
+      "above50ms": 10,
+      "acceptedCasts": 27,
+      "walkSamples": 372,
+      "walkRenderLagP95": 8.350044549875975,
+      "peakLights": 0,
+      "totalDynamicCasts": 0
+    },
+    {
+      "enabled": true,
+      "damageTextureCache": {
+        "cached": 98,
+        "hits": 5330,
+        "misses": 98,
+        "max": 256
+      },
+      "seconds": 10.056545299999998,
+      "samples": 514,
+      "median": 16.799999997019768,
+      "p95": 26.599999994039536,
+      "max": 130.40000000596046,
+      "above50ms": 8,
+      "acceptedCasts": 27,
+      "walkSamples": 409,
+      "walkRenderLagP95": 9.539310439273663,
+      "peakLights": 16,
+      "totalDynamicCasts": 64
+    }
+  ],
+  "shadowEdgeAudit": {
+    "checked": 128,
+    "clipped": 0
+  },
+  "sourceIdentity": {
+    "apps/game-client/src/world-depth-effects.ts": "61ac4b2a312e23f594373435a51594101e40e3325801db52d1fcbf9edc0da9bf",
+    "apps/game-client/src/world-depth-emission.ts": "8ac4d705bbac0fc8c3974f1eefbb803d163dbd1b918a3efe742c8de1e9e611e4",
+    "apps/game-client/src/world-depth-environment.ts": "ec5ce6bc4b46c63e8b3f507071911123c48fefca9f9a1845d959c9e348bd6664",
+    "apps/game-client/src/world-depth-light-policy.ts": "5eeb613b673622b990ef6ed3a05e4cb04a541a7f68b7890cf11afebf8ef1b371",
+    "apps/game-client/src/world-depth-material.ts": "47481fa906fb4ddd02000fa9972982396a887da3de8d504ecad070da66dfc94f",
+    "apps/game-client/src/world-depth-profiles.ts": "8b064e4a206727d861d0c11c660c78c8b2aa616b565ff0181bbd41c8e4d5811a",
+    "apps/game-client/src/world-depth-shadows.ts": "6a0ae5a20d36b9b775a59bd6be62ec23442c25c2cf9414f68c40b3b493cd2b78",
+    "apps/game-client/src/world-depth-terrain.ts": "92b65b64e009fafeb08c2277391cf678a1f51a43338fd8fea9c1a24ae82284da",
+    "apps/game-client/src/hero-motion.ts": "1a4a75d398ff0cee9d416cc601fb2f130ebb81d106f45de6b484cf764adfb9b3",
+    "apps/game-client/src/hero-finish.ts": "79f6b5ed7d03d9982f02d3bf09c235755baf19e4e7e7bceb189e379930dfbbeb",
+    "apps/game-client/src/hero-finish-policy.ts": "2de6a7da183a9025693263ab289e42a565ccc8cffc6b2023b25677b054a70745",
+    "apps/game-client/src/hero-portraits.ts": "8ba8939625b7b239d38305375399eb03c099023ebba509cb875c68b3fbd3100c",
+    "apps/game-client/src/arena-scene.ts": "da4d02fc72142a012c2e3ad3ec2f4e94871f6b085ffb31a0b6c3c5d508325121",
+    "apps/game-client/src/floating-damage.ts": "d5b0a092be9b09b595e8e4055b52303ee01a672e4ebc5e0c314b4b12ac27f0c1",
+    "apps/game-client/src/ui.ts": "48d5b96c9be129d7bd624e512ca80191eaf0691d678778e989bb396f910f3c4b",
+    "apps/game-client/src/arena-hud.css": "038794c7d8c986ab77a679ed3a569710721489f5b518eb8baba6ec1b9cfa7e36",
+    "apps/game-client/src/main.ts": "f90ba8bcfd22808fc5f1557ca8dd30bfdc8aa543ce8dfa5041157ffc4cd4bad9",
+    "apps/game-client/src/pregame.ts": "a1b9052f0a835d6a2fc3d10b2a2171aae3d46f9729dcf3c868dc5b2e9ac69188"
+  },
+  "playRoom": {
+    "status": "READY",
+    "url": "http://127.0.0.1:5573/?debug=1",
+    "roomId": "Qu0pBoWyJ",
+    "sessionId": "4k6JlMHtX",
+    "level": 30,
+    "basic": "cai_bang_chuong",
+    "slots": [
+      "hoa_van_chuong",
+      "cuong_long_loan_vu",
+      "phi_long_tai_thien",
+      "khang_long_huu_hoi",
+      "hang_long_hoa_vu"
+    ],
+    "ranks": {
+      "hoa_van_chuong": 4,
+      "cuong_long_loan_vu": 4,
+      "phi_long_tai_thien": 4,
+      "khang_long_huu_hoi": 4,
+      "hang_long_hoa_vu": 4
+    },
+    "visualDepth": true,
+    "errors": []
+  },
+  "matchedProof": "matched-proof.json",
+  "retryNotes": "Source/timing bugs and fixture prerequisites corrected; all failed reports preserved separately. Completed branch stages retained only for unaffected art/clock paths; zero-lock fallback later verified for instant basics. All14 final idle/walk/basic checks and updated Bổng full action check passed. Final Shaolin body mapping corrected: fist beats use strike, authored kick skills use alternate; full default branch and F stance scoped retry PASS."
+}

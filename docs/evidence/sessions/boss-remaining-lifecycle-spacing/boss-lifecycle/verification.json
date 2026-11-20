@@ -1,0 +1,180 @@
+{
+  "status": "RUNNING",
+  "fixture": "Server-owned phase/HP prerequisites; real acknowledged arrow keys and manual A; not natural campaign progression, lightning/QTE or balance acceptance",
+  "cases": [
+    {
+      "id": "kim_luan",
+      "beforeHp": 1000000,
+      "hpAtAttack": 1,
+      "afterHp": 0,
+      "transition": false,
+      "motion": {
+        "frames": [
+          "walk_2_left",
+          "walk_2_down_right",
+          "walk_3_down_right",
+          "death_0_down_right",
+          "death_1_down_right"
+        ],
+        "textures": [
+          "boss-unified:kim_luan"
+        ]
+      },
+      "peerMotions": [
+        {
+          "frames": [
+            "walk_2_left",
+            "walk_2_down_right",
+            "walk_3_down_right",
+            "death_0_down_right",
+            "death_1_down_right"
+          ],
+          "textures": [
+            "boss-unified:kim_luan"
+          ]
+        },
+        {
+          "frames": [
+            "walk_0_left",
+            "walk_0_down_right",
+            "walk_1_down_right",
+            "death_0_down_right",
+            "death_1_down_right"
+          ],
+          "textures": [
+            "boss-unified:kim_luan"
+          ]
+        }
+      ],
+      "peers": [
+        {
+          "phase": "IN_GAME",
+          "tick": 43,
+          "basic": "vo_dang_quyen"
+        },
+        {
+          "phase": "IN_GAME",
+          "tick": 43,
+          "basic": "cai_bang_bong"
+        }
+      ]
+    },
+    {
+      "id": "ly_mac_sau",
+      "beforeHp": 1000000,
+      "hpAtAttack": 1,
+      "afterHp": 0,
+      "transition": false,
+      "motion": {
+        "frames": [
+          "idle_1_down_right",
+          "death_0_down_right",
+          "death_1_down_right"
+        ],
+        "textures": [
+          "boss-unified:ly_mac_sau"
+        ]
+      },
+      "peerMotions": [
+        {
+          "frames": [
+            "idle_1_down_right",
+            "death_0_down_right",
+            "death_1_down_right"
+          ],
+          "textures": [
+            "boss-unified:ly_mac_sau"
+          ]
+        },
+        {
+          "frames": [
+            "idle_1_down_right",
+            "death_0_down_right",
+            "death_1_down_right"
+          ],
+          "textures": [
+            "boss-unified:ly_mac_sau"
+          ]
+        }
+      ],
+      "peers": [
+        {
+          "phase": "IN_GAME",
+          "tick": 43,
+          "basic": "vo_dang_quyen"
+        },
+        {
+          "phase": "IN_GAME",
+          "tick": 43,
+          "basic": "cai_bang_bong"
+        }
+      ]
+    },
+    {
+      "id": "vuong_trung_duong_p1",
+      "beforeHp": 1000000,
+      "hpAtAttack": 550001,
+      "afterHp": 550000,
+      "transition": true,
+      "motion": {
+        "frames": [
+          "idle_2_down_right",
+          "windup_down",
+          "attack_1_down",
+          "recover_down",
+          "cast_4_down",
+          "cast_5_down",
+          "channel_down"
+        ],
+        "textures": [
+          "boss-unified:vuong_trung_duong_p1",
+          "boss-unified:vuong_trung_duong_p2"
+        ]
+      },
+      "peerMotions": [
+        {
+          "frames": [
+            "idle_2_down_right",
+            "windup_down",
+            "attack_1_down",
+            "recover_down",
+            "cast_4_down",
+            "cast_5_down",
+            "channel_down"
+          ],
+          "textures": [
+            "boss-unified:vuong_trung_duong_p1",
+            "boss-unified:vuong_trung_duong_p2"
+          ]
+        },
+        {
+          "frames": [
+            "idle_0_down_right",
+            "windup_down",
+            "attack_1_down",
+            "recover_down",
+            "cast_4_down",
+            "cast_5_down",
+            "channel_down"
+          ],
+          "textures": [
+            "boss-unified:vuong_trung_duong_p1",
+            "boss-unified:vuong_trung_duong_p2"
+          ]
+        }
+      ],
+      "peers": [
+        {
+          "phase": "IN_GAME",
+          "tick": 160,
+          "basic": "vo_dang_quyen"
+        },
+        {
+          "phase": "IN_GAME",
+          "tick": 160,
+          "basic": "cai_bang_bong"
+        }
+      ]
+    }
+  ]
+}

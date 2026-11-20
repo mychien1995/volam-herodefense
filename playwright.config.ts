@@ -9,6 +9,14 @@ export default defineConfig({
   // Accelerated invasion scenarios own separate server settings and ports.
   testIgnore: [
     '**/qa-iteration.spec.ts',
+    // Dedicated sprite profiles own their bundle, room lifecycle and timeouts.
+    '**/boss-coherence*.spec.ts',
+    '**/hero-coherence*.spec.ts',
+    '**/chuong-unified.spec.ts',
+    '**/hero-finish.spec.ts',
+    '**/presentation-polish.spec.ts',
+    '**/thien-son-sharp-prototype.spec.ts',
+    '**/world-depth-expansion.spec.ts',
     '**/qa-owned-lifecycle.spec.ts',
     '**/qa-skill-prerequisites.spec.ts',
     '**/boss-game.spec.ts',

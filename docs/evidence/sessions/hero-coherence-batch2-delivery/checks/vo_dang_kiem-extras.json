@@ -1,0 +1,359 @@
+{
+  "status": "PASS",
+  "clients": 6,
+  "basic": "vo_dang_kiem",
+  "partial": false,
+  "scope": "authored choreography / swordless lifecycle only",
+  "idle": [],
+  "walk": [],
+  "actions": [],
+  "reactions": [],
+  "authority": [],
+  "notes": [
+    "Profile-scoped body art only. Status and hit fixtures are server-owned, body clocks never send combat commands."
+  ],
+  "extraChecks": {
+    "status": "PASS",
+    "basic": "vo_dang_kiem",
+    "checks": [
+      {
+        "kind": "five real RNG-selected A variants",
+        "attempts": [
+          "cut_down",
+          "cut_right",
+          "cut_down",
+          "thrust",
+          "cut_right",
+          "cut_left",
+          "thrust",
+          "cut_right",
+          "thrust",
+          "thrust",
+          "cut_down",
+          "thrust",
+          "cut_left",
+          "cut_left",
+          "cut_right",
+          "cut_down",
+          "cut_left",
+          "cut_right",
+          "cut_right",
+          "cut_up"
+        ]
+      },
+      {
+        "kind": "seven accepted cut pulses / pose order",
+        "events": [
+          {
+            "tick": 489,
+            "hitIndex": 0,
+            "protocolVersion": 46,
+            "id": 304,
+            "kind": "pulse",
+            "sourceId": "rpIXwZZs7",
+            "targetId": "",
+            "abilityId": "that_tinh_kiem",
+            "x": 700,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 1,
+            "fy": 1,
+            "radius": 92,
+            "stage": "sweep"
+          },
+          {
+            "tick": 495,
+            "hitIndex": 1,
+            "protocolVersion": 46,
+            "id": 319,
+            "kind": "pulse",
+            "sourceId": "rpIXwZZs7",
+            "targetId": "",
+            "abilityId": "that_tinh_kiem",
+            "x": 700,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 1,
+            "fy": 1,
+            "radius": 92,
+            "stage": "sweep"
+          },
+          {
+            "tick": 501,
+            "hitIndex": 2,
+            "protocolVersion": 46,
+            "id": 331,
+            "kind": "pulse",
+            "sourceId": "rpIXwZZs7",
+            "targetId": "",
+            "abilityId": "that_tinh_kiem",
+            "x": 700,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 1,
+            "fy": 1,
+            "radius": 92,
+            "stage": "sweep"
+          },
+          {
+            "tick": 507,
+            "hitIndex": 3,
+            "protocolVersion": 46,
+            "id": 343,
+            "kind": "pulse",
+            "sourceId": "rpIXwZZs7",
+            "targetId": "",
+            "abilityId": "that_tinh_kiem",
+            "x": 700,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 1,
+            "fy": 1,
+            "radius": 92,
+            "stage": "sweep"
+          },
+          {
+            "tick": 513,
+            "hitIndex": 4,
+            "protocolVersion": 46,
+            "id": 355,
+            "kind": "pulse",
+            "sourceId": "rpIXwZZs7",
+            "targetId": "",
+            "abilityId": "that_tinh_kiem",
+            "x": 700,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 1,
+            "fy": 1,
+            "radius": 92,
+            "stage": "sweep"
+          },
+          {
+            "tick": 519,
+            "hitIndex": 5,
+            "protocolVersion": 46,
+            "id": 367,
+            "kind": "pulse",
+            "sourceId": "rpIXwZZs7",
+            "targetId": "",
+            "abilityId": "that_tinh_kiem",
+            "x": 700,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 1,
+            "fy": 1,
+            "radius": 92,
+            "stage": "sweep"
+          },
+          {
+            "tick": 525,
+            "hitIndex": 6,
+            "protocolVersion": 46,
+            "id": 379,
+            "kind": "pulse",
+            "sourceId": "rpIXwZZs7",
+            "targetId": "",
+            "abilityId": "that_tinh_kiem",
+            "x": 700,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 1,
+            "fy": 1,
+            "radius": 92,
+            "stage": "sweep"
+          }
+        ],
+        "sequence": [
+          "idle_3_down_right",
+          "cut_up_down_right",
+          "cut_down_down_right",
+          "cut_right_down_right",
+          "cut_down_down_right",
+          "cut_up_down_right",
+          "cut_left_down_right",
+          "cut_right_down_right",
+          "idle_1_down_right",
+          "idle_2_down_right"
+        ]
+      },
+      {
+        "kind": "natural launch / swordless idle-walk-hurt / return",
+        "launch": [
+          "idle_2_down_right",
+          "release_away_down_right",
+          "idle_away_3_down_right",
+          "idle_away_0_down_right"
+        ],
+        "walk": [
+          "idle_away_0_down_right",
+          "walk_away_2_down_right",
+          "walk_away_3_down_right",
+          "walk_away_0_down_right",
+          "walk_away_1_down_right"
+        ],
+        "hurt": [
+          "idle_away_1_down_right",
+          "hurt_away_0_down_right",
+          "hurt_away_1_down_right",
+          "idle_away_2_down_right"
+        ],
+        "attack": [
+          "walk_away_2_down_right",
+          "walk_away_3_down_right",
+          "windup_away_down_right",
+          "release_away_down_right",
+          "idle_away_1_down_right"
+        ],
+        "returnDirection": "down_right",
+        "returned": [
+          "idle_0_down_right"
+        ]
+      },
+      {
+        "kind": "real W recast teleport",
+        "before": {
+          "x": 700,
+          "y": 660
+        },
+        "after": {
+          "x": 838,
+          "y": 798
+        }
+      },
+      {
+        "kind": "skyfall aim, natural strike, idle",
+        "hits": 1
+      }
+    ]
+  },
+  "f8": "PASS",
+  "portrait": "url(\"/assets/vo-dang-kiem-unified-v1/avatar.png\")",
+  "party": {
+    "targetFixture": "96 stationary high-HP server targets; real keyboard hero attacks/hits, no creep AI combat/reward coverage",
+    "creeps": 96,
+    "clients": 6,
+    "hits": 421,
+    "medianMs": 16.599999994039536,
+    "p95Ms": 20,
+    "frames": 212,
+    "framing": [
+      {
+        "id": "rpIXwZZs7",
+        "visible": true,
+        "bounds": {
+          "x": 731.6666870117186,
+          "y": 552.0000000000001,
+          "right": 781.1666870117186,
+          "bottom": 602.0000000000001
+        },
+        "viewport": {
+          "x": 417.16668701171864,
+          "y": 360.0000000000001,
+          "right": 1100.1666870117188,
+          "bottom": 744.0000000000001
+        },
+        "inside": true
+      },
+      {
+        "id": "ZHx1KgBYB",
+        "visible": true,
+        "bounds": {
+          "x": 784.5,
+          "y": 552.5,
+          "right": 833.5,
+          "bottom": 602.5
+        },
+        "viewport": {
+          "x": 417.16668701171864,
+          "y": 360.0000000000001,
+          "right": 1100.1666870117188,
+          "bottom": 744.0000000000001
+        },
+        "inside": true
+      },
+      {
+        "id": "XKbP46yJ4",
+        "visible": true,
+        "bounds": {
+          "x": 894.5,
+          "y": 552.5,
+          "right": 943.5,
+          "bottom": 602.5
+        },
+        "viewport": {
+          "x": 417.16668701171864,
+          "y": 360.0000000000001,
+          "right": 1100.1666870117188,
+          "bottom": 744.0000000000001
+        },
+        "inside": true
+      },
+      {
+        "id": "8oSLnZTGz",
+        "visible": true,
+        "bounds": {
+          "x": 674.5,
+          "y": 637.5,
+          "right": 723.5,
+          "bottom": 687.5
+        },
+        "viewport": {
+          "x": 417.16668701171864,
+          "y": 360.0000000000001,
+          "right": 1100.1666870117188,
+          "bottom": 744.0000000000001
+        },
+        "inside": true
+      },
+      {
+        "id": "mnxA3deGj",
+        "visible": true,
+        "bounds": {
+          "x": 784.5,
+          "y": 637.5,
+          "right": 833.5,
+          "bottom": 687.5
+        },
+        "viewport": {
+          "x": 417.16668701171864,
+          "y": 360.0000000000001,
+          "right": 1100.1666870117188,
+          "bottom": 744.0000000000001
+        },
+        "inside": true
+      },
+      {
+        "id": "KIQmPlFKp",
+        "visible": true,
+        "bounds": {
+          "x": 894.5,
+          "y": 637.5,
+          "right": 943.5,
+          "bottom": 687.5
+        },
+        "viewport": {
+          "x": 417.16668701171864,
+          "y": 360.0000000000001,
+          "right": 1100.1666870117188,
+          "bottom": 744.0000000000001
+        },
+        "inside": true
+      }
+    ]
+  }
+}

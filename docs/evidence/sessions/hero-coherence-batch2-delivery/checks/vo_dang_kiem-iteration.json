@@ -1,0 +1,1137 @@
+{
+  "status": "PASS",
+  "clients": 2,
+  "basic": "vo_dang_kiem",
+  "partial": false,
+  "scope": "all",
+  "idle": [
+    {
+      "direction": "down_right",
+      "frames": [
+        "idle_0_down_right",
+        "idle_1_down_right",
+        "idle_2_down_right",
+        "idle_3_down_right"
+      ],
+      "alpha": 1
+    },
+    {
+      "direction": "up_left",
+      "frames": [
+        "idle_0_down_right",
+        "idle_0_up_left",
+        "idle_1_up_left",
+        "idle_2_up_left",
+        "idle_3_up_left"
+      ],
+      "alpha": 1
+    }
+  ],
+  "walk": [
+    {
+      "direction": "down_right",
+      "frames": [
+        "walk_1_down",
+        "walk_1_down_right",
+        "walk_2_down_right",
+        "walk_3_down_right",
+        "walk_0_down_right"
+      ]
+    },
+    {
+      "direction": "up_left",
+      "frames": [
+        "walk_2_up_left",
+        "walk_3_up_left",
+        "walk_0_up_left",
+        "walk_1_up_left"
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "direction": "down_right",
+      "key": "KeyA",
+      "ability": "vo_dang_kiem",
+      "cases": [
+        {
+          "id": "jaoMdEWsX",
+          "event": {
+            "tick": 1535,
+            "protocolVersion": 46,
+            "id": 99,
+            "kind": "attack",
+            "sourceId": "jaoMdEWsX",
+            "targetId": "",
+            "abilityId": "vo_dang_kiem",
+            "x": 700,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 1,
+            "fy": 1,
+            "radius": 94,
+            "stage": "cut_up"
+          },
+          "frames": [
+            "idle_1_down_right",
+            "idle_2_down_right",
+            "cut_up_down_right",
+            "recover_down_right",
+            "idle_3_down_right",
+            "idle_0_down_right"
+          ],
+          "targetHp": 99927
+        },
+        {
+          "id": "qwhA3mSZC",
+          "event": {
+            "tick": 1536,
+            "protocolVersion": 46,
+            "id": 101,
+            "kind": "attack",
+            "sourceId": "qwhA3mSZC",
+            "targetId": "",
+            "abilityId": "vo_dang_kiem",
+            "x": 870,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 1,
+            "fy": 1,
+            "radius": 94,
+            "stage": "cut_up"
+          },
+          "frames": [
+            "idle_1_down_right",
+            "idle_2_down_right",
+            "cut_up_down_right",
+            "recover_down_right",
+            "idle_3_down_right",
+            "idle_0_down_right"
+          ],
+          "targetHp": 99927
+        }
+      ]
+    },
+    {
+      "direction": "down_right",
+      "key": "KeyQ",
+      "ability": "that_tinh_kiem",
+      "cases": [
+        {
+          "id": "jaoMdEWsX",
+          "event": {
+            "tick": 1581,
+            "protocolVersion": 46,
+            "id": 103,
+            "kind": "cast",
+            "sourceId": "jaoMdEWsX",
+            "targetId": "",
+            "abilityId": "that_tinh_kiem",
+            "x": 700,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 1,
+            "fy": 1,
+            "radius": 92
+          },
+          "frames": [
+            "idle_0_down_right",
+            "cut_up_down_right",
+            "cut_down_down_right",
+            "cut_right_down_right",
+            "cut_left_down_right"
+          ],
+          "targetHp": 99633
+        },
+        {
+          "id": "qwhA3mSZC",
+          "event": {
+            "tick": 1582,
+            "protocolVersion": 46,
+            "id": 106,
+            "kind": "cast",
+            "sourceId": "qwhA3mSZC",
+            "targetId": "",
+            "abilityId": "that_tinh_kiem",
+            "x": 870,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 1,
+            "fy": 1,
+            "radius": 92
+          },
+          "frames": [
+            "idle_0_down_right",
+            "cut_up_down_right",
+            "cut_down_down_right",
+            "cut_right_down_right",
+            "cut_left_down_right"
+          ],
+          "targetHp": 99609
+        }
+      ]
+    },
+    {
+      "direction": "down_right",
+      "key": "KeyW",
+      "ability": "nhan_kiem_hop_nhat",
+      "cases": [
+        {
+          "id": "jaoMdEWsX",
+          "event": {
+            "tick": 1626,
+            "protocolVersion": 46,
+            "id": 135,
+            "kind": "cast",
+            "sourceId": "jaoMdEWsX",
+            "targetId": "",
+            "abilityId": "nhan_kiem_hop_nhat",
+            "x": 700,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 1,
+            "fy": 1,
+            "radius": 555
+          },
+          "frames": [
+            "idle_2_down_right",
+            "release_away_down_right",
+            "idle_away_3_down_right",
+            "idle_away_0_down_right"
+          ],
+          "targetHp": 99884
+        },
+        {
+          "id": "qwhA3mSZC",
+          "event": {
+            "tick": 1628,
+            "protocolVersion": 46,
+            "id": 136,
+            "kind": "cast",
+            "sourceId": "qwhA3mSZC",
+            "targetId": "",
+            "abilityId": "nhan_kiem_hop_nhat",
+            "x": 870,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 1,
+            "fy": 1,
+            "radius": 555
+          },
+          "frames": [
+            "recover_down_right",
+            "aim_down_right",
+            "idle_2_down_right",
+            "release_away_down_right",
+            "idle_away_3_down_right",
+            "idle_away_0_down_right"
+          ],
+          "targetHp": 99884
+        }
+      ]
+    },
+    {
+      "direction": "down_right",
+      "key": "KeyE",
+      "ability": "bat_quai_kiem_tran",
+      "cases": [
+        {
+          "id": "jaoMdEWsX",
+          "event": {
+            "tick": 1672,
+            "protocolVersion": 46,
+            "id": 139,
+            "kind": "cast",
+            "sourceId": "jaoMdEWsX",
+            "targetId": "",
+            "abilityId": "bat_quai_kiem_tran",
+            "x": 700,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 1,
+            "fy": 1,
+            "radius": 0
+          },
+          "frames": [
+            "idle_away_0_down_right",
+            "idle_0_down_right",
+            "charge_down_right",
+            "sword_raise_down_right",
+            "idle_1_down_right",
+            "idle_2_down_right"
+          ],
+          "targetHp": 99836
+        },
+        {
+          "id": "qwhA3mSZC",
+          "event": {
+            "tick": 1674,
+            "protocolVersion": 46,
+            "id": 142,
+            "kind": "cast",
+            "sourceId": "qwhA3mSZC",
+            "targetId": "",
+            "abilityId": "bat_quai_kiem_tran",
+            "x": 870,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 1,
+            "fy": 1,
+            "radius": 0
+          },
+          "frames": [
+            "idle_away_0_down_right",
+            "idle_0_down_right",
+            "charge_down_right",
+            "sword_raise_down_right",
+            "idle_1_down_right",
+            "idle_2_down_right"
+          ],
+          "targetHp": 99836
+        }
+      ]
+    },
+    {
+      "direction": "down_right",
+      "key": "KeyR",
+      "ability": "toa_sat_bac_do",
+      "cases": [
+        {
+          "id": "jaoMdEWsX",
+          "event": {
+            "tick": 1717,
+            "protocolVersion": 46,
+            "id": 149,
+            "kind": "cast",
+            "sourceId": "jaoMdEWsX",
+            "targetId": "",
+            "abilityId": "toa_sat_bac_do",
+            "x": 700,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 1,
+            "fy": 1,
+            "radius": 125
+          },
+          "frames": [
+            "idle_2_down_right",
+            "guard_down_right"
+          ],
+          "targetHp": 100000
+        },
+        {
+          "id": "qwhA3mSZC",
+          "event": {
+            "tick": 1718,
+            "protocolVersion": 46,
+            "id": 150,
+            "kind": "cast",
+            "sourceId": "qwhA3mSZC",
+            "targetId": "",
+            "abilityId": "toa_sat_bac_do",
+            "x": 870,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 1,
+            "fy": 1,
+            "radius": 125
+          },
+          "frames": [
+            "idle_2_down_right",
+            "guard_down_right"
+          ],
+          "targetHp": 100000
+        }
+      ]
+    },
+    {
+      "direction": "down_right",
+      "key": "KeyT",
+      "ability": "van_kiem_quy_tong",
+      "cases": [
+        {
+          "id": "jaoMdEWsX",
+          "event": {
+            "tick": 1761,
+            "protocolVersion": 46,
+            "id": 151,
+            "kind": "cast",
+            "sourceId": "jaoMdEWsX",
+            "targetId": "",
+            "abilityId": "van_kiem_quy_tong",
+            "x": 700,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 1,
+            "fy": 1,
+            "radius": 0
+          },
+          "frames": [
+            "guard_down_right",
+            "idle_0_down_right",
+            "aim_down_right",
+            "idle_2_down_right",
+            "idle_3_down_right"
+          ],
+          "targetHp": 100000
+        },
+        {
+          "id": "qwhA3mSZC",
+          "event": {
+            "tick": 1763,
+            "protocolVersion": 46,
+            "id": 152,
+            "kind": "cast",
+            "sourceId": "qwhA3mSZC",
+            "targetId": "",
+            "abilityId": "van_kiem_quy_tong",
+            "x": 870,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 1,
+            "fy": 1,
+            "radius": 0
+          },
+          "frames": [
+            "guard_down_right",
+            "idle_0_down_right",
+            "aim_down_right",
+            "idle_2_down_right",
+            "idle_3_down_right"
+          ],
+          "targetHp": 100000
+        }
+      ]
+    },
+    {
+      "direction": "up_left",
+      "key": "KeyA",
+      "ability": "vo_dang_kiem",
+      "cases": [
+        {
+          "id": "jaoMdEWsX",
+          "event": {
+            "tick": 1948,
+            "protocolVersion": 46,
+            "id": 153,
+            "kind": "attack",
+            "sourceId": "jaoMdEWsX",
+            "targetId": "",
+            "abilityId": "vo_dang_kiem",
+            "x": 700,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": -1,
+            "fy": -1,
+            "radius": 94,
+            "stage": "cut_left"
+          },
+          "frames": [
+            "idle_1_up_left",
+            "cut_left_up_left",
+            "recover_up_left",
+            "idle_2_up_left",
+            "idle_3_up_left",
+            "idle_0_up_left"
+          ],
+          "targetHp": 99861
+        },
+        {
+          "id": "qwhA3mSZC",
+          "event": {
+            "tick": 1949,
+            "protocolVersion": 46,
+            "id": 156,
+            "kind": "attack",
+            "sourceId": "qwhA3mSZC",
+            "targetId": "",
+            "abilityId": "vo_dang_kiem",
+            "x": 870,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": -1,
+            "fy": -1,
+            "radius": 94,
+            "stage": "thrust"
+          },
+          "frames": [
+            "idle_1_up_left",
+            "thrust_up_left",
+            "recover_up_left",
+            "idle_2_up_left",
+            "idle_3_up_left",
+            "idle_0_up_left"
+          ],
+          "targetHp": 99927
+        }
+      ]
+    },
+    {
+      "direction": "up_left",
+      "key": "KeyQ",
+      "ability": "that_tinh_kiem",
+      "cases": [
+        {
+          "id": "jaoMdEWsX",
+          "event": {
+            "tick": 1990,
+            "protocolVersion": 46,
+            "id": 159,
+            "kind": "cast",
+            "sourceId": "jaoMdEWsX",
+            "targetId": "",
+            "abilityId": "that_tinh_kiem",
+            "x": 700,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": -1,
+            "fy": -1,
+            "radius": 92
+          },
+          "frames": [
+            "idle_0_up_left",
+            "cut_up_up_left",
+            "cut_down_up_left",
+            "cut_right_up_left",
+            "cut_left_up_left"
+          ],
+          "targetHp": 99657
+        },
+        {
+          "id": "qwhA3mSZC",
+          "event": {
+            "tick": 1992,
+            "protocolVersion": 46,
+            "id": 162,
+            "kind": "cast",
+            "sourceId": "qwhA3mSZC",
+            "targetId": "",
+            "abilityId": "that_tinh_kiem",
+            "x": 870,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": -1,
+            "fy": -1,
+            "radius": 92
+          },
+          "frames": [
+            "idle_0_up_left",
+            "cut_up_up_left",
+            "cut_down_up_left",
+            "cut_right_up_left",
+            "cut_left_up_left"
+          ],
+          "targetHp": 99657
+        }
+      ]
+    },
+    {
+      "direction": "up_left",
+      "key": "KeyW",
+      "ability": "nhan_kiem_hop_nhat",
+      "cases": [
+        {
+          "id": "jaoMdEWsX",
+          "event": {
+            "tick": 2033,
+            "protocolVersion": 46,
+            "id": 189,
+            "kind": "cast",
+            "sourceId": "jaoMdEWsX",
+            "targetId": "",
+            "abilityId": "nhan_kiem_hop_nhat",
+            "x": 700,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": -1,
+            "fy": -1,
+            "radius": 555
+          },
+          "frames": [
+            "cut_right_up_left",
+            "idle_1_up_left",
+            "release_away_up_left",
+            "idle_away_2_up_left",
+            "idle_away_3_up_left",
+            "idle_away_0_up_left"
+          ],
+          "targetHp": 99884
+        },
+        {
+          "id": "qwhA3mSZC",
+          "event": {
+            "tick": 2035,
+            "protocolVersion": 46,
+            "id": 190,
+            "kind": "cast",
+            "sourceId": "qwhA3mSZC",
+            "targetId": "",
+            "abilityId": "nhan_kiem_hop_nhat",
+            "x": 870,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": -1,
+            "fy": -1,
+            "radius": 555
+          },
+          "frames": [
+            "cut_right_up_left",
+            "idle_1_up_left",
+            "release_away_up_left",
+            "idle_away_2_up_left",
+            "idle_away_3_up_left",
+            "idle_away_0_up_left"
+          ],
+          "targetHp": 99884
+        }
+      ]
+    },
+    {
+      "direction": "up_left",
+      "key": "KeyE",
+      "ability": "bat_quai_kiem_tran",
+      "cases": [
+        {
+          "id": "jaoMdEWsX",
+          "event": {
+            "tick": 2076,
+            "protocolVersion": 46,
+            "id": 193,
+            "kind": "cast",
+            "sourceId": "jaoMdEWsX",
+            "targetId": "",
+            "abilityId": "bat_quai_kiem_tran",
+            "x": 700,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": -1,
+            "fy": -1,
+            "radius": 0
+          },
+          "frames": [
+            "idle_away_0_up_left",
+            "idle_0_up_left",
+            "charge_up_left",
+            "sword_raise_up_left",
+            "idle_1_up_left"
+          ],
+          "targetHp": 99836
+        },
+        {
+          "id": "qwhA3mSZC",
+          "event": {
+            "tick": 2078,
+            "protocolVersion": 46,
+            "id": 196,
+            "kind": "cast",
+            "sourceId": "qwhA3mSZC",
+            "targetId": "",
+            "abilityId": "bat_quai_kiem_tran",
+            "x": 870,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": -1,
+            "fy": -1,
+            "radius": 0
+          },
+          "frames": [
+            "idle_away_0_up_left",
+            "idle_0_up_left",
+            "charge_up_left",
+            "sword_raise_up_left",
+            "idle_1_up_left"
+          ],
+          "targetHp": 99836
+        }
+      ]
+    },
+    {
+      "direction": "up_left",
+      "key": "KeyR",
+      "ability": "toa_sat_bac_do",
+      "cases": [
+        {
+          "id": "jaoMdEWsX",
+          "event": {
+            "tick": 2119,
+            "protocolVersion": 46,
+            "id": 203,
+            "kind": "cast",
+            "sourceId": "jaoMdEWsX",
+            "targetId": "",
+            "abilityId": "toa_sat_bac_do",
+            "x": 700,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": -1,
+            "fy": -1,
+            "radius": 125
+          },
+          "frames": [
+            "idle_1_up_left",
+            "guard_up_left"
+          ],
+          "targetHp": 100000
+        },
+        {
+          "id": "qwhA3mSZC",
+          "event": {
+            "tick": 2121,
+            "protocolVersion": 46,
+            "id": 204,
+            "kind": "cast",
+            "sourceId": "qwhA3mSZC",
+            "targetId": "",
+            "abilityId": "toa_sat_bac_do",
+            "x": 870,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": -1,
+            "fy": -1,
+            "radius": 125
+          },
+          "frames": [
+            "idle_1_up_left",
+            "guard_up_left"
+          ],
+          "targetHp": 100000
+        }
+      ]
+    },
+    {
+      "direction": "up_left",
+      "key": "KeyT",
+      "ability": "van_kiem_quy_tong",
+      "cases": [
+        {
+          "id": "jaoMdEWsX",
+          "event": {
+            "tick": 2161,
+            "protocolVersion": 46,
+            "id": 205,
+            "kind": "cast",
+            "sourceId": "jaoMdEWsX",
+            "targetId": "",
+            "abilityId": "van_kiem_quy_tong",
+            "x": 700,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": -1,
+            "fy": -1,
+            "radius": 0
+          },
+          "frames": [
+            "guard_up_left",
+            "idle_0_up_left",
+            "aim_up_left",
+            "idle_1_up_left",
+            "idle_2_up_left",
+            "idle_3_up_left"
+          ],
+          "targetHp": 100000
+        },
+        {
+          "id": "qwhA3mSZC",
+          "event": {
+            "tick": 2164,
+            "protocolVersion": 46,
+            "id": 206,
+            "kind": "cast",
+            "sourceId": "qwhA3mSZC",
+            "targetId": "",
+            "abilityId": "van_kiem_quy_tong",
+            "x": 870,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": -1,
+            "fy": -1,
+            "radius": 0
+          },
+          "frames": [
+            "guard_up_left",
+            "idle_0_up_left",
+            "aim_up_left",
+            "idle_1_up_left",
+            "idle_2_up_left",
+            "idle_3_up_left"
+          ],
+          "targetHp": 100000
+        }
+      ]
+    }
+  ],
+  "reactions": [
+    {
+      "direction": "down_right",
+      "kind": "hurt",
+      "frames": [
+        "idle_3_up_left",
+        "idle_3_down_right",
+        "idle_0_down_right",
+        "hurt_0_down_right",
+        "hurt_1_down_right"
+      ]
+    },
+    {
+      "direction": "down_right",
+      "kind": "stun",
+      "alphaAfter": 1
+    },
+    {
+      "direction": "down_right",
+      "kind": "status expiry",
+      "observed": [
+        "slow",
+        "silence",
+        "disarm",
+        "root",
+        "burn",
+        "poison"
+      ],
+      "alphaAfter": 1
+    },
+    {
+      "direction": "down_right",
+      "kind": "death",
+      "frames": [
+        "idle_2_down_right",
+        "death_0_down_right",
+        "death_1_down_right"
+      ]
+    },
+    {
+      "direction": "down_right",
+      "kind": "natural arena revival",
+      "alphaAfter": 1
+    },
+    {
+      "direction": "up_left",
+      "kind": "hurt",
+      "frames": [
+        "idle_2_up_left",
+        "hurt_0_up_left",
+        "hurt_1_up_left"
+      ]
+    },
+    {
+      "direction": "up_left",
+      "kind": "stun",
+      "alphaAfter": 1
+    },
+    {
+      "direction": "up_left",
+      "kind": "status expiry",
+      "observed": [
+        "slow",
+        "silence",
+        "disarm",
+        "root",
+        "burn",
+        "poison"
+      ],
+      "alphaAfter": 1
+    },
+    {
+      "direction": "up_left",
+      "kind": "death",
+      "frames": [
+        "idle_0_up_left",
+        "idle_1_up_left",
+        "death_0_up_left",
+        "death_1_up_left"
+      ]
+    },
+    {
+      "direction": "up_left",
+      "kind": "natural arena revival",
+      "alphaAfter": 1
+    }
+  ],
+  "authority": [
+    {
+      "kind": "resolved-hit",
+      "direction": "down_right",
+      "hitTick": 2230,
+      "acknowledged": {
+        "tick": 2245,
+        "serverHp": 334.89999999999975,
+        "peerHp": 334.8999938964844
+      }
+    },
+    {
+      "kind": "resolved-hit",
+      "direction": "up_left",
+      "hitTick": 2461,
+      "acknowledged": {
+        "tick": 2473,
+        "serverHp": 334.8499999999998,
+        "peerHp": 334.8500061035156
+      }
+    }
+  ],
+  "notes": [
+    "Profile-scoped body art only. Status and hit fixtures are server-owned, body clocks never send combat commands."
+  ],
+  "extraChecks": {
+    "status": "PASS",
+    "basic": "vo_dang_kiem",
+    "checks": [
+      {
+        "kind": "five real RNG-selected A variants",
+        "attempts": [
+          "cut_up",
+          "thrust",
+          "cut_left",
+          "cut_left",
+          "cut_left",
+          "cut_down",
+          "cut_up",
+          "cut_left",
+          "cut_right"
+        ]
+      },
+      {
+        "kind": "seven accepted cut pulses / pose order",
+        "events": [
+          {
+            "tick": 2795,
+            "hitIndex": 0,
+            "protocolVersion": 46,
+            "id": 270,
+            "kind": "pulse",
+            "sourceId": "jaoMdEWsX",
+            "targetId": "",
+            "abilityId": "that_tinh_kiem",
+            "x": 700,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 1,
+            "fy": 1,
+            "radius": 92,
+            "stage": "sweep"
+          },
+          {
+            "tick": 2801,
+            "hitIndex": 1,
+            "protocolVersion": 46,
+            "id": 275,
+            "kind": "pulse",
+            "sourceId": "jaoMdEWsX",
+            "targetId": "",
+            "abilityId": "that_tinh_kiem",
+            "x": 700,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 1,
+            "fy": 1,
+            "radius": 92,
+            "stage": "sweep"
+          },
+          {
+            "tick": 2807,
+            "hitIndex": 2,
+            "protocolVersion": 46,
+            "id": 279,
+            "kind": "pulse",
+            "sourceId": "jaoMdEWsX",
+            "targetId": "",
+            "abilityId": "that_tinh_kiem",
+            "x": 700,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 1,
+            "fy": 1,
+            "radius": 92,
+            "stage": "sweep"
+          },
+          {
+            "tick": 2813,
+            "hitIndex": 3,
+            "protocolVersion": 46,
+            "id": 283,
+            "kind": "pulse",
+            "sourceId": "jaoMdEWsX",
+            "targetId": "",
+            "abilityId": "that_tinh_kiem",
+            "x": 700,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 1,
+            "fy": 1,
+            "radius": 92,
+            "stage": "sweep"
+          },
+          {
+            "tick": 2819,
+            "hitIndex": 4,
+            "protocolVersion": 46,
+            "id": 287,
+            "kind": "pulse",
+            "sourceId": "jaoMdEWsX",
+            "targetId": "",
+            "abilityId": "that_tinh_kiem",
+            "x": 700,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 1,
+            "fy": 1,
+            "radius": 92,
+            "stage": "sweep"
+          },
+          {
+            "tick": 2825,
+            "hitIndex": 5,
+            "protocolVersion": 46,
+            "id": 291,
+            "kind": "pulse",
+            "sourceId": "jaoMdEWsX",
+            "targetId": "",
+            "abilityId": "that_tinh_kiem",
+            "x": 700,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 1,
+            "fy": 1,
+            "radius": 92,
+            "stage": "sweep"
+          },
+          {
+            "tick": 2831,
+            "hitIndex": 6,
+            "protocolVersion": 46,
+            "id": 295,
+            "kind": "pulse",
+            "sourceId": "jaoMdEWsX",
+            "targetId": "",
+            "abilityId": "that_tinh_kiem",
+            "x": 700,
+            "y": 660,
+            "damage": 0,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 1,
+            "fy": 1,
+            "radius": 92,
+            "stage": "sweep"
+          }
+        ],
+        "sequence": [
+          "idle_1_down_right",
+          "idle_2_down_right",
+          "cut_up_down_right",
+          "cut_down_down_right",
+          "cut_right_down_right",
+          "cut_down_down_right",
+          "cut_up_down_right",
+          "cut_left_down_right",
+          "cut_right_down_right",
+          "recover_down_right",
+          "aim_down_right",
+          "idle_0_down_right"
+        ]
+      },
+      {
+        "kind": "natural launch / swordless idle-walk-hurt / return",
+        "launch": [
+          "idle_1_down_right",
+          "release_away_down_right",
+          "idle_away_1_down_right",
+          "idle_away_2_down_right"
+        ],
+        "walk": [
+          "idle_away_2_down_right",
+          "walk_away_3_down_right",
+          "walk_away_0_down_right",
+          "walk_away_1_down_right",
+          "walk_away_2_down_right"
+        ],
+        "hurt": [
+          "idle_away_0_down_right",
+          "hurt_away_0_down_right",
+          "hurt_away_1_down_right"
+        ],
+        "returned": [
+          "idle_2_down_right",
+          "idle_3_down_right"
+        ]
+      },
+      {
+        "kind": "real W recast teleport",
+        "before": {
+          "x": 700,
+          "y": 660
+        },
+        "after": {
+          "x": 808,
+          "y": 768
+        }
+      },
+      {
+        "kind": "skyfall aim, natural strike, idle",
+        "hits": 1
+      }
+    ]
+  },
+  "f8": "PASS",
+  "portrait": "url(\"/assets/vo-dang-kiem-unified-v1/avatar.png\")"
+}

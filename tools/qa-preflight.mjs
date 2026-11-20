@@ -42,7 +42,11 @@ export function managedQaProfile(mode, args = []) {
   return qaManagedProfile(mode, args) !== null;
 }
 
-export function verifyQaBuild(root, session) {
+export function verifyQaBuild(
+  root,
+  session,
+  clientDist = 'apps/game-client/dist',
+) {
   const contract = session.contract;
   const clientOnly = contract?.services.every(
     (service) => service.serverPort === undefined,
@@ -50,7 +54,7 @@ export function verifyQaBuild(root, session) {
   if (contract?.clientMode === 'static')
     return { client: 'static review; no game build consumed' };
   if (clientOnly) {
-    if (!existsSync(resolve(root, 'apps/game-client/dist/index.html')))
+    if (!existsSync(resolve(root, clientDist, 'index.html')))
       throw Error('Missing built preview client');
     return { client: 'preview-only; no game server consumed' };
   }
@@ -74,7 +78,7 @@ export function verifyQaBuild(root, session) {
     };
   const endpoint = JSON.parse(
     readFileSync(
-      resolve(root, 'apps/game-client/dist/volam-build-endpoint.json'),
+      resolve(root, clientDist, 'volam-build-endpoint.json'),
       'utf8',
     ),
   );

@@ -1,0 +1,680 @@
+{
+  "status": "PASS",
+  "before": true,
+  "clients": 2,
+  "fixture": "Isolated server-owned boss spawn/build/location/cooldown prerequisites; actual encounter beginCast/release and replicated effects; not natural progression or defeat coverage",
+  "idle": {
+    "frames": [
+      "idle_down_0"
+    ],
+    "scales": [
+      "[0.5,0.5]"
+    ]
+  },
+  "walk": {
+    "frames": [
+      "idle_down_0",
+      "walk_down_0",
+      "walk_down_1",
+      "walk_down_2",
+      "walk_down_3"
+    ],
+    "scales": [
+      "[0.5,0.5]"
+    ]
+  },
+  "cases": [
+    {
+      "ability": "ta_kiem_lien_kich",
+      "sourceSince": 0,
+      "body": {
+        "id": "dong_ta",
+        "pose": "action",
+        "direction": "down",
+        "locomotion": false,
+        "name": "dong_ta:dong_ta",
+        "texture": "renovated-action-dong_ta_actions",
+        "source": "/assets/renovation-v3/actors/dong_ta_actions.png",
+        "density": 1,
+        "effectiveDensity": 2,
+        "action": {
+          "ability": "ta_kiem_lien_kich",
+          "phase": "release",
+          "sourceTexture": "renovated-action-dong_ta_actions",
+          "sourceFrame": "down_1"
+        },
+        "screen": [
+          516.122802734375,
+          313.122802734375
+        ],
+        "frame": "down_1",
+        "x": 700,
+        "y": 650,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "depth": 650.5,
+        "visible": true
+      },
+      "cap": {
+        "frames": [
+          "down_3",
+          "idle_down_0",
+          "down_0"
+        ],
+        "scales": [
+          "[0.5,0.5]"
+        ]
+      },
+      "peerEvents": [
+        {
+          "phase": "IN_GAME",
+          "events": []
+        },
+        {
+          "phase": "IN_GAME",
+          "events": []
+        }
+      ],
+      "peerReleases": [
+        {
+          "id": "dong_0_1",
+          "actorId": "dong_ta",
+          "abilityId": "ta_kiem_lien_kich",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "15Byqb4Xg",
+          "startedAt": 218,
+          "activeAt": 232,
+          "endsAt": 259,
+          "released": true,
+          "nextPulse": 234,
+          "pulse": 1,
+          "pattern": "x"
+        },
+        {
+          "id": "dong_0_1",
+          "actorId": "dong_ta",
+          "abilityId": "ta_kiem_lien_kich",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "15Byqb4Xg",
+          "startedAt": 218,
+          "activeAt": 232,
+          "endsAt": 259,
+          "released": true,
+          "nextPulse": 234,
+          "pulse": 1,
+          "pattern": "x"
+        }
+      ]
+    },
+    {
+      "ability": "lac_anh_normal",
+      "sourceSince": 0,
+      "body": {
+        "id": "dong_ta",
+        "pose": "action",
+        "direction": "up",
+        "locomotion": false,
+        "name": "dong_ta:dong_ta",
+        "texture": "renovated-action-dong_ta_actions",
+        "source": "/assets/renovation-v3/actors/dong_ta_actions.png",
+        "density": 1,
+        "effectiveDensity": 2,
+        "action": {
+          "ability": "lac_anh_normal",
+          "phase": "release",
+          "sourceTexture": "renovated-action-dong_ta_actions",
+          "sourceFrame": "up_1"
+        },
+        "screen": [
+          516.122802734375,
+          313.122802734375
+        ],
+        "frame": "up_1",
+        "x": 700,
+        "y": 650,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "depth": 650.5,
+        "visible": true
+      },
+      "cap": {
+        "frames": [
+          "down_3",
+          "up_3",
+          "walk_right_1",
+          "walk_right_2",
+          "walk_right_3",
+          "walk_right_0",
+          "right_0"
+        ],
+        "scales": [
+          "[0.5,0.5]"
+        ]
+      },
+      "peerEvents": [
+        {
+          "phase": "IN_GAME",
+          "events": []
+        },
+        {
+          "phase": "IN_GAME",
+          "events": []
+        }
+      ],
+      "peerReleases": [
+        {
+          "id": "dong_0_16",
+          "actorId": "dong_ta",
+          "abilityId": "lac_anh_normal",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "15Byqb4Xg",
+          "startedAt": 283,
+          "activeAt": 297,
+          "endsAt": 333,
+          "released": true,
+          "nextPulse": 297,
+          "pulse": 0,
+          "pattern": "x",
+          "path": [
+            {
+              "x": 700,
+              "y": 650
+            },
+            {
+              "x": 960,
+              "y": 381
+            },
+            {
+              "x": 960,
+              "y": 851
+            },
+            {
+              "x": 640,
+              "y": 381
+            },
+            {
+              "x": 640,
+              "y": 851
+            }
+          ],
+          "hitIds": []
+        },
+        {
+          "id": "dong_0_16",
+          "actorId": "dong_ta",
+          "abilityId": "lac_anh_normal",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "15Byqb4Xg",
+          "startedAt": 283,
+          "activeAt": 297,
+          "endsAt": 333,
+          "released": true,
+          "nextPulse": 297,
+          "pulse": 0,
+          "pattern": "x",
+          "path": [
+            {
+              "x": 700,
+              "y": 650
+            },
+            {
+              "x": 960,
+              "y": 381
+            },
+            {
+              "x": 960,
+              "y": 851
+            },
+            {
+              "x": 640,
+              "y": 381
+            },
+            {
+              "x": 640,
+              "y": 851
+            }
+          ],
+          "hitIds": []
+        }
+      ]
+    },
+    {
+      "ability": "dan_chi_than_cong",
+      "sourceSince": 0,
+      "body": {
+        "id": "dong_ta",
+        "pose": "action",
+        "direction": "down",
+        "locomotion": false,
+        "name": "dong_ta:dong_ta",
+        "texture": "renovated-action-dong_ta_actions",
+        "source": "/assets/renovation-v3/actors/dong_ta_actions.png",
+        "density": 1,
+        "effectiveDensity": 2,
+        "action": {
+          "ability": "dan_chi_than_cong",
+          "phase": "windup",
+          "sourceTexture": "renovated-action-dong_ta_actions",
+          "sourceFrame": "down_0"
+        },
+        "screen": [
+          516.122802734375,
+          313.122802734375
+        ],
+        "frame": "down_0",
+        "x": 700,
+        "y": 650,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "depth": 650.5,
+        "visible": true
+      },
+      "cap": {
+        "frames": [
+          "down_0",
+          "idle_down_0"
+        ],
+        "scales": [
+          "[0.5,0.5]"
+        ]
+      },
+      "peerEvents": [
+        {
+          "phase": "IN_GAME",
+          "events": []
+        },
+        {
+          "phase": "IN_GAME",
+          "events": []
+        }
+      ],
+      "peerReleases": [
+        {
+          "id": "dong_0_18",
+          "actorId": "dong_ta",
+          "abilityId": "dan_chi_than_cong",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "15Byqb4Xg",
+          "startedAt": 367,
+          "activeAt": 385,
+          "endsAt": 400,
+          "released": true,
+          "nextPulse": 385,
+          "pulse": 0,
+          "pattern": "x"
+        },
+        {
+          "id": "dong_0_18",
+          "actorId": "dong_ta",
+          "abilityId": "dan_chi_than_cong",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "15Byqb4Xg",
+          "startedAt": 367,
+          "activeAt": 385,
+          "endsAt": 400,
+          "released": true,
+          "nextPulse": 385,
+          "pulse": 0,
+          "pattern": "x"
+        }
+      ]
+    },
+    {
+      "ability": "lac_anh_kiem_phap",
+      "sourceSince": 0,
+      "body": {
+        "id": "dong_ta",
+        "pose": "action",
+        "direction": "down",
+        "locomotion": false,
+        "name": "dong_ta:dong_ta",
+        "texture": "renovated-action-dong_ta_actions",
+        "source": "/assets/renovation-v3/actors/dong_ta_actions.png",
+        "density": 1,
+        "effectiveDensity": 2,
+        "action": {
+          "ability": "lac_anh_kiem_phap",
+          "phase": "windup",
+          "sourceTexture": "renovated-action-dong_ta_actions",
+          "sourceFrame": "down_0"
+        },
+        "screen": [
+          516.122802734375,
+          313.122802734375
+        ],
+        "frame": "down_0",
+        "x": 700,
+        "y": 650,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "depth": 650.5,
+        "visible": true
+      },
+      "cap": {
+        "frames": [
+          "down_3",
+          "idle_down_0",
+          "down_0"
+        ],
+        "scales": [
+          "[0.5,0.5]"
+        ]
+      },
+      "peerEvents": [
+        {
+          "phase": "IN_GAME",
+          "events": [
+            {
+              "id": 4,
+              "kind": "effect",
+              "stage": "boss_shout"
+            },
+            {
+              "id": 5,
+              "kind": "cast"
+            }
+          ]
+        },
+        {
+          "phase": "IN_GAME",
+          "events": [
+            {
+              "id": 4,
+              "kind": "effect",
+              "stage": "boss_shout"
+            },
+            {
+              "id": 5,
+              "kind": "cast"
+            }
+          ]
+        }
+      ],
+      "peerReleases": [
+        {
+          "id": "dong_0_28",
+          "actorId": "dong_ta",
+          "abilityId": "lac_anh_kiem_phap",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "15Byqb4Xg",
+          "startedAt": 424,
+          "activeAt": 445,
+          "endsAt": 466,
+          "released": true,
+          "nextPulse": 445,
+          "pulse": 0,
+          "pattern": "x"
+        },
+        {
+          "id": "dong_0_28",
+          "actorId": "dong_ta",
+          "abilityId": "lac_anh_kiem_phap",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "15Byqb4Xg",
+          "startedAt": 424,
+          "activeAt": 445,
+          "endsAt": 466,
+          "released": true,
+          "nextPulse": 445,
+          "pulse": 0,
+          "pattern": "x"
+        }
+      ]
+    },
+    {
+      "ability": "ngoc_tieu_hoi_phong",
+      "sourceSince": 0,
+      "body": {
+        "id": "dong_ta",
+        "pose": "action",
+        "direction": "down",
+        "locomotion": false,
+        "name": "dong_ta:dong_ta",
+        "texture": "renovated-action-dong_ta_actions",
+        "source": "/assets/renovation-v3/actors/dong_ta_actions.png",
+        "density": 1,
+        "effectiveDensity": 2,
+        "action": {
+          "ability": "ngoc_tieu_hoi_phong",
+          "phase": "release",
+          "sourceTexture": "renovated-action-dong_ta_actions",
+          "sourceFrame": "down_2"
+        },
+        "screen": [
+          516.122802734375,
+          313.122802734375
+        ],
+        "frame": "down_2",
+        "x": 700,
+        "y": 650,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "depth": 650.5,
+        "visible": true
+      },
+      "cap": {
+        "frames": [
+          "down_2",
+          "idle_down_0",
+          "down_0"
+        ],
+        "scales": [
+          "[0.5,0.5]"
+        ]
+      },
+      "peerEvents": [
+        {
+          "phase": "IN_GAME",
+          "events": [
+            {
+              "id": 2,
+              "kind": "effect",
+              "stage": "boss_shout"
+            },
+            {
+              "id": 3,
+              "kind": "cast"
+            }
+          ]
+        },
+        {
+          "phase": "IN_GAME",
+          "events": [
+            {
+              "id": 2,
+              "kind": "effect",
+              "stage": "boss_shout"
+            },
+            {
+              "id": 3,
+              "kind": "cast"
+            }
+          ]
+        }
+      ],
+      "peerReleases": [
+        {
+          "id": "dong_0_34",
+          "actorId": "dong_ta",
+          "abilityId": "ngoc_tieu_hoi_phong",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "15Byqb4Xg",
+          "startedAt": 489,
+          "activeAt": 522,
+          "endsAt": 546,
+          "released": true,
+          "nextPulse": 522,
+          "pulse": 0,
+          "pattern": "x"
+        },
+        {
+          "id": "dong_0_34",
+          "actorId": "dong_ta",
+          "abilityId": "ngoc_tieu_hoi_phong",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "15Byqb4Xg",
+          "startedAt": 489,
+          "activeAt": 522,
+          "endsAt": 546,
+          "released": true,
+          "nextPulse": 522,
+          "pulse": 0,
+          "pattern": "x"
+        }
+      ]
+    },
+    {
+      "ability": "trieu_hon_dong_hai",
+      "sourceSince": 0,
+      "body": {
+        "id": "dong_ta",
+        "pose": "action",
+        "direction": "down",
+        "locomotion": false,
+        "name": "dong_ta:dong_ta",
+        "texture": "renovated-action-dong_ta_actions",
+        "source": "/assets/renovation-v3/actors/dong_ta_actions.png",
+        "density": 1,
+        "effectiveDensity": 2,
+        "action": {
+          "ability": "trieu_hon_dong_hai",
+          "phase": "windup",
+          "sourceTexture": "renovated-action-dong_ta_actions",
+          "sourceFrame": "down_0"
+        },
+        "screen": [
+          516.122802734375,
+          313.122802734375
+        ],
+        "frame": "down_0",
+        "x": 700,
+        "y": 650,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "depth": 650.5,
+        "visible": true
+      },
+      "cap": {
+        "frames": [
+          "down_0",
+          "idle_down_0"
+        ],
+        "scales": [
+          "[0.5,0.5]"
+        ]
+      },
+      "peerEvents": [
+        {
+          "phase": "IN_GAME",
+          "events": []
+        },
+        {
+          "phase": "IN_GAME",
+          "events": []
+        }
+      ],
+      "peerReleases": [
+        {
+          "id": "dong_0_76",
+          "actorId": "dong_ta",
+          "abilityId": "trieu_hon_dong_hai",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "15Byqb4Xg",
+          "startedAt": 570,
+          "activeAt": 594,
+          "endsAt": 612,
+          "released": true,
+          "nextPulse": 594,
+          "pulse": 0,
+          "pattern": "plus"
+        },
+        {
+          "id": "dong_0_76",
+          "actorId": "dong_ta",
+          "abilityId": "trieu_hon_dong_hai",
+          "x": 700,
+          "y": 650,
+          "fx": 0.7071067811865475,
+          "fy": 0.7071067811865475,
+          "targetId": "15Byqb4Xg",
+          "startedAt": 570,
+          "activeAt": 594,
+          "endsAt": 612,
+          "released": true,
+          "nextPulse": 594,
+          "pulse": 0,
+          "pattern": "plus"
+        }
+      ]
+    }
+  ]
+}

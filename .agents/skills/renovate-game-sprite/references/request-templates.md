@@ -58,3 +58,26 @@ Output a true transparent PNG. Separate VFX from the body.
 
 Choose the numeric size and frame count after inspecting the old asset and target view. Preserve the reference's visual style while adapting material and school colors to the requested subject.
 
+
+## Sharpen a limited sample before expansion
+
+```text
+Dùng $renovate-game-sprite làm mẫu nét hơn cho [nhân vật].
+Giữ identity, tỷ lệ, gameplay/HUD và các phím so sánh hiện có.
+Mẫu gồm [hướng] và [idle/walk/A hoặc động tác đại diện]. Các phần ngoài mẫu giữ bản trước.
+Cho PNG trước–sau ở cùng gameplay zoom, kiểm tra chuyển frame trong game và mở phòng thử.
+Chỉ test liên quan. Dừng ở mẫu trước khi mở rộng. Worktree: [đường dẫn].
+```
+
+## Unify a character and its skill presentation
+
+```text
+Dùng $renovate-game-sprite thống nhất [nhân vật] theo sprite nét đã duyệt [tham chiếu].
+Phạm vi: [hướng/trạng thái/kỹ năng cần sửa], gồm phản ứng và chết/hồi sinh nếu thuộc yêu cầu.
+Giữ biến thể đánh thường, choreography, VFX và luật server; căn lại socket nếu body mới cần.
+Ghi rõ pose dùng lại, weapon-away/biến thân/phân thân và phần chưa kiểm chứng.
+Triển khai [mẫu trước / từng đợt được phép làm hết], test liên quan, PNG trong game và phòng thử.
+Worktree: [đường dẫn].
+```
+
+For an existing skill's visual-only renovation, name the affected skill/action rather than requesting new combat behavior. If the user also requests a gameplay change, establish that additional scope and use the project's ability workflow for mechanics.

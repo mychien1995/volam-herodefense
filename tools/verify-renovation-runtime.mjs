@@ -37,6 +37,8 @@ export async function verifyRenovationRuntime(
     evidenceDir,
     clientQuery = '',
     compareLegacy = true,
+    clientDist,
+    selectionTimeout = 30000,
   } = {},
 ) {
   const session = qaSession({
@@ -95,6 +97,7 @@ export async function verifyRenovationRuntime(
     const stopServices = await startOwnedGameQa({
       session,
       clientMode: development ? 'development' : 'preview',
+      clientDist,
       environment: { NODE_ENV: 'development' },
       configure(gameServer) {
         server = new ColyseusTestServer(gameServer);
@@ -166,7 +169,7 @@ export async function verifyRenovationRuntime(
         schools[i],
         m1Config.progression.schools[schools[i]].basicIds[0],
       ]);
-      await startAuditTogether(roster, 30000, selectionHook);
+      await startAuditTogether(roster, selectionTimeout, selectionHook);
     } else if (selectionHook) {
       await pages[0]
         .getByRole('button', { name: 'Bắt đầu', exact: true })

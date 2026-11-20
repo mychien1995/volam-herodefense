@@ -6,6 +6,7 @@ export interface OwnedGameOptions {
   session?: QaSession;
   environment?: Record<string, string | undefined>;
   client?: InlineConfig;
+  clientDist?: string;
   loadClientConfig?: boolean;
   clientMode?: 'development' | 'preview';
   serverFactory?: typeof createGameServer;

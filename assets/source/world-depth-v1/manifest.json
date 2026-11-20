@@ -1,0 +1,94 @@
+{
+  "revision": "world-depth-presentation-r6",
+  "status": "PROTOTYPE - director review pending",
+  "sourceArtwork": [
+    {
+      "file": "assets/exports/renovation-v2/arena-ground.png",
+      "sha256": "b73f7bbf22d43217e420763ac70e76a9aafd3e33ca6571bef3b755c856933c3c"
+    },
+    {
+      "file": "assets/exports/visual-upgrade-2/statue.png",
+      "sha256": "1902fb8def95c3210b451fc253cb3f2a481778ab52d0a1f12f668d210407d038"
+    },
+    {
+      "file": "assets/exports/visual-upgrade-2/lantern.png",
+      "sha256": "6a34b13271d0a95895801c22925f3e00eef5053148a231fb9d3cb095e29d3170"
+    },
+    {
+      "file": "assets/exports/renovation-v1/runtime/hero_cai_bang_chuong.png",
+      "sha256": "8b65b4ae611bf382ae28cc21a8a5645ac9856b0e2825029f7663f63289fcd83b"
+    },
+    {
+      "file": "assets/source/renovation-v2/raw/arena-materials.png",
+      "sha256": "16378c3a3ee80ba31d6dd2fc61bd5489468e07d842d2bd9a1ff579290f87f4ad"
+    }
+  ],
+  "runtimeSources": [
+    "apps/game-client/src/world-depth-effects.ts",
+    "apps/game-client/src/world-depth-emission.ts",
+    "apps/game-client/src/world-depth-terrain.ts",
+    "apps/game-client/src/world-depth-material.ts",
+    "apps/game-client/src/world-depth-profiles.ts",
+    "apps/game-client/src/world-depth-shadows.ts",
+    "apps/game-client/src/world-depth-environment.ts",
+    "apps/game-client/src/world-depth-light-policy.ts",
+    "apps/game-client/src/hero-motion.ts",
+    "apps/game-client/src/hero-finish.ts",
+    "apps/game-client/src/hero-finish-policy.ts",
+    "apps/game-client/src/floating-damage.ts"
+  ],
+  "firePoolCap": 16,
+  "sourcePixelsChanged": false,
+  "gameplayChanges": false,
+  "hudChanges": false,
+  "dogShadowFacings": 4,
+  "groundAssembly": "Minimum-error overlap, 448px non-mirrored repeat, original material scale and retained circle/cross footprint",
+  "r3CachedTextureCount": 17,
+  "expandedShadowBudget": {
+    "maxVisibleCasts": 64,
+    "maxCachedTextures": 128,
+    "maxBytes": 25165824,
+    "maxProjectionCanvas": [
+      384,
+      192
+    ],
+    "legacyHeroSlotsReserved": true,
+    "wildDogsUseSharedBudget": true
+  },
+  "emissionPointCacheLimit": 1024,
+  "scope": [
+    "arena",
+    "forest",
+    "desert",
+    "sea",
+    "hell",
+    "co_mo",
+    "chu_ba_thong",
+    "hong_liet",
+    "kim_luan",
+    "loi_dai"
+  ],
+  "reusedCatalogs": [
+    {
+      "file": "apps/game-client/src/renovation-art.generated.json",
+      "sha256": "f91568c001824fa631b1da1d174ac3de9a8b2e2e20afeffec11298b537d35e30"
+    },
+    {
+      "file": "apps/game-client/src/chu-art.generated.json",
+      "sha256": "42ddb1dcc0c31b8bf561b70d4e07afd7d7a427f91b3ac92a1e1c9e719402e7ce"
+    },
+    {
+      "file": "apps/game-client/src/nam-de-art.generated.json",
+      "sha256": "6374dd095412dc34c4fcfd74501558c25ffdd4b044998427ce36d9a88cac0a4c"
+    },
+    {
+      "file": "apps/game-client/src/kim-playback.json",
+      "sha256": "7bdc19b8247bfc10e82b088fa0f2706f94bbde71c9cabf9beac66dbf54ce6ad6"
+    },
+    {
+      "file": "assets/exports/loi-dai-v2/manifest.json",
+      "sha256": "4d0ed40267866ab02eda8ed4d1816c2ca06ab6c2dab4061a7c2b318b892d1494"
+    }
+  ],
+  "shadowClippingAudit": "explicit QA readback, outside update/render loop"
+}

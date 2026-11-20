@@ -1,0 +1,103 @@
+{
+  "players": 2,
+  "development": false,
+  "protocol": 46,
+  "timings": [
+    {
+      "phase": "2 joined room",
+      "seconds": 1.99
+    },
+    {
+      "phase": "2 real clients ready",
+      "seconds": 12.64
+    }
+  ],
+  "directions": [],
+  "scenes": [],
+  "fixtures": "Server-owned wave placement/zone entry for coverage; natural keyboard combat and movement checked separately.",
+  "status": "FAIL",
+  "failure": "Error: Timeout: native boss renderer vuong_trung_duong_p1 after 30016ms (382 observations); {\"serverActors\":[{\"id\":\"vuong_trung_duong\",\"archetype\":\"vuong_trung_duong\",\"hp\":302400}],\"serverVuong\":\"fighting\",\"client\":{\"ready\":true,\"zone\":\"arena\",\"bodies\":[{\"id\":\"hero_vo_dang\",\"pose\":\"idle\",\"direction\":\"right\",\"locomotion\":true,\"bodySet\":\"hero-unified:vo_dang_quyen\",\"actionFamily\":\"idle_3\",\"name\":\"actor:jbP_TmQ-p\",\"texture\":\"hero-unified:vo_dang_quyen\",\"source\":\"/assets/vo-dang-quyen-unified-v1/body.png\",\"density\":1,\"effectiveDensity\":2,\"screen\":[683,480],\"frame\":\"idle_3_right\",\"x\":990,\"y\":616,\"origin\":[0.5,0.8571428571428571],\"scale\":[0.5,0.5],\"depth\":616,\"visible\":true},{\"id\":\"hero_cai_bang\",\"pose\":\"idle\",\"direction\":\"right\",\"locomotion\":true,\"bodySet\":\"hero-unified:cai_bang_bong\",\"actionFamily\":\"idle_3\",\"name\":\"actor:ed8GqNc80\",\"texture\":\"hero-unified:cai_bang_bong\",\"source\":\"/assets/cai-bang-bong-unified-v1/body.png\",\"density\":1,\"effectiveDensity\":2,\"screen\":[493,774.4486083984375],\"frame\":\"idle_3_right\",\"x\":895,\"y\":763.2243041992188,\"origin\":[0.5,0.4888888888888889],\"scale\":[0.5,0.5],\"depth\":763.2243041992188,\"visible\":true}],\"vuong\":{\"arena\":{\"snapshot\":\"{\\\"tick\\\":942,\\\"rate\\\":30,\\\"phase\\\":1,\\\"state\\\":\\\"fighting\\\",\\\"x\\\":700,\\\"y\\\":650,\\\"fx\\\":1,\\\"fy\\\":1,\\\"hp\\\":302400,\\\"maxHp\\\":302400,\\\"pose\\\":\\\"idle\\\",\\\"center\\\":{\\\"x\\\":800,\\\"y\\\":616},\\\"shield\\\":3,\\\"transitionUntil\\\":0,\\\"exposedUntil\\\":0,\\\"corpseUntil\\\":0,\\\"qteOutcome\\\":\\\"\\\",\\\"action\\\":null,\\\"releasedAt\\\":-57,\\\"elements\\\":[],\\\"stars\\\":[],\\\"eyeIndex\\\":3,\\\"elementRadius\\\":38,\\\"noteRadius\\\":29,\\\"innerRadius\\\":95,\\\"outerRadius\\\":185,\\\"swords\\\":[],\\\"noteSeals\\\":[],\\\"notes\\\":[],\\\"cues\\\":[]}\"}},\"creeps\":{},\"ui\":\"Bản\\nP\\nThương Gia\\nLôi Đài\\nConnected · PfIDoh5hI · 2 / 6\\nTúi đồ\\n0\\n1\\n10\\n2\\n10\\nA\\nQ\\n+\\n0\\nW\\n+\\n0\\nE\\n+\\n0\\nR\\n+\\n0\\nT\\n+\\n0\\n2\\nShift\\nZ\\n20 điểm · Giữ O + QWERT\\n\\nCấp 30 · Sinh lực 371/370.6499938964844 · Nội lực 354/354 · Kinh nghiệm 0 · Vàng 0 · Điểm kỹ năng 20\\n\\nVương Trùng Dương · Lần 1\\nTượng bất tử · 2000 / 2000\\nĐợt 0 · Đợt 1 sau 55:04\\nSắp tới: Chó Hoang\\nLần 1 · Còn 3 lượt hồi sinh\\nVương Trùng Dương\\n302400 / 302400\"}}",
+  "errors": [],
+  "serverLobby": {
+    "phase": "IN_GAME",
+    "host": "jbP_TmQ-p",
+    "players": [
+      {
+        "id": "jbP_TmQ-p",
+        "nickname": "Renovation 1",
+        "school": "vo_dang",
+        "branch": "vo_dang_quyen",
+        "confirmed": true,
+        "connected": true
+      },
+      {
+        "id": "ed8GqNc80",
+        "nickname": "Renovation 2",
+        "school": "cai_bang",
+        "branch": "cai_bang_bong",
+        "confirmed": true,
+        "connected": true
+      }
+    ]
+  },
+  "clientLobby": [
+    {
+      "client": 1,
+      "session": "jbP_TmQ-p",
+      "phase": "IN_GAME",
+      "host": "jbP_TmQ-p",
+      "players": [
+        {
+          "id": "jbP_TmQ-p",
+          "nickname": "Renovation 1",
+          "school": "vo_dang",
+          "branch": "vo_dang_quyen",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "ed8GqNc80",
+          "nickname": "Renovation 2",
+          "school": "cai_bang",
+          "branch": "cai_bang_bong",
+          "confirmed": true,
+          "connected": true
+        }
+      ],
+      "heading": "Chọn môn phái",
+      "schoolControls": 7,
+      "hidden": true,
+      "error": "Không thể đổi lựa chọn ở giai đoạn này.",
+      "focused": true
+    },
+    {
+      "client": 2,
+      "session": "ed8GqNc80",
+      "phase": "IN_GAME",
+      "host": "jbP_TmQ-p",
+      "players": [
+        {
+          "id": "jbP_TmQ-p",
+          "nickname": "Renovation 1",
+          "school": "vo_dang",
+          "branch": "vo_dang_quyen",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "ed8GqNc80",
+          "nickname": "Renovation 2",
+          "school": "cai_bang",
+          "branch": "cai_bang_bong",
+          "confirmed": true,
+          "connected": true
+        }
+      ],
+      "heading": "Chọn môn phái",
+      "schoolControls": 7,
+      "hidden": true,
+      "error": "",
+      "focused": true
+    }
+  ]
+}

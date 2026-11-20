@@ -1,0 +1,265 @@
+{
+  "basic": "con_luan_thien_su",
+  "texture": "hero-unified:con_luan_thien_su",
+  "folder": "con-luan-thien-su-unified-v2",
+  "sourceRows": 8,
+  "sourceColumns": 4,
+  "canvas": [
+    352,
+    320
+  ],
+  "foot": [
+    176,
+    248
+  ],
+  "bodyHeight": 89,
+  "scale": 0.5,
+  "bodyWidth": 62,
+  "rootMode": "fur_hammer",
+  "poses": [
+    "idle_0",
+    "idle_1",
+    "idle_2",
+    "idle_3",
+    "walk_0",
+    "walk_1",
+    "walk_2",
+    "walk_3",
+    "windup",
+    "thrust",
+    "sweep",
+    "rising",
+    "overhead",
+    "recover",
+    "ranged_charge",
+    "ranged_release",
+    "hammer_throw",
+    "hammer_return",
+    "guard",
+    "channel",
+    "chaos_idle_0",
+    "chaos_idle_1",
+    "chaos_idle_2",
+    "chaos_idle_3",
+    "chaos_walk_0",
+    "chaos_walk_1",
+    "chaos_walk_2",
+    "chaos_walk_3",
+    "hurt_0",
+    "hurt_1",
+    "death_0",
+    "death_1",
+    "chaos_windup",
+    "chaos_thrust",
+    "chaos_sweep",
+    "chaos_rising",
+    "chaos_overhead",
+    "chaos_recover",
+    "chaos_ranged_charge",
+    "chaos_ranged_release",
+    "chaos_hammer_throw",
+    "chaos_hammer_return",
+    "chaos_guard",
+    "chaos_channel",
+    "chaos_hurt_0",
+    "chaos_hurt_1"
+  ],
+  "references": [
+    "assets/source/characters/con_luan_thien_su_v03/generated/down.png",
+    "assets/source/characters/con_luan_hac_thiet_v04/generated/monk.png"
+  ],
+  "groups": [
+    {
+      "name": "idle",
+      "poses": [
+        "idle_0",
+        "idle_1",
+        "idle_2",
+        "idle_3"
+      ],
+      "durationMs": 700
+    },
+    {
+      "name": "walk",
+      "poses": [
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3"
+      ],
+      "durationMs": 110
+    },
+    {
+      "name": "action_library",
+      "poses": [
+        "windup",
+        "thrust",
+        "sweep",
+        "rising",
+        "overhead",
+        "recover",
+        "ranged_charge",
+        "ranged_release",
+        "hammer_throw",
+        "hammer_return",
+        "guard",
+        "channel",
+        "chaos_idle_0",
+        "chaos_idle_1",
+        "chaos_idle_2",
+        "chaos_idle_3",
+        "chaos_walk_0",
+        "chaos_walk_1",
+        "chaos_walk_2",
+        "chaos_walk_3"
+      ],
+      "durationMs": 100
+    },
+    {
+      "name": "hurt",
+      "poses": [
+        "hurt_0",
+        "hurt_1"
+      ],
+      "durationMs": 90
+    },
+    {
+      "name": "death",
+      "poses": [
+        "death_0",
+        "death_1"
+      ],
+      "durationMs": 220
+    },
+    {
+      "name": "chaos_action",
+      "poses": [
+        "chaos_windup",
+        "chaos_thrust",
+        "chaos_sweep",
+        "chaos_rising",
+        "chaos_overhead",
+        "chaos_recover",
+        "chaos_ranged_charge",
+        "chaos_ranged_release",
+        "chaos_hammer_throw",
+        "chaos_hammer_return",
+        "chaos_guard",
+        "chaos_channel",
+        "chaos_hurt_0",
+        "chaos_hurt_1"
+      ],
+      "durationMs": 100
+    }
+  ],
+  "registrationPolicy": "Fixed head/body density per group, boot pivot; no scale/alpha breathing. Chaos intentional growth from replicated form only. Fur/hammer boot search is constrained to the dense head/torso column, excluding the grounded hammer head. High-resolution replacement idle cels and retained walk cels register separately to the same head density. Chaos body is sampled from original high-resolution cels at1.34 native density, renderer stays .5; derivatives are explicitly counted separately from independently authored cels.",
+  "celGroupOverrides": [
+    {
+      "direction": "right",
+      "path": "raw/repairs/idle-right.png",
+      "rows": 1,
+      "columns": 4,
+      "start": 0
+    },
+    {
+      "direction": "up",
+      "path": "raw/repairs/idle-up.png",
+      "rows": 1,
+      "columns": 4,
+      "start": 0
+    }
+  ],
+  "independentLocomotionDensity": true,
+  "derivedPoses": [
+    {
+      "pose": "chaos_windup",
+      "source": "windup",
+      "densityScale": 1.34
+    },
+    {
+      "pose": "chaos_thrust",
+      "source": "thrust",
+      "densityScale": 1.34
+    },
+    {
+      "pose": "chaos_sweep",
+      "source": "sweep",
+      "densityScale": 1.34
+    },
+    {
+      "pose": "chaos_rising",
+      "source": "rising",
+      "densityScale": 1.34
+    },
+    {
+      "pose": "chaos_overhead",
+      "source": "overhead",
+      "densityScale": 1.34
+    },
+    {
+      "pose": "chaos_recover",
+      "source": "recover",
+      "densityScale": 1.34
+    },
+    {
+      "pose": "chaos_ranged_charge",
+      "source": "ranged_charge",
+      "densityScale": 1.34
+    },
+    {
+      "pose": "chaos_ranged_release",
+      "source": "ranged_release",
+      "densityScale": 1.34
+    },
+    {
+      "pose": "chaos_hammer_throw",
+      "source": "hammer_throw",
+      "densityScale": 1.34
+    },
+    {
+      "pose": "chaos_hammer_return",
+      "source": "hammer_return",
+      "densityScale": 1.34
+    },
+    {
+      "pose": "chaos_guard",
+      "source": "guard",
+      "densityScale": 1.34
+    },
+    {
+      "pose": "chaos_channel",
+      "source": "channel",
+      "densityScale": 1.34
+    },
+    {
+      "pose": "chaos_hurt_0",
+      "source": "hurt_0",
+      "densityScale": 1.34
+    },
+    {
+      "pose": "chaos_hurt_1",
+      "source": "hurt_1",
+      "densityScale": 1.34
+    }
+  ],
+  "poseDensityScales": {
+    "chaos_idle_0": 1.34,
+    "chaos_idle_1": 1.34,
+    "chaos_idle_2": 1.34,
+    "chaos_idle_3": 1.34,
+    "chaos_walk_0": 1.34,
+    "chaos_walk_1": 1.34,
+    "chaos_walk_2": 1.34,
+    "chaos_walk_3": 1.34
+  },
+  "directionDensityPolicies": {
+    "down": "uniform-source",
+    "down_right": "uniform-source",
+    "right": "uniform-source",
+    "up_right": "uniform-source",
+    "up": "uniform-source",
+    "up_left": "uniform-source",
+    "left": "uniform-source",
+    "down_left": "uniform-source"
+  }
+}

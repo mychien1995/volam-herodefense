@@ -34,6 +34,7 @@ export async function startOwnedGameQa(options = {}) {
               contract: { ...session.contract, clientMode: 'preview' },
             }
           : session,
+        options.clientDist,
       ),
     ...(hasServer
       ? { createServer: options.serverFactory ?? createGameServer }
@@ -46,6 +47,15 @@ export async function startOwnedGameQa(options = {}) {
         ...(options.loadClientConfig ? {} : { configFile: false }),
         ...options.client,
         ...configured,
+        ...(options.clientDist
+          ? {
+              build: {
+                ...options.client?.build,
+                ...configured?.build,
+                outDir: resolve(options.clientDist),
+              },
+            }
+          : {}),
       };
       config.plugins = [qaIdentityPlugin(session), ...(config.plugins ?? [])];
       config.define = {

@@ -1,6 +1,9 @@
 import { frameWorld, nativeGameplayZoom } from './camera-policy.js';
 import { PvpArt, pvpView, drawPvpMap, fitPvpCamera } from './pvp-art.js';
 import type { PvpMapId } from '@volam/game-core';
+import { preloadHeroMotion, presentHeroMotion } from './hero-motion.js';
+import { preloadDepthTerrain } from './world-depth-terrain.js';
+import { WorldDepthEffects } from './world-depth-effects.js';
 import markerArt from './controls-art/move-marker.png?url';
 import { BossSkillAnnouncements } from './boss-skill-announcements.js';
 import {
@@ -177,12 +180,15 @@ export class ArenaScene extends Phaser.Scene {
   private readonly shaolinDao = new ShaolinDaoMatchArt(this);
   private readonly hitArt = new M3dHitArt(this);
   private polished = true;
+  private worldDepth?: WorldDepthEffects;
   onNpc: (menu: 'merchant' | 'pvp') => void = () => {};
   private zoneId = 'arena';
-  private pvpMap: PvpMapId|undefined;
-  private pvpArt: PvpArt|undefined;
-  private loadingPvp=false;
-  pvpPresentation(){return this.pvpArt?.inspect();}
+  private pvpMap: PvpMapId | undefined;
+  private pvpArt: PvpArt | undefined;
+  private loadingPvp = false;
+  pvpPresentation() {
+    return this.pvpArt?.inspect();
+  }
   private snapshot: LobbyState | undefined;
   private sessionId = '';
   protected actors = new Map<string, EntityView>();
@@ -285,12 +291,27 @@ export class ArenaScene extends Phaser.Scene {
         story?.visible && view.contains(story.x, story.y - story.height)
           ? story.text
           : '',
-      statueLayout: story ? {
-        text:story.text,visible:story.visible,age:this.time.now-this.storyStartedAt,
-        bounds:{x:story.x-story.width/2,y:story.y-story.height,width:story.width,height:story.height},
-        view:{x:view.x,y:view.y,width:view.width,height:view.height},
-        zoom:this.cameras.main.zoom,followOffset:this.followOffsetY,
-      }:null,
+      statueLayout: story
+        ? {
+            text: story.text,
+            visible: story.visible,
+            age: this.time.now - this.storyStartedAt,
+            bounds: {
+              x: story.x - story.width / 2,
+              y: story.y - story.height,
+              width: story.width,
+              height: story.height,
+            },
+            view: {
+              x: view.x,
+              y: view.y,
+              width: view.width,
+              height: view.height,
+            },
+            zoom: this.cameras.main.zoom,
+            followOffset: this.followOffsetY,
+          }
+        : null,
       levelUpRings: this.children.list
         .filter((child) => child.name.startsWith('level-up:'))
         .map((child) => {
@@ -389,9 +410,12 @@ export class ArenaScene extends Phaser.Scene {
       const enemy =
         creep ?? (fighter && player?.loiDaiFighter ? player : undefined);
       if (!enemy || enemy.hp <= 0 || enemy.zoneId !== this.zoneId) continue;
-      const pvp=pvpView(this.snapshot);
-      if(pvp){const owner=creep?.ownerId??id;const team=pvp.members.find(m=>m.id===owner)?.team;
-        if(team===pvp.members.find(m=>m.id===this.sessionId)?.team)continue;
+      const pvp = pvpView(this.snapshot);
+      if (pvp) {
+        const owner = creep?.ownerId ?? id;
+        const team = pvp.members.find((m) => m.id === owner)?.team;
+        if (team === pvp.members.find((m) => m.id === this.sessionId)?.team)
+          continue;
       }
       if (view.getBounds().contains(position.x, position.y)) {
         targetId = id;
@@ -429,11 +453,15 @@ export class ArenaScene extends Phaser.Scene {
       },
     );
     preloadRuntimeArtReview(this);
+    preloadDepthTerrain(this);
+    preloadHeroMotion(this);
     if (this.eagerArt) preloadLoiDai(this);
     preloadArt(this, this.eagerArt);
     // A direct PvP join already needs its map in the waiting room. Queue it
     // with boot assets instead of restarting this loader from Scene.create.
-    this.pvpArtAtBoot = !!(this.snapshot?.pvp.enabled || this.snapshot?.practice.enabled);
+    this.pvpArtAtBoot = !!(
+      this.snapshot?.pvp.enabled || this.snapshot?.practice.enabled
+    );
     if (this.pvpArtAtBoot && !this.eagerArt) preloadArtPack(this, 'pvp');
     if (!this.eagerArt && this.waveArtAtBoot)
       preloadArtPack(this, 'wave-bosses');
@@ -507,6 +535,7 @@ export class ArenaScene extends Phaser.Scene {
     });
     this.damage = new FloatingDamage(this);
     this.vfx = new SkillVfx(this);
+    this.worldDepth = new WorldDepthEffects(this);
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.vfx?.clear());
     this.events.once(Phaser.Scenes.Events.DESTROY, () => this.vfx?.clear());
     this.creepEffects = new ArenaCreepEffects(
@@ -571,6 +600,8 @@ export class ArenaScene extends Phaser.Scene {
         () =>
           new Promise<void>((resolve, reject) => {
             preloadRuntimeArtReview(this);
+            preloadDepthTerrain(this);
+            preloadHeroMotion(this);
             preloadArtPack(this, pack);
             this.load.once(
               Phaser.Loader.Events.COMPLETE,
@@ -673,7 +704,12 @@ export class ArenaScene extends Phaser.Scene {
   }
 
   moveLocal(x: number, y: number): void {
-    if (this.predictMovement && !this.snapshot?.pvp.enabled && !this.snapshot?.practice.enabled) this.localMovement.move(x, y, performance.now());
+    if (
+      this.predictMovement &&
+      !this.snapshot?.pvp.enabled &&
+      !this.snapshot?.practice.enabled
+    )
+      this.localMovement.move(x, y, performance.now());
   }
 
   localFrame(): { x: number; y: number; animation: string } | undefined {
@@ -688,23 +724,40 @@ export class ArenaScene extends Phaser.Scene {
 
   private syncZone(): void {
     if (!this.ready) return;
-    const pvp=pvpView(this.snapshot);
-    const mapId=pvp?.mapId??(this.snapshot?.practice.enabled?'rung_truc':undefined);
-    if(mapId){
-      if(!this.hasArt('pvp')){
-        if(!this.loadingPvp){
-          this.loadingPvp=true;this.pendingZone='standalone-pvp';
-          void this.prepareArt('pvp').then(()=>{
-            this.pendingZone='';this.loadingPvp=false;
-            if(this.snapshot?.pvp.enabled||this.snapshot?.practice.enabled)this.syncZone();
-          }).catch(error=>{this.loadingPvp=false;this.pendingZone='';this.onArtError(error);});
+    const pvp = pvpView(this.snapshot);
+    const mapId =
+      pvp?.mapId ?? (this.snapshot?.practice.enabled ? 'rung_truc' : undefined);
+    if (mapId) {
+      if (!this.hasArt('pvp')) {
+        if (!this.loadingPvp) {
+          this.loadingPvp = true;
+          this.pendingZone = 'standalone-pvp';
+          void this.prepareArt('pvp')
+            .then(() => {
+              this.pendingZone = '';
+              this.loadingPvp = false;
+              if (this.snapshot?.pvp.enabled || this.snapshot?.practice.enabled)
+                this.syncZone();
+            })
+            .catch((error) => {
+              this.loadingPvp = false;
+              this.pendingZone = '';
+              this.onArtError(error);
+            });
         }
         return;
       }
-      if(this.pvpMap!==mapId){this.pvpMap=mapId;this.pendingZone='';this.drawZone('arena');}
+      if (this.pvpMap !== mapId) {
+        this.pvpMap = mapId;
+        this.pendingZone = '';
+        this.drawZone('arena');
+      }
       return;
     }
-    if(this.pvpMap){this.pvpMap=undefined;this.drawZone('arena');}
+    if (this.pvpMap) {
+      this.pvpMap = undefined;
+      this.drawZone('arena');
+    }
     const zone = this.snapshot?.players.get(this.sessionId)?.zoneId ?? 'arena';
     if (zone === this.pendingZone) return;
     this.pendingZone = '';
@@ -741,8 +794,13 @@ export class ArenaScene extends Phaser.Scene {
         });
       });
   }
+  reviewWorldDepth(enabled: boolean): void {
+    this.worldDepth?.setEnabled(enabled);
+  }
   private drawZone(zoneId: string): void {
-    this.pvpArt?.clear();this.pvpArt=undefined;
+    this.pvpArt?.clear();
+    this.pvpArt = undefined;
+    this.worldDepth?.clear();
     this.hitArt.clear();
     this.shaolinDao.clear();
     this.story?.destroy();
@@ -779,10 +837,15 @@ export class ArenaScene extends Phaser.Scene {
     this.followed = '';
     this.zoneId = zoneId;
     this.fitCamera();
-    const pvp=this.hasArt('pvp')?pvpView(this.snapshot):undefined;
-    if(this.snapshot?.practice.enabled && this.hasArt('pvp')){this.trees=[];drawPvpMap(this,'rung_truc');}
-    else if(pvp){this.trees=[];drawPvpMap(this,pvp.mapId);this.pvpArt=new PvpArt(this);}
-    else if (zoneId === 'arena') {
+    const pvp = this.hasArt('pvp') ? pvpView(this.snapshot) : undefined;
+    if (this.snapshot?.practice.enabled && this.hasArt('pvp')) {
+      this.trees = [];
+      drawPvpMap(this, 'rung_truc');
+    } else if (pvp) {
+      this.trees = [];
+      drawPvpMap(this, pvp.mapId);
+      this.pvpArt = new PvpArt(this);
+    } else if (zoneId === 'arena') {
       this.trees = createRenovationWorld(this, zoneId);
       applyArenaPalette(this, this.polished);
       this.cameras.main
@@ -943,6 +1006,7 @@ export class ArenaScene extends Phaser.Scene {
         invasionWave?: number;
         archetypeId?: string;
         castAbilityId?: string;
+        castTicks?: number;
         statuses?: string;
       },
       enemy: boolean,
@@ -1070,7 +1134,8 @@ export class ArenaScene extends Phaser.Scene {
       const blinkAlpha = !enemy ? (this.vfx?.actorAlpha(id) ?? 1) : 1;
       const local = id === this.sessionId ? state?.players.get(id) : undefined;
       const predicted =
-        !state?.pvp.enabled && !state?.practice.enabled &&
+        !state?.pvp.enabled &&
+        !state?.practice.enabled &&
         local?.zoneId === 'arena' &&
         local.connected &&
         local.hp > 0 &&
@@ -1093,7 +1158,10 @@ export class ArenaScene extends Phaser.Scene {
       const weight = blinkAlpha < 1 ? 1 : Math.min(1, delta / 45);
       // Preserve interpolation precision; feeding rounded pixels back into lerp
       // otherwise leaves a stationary actor permanently one pixel off its feet.
-      if (highResBody) {
+      // All player bodies share continuous reconciliation. Quantizing the older
+      // bodies here (and their following camera below) exposed each server patch
+      // as alternating short/long screen steps even at a steady render rate.
+      if (highResBody || !enemy) {
         const target = predicted ?? actor;
         const snap =
           Math.hypot(view.smoothX - target.x, view.smoothY - target.y) > 80;
@@ -1106,8 +1174,8 @@ export class ArenaScene extends Phaser.Scene {
         view.smoothY =
           predicted?.y ?? Phaser.Math.Linear(view.smoothY, actor.y, weight);
       }
-      const x = highResBody ? view.smoothX : Math.round(view.smoothX);
-      const y = highResBody ? view.smoothY : Math.round(view.smoothY);
+      const x = highResBody || !enemy ? view.smoothX : Math.round(view.smoothX);
+      const y = highResBody || !enemy ? view.smoothY : Math.round(view.smoothY);
       view.sprite.setPosition(x, y);
       if (view.sprite.depth !== y) view.sprite.setDepth(y);
       const renderFx = predicted?.fx ?? actor.fx;
@@ -1146,6 +1214,24 @@ export class ArenaScene extends Phaser.Scene {
             )
         : heroTexture(actor.basicId, actor.schoolId);
       const activeAt = actor.actionActiveAt ?? 0;
+      let coMoBodyClock: { beat: 0 | 1 | 2 } | undefined;
+      if (actor.archetypeId === 'ly_mac_sau' && bossPose) {
+        const previous = view.sprite.getData('co-mo-body-release') as
+          { ability: string; tick: number } | undefined;
+        // Cổ Mộ already replicates remaining native windup ticks. Cache the
+        // resulting release tick through recovery; no new protocol or cast.
+        const releaseAt =
+          (actor.castTicks ?? 0) > 0
+            ? tick + actor.castTicks!
+            : previous && previous.ability === actor.castAbilityId
+              ? previous.tick
+              : tick;
+        view.sprite.setData('co-mo-body-release', {
+          ability: actor.castAbilityId,
+          tick: releaseAt,
+        });
+        coMoBodyClock = { beat: releaseBeat(tick, releaseAt) };
+      } else view.sprite.setData('co-mo-body-release', undefined);
       const specialInProgress =
         tick < (actor.actionEndsAt ?? 0) &&
         actor.castAbilityId?.endsWith('_special');
@@ -1311,9 +1397,10 @@ export class ArenaScene extends Phaser.Scene {
             renderFx,
             renderFy,
             cast?.abilityId ?? actor.castAbilityId ?? '',
-            actor.archetypeId === 'ly_mac_sau' && bossPose && activeAt > 0
-              ? { beat: releaseBeat(tick, activeAt) }
-              : (creepClock ?? cast),
+            coMoBodyClock ??
+              (actor.archetypeId === 'ly_mac_sau' && bossPose && activeAt > 0
+                ? { beat: releaseBeat(tick, activeAt) }
+                : (creepClock ?? cast)),
           );
         if (!enemy && !heroReaction) {
           const tick = actorZoneTick;
@@ -1338,6 +1425,44 @@ export class ArenaScene extends Phaser.Scene {
         }
       }
       this.nguDocArt?.mark(id, view.sprite, states);
+      if (!enemy)
+        presentHeroMotion(
+          this,
+          view.sprite,
+          actor.basicId,
+          actor.hp <= 0
+            ? 'death'
+            : (heroReaction ??
+                (cast &&
+                !(
+                  daoPose &&
+                  /^(idle|walk)_/.test(daoPose.firstFrame) &&
+                  ['idle', 'walk'].includes(actorPose)
+                )
+                  ? 'action'
+                  : actorPose)),
+          renderFx,
+          renderFy,
+          states,
+          {
+            tick,
+            startedAt: actor.actionStartedAt ?? tick,
+            until: state?.players.get(id)?.actionUntil ?? tick,
+            ability: cast?.abilityId ?? actor.castAbilityId ?? '',
+            basicStage: actor.basicStage ?? '',
+            visualDurationTicks: ((cast?.durationMs ?? 0) * 30) / 1000,
+            actorPose,
+            weaponAway:
+              actor.basicId === 'vo_dang_kiem' &&
+              [...(state?.projectiles.values() ?? [])].some(
+                (p) => p.ownerId === id && p.abilityId === 'nhan_kiem_hop_nhat',
+              ),
+            phase: cast?.phase,
+            progress: cast?.progress,
+          },
+        );
+      if (!enemy)
+        this.nguDocArt?.canonicalHands(id, view.sprite, actor, states, tick);
       if (cast)
         this.vfx?.observeCharacter(
           texture,
@@ -1398,20 +1523,26 @@ export class ArenaScene extends Phaser.Scene {
         id === this.sessionId &&
         this.followed !== id
       ) {
-        this.cameras.main.startFollow(view.sprite, !highResBody, 1, 1, 0, 48);
+        this.cameras.main.startFollow(view.sprite, false, 1, 1, 0, 48);
         this.followed = id;
       }
     };
-    const pvp=pvpView(state);
-    if(pvp)this.pvpArt?.sync(pvp,this.time.now,state!);
+    const pvp = pvpView(state);
+    if (pvp) this.pvpArt?.sync(pvp, this.time.now, state!);
     state?.players?.forEach((hero, id) => {
-      if(pvp&&(pvp.phase==='lobby'||pvp.members.find(m=>m.id===id)?.team==='spectator'))return;
+      if (
+        pvp &&
+        (pvp.phase === 'lobby' ||
+          pvp.members.find((m) => m.id === id)?.team === 'spectator')
+      )
+        return;
       if (!hero.confirmed || hero.zoneId !== this.zoneId) return;
       render(id, hero, false, hero.nickname);
       const view = this.actors.get(id);
       if (!view) return;
-      const member=pvp?.members.find(m=>m.id===id);
-      if(member)view.label.setColor(member.team==='chinh'?'#a4e1f3':'#ffbab0');
+      const member = pvp?.members.find((m) => m.id === id);
+      if (member)
+        view.label.setColor(member.team === 'chinh' ? '#a4e1f3' : '#ffbab0');
       if (
         view.lastLevel !== undefined &&
         hero.level > view.lastLevel &&
@@ -1492,6 +1623,7 @@ export class ArenaScene extends Phaser.Scene {
     );
     this.creepCombatArt?.sync(state, this.zoneId, localBody);
     this.hitArt.sync();
+    this.worldDepth?.sync(state, this.zoneId, this.actors);
   }
 
   private keepLocalHeroVisible(
@@ -1806,6 +1938,10 @@ export class ArenaScene extends Phaser.Scene {
         gamePaused: this.game.isPaused,
       },
       polished: this.polished,
+      worldDepth: this.worldDepth?.inspect(),
+      heroMotionObserved: [
+        ...(this.registry.get('hero-motion-observed') ?? []),
+      ],
       artwork: productionArtBindings(this),
       animationTimings: {
         tayDocIdle: this.anims
@@ -1831,7 +1967,9 @@ export class ArenaScene extends Phaser.Scene {
       zoneId: this.zoneId,
       pvp: this.pvpArt?.inspect(),
       pvpMap: this.pvpMap,
-      pvpLayers: this.children.list.filter(o=>o.name.startsWith('pvp-map:')).map(o=>o.name),
+      pvpLayers: this.children.list
+        .filter((o) => o.name.startsWith('pvp-map:'))
+        .map((o) => o.name),
       hongLiet: this.hongLiet?.inspect(),
       tayDoc: this.tayDoc?.inspect(),
       kim: this.kim?.inspect(),
@@ -1922,7 +2060,12 @@ export class ArenaScene extends Phaser.Scene {
       zoom: this.cameras.main.zoom,
       roundPixels: this.cameras.main.roundPixels,
       camera: { x: this.cameras.main.scrollX, y: this.cameras.main.scrollY },
-      worldView: {x: this.cameras.main.worldView.x, y: this.cameras.main.worldView.y, width: this.cameras.main.worldView.width, height: this.cameras.main.worldView.height},
+      worldView: {
+        x: this.cameras.main.worldView.x,
+        y: this.cameras.main.worldView.y,
+        width: this.cameras.main.worldView.width,
+        height: this.cameras.main.worldView.height,
+      },
       cameraMatrix: {
         origin: { x: origin.x, y: origin.y },
         step: unit.x - origin.x,

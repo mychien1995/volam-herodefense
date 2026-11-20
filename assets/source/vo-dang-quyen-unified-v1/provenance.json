@@ -1,0 +1,60 @@
+{
+  "status": "prototype pending director review",
+  "identity": "Existing sharp original Vo Dang quyen project art: monochrome white/charcoal robe, black bun/Yin-Yang clasp, white ribbons; no costume redesign",
+  "ownership": "Original project artwork and built-in imagegen derivatives. No third-party game artwork imported.",
+  "generator": "Built-in image_gen only; exact prompts, selected raw outputs and UTC request intervals retained in generation-timing.json and prompts/",
+  "masterReferences": [
+    {
+      "path": "assets/source/vo-dang-quyen-preview/punch-source.png",
+      "sha256": "963f3c72cfc0dc7d7901274003b2eabe4aae108773f110060aac032b6c52253f"
+    },
+    {
+      "path": "assets/exports/vo-dang-quyen-preview/punch.png",
+      "sha256": "3073cbd51579ff7b40325bce37d7fa6fbce56ab469d0f69181948b240cdac640"
+    },
+    {
+      "path": "assets/exports/vo-dang-quyen-preview/punch.json",
+      "sha256": "f0aeabe97938f0ef34c0307cb8531612199ce30313f5ab24eb2ddc1ca8b93533"
+    },
+    {
+      "path": "assets/exports/vo-dang-quyen-preview/casts.png",
+      "sha256": "469dbb652b7de5a47f4b1d67ee2d340786e5747c20dde0773810fcc831e029f6"
+    },
+    {
+      "path": "assets/exports/vo-dang-quyen-preview/casts.json",
+      "sha256": "13d60b80b9b2bc1f275962a37c4348f081221a2f535e9ace84fc563f9c9ba354"
+    },
+    {
+      "path": "assets/references/vo_dang_character_reference.png",
+      "sha256": "a31a5bdebe5afff273f1e68f0741162e17f3a38e9ee98d1a273d0a797f93c6fd"
+    },
+    {
+      "path": "assets/references/current_game_2026_10_29_placeholder_anti_reference.png",
+      "sha256": "7650239f6117b3d92ed6e8b1efdafe7213680f258c979808a09a82d2d6c2cdc5"
+    }
+  ],
+  "referencePathNote": "Historical assets/references/vo_dang_art_direction_reference.png is absent. Current mapped positive character reference inspected instead. Unchanged arena/HUD references reused from this rollout.",
+  "nativeSource": {
+    "path": "body.aseprite",
+    "cels": 192,
+    "tags": 40,
+    "sha256": "cc3c7f40b6894221c73b681d9bdfcb43a98a8d03ab6d9a9639494ea71cb89c5d",
+    "roundtrip": "exact alpha and visible RGB PASS"
+  },
+  "productionSelection": {
+    "directionalSheets": [
+      "raw/down.png",
+      "raw/down_right.png",
+      "raw/right.png",
+      "raw/up_right.png",
+      "raw/up.png",
+      "raw/up_left.png",
+      "raw/left.png",
+      "raw/down_left.png"
+    ],
+    "extraSources": [],
+    "celGroupOverrides": []
+  },
+  "registration": "Fixed boots pivot and physical body size; group scale, never scale by weapon extents or change alpha between idle cels. Swordless neutral groups use physical head-to-feet height.",
+  "scope": "Body and portrait only; native event-driven choreography and VFX remain; gameplay/HUD/F8 unchanged; no recordings."
+}
