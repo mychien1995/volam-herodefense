@@ -2,6 +2,7 @@ import { defineConfig } from 'vitest/config';
 import { resolve } from 'node:path';
 import { createRequire } from 'node:module';
 import base from './vitest.config.js';
+import { coreTestExecution } from './tools/core-test-execution.mjs';
 
 const root = import.meta.dirname;
 const tests: unknown = JSON.parse(
@@ -32,5 +33,5 @@ export default defineConfig({
       zod: dataRequire.resolve('zod'),
     },
   },
-  test: { ...base.test, include: tests, fileParallelism: false },
+  test: { ...base.test, include: tests, ...coreTestExecution() },
 });

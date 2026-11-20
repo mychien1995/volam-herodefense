@@ -13,6 +13,7 @@ import {
 import { randomUUID } from 'node:crypto';
 import { qaPreflight, formatPreflight } from '../tools/qa-preflight.mjs';
 import { qaEvidenceDirectory } from '../tools/qa-session.mjs';
+import { coreTestExecution } from '../tools/core-test-execution.mjs';
 import {
   acquireCoreLock,
   fileSnapshot,
@@ -92,6 +93,8 @@ function run(label, script, parameters = []) {
 save();
 let lock;
 try {
+  report.execution = coreTestExecution();
+  console.info(`[core] isolated file workers: ${report.execution.maxWorkers}`);
   const preflight = await qaPreflight({ mode: 'quick', args, root });
   report.stages.push({
     label: 'environment preflight',

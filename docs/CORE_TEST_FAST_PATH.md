@@ -28,7 +28,22 @@ HIT chỉ tái dùng artifact khi **cả input lẫn output** khớp. Sửa logi
 
 Cache dữ liệu này không chứng nhận PNG, art approval hoặc nội dung public assets còn hợp lệ. Artwork không phải input giá trị của test mô phỏng và không được kiểm tra lại ở HIT. Dùng đường asset/browser hiện hành khi làm art. `check:final` vẫn không đọc cache này: luôn chạy asset preparation, typechecks, workflow + unit/integration, production build, mọi asset validator và browser scope như trước. Không cache kết quả test PASS hoặc phê duyệt art.
 
-Đường nhanh typecheck core/data khi phải biên dịch; không thay typecheck tests/tools/protocol và các kiểm tra khác của final. Không đổi `fileParallelism` hoặc isolation.
+Đường nhanh typecheck core/data khi phải biên dịch; không thay typecheck tests/tools/protocol và các kiểm tra khác của final.
+
+## Chạy song song an toàn
+
+`check:core` chạy tối đa **2 worker fork**, mỗi file vẫn có môi trường/module riêng (`isolate:true`). Chỉ chạy song song giữa file; không bật concurrent cho test trong file. Import guard vẫn kiểm tra toàn bộ graph trước khi chuẩn bị/chạy test, nên test Room/server/IO không được đi vào pool này. Cấu hình suite chung và final giữ `fileParallelism:false`.
+
+```powershell
+$env:VOLAM_CORE_WORKERS = '1' # debug tuần tự hoặc máy đang bận
+pnpm check:core tests/combat.test.ts tests/practice.test.ts
+# Bỏ override để trở lại 2 worker; chỉ nhận số nguyên 1..4.
+Remove-Item Env:\VOLAM_CORE_WORKERS
+```
+
+Runner ghi policy worker/isolation vào report. Helper policy nằm trong input hash của cache; thay worker count không đổi artifact mô phỏng và không tái dùng kết quả test. Số worker tối đa được cấu hình rõ ràng, không lấy tất cả CPU hay đọc `VITEST_MAX_WORKERS`. Giữ lock toàn checkout cho một runner; parallelism ở bên trong lượt được sở hữu đó.
+
+Regression thực thi bốn file thật xác nhận overlap ở 2 worker, không overlap ở 1 worker, module counter luôn bắt đầu lại và assertion sai vẫn làm exit 1. [Đo và phạm vi kiểm chứng](CORE_PARALLEL_REPORT_2026_11_20.md).
 
 ## Isolation và evidence
 

@@ -294,6 +294,7 @@ export function prepareCoreArtifacts({
     'packages/game-data/package.json',
     'packages/game-data/tsconfig.json',
     'tools/core-test-cache.mjs',
+    'tools/core-test-execution.mjs',
     'scripts/check-core.mjs',
     'vitest.core.config.ts',
     'vitest.config.ts',
