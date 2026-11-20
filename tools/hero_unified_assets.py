@@ -99,7 +99,7 @@ def export_profile(profile_path,direction=None):
    groupRatio*=cfg.get('poseDensityScales',{}).get(poses[i],1)
    override=next((e for e in cfg.get('poseOverrides',[]) if e['frame']==poses[i]+'_'+d),None)
    if override:
-    path=src/override['path'];im,sourceBounds=figures(path,1,1)[0];rx=override['sourceRoot'][0]-sourceBounds[0];ry=override['sourceRoot'][1]-sourceBounds[1];headTop=override['sourceBodyTop']-sourceBounds[1];groupRatio=override.get('bodyHeight',cfg['bodyHeight'])/(ry-headTop+1)
+    path=src/override['path'];im,sourceBounds=figures(path,1,1)[0];rx=override['sourceRoot'][0]-sourceBounds[0];ry=override['sourceRoot'][1]-sourceBounds[1];headTop=override['sourceBodyTop']-sourceBounds[1];groupRatio=override.get('sourceScale',override.get('bodyHeight',cfg['bodyHeight'])/(ry-headTop+1))
    resized=im.resize((round(im.width*groupRatio),round(im.height*groupRatio)),Image.Resampling.LANCZOS);x=round(foot[0]-rx*groupRatio);y=round(foot[1]-ry*groupRatio)
    assert x>=3 and y>=3 and x+resized.width<=w-3 and y+resized.height<=h-3,(d,poses[i],'canvas clip',x,y,resized.size)
    tile=Image.new('RGBA',(w,h));tile.alpha_composite(resized,(x,y));name=poses[i]+'_'+d;tiles.append((name,tile));box=tile.getbbox();entries.append({'frame':name,'sha256':hashlib.sha256(tile.tobytes()).hexdigest(),'visible':list(box),'sourceBounds':list(sourceBounds),'sourceRoot':[rx,ry],'sourceHeadTop':headTop,'groupRatio':groupRatio,'sourceHairWidth':hair_width(im,(rx,ry,headTop),mode) if override else hair[i],'override':override,'overrideSha256':sha(src/override['path']) if override else None})

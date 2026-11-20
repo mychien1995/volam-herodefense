@@ -98,10 +98,10 @@ it('uses each canonical neutral body for the matching portrait', async () => {
   const { heroPortraitUrl, heroBodyUrl } =
     await import('../apps/game-client/src/hero-portraits.js');
   expect(heroPortraitUrl('hero_thien_son')).toBe(
-    '/assets/thien-son-phien-unified-v1/avatar.png',
+    '/assets/thien-son-phien-unified-v2/avatar.png',
   );
   expect(heroBodyUrl('hero_thien_son_dao')).toBe(
-    '/assets/thien-son-dao-unified-v2/avatar-body.png',
+    '/assets/thien-son-dao-unified-v3/avatar-body.png',
   );
 });
 

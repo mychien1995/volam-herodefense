@@ -6,8 +6,8 @@ import clm from '../../../assets/exports/con-luan-thien-su-unified-v2/manifest.j
 import cls from '../../../assets/exports/con-luan-kiem-ton-unified-v2/manifest.json';
 import slq from '../../../assets/exports/thieu-lam-quyen-unified-v1/manifest.json';
 import sld from '../../../assets/exports/thieu-lam-dao-unified-v1/manifest.json';
-import phien from '../../../assets/exports/thien-son-phien-unified-v1/manifest.json';
-import dao from '../../../assets/exports/thien-son-dao-unified-v2/manifest.json';
+import phien from '../../../assets/exports/thien-son-phien-unified-v2/manifest.json';
+import dao from '../../../assets/exports/thien-son-dao-unified-v3/manifest.json';
 import Phaser from 'phaser';
 import quyen from '../../../assets/exports/vo-dang-quyen-unified-v1/manifest.json';
 import kiem from '../../../assets/exports/vo-dang-kiem-unified-v1/manifest.json';

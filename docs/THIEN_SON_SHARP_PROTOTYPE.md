@@ -1,0 +1,11 @@
+# Thiên Sơn sharpness prototype — 2026-11-20
+
+User yêu cầu mẫu trước khi mở rộng toàn bộ động tác. Chỉ12 cel/nhánh hướng down_right: idle4/walk4/A4. Phiến dùng sibling unified-v2, Đao unified-v3.456 cel còn lại giữ byte-exact v1/v2, gồm các hướng và kỹ năng khác; HUD portraits cũng giữ byte-exact. Renderer/camera/gameplay/HUD geometry/F8 không đổi. Không gọi đây là bộ sắc nét hoàn chỉnh.
+
+Built-in imagegen vẽ lại mẫu từ identity source hiện hành, lấy Đường Môn Cơ Quan làm chuẩn contour/value readability. Bớt viền tóc wispy/microdetail, tăng contrast mắt/tóc/nếp áo và tách ivory light/cool gray shadow. Giữ danh tính/trang phục/vũ khí, không đổi body size.12 source cels dùng một sourceScale đo theo median idle anatomical height89; scale trong Phaser vẫn.5. Đây là source-to-atlas registration, không scale breathing. Giữ exact alpha và native Aseprite roundtrip480 frames/80tags, trong đó chỉ24 cels là artwork mới. Original PNGs/receipts/prompts nằm ở sharp-generation.json và raw/sharp-prototype mỗi sibling source folder.
+
+Guard `tools/verify-thien-son-sharp-prototype.py`:24changed/456retained, pivot/scale/HUD portraits/36approved locks PASS.13focused unit cases PASS; client/tools types PASS. Before và after directional two-client profiles dùng cùng zoom/fixture/accepted A/real hit/same-tick authority/status expiry/natural arena respawn/F8/portrait. Final six-client chỉ kiểm tra hướng mẫu, A/crowding; các hướng khác trong party dùng art cũ. Không full skill/balance/AI/reward acceptance hoặc recording.
+
+PNG source-pixel crops lấy từ Phaser chạy thật, thời điểm/biến thể A độc lập; không repaint và không thay backdrop. Phòng mẫu cấp30/rank4 sẽ mở riêng Đao/Phiến. Giữ hai phím mũi tên xuống+phải để xem hướng ↘ đang làm mẫu; bấm A thử đánh thường. Các hướng/kỹ năng còn lại giữ bản trước và chỉ mở rộng sau phản hồi của user.
+
+Final six-client directional sample PASS (`thien-son-sharp-final`,1.3min). [Before–after PNG](evidence/sessions/thien-son-sharp-delivery/before-after.png), [summary](evidence/sessions/thien-son-sharp-delivery/summary.json). Hai cửa sổ review đã mở cấp30/rank4, F8 verified/no pageerror, server3019/client5620. Giai đoạn này dừng trước bulk actions/facings theo yêu cầu user.

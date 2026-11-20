@@ -37,3 +37,8 @@ Phòng review mới: `http://127.0.0.1:5614/?debug=1`, mở sẵn Ngũ Độc C�
 ## Sprite correction — 2026-11-20
 
 User phản hồi Thiên Sơn Đao khác style Phiến và hai Côn Luân nhỏ khi A. Current runtime chuyển ba nhánh này sang sibling `*-unified-v2`; v1/36 approved byte locks giữ nguyên. Đao redraw256cel/tám hướng theo material/contour Phiến, chưa director-approved. Côn Luân giữ nguyên nguồn art, sửa action export density và xử lý idle replacement khác resolution; renderer scale vẫn0.5. Native848frames/128tags PASS,16focused cases/types PASS; six-client coverage qua scoped stages, giữ các FAIL và retry đã ghi. Chi tiết/PNG: [SPRITE_CORRECTIONS_2026_11_20.md](SPRITE_CORRECTIONS_2026_11_20.md).
+
+
+## Thiên Sơn sharpness sample — 2026-11-20
+
+Latest user scope is a SAMPLE before all actions. Phiến now references unified-v2 and Đao unified-v3, with ONLY down_right idle4/walk4/A4 reauthored each.24changed/456retained cels, unchanged HUD portraits/pivots/scale/F8/gameplay. Other facings/skills remain previous artwork deliberately. Native480frames/80tags,13focused policy cases, types and two-/six-client directional sample checks PASS. Do not expand automatically; collect user feedback on sample first. Source receipts, runtime PNGs, exact-scope guard and room links: [THIEN_SON_SHARP_PROTOTYPE.md](THIEN_SON_SHARP_PROTOTYPE.md).
