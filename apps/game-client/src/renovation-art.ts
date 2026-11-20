@@ -1,3 +1,4 @@
+import { preloadUnifiedBosses, presentUnifiedBoss } from './boss-unified-body.js';
 import Phaser from 'phaser';
 import {
   approvedBossBody,
@@ -75,6 +76,7 @@ export function preloadRenovation(
       : pack === 'arena';
   };
   preloadRenovationActions(scene, includes);
+  preloadUnifiedBosses(scene, includes);
   if (pack === 'forest' || pack === 'all') preloadNativeForestArt(scene);
   if (pack === 'arena' || pack === 'all') {
     preloadM3dNativeArt(scene);
@@ -284,7 +286,8 @@ export function presentRenovatedBody(
   ) {
     presentRenovationAction(scene, image, id, pose, fx, fy, ability, clock);
   }
-  image.setData('renovation', { id, pose, direction, locomotion });
+  if (!presentUnifiedBoss(scene, image, id, pose, fx, fy, ability, clock))
+    image.setData('renovation', { id, pose, direction, locomotion });
   const seen = scene.registry.get('renovation-observed') as Map<
     string,
     Set<string>
