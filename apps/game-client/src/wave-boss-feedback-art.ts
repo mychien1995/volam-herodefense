@@ -125,8 +125,25 @@ export class WaveBossFeedbackArt {
       .setDepth(o.depth ?? y + 0.2);
     this.used.add(id);
     this.observed.add(asset + ':' + frame);
-    if (asset === 'bc_boss')
-      presentRenovatedBody(this.scene, s, 'bac_cai', 'action');
+    if (asset === 'bc_boss') {
+      const direction = clip.match(/_(down|up|left|right)$/)?.[1] ?? 'down';
+      const vector = {
+        down: [0, 1],
+        up: [0, -1],
+        left: [-1, 0],
+        right: [1, 0],
+      }[direction]!;
+      presentRenovatedBody(
+        this.scene,
+        s,
+        'bac_cai',
+        /^(idle|walk)_/.test(clip) ? clip.split('_')[0]! : 'action',
+        vector[0],
+        vector[1],
+        'vortex',
+        { elapsedMs: age * 1000, beat: 1 },
+      );
+    }
     return s;
   }
   ring(id: string, x: number, y: number, age: number) {

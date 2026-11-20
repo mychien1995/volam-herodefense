@@ -1,0 +1,39 @@
+{
+  "status": "RUNNING",
+  "fixture": "Server-owned phase/HP prerequisites; real acknowledged arrow keys and manual A; not natural campaign progression, lightning/QTE or balance acceptance",
+  "cases": [
+    {
+      "id": "tay_doc",
+      "beforeHp": 1000000,
+      "hpAtAttack": 500001,
+      "afterHp": 499910,
+      "transition": true,
+      "motion": {
+        "frames": [
+          "idle_1_down_right",
+          "cast_4_down",
+          "hurt_0_down_right",
+          "hurt_1_down_right",
+          "idle_2_down_right",
+          "cast_0_down"
+        ],
+        "textures": [
+          "boss-unified:tay_doc",
+          "boss-unified:tay_doc_cap_mo"
+        ]
+      },
+      "peers": [
+        {
+          "phase": "IN_GAME",
+          "tick": 233,
+          "basic": "vo_dang_quyen"
+        },
+        {
+          "phase": "IN_GAME",
+          "tick": 233,
+          "basic": "cai_bang_bong"
+        }
+      ]
+    }
+  ]
+}

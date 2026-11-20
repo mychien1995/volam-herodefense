@@ -1,0 +1,108 @@
+{
+  "status": "RUNNING",
+  "fixture": "Server-owned phase/HP prerequisites; real acknowledged arrow keys and manual A; not natural campaign progression, lightning/QTE or balance acceptance",
+  "cases": [
+    {
+      "id": "chu_ba_thong",
+      "beforeHp": 1000000,
+      "hpAtAttack": 1,
+      "afterHp": 0,
+      "transition": false,
+      "motion": {
+        "frames": [
+          "idle_1_down_right",
+          "death_0_down_right",
+          "death_1_down_right"
+        ],
+        "textures": [
+          "boss-unified:chu_ba_thong"
+        ]
+      },
+      "peerMotions": [
+        {
+          "frames": [
+            "idle_1_down_right",
+            "death_0_down_right",
+            "death_1_down_right"
+          ],
+          "textures": [
+            "boss-unified:chu_ba_thong"
+          ]
+        },
+        {
+          "frames": [
+            "idle_0_down_right",
+            "death_0_down_right",
+            "death_1_down_right"
+          ],
+          "textures": [
+            "boss-unified:chu_ba_thong"
+          ]
+        }
+      ],
+      "peers": [
+        {
+          "phase": "IN_GAME",
+          "tick": 45,
+          "basic": "vo_dang_quyen"
+        },
+        {
+          "phase": "IN_GAME",
+          "tick": 45,
+          "basic": "cai_bang_bong"
+        }
+      ]
+    },
+    {
+      "id": "hoan_nhan_hong_liet",
+      "beforeHp": 1000000,
+      "hpAtAttack": 1,
+      "afterHp": 0,
+      "transition": false,
+      "motion": {
+        "frames": [
+          "idle_0_down_right",
+          "death_0_down_right",
+          "death_1_down_right"
+        ],
+        "textures": [
+          "boss-unified:hoan_nhan_hong_liet"
+        ]
+      },
+      "peerMotions": [
+        {
+          "frames": [
+            "idle_0_down_right",
+            "death_0_down_right",
+            "death_1_down_right"
+          ],
+          "textures": [
+            "boss-unified:hoan_nhan_hong_liet"
+          ]
+        },
+        {
+          "frames": [
+            "idle_2_down_right",
+            "death_0_down_right",
+            "death_1_down_right"
+          ],
+          "textures": [
+            "boss-unified:hoan_nhan_hong_liet"
+          ]
+        }
+      ],
+      "peers": [
+        {
+          "phase": "IN_GAME",
+          "tick": 45,
+          "basic": "vo_dang_quyen"
+        },
+        {
+          "phase": "IN_GAME",
+          "tick": 45,
+          "basic": "cai_bang_bong"
+        }
+      ]
+    }
+  ]
+}

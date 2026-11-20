@@ -221,3 +221,10 @@ User phản hồi Thiên Sơn Đao khác style Phiến và hai Côn Luân nhỏ 
 ## Thiên Sơn sharpness sample — 2026-11-20
 
 Latest user scope is a SAMPLE before all actions. Phiến now references unified-v2 and Đao unified-v3, with ONLY down_right idle4/walk4/A4 reauthored each.24changed/456retained cels, unchanged HUD portraits/pivots/scale/F8/gameplay. Other facings/skills remain previous artwork deliberately. Native480frames/80tags,13focused policy cases, types and two-/six-client directional sample checks PASS. Do not expand automatically; collect user feedback on sample first. Source receipts, runtime PNGs, exact-scope guard and room links: [THIEN_SON_SHARP_PROTOTYPE.md](THIEN_SON_SHARP_PROTOTYPE.md).
+
+
+## Boss body coherence — 2026-11-20
+
+User authorized the renovate-game-sprite process for bosses on `wip/m3d/25d`.9main bosses /11 identities now use sibling unified-v1 sources/exports,2528packed native frames /456tags (2472unique authored drawings; Bắc Cái rest shared south). Actual idle/walk cycles,8facing locomotion/reactions, original cardinal action choreography, fixed density/feet/scale0.5. Native transforms/corpses, Bắc doubles/rest, Chu spin afterimages, Kim weapon-away, Ly native clip aliases/release clock and detached Hồng cannon body contact are integrated. Gameplay/core/server/protocol/HUD/controls/F8 and existing VFX rasters/owners are unchanged; named support/minion art retained.
+
+11native/hash profiles,8focused policy cases, types/scoped build,2-/6-client body/cast/peer checks and accepted-arrow/A lifecycle coverage complete through documented scoped retries. Preserve FAIL reports; no natural campaign/QTE/loot/balance acceptance or video claim. All new boss art candidate, pending director approval. PNG comparisons, exact evidence, limitations and isolated level30/max-rank review tools: [BOSS_COHERENCE_ROLLOUT.md](BOSS_COHERENCE_ROLLOUT.md). Commit only this branch, no merge/push.

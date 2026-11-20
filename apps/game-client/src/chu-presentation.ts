@@ -293,23 +293,39 @@ export class ChuPresentation {
       else if (v.phase === 'drink' && t > 6.5) tag = 'drink_' + dir;
       else if (enemy?.pose === 'walk') tag = 'walk_' + dir;
       const body = this.draw('boss', bundle, tag, x, y, v.bossHp <= 0 ? 0 : t);
+      // Native idle-phase palms have no cast pose. Use the replicated projectile's
+      // travelled distance for a short body release, without creating a cast/hit.
+      const palmAge =
+        v.phase === 'idle'
+          ? Math.min(...v.missiles.map((p) => (1000 - p.remaining) / 300))
+          : Infinity;
+      const basicPalm = v.bossHp > 0 && palmAge >= 0 && palmAge < 0.35;
       presentRenovatedBody(
         this.scene,
         body,
         'chu_ba_thong',
         v.bossHp <= 0
           ? 'death'
-          : /^idle_/.test(tag)
-            ? enemy?.pose === 'hurt'
-              ? 'hurt'
-              : 'idle'
-            : /^walk_/.test(tag)
-              ? 'walk'
-              : 'action',
+          : basicPalm
+            ? 'action'
+            : /^idle_/.test(tag)
+              ? enemy?.pose === 'hurt'
+                ? 'hurt'
+                : 'idle'
+              : /^walk_/.test(tag)
+                ? 'walk'
+                : 'action',
         enemy?.fx ?? v.fx,
         enemy?.fy ?? v.fy,
-        v.phase,
-        { beat: chuBodyBeat(v.phase, t) },
+        basicPalm ? 'palm' : v.phase,
+        {
+          beat: basicPalm
+            ? releaseBeat(palmAge, 0, 0.16)
+            : chuBodyBeat(v.phase, t),
+          ...(v.phase === 'spin' && v.bossHp > 0
+            ? { elapsedMs: t * 1000 }
+            : {}),
+        },
       );
       markImpactTarget(body, id);
       if (v.bossHp < this.previousHp && v.bossHp > 0)
@@ -483,8 +499,8 @@ export class ChuPresentation {
             this.spinHistory.push({ x, y, t });
             if (this.spinHistory.length > 6) this.spinHistory.shift();
           }
-          for (const [i, p] of this.spinHistory.slice(0, -1).entries())
-            this.draw(
+          for (const [i, p] of this.spinHistory.slice(0, -1).entries()) {
+            const ghost = this.draw(
               'spin:ghost:' + i,
               'boss',
               'spin',
@@ -494,6 +510,17 @@ export class ChuPresentation {
               1,
               0.04 + i * 0.025,
             ).setDepth(p.y - 0.1);
+            presentRenovatedBody(
+              this.scene,
+              ghost,
+              'chu_ba_thong',
+              'action',
+              v.fx,
+              v.fy,
+              'spin',
+              { elapsedMs: p.t * 1000, beat: 1 },
+            );
+          }
           this.draw(
             'spin:ring',
             'palm',

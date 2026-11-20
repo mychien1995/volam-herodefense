@@ -1,4 +1,7 @@
-import { preloadUnifiedBosses, presentUnifiedBoss } from './boss-unified-body.js';
+import {
+  preloadUnifiedBosses,
+  presentUnifiedBoss,
+} from './boss-unified-body.js';
 import Phaser from 'phaser';
 import {
   approvedBossBody,
@@ -136,7 +139,12 @@ export function presentRenovatedBody(
   fx = 0,
   fy = 1,
   ability = '',
-  clock?: { phase?: string; progress?: number; beat?: 0 | 1 | 2 },
+  clock?: {
+    elapsedMs?: number;
+    phase?: string;
+    progress?: number;
+    beat?: 0 | 1 | 2;
+  },
 ): void {
   if (!image || !id || !renovationEnabled(scene)) return;
   const definition = definitions.get(id);

@@ -906,6 +906,7 @@ export class ArenaScene extends Phaser.Scene {
         invasionWave?: number;
         archetypeId?: string;
         castAbilityId?: string;
+        castTicks?: number;
         statuses?: string;
       },
       enemy: boolean,
@@ -1111,6 +1112,24 @@ export class ArenaScene extends Phaser.Scene {
             )
         : heroTexture(actor.basicId, actor.schoolId);
       const activeAt = actor.actionActiveAt ?? 0;
+      let coMoBodyClock: { beat: 0 | 1 | 2 } | undefined;
+      if (actor.archetypeId === 'ly_mac_sau' && bossPose) {
+        const previous = view.sprite.getData('co-mo-body-release') as
+          { ability: string; tick: number } | undefined;
+        // Cổ Mộ already replicates remaining native windup ticks. Cache the
+        // resulting release tick through recovery; no new protocol or cast.
+        const releaseAt =
+          (actor.castTicks ?? 0) > 0
+            ? tick + actor.castTicks!
+            : previous && previous.ability === actor.castAbilityId
+              ? previous.tick
+              : tick;
+        view.sprite.setData('co-mo-body-release', {
+          ability: actor.castAbilityId,
+          tick: releaseAt,
+        });
+        coMoBodyClock = { beat: releaseBeat(tick, releaseAt) };
+      } else view.sprite.setData('co-mo-body-release', undefined);
       const specialInProgress =
         tick < (actor.actionEndsAt ?? 0) &&
         actor.castAbilityId?.endsWith('_special');
@@ -1276,9 +1295,10 @@ export class ArenaScene extends Phaser.Scene {
             renderFx,
             renderFy,
             cast?.abilityId ?? actor.castAbilityId ?? '',
-            actor.archetypeId === 'ly_mac_sau' && bossPose && activeAt > 0
-              ? { beat: releaseBeat(tick, activeAt) }
-              : (creepClock ?? cast),
+            coMoBodyClock ??
+              (actor.archetypeId === 'ly_mac_sau' && bossPose && activeAt > 0
+                ? { beat: releaseBeat(tick, activeAt) }
+                : (creepClock ?? cast)),
           );
         if (!enemy && !heroReaction) {
           const tick = actorZoneTick;

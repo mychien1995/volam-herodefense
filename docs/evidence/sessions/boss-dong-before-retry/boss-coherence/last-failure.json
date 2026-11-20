@@ -1,0 +1,103 @@
+{
+  "players": 2,
+  "development": false,
+  "protocol": 46,
+  "timings": [
+    {
+      "phase": "2 joined room",
+      "seconds": 2.11
+    },
+    {
+      "phase": "2 real clients ready",
+      "seconds": 12.78
+    }
+  ],
+  "directions": [],
+  "scenes": [],
+  "fixtures": "Server-owned wave placement/zone entry for coverage; natural keyboard combat and movement checked separately.",
+  "status": "FAIL",
+  "failure": "AssertionError [ERR_ASSERTION]: peer event acknowledgments",
+  "errors": [],
+  "serverLobby": {
+    "phase": "IN_GAME",
+    "host": "RN0yw8nWC",
+    "players": [
+      {
+        "id": "RN0yw8nWC",
+        "nickname": "Renovation 1",
+        "school": "vo_dang",
+        "branch": "vo_dang_quyen",
+        "confirmed": true,
+        "connected": true
+      },
+      {
+        "id": "LGjNSP_17",
+        "nickname": "Renovation 2",
+        "school": "cai_bang",
+        "branch": "cai_bang_bong",
+        "confirmed": true,
+        "connected": true
+      }
+    ]
+  },
+  "clientLobby": [
+    {
+      "client": 1,
+      "session": "RN0yw8nWC",
+      "phase": "IN_GAME",
+      "host": "RN0yw8nWC",
+      "players": [
+        {
+          "id": "RN0yw8nWC",
+          "nickname": "Renovation 1",
+          "school": "vo_dang",
+          "branch": "vo_dang_quyen",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "LGjNSP_17",
+          "nickname": "Renovation 2",
+          "school": "cai_bang",
+          "branch": "cai_bang_bong",
+          "confirmed": true,
+          "connected": true
+        }
+      ],
+      "heading": "Chọn môn phái",
+      "schoolControls": 7,
+      "hidden": true,
+      "error": "Không thể đổi lựa chọn ở giai đoạn này.",
+      "focused": true
+    },
+    {
+      "client": 2,
+      "session": "LGjNSP_17",
+      "phase": "IN_GAME",
+      "host": "RN0yw8nWC",
+      "players": [
+        {
+          "id": "RN0yw8nWC",
+          "nickname": "Renovation 1",
+          "school": "vo_dang",
+          "branch": "vo_dang_quyen",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "LGjNSP_17",
+          "nickname": "Renovation 2",
+          "school": "cai_bang",
+          "branch": "cai_bang_bong",
+          "confirmed": true,
+          "connected": true
+        }
+      ],
+      "heading": "Chọn môn phái",
+      "schoolControls": 7,
+      "hidden": true,
+      "error": "",
+      "focused": true
+    }
+  ]
+}

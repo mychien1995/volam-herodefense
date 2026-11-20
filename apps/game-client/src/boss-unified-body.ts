@@ -1,13 +1,29 @@
 import Phaser from 'phaser';
 import dong from '../../../assets/exports/boss-dong-ta-unified-v1/manifest.json';
+import tay from '../../../assets/exports/boss-tay-doc-unified-v1/manifest.json';
+import cap from '../../../assets/exports/boss-tay-doc-cap-mo-unified-v1/manifest.json';
+import nam from '../../../assets/exports/boss-nam-de-unified-v1/manifest.json';
+import bac from '../../../assets/exports/boss-bac-cai-unified-v1/manifest.json';
+import vp1 from '../../../assets/exports/boss-vuong-trung-duong-p1-unified-v1/manifest.json';
+import vp2 from '../../../assets/exports/boss-vuong-trung-duong-p2-unified-v1/manifest.json';
+import chu from '../../../assets/exports/boss-chu-ba-thong-unified-v1/manifest.json';
+import hong from '../../../assets/exports/boss-hoan-nhan-hong-liet-unified-v1/manifest.json';
+import kim from '../../../assets/exports/boss-kim-luan-unified-v1/manifest.json';
+import ly from '../../../assets/exports/boss-ly-mac-sau-unified-v1/manifest.json';
 import { setArtFilter } from './art-filter.js';
 import {
   bossBodyPose,
+  bossNativePose,
   bossContactBeat,
   type BossBodyClock,
 } from './boss-unified-policy.js';
 let overrideEnabled: boolean | undefined;
-const profiles = new Map([dong].map((p) => [p.basic, p]));
+const profiles = new Map(
+  [dong, tay, cap, nam, bac, vp1, vp2, chu, hong, kim, ly].map((p) => [
+    p.basic,
+    p,
+  ]),
+);
 export function preloadUnifiedBosses(
   scene: Phaser.Scene,
   includes: (id: string) => boolean,
@@ -35,6 +51,7 @@ export function presentUnifiedBoss(
   overrideEnabled ??=
     new URLSearchParams(location.search).get('bossCoherence') !== '0';
   if (!overrideEnabled) return false;
+  pose = bossNativePose(id, pose);
   const previous = body.getData('boss-unified-clock') as
     { pose: string; ability: string; at: number; beat: 0 | 1 | 2 } | undefined;
   const at =
@@ -56,15 +73,18 @@ export function presentUnifiedBoss(
     'up_right',
   ];
   // Retain the four-facing native encounter choreography; locomotion/reactions gain eight facings.
-  const direction = actionPose
-    ? Math.abs(fx) > Math.abs(fy)
-      ? fx < 0
-        ? 'left'
-        : 'right'
-      : fy < 0
-        ? 'up'
-        : 'down'
-    : directions[sector]!;
+  const direction =
+    id === 'bac_cai' && /^(drink|sleep)_/.test(ability)
+      ? 'down'
+      : actionPose
+        ? Math.abs(fx) > Math.abs(fy)
+          ? fx < 0
+            ? 'left'
+            : 'right'
+          : fy < 0
+            ? 'up'
+            : 'down'
+        : directions[sector]!;
   if (!p.directions.includes(direction)) return false; // Internal directional pilot; full delivery requires all8.
   const acting = ['action', 'cast', 'basic_attack'].includes(pose);
   const beat = bossContactBeat(
