@@ -101,7 +101,7 @@ it('uses each canonical neutral body for the matching portrait', async () => {
     '/assets/thien-son-phien-unified-v1/avatar.png',
   );
   expect(heroBodyUrl('hero_thien_son_dao')).toBe(
-    '/assets/thien-son-dao-unified-v1/avatar-body.png',
+    '/assets/thien-son-dao-unified-v2/avatar-body.png',
   );
 });
 

@@ -32,3 +32,8 @@ Bổng cần giữ thêm: gậy đỏ khắc vàng đã duyệt và tỷ lệ d�
 Git giữ byte-exact JSON cho các atlas/source unified để approval/native hashes còn đúng khi checkout mới. Re-stage metadata đã duyệt chỉ giữ đúng CRLF hiện tại đang được khóa; không re-export/re-serialize approved art. Kiểm tra index đủ36 locks PASS. Chỉ commit nhánh này, không merge/push.
 
 Phòng review mới: `http://127.0.0.1:5614/?debug=1`, mở sẵn Ngũ Độc Cổ Sư cấp30, cả5 slot rank4, F8 off/on đã kiểm tra, không pageerror. Fixture local cho phép tạo phòng và chọn lại bất kỳ14 nhánh, nhận cấp30/rank4 theo đúng nhánh chọn; trận vẫn chạy luật/cooldown/wave bình thường. [PNG có HUD](evidence/sessions/hero-coherence-all-remaining-delivery/room-ready.png), [room metadata](evidence/sessions/hero-coherence-all-remaining-delivery/play-room.json). Room ID là thời điểm chụp, có thể kết thúc theo gameplay bình thường.
+
+
+## Sprite correction — 2026-11-20
+
+User phản hồi Thiên Sơn Đao khác style Phiến và hai Côn Luân nhỏ khi A. Current runtime chuyển ba nhánh này sang sibling `*-unified-v2`; v1/36 approved byte locks giữ nguyên. Đao redraw256cel/tám hướng theo material/contour Phiến, chưa director-approved. Côn Luân giữ nguyên nguồn art, sửa action export density và xử lý idle replacement khác resolution; renderer scale vẫn0.5. Native848frames/128tags PASS,16focused cases/types PASS; six-client coverage qua scoped stages, giữ các FAIL và retry đã ghi. Chi tiết/PNG: [SPRITE_CORRECTIONS_2026_11_20.md](SPRITE_CORRECTIONS_2026_11_20.md).

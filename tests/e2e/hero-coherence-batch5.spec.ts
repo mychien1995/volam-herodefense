@@ -56,7 +56,7 @@ test('batch5 Kunlun body coherence', async ({ browser }) => {
           texture: 'hero-unified:' + basic,
           pivot: [0.5, 248 / 320],
           avatar:
-            '/assets/' + basic.replaceAll('_', '-') + '-unified-v1/avatar.png',
+            '/assets/' + basic.replaceAll('_', '-') + '-unified-v2/avatar.png',
           partial: process.env['VOLAM_COHERENCE_PARTIAL'] === '1',
         };
         const opts = { ...context, out: resolve(context.out, basic) };

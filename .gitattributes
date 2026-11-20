@@ -624,3 +624,7 @@ assets/exports/characters/con_luan_*/*.json -text -eol whitespace=blank-at-eol,b
 # Keep canonical hero atlas/source metadata byte-exact for approval and native validation hashes.
 assets/exports/*-unified-v1/*.json -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 assets/source/*-unified-v1/*.json -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# Versioned hero corrections retain exact source/atlas metadata bytes.
+assets/exports/*-unified-v2/*.json -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/source/*-unified-v2/*.json -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

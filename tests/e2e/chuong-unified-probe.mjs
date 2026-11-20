@@ -727,8 +727,8 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
       assert.equal(effect.frames[h.id].at(-1).alpha, 1);
       assert.equal(
         effect.frames[h.id].at(-1).tint,
-        effect.frames[h.id][0].tint,
-        'tint restored after status expiry',
+        stun.frames[h.id].at(-1).tint,
+        'tint restored to idle baseline before statuses',
       );
       assert.ok(effect.frames[h.id].at(-1).frame.startsWith('idle_'));
       report.reactions.push({

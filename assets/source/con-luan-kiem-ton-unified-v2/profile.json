@@ -1,0 +1,124 @@
+{
+  "basic": "con_luan_kiem_ton",
+  "texture": "hero-unified:con_luan_kiem_ton",
+  "folder": "con-luan-kiem-ton-unified-v2",
+  "sourceRows": 7,
+  "sourceColumns": 4,
+  "canvas": [
+    352,
+    320
+  ],
+  "foot": [
+    176,
+    248
+  ],
+  "bodyHeight": 89,
+  "scale": 0.5,
+  "bodyWidth": 56,
+  "rootMode": "monochrome",
+  "poses": [
+    "idle_0",
+    "idle_1",
+    "idle_2",
+    "idle_3",
+    "walk_0",
+    "walk_1",
+    "walk_2",
+    "walk_3",
+    "windup",
+    "release",
+    "palm",
+    "sword_point",
+    "plant",
+    "detonate",
+    "dash",
+    "guard",
+    "channel",
+    "fan",
+    "storm",
+    "dragon",
+    "star_raise",
+    "star_hold",
+    "recover",
+    "cast_hold",
+    "hurt_0",
+    "hurt_1",
+    "death_0",
+    "death_1"
+  ],
+  "references": [
+    "assets/source/characters/con_luan_skill_preview/generated/body.png",
+    "assets/source/characters/con_luan_hac_thiet_v04/generated/sword.png"
+  ],
+  "groups": [
+    {
+      "name": "idle",
+      "poses": [
+        "idle_0",
+        "idle_1",
+        "idle_2",
+        "idle_3"
+      ],
+      "durationMs": 700
+    },
+    {
+      "name": "walk",
+      "poses": [
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3"
+      ],
+      "durationMs": 110
+    },
+    {
+      "name": "action_library",
+      "poses": [
+        "windup",
+        "release",
+        "palm",
+        "sword_point",
+        "plant",
+        "detonate",
+        "dash",
+        "guard",
+        "channel",
+        "fan",
+        "storm",
+        "dragon",
+        "star_raise",
+        "star_hold",
+        "recover",
+        "cast_hold"
+      ],
+      "durationMs": 100
+    },
+    {
+      "name": "hurt",
+      "poses": [
+        "hurt_0",
+        "hurt_1"
+      ],
+      "durationMs": 90
+    },
+    {
+      "name": "death",
+      "poses": [
+        "death_0",
+        "death_1"
+      ],
+      "durationMs": 220
+    }
+  ],
+  "registrationPolicy": "Fixed head/body density per group, boot pivot; no scale/alpha breathing. Chaos intentional growth from replicated form only.",
+  "directionDensityPolicies": {
+    "down": "uniform-source",
+    "down_right": "uniform-source",
+    "right": "uniform-source",
+    "up_right": "uniform-source",
+    "up": "uniform-source",
+    "up_left": "uniform-source",
+    "left": "uniform-source",
+    "down_left": "uniform-source"
+  }
+}

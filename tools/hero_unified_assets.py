@@ -73,6 +73,7 @@ def export_profile(profile_path,direction=None):
  for row,d in enumerate(dirs):
   mode=cfg.get('directionRootModes',{}).get(d,cfg.get('rootMode','brown'))
   raw=src/'raw'/(d+'.png');cels=figures(raw,cfg['sourceRows'],cfg['sourceColumns'],cfg.get('sourceSegmentationCuts',{}).get(d,[]),cfg.get('sourceComponentLinks',{}).get(d,[]))
+  sourceIdleCels=cels[:4]
   replacements=[o for o in cfg.get('celGroupOverrides',[]) if o['direction']==d]
   extraRecords=[]
   for extra in cfg.get('extraSources',[]):
@@ -84,7 +85,10 @@ def export_profile(profile_path,direction=None):
   roots=[body_root(im,poses[i]=='death_1',mode,cfg.get('bodyColumnTop',False)) for i,(im,_) in enumerate(cels)]
   ratio=cfg['bodyHeight']/statistics.median(roots[i][1]-roots[i][2]+1 for i in range(4));entries=[]
   hair=[hair_width(im,root,mode) for (im,_),root in zip(cels,roots)];headTarget=ratio*statistics.median(hair[:4]);actionRatio=headTarget/statistics.median(hair[8:reactionStart]);reactionRatio=headTarget/statistics.median(hair[reactionStart:baseCount-1]);walkRatio=headTarget/statistics.median(hair[4:8]) if cfg.get('independentLocomotionDensity') else ratio
-  if cfg.get('directionDensityPolicies',{}).get(d)=='uniform-source':actionRatio=reactionRatio=walkRatio=ratio
+  if cfg.get('directionDensityPolicies',{}).get(d)=='uniform-source':
+   sourceRoots=[body_root(im,False,mode,cfg.get('bodyColumnTop',False)) for im,_ in sourceIdleCels]
+   actionRatio=reactionRatio=cfg['bodyHeight']/statistics.median(r[1]-r[2]+1 for r in sourceRoots)
+   if not cfg.get('independentLocomotionDensity'):walkRatio=actionRatio
   for i,((im,sourceBounds),(rx,ry,headTop)) in enumerate(zip(cels,roots)):
    groupRatio=ratio if i<4 else walkRatio if i<8 else actionRatio if i<reactionStart else reactionRatio
    for extra in extraRecords:

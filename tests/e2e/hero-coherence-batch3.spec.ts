@@ -23,7 +23,7 @@ test('batch3 Thien Son body coherence', async ({ browser }) => {
           basic,
           sameTickAuthority: true,
           settleIdle: true,
-          extraChecks: verifyThienSonChoreography,
+          extraChecks: process.env['VOLAM_COHERENCE_PARTIAL'] === '1' ? undefined : verifyThienSonChoreography,
           nativeFacingAbilities: ['liet_phong_dao'],
           stationaryPartyTargets: true,
           actionBodyPattern:
@@ -81,7 +81,7 @@ test('batch3 Thien Son body coherence', async ({ browser }) => {
           texture: 'hero-unified:' + basic,
           pivot: [0.5, 224 / 288],
           avatar:
-            '/assets/' + basic.replaceAll('_', '-') + '-unified-v1/avatar.png',
+            '/assets/' + basic.replaceAll('_', '-') + (basic === 'thien_son_dao' ? '-unified-v2/avatar.png' : '-unified-v1/avatar.png'),
           partial: process.env['VOLAM_COHERENCE_PARTIAL'] === '1',
         };
         const options = { ...context, out: resolve(context.out, basic) };

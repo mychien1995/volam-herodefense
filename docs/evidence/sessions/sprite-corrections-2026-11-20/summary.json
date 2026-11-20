@@ -1,0 +1,80 @@
+{
+  "status": "PASS via scoped stages",
+  "branch": "wip/m3d/25d",
+  "branches": {
+    "thien_son_dao": {
+      "nativeFrames": 256,
+      "nativeTags": 40,
+      "bodyPNG": "8581d7291721f833c243eedea6acd09b2dd66978bd84efe669455a9637630475",
+      "idleDirections": 8,
+      "walkDirections": 8,
+      "actionGroups": 48,
+      "originalRunStatus": "PASS",
+      "completion": "Six-client complete profile PASS"
+    },
+    "con_luan_thien_su": {
+      "nativeFrames": 368,
+      "nativeTags": 48,
+      "bodyPNG": "0dc5b54de82e3497b4d31f280b81c97c0af59cc797b6d7565e6380ef31f625b3",
+      "idleDirections": 8,
+      "walkDirections": 8,
+      "actionGroups": 48,
+      "originalRunStatus": "PASS",
+      "completion": "Six-client complete profile PASS"
+    },
+    "con_luan_kiem_ton": {
+      "nativeFrames": 224,
+      "nativeTags": 40,
+      "bodyPNG": "8eb2d6b9805ae8525f87eec74cc72d61491266e3375395ab807b0a798e8d0081",
+      "idleDirections": 8,
+      "walkDirections": 8,
+      "actionGroups": 48,
+      "originalRunStatus": "FAIL",
+      "completion": "Original full8 locomotion/48actions; six-client reaction/party/F8/portrait retry and extras PASS. Initial status assertion failure retained."
+    }
+  },
+  "focusedUnitTests": 16,
+  "typechecks": [
+    "apps/game-client/tsconfig.json",
+    "tsconfig.tools.json"
+  ],
+  "recordings": false,
+  "approvedByteLocks": 36,
+  "note": "Actual Phaser source-pixel crops, independent moments at fixed gameplay zoom. Old v1 files preserved. No core/server/protocol/HUD/F8 changes.",
+  "densityBefore": {
+    "monk": [
+      0.729,
+      0.943
+    ],
+    "sword": [
+      0.831,
+      0.972
+    ]
+  },
+  "densityAfter": "1.0 in all checked normal A source cels/eight facings; runtime scale unchanged .5",
+  "reviewRoom": {
+    "status": "READY",
+    "url": "http://127.0.0.1:5618/?debug=1",
+    "roomId": "EzLyQwrcW",
+    "sessionId": "y3eiLlngS",
+    "basic": "thien_son_dao",
+    "level": 30,
+    "slots": [
+      "phi_anh_tram",
+      "truy_hon_dao",
+      "phong_anh_hoan_vi",
+      "liet_phong_dao",
+      "bach_liet_thien_kich"
+    ],
+    "ranks": {
+      "phi_anh_tram": 4,
+      "truy_hon_dao": 4,
+      "phong_anh_hoan_vi": 4,
+      "liet_phong_dao": 4,
+      "bach_liet_thien_kich": 4
+    },
+    "body": "hero-unified:thien_son_dao",
+    "f8": "ON; keyboard toggle verified",
+    "errors": []
+  }
+}

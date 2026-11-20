@@ -2,12 +2,12 @@ import ndt from '../../../assets/exports/ngu-doc-ta-hiep-unified-v1/manifest.jso
 import ndc from '../../../assets/exports/ngu-doc-co-su-unified-v1/manifest.json';
 import dmc from '../../../assets/exports/duong-mon-co-quan-unified-v1/manifest.json';
 import dma from '../../../assets/exports/duong-mon-am-khi-unified-v1/manifest.json';
-import clm from '../../../assets/exports/con-luan-thien-su-unified-v1/manifest.json';
-import cls from '../../../assets/exports/con-luan-kiem-ton-unified-v1/manifest.json';
+import clm from '../../../assets/exports/con-luan-thien-su-unified-v2/manifest.json';
+import cls from '../../../assets/exports/con-luan-kiem-ton-unified-v2/manifest.json';
 import slq from '../../../assets/exports/thieu-lam-quyen-unified-v1/manifest.json';
 import sld from '../../../assets/exports/thieu-lam-dao-unified-v1/manifest.json';
 import phien from '../../../assets/exports/thien-son-phien-unified-v1/manifest.json';
-import dao from '../../../assets/exports/thien-son-dao-unified-v1/manifest.json';
+import dao from '../../../assets/exports/thien-son-dao-unified-v2/manifest.json';
 import Phaser from 'phaser';
 import quyen from '../../../assets/exports/vo-dang-quyen-unified-v1/manifest.json';
 import kiem from '../../../assets/exports/vo-dang-kiem-unified-v1/manifest.json';
