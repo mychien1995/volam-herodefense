@@ -228,3 +228,8 @@ Latest user scope is a SAMPLE before all actions. Phiến now references unified
 User authorized the renovate-game-sprite process for bosses on `wip/m3d/25d`.9main bosses /11 identities now use sibling unified-v1 sources/exports,2528packed native frames /456tags (2472unique authored drawings; Bắc Cái rest shared south). Actual idle/walk cycles,8facing locomotion/reactions, original cardinal action choreography, fixed density/feet/scale0.5. Native transforms/corpses, Bắc doubles/rest, Chu spin afterimages, Kim weapon-away, Ly native clip aliases/release clock and detached Hồng cannon body contact are integrated. Gameplay/core/server/protocol/HUD/controls/F8 and existing VFX rasters/owners are unchanged; named support/minion art retained.
 
 11native/hash profiles,8focused policy cases, types/scoped build,2-/6-client body/cast/peer checks and accepted-arrow/A lifecycle coverage complete through documented scoped retries. Preserve FAIL reports; no natural campaign/QTE/loot/balance acceptance or video claim. All new boss art candidate, pending director approval. PNG comparisons, exact evidence, limitations and isolated level30/max-rank review tools: [BOSS_COHERENCE_ROLLOUT.md](BOSS_COHERENCE_ROLLOUT.md). Commit only this branch, no merge/push.
+
+
+## Boss director approval and merge authorization — 2026-11-20
+
+User explicitly approved the9main bosses/11body identities reviewed at54ede68b and requested merge into `milestone/m3d` plus commit. This supersedes the earlier commit-only/no-merge restriction for this integration.44exact body/native/manifest SHA-256 snapshots and approval scope are recorded in `assets/approvals/boss-coherence/v1.json`; original candidate reports remain historical. VFX/supporting actor art remains unchanged.

@@ -1,5 +1,7 @@
 # Boss sprite coherence rollout — 2026-11-20
 
+**Current approval: APPROVED by the user on2026-11-20**, with instruction to merge into `milestone/m3d`. The reviewed art/runtime is commit54ede68b; [approval and44 SHA-256 snapshots](../assets/approvals/boss-coherence/v1.json). Candidate wording below and in original production reports is historical, recorded before this approval. The earlier commit-only/no-merge restriction is superseded by this explicit merge request.
+
 User authorized staged renovation of bosses on `wip/m3d/25d`. Current result: **9 main bosses /11 body identities integrated as candidates**. Gameplay, server/core/protocol, hitboxes, skill/phase clocks, HUD, controls and F8 are unchanged. No merge/push. No recording.
 
 ## Delivered scope
