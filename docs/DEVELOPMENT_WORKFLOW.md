@@ -9,6 +9,7 @@ Read [session execution lessons](SESSION_EXECUTION_LESSONS.md) before choosing t
 | One unit/integration area | `pnpm check:quick tests/skill-assets.test.ts` (accepts more files and Vitest filters) |
 | Pure-core simulation iteration | `pnpm check:core tests/combat.test.ts tests/practice.test.ts` (explicit pure-core files; hash-verified artifacts) |
 | Environment preflight (no build/install) | `pnpm qa:preflight --mode browser [--config <profile>]` |
+| Owned development browser iteration | `pnpm qa:iterate --plan rounds.json` (explicit supported smoke/gameplay selection; [boundaries](QA_ITERATION_REUSE_2026_11_20.md)) |
 | Preparation helper | `pnpm test:workflow` |
 | Affected art exports | `python -X utf8 scripts/verify-vo-dang.py` or the corresponding asset validator |
 | Focused live Phaser/browser check | `pnpm check:browser --config playwright.vo-dang.config.ts tests/e2e/vo-dang-art.spec.ts --grep "both weapon"` |

@@ -2,6 +2,8 @@
 
 Implemented 2026-11-19. Tooling/fixture changes only; game rules and runtime assets are unchanged.
 
+Optional owned development iteration now uses `pnpm qa:iterate --plan rounds.json`: fresh tests and asset guards, byte-verified live compiler/service reuse, room/socket reset and scoped teardown. Only the dedicated smoke and explicitly selected default gameplay tests are supported. [Commands, measurements and limitations](QA_ITERATION_REUSE_2026_11_20.md). Final remains independent.
+
 ## Start a session
 
 ```powershell
@@ -18,7 +20,7 @@ Do not use example ports without checking that they are free. Preflight refuses 
 
 `pnpm qa:preflight --mode browser --ready` is a **before-launch** check of an already-built candidate: server output exists, source/dist protocol agree and client build endpoint matches. It does not prove that all compiled inputs are fresh. Keep compilation and real service run/protocol/endpoint checks. It still refuses occupied ports, including a previously running review service.
 
-All 80 legacy profiles and both focused QA profiles use the audited [profile contracts](../tools/qa-profile-contracts.json) through `qaWorkflowSession`. Preflight checks every service/fixture port and the configured bundled Chromium, Chrome, Edge or custom executable. Fixed-port and multi-service fixtures keep their existing ports; unsupported overrides fail explicitly. Shared profiles accept `VOLAM_QA_SERVER_PORT` / `VOLAM_QA_CLIENT_PORT`; alias profiles retain their named environment variables. Run with the actual `--config` to select the right contract. Unregistered/WIP configs still receive an explicit limitation note. Update the contract when changing a profile/setup; `qa-profiles.test.mjs` rejects missing tracked profiles.
+All 80 legacy profiles and the three focused QA profiles use explicit [profile contracts](../tools/qa-profile-contracts.json) through `qaWorkflowSession`. Preflight checks every service/fixture port and the configured bundled Chromium, Chrome, Edge or custom executable. Fixed-port and multi-service fixtures keep their existing ports; unsupported overrides fail explicitly. Shared profiles accept `VOLAM_QA_SERVER_PORT` / `VOLAM_QA_CLIENT_PORT`; alias profiles retain their named environment variables. Run with the actual `--config` to select the right contract. Unregistered/WIP configs still receive an explicit limitation note. Update the contract when changing a profile/setup; `qa-profiles.test.mjs` rejects missing tracked profiles.
 
 `--ready` checks the build actually consumed: development clients require compiled server/protocol, preview clients also require the matching built endpoint, static review pages require no game build. The shared lifecycle now owns game/Vite startup, verifies run/protocol/client identity and restores fixture environment on success or failure. Child services additionally verify PID and IPC metadata; static PID review servers use an awaited owned-process cleanup. Two existing static profiles retain Playwright's no-reuse webServer ownership. This does not prove that every historical visual suite passes. See [shared UI/camera contracts and checks](SHARED_UI_CAMERA.md).
 

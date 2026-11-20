@@ -1,0 +1,109 @@
+{
+  "scenario": "same revised held-key smoke, fresh two-client Phaser test per round; sequential cold then reuse; all asset preparation retained; not the production/final pipeline",
+  "commands": {
+    "plan": [
+      {
+        "grep": "iteration starts fresh"
+      },
+      {
+        "grep": "iteration starts fresh"
+      }
+    ],
+    "cold": "node scripts/qa-iterate.mjs --cold --plan .cache/qa-iteration-task/rounds-final.json",
+    "reuse": "node scripts/qa-iterate.mjs --plan .cache/qa-iteration-task/rounds-final.json"
+  },
+  "samples": {
+    "cold": [
+      {
+        "index": 0,
+        "seconds": 95.8062403,
+        "prepareSeconds": 57.6871849,
+        "compileSeconds": 3.045352699999996,
+        "compiler": {
+          "reused": false,
+          "pid": 24780,
+          "nativePid": 20272,
+          "input": "83198a58f41db41b274d96bd3522b78e5530d30fe4cb711c276a576bb168cf66",
+          "output": "a36ccbb5bf894c450b5d8f58cd7817182aa8f0017a93d0e4479d6a9b628687e1"
+        },
+        "service": {
+          "runId": "8f8729dd-d8c5-4deb-ba99-76b0446e2a3a",
+          "pid": 21320
+        },
+        "fingerprint": "a146bd337c16191c0214c178d28ff7493a19637cbbbe435d5f6bed77685dc32e",
+        "reused": false,
+        "browserSeconds": 20.82855200000001,
+        "otherSeconds": 14.245150699999996
+      },
+      {
+        "index": 1,
+        "seconds": 44.36375179999998,
+        "prepareSeconds": 13.310304900000002,
+        "compileSeconds": 2.3635363999999974,
+        "compiler": {
+          "reused": false,
+          "pid": 5688,
+          "nativePid": 25464,
+          "input": "83198a58f41db41b274d96bd3522b78e5530d30fe4cb711c276a576bb168cf66",
+          "output": "a36ccbb5bf894c450b5d8f58cd7817182aa8f0017a93d0e4479d6a9b628687e1"
+        },
+        "service": {
+          "runId": "2dd65803-cb64-4eeb-a3b0-cbcbb5b261ab",
+          "pid": 19484
+        },
+        "fingerprint": "a146bd337c16191c0214c178d28ff7493a19637cbbbe435d5f6bed77685dc32e",
+        "reused": false,
+        "browserSeconds": 19.279142600000007,
+        "otherSeconds": 9.410767899999975
+      }
+    ],
+    "reuse": [
+      {
+        "index": 0,
+        "seconds": 66.9014222,
+        "prepareSeconds": 16.745840400000002,
+        "compileSeconds": 3.6911358999999977,
+        "compiler": {
+          "reused": false,
+          "pid": 23796,
+          "nativePid": 9756,
+          "input": "83198a58f41db41b274d96bd3522b78e5530d30fe4cb711c276a576bb168cf66",
+          "output": "a36ccbb5bf894c450b5d8f58cd7817182aa8f0017a93d0e4479d6a9b628687e1"
+        },
+        "service": {
+          "runId": "55e764e5-c3c5-48a7-9945-c88a1024dd0f",
+          "pid": 25160
+        },
+        "fingerprint": "a146bd337c16191c0214c178d28ff7493a19637cbbbe435d5f6bed77685dc32e",
+        "reused": false,
+        "browserSeconds": 30.850381899999995,
+        "otherSeconds": 15.614063999999999
+      },
+      {
+        "index": 1,
+        "seconds": 92.3156998,
+        "prepareSeconds": 48.1647289,
+        "compileSeconds": 0.44805539999999744,
+        "compiler": {
+          "reused": true,
+          "pid": 23796,
+          "nativePid": 9756,
+          "input": "83198a58f41db41b274d96bd3522b78e5530d30fe4cb711c276a576bb168cf66",
+          "output": "a36ccbb5bf894c450b5d8f58cd7817182aa8f0017a93d0e4479d6a9b628687e1"
+        },
+        "service": {
+          "runId": "55e764e5-c3c5-48a7-9945-c88a1024dd0f",
+          "pid": 25160
+        },
+        "fingerprint": "a146bd337c16191c0214c178d28ff7493a19637cbbbe435d5f6bed77685dc32e",
+        "reused": true,
+        "browserSeconds": 27.669586700000014,
+        "otherSeconds": 16.033328799999996
+      }
+    ]
+  },
+  "coldTotalSeconds": 140.77155249999998,
+  "reuseTotalSeconds": 159.86319100000003,
+  "freshRoomIdsUnique": 4,
+  "warmIdentityAndCompilerVerified": true
+}

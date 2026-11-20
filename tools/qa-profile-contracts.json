@@ -1170,6 +1170,19 @@
       ],
       "channels": [null],
       "setup": "./tests/e2e/m3c1-setup.ts"
+    },
+    "playwright.qa-iteration.config.ts": {
+      "profile": "qa-iteration",
+      "ports": "shared",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2886,
+          "clientPort": 5486
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/qa-iteration-setup.ts"
     }
   }
 }

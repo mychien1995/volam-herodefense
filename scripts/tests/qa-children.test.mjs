@@ -1,7 +1,13 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createServer } from 'node:http';
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import {
+  mkdtempSync,
+  mkdirSync,
+  writeFileSync,
+  readFileSync,
+  rmSync,
+} from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { startQaChildren } from '../../tools/qa-children.mjs';
@@ -27,10 +33,12 @@ test('owned child identities, failed sibling and timeout all release only owned 
   writeFileSync(
     script,
     `import {createServer} from 'node:http';
+import {writeFileSync} from 'node:fs';
 import {runQaFixture} from ${JSON.stringify(pathToFileURL(resolve('tools/qa-fixture.mjs')).href)};
 import {serveQaChild} from ${JSON.stringify(pathToFileURL(resolve('tools/qa-children.mjs')).href)};
 const serverPort=Number(process.env.PROBE_SERVER),clientPort=Number(process.env.PROBE_CLIENT),runId=process.env.VOLAM_QA_RUN_ID;
 const session={serverPort,clientPort,runId,serverUrl:'http://127.0.0.1:'+serverPort,clientUrl:'http://127.0.0.1:'+clientPort};
+if(process.env.PROBE_PID_FILE)writeFileSync(process.env.PROBE_PID_FILE,String(process.pid));
 if(process.env.PROBE_BAD){const send=process.send.bind(process);process.send=message=>send(message.type==='ready'?{...message,runId:'foreign-run'}:message);}
 function native(port,identity){const s=createServer((_q,r)=>r.end(JSON.stringify(identity)));return {listen:()=>new Promise((done,reject)=>s.once('error',reject).listen(port,'127.0.0.1',done)),close:()=>new Promise((done,reject)=>s.close(e=>e?reject(e):done()))};}
 await serveQaChild(session,48,()=>process.env.PROBE_HANG?new Promise(()=>{}):runQaFixture({session,protocolVersion:48,
@@ -79,7 +87,12 @@ if(process.env.PROBE_DISCONNECT)setTimeout(()=>process.disconnect(),100);
     await requireQaPorts(allocated);
     const disconnected = await startQaChildren({
       ...options,
-      services: [service('disconnect', a, b, { PROBE_DISCONNECT: '1' })],
+      services: [
+        service('disconnect', a, b, {
+          PROBE_DISCONNECT: '1',
+          PROBE_PID_FILE: resolve(root, 'disconnect-pid'),
+        }),
+      ],
     });
     await waitForQa(
       async () => {
@@ -91,6 +104,25 @@ if(process.env.PROBE_DISCONNECT)setTimeout(()=>process.disconnect(),100);
         }
       },
       'disconnected child releases its ports',
+      { timeout: 2000, interval: 30 },
+    );
+    // Port close precedes process exit. Observe the PID recorded by our own
+    // fixture, without sending a termination signal or searching other processes.
+    const disconnectedPid = Number(
+      readFileSync(resolve(root, 'disconnect-pid'), 'utf8'),
+    );
+    assert.ok(Number.isInteger(disconnectedPid) && disconnectedPid > 0);
+    await waitForQa(
+      () => {
+        try {
+          process.kill(disconnectedPid, 0);
+          return false;
+        } catch (error) {
+          if (error.code === 'ESRCH') return true;
+          throw error;
+        }
+      },
+      'disconnected child process exits',
       { timeout: 2000, interval: 30 },
     );
     await assert.rejects(
