@@ -14,7 +14,8 @@ function controlsHelp(): string {
 
 export function settingsControls(id: string, withPreview = false): string {
   return `<div class="book-paper settings-sheet">
-       <div class="settings-row"><label for="${id}-volume">Âm lượng</label><div class="volume-control"><input id="${id}-volume" type="range" min="0" max="100" value="${preferences.volume}"><output for="${id}-volume">${preferences.volume}%</output></div></div>
+       <div class="settings-row"><label for="${id}-music-volume">Nhạc nền</label><div class="volume-control"><input id="${id}-music-volume" type="range" min="0" max="100" value="${preferences.musicVolume}"><output for="${id}-music-volume">${preferences.musicVolume}%</output></div></div>
+       <div class="settings-row"><label for="${id}-volume">Âm thanh game</label><div class="volume-control"><input id="${id}-volume" type="range" min="0" max="100" value="${preferences.volume}"><output for="${id}-volume">${preferences.volume}%</output></div></div>
        <div class="settings-row"><label for="${id}-auto-basic">Tự đánh thường</label><label class="game-toggle"><input id="${id}-auto-basic" type="checkbox" role="switch" ${preferences.autoBasic ? 'checked' : ''}><span aria-hidden="true"></span></label><p>Đánh địch PvE gần nhất trong tầm, kể cả boss. Bạn vẫn tự thi triển võ công.</p></div>
        <fieldset class="settings-row"><legend>Điều khiển</legend><div class="control-modes">${(['keyboard', 'mouse'] as const).map((mode) => `<label><input type="radio" name="${id}-controls" value="${mode}" ${preferences.controls === mode ? 'checked' : ''}><span>${mode === 'keyboard' ? 'Bàn phím' : 'Chuột'}</span></label>`).join('')}</div>
        <p class="control-note">${controlsHelp()}</p></fieldset>
@@ -35,8 +36,18 @@ export function bindSettings(
   };
   volume.addEventListener('input', () => {
     preferences.volume = volume.valueAsNumber;
-    root.querySelector('output')!.textContent = `${preferences.volume}%`;
+    root.querySelector(`output[for="${id}-volume"]`)!.textContent =
+      `${preferences.volume}%`;
     save('volume');
+  });
+  const music = root.querySelector<HTMLInputElement>(
+    '#' + id + '-music-volume',
+  )!;
+  music.addEventListener('input', () => {
+    preferences.musicVolume = music.valueAsNumber;
+    root.querySelector(`output[for="${id}-music-volume"]`)!.textContent =
+      `${preferences.musicVolume}%`;
+    save('musicVolume');
   });
   auto.addEventListener('change', () => {
     preferences.autoBasic = auto.checked;

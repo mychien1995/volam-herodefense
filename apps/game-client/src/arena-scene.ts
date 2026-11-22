@@ -32,6 +32,8 @@ import {
 } from './con-luan-art.js';
 import Phaser from 'phaser';
 import { preloadSkillSounds } from './skill-sounds.js';
+import { inspectConLuanSounds, syncConLuanSounds } from './con-luan-sounds.js';
+import { inspectAdditionalSchoolSounds, syncAdditionalSchoolSounds } from './additional-school-sounds.js';
 import {
   DuongMonArt,
   duongMonBody,
@@ -686,6 +688,8 @@ export class ArenaScene extends Phaser.Scene {
     }
     this.snapshot = snapshot;
     this.sessionId = sessionId;
+    if (this.ready) syncConLuanSounds(this, snapshot, sessionId);
+    if (this.ready) syncAdditionalSchoolSounds(this, snapshot, sessionId);
     this.syncZone();
     if (
       this.ready &&
@@ -979,6 +983,8 @@ export class ArenaScene extends Phaser.Scene {
     return view;
   }
   override update(_time: number, delta: number): void {
+    syncConLuanSounds(this, this.snapshot, this.sessionId);
+    syncAdditionalSchoolSounds(this, this.snapshot, this.sessionId);
     if (!this.zoneReady) return;
     const state = this.snapshot;
     const waveArtReady = this.hasArt('wave-bosses');
@@ -1923,6 +1929,8 @@ export class ArenaScene extends Phaser.Scene {
       'renovation:ground:co_mo',
     ) as Phaser.GameObjects.Image | null;
     return {
+      conLuanSounds: inspectConLuanSounds(this),
+      schoolSounds: inspectAdditionalSchoolSounds(this),
       renovation: inspectRenovation(this),
       namDe: this.namDe?.inspect(),
       bossShouts: this.bossShouts?.inspect(),

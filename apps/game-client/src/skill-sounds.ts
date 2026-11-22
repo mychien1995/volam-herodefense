@@ -1,53 +1,58 @@
 import type Phaser from 'phaser';
 import type { CombatEvent } from '@volam/game-core';
 import { preferences } from './preferences.js';
-import caiBangPalm from '../../../assets/sounds/skills/cai-bang-chuong-A.mp3?url';
-import caiBangDragon from '../../../assets/sounds/skills/cai-bang-chuong-A-special.mp3?url';
-import hoaVanChuong from '../../../assets/sounds/skills/cai-bang-chuong-Q.mp3?url';
-import cuongLongLoanVu from '../../../assets/sounds/skills/cai-bang-chuong-W.mp3?url';
-import phiLongTaiThien from '../../../assets/sounds/skills/cai-bang-chuong-E.mp3?url';
-import hangLongHoaVu from '../../../assets/sounds/skills/cai-bang-chuong-T.mp3?url';
-import caiBangStaff from '../../../assets/sounds/skills/cai-bang-bong-A.mp3?url';
-import caiBangStaffSmash from '../../../assets/sounds/skills/cai-bang-bong-A-end.mp3?url';
-import hoanhTaoBong from '../../../assets/sounds/skills/cai-bang-bong-Q.mp3?url';
-import phaGiapBong from '../../../assets/sounds/skills/cai-bang-bong-W.mp3?url';
-import camLongCong from '../../../assets/sounds/skills/cai-bang-bong-E.mp3?url';
-import truyPhongBong from '../../../assets/sounds/skills/cai-bang-bong-R.mp3?url';
-import thienHaVoCau from '../../../assets/sounds/skills/cai-bang-bong-T.mp3?url';
-import thienSonFan from '../../../assets/sounds/skills/thien-son-phien-A.mp3?url';
-import lucDuongChuong from '../../../assets/sounds/skills/thien-son-phien-W.mp3?url';
-import luuPhongBo from '../../../assets/sounds/skills/thien-son-phien-E.mp3?url';
-import bachPhienPhongBao from '../../../assets/sounds/skills/thien-son-phien-T.mp3?url';
-import thienSonBlade from '../../../assets/sounds/skills/thien-son-dao-A.mp3?url';
-import phiAnhTram from '../../../assets/sounds/skills/thien-son-dao-Q-and-E.mp3?url';
-import truyHonDao from '../../../assets/sounds/skills/thien-son-dao-W.mp3?url';
-import lietPhongDao from '../../../assets/sounds/skills/thien-son-dao-R.mp3?url';
-import bachLietThienKich from '../../../assets/sounds/skills/thien-son-dao-T.mp3?url';
+import { playConLuanSound, preloadConLuanSounds } from './con-luan-sounds.js';
+import {
+  playAdditionalSchoolSound,
+  preloadAdditionalSchoolSounds,
+} from './additional-school-sounds.js';
+import caiBangPalm from '../../../assets/sounds/skills/original-four-schools-ogg/cai-bang-chuong-A.ogg?url';
+import caiBangDragon from '../../../assets/sounds/skills/original-four-schools-ogg/cai-bang-chuong-A-special.ogg?url';
+import hoaVanChuong from '../../../assets/sounds/skills/original-four-schools-ogg/cai-bang-chuong-Q.ogg?url';
+import cuongLongLoanVu from '../../../assets/sounds/skills/original-four-schools-ogg/cai-bang-chuong-W.ogg?url';
+import phiLongTaiThien from '../../../assets/sounds/skills/original-four-schools-ogg/cai-bang-chuong-E.ogg?url';
+import hangLongHoaVu from '../../../assets/sounds/skills/original-four-schools-ogg/cai-bang-chuong-T.ogg?url';
+import caiBangStaff from '../../../assets/sounds/skills/original-four-schools-ogg/cai-bang-bong-A.ogg?url';
+import caiBangStaffSmash from '../../../assets/sounds/skills/original-four-schools-ogg/cai-bang-bong-A-end.ogg?url';
+import hoanhTaoBong from '../../../assets/sounds/skills/original-four-schools-ogg/cai-bang-bong-Q.ogg?url';
+import phaGiapBong from '../../../assets/sounds/skills/original-four-schools-ogg/cai-bang-bong-W.ogg?url';
+import camLongCong from '../../../assets/sounds/skills/original-four-schools-ogg/cai-bang-bong-E.ogg?url';
+import truyPhongBong from '../../../assets/sounds/skills/original-four-schools-ogg/cai-bang-bong-R.ogg?url';
+import thienHaVoCau from '../../../assets/sounds/skills/original-four-schools-ogg/cai-bang-bong-T.ogg?url';
+import thienSonFan from '../../../assets/sounds/skills/original-four-schools-ogg/thien-son-phien-A.ogg?url';
+import lucDuongChuong from '../../../assets/sounds/skills/original-four-schools-ogg/thien-son-phien-W.ogg?url';
+import luuPhongBo from '../../../assets/sounds/skills/original-four-schools-ogg/thien-son-phien-E.ogg?url';
+import bachPhienPhongBao from '../../../assets/sounds/skills/original-four-schools-ogg/thien-son-phien-T.ogg?url';
+import thienSonBlade from '../../../assets/sounds/skills/original-four-schools-ogg/thien-son-dao-A.ogg?url';
+import phiAnhTram from '../../../assets/sounds/skills/original-four-schools-ogg/thien-son-dao-Q-and-E.ogg?url';
+import truyHonDao from '../../../assets/sounds/skills/original-four-schools-ogg/thien-son-dao-W.ogg?url';
+import lietPhongDao from '../../../assets/sounds/skills/original-four-schools-ogg/thien-son-dao-R.ogg?url';
+import bachLietThienKich from '../../../assets/sounds/skills/original-four-schools-ogg/thien-son-dao-T.ogg?url';
 
-import voDangPalm from '../../../assets/sounds/skills/vo-dang-quyen-A.mp3?url';
-import luongNghiThu from '../../../assets/sounds/skills/vo-dang-quyen-Q.mp3?url';
-import huyenAmChuong from '../../../assets/sounds/skills/vo-dang-quyen-W.mp3?url';
-import thaiCucThanCong from '../../../assets/sounds/skills/vo-dang-quyen-R.mp3?url';
-import thaiCucTran from '../../../assets/sounds/skills/vo-dang-quyen-T.mp3?url';
+import voDangPalm from '../../../assets/sounds/skills/original-four-schools-ogg/vo-dang-quyen-A.ogg?url';
+import luongNghiThu from '../../../assets/sounds/skills/original-four-schools-ogg/vo-dang-quyen-Q.ogg?url';
+import huyenAmChuong from '../../../assets/sounds/skills/original-four-schools-ogg/vo-dang-quyen-W.ogg?url';
+import thaiCucThanCong from '../../../assets/sounds/skills/original-four-schools-ogg/vo-dang-quyen-R.ogg?url';
+import thaiCucTran from '../../../assets/sounds/skills/original-four-schools-ogg/vo-dang-quyen-T.ogg?url';
 
-import voDangSword from '../../../assets/sounds/skills/vo-dang-kiem-A.mp3?url';
-import thatTinhKiem from '../../../assets/sounds/skills/vo-dang-kiem-Q.mp3?url';
-import nhanKiemHopNhat from '../../../assets/sounds/skills/vo-dang-kiem-W.mp3?url';
-import vanKiemQuyTong from '../../../assets/sounds/skills/vo-dang-kiem-T.mp3?url';
-import batQuaiKiemTran from '../../../assets/sounds/skills/vo-dang-kiem-E.mp3?url';
+import voDangSword from '../../../assets/sounds/skills/original-four-schools-ogg/vo-dang-kiem-A.ogg?url';
+import thatTinhKiem from '../../../assets/sounds/skills/original-four-schools-ogg/vo-dang-kiem-Q.ogg?url';
+import nhanKiemHopNhat from '../../../assets/sounds/skills/original-four-schools-ogg/vo-dang-kiem-W.ogg?url';
+import vanKiemQuyTong from '../../../assets/sounds/skills/original-four-schools-ogg/vo-dang-kiem-T.ogg?url';
+import batQuaiKiemTran from '../../../assets/sounds/skills/original-four-schools-ogg/vo-dang-kiem-E.ogg?url';
 
-import shaolinBasic from '../../../assets/sounds/skills/thieu-lam-quyen-A.mp3?url';
-import laHanQuyen from '../../../assets/sounds/skills/thieu-lam-quyen-dam-Q.mp3?url';
-import viDaQuyen from '../../../assets/sounds/skills/thieu-lam-quyen-dam-W.mp3?url';
-import daiLucKimCuongChuong from '../../../assets/sounds/skills/thieu-lam-quyen-dam-E.mp3?url';
-import toanPhongThoai from '../../../assets/sounds/skills/thieu-lam-quyen-da-Q.mp3?url';
-import caDiepThoai from '../../../assets/sounds/skills/thieu-lam-quyen-da-W.mp3?url';
-import voAnhCuoc from '../../../assets/sounds/skills/thieu-lam-quyen-da-E.mp3?url';
-import nhuLaiNietBan from '../../../assets/sounds/skills/thieu-lam-quyen-T.mp3?url';
+import shaolinBasic from '../../../assets/sounds/skills/original-four-schools-ogg/thieu-lam-quyen-A.ogg?url';
+import laHanQuyen from '../../../assets/sounds/skills/original-four-schools-ogg/thieu-lam-quyen-dam-Q.ogg?url';
+import viDaQuyen from '../../../assets/sounds/skills/original-four-schools-ogg/thieu-lam-quyen-dam-W.ogg?url';
+import daiLucKimCuongChuong from '../../../assets/sounds/skills/original-four-schools-ogg/thieu-lam-quyen-dam-E.ogg?url';
+import toanPhongThoai from '../../../assets/sounds/skills/original-four-schools-ogg/thieu-lam-quyen-da-Q.ogg?url';
+import caDiepThoai from '../../../assets/sounds/skills/original-four-schools-ogg/thieu-lam-quyen-da-W.ogg?url';
+import voAnhCuoc from '../../../assets/sounds/skills/original-four-schools-ogg/thieu-lam-quyen-da-E.ogg?url';
+import nhuLaiNietBan from '../../../assets/sounds/skills/original-four-schools-ogg/thieu-lam-quyen-T.ogg?url';
 
-import shaolinBlade from '../../../assets/sounds/skills/thieu-lam-dao-A.mp3?url';
-import truTa from '../../../assets/sounds/skills/thieu-lam-dao-Q.mp3?url';
-import nhuLaiThienDiep from '../../../assets/sounds/skills/thieu-lam-dao-T.mp3?url';
+import shaolinBlade from '../../../assets/sounds/skills/original-four-schools-ogg/thieu-lam-dao-A.ogg?url';
+import truTa from '../../../assets/sounds/skills/original-four-schools-ogg/thieu-lam-dao-Q.ogg?url';
+import nhuLaiThienDiep from '../../../assets/sounds/skills/original-four-schools-ogg/thieu-lam-dao-T.ogg?url';
 
 const attackSounds = new Map([
   ['cai_bang_chuong', caiBangPalm],
@@ -107,9 +112,23 @@ export function playVanKiemLandingSound(scene: Phaser.Scene): void {
 }
 
 export function preloadSkillSounds(scene: Phaser.Scene): void {
+  preloadConLuanSounds(scene);
+  preloadAdditionalSchoolSounds(scene);
   scene.load.audio('van_kiem_quy_tong', vanKiemQuyTong);
   for (const [key, url] of [...attackSounds, ...castSounds])
     scene.load.audio(key, url);
+}
+
+export function refreshSkillSoundVolumes(scene: Phaser.Scene): void {
+  const keys = new Set([
+    ...attackSounds.keys(),
+    ...castSounds.keys(),
+    'van_kiem_quy_tong',
+  ]);
+  for (const key of keys)
+    for (const sound of scene.sound.getAll(key)) {
+      if ('volume' in sound) sound.volume = preferences.volume / 100;
+    }
 }
 
 export function playSkillSound(
@@ -117,6 +136,8 @@ export function playSkillSound(
   event: CombatEvent,
   sessionId: string,
 ): void {
+  playConLuanSound(scene, event, sessionId);
+  playAdditionalSchoolSound(scene, event, sessionId);
   if (event.sourceId !== sessionId || !preferences.volume) return;
 
   let key: string | undefined;

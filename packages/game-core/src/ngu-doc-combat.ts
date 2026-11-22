@@ -211,6 +211,18 @@ function venom(
       id,
       world.tick,
     );
+  if (id === nguDoc.counter)
+    emit(world, {
+      kind: 'effect',
+      sourceId: source.id,
+      targetId: target.id,
+      abilityId: id,
+      stage: 'reflected',
+      x: target.x,
+      y: target.y,
+      damage: 0,
+      critical: false,
+    });
 }
 
 export function nguDocDamage(
@@ -292,6 +304,17 @@ export function attachNguDocMark(
     nguDoc.mark,
     world.tick,
   );
+  emit(world, {
+    kind: 'effect',
+    sourceId: ownerId,
+    targetId: target.id,
+    abilityId: nguDoc.mark,
+    stage: 'attached',
+    x: target.x,
+    y: target.y,
+    damage: 0,
+    critical: false,
+  });
   return true;
 }
 

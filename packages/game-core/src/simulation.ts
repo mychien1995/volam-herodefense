@@ -680,7 +680,9 @@ function advanceProjectile(
           fx: dir.x,
           fy: dir.y,
           hitPhase:
-            shot.abilityId === 'huyen_am_chuong'
+            shot.abilityId === 'huyen_am_chuong' ||
+            shot.abilityId === duongMon.amKhi ||
+            shot.abilityId === duongMon.storm
               ? shot.stage
               : shot.abilityId === nguDoc.taiHiep
                 ? shot.stage
@@ -1115,6 +1117,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
   stepScatters(world, config);
   stepAreas(world, config);
   stepSupports(world, config);
+  const releasedBatches = new Set<string>();
   for (const scheduled of world.shots.filter(
     (item) => item.tick <= world.tick,
   )) {
@@ -1167,6 +1170,28 @@ export function stepWorld(world: World, config: SimulationConfig): void {
         ? { stage: scheduled.stage ?? 'fan_outbound' }
         : {}),
     });
+    // One presentation cue per accepted volley, including shots that hit or
+    // meet a wall before the next state patch. No per-projectile audio spam.
+    if (
+      scheduled.ability.id === duongMon.knives ||
+      scheduled.ability.id === duongMon.storm
+    ) {
+      const batch = `${scheduled.ownerId}:${scheduled.ability.id}:${scheduled.stage ?? ''}`;
+      if (!releasedBatches.has(batch)) {
+        releasedBatches.add(batch);
+        emit(world, {
+          kind: 'pulse',
+          sourceId: scheduled.ownerId,
+          targetId: '',
+          abilityId: scheduled.ability.id,
+          stage: scheduled.stage ?? 'release',
+          x: scheduled.x,
+          y: scheduled.y,
+          damage: 0,
+          critical: false,
+        });
+      }
+    }
   }
   world.shots = world.shots.filter((item) => item.tick > world.tick);
   for (const shot of world.projectiles.values())

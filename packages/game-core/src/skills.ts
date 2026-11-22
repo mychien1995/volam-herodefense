@@ -1481,7 +1481,12 @@ export function stepAreas(world: World, config: SimulationConfig): void {
       }
       continue;
     }
-    if (pulse && !area.effect.oncePerTarget)
+    if (
+      pulse &&
+      (!area.effect.oncePerTarget ||
+        (area.abilityId === nguDoc.hands &&
+          elapsed === (area.effect.windupTicks ?? 0)))
+    )
       emit(world, {
         kind: 'pulse',
         sourceId: area.ownerId,
@@ -1493,7 +1498,8 @@ export function stepAreas(world: World, config: SimulationConfig): void {
         stage:
           area.abilityId === conLuan.slam
             ? 'hammer_contact'
-            : area.effect.pentagon && elapsed === 0
+            : (area.effect.pentagon && elapsed === 0) ||
+                area.abilityId === nguDoc.hands
               ? 'area_open'
               : 'area_tick',
         damage: 0,

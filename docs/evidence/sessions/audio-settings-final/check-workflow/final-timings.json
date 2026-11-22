@@ -1,0 +1,91 @@
+{
+  "runId": "6481f7bc-9f57-4081-92f0-4cad22f3f387",
+  "mode": "final",
+  "args": [
+    "--config",
+    "playwright.practice.config.ts",
+    "tests/e2e/audio-settings.spec.ts"
+  ],
+  "startedAt": "2026-11-22T02:24:49.979Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "environment preflight",
+      "seconds": 1.509,
+      "status": "PASS",
+      "checks": [
+        {
+          "id": "workspace",
+          "status": "PASS",
+          "detail": {
+            "mode": "final",
+            "stage": "before-build",
+            "managed": true
+          }
+        },
+        {
+          "id": "session",
+          "status": "PASS",
+          "detail": {
+            "serverPort": 28871,
+            "clientPort": 55871
+          }
+        },
+        {
+          "id": "ports",
+          "status": "PASS"
+        },
+        {
+          "id": "node",
+          "status": "PASS",
+          "detail": "26.0.0"
+        },
+        {
+          "id": "installation",
+          "status": "PASS",
+          "detail": "pnpm@11.25.0"
+        },
+        {
+          "id": "tools",
+          "status": "PASS",
+          "detail": {
+            "typescript": "7.0.2",
+            "vitest": "5.0.5",
+            "vite": "8.3.5",
+            "@playwright/test": "1.64.1"
+          }
+        },
+        {
+          "id": "chromium",
+          "status": "PASS",
+          "detail": {
+            "version": "156.0.8078.4",
+            "cache": "D:\\Projects\\volam-hero-defense\\.cache\\ms-playwright"
+          }
+        },
+        {
+          "id": "python",
+          "status": "PASS",
+          "detail": "Python 3.13.5"
+        }
+      ]
+    },
+    {
+      "label": "prepare assets (once)",
+      "seconds": 117.6,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\audio-settings-final\\check-workflow\\6481f7bc-9f57-4081-92f0-4cad22f3f387\\1-prepare-assets-once-.log",
+      "outputBytes": 738
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 1.66,
+      "status": "FAIL",
+      "exitCode": 2,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\audio-settings-final\\check-workflow\\6481f7bc-9f57-4081-92f0-4cad22f3f387\\2-compile-TypeScript.log",
+      "outputBytes": 93
+    }
+  ],
+  "totalSeconds": 120.78
+}

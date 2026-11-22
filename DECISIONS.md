@@ -1,3 +1,7 @@
+## Âm thanh đã duyệt và tích hợp M3D · 2026-11-22
+
+Đã duyệt âm Côn Luân, Ngũ Độc, Đường Môn; giữ byte theo approval lock. Bốn phái còn lại dùng âm MP3 người dùng cung cấp, chuyển sang OGG và giữ nguyên mapping/mốc phát; bộ âm tổng hợp thử của bốn phái bị từ chối. Cài đặt tách nhạc nền và âm thanh game; mức SFX tăng nhẹ qua migration một lần. Người dùng yêu cầu tích hợp vào `milestone/m3d`. [Phạm vi và kiểm chứng](docs/AUDIO_M3D_INTEGRATION.md).
+
 ## Trình bày Phòng test/Lôi Đài và nhịp Độc Cô · 2026-11-19
 
 Theo phản hồi người dùng: giữ label/nút nhập tên một dòng khi đủ chỗ, đưa map/hero về tỉ lệ gameplay Defense với camera trong bounds, thống nhất cỡ nút HUD và sửa nhát chém không kéo dãn ảnh. Tăng tần suất hai chiêu Độc Cô20% bằng khoảng chờ300/225tick, giữ warning/damage. [Nguyên nhân, triển khai và kiểm chứng](docs/PVP_VISUAL_REPAIR.md).

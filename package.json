@@ -35,7 +35,7 @@
     "test:balance:m3a": "pnpm build:shared && pnpm --filter @volam/game-server exec tsx ../../tools/m3a-balance.ts",
     "assets:export:skills": "node assets/source/skills/cai-bang/build.mjs",
     "assets:icons:skills": "python scripts/prepare-skill-assets.py",
-    "verify:assets": "python scripts/verify-assets.py && python scripts/verify-arena-art01.py && python scripts/verify-arena-v2.py && python scripts/verify-thien-son.py && python scripts/verify-vo-dang.py && python scripts/verify-thieu-lam.py && python scripts/verify-thieu-lam-skills.py && python scripts/verify-thien-son-skills.py && python scripts/verify-vo-dang-skills.py && python scripts/verify-bamboo-forest.py && python scripts/verify-desert.py && python scripts/verify-forest-creeps.py && python scripts/verify-beach.py && python scripts/verify-hell.py && python scripts/verify-chu-art.py && python scripts/verify-ly-mac-sau.py && python scripts/verify-inventory-ui.py && python scripts/verify-tay-doc.py && python scripts/verify-nam-de.py && python scripts/verify-bac-cai-preview.py && python scripts/verify-vuong-trung-duong.py && python scripts/verify-renovation.py && python scripts/verify-renovation-runtime.py && python scripts/verify-renovation-v2.py && python scripts/verify-renovation-v3.py && python scripts/verify-renovation-v4.py && python scripts/verify-renovation-v5.py && python scripts/verify-renovation-v6.py && python scripts/verify-renovation-v7.py && python scripts/verify-renovation-v8.py && python scripts/verify-loi-dai.py && python scripts/verify-contact-impacts.py && python scripts/verify-pvp.py",
+    "verify:assets": "python scripts/verify-assets.py && python scripts/verify-arena-art01.py && python scripts/verify-arena-v2.py && python scripts/verify-thien-son.py && python scripts/verify-vo-dang.py && python scripts/verify-thieu-lam.py && python scripts/verify-thieu-lam-skills.py && python scripts/verify-thien-son-skills.py && python scripts/verify-vo-dang-skills.py && python scripts/verify-bamboo-forest.py && python scripts/verify-desert.py && python scripts/verify-forest-creeps.py && python scripts/verify-beach.py && python scripts/verify-hell.py && python scripts/verify-chu-art.py && python scripts/verify-ly-mac-sau.py && python scripts/verify-inventory-ui.py && python scripts/verify-tay-doc.py && python scripts/verify-nam-de.py && python scripts/verify-bac-cai-preview.py && python scripts/verify-vuong-trung-duong.py && python scripts/verify-renovation.py && python scripts/verify-renovation-runtime.py && python scripts/verify-renovation-v2.py && python scripts/verify-renovation-v3.py && python scripts/verify-renovation-v4.py && python scripts/verify-renovation-v5.py && python scripts/verify-renovation-v6.py && python scripts/verify-renovation-v7.py && python scripts/verify-renovation-v8.py && python scripts/verify-loi-dai.py && python scripts/verify-contact-impacts.py && python scripts/verify-pvp.py && python scripts/verify-skill-sounds.py",
     "assets:export:arena": "node scripts/export-arena-art01.mjs",
     "assets:export:visual": "node scripts/export-arena-v2.mjs",
     "assets:export:thien-son": "node scripts/export-thien-son.mjs",
@@ -63,7 +63,8 @@
     "assets:export:renovation-v7": "node scripts/export-renovation-v7.mjs",
     "assets:export:renovation-v8": "node scripts/export-renovation-v8.mjs",
     "qa:preflight": "node tools/qa-preflight.mjs",
-    "qa:iterate": "node scripts/qa-iterate.mjs"
+    "qa:iterate": "node scripts/qa-iterate.mjs",
+    "verify:skill-audio": "python scripts/verify-skill-sounds.py"
   },
   "devDependencies": {
     "@playwright/test": "1.64.1",

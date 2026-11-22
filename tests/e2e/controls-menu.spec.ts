@@ -55,12 +55,12 @@ test('home links, three guide tabs and saved settings work before joining', asyn
   ).toBeVisible();
   await page.keyboard.press('Escape');
   await page.getByRole('button', { name: 'Cài đặt' }).click();
-  await page.getByRole('slider', { name: 'Âm lượng' }).focus();
+  await page.getByRole('slider', { name: 'Nhạc nền' }).focus();
   await page.keyboard.press('End');
   await page.getByRole('switch', { name: 'Tự đánh thường' }).check();
   await page.getByRole('radio', { name: 'Chuột' }).check();
-  await expect(page.locator('#pregame output')).toHaveText('100%');
-  await expect(page.locator('label[for=pre-volume]')).toHaveCSS(
+  await expect(page.locator('#pregame output[for=pre-music-volume]')).toHaveText('100%');
+  await expect(page.locator('label[for=pre-music-volume]')).toHaveCSS(
     'color',
     'rgb(54, 40, 28)',
   );
@@ -69,7 +69,7 @@ test('home links, three guide tabs and saved settings work before joining', asyn
   await page.getByRole('button', { name: 'Cài đặt' }).click();
   await expect(page.getByRole('switch')).toBeChecked();
   await expect(page.getByRole('radio', { name: 'Chuột' })).toBeChecked();
-  await expect(page.locator('#pregame output')).toHaveText('100%');
+  await expect(page.locator('#pregame output[for=pre-music-volume]')).toHaveText('100%');
   await expect(page.locator('#match-music')).toHaveJSProperty('volume', 1);
   await page.getByRole('button', { name: 'Quay lại' }).click();
   await page.getByRole('button', { name: 'Vào game' }).click();
@@ -378,7 +378,7 @@ test('in-match settings apply immediately and persist for the next visit', async
   const dialog = page.locator('#game-dialog');
   const auto = dialog.getByRole('switch', { name: 'Tự đánh thường' });
   await expect(auto).not.toBeChecked();
-  await dialog.getByRole('slider', { name: 'Âm lượng' }).focus();
+  await dialog.getByRole('slider', { name: 'Nhạc nền' }).focus();
   await page.keyboard.press('End');
   await expect(page.locator('#match-music')).toHaveJSProperty('volume', 1);
   await dialog.getByRole('radio', { name: 'Chuột' }).check();
@@ -418,5 +418,5 @@ test('in-match settings apply immediately and persist for the next visit', async
     page.getByRole('switch', { name: 'Tự đánh thường' }),
   ).not.toBeChecked();
   await expect(page.getByRole('radio', { name: 'Chuột' })).toBeChecked();
-  await expect(page.locator('#pregame output')).toHaveText('100%');
+  await expect(page.locator('#pregame output[for=pre-music-volume]')).toHaveText('100%');
 });

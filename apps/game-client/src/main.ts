@@ -47,7 +47,7 @@ import './defense-hud.css';
 import './item-menu.css';
 import { PreGame } from './pregame.js';
 import { preferences, type Preferences } from './preferences.js';
-import { playSkillSound } from './skill-sounds.js';
+import { playSkillSound, refreshSkillSoundVolumes } from './skill-sounds.js';
 import { CreepPreview, creepPreviewRequested } from './creep-preview.js';
 import gameOstUrl from '../../../assets/sounds/game-ost.mp3?url';
 import gameOst2Url from '../../../assets/sounds/game-ost-2.mp3?url';
@@ -142,11 +142,12 @@ const matchMusic = artPreview ? undefined : new Audio();
 if (matchMusic) {
   matchMusic.preload = 'none';
   matchMusic.id = 'match-music';
-  matchMusic.volume = preferences.volume / 100;
+  matchMusic.volume = preferences.musicVolume / 100;
   document.body.append(matchMusic);
 }
 function applySettings(key?: keyof Preferences): void {
-  if (matchMusic) matchMusic.volume = preferences.volume / 100;
+  if (matchMusic) matchMusic.volume = preferences.musicVolume / 100;
+  if (key === 'volume' && arenaScene?.presentationReady) refreshSkillSoundVolumes(arenaScene);
   element('#viewport').toggleAttribute(
     'data-mouse-controls',
     preferences.controls === 'mouse',

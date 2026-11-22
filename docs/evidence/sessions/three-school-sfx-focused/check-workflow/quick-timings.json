@@ -1,0 +1,79 @@
+{
+  "runId": "f7d0f9a2-39b7-4097-ae6a-4b55a6dcbe28",
+  "mode": "quick",
+  "args": [
+    "tests/con-luan-sounds.test.ts",
+    "tests/additional-school-sounds.test.ts",
+    "tests/skill-sound-events.test.ts",
+    "tests/ngu-doc.test.ts",
+    "tests/duong-mon.test.ts"
+  ],
+  "startedAt": "2026-11-20T09:00:50.663Z",
+  "status": "PASS",
+  "stages": [
+    {
+      "label": "environment preflight",
+      "seconds": 0.009,
+      "status": "PASS",
+      "checks": [
+        {
+          "id": "workspace",
+          "status": "PASS",
+          "detail": {
+            "mode": "quick",
+            "stage": "before-build",
+            "managed": false
+          }
+        },
+        {
+          "id": "session",
+          "status": "PASS",
+          "detail": "No managed service ports for this profile"
+        },
+        {
+          "id": "node",
+          "status": "PASS",
+          "detail": "26.0.0"
+        },
+        {
+          "id": "installation",
+          "status": "PASS",
+          "detail": "pnpm@11.25.0"
+        },
+        {
+          "id": "tools",
+          "status": "PASS",
+          "detail": {
+            "typescript": "7.0.2",
+            "vitest": "5.0.5"
+          }
+        }
+      ]
+    },
+    {
+      "label": "prepare assets (once)",
+      "seconds": 12.33,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\three-school-sfx-focused\\check-workflow\\f7d0f9a2-39b7-4097-ae6a-4b55a6dcbe28\\1-prepare-assets-once-.log",
+      "outputBytes": 738
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 0.22,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\three-school-sfx-focused\\check-workflow\\f7d0f9a2-39b7-4097-ae6a-4b55a6dcbe28\\2-compile-TypeScript.log",
+      "outputBytes": 0
+    },
+    {
+      "label": "focused tests",
+      "seconds": 3.84,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\three-school-sfx-focused\\check-workflow\\f7d0f9a2-39b7-4097-ae6a-4b55a6dcbe28\\3-focused-tests.log",
+      "outputBytes": 392
+    }
+  ],
+  "totalSeconds": 16.41
+}

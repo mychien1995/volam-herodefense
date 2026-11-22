@@ -1,3 +1,7 @@
+## Audio integration — approved 2026-11-22
+
+Seven-school runtime audio is integrated on `milestone/m3d`: approved 129 synthesized clips for Côn Luân/Ngũ Độc/Đường Môn; original four-school MP3 sources retained, 44 converted OGGs with 43 existing mappings. Rejected four-school synthesis is excluded. Shared settings independently persist music/game levels, migrating the old SFX level once by 15%. Final runtime pipeline passed 1237 tests, all validators and two browser cases; earlier six-client audio coverage is retained. Integration bookkeeping uses staged-blob/checkout hash checks, not a repeated full suite. See [integration](AUDIO_M3D_INTEGRATION.md), [source conversion](ORIGINAL_SKILL_AUDIO_OGG.md).
+
 ## Lôi Đài độc lập và Phòng test — duyệt 2026-11-19
 
 Người dùng duyệt toàn bộ bản chơi và yêu cầu tích hợp/commit vào milestone/m3d. Protocol48, phòng8 người/Chính-Tà, năm map, Practice cấp30/full skill/đổi hero ngay trong room; camera/HUD/VFX đã sửa, nhịp Độc Cô +20%. [Phạm vi và kiểm chứng](PVP_M3D_INTEGRATION.md).

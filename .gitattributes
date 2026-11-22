@@ -630,5 +630,12 @@ assets/exports/*-unified-v2/*.json -text -eol whitespace=blank-at-eol,blank-at-e
 assets/source/*-unified-v2/*.json -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 
 # Sharpness prototype metadata byte preservation.
+# Approved audio manifests and generator are hashed as exact bytes.
+assets/sounds/skills/con-luan-v01/manifest.json -text -eol whitespace=cr-at-eol
+assets/sounds/skills/ngu-doc-v01/manifest.json -text -eol whitespace=cr-at-eol
+assets/sounds/skills/duong-mon-v01/manifest.json -text -eol whitespace=cr-at-eol
+scripts/build-skill-sounds.py -text -eol whitespace=cr-at-eol
+assets/source/audio/**/*.wav binary
+assets/sounds/skills/**/*.ogg binary
 assets/source/*-unified-v3/*.json -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 assets/exports/*-unified-v3/*.json -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

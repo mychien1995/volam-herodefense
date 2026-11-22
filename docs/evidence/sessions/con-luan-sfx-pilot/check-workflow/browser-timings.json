@@ -1,0 +1,104 @@
+{
+  "runId": "0604e7e8-64d7-438f-a886-ce98e9a38d1d",
+  "mode": "browser",
+  "args": [
+    "--config",
+    "playwright.practice.config.ts",
+    "tests/e2e/con-luan-sounds.spec.ts",
+    "--grep",
+    "pilot"
+  ],
+  "startedAt": "2026-11-20T08:47:46.221Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "environment preflight",
+      "seconds": 0.536,
+      "status": "PASS",
+      "checks": [
+        {
+          "id": "workspace",
+          "status": "PASS",
+          "detail": {
+            "mode": "browser",
+            "stage": "before-build",
+            "managed": true
+          }
+        },
+        {
+          "id": "session",
+          "status": "PASS",
+          "detail": {
+            "serverPort": 28861,
+            "clientPort": 55861
+          }
+        },
+        {
+          "id": "ports",
+          "status": "PASS"
+        },
+        {
+          "id": "node",
+          "status": "PASS",
+          "detail": "26.0.0"
+        },
+        {
+          "id": "installation",
+          "status": "PASS",
+          "detail": "pnpm@11.25.0"
+        },
+        {
+          "id": "tools",
+          "status": "PASS",
+          "detail": {
+            "typescript": "7.0.2",
+            "vitest": "5.0.5",
+            "vite": "8.3.5",
+            "@playwright/test": "1.64.1"
+          }
+        },
+        {
+          "id": "chromium",
+          "status": "PASS",
+          "detail": {
+            "version": "156.0.8078.4",
+            "cache": "D:\\Projects\\volam-hero-defense\\.cache\\ms-playwright"
+          }
+        }
+      ]
+    },
+    {
+      "label": "prepare assets (once)",
+      "seconds": 12.07,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\con-luan-sfx-pilot\\check-workflow\\0604e7e8-64d7-438f-a886-ce98e9a38d1d\\1-prepare-assets-once-.log",
+      "outputBytes": 738
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 1.06,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\con-luan-sfx-pilot\\check-workflow\\0604e7e8-64d7-438f-a886-ce98e9a38d1d\\2-compile-TypeScript.log",
+      "outputBytes": 0
+    },
+    {
+      "label": "production client build",
+      "seconds": 12.07,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\con-luan-sfx-pilot\\check-workflow\\0604e7e8-64d7-438f-a886-ce98e9a38d1d\\3-production-client-build.log",
+      "outputBytes": 16825
+    },
+    {
+      "label": "browser verification",
+      "seconds": 50.88,
+      "status": "FAIL",
+      "exitCode": 1,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\con-luan-sfx-pilot\\check-workflow\\0604e7e8-64d7-438f-a886-ce98e9a38d1d\\4-browser-verification.log",
+      "outputBytes": 2251
+    }
+  ],
+  "totalSeconds": 76.63
+}

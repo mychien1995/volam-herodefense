@@ -1,0 +1,104 @@
+{
+  "runId": "3cf171bb-3c1b-4971-a10d-cce76188d4ed",
+  "mode": "browser",
+  "args": [
+    "--config",
+    "playwright.practice.config.ts",
+    "tests/e2e/school-sounds.spec.ts",
+    "--grep",
+    "complete kit"
+  ],
+  "startedAt": "2026-11-20T09:08:06.497Z",
+  "status": "PASS",
+  "stages": [
+    {
+      "label": "environment preflight",
+      "seconds": 0.497,
+      "status": "PASS",
+      "checks": [
+        {
+          "id": "workspace",
+          "status": "PASS",
+          "detail": {
+            "mode": "browser",
+            "stage": "before-build",
+            "managed": true
+          }
+        },
+        {
+          "id": "session",
+          "status": "PASS",
+          "detail": {
+            "serverPort": 28861,
+            "clientPort": 55861
+          }
+        },
+        {
+          "id": "ports",
+          "status": "PASS"
+        },
+        {
+          "id": "node",
+          "status": "PASS",
+          "detail": "26.0.0"
+        },
+        {
+          "id": "installation",
+          "status": "PASS",
+          "detail": "pnpm@11.25.0"
+        },
+        {
+          "id": "tools",
+          "status": "PASS",
+          "detail": {
+            "typescript": "7.0.2",
+            "vitest": "5.0.5",
+            "vite": "8.3.5",
+            "@playwright/test": "1.64.1"
+          }
+        },
+        {
+          "id": "chromium",
+          "status": "PASS",
+          "detail": {
+            "version": "156.0.8078.4",
+            "cache": "D:\\Projects\\volam-hero-defense\\.cache\\ms-playwright"
+          }
+        }
+      ]
+    },
+    {
+      "label": "prepare assets (once)",
+      "seconds": 12.1,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\remaining-school-sfx-kits\\check-workflow\\3cf171bb-3c1b-4971-a10d-cce76188d4ed\\1-prepare-assets-once-.log",
+      "outputBytes": 738
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 1.04,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\remaining-school-sfx-kits\\check-workflow\\3cf171bb-3c1b-4971-a10d-cce76188d4ed\\2-compile-TypeScript.log",
+      "outputBytes": 0
+    },
+    {
+      "label": "production client build",
+      "seconds": 15.86,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\remaining-school-sfx-kits\\check-workflow\\3cf171bb-3c1b-4971-a10d-cce76188d4ed\\3-production-client-build.log",
+      "outputBytes": 25525
+    },
+    {
+      "label": "browser verification",
+      "seconds": 92.25,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\remaining-school-sfx-kits\\check-workflow\\3cf171bb-3c1b-4971-a10d-cce76188d4ed\\4-browser-verification.log",
+      "outputBytes": 1217
+    }
+  ],
+  "totalSeconds": 121.76
+}
