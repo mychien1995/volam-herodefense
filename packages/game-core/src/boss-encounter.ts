@@ -347,7 +347,7 @@ export function stepBossEncounter(
     return;
   }
   const target = [...world.heroes.values()]
-    .filter((h) => h.hp > 0)
+    .filter((h) => h.hp > 0 && !hasStatus(h, 'concealed', world.tick))
     .sort(
       (a, b) => distance(a, boss) - distance(b, boss) || compareId(a.id, b.id),
     )[0];

@@ -1,0 +1,483 @@
+{
+  "players": 6,
+  "browserClients": 2,
+  "sdkClients": 4,
+  "scope": [
+    "truc_yeu",
+    "sa_xa",
+    "sa_tac",
+    "cung_thu_sa_mac",
+    "xac_uop",
+    "cu_nhan_sa_thach",
+    "hai_xa",
+    "hai_tac",
+    "hai_tac_hoa_phao",
+    "thuy_quy",
+    "hai_vu",
+    "hell_dia_nguc_khuyen",
+    "hell_dung_nham_linh",
+    "hell_hac_viem_phap_su",
+    "hell_hac_dien_nguu_ma",
+    "hell_dung_nham_cu_nhan"
+  ],
+  "coverage": {
+    "truc_yeu": {
+      "basic": {
+        "texture": "forest_truc_yeu",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__forest_truc_yeu.png",
+        "frame": "basic_attack_right_0"
+      },
+      "special": {
+        "texture": "forest_truc_yeu",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__forest_truc_yeu.png",
+        "frame": "basic_attack_right_0"
+      },
+      "death": {
+        "texture": "forest_truc_yeu",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__forest_truc_yeu.png",
+        "frame": "death_right_0"
+      },
+      "deathAbility": false,
+      "effects": [
+        {
+          "id": "forest_private_c0LhK4Dff:creep_fx_1",
+          "abilityId": "creep_truc_yeu_basic",
+          "suppressed": true,
+          "frames": []
+        }
+      ]
+    },
+    "sa_xa": {
+      "basic": {
+        "texture": "desert_sa_xa",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__desert_sa_xa.png",
+        "frame": "attack_right_0.png"
+      },
+      "special": {
+        "texture": "desert_sa_xa",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__desert_sa_xa.png",
+        "frame": "attack_right_0.png"
+      },
+      "death": {
+        "texture": "desert_sa_xa",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__desert_sa_xa.png",
+        "frame": "death_right_0.png"
+      },
+      "deathAbility": false,
+      "effects": [
+        {
+          "id": "desert_private_c0LhK4Dff:creep_fx_1",
+          "abilityId": "creep_sa_xa_basic",
+          "suppressed": false,
+          "frames": [
+            "beach_fx:cannon_projectile_0"
+          ]
+        }
+      ]
+    },
+    "sa_tac": {
+      "basic": {
+        "texture": "desert_sa_tac",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__desert_sa_tac.png",
+        "frame": "attack_right_0.png"
+      },
+      "special": {
+        "texture": "desert_sa_tac",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__desert_sa_tac.png",
+        "frame": "attack_right_0.png"
+      },
+      "death": {
+        "texture": "desert_sa_tac",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__desert_sa_tac.png",
+        "frame": "death_right_0.png"
+      },
+      "deathAbility": false,
+      "effects": [
+        {
+          "id": "desert_private_c0LhK4Dff:creep_fx_3",
+          "abilityId": "creep_sa_tac_basic",
+          "suppressed": true,
+          "frames": []
+        }
+      ]
+    },
+    "cung_thu_sa_mac": {
+      "basic": {
+        "texture": "desert_cung_thu_sa_mac",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__desert_cung_thu_sa_mac.png",
+        "frame": "attack_right_0.png"
+      },
+      "special": {
+        "texture": "desert_cung_thu_sa_mac",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__desert_cung_thu_sa_mac.png",
+        "frame": "attack_right_0.png"
+      },
+      "death": {
+        "texture": "desert_cung_thu_sa_mac",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__desert_cung_thu_sa_mac.png",
+        "frame": "death_right_0.png"
+      },
+      "deathAbility": false,
+      "effects": []
+    },
+    "xac_uop": {
+      "basic": {
+        "texture": "desert_xac_uop",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__desert_xac_uop.png",
+        "frame": "attack_right_0.png"
+      },
+      "special": {
+        "texture": "desert_xac_uop",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__desert_xac_uop.png",
+        "frame": "attack_right_0.png"
+      },
+      "death": {
+        "texture": "desert_xac_uop",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__desert_xac_uop.png",
+        "frame": "death_right_0.png"
+      },
+      "deathAbility": false,
+      "effects": [
+        {
+          "id": "desert_private_c0LhK4Dff:creep_fx_7",
+          "abilityId": "creep_xac_uop_basic",
+          "suppressed": true,
+          "frames": []
+        },
+        {
+          "id": "desert_private_c0LhK4Dff:creep_fx_8",
+          "abilityId": "creep_xac_uop_special",
+          "suppressed": false,
+          "frames": [
+            "m3d_review_effects:curse/0",
+            "m3d_review_effects:curse/1",
+            "m3d_review_effects:curse/2"
+          ]
+        }
+      ]
+    },
+    "cu_nhan_sa_thach": {
+      "basic": {
+        "texture": "desert_cu_nhan_sa_thach",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__desert_cu_nhan_sa_thach.png",
+        "frame": "attack_right_0.png"
+      },
+      "special": {
+        "texture": "desert_cu_nhan_sa_thach",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__desert_cu_nhan_sa_thach.png",
+        "frame": "attack_right_0.png"
+      },
+      "death": {
+        "texture": "desert_cu_nhan_sa_thach",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__desert_cu_nhan_sa_thach.png",
+        "frame": "death_right_0.png"
+      },
+      "deathAbility": false,
+      "effects": [
+        {
+          "id": "desert_private_c0LhK4Dff:creep_fx_10",
+          "abilityId": "creep_cu_nhan_sa_thach_basic",
+          "suppressed": true,
+          "frames": []
+        },
+        {
+          "id": "desert_private_c0LhK4Dff:creep_fx_11",
+          "abilityId": "creep_cu_nhan_sa_thach_special",
+          "suppressed": false,
+          "frames": [
+            "m3d_review_effects:sandstone/0",
+            "m3d_review_effects:sandstone/1",
+            "m3d_review_effects:sandstone/2"
+          ]
+        },
+        {
+          "id": "desert_private_c0LhK4Dff:creep_fx_12",
+          "abilityId": "creep_cu_nhan_sa_thach_special",
+          "suppressed": false,
+          "frames": [
+            "m3d_review_effects:sandstone/0",
+            "m3d_review_effects:sandstone/1"
+          ]
+        }
+      ]
+    },
+    "hai_xa": {
+      "basic": {
+        "texture": "beach_hai_xa",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__beach_hai_xa.png",
+        "frame": "basic_attack_right_0"
+      },
+      "special": {
+        "texture": "beach_hai_xa",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__beach_hai_xa.png",
+        "frame": "basic_attack_right_0"
+      },
+      "death": {
+        "texture": "beach_hai_xa",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__beach_hai_xa.png",
+        "frame": "death_right_0"
+      },
+      "deathAbility": false,
+      "effects": [
+        {
+          "id": "sea_private_c0LhK4Dff:creep_fx_1",
+          "abilityId": "creep_hai_xa_basic",
+          "suppressed": false,
+          "frames": [
+            "beach_fx:water_projectile_0"
+          ]
+        }
+      ]
+    },
+    "hai_tac": {
+      "basic": {
+        "texture": "beach_hai_tac",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__beach_hai_tac.png",
+        "frame": "basic_attack_right_0"
+      },
+      "special": {
+        "texture": "beach_hai_tac",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__beach_hai_tac.png",
+        "frame": "basic_attack_right_0"
+      },
+      "death": {
+        "texture": "beach_hai_tac",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__beach_hai_tac.png",
+        "frame": "death_right_0"
+      },
+      "deathAbility": false,
+      "effects": [
+        {
+          "id": "sea_private_c0LhK4Dff:creep_fx_5",
+          "abilityId": "creep_hai_tac_basic",
+          "suppressed": true,
+          "frames": []
+        }
+      ]
+    },
+    "hai_tac_hoa_phao": {
+      "basic": {
+        "texture": "beach_hai_tac_hoa_phao",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__beach_hai_tac_hoa_phao.png",
+        "frame": "basic_attack_right_0"
+      },
+      "special": {
+        "texture": "beach_hai_tac_hoa_phao",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__beach_hai_tac_hoa_phao.png",
+        "frame": "basic_attack_right_0"
+      },
+      "death": {
+        "texture": "beach_hai_tac_hoa_phao",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__beach_hai_tac_hoa_phao.png",
+        "frame": "death_right_0"
+      },
+      "deathAbility": false,
+      "effects": [
+        {
+          "id": "sea_private_c0LhK4Dff:creep_fx_9",
+          "abilityId": "creep_hai_tac_hoa_phao_basic",
+          "suppressed": false,
+          "frames": [
+            "beach_fx:cannon_projectile_0"
+          ]
+        },
+        {
+          "id": "sea_private_c0LhK4Dff:creep_fx_10",
+          "abilityId": "creep_hai_tac_hoa_phao_special",
+          "suppressed": false,
+          "frames": [
+            "beach_fx:muzzle_flash_1",
+            "beach_fx:muzzle_flash_2",
+            "beach_fx:cannon_projectile_3",
+            "beach_fx:cannon_projectile_0",
+            "beach_fx:cannon_projectile_1",
+            "beach_fx:cannon_projectile_2"
+          ]
+        }
+      ]
+    },
+    "thuy_quy": {
+      "basic": {
+        "texture": "beach_thuy_quy",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__beach_thuy_quy.png",
+        "frame": "basic_attack_right_0"
+      },
+      "special": {
+        "texture": "beach_thuy_quy",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__beach_thuy_quy.png",
+        "frame": "basic_attack_right_0"
+      },
+      "death": {
+        "texture": "beach_thuy_quy",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__beach_thuy_quy.png",
+        "frame": "death_right_0"
+      },
+      "deathAbility": false,
+      "effects": [
+        {
+          "id": "sea_private_c0LhK4Dff:creep_fx_12",
+          "abilityId": "creep_thuy_quy_basic",
+          "suppressed": true,
+          "frames": []
+        }
+      ]
+    },
+    "hai_vu": {
+      "basic": {
+        "texture": "beach_hai_vu",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__beach_hai_vu.png",
+        "frame": "basic_attack_right_0"
+      },
+      "special": {
+        "texture": "beach_hai_vu",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__beach_hai_vu.png",
+        "frame": "basic_attack_right_0"
+      },
+      "death": {
+        "texture": "beach_hai_vu",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__beach_hai_vu.png",
+        "frame": "death_right_0"
+      },
+      "deathAbility": false,
+      "effects": [
+        {
+          "id": "sea_private_c0LhK4Dff:creep_fx_14",
+          "abilityId": "creep_hai_vu_basic",
+          "suppressed": false,
+          "frames": [
+            "beach_fx:water_projectile_0"
+          ]
+        },
+        {
+          "id": "sea_private_c0LhK4Dff:creep_fx_16",
+          "abilityId": "creep_hai_vu_special",
+          "suppressed": false,
+          "frames": [
+            "m3d_review_effects:tide/0"
+          ]
+        }
+      ]
+    },
+    "hell_dia_nguc_khuyen": {
+      "basic": {
+        "texture": "hell_dia_nguc_khuyen",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__hell_dia_nguc_khuyen.png",
+        "frame": "basic_attack_right_0"
+      },
+      "special": {
+        "texture": "hell_dia_nguc_khuyen",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__hell_dia_nguc_khuyen.png",
+        "frame": "basic_attack_right_0"
+      },
+      "death": {
+        "texture": "hell_dia_nguc_khuyen",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__hell_dia_nguc_khuyen.png",
+        "frame": "death_shared_0"
+      },
+      "deathAbility": false,
+      "effects": [
+        {
+          "id": "hell_private_c0LhK4Dff:creep_fx_1",
+          "abilityId": "creep_hell_dia_nguc_khuyen_basic",
+          "suppressed": true,
+          "frames": []
+        }
+      ]
+    },
+    "hell_dung_nham_linh": {
+      "basic": {
+        "texture": "hell_dung_nham_linh",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__hell_dung_nham_linh.png",
+        "frame": "basic_attack_right_0"
+      },
+      "death": {
+        "texture": "hell_dung_nham_linh",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__hell_dung_nham_linh.png",
+        "frame": "death_shared_0"
+      },
+      "deathAbility": true,
+      "effects": [
+        {
+          "id": "hell_private_c0LhK4Dff:creep_fx_6",
+          "abilityId": "creep_hell_dung_nham_linh_basic",
+          "suppressed": false,
+          "frames": [
+            "hell_fx:molten_projectile_0"
+          ]
+        }
+      ]
+    },
+    "hell_hac_viem_phap_su": {
+      "basic": {
+        "texture": "hell_hac_viem_phap_su",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__hell_hac_viem_phap_su.png",
+        "frame": "basic_attack_right_0"
+      },
+      "special": {
+        "texture": "hell_hac_viem_phap_su",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__hell_hac_viem_phap_su.png",
+        "frame": "basic_attack_right_0"
+      },
+      "death": {
+        "texture": "hell_hac_viem_phap_su",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__hell_hac_viem_phap_su.png",
+        "frame": "death_shared_0"
+      },
+      "deathAbility": false,
+      "effects": []
+    },
+    "hell_hac_dien_nguu_ma": {
+      "basic": {
+        "texture": "hell_hac_dien_nguu_ma",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__hell_hac_dien_nguu_ma.png",
+        "frame": "basic_attack_right_0"
+      },
+      "special": {
+        "texture": "hell_hac_dien_nguu_ma",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__hell_hac_dien_nguu_ma.png",
+        "frame": "basic_attack_right_0"
+      },
+      "death": {
+        "texture": "hell_hac_dien_nguu_ma",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__hell_hac_dien_nguu_ma.png",
+        "frame": "death_shared_0"
+      },
+      "deathAbility": false,
+      "effects": [
+        {
+          "id": "hell_private_c0LhK4Dff:creep_fx_10",
+          "abilityId": "creep_hell_hac_dien_nguu_ma_basic",
+          "suppressed": true,
+          "frames": []
+        }
+      ]
+    },
+    "hell_dung_nham_cu_nhan": {
+      "basic": {
+        "texture": "hell_dung_nham_cu_nhan",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__hell_dung_nham_cu_nhan.png",
+        "frame": "basic_attack_right_0"
+      },
+      "special": {
+        "texture": "hell_dung_nham_cu_nhan",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__hell_dung_nham_cu_nhan.png",
+        "frame": "basic_attack_right_0"
+      },
+      "death": {
+        "texture": "hell_dung_nham_cu_nhan",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__hell_dung_nham_cu_nhan.png",
+        "frame": "death_shared_0"
+      },
+      "deathAbility": false,
+      "effects": [
+        {
+          "id": "hell_private_c0LhK4Dff:creep_fx_15",
+          "abilityId": "creep_hell_dung_nham_cu_nhan_basic",
+          "suppressed": true,
+          "frames": []
+        }
+      ]
+    }
+  },
+  "errors": []
+}

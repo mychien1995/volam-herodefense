@@ -1,0 +1,43 @@
+{
+  "runId": "aebdbb62-dc03-466c-b2bc-b8c95e0e7694",
+  "mode": "final",
+  "args": [
+    "--config",
+    "playwright.m3d-hit-continuity.config.ts"
+  ],
+  "startedAt": "2026-11-12T08:06:33.605Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "prepare assets (once)",
+      "seconds": 55.38,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 0.41,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "typecheck tests and tools",
+      "seconds": 1.88,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "workflow regression checks",
+      "seconds": 0.53,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "all unit/integration tests",
+      "seconds": 318.53,
+      "status": "FAIL",
+      "exitCode": 1
+    }
+  ],
+  "totalSeconds": 376.74
+}

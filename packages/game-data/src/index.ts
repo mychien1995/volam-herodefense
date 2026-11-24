@@ -43,6 +43,7 @@ export * from './hell.js';
 export * from './dungeon-registry.js';
 export * from './invasion.js';
 export * from './cai-bang.js';
+export * from './skill-revise.js';
 export * from './thien-son.js';
 export * from './vo-dang.js';
 export * from './skill-art.js';

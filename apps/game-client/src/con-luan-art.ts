@@ -123,6 +123,12 @@ export class ConLuanArt {
       ? (facing as Direction)
       : 'down';
     const monk = actor.basicId === conLuan.monk;
+    if (monk) {
+      // Keep Chaos's retained aura; the revised renderer owns only the body bank.
+      if(actor.hp>0&&states.some(s=>s.kind==='con_luan_chaos'))
+        this.attach(id+':chaos',effects,'chaos_aura',sprite.x,sprite.y-29.5,sprite.depth+1,conLuanBodyScale).setAlpha(0.68+0.28*Math.sin(this.scene.time.now/69)**2);
+      return;
+    }
     const chaos =
       monk && actor.hp > 0 && states.some((s) => s.kind === 'con_luan_chaos');
     const ranged = monk && states.some((s) => s.kind === 'con_luan_ranged');
@@ -339,19 +345,9 @@ export class ConLuanArt {
 
   event(e: CombatEvent, actor?: Sprite): boolean {
     if (!ids.has(e.abilityId)) return false;
-    const dir = directionFor(e.fx ?? 0, e.fy ?? 1);
     const { x, y, radius = 0 } = e;
     const hit = e.kind === 'hit';
     const pulse = e.kind === 'pulse';
-    if (
-      e.kind === 'attack' &&
-      e.abilityId === conLuan.monk &&
-      e.stage &&
-      beats.includes(e.stage)
-    )
-      this.flash(monkFx, 'trail_' + e.stage + '_' + dir, x, y, {
-        depth: y + (dir === 'up' ? -0.1 : 0.1),
-      });
     if (e.abilityId === conLuan.monk && pulse && e.stage === 'area_tick')
       this.flash(monkFx, 'slam', x, y);
     if (e.abilityId === conLuan.bolt && pulse)

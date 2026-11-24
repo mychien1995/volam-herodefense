@@ -1,0 +1,412 @@
+{
+  "players": 2,
+  "development": true,
+  "protocol": 39,
+  "fixture": "Normal room and Phaser. Server fixtures select encounter, positions and legal skill loadout. Keyboard casts, encounter release and hurt use authoritative combat.",
+  "heroes": [],
+  "bosses": [
+    {
+      "form": "dong_ta",
+      "direction": "right",
+      "ability": "dan_chi_than_cong",
+      "idle": "idle_right_0",
+      "hit": {
+        "body": {
+          "id": "dong_ta",
+          "pose": "idle",
+          "direction": "right",
+          "locomotion": true,
+          "name": "dong_ta:dong_ta",
+          "texture": "renovated-dong_ta",
+          "source": "/assets/renovation-v1/runtime/dong_ta.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            463,
+            479.280029296875
+          ],
+          "frame": "idle_right_0",
+          "x": 800,
+          "y": 656.6400146484375,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 657.1400146484375,
+          "visible": true
+        },
+        "effect": {
+          "id": 1,
+          "target": "dong_ta",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 62,
+          "protocolVersion": 39,
+          "id": 1,
+          "kind": "hit",
+          "sourceId": "hQnPHhFoo",
+          "targetId": "dong_ta",
+          "abilityId": "fixture_resolved_strike_1",
+          "x": 800,
+          "y": 656.64,
+          "damage": 28,
+          "critical": false,
+          "zoneId": "arena",
+          "fx": -1,
+          "fy": 0
+        }
+      },
+      "release": {
+        "texture": "renovated-action-dong_ta_actions",
+        "frame": "right_1",
+        "source": "/assets/renovation-v3/actors/dong_ta_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    }
+  ],
+  "impacts": [],
+  "currentBoss": {
+    "form": "dong_ta",
+    "direction": "down",
+    "ability": "dan_chi_than_cong",
+    "id": "dong_ta"
+  },
+  "lastFixture": {
+    "accepted": true,
+    "hp": 12992,
+    "zoneId": "arena",
+    "events": [
+      {
+        "id": 6,
+        "tick": 133,
+        "kind": "hit",
+        "sourceId": "hQnPHhFoo",
+        "targetId": "dong_ta",
+        "abilityId": "fixture_resolved_strike_2",
+        "damage": 28,
+        "critical": false,
+        "x": 800,
+        "y": 656.64,
+        "fx": 0,
+        "fy": -1
+      }
+    ]
+  },
+  "failure": {
+    "message": "AssertionError [ERR_ASSERTION]: {\"kind\":\"boss\",\"query\":{\"form\":\"dong_ta\",\"ability\":\"dan_chi_than_cong\"},\"seen\":[\"  renovated-dong_ta idle_down_0  \",\"  renovated-action-dong_ta_actions down_0 dan_chi_than_cong windup\",\"  renovated-action-dong_ta_actions down_0 dan_chi_than_cong recovery hQnPHhFoo:spark-0:true\",\"  renovated-action-dong_ta_actions down_0 dan_chi_than_cong recovery\",\"  renovated-dong_ta idle_down_0  \",\"  renovated-action-dong_ta_actions down_0 ngoc_tieu_hoi_phong windup\",\"  renovated-action-dong_ta_actions down_2 ngoc_tieu_hoi_phong release\",\"  renovated-action-dong_ta_actions down_2 ngoc_tieu_hoi_phong recovery\",\"  renovated-dong_ta idle_down_0  \",\"  renovated-action-dong_ta_actions down_0 lac_anh_kiem_phap windup\",\"  renovated-action-dong_ta_actions down_1 lac_anh_kiem_phap release mfMu1UhXt:spark-0:true\",\"  renovated-action-dong_ta_actions down_3 lac_anh_kiem_phap recovery hQnPHhFoo:spark-0:true\",\"  renovated-action-dong_ta_actions down_3 lac_anh_kiem_phap recovery\",\"  renovated-dong_ta idle_down_0  \",\"  renovated-action-dong_ta_actions down_0 ta_kiem_lien_kich windup mfMu1UhXt:spark-0:true\",\"  renovated-action-dong_ta_actions down_0 ta_kiem_lien_kich windup mfMu1UhXt:spark-0:true hQnPHhFoo:spark-0:true\",\"  renovated-action-dong_ta_actions down_0 ta_kiem_lien_kich windup\",\"  renovated-action-dong_ta_actions down_3 ta_kiem_lien_kich recovery\",\"  renovated-action-dong_ta_actions down_3 ta_kiem_lien_kich recovery hQnPHhFoo:spark-0:true\"],\"events\":[{\"tick\":263,\"protocolVersion\":39,\"id\":10,\"kind\":\"cast\",\"sourceId\":\"dong_ta\",\"targetId\":\"hQnPHhFoo\",\"abilityId\":\"lac_anh_kiem_phap\",\"x\":800,\"y\":656.64,\"damage\":0,\"critical\":false,\"zoneId\":\"arena\",\"fx\":0,\"fy\":1},{\"tick\":286,\"protocolVersion\":39,\"id\":11,\"kind\":\"hit\",\"sourceId\":\"dong_ta\",\"targetId\":\"mfMu1UhXt\",\"abilityId\":\"lac_anh_kiem_phap\",\"x\":735,\"y\":766.64,\"damage\":37,\"critical\":false,\"zoneId\":\"arena\",\"fx\":-0.7071067811865475,\"fy\":0.7071067811865476},{\"tick\":287,\"protocolVersion\":39,\"id\":12,\"kind\":\"hit\",\"sourceId\":\"dong_ta\",\"targetId\":\"hQnPHhFoo\",\"abilityId\":\"lac_anh_kiem_phap\",\"x\":800,\"y\":766.64,\"damage\":36,\"critical\":false,\"zoneId\":\"arena\",\"fx\":0.7071067811865476,\"fy\":0.7071067811865475},{\"tick\":287,\"protocolVersion\":39,\"id\":13,\"kind\":\"hit\",\"sourceId\":\"dong_ta\",\"targetId\":\"hQnPHhFoo\",\"abilityId\":\"lac_anh_kiem_phap\",\"x\":800,\"y\":766.64,\"damage\":36,\"critical\":false,\"zoneId\":\"arena\",\"fx\":-0.7071067811865475,\"fy\":0.7071067811865476},{\"tick\":313,\"protocolVersion\":39,\"id\":14,\"kind\":\"hit\",\"sourceId\":\"dong_ta\",\"targetId\":\"mfMu1UhXt\",\"abilityId\":\"ngoc_tieu_hoi_phong\",\"x\":735,\"y\":766.64,\"damage\":42,\"critical\":false,\"zoneId\":\"arena\",\"fx\":0,\"fy\":1},{\"tick\":316,\"protocolVersion\":39,\"id\":15,\"kind\":\"cast\",\"sourceId\":\"dong_ta\",\"targetId\":\"hQnPHhFoo\",\"abilityId\":\"ta_kiem_lien_kich\",\"x\":800,\"y\":656.64,\"damage\":0,\"critical\":false,\"zoneId\":\"arena\",\"fx\":0,\"fy\":1},{\"tick\":317,\"protocolVersion\":39,\"id\":16,\"kind\":\"hit\",\"sourceId\":\"dong_ta\",\"targetId\":\"hQnPHhFoo\",\"abilityId\":\"ngoc_tieu_hoi_phong\",\"x\":800,\"y\":766.64,\"damage\":41,\"critical\":false,\"zoneId\":\"arena\",\"fx\":0,\"fy\":1},{\"tick\":321,\"protocolVersion\":39,\"id\":17,\"kind\":\"hit\",\"sourceId\":\"dong_ta\",\"targetId\":\"mfMu1UhXt\",\"abilityId\":\"ngoc_tieu_hoi_phong\",\"x\":735,\"y\":766.64,\"damage\":42,\"critical\":false,\"zoneId\":\"arena\",\"fx\":0,\"fy\":1},{\"tick\":340,\"protocolVersion\":39,\"id\":18,\"kind\":\"hit\",\"sourceId\":\"dong_ta\",\"targetId\":\"hQnPHhFoo\",\"abilityId\":\"ta_kiem_lien_kich\",\"x\":800,\"y\":766.64,\"damage\":12,\"critical\":false,\"zoneId\":\"arena\",\"fx\":0.25881904510252074,\"fy\":0.9659258262890683},{\"tick\":342,\"protocolVersion\":39,\"id\":19,\"kind\":\"hit\",\"sourceId\":\"dong_ta\",\"targetId\":\"hQnPHhFoo\",\"abilityId\":\"ta_kiem_lien_kich\",\"x\":800,\"y\":766.64,\"damage\":12,\"critical\":false,\"zoneId\":\"arena\",\"fx\":6.123233995736766e-17,\"fy\":1}]}",
+    "events": [
+      {
+        "tick": 287,
+        "protocolVersion": 39,
+        "id": 12,
+        "kind": "hit",
+        "sourceId": "dong_ta",
+        "targetId": "hQnPHhFoo",
+        "abilityId": "lac_anh_kiem_phap",
+        "x": 800,
+        "y": 766.64,
+        "damage": 36,
+        "critical": false,
+        "zoneId": "arena",
+        "fx": 0.7071067811865476,
+        "fy": 0.7071067811865475
+      },
+      {
+        "tick": 287,
+        "protocolVersion": 39,
+        "id": 13,
+        "kind": "hit",
+        "sourceId": "dong_ta",
+        "targetId": "hQnPHhFoo",
+        "abilityId": "lac_anh_kiem_phap",
+        "x": 800,
+        "y": 766.64,
+        "damage": 36,
+        "critical": false,
+        "zoneId": "arena",
+        "fx": -0.7071067811865475,
+        "fy": 0.7071067811865476
+      },
+      {
+        "tick": 313,
+        "protocolVersion": 39,
+        "id": 14,
+        "kind": "hit",
+        "sourceId": "dong_ta",
+        "targetId": "mfMu1UhXt",
+        "abilityId": "ngoc_tieu_hoi_phong",
+        "x": 735,
+        "y": 766.64,
+        "damage": 42,
+        "critical": false,
+        "zoneId": "arena",
+        "fx": 0,
+        "fy": 1
+      },
+      {
+        "tick": 316,
+        "protocolVersion": 39,
+        "id": 15,
+        "kind": "cast",
+        "sourceId": "dong_ta",
+        "targetId": "hQnPHhFoo",
+        "abilityId": "ta_kiem_lien_kich",
+        "x": 800,
+        "y": 656.64,
+        "damage": 0,
+        "critical": false,
+        "zoneId": "arena",
+        "fx": 0,
+        "fy": 1
+      },
+      {
+        "tick": 317,
+        "protocolVersion": 39,
+        "id": 16,
+        "kind": "hit",
+        "sourceId": "dong_ta",
+        "targetId": "hQnPHhFoo",
+        "abilityId": "ngoc_tieu_hoi_phong",
+        "x": 800,
+        "y": 766.64,
+        "damage": 41,
+        "critical": false,
+        "zoneId": "arena",
+        "fx": 0,
+        "fy": 1
+      },
+      {
+        "tick": 321,
+        "protocolVersion": 39,
+        "id": 17,
+        "kind": "hit",
+        "sourceId": "dong_ta",
+        "targetId": "mfMu1UhXt",
+        "abilityId": "ngoc_tieu_hoi_phong",
+        "x": 735,
+        "y": 766.64,
+        "damage": 42,
+        "critical": false,
+        "zoneId": "arena",
+        "fx": 0,
+        "fy": 1
+      },
+      {
+        "tick": 340,
+        "protocolVersion": 39,
+        "id": 18,
+        "kind": "hit",
+        "sourceId": "dong_ta",
+        "targetId": "hQnPHhFoo",
+        "abilityId": "ta_kiem_lien_kich",
+        "x": 800,
+        "y": 766.64,
+        "damage": 12,
+        "critical": false,
+        "zoneId": "arena",
+        "fx": 0.25881904510252074,
+        "fy": 0.9659258262890683
+      },
+      {
+        "tick": 342,
+        "protocolVersion": 39,
+        "id": 19,
+        "kind": "hit",
+        "sourceId": "dong_ta",
+        "targetId": "hQnPHhFoo",
+        "abilityId": "ta_kiem_lien_kich",
+        "x": 800,
+        "y": 766.64,
+        "damage": 12,
+        "critical": false,
+        "zoneId": "arena",
+        "fx": 6.123233995736766e-17,
+        "fy": 1
+      },
+      {
+        "tick": 344,
+        "protocolVersion": 39,
+        "id": 20,
+        "kind": "hit",
+        "sourceId": "dong_ta",
+        "targetId": "hQnPHhFoo",
+        "abilityId": "ta_kiem_lien_kich",
+        "x": 800,
+        "y": 766.64,
+        "damage": 12,
+        "critical": false,
+        "zoneId": "arena",
+        "fx": -0.25881904510252063,
+        "fy": 0.9659258262890683
+      },
+      {
+        "tick": 346,
+        "protocolVersion": 39,
+        "id": 21,
+        "kind": "hit",
+        "sourceId": "dong_ta",
+        "targetId": "mfMu1UhXt",
+        "abilityId": "ta_kiem_lien_kich",
+        "x": 735,
+        "y": 766.64,
+        "damage": 13,
+        "critical": false,
+        "zoneId": "arena",
+        "fx": -0.4999999999999998,
+        "fy": 0.8660254037844387
+      }
+    ],
+    "presentation": {
+      "hero": {
+        "id": "hQnPHhFoo",
+        "x": 800,
+        "y": 767,
+        "depth": 767,
+        "animation": "hero_vo_dang:hurt:up",
+        "frame": "idle_up_0",
+        "texture": "renovated-hero_vo_dang",
+        "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+        "filterMode": 0,
+        "origin": [
+          0.5,
+          0.875
+        ],
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "alpha": 1,
+        "playing": false,
+        "hp": 99824.89999999932,
+        "pose": "hurt",
+        "label": {
+          "text": "Renovation 1",
+          "visible": true,
+          "resolution": 2,
+          "fontFamily": "Segoe UI, Tahoma, Arial, sans-serif"
+        },
+        "healthBarVisible": true
+      },
+      "effects": [
+        {
+          "id": 20,
+          "target": "hQnPHhFoo",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        {
+          "id": 22,
+          "target": "mfMu1UhXt",
+          "critical": false,
+          "outline": false
+        }
+      ],
+      "bodies": [
+        {
+          "id": "dong_ta",
+          "pose": "action",
+          "direction": "down",
+          "locomotion": false,
+          "name": "dong_ta:dong_ta",
+          "texture": "renovated-action-dong_ta_actions",
+          "source": "/assets/renovation-v3/actors/dong_ta_actions.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "action": {
+            "ability": "ta_kiem_lien_kich",
+            "phase": "recovery",
+            "sourceTexture": "renovated-action-dong_ta_actions",
+            "sourceFrame": "down_3"
+          },
+          "screen": [
+            683,
+            259.280029296875
+          ],
+          "frame": "down_3",
+          "x": 800,
+          "y": 656.6400146484375,
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 657.1400146484375,
+          "visible": true
+        },
+        {
+          "id": "hero_vo_dang",
+          "pose": "hurt",
+          "direction": "up",
+          "locomotion": false,
+          "name": "actor:hQnPHhFoo",
+          "texture": "renovated-hero_vo_dang",
+          "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            683,
+            480
+          ],
+          "frame": "idle_up_0",
+          "x": 800,
+          "y": 767,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 767,
+          "visible": true
+        },
+        {
+          "id": "hero_cai_bang",
+          "pose": "hurt",
+          "direction": "up",
+          "locomotion": false,
+          "name": "actor:mfMu1UhXt",
+          "texture": "renovated-bong-combo-body",
+          "source": "/@fs/D:/Projects/volam-hero-defense/assets/exports/cai-bang-bong-reach/bong.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            553,
+            480
+          ],
+          "frame": "idle_up_0",
+          "x": 735,
+          "y": 767,
+          "origin": [
+            0.5,
+            0.734375
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 767,
+          "visible": true
+        }
+      ],
+      "boss": {},
+      "zone": "arena",
+      "zoom": 2
+    }
+  }
+}

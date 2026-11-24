@@ -1,0 +1,66 @@
+{
+  "status": "PASS",
+  "branch": "wip/m3d/skill-revise",
+  "scope": "Visual-only compact-model sweep correction; no combat changes",
+  "runtimeFrames": 48,
+  "newAuthoredMotionCels": 20,
+  "mirroredMotionCels": 12,
+  "retainedNeutralCels": 16,
+  "facings": 8,
+  "renderScale": 0.5,
+  "animationMs": 375,
+  "beatMs": 400,
+  "lightning": "retained",
+  "final": {
+    "command": "pnpm check:final --config playwright.skill-revise.config.ts",
+    "runId": "496ea61b-d09e-4363-995a-312c53975af4",
+    "tests": 1280,
+    "testFiles": 128,
+    "validators": 35,
+    "seconds": 680.24,
+    "path": "docs/evidence/skill-revise-thien-su-v08/final/check-workflow/final-timings.json"
+  },
+  "twoClient": {
+    "path": "docs/evidence/skill-revise-thien-su-v08/two/skill-revise-game/feedback-v04.json",
+    "attacks": 24,
+    "walkDirections": 3
+  },
+  "sixClient": {
+    "path": "docs/evidence/skill-revise-thien-su-v08/final/skill-revise-game/feedback-v04.json",
+    "attacks": 24,
+    "naturalCombat": true,
+    "finalAcceptance": true,
+    "scope": "Two pose observers; four other renderers paused during pose checks, all six resumed for natural combat. Unchanged walking explicitly reuses fresh two-client coverage."
+  },
+  "nativeValidation": "assets/source/skill-revise-thien-su-v08/validation.json",
+  "before": "docs/evidence/skill-revise-thien-su-v08/before/skill-revise-game/feedback-v04-sweep.png",
+  "after": "docs/evidence/skill-revise-thien-su-v08/final/skill-revise-game/feedback-v04-sweep.png",
+  "limits": "Manual anatomical landmarks, not automatic segmentation; configured 375ms may stretch on slow renderers. New art candidate awaiting director review.",
+  "manualGame": {
+    "status": "READY",
+    "pid": 7456,
+    "command": "node tools/renovation-dev.mjs",
+    "url": "http://127.0.0.1:5529/?revision=thien-su-v08",
+    "health": {
+      "status": "ok",
+      "service": "volam-game-server",
+      "runId": "d04ead4d-756d-4189-bafe-e4047f5598f6",
+      "milestone": "M3B",
+      "protocolVersion": 48
+    },
+    "identity": {
+      "service": "volam-qa-client",
+      "runId": "d04ead4d-756d-4189-bafe-e4047f5598f6",
+      "serverUrl": "http://127.0.0.1:2926"
+    },
+    "endpoint": {
+      "serverUrl": "http://127.0.0.1:2926"
+    },
+    "runtimeFrames": 48,
+    "renderScale": 0.5,
+    "beatMs": 400,
+    "animationMs": 375,
+    "fixtures": "none; normal game",
+    "verifiedAt": "2026-11-24T17:05:03.1799567+07:00"
+  }
+}

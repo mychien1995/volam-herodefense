@@ -43,6 +43,9 @@ function damageText(effect: Ability['effect']): string {
     case 'dash':
       return [
         amount,
+        effect.endBlast && `${number.format(effect.endBlast.damage)} nổ cuối`,
+        effect.afterProjectile &&
+          `${number.format(effect.afterProjectile.damage)} mỗi projectile sau lướt`,
         effect.counter && `${number.format(effect.counter.damage)} phản kích`,
       ]
         .filter(Boolean)
@@ -61,6 +64,8 @@ function damageText(effect: Ability['effect']): string {
 }
 
 export function skillRankStats(ability: Ability): string {
+  if (ability.passive && ability.reactiveBlock)
+    return `Nội tại · ${number.format(ability.reactiveBlock.chance * 100)}% chặn đòn\nPhản sét · ${number.format(ability.reactiveBlock.damage)} sát thương\nChoáng · ${seconds(ability.reactiveBlock.stunTicks)} giây`;
   const { effect } = ability;
   const drain = effect.mode === 'projectile' ? effect.recallDrain : undefined;
   const toggleShield = effect.mode === 'mana_shield' && effect.toggle;

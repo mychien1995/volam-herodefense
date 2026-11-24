@@ -474,7 +474,7 @@ export function beginNamDeCast(
   const s = w.namDe,
     b = boss(w);
   if (!s || !b || b.hp <= 0 || !namDeAbilities.includes(ability)) return false;
-  const choices = alive(w);
+  const choices = alive(w).filter((h) => !hasStatus(h, 'concealed', w.tick));
   const h =
     choices.find((h) => h.id === targetId) ??
     choices.sort(
@@ -939,10 +939,15 @@ export function stepNamDe(w: World, c: SimulationConfig): void {
       s.nextActionAt = w.tick + d.actionRestTicks;
       b.castAbilityId = '';
     }
-  } else if (targets.length && !hasStatus(b, 'stun', w.tick)) {
-    const target = targets.sort(
-      (a, z) => distance(a, b) - distance(z, b) || a.id.localeCompare(z.id),
-    )[0]!;
+  } else if (
+    targets.some((h) => !hasStatus(h, 'concealed', w.tick)) &&
+    !hasStatus(b, 'stun', w.tick)
+  ) {
+    const target = targets
+      .filter((h) => !hasStatus(h, 'concealed', w.tick))
+      .sort(
+        (a, z) => distance(a, b) - distance(z, b) || a.id.localeCompare(z.id),
+      )[0]!;
     const v = direction(target.x - b.x, target.y - b.y);
     b.fx = v.x;
     b.fy = v.y;
@@ -979,7 +984,8 @@ export function stepNamDe(w: World, c: SimulationConfig): void {
           : d.rotation[s.rotationIndex++ % d.rotation.length]!;
       beginNamDeCast(w, c, ability, target.id);
     }
-  } else if (!targets.length) b.pose = 'idle';
+  } else if (!targets.some((h) => !hasStatus(h, 'concealed', w.tick)))
+    b.pose = 'idle';
   stepSmallBurst(w, c);
   stepEffects(w, c);
 }

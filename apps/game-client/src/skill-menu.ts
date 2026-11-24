@@ -16,6 +16,8 @@ const image = (id: string) =>
 const seconds = (ticks: number) =>
   (ticks / m1Config.tickRate).toFixed(1).replace(/\.0$/, '');
 export function abilitySummary(a: Ability): string {
+  if (a.passive && a.reactiveBlock)
+    return `Nội tại · ${Math.round(a.reactiveBlock.chance * 100)}% chặn hoàn toàn sát thương một đòn trực tiếp · phản sét ${a.reactiveBlock.damage} · choáng ${seconds(a.reactiveBlock.stunTicks)}s`;
   const e = a.effect;
   let result = '';
   if (e.mode === 'projectile')
@@ -75,6 +77,17 @@ export function abilitySummary(a: Ability): string {
       result += ` · giảm sát thương ${Math.round(s.magnitude * 100)}% / ${seconds(s.durationTicks)}s`;
   if (a.allies)
     result += ` · đồng đội +${a.allies.statuses?.[0]?.magnitude ?? 0} phòng thủ / ${seconds(a.allies.statuses?.[0]?.durationTicks ?? 0)}s`;
+  if (a.id === 'cai_bang_bong')
+    result +=
+      ' · A trúng cùng target tích tối đa 4 charge cho Phá Giáp; đổi target reset';
+  if (a.targeting === 'nearestEnemyAtCast')
+    result += ' · tự ngắm địch gần nhất, đạn bay thẳng';
+  if (e.mode === 'dash' && e.endBlast)
+    result += ` · nổ cuối ${e.endBlast.damage} sát thương / bán kính ${e.endBlast.radius}`;
+  if (e.mode === 'dash' && e.afterProjectile)
+    result += ` · ${e.afterProjectile.count} projectile sau khi lướt`;
+  if (e.mode === 'multi_hit' && e.targetArea)
+    result = `${e.hits} kiếm rơi × ${e.damage} sát thương · tầm ${e.targetArea.range} · bán kính nổ ${e.targetArea.radius}`;
   return `${result} · ${a.manaCost} nội lực · ${e.mode === 'mana_shield' && e.toggle ? 'bật/tắt không hồi chiêu phụ' : `${Object.hasOwn(m1Config.basics, a.id) ? 'nhịp cơ sở' : 'hồi'} ${seconds(a.cooldownTicks)}s`}`;
 }
 /** Stable DOM and local draft selections; only the server commits ranks/stats. */

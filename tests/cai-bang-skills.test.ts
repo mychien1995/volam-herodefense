@@ -58,7 +58,11 @@ describe('M3A canonical Cái Bang skills', () => {
     const f = fixture(id),
       skill = f.config.skillCatalogue![id]!;
     f.cast();
-    expect(f.hero.mana).toBe(100 - skill.manaCost);
+    expect(f.hero.mana).toBeCloseTo(
+      100 -
+        skill.manaCost +
+        (id === 'khang_long_huu_hoi' ? (8 * (f.world.tick - 1)) / 30 : 0),
+    );
     expect(f.hero.skillCooldowns[0]).toBe(1 + skill.cooldownTicks);
     const deadline = f.hero.skillCooldowns[0];
     for (let i = 0; i < 20; i++)
@@ -67,7 +71,11 @@ describe('M3A canonical Cái Bang skills', () => {
         slot: 0,
       });
     f.steps(1);
-    expect(f.hero.mana).toBe(100 - skill.manaCost);
+    expect(f.hero.mana).toBeCloseTo(
+      100 -
+        skill.manaCost +
+        (id === 'khang_long_huu_hoi' ? (8 * (f.world.tick - 1)) / 30 : 0),
+    );
     expect(f.events.filter((e) => e.kind === 'cast')).toHaveLength(1);
     expect(f.hero.skillCooldowns[0]).toBe(deadline);
     const empty = fixture(id);
@@ -79,29 +87,20 @@ describe('M3A canonical Cái Bang skills', () => {
     empty.cast();
     expect(empty.events.filter((e) => e.kind === 'cast')).toHaveLength(0);
   });
-  it('Hỏa Vân fans three non-homing shots around the nearest enemy snapshot', () => {
+  it('Hỏa Long dash keeps its cast direction and creates one endpoint explosion', () => {
     const f = fixture('hoa_van_chuong');
+    const start = f.hero.x;
     f.cast();
     f.hero.fx = 0;
     f.hero.fy = 1;
     f.steps(35);
-    expect(
-      f.events.filter(
-        (e) => e.kind === 'hit' && e.targetId === f.enemies[0]!.id,
-      ),
-    ).toHaveLength(1);
-    expect(f.enemies[0]!.hp).toBe(982);
-    expect(
-      f.events.filter((e) => e.kind === 'hit').every((e) => (e.fx ?? 0) > 0),
-    ).toBe(true);
-    const g = fixture('hoa_van_chuong');
-    g.cast();
-    const p = [...g.world.projectiles.values()][0]!;
-    const v = { x: p.vx, y: p.vy };
-    g.enemies[0]!.y += 100;
-    g.steps(2);
-    expect({ x: p.vx, y: p.vy }).toEqual(v);
+    expect(f.hero.x).toBeCloseTo(start + 210);
+    expect(f.world.projectiles.size).toBe(0);
+    expect(f.events.filter((e) => e.stage === 'dash_impact')).toHaveLength(1);
+    expect(f.enemies[0]!.hp).toBeLessThan(1000);
+    expect(f.world.areas).toEqual([]);
   });
+
   it('Cuồng Long explodes once on collision, burns its area, and expires', () => {
     const f = fixture('cuong_long_loan_vu');
     f.cast();
@@ -167,7 +166,7 @@ describe('M3A canonical Cái Bang skills', () => {
     f.hero.fx = 1;
     f.hero.fy = 0;
     f.cast();
-    f.steps(28);
+    f.steps(40);
     const first = f.enemies[0]!;
     const hpAfterCoil = first.hp;
     expect(hpAfterCoil).toBeLessThan(1000);
@@ -214,7 +213,7 @@ describe('M3A canonical Cái Bang skills', () => {
     expect(f.hero.hp).toBeCloseTo(107.4);
     expect(hasStatus(f.enemies[0]!, 'stun', f.world.tick)).toBe(true);
     expect(hasStatus(f.enemies[2]!, 'stun', f.world.tick)).toBe(false);
-    f.steps(17);
+    f.steps(59);
     expect(hasStatus(f.enemies[0]!, 'stun', f.world.tick)).toBe(true);
     f.steps(1);
     expect(hasStatus(f.enemies[0]!, 'stun', f.world.tick)).toBe(false);
@@ -474,7 +473,7 @@ describe('M3A canonical Cái Bang skills', () => {
     h.skillIds = [
       'thien_ha_vo_cau',
       'khang_long_huu_hoi',
-      'hoa_van_chuong',
+      'cuong_long_loan_vu',
       '',
     ];
     match.input('a', 1, { kind: 'cast', slot: 0 });

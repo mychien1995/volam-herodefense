@@ -1,0 +1,965 @@
+{
+  "players": 2,
+  "development": true,
+  "protocol": 39,
+  "fixture": "Normal room and Phaser. Server fixtures select encounter, positions and legal skill loadout. Keyboard casts, encounter release and hurt use authoritative combat.",
+  "heroes": [
+    {
+      "direction": "right",
+      "hit": {
+        "body": {
+          "id": "yPi5Dwvud",
+          "x": 644,
+          "y": 770,
+          "depth": 770,
+          "animation": "shaolin-dao-review:idle:right",
+          "frame": "idle_right",
+          "texture": "shaolin-dao-review",
+          "source": "/assets/shaolin-dao-preview-v01/review.png",
+          "filterMode": 0,
+          "origin": [
+            0.5,
+            0.8055555555555556
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "alpha": 1,
+          "playing": true,
+          "hp": 600,
+          "label": {
+            "text": "Renovation 1",
+            "visible": true,
+            "resolution": 2,
+            "fontFamily": "Segoe UI, Tahoma, Arial, sans-serif"
+          },
+          "healthBarVisible": true
+        },
+        "effect": {
+          "id": 1,
+          "target": "yPi5Dwvud",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 72,
+          "protocolVersion": 39,
+          "id": 1,
+          "kind": "hit",
+          "sourceId": "fixture_attacker",
+          "targetId": "yPi5Dwvud",
+          "abilityId": "fixture_resolved_strike_1",
+          "x": 644.1333333333326,
+          "y": 770,
+          "damage": 26,
+          "critical": false,
+          "zoneId": "arena",
+          "fx": 1,
+          "fy": 0
+        }
+      },
+      "walk": "walk_1_right",
+      "casts": [
+        {
+          "ability": "kim_quang_ho_tran",
+          "body": "lotus_right",
+          "event": 2
+        },
+        {
+          "ability": "bat_dong_minh_vuong",
+          "body": "lotus_right",
+          "event": 5
+        },
+        {
+          "ability": "tam_gioi_quy_thien",
+          "body": "strike_right",
+          "event": 7
+        }
+      ]
+    },
+    {
+      "direction": "down",
+      "hit": {
+        "body": {
+          "id": "yPi5Dwvud",
+          "x": 580,
+          "y": 854,
+          "depth": 854,
+          "animation": "shaolin-dao-review:idle:down",
+          "frame": "idle_down",
+          "texture": "shaolin-dao-review",
+          "source": "/assets/shaolin-dao-preview-v01/review.png",
+          "filterMode": 0,
+          "origin": [
+            0.5,
+            0.8055555555555556
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "alpha": 1,
+          "playing": true,
+          "hp": 600.468017578125,
+          "label": {
+            "text": "Renovation 1",
+            "visible": true,
+            "resolution": 2,
+            "fontFamily": "Segoe UI, Tahoma, Arial, sans-serif"
+          },
+          "healthBarVisible": true
+        },
+        "effect": {
+          "id": 11,
+          "target": "yPi5Dwvud",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 261,
+          "protocolVersion": 39,
+          "id": 11,
+          "kind": "hit",
+          "sourceId": "fixture_attacker",
+          "targetId": "yPi5Dwvud",
+          "abilityId": "fixture_resolved_strike_2",
+          "x": 580,
+          "y": 853.8666666666658,
+          "damage": 26,
+          "critical": false,
+          "zoneId": "arena",
+          "fx": 1,
+          "fy": 0
+        }
+      },
+      "walk": "walk_1_down",
+      "casts": [
+        {
+          "ability": "kim_quang_ho_tran",
+          "body": "lotus_down",
+          "event": 12
+        },
+        {
+          "ability": "bat_dong_minh_vuong",
+          "body": "lotus_down",
+          "event": 14
+        },
+        {
+          "ability": "tam_gioi_quy_thien",
+          "body": "strike_down",
+          "event": 16
+        }
+      ]
+    },
+    {
+      "direction": "left",
+      "hit": {
+        "body": {
+          "id": "yPi5Dwvud",
+          "x": 496,
+          "y": 770,
+          "depth": 770,
+          "animation": "shaolin-dao-review:idle:left",
+          "frame": "idle_left",
+          "texture": "shaolin-dao-review",
+          "source": "/assets/shaolin-dao-preview-v01/review.png",
+          "filterMode": 0,
+          "origin": [
+            0.5,
+            0.8055555555555556
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "alpha": 1,
+          "playing": true,
+          "hp": 600,
+          "label": {
+            "text": "Renovation 1",
+            "visible": true,
+            "resolution": 2,
+            "fontFamily": "Segoe UI, Tahoma, Arial, sans-serif"
+          },
+          "healthBarVisible": true
+        },
+        "effect": {
+          "id": 20,
+          "target": "yPi5Dwvud",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 464,
+          "protocolVersion": 39,
+          "id": 20,
+          "kind": "hit",
+          "sourceId": "fixture_attacker",
+          "targetId": "yPi5Dwvud",
+          "abilityId": "fixture_resolved_strike_3",
+          "x": 496.133333333334,
+          "y": 770,
+          "damage": 26,
+          "critical": false,
+          "zoneId": "arena",
+          "fx": 1,
+          "fy": 0
+        }
+      },
+      "walk": "walk_1_left",
+      "casts": [
+        {
+          "ability": "kim_quang_ho_tran",
+          "body": "lotus_left",
+          "event": 21
+        },
+        {
+          "ability": "bat_dong_minh_vuong",
+          "body": "lotus_left",
+          "event": 23
+        },
+        {
+          "ability": "tam_gioi_quy_thien",
+          "body": "strike_left",
+          "event": 25
+        }
+      ]
+    },
+    {
+      "direction": "up",
+      "hit": {
+        "body": {
+          "id": "yPi5Dwvud",
+          "x": 580,
+          "y": 686,
+          "depth": 686,
+          "animation": "shaolin-dao-review:idle:up",
+          "frame": "idle_up",
+          "texture": "shaolin-dao-review",
+          "source": "/assets/shaolin-dao-preview-v01/review.png",
+          "filterMode": 0,
+          "origin": [
+            0.5,
+            0.8055555555555556
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "alpha": 1,
+          "playing": true,
+          "hp": 600.31201171875,
+          "label": {
+            "text": "Renovation 1",
+            "visible": true,
+            "resolution": 2,
+            "fontFamily": "Segoe UI, Tahoma, Arial, sans-serif"
+          },
+          "healthBarVisible": true
+        },
+        "effect": {
+          "id": 29,
+          "target": "yPi5Dwvud",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 646,
+          "protocolVersion": 39,
+          "id": 29,
+          "kind": "hit",
+          "sourceId": "fixture_attacker",
+          "targetId": "yPi5Dwvud",
+          "abilityId": "fixture_resolved_strike_4",
+          "x": 580,
+          "y": 686.1333333333342,
+          "damage": 26,
+          "critical": false,
+          "zoneId": "arena",
+          "fx": 1,
+          "fy": 0
+        }
+      },
+      "walk": "walk_1_up",
+      "casts": [
+        {
+          "ability": "kim_quang_ho_tran",
+          "body": "lotus_up",
+          "event": 30
+        },
+        {
+          "ability": "bat_dong_minh_vuong",
+          "body": "lotus_up",
+          "event": 32
+        },
+        {
+          "ability": "tam_gioi_quy_thien",
+          "body": "strike_up",
+          "event": 34
+        }
+      ]
+    }
+  ],
+  "bosses": [
+    {
+      "form": "dong_ta",
+      "direction": "right",
+      "ability": "dan_chi_than_cong",
+      "idle": "idle_right_0",
+      "hit": {
+        "body": {
+          "id": "dong_ta",
+          "pose": "idle",
+          "direction": "right",
+          "locomotion": true,
+          "name": "dong_ta:dong_ta",
+          "texture": "renovated-dong_ta",
+          "source": "/assets/renovation-v1/runtime/dong_ta.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            463,
+            479.280029296875
+          ],
+          "frame": "idle_right_0",
+          "x": 800,
+          "y": 656.6400146484375,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 657.1400146484375,
+          "visible": true
+        },
+        "effect": {
+          "id": 46,
+          "target": "dong_ta",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 899,
+          "protocolVersion": 39,
+          "id": 46,
+          "kind": "hit",
+          "sourceId": "yPi5Dwvud",
+          "targetId": "dong_ta",
+          "abilityId": "fixture_resolved_strike_5",
+          "x": 800,
+          "y": 656.64,
+          "damage": 28,
+          "critical": false,
+          "zoneId": "arena",
+          "fx": -1,
+          "fy": 0
+        }
+      },
+      "release": {
+        "texture": "renovated-action-dong_ta_actions",
+        "frame": "right_1",
+        "source": "/assets/renovation-v3/actors/dong_ta_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "form": "dong_ta",
+      "direction": "down",
+      "ability": "dan_chi_than_cong",
+      "idle": "idle_down_0",
+      "hit": {
+        "body": {
+          "id": "dong_ta",
+          "pose": "idle",
+          "direction": "down",
+          "locomotion": true,
+          "name": "dong_ta:dong_ta",
+          "texture": "renovated-dong_ta",
+          "source": "/assets/renovation-v1/runtime/dong_ta.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            683,
+            259.280029296875
+          ],
+          "frame": "idle_down_0",
+          "x": 800,
+          "y": 656.6400146484375,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 657.1400146484375,
+          "visible": true
+        },
+        "effect": {
+          "id": 49,
+          "target": "dong_ta",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 966,
+          "protocolVersion": 39,
+          "id": 49,
+          "kind": "hit",
+          "sourceId": "yPi5Dwvud",
+          "targetId": "dong_ta",
+          "abilityId": "fixture_resolved_strike_6",
+          "x": 800,
+          "y": 656.64,
+          "damage": 28,
+          "critical": false,
+          "zoneId": "arena",
+          "fx": 0,
+          "fy": -1
+        }
+      },
+      "release": {
+        "texture": "renovated-action-dong_ta_actions",
+        "frame": "down_1",
+        "source": "/assets/renovation-v3/actors/dong_ta_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "form": "dong_ta",
+      "direction": "left",
+      "ability": "dan_chi_than_cong",
+      "idle": "idle_left_0",
+      "hit": {
+        "body": {
+          "id": "dong_ta",
+          "pose": "idle",
+          "direction": "left",
+          "locomotion": true,
+          "name": "dong_ta:dong_ta",
+          "texture": "renovated-dong_ta",
+          "source": "/assets/renovation-v1/runtime/dong_ta.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            903,
+            479.280029296875
+          ],
+          "frame": "idle_left_0",
+          "x": 800,
+          "y": 656.6400146484375,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 657.1400146484375,
+          "visible": true
+        },
+        "effect": {
+          "id": 52,
+          "target": "dong_ta",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 1022,
+          "protocolVersion": 39,
+          "id": 52,
+          "kind": "hit",
+          "sourceId": "yPi5Dwvud",
+          "targetId": "dong_ta",
+          "abilityId": "fixture_resolved_strike_7",
+          "x": 800,
+          "y": 656.64,
+          "damage": 28,
+          "critical": false,
+          "zoneId": "arena",
+          "fx": 1,
+          "fy": 0
+        }
+      },
+      "release": {
+        "texture": "renovated-action-dong_ta_actions",
+        "frame": "left_1",
+        "source": "/assets/renovation-v3/actors/dong_ta_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "form": "dong_ta",
+      "direction": "up",
+      "ability": "dan_chi_than_cong",
+      "idle": "idle_up_0",
+      "hit": {
+        "body": {
+          "id": "dong_ta",
+          "pose": "idle",
+          "direction": "up",
+          "locomotion": true,
+          "name": "dong_ta:dong_ta",
+          "texture": "renovated-dong_ta",
+          "source": "/assets/renovation-v1/runtime/dong_ta.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            683,
+            699.280029296875
+          ],
+          "frame": "idle_up_0",
+          "x": 800,
+          "y": 656.6400146484375,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 657.1400146484375,
+          "visible": true
+        },
+        "effect": {
+          "id": 56,
+          "target": "dong_ta",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 1081,
+          "protocolVersion": 39,
+          "id": 56,
+          "kind": "hit",
+          "sourceId": "yPi5Dwvud",
+          "targetId": "dong_ta",
+          "abilityId": "fixture_resolved_strike_8",
+          "x": 800,
+          "y": 656.64,
+          "damage": 28,
+          "critical": false,
+          "zoneId": "arena",
+          "fx": 0,
+          "fy": 1
+        }
+      },
+      "release": {
+        "texture": "renovated-action-dong_ta_actions",
+        "frame": "up_1",
+        "source": "/assets/renovation-v3/actors/dong_ta_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    }
+  ],
+  "impacts": [
+    {
+      "critical": false,
+      "local": {
+        "effects": [
+          {
+            "id": 39,
+            "target": "impact_0",
+            "critical": false,
+            "spark": "spark-0",
+            "outline": true
+          },
+          {
+            "id": 40,
+            "target": "impact_1",
+            "critical": false,
+            "spark": "spark-0",
+            "outline": true
+          },
+          {
+            "id": 41,
+            "target": "impact_2",
+            "critical": false,
+            "spark": "spark-0",
+            "outline": true
+          }
+        ],
+        "events": [
+          {
+            "tick": 800,
+            "protocolVersion": 39,
+            "id": 39,
+            "kind": "hit",
+            "sourceId": "yPi5Dwvud",
+            "targetId": "impact_0",
+            "abilityId": "cai_bang_bong",
+            "x": 632,
+            "y": 770,
+            "damage": 90,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 1,
+            "fy": 0
+          },
+          {
+            "tick": 800,
+            "hitIndex": 1,
+            "protocolVersion": 39,
+            "id": 40,
+            "kind": "hit",
+            "sourceId": "yPi5Dwvud",
+            "targetId": "impact_1",
+            "abilityId": "cai_bang_bong",
+            "x": 656,
+            "y": 751,
+            "damage": 45,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 1,
+            "fy": 0
+          },
+          {
+            "tick": 800,
+            "hitIndex": 2,
+            "protocolVersion": 39,
+            "id": 41,
+            "kind": "hit",
+            "sourceId": "yPi5Dwvud",
+            "targetId": "impact_2",
+            "abilityId": "cai_bang_bong",
+            "x": 656,
+            "y": 789,
+            "damage": 45,
+            "critical": false,
+            "zoneId": "arena",
+            "fx": 1,
+            "fy": 0
+          }
+        ]
+      }
+    },
+    {
+      "critical": true,
+      "local": {
+        "effects": [
+          {
+            "id": 43,
+            "target": "impact_0",
+            "critical": true,
+            "spark": "spark-0",
+            "ring": "crack-0",
+            "outline": true
+          },
+          {
+            "id": 44,
+            "target": "impact_1",
+            "critical": true,
+            "spark": "spark-0",
+            "outline": true
+          },
+          {
+            "id": 45,
+            "target": "impact_2",
+            "critical": true,
+            "spark": "spark-0",
+            "outline": true
+          }
+        ],
+        "events": [
+          {
+            "tick": 855,
+            "protocolVersion": 39,
+            "id": 43,
+            "kind": "hit",
+            "sourceId": "yPi5Dwvud",
+            "targetId": "impact_0",
+            "abilityId": "cai_bang_bong",
+            "x": 632,
+            "y": 770,
+            "damage": 148,
+            "critical": true,
+            "zoneId": "arena",
+            "fx": 1,
+            "fy": 0
+          },
+          {
+            "tick": 855,
+            "hitIndex": 1,
+            "protocolVersion": 39,
+            "id": 44,
+            "kind": "hit",
+            "sourceId": "yPi5Dwvud",
+            "targetId": "impact_1",
+            "abilityId": "cai_bang_bong",
+            "x": 656,
+            "y": 751,
+            "damage": 74,
+            "critical": true,
+            "zoneId": "arena",
+            "fx": 1,
+            "fy": 0
+          },
+          {
+            "tick": 855,
+            "hitIndex": 2,
+            "protocolVersion": 39,
+            "id": 45,
+            "kind": "hit",
+            "sourceId": "yPi5Dwvud",
+            "targetId": "impact_2",
+            "abilityId": "cai_bang_bong",
+            "x": 656,
+            "y": 789,
+            "damage": 74,
+            "critical": true,
+            "zoneId": "arena",
+            "fx": 1,
+            "fy": 0
+          }
+        ]
+      }
+    }
+  ],
+  "lastFixture": {
+    "accepted": true,
+    "hp": 12992,
+    "zoneId": "arena",
+    "events": [
+      {
+        "id": 62,
+        "tick": 1081,
+        "kind": "hit",
+        "sourceId": "yPi5Dwvud",
+        "targetId": "dong_ta",
+        "abilityId": "fixture_resolved_strike_8",
+        "damage": 28,
+        "critical": false,
+        "x": 800,
+        "y": 656.64,
+        "fx": 0,
+        "fy": 1
+      }
+    ]
+  },
+  "failure": {
+    "message": "TimeoutError: page.waitForFunction: Timeout 5500ms exceeded.",
+    "events": [
+      {
+        "tick": 939,
+        "protocolVersion": 39,
+        "id": 47,
+        "kind": "hit",
+        "sourceId": "dong_ta",
+        "targetId": "yPi5Dwvud",
+        "abilityId": "dan_chi_than_cong",
+        "x": 910,
+        "y": 656.64,
+        "damage": 28,
+        "critical": false,
+        "zoneId": "arena",
+        "fx": 0.994867065053536,
+        "fy": -0.10119052757923232
+      },
+      {
+        "tick": 940,
+        "protocolVersion": 39,
+        "id": 48,
+        "kind": "hit",
+        "sourceId": "dong_ta",
+        "targetId": "vqIdk3e_-",
+        "abilityId": "dan_chi_than_cong",
+        "x": 910,
+        "y": 721.64,
+        "damage": 30,
+        "critical": false,
+        "zoneId": "arena",
+        "fx": 0.9121754155144439,
+        "fy": 0.4097999650208032
+      },
+      {
+        "tick": 966,
+        "protocolVersion": 39,
+        "id": 49,
+        "kind": "hit",
+        "sourceId": "yPi5Dwvud",
+        "targetId": "dong_ta",
+        "abilityId": "fixture_resolved_strike_6",
+        "x": 800,
+        "y": 656.64,
+        "damage": 28,
+        "critical": false,
+        "zoneId": "arena",
+        "fx": 0,
+        "fy": -1
+      },
+      {
+        "tick": 1004,
+        "protocolVersion": 39,
+        "id": 50,
+        "kind": "hit",
+        "sourceId": "dong_ta",
+        "targetId": "yPi5Dwvud",
+        "abilityId": "dan_chi_than_cong",
+        "x": 800,
+        "y": 766.64,
+        "damage": 28,
+        "critical": false,
+        "zoneId": "arena",
+        "fx": -0.14941081283160296,
+        "fy": 0.9887752065100539
+      },
+      {
+        "tick": 1004,
+        "protocolVersion": 39,
+        "id": 51,
+        "kind": "hit",
+        "sourceId": "dong_ta",
+        "targetId": "vqIdk3e_-",
+        "abilityId": "dan_chi_than_cong",
+        "x": 735,
+        "y": 766.64,
+        "damage": 30,
+        "critical": false,
+        "zoneId": "arena",
+        "fx": -0.591803454927071,
+        "fy": 0.8060822977440841
+      },
+      {
+        "tick": 1022,
+        "protocolVersion": 39,
+        "id": 52,
+        "kind": "hit",
+        "sourceId": "yPi5Dwvud",
+        "targetId": "dong_ta",
+        "abilityId": "fixture_resolved_strike_7",
+        "x": 800,
+        "y": 656.64,
+        "damage": 28,
+        "critical": false,
+        "zoneId": "arena",
+        "fx": 1,
+        "fy": 0
+      },
+      {
+        "tick": 1062,
+        "protocolVersion": 39,
+        "id": 53,
+        "kind": "hit",
+        "sourceId": "dong_ta",
+        "targetId": "yPi5Dwvud",
+        "abilityId": "dan_chi_than_cong",
+        "x": 690,
+        "y": 656.64,
+        "damage": 28,
+        "critical": false,
+        "zoneId": "arena",
+        "fx": -0.9880378153974056,
+        "fy": -0.15421178730798166
+      },
+      {
+        "tick": 1063,
+        "protocolVersion": 39,
+        "id": 54,
+        "kind": "hit",
+        "sourceId": "dong_ta",
+        "targetId": "vqIdk3e_-",
+        "abilityId": "dan_chi_than_cong",
+        "x": 690,
+        "y": 591.64,
+        "damage": 30,
+        "critical": false,
+        "zoneId": "arena",
+        "fx": -0.8031982462525624,
+        "fy": -0.5957118239692814
+      },
+      {
+        "tick": 1064,
+        "protocolVersion": 39,
+        "id": 55,
+        "kind": "effect",
+        "sourceId": "dong_ta",
+        "targetId": "",
+        "abilityId": "banter_dong_ta_0",
+        "x": 800,
+        "y": 656.64,
+        "damage": 0,
+        "critical": false,
+        "zoneId": "arena",
+        "stage": "boss_banter"
+      },
+      {
+        "tick": 1081,
+        "protocolVersion": 39,
+        "id": 56,
+        "kind": "hit",
+        "sourceId": "yPi5Dwvud",
+        "targetId": "dong_ta",
+        "abilityId": "fixture_resolved_strike_8",
+        "x": 800,
+        "y": 656.64,
+        "damage": 28,
+        "critical": false,
+        "zoneId": "arena",
+        "fx": 0,
+        "fy": 1
+      }
+    ],
+    "presentation": {
+      "hero": {
+        "id": "yPi5Dwvud",
+        "x": 990,
+        "y": 616,
+        "depth": 616,
+        "animation": "hero_cai_bang:idle:left",
+        "frame": "idle_left_0",
+        "texture": "renovated-bong-combo-body",
+        "source": "/@fs/D:/Projects/volam-hero-defense/assets/exports/cai-bang-bong-reach/bong.png",
+        "filterMode": 0,
+        "origin": [
+          0.5,
+          0.734375
+        ],
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "alpha": 1,
+        "playing": false,
+        "hp": 411.6000061035156,
+        "pose": "idle",
+        "label": {
+          "text": "Renovation 1",
+          "visible": true,
+          "resolution": 2,
+          "fontFamily": "Segoe UI, Tahoma, Arial, sans-serif"
+        },
+        "healthBarVisible": true
+      },
+      "effects": [],
+      "zone": "arena",
+      "zoom": 2
+    }
+  }
+}

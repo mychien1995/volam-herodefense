@@ -1,0 +1,70 @@
+{
+  "status": "PASS",
+  "branch": "wip/m3d/skill-revise",
+  "combo": [
+    "thrust",
+    "sweep",
+    "overhead"
+  ],
+  "art": {
+    "facings": 8,
+    "newBankCels": 96,
+    "clips": 16,
+    "reviewedInputBytesPreserved": true,
+    "retainedThrust": true,
+    "retainedLightning": true,
+    "nativeStatus": "PASS"
+  },
+  "focusedTests": 53,
+  "final": {
+    "command": "pnpm check:final --config playwright.skill-revise.config.ts",
+    "runId": "d1e2e660-2d59-4633-b812-fbf805821082",
+    "tests": 1273,
+    "testFiles": 128,
+    "assetValidators": 35,
+    "seconds": 701.84,
+    "report": "docs/evidence/skill-revise-thien-su-v06/final/check-workflow/final-timings.json",
+    "status": "PASS"
+  },
+  "twoClient": {
+    "report": "docs/evidence/skill-revise-thien-su-v06/two/skill-revise-game/feedback-v04.json",
+    "attacks": 24,
+    "walkDirections": 3,
+    "naturalCombat": true
+  },
+  "sixClient": {
+    "report": "docs/evidence/skill-revise-thien-su-v06/final/skill-revise-game/feedback-v04.json",
+    "attacks": 24,
+    "naturalCombat": true,
+    "finalAcceptance": true,
+    "observerScope": "Two active renderers for focused directional art; all six resumed for natural combat/readability. Unchanged walking coverage explicitly reused from the fresh two-client run."
+  },
+  "balance": "docs/evidence/skill-revise-thien-su-v06/balance-comparison.json",
+  "artApproval": "Reviewed motion poses and integration approved. Final in-game director feel/art review remains separate.",
+  "manualGame": {
+    "report": "docs/evidence/skill-revise-thien-su-v06/manual-service.json",
+    "status": "READY",
+    "pid": 19704,
+    "command": "node tools/renovation-dev.mjs",
+    "url": "http://127.0.0.1:5529/?revision=thien-su-v06",
+    "health": {
+      "status": "ok",
+      "service": "volam-game-server",
+      "runId": "3ca1c2d7-f762-4a05-aaa4-10672477763f",
+      "milestone": "M3B",
+      "protocolVersion": 48
+    },
+    "endpoint": {
+      "serverUrl": "http://127.0.0.1:2926"
+    },
+    "identity": {
+      "service": "volam-qa-client",
+      "runId": "3ca1c2d7-f762-4a05-aaa4-10672477763f",
+      "serverUrl": "http://127.0.0.1:2926"
+    },
+    "runtimeFrames": 96,
+    "fixtures": "none; normal game",
+    "replacedPid": 34740,
+    "verifiedAt": "2026-11-24T15:15:49.3465970+07:00"
+  }
+}

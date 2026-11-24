@@ -263,10 +263,11 @@ export class KimLuanEncounter {
       const b = w.creeps.get(id);
       if (!b || b.hp <= 0) continue;
       const target = heroes
-        .slice()
+        .filter((h) => !hasStatus(h, 'concealed', w.tick))
         .sort(
           (a, z) => distance(b, a) - distance(b, z) || a.id.localeCompare(z.id),
-        )[0]!;
+        )[0];
+      if (!target) continue;
       const cast = this.casts.get(id);
       if (this.enraged && id === boss?.id) {
         this.move(w, movement, b, target, true);

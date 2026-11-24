@@ -42,6 +42,23 @@ const practice = () =>
     123,
   );
 describe('private practice simulation', () => {
+  it('keeps the hammer beat in practice even while skill cooldowns are refilled', () => {
+    const p = practice();
+    p.addSelected('h', 'Thử nhịp búa', 'con_luan', 'con_luan_thien_su');
+    const attacks: { tick: number; stage: string | undefined }[] = [];
+    for (let i = 1; i <= 25; i++) {
+      p.input('h', i, { kind: 'basic' });
+      p.step();
+      for (const { event } of p.events)
+        if (event.kind === 'attack')
+          attacks.push({ tick: p.tick, stage: event.stage });
+    }
+    expect(attacks).toEqual([
+      { tick: 1, stage: 'thrust' },
+      { tick: 13, stage: 'sweep' },
+      { tick: 25, stage: 'overhead' },
+    ]);
+  });
   it('clears real summons and old-school damage when switching, across every legal branch', () => {
     const p = practice(),
       h = p.addSelected('h', 'Thử triệu hồi', 'ngu_doc', 'ngu_doc_co_su'),

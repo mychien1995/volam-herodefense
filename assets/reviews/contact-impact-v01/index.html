@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Điểm chạm V01 · Võ Lâm Hero Defense</title>
+  <style>
+    :root { color-scheme: dark; --paper:#11131a; --panel:#1a1e28; --line:#353b4b; --text:#f1eadb; --sub:#bdc2ce; --accent:#eabe84; }
+    *, *::before, *::after { box-sizing:border-box; }
+    body { margin:0; background:var(--paper); color:var(--text); font:16px/1.5 Inter, system-ui, sans-serif; }
+    main { max-width:1136px; margin:auto; padding:2.4rem clamp(1rem, 4vw, 3rem) 3rem; }
+    header { margin-bottom:1.6rem; }
+    header p { margin:0 0 .15rem; color:var(--sub); font-size:.86rem; }
+    h1 { margin:0 0 .45rem; font:600 clamp(2rem, 4vw, 3.4rem)/1.05 Georgia, serif; }
+    header .summary { font-size:.98rem; }
+    .filters { display:flex; flex-wrap:wrap; gap:.55rem; border-bottom:1px solid var(--line); padding-bottom:.95rem; margin-bottom:1rem; }
+    button, select { font:inherit; color:var(--text); background:#202530; border:1px solid var(--line); border-radius:6px; min-height:40px; padding:.38rem .65rem; }
+    button { cursor:pointer; }
+    button[aria-pressed="true"] { border-color:var(--accent); color:var(--accent); background:#24222a; }
+    button:hover, select:hover { border-color:var(--accent); }
+    :focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
+    .controls { display:grid; grid-template-columns:minmax(210px,1.55fr) minmax(140px,1fr) auto; align-items:end; gap:.75rem; }
+    label { display:grid; align-items:start; gap:.3rem; color:var(--sub); font-size:.85rem; }
+    select { width:100%; }
+    .info { padding:.9rem 0 1rem; display:grid; gap:.22rem; }
+    .info p { margin:0; }
+    #palette { color:var(--accent); }
+    #art-note, #gameplay, #sample { color:var(--sub); }
+    #sample { font-size:.84rem; margin:.65rem 0 0; }
+    .compare { display:grid; grid-template-columns:1fr 1fr; gap:.9rem; }
+    figure { margin:0; overflow:hidden; border:1px solid var(--line); border-radius:10px; background:var(--panel); }
+    figcaption { display:flex; justify-content:space-between; gap:1rem; padding:.55rem .8rem; font-size:.85rem; }
+    .box { position:relative; overflow:hidden; width:100%; aspect-ratio:16/9; background:#0d1017; }
+    .context { display:block; width:100%; height:100%; object-fit:contain; }
+    #stamp { pointer-events:none; position:absolute; image-rendering:pixelated; display:block; width:26.666667%; height:auto; }
+    .asset-line { margin-top:.9rem; display:flex; gap:1rem; align-items:center; }
+    #art {width:88px; height:88px; image-rendering:pixelated; background:#1c202b; border:1px solid var(--line); border-radius:8px;}
+    a {color:var(--accent); text-underline-offset:3px;}
+    a:hover {color:var(--text);}
+    .details { margin-top:1.3rem; border-top:1px solid var(--line); padding-top:.9rem; color:var(--sub); font-size:.86rem; }
+    @media (max-width:735px) { .controls {grid-template-columns:1fr 1fr;} .controls label:first-child{grid-column:1 / -1;} .compare {grid-template-columns:1fr;} }
+    @media (max-width:390px) { .controls {grid-template-columns:1fr;} }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p>Võ Lâm Hero Defense</p>
+      <h1>Điểm chạm · Preview V01</h1>
+      <p class="summary">30 mục đối chiếu · 35 cel trên khung trúng đòn của bản production</p>
+    </header>
+    <nav id="schools" class="filters" aria-label="Môn phái"></nav>
+    <div class="controls">
+      <label>Đòn đánh hoặc kỹ năng <select id="case"></select></label>
+      <label>Mẫu điểm chạm <select id="variant"></select></label>
+      <label>Mục tiêu <select id="target"><option value="creep">Creep</option><option value="ly_mac_sau">Lý Mạc Sầu</option></select></label>
+    </div>
+    <div class="info">
+      <p id="palette"></p>
+      <p id="art-note"></p>
+      <p id="gameplay"></p>
+    </div>
+    <div class="compare">
+      <figure><figcaption><b>Bản đang chạy</b><span id="damage"></span></figcaption><div class="box"><img class="context" id="baseline" alt="Khung hit production"></div></figure>
+      <figure><figcaption><b>Ảnh ghép preview</b><span>Zoom gốc</span></figcaption><div class="box"><img class="context" id="backdrop" alt="Cùng khung hit production"><img id="stamp" alt=""></div></figure>
+    </div>
+    <p id="sample" aria-live="polite"></p>
+    <div class="asset-line">
+      <img id="art" alt="Cel PNG nền trong">
+      <div><a id="png" target="_blank" rel="noopener">Mở cel PNG</a><br><a href="contact-sheet.png">Tổng quan 5 phái</a></div>
+    </div>
+    <p class="details">Ảnh ghép thêm cel ở điểm chạm và giữ tia hiện có trong ảnh nền. Khung hình dùng để duyệt nét, màu và độ phủ. Cel V01 là tư thế tĩnh tại lúc trúng.</p>
+  </main>
+  <script src="preview-data.js"></script>
+  <script src="preview.js"></script>
+</body>
+</html>

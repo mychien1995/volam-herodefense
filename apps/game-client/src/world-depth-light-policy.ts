@@ -25,7 +25,20 @@ export function depthLightStyle(
     Record<string, { skillId: string; kind: string }> | undefined;
   const asset = raster?.[key];
   if (asset?.kind === 'character') return;
-  const text = source.name + ':' + key + ':' + source.frame.name;
+  const text =
+    source.name +
+    ':' +
+    key +
+    ':' +
+    source.frame.name +
+    ':' +
+    (asset?.skillId ?? '');
+  if (
+    /khang_long_huu_hoi|kim_cang_bat_hoai|kim_quang_ho_tran|toan_phong_thoai|hoanh_tao_cuoc|ca_diep_thoai/.test(
+      text,
+    )
+  )
+    return;
   const fireIds = [
     'cai_bang_chuong',
     'hoa_van_chuong',

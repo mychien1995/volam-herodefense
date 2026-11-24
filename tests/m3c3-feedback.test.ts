@@ -121,17 +121,19 @@ describe('M3C3 feedback authoritative trial', () => {
       'thrust',
     );
   });
-  it('Hỏa Vân releases three simultaneous fixed divergent directions', () => {
+  it('Hỏa Long dash locks direction and resolves a single endpoint burst', () => {
     const f = fixture();
     f.cast();
-    const shots = [...f.world.projectiles.values()];
-    expect(shots).toHaveLength(3);
-    const directions = shots.map((p) => [p.vx, p.vy]);
-    expect(new Set(shots.map((p) => p.vy)).size).toBe(3);
-    f.enemies[0]!.y = 500;
-    f.steps(2);
-    expect(shots.map((p) => [p.vx, p.vy])).toEqual(directions);
+    const action = f.world.actions![0]!;
+    expect(action.effect.mode).toBe('dash');
+    expect(action.fx).toBe(1);
+    expect(action.fy).toBe(0);
+    f.hero.fy = 1;
+    f.steps(20);
+    expect(f.hero.y).toBe(300);
+    expect(f.events.filter((e) => e.stage === 'dash_impact')).toHaveLength(1);
   });
+
   it('boomerang hits once per leg, captures owner at turnaround and never tracks afterward', () => {
     const f = fixture();
     f.hero.basicId = 'thien_son_phien';
@@ -227,7 +229,7 @@ describe('M3C3 feedback authoritative trial', () => {
     ).toHaveLength(12);
     expect(f.hits().length).toBeGreaterThanOrEqual(12);
   });
-  it('Chiết Mai gives bounded active CDR and preserves cooldown debt; Đao A has no cooldown', () => {
+  it('Phong Quyển replaces the old buff while Đao A keeps its zero cooldown', () => {
     const f = fixture('chiet_mai_thu');
     f.hero.schoolId = 'thien_son';
     initializeProgression(f.hero, f.config);
@@ -237,19 +239,23 @@ describe('M3C3 feedback authoritative trial', () => {
     change({ action: 'upgrade', skillId: 'chiet_mai_thu' });
     const before = characterStats(f.hero, f.config).total;
     f.cast();
-    const after = characterStats(f.hero, f.config, f.world.tick).total;
-    expect(after.cooldownReduction).toBeCloseTo(0.2);
-    expect(after.attackSpeed).toBeGreaterThan(before.attackSpeed);
-    const a = f.config.basics['thien_son_dao']!;
-    f.config.progression!.schools['thien_son']!.base.attackSpeed = 1000;
-    expect(abilityCooldown(f.hero, a, f.config, f.world.tick, true)).toBe(0);
-    const debt = f.hero.skillCooldowns[0];
-    change({ action: 'reset' });
-    expect(f.hero.skillCooldowns[0]).toBe(debt);
+    f.steps(30);
+    expect(f.hero.x).toBeLessThan(300);
     expect(
       characterStats(f.hero, f.config, f.world.tick).total.cooldownReduction,
+    ).toBe(before.cooldownReduction);
+    expect(
+      abilityCooldown(
+        f.hero,
+        f.config.basics.thien_son_dao!,
+        f.config,
+        f.world.tick,
+        true,
+      ),
     ).toBe(0);
+    expect(f.events.filter((e) => e.kind === 'cast')).toHaveLength(1);
   });
+
   it('two air blades apply slow', () => {
     const g = fixture('truy_hon_dao');
     g.cast();
@@ -290,11 +296,11 @@ describe('M3C3 feedback authoritative trial', () => {
     const e = f.enemies[0]!;
     f.hero.x = 800;
     f.steps(60);
-    expect(e.x).toBeLessThanOrEqual(492.001);
+    expect(e.x).toBeLessThanOrEqual(477.017);
     expect(e.x).toBeGreaterThan(380);
     e.forcedMovementImmune = true;
     f.steps(20);
-    expect(e.x).toBeLessThanOrEqual(492.001);
+    expect(e.x).toBeLessThanOrEqual(477.017);
     const g = fixture('thai_cuc_tran');
     g.config.creep.speed = 240;
     g.config.creep.detectionRange = 1000;
@@ -343,10 +349,10 @@ describe('M3C3 feedback authoritative trial', () => {
     f.hero.skillIds![0] = 'vo_dang_quyen';
     f.hero.basicId = 'vo_dang_quyen';
     f.hero.x = 430;
-    f.enemies[0]!.x = 490;
+    f.enemies[0]!.x = 470;
     f.input('basic');
     f.steps();
-    expect(f.enemies[0]!.x).toBeLessThanOrEqual(492.001);
+    expect(f.enemies[0]!.x).toBeLessThanOrEqual(477.017);
     const area = f.world.areas![0]!;
     f.world.areas!.push({
       ...area,
@@ -358,7 +364,7 @@ describe('M3C3 feedback authoritative trial', () => {
     f.config.creep.detectionRange = 1000;
     f.hero.x = 800;
     f.steps(10);
-    expect(f.enemies[0]!.x).toBeLessThanOrEqual(492.001);
+    expect(f.enemies[0]!.x).toBeLessThanOrEqual(477.017);
   });
   it('new projectiles, chains, shields and formations cancel on owner removal without resource resets', () => {
     for (const id of [

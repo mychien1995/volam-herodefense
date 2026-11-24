@@ -1,3 +1,11 @@
+## Thiền Sư A · nhịp chậm và sửa sprite 2026-11-24
+
+Director chọn “Chậm cả animation và nhịp ra đòn”. Giới hạn A thủ công/tự động của Thiền Sư là 12 tick (0,4 giây), gồm Phòng test; giữ damage từng thức. Quạt xuất lại đúng mật độ đầu/thân, timing ba thức 375ms. Điều này thay phần A không giới hạn nhịp trước đó. [Hợp đồng v07](docs/SKILL_REVISE_THIEN_SU_V07_2026_11_24.md).
+
+## Thiền Sư A · duyệt 2026-11-24
+
+Director duyệt tích hợp ba thức **chọc → quạt hai tay → đập**, kèm lôi ảnh hiện tại. Mẫu quạt/đập theo ảnh động tác mới thay bản đập v05; bản hai thức trước đó là lịch sử. Giữ hệ số từng thức và quyền xử lý combat của server. [Phạm vi nguồn/runtime và kết quả](docs/SKILL_REVISE_THIEN_SU_V06_2026_11_24.md).
+
 ## Âm thanh đã duyệt và tích hợp M3D · 2026-11-22
 
 Đã duyệt âm Côn Luân, Ngũ Độc, Đường Môn; giữ byte theo approval lock. Bốn phái còn lại dùng âm MP3 người dùng cung cấp, chuyển sang OGG và giữ nguyên mapping/mốc phát; bộ âm tổng hợp thử của bốn phái bị từ chối. Cài đặt tách nhạc nền và âm thanh game; mức SFX tăng nhẹ qua migration một lần. Người dùng yêu cầu tích hợp vào `milestone/m3d`. [Phạm vi và kiểm chứng](docs/AUDIO_M3D_INTEGRATION.md).
@@ -611,3 +619,8 @@ Director duyệt bản Phaser sau khi chỉnh chiều đao ảnh, hạ vệt ph�
 ## VFX Hoàn Nhan Hồng Liệt v05 · 2026-11-13
 
 Director approved the v05 preview of Dung Nham Liệt Địa, Vạn Lý Nham Hỏa, Hỏa Sơn Bạo Phát, Liệt Diễm Phong Tỏa and Hoành Tảo Đại Đao. The live match renderer loads v05 by default. Server cue geometry and combat rules continue to govern all five abilities. [Editable source, atlas and review notes](assets/source/bosses/hoan_nhan_hong_liet_vfx_v05/README.md).
+
+
+## 2026-11-23 — approved skill revise integration
+
+The director authorized the twelve-branch revision and selected the crescent Phong Quyển projectile. [Canonical integration contract and trial tuning](docs/SKILL_REVISE_INTEGRATION_2026_11_23.md) supersede the older skill behavior in this scope. Stable IDs, server authority and unrelated campaign/economy rules remain in force. Old active Q Ngũ Lôi stance is replaced by a reactive passive; E Lôi Đình Chấn Vực is a rename only. Gameplay feel awaits the director’s Phòng test review.

@@ -2,6 +2,7 @@ import { hurt } from './combat.js';
 import { blocked, direction, distance, segmentRect } from './geometry.js';
 import { applyStatus } from './status.js';
 import type { Hero, Projectile, SimulationConfig, World } from './types.js';
+import { opponents, targetRadius } from './opponents.js';
 
 export function recallSpinningProjectile(shot: Projectile): void {
   shot.leg = 'return';
@@ -76,11 +77,11 @@ export function stepSpinningProjectile(
     return;
   }
   owner.mana -= drain.mana;
-  for (const target of world.creeps.values()) {
+  for (const target of opponents(world, owner.id)) {
     if (
       target.hp <= 0 ||
       distance(shot, target) >
-        shot.effect.radius + (target.stats ?? config.creep).radius ||
+        shot.effect.radius + targetRadius(world, target, config) ||
       config.collision.some(
         (wall) => segmentRect(shot, target, wall) !== undefined,
       )

@@ -80,7 +80,7 @@ describe('renovated actions retain semantic phases and registrations', () => {
     expect(fx).toHaveLength(7);
     expect(fx.map((c) => c.at)).toEqual(
       [0, 1, 2, 3, 4, 5, 6].map(
-        (i) => (i * e.spacingTicks * 1000) / m1Config.tickRate,
+        (i) => i * ((e.spacingTicks * 1000) / m1Config.tickRate),
       ),
     );
     for (const cue of fx) {

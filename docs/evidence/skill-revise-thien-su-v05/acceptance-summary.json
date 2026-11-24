@@ -1,0 +1,118 @@
+{
+  "status": "PASS_WITH_SCOPED_BROWSER_RETRY",
+  "completedAt": "2026-11-23T11:37:37.152910+00:00",
+  "branch": "wip/m3d/skill-revise",
+  "serverCombo": [
+    "thrust",
+    "overhead"
+  ],
+  "unitTests": 1271,
+  "originalFinalCommand": "pnpm check:final --config playwright.skill-revise.config.ts",
+  "originalFinalReport": "final/check-workflow/final-timings.json",
+  "originalFinalStatus": "FAIL",
+  "originalFailure": "Six-window run sampled only3/4 unchanged walk cels. Preserve FAIL. All non-browser stages passed.",
+  "retiming": {
+    "reproduction": "pose-window-reproduction.log",
+    "initialMs": 600,
+    "serverPoseMs": 300,
+    "finalSlamMs": 270,
+    "thrustPlaybackMs": 300,
+    "damageTimingChanged": false,
+    "nativeReport": "../../../assets/source/skill-revise-thien-su-v05/validation.json",
+    "currentAffectedRegressions": {
+      "command": "node node_modules/vitest/vitest.mjs run tests/con-luan.test.ts tests/skill-revise.test.ts tests/skill-revise-runtime-assets.test.ts",
+      "status": "PASS",
+      "tests": 51,
+      "observedStartLocal": "2026-11-23 18:25:30 Asia/Saigon",
+      "durationSeconds": 3.13
+    },
+    "clientRebuild": "retimed-client-build.log"
+  },
+  "browser": {
+    "path": "contact-final/skill-revise-game/feedback-v04.json",
+    "status": "PASS",
+    "players": 6,
+    "attackTakes": 16,
+    "thrustCelsPerTake": 6,
+    "slamCelsPerTake": 10,
+    "facings": 8,
+    "contactFX": true,
+    "naturalDamageDeathRewardsCleanup": true,
+    "renderClientsDuringArt": 2,
+    "renderClientsDuringCombat": 6,
+    "walkingCoverage": {
+      "path": "docs/evidence/skill-revise-thien-su-v05/two/skill-revise-game/feedback-v04.json",
+      "walking": [
+        {
+          "direction": "left",
+          "frames": [
+            "walk_3_left",
+            "walk_2_left",
+            "walk_1_left",
+            "walk_0_left"
+          ],
+          "delta": {
+            "x": -330.66666666666504,
+            "y": 0
+          }
+        },
+        {
+          "direction": "down_left",
+          "frames": [
+            "walk_2_down_left",
+            "walk_1_down_left",
+            "walk_3_down_left",
+            "walk_0_down_left"
+          ],
+          "delta": {
+            "x": -204.829821818779,
+            "y": 199.49648848544575
+          }
+        },
+        {
+          "direction": "up_left",
+          "frames": [
+            "walk_0_up_left",
+            "walk_3_up_left",
+            "walk_1_up_left",
+            "walk_2_up_left"
+          ],
+          "delta": {
+            "x": -213.93439131844048,
+            "y": -203.2677246517743
+          }
+        }
+      ],
+      "note": "Walking rasters unchanged by V05; fresh two-client coverage retained. Six-client retry covers new A and natural combat."
+    },
+    "scope": "Every new A cel and natural combat checked in production; unchanged walking uses explicit fresh two-client evidence."
+  },
+  "balance": {
+    "path": "balance-comparison.json",
+    "monkCases": 24,
+    "minPercent": 1.7256768818803891,
+    "maxPercent": 12.041836098523252,
+    "medianPercent": 7.32344625661524,
+    "note": "Existing fixed-seed exposure diagnostic, not campaign/PVP approval; per-strike values retained."
+  },
+  "manualGame": {
+    "status": "READY",
+    "pid": 34740,
+    "command": "node tools/renovation-dev.mjs",
+    "url": "http://127.0.0.1:5529/?revision=thien-su-v05",
+    "health": {
+      "status": "ok",
+      "service": "volam-game-server",
+      "runId": "2dc050fb-c42c-4535-9232-f43a82a7f1ed",
+      "milestone": "M3B",
+      "protocolVersion": 48
+    },
+    "endpoint": {
+      "serverUrl": "http://127.0.0.1:2926"
+    },
+    "replacedPid": 9108,
+    "verifiedAt": "2026-11-23T18:36:18.2753722+07:00",
+    "fixtures": "none; normal game"
+  },
+  "artReview": "Director judgment of grip/motion quality remains separate from automated verification."
+}

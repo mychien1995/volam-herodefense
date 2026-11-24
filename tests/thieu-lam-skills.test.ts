@@ -292,13 +292,13 @@ describe('M3C3 Thiếu Lâm shared combat', () => {
     (first, second, finish) => {
       const f = fixture(),
         [a, b] = f.enemies;
-      if (first === 'toan_phong_thoai') f.enemies[2]!.x = 100;
+      f.enemies[2]!.x = 100;
       f.cast(first);
       expect(f.world.combos).toHaveLength(2);
       a!.y = 450;
-      if (second === 'vi_da_quyen') f.hero.x -= 126; // Keep the explosion on the same target after the new189px offset.
+      if (second === 'vi_da_quyen') f.hero.x -= 12; // Keep the explosion on the same target after the new189px offset.
       f.cast(second);
-      if (second === 'vi_da_quyen') f.hero.x += 126;
+      if (second === 'vi_da_quyen') f.hero.x += 12;
       if (second === 'hoanh_tao_cuoc') f.steps(16);
       a!.y = 300;
       f.cast(finish);
@@ -322,8 +322,11 @@ describe('M3C3 Thiếu Lâm shared combat', () => {
   );
   it('never empowers misses, wrong order, expired targets, or another attacker; unrelated skills preserve progress', () => {
     const f = fixture();
+    const original = f.enemies.map((e) => ({ x: e.x, y: e.y }));
+    f.enemies.forEach((e) => (e.x = 900));
     f.hero.fx = -1;
     f.cast('la_han_quyen');
+    f.enemies.forEach((e, i) => Object.assign(e, original[i]));
     f.hero.fx = 1;
     f.cast('vi_da_quyen');
     f.cast('dai_luc_kim_cuong_chuong');
@@ -382,29 +385,25 @@ describe('M3C3 Thiếu Lâm shared combat', () => {
     ]);
     expect(f.events.some((e) => e.stage === 'empowered_impact')).toBe(true);
   });
-  it('La Hán hits farther along its frontal arc, and rapid QWE prioritizes the primed enemy', () => {
+  it('QWE focuses the nearest enemy while combo progress remains target-specific', () => {
     const f = fixture();
-    const [target, decoy, outOfRange] = f.enemies;
+    const [target, decoy, outside] = f.enemies;
     Object.assign(target!, { x: 435, y: 300 });
+    Object.assign(decoy!, { x: 300, y: 475 });
+    Object.assign(outside!, { x: 650, y: 300 });
+    f.cast('la_han_quyen');
+    expect(f.hits('la_han_quyen', target!.id)).toHaveLength(1);
     Object.assign(decoy!, { x: 300, y: 345 });
-    Object.assign(outOfRange!, { x: 470, y: 300 });
-    f.hero.skillIds = [
-      'la_han_quyen',
-      'vi_da_quyen',
-      'dai_luc_kim_cuong_chuong',
-    ];
-    for (const slot of [0, 1, 2]) {
-      f.input({ kind: 'cast', slot });
-      f.steps(2);
-    }
-    f.steps(30);
-    expect(f.hits('la_han_quyen')).toHaveLength(1);
-    expect(f.hits('la_han_quyen', outOfRange!.id)).toHaveLength(0);
-    expect(f.hits('dai_luc_kim_cuong_chuong')).toMatchObject([
-      { stage: 'empowered' },
-    ]);
-    expect(f.hits('dai_luc_kim_cuong_chuong', decoy!.id)).toHaveLength(0);
+    f.cast('vi_da_quyen');
+    f.cast('dai_luc_kim_cuong_chuong');
+    f.steps(20);
+    expect(
+      f.hits('dai_luc_kim_cuong_chuong', decoy!.id).length,
+    ).toBeGreaterThan(0);
+    expect(f.hits('dai_luc_kim_cuong_chuong', target!.id)).toHaveLength(0);
+    expect(f.events.some((e) => e.stage === 'combo_empowered')).toBe(false);
   });
+
   it('slow palm snapshots facing/offense, resolves against current positions and can miss/be interrupted', () => {
     const f = fixture();
     f.cast('dai_luc_kim_cuong_chuong');
@@ -443,11 +442,12 @@ describe('M3C3 Thiếu Lâm shared combat', () => {
   });
   it('keeps both chains independent and never builds progress through terrain or from another owner', () => {
     const f = fixture();
+    f.enemies[2]!.x = 100;
     f.cast('la_han_quyen');
     f.cast('toan_phong_thoai');
-    f.hero.x -= 126;
+    f.hero.x -= 12;
     f.cast('vi_da_quyen');
-    f.hero.x += 126;
+    f.hero.x += 12;
     const records = (f.world.combos ?? []).filter(
       (c) => c.targetId === f.enemies[0]!.id,
     );
@@ -464,6 +464,7 @@ describe('M3C3 Thiếu Lâm shared combat', () => {
       )?.step,
     ).toBe(2);
     const g = fixture();
+    g.enemies[2]!.x = 100;
     g.config.collision = [{ x: 320, y: 250, width: 10, height: 100 }];
     g.cast('la_han_quyen');
     expect(g.world.combos ?? []).toHaveLength(0);
@@ -563,17 +564,17 @@ describe('M3C3 Thiếu Lâm shared combat', () => {
     const far = addHero(f.world, 'c', 'Far', f.config);
     Object.assign(far, { x: 700, y: 300 });
     f.cast('kim_quang_ho_tran');
-    expect(characterStats(ally, f.config, f.world.tick).total.defense).toBe(22);
+    expect(characterStats(ally, f.config, f.world.tick).total.defense).toBe(34);
     expect(characterStats(far, f.config, f.world.tick).total.defense).toBe(0);
     const x = f.hero.x;
     f.hero.x = 700;
     f.steps(16);
-    expect(characterStats(far, f.config, f.world.tick).total.defense).toBe(22);
+    expect(characterStats(far, f.config, f.world.tick).total.defense).toBe(34);
     expect(characterStats(ally, f.config, f.world.tick).total.defense).toBe(0);
     f.hero.x = x;
     f.cast('kim_quang_ho_tran');
     f.steps(16);
-    expect(characterStats(ally, f.config, f.world.tick).total.defense).toBe(22);
+    expect(characterStats(ally, f.config, f.world.tick).total.defense).toBe(34);
     f.steps(181);
     expect(characterStats(ally, f.config, f.world.tick).total.defense).toBe(0);
   });
@@ -590,7 +591,7 @@ describe('M3C3 Thiếu Lâm shared combat', () => {
     const enemyHp = f.enemies[0]!.hp;
     f.cast('bat_dong_minh_vuong');
     expect(f.hero.hp).toBe(82);
-    expect(ally.hp).toBe(160);
+    expect(ally.hp).toBe(150);
     expect(dead.hp).toBe(0);
     expect(far.hp).toBe(30);
     expect(f.world.statue.hp).toBe(20);
@@ -598,7 +599,7 @@ describe('M3C3 Thiếu Lâm shared combat', () => {
     f.steps(60);
     expect(f.hero.hp).toBe(82);
   });
-  it('Như Lai Thiên Diệp sends 15 straight volleys to each nearby enemy and buffs allies', () => {
+  it('Như Lai Thiên Diệp sends 30 weaker straight volleys to each nearby enemy and buffs allies', () => {
     const f = fixture(),
       ally = addHero(f.world, 'b', 'Ally', f.config);
     Object.assign(ally, { x: 330, y: 300 });
@@ -614,13 +615,13 @@ describe('M3C3 Thiếu Lâm shared combat', () => {
     f.hero.x += 10;
     f.hero.fx = -1;
     f.steps(450);
-    expect(f.hits('nhu_lai_thien_diep')).toHaveLength(15);
-    expect(f.hits('nhu_lai_thien_diep', f.enemies[2]!.id)).toHaveLength(15);
+    expect(f.hits('nhu_lai_thien_diep')).toHaveLength(30);
+    expect(f.hits('nhu_lai_thien_diep', f.enemies[2]!.id)).toHaveLength(30);
     expect(f.hits('nhu_lai_thien_diep', f.enemies[1]!.id)).toHaveLength(0);
     expect(ally.hp).toBe(hp);
     expect(f.world.areas).toHaveLength(0);
     f.steps(60);
-    expect(f.hits('nhu_lai_thien_diep')).toHaveLength(15);
+    expect(f.hits('nhu_lai_thien_diep')).toHaveLength(30);
   });
   it('Dịch Cân grows HP/defense/regen automatically and surplus recalculates without respec stacking', () => {
     const f = fixture();

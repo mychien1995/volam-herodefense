@@ -1,3 +1,11 @@
+## Thiền Sư density/cadence override — 2026-11-24
+
+Director explicitly selected slowing both motion and attack cadence. V07 enforces 12 ticks between manual/automatic monk A, including Practice cooldown-refill; 375ms presentation, same per-strike damage and lightning effects. Sweep raster density is corrected at export around the existing feet pivot, with higher-density originals retained. This supersedes the monk manual-unlimited-A rule, not other schools. [Contract/evidence](SKILL_REVISE_THIEN_SU_V07_2026_11_24.md).
+
+## Thiền Sư three-stage A — approved 2026-11-24
+
+Latest director override restores **thrust → two-hand sweep → overhead**, using the reviewed motion studies and retaining current lightning/contact effects. V06 supersedes the V05 two-stage pose set, not other skill-revise behavior. Exact neutral entry/recovery, 96 directional cels, retained thrust, server multipliers and authority remain explicit in [scope/evidence](SKILL_REVISE_THIEN_SU_V06_2026_11_24.md). Final-game director art approval stays separate from the requested integration.
+
 ## Audio integration — approved 2026-11-22
 
 Seven-school runtime audio is integrated on `milestone/m3d`: approved 129 synthesized clips for Côn Luân/Ngũ Độc/Đường Môn; original four-school MP3 sources retained, 44 converted OGGs with 43 existing mappings. Rejected four-school synthesis is excluded. Shared settings independently persist music/game levels, migrating the old SFX level once by 15%. Final runtime pipeline passed 1237 tests, all validators and two browser cases; earlier six-client audio coverage is retained. Integration bookkeeping uses staged-blob/checkout hash checks, not a repeated full suite. See [integration](AUDIO_M3D_INTEGRATION.md), [source conversion](ORIGINAL_SKILL_AUDIO_OGG.md).
@@ -241,3 +249,16 @@ User authorized the renovate-game-sprite process for bosses on `wip/m3d/25d`.9ma
 ## Boss director approval and merge authorization — 2026-11-20
 
 User explicitly approved the9main bosses/11body identities reviewed at54ede68b and requested merge into `milestone/m3d` plus commit. This supersedes the earlier commit-only/no-merge restriction for this integration.44exact body/native/manifest SHA-256 snapshots and approval scope are recorded in `assets/approvals/boss-coherence/v1.json`; original candidate reports remain historical. VFX/supporting actor art remains unchanged.
+
+
+## 2026-11-23 — approved skill revise integration
+
+The director authorized the twelve-branch revision and selected the crescent Phong Quyển projectile. [Canonical integration contract and trial tuning](SKILL_REVISE_INTEGRATION_2026_11_23.md) supersede the older skill behavior in this scope. Stable IDs, server authority and unrelated campaign/economy rules remain in force. Old active Q Ngũ Lôi stance is replaced by a reactive passive; E Lôi Đình Chấn Vực is a rename only. Gameplay feel awaits the director’s Phòng test review.
+
+## 2026-11-24 — Thiền Sư sweep proportions V08
+
+Director reports V07 grows during the sweep. [V08 visual correction](SKILL_REVISE_THIEN_SU_V08_2026_11_24.md) replaces only sweep artwork with a compact redraw registered by anatomical landmarks; it supersedes V07 sweep enlargement, not its approved 400ms attack beat. Three-stage A, 375ms nominal presentation, retained thrust/overhead and lightning remain unchanged. New art remains candidate for director review. Source prompts, native roundtrip, before/after Phaser evidence and current validation are linked in that document.
+
+## 2026-11-24 — director approval and merge authorization
+
+After the V08 normal-game review, the director stated “Ổn. Merge với milestone/m3d và commit tất cả các thay đổi”. This approves the current skill revision bundle for M3D integration, including V08, and authorizes committing all current changes. [Exact current asset snapshot](../assets/approvals/skill-revise/merge-2026-11-24.json) records the approval separately from historical candidate/failure reports. The final implementation passed 1,280 tests, 35 asset validators and the scoped six-client production check before this metadata-only approval update.

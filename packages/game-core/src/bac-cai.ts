@@ -273,7 +273,7 @@ export class BacCaiEncounter {
     target?: Hero,
   ): boolean {
     const b = w.creeps.get(this.bossId),
-      heroes = this.living(w),
+      heroes = this.living(w).filter((h) => !hasStatus(h, 'concealed', w.tick)),
       d = this.definition;
     if (
       !b ||
@@ -741,9 +741,9 @@ export class BacCaiEncounter {
         this.dogBorn.delete(id);
         continue;
       }
-      const target = this.living(w).sort(
-        (a, b) => distance(a, dog) - distance(b, dog),
-      )[0];
+      const target = this.living(w)
+        .filter((h) => !hasStatus(h, 'concealed', w.tick))
+        .sort((a, b) => distance(a, dog) - distance(b, dog))[0];
       if (!target) continue;
       if (dog.stats) dog.stats.damage = d.damage.dogs;
       if (stepControlledCreepSpecial(w, dog, target, c)) continue;
@@ -916,7 +916,9 @@ export class BacCaiEncounter {
       hasStatus(b, 'stun', w.tick)
     )
       return;
-    const heroes = this.living(w),
+    const heroes = this.living(w).filter(
+        (h) => !hasStatus(h, 'concealed', w.tick),
+      ),
       target = heroes.sort((a, b2) => distance(a, b) - distance(b2, b))[0];
     if (!target) return;
     if (w.tick >= this.nextSpecial) {
@@ -972,7 +974,7 @@ export class BacCaiEncounter {
               this.ticks(this.definition.reward.assistMs, c),
         );
       eligible.forEach((h, i) => {
-      if (c.campaign) return;
+        if (c.campaign) return;
         const split = (n: number) =>
           Math.floor(n / eligible.length) + (i < n % eligible.length ? 1 : 0);
         gainExperience(h, split(this.definition.reward.xp), c);

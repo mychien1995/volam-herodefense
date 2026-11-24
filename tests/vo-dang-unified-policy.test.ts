@@ -51,7 +51,7 @@ it('retains a short-lived confirmed sword contact even between pose patches', ()
       })?.pose,
     ).toBe(p);
 });
-it('keeps seven-cut order on the existing six-tick rhythm', () => {
+it('uses a ranged summoning pose for the seven falling swords', () => {
   expect(
     Array.from(
       { length: 7 },
@@ -62,16 +62,9 @@ it('keeps seven-cut order on the existing six-tick rhythm', () => {
           tick: 100 + i * 6,
         })?.pose,
     ),
-  ).toEqual([
-    'cut_up',
-    'cut_down',
-    'cut_right',
-    'cut_down',
-    'cut_up',
-    'cut_left',
-    'cut_right',
-  ]);
+  ).toEqual(['charge', 'aim', 'aim', 'aim', 'aim', 'recover', 'recover']);
 });
+
 it('retains the skyfall pointing pose and defensive guard', () => {
   expect(
     sample('vo_dang_kiem', 'cast', 0, 0, {

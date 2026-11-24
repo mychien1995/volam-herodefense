@@ -1,4 +1,5 @@
 import { frameWorld, nativeGameplayZoom } from './camera-policy.js';
+import { SkillReviseArt, preloadSkillRevise } from './skill-revise-art.js';
 import { PvpArt, pvpView, drawPvpMap, fitPvpCamera } from './pvp-art.js';
 import type { PvpMapId } from '@volam/game-core';
 import { preloadHeroMotion, presentHeroMotion } from './hero-motion.js';
@@ -33,7 +34,10 @@ import {
 import Phaser from 'phaser';
 import { preloadSkillSounds } from './skill-sounds.js';
 import { inspectConLuanSounds, syncConLuanSounds } from './con-luan-sounds.js';
-import { inspectAdditionalSchoolSounds, syncAdditionalSchoolSounds } from './additional-school-sounds.js';
+import {
+  inspectAdditionalSchoolSounds,
+  syncAdditionalSchoolSounds,
+} from './additional-school-sounds.js';
 import {
   DuongMonArt,
   duongMonBody,
@@ -413,6 +417,12 @@ export class ArenaScene extends Phaser.Scene {
       const enemy =
         creep ?? (fighter && player?.loiDaiFighter ? player : undefined);
       if (!enemy || enemy.hp <= 0 || enemy.zoneId !== this.zoneId) continue;
+      if (
+        JSON.parse(enemy.statuses).some(
+          (s: { kind: string }) => s.kind === 'concealed',
+        )
+      )
+        continue;
       const pvp = pvpView(this.snapshot);
       if (pvp) {
         const owner = creep?.ownerId ?? id;
@@ -469,16 +479,22 @@ export class ArenaScene extends Phaser.Scene {
     preloadShaolinDaoArt(this);
     preloadM3dHitArt(this);
     preloadConLuanArt(this);
+    preloadSkillRevise(this);
     preloadDuongMon(this);
     preloadNguDoc(this);
   }
   private conLuanArt?: ConLuanArt;
   private duongMonArt?: DuongMonArt;
+  private skillReviseArt?: SkillReviseArt;
   private nguDocArt?: NguDocArt;
   create(): void {
     if (this.bootArtFailed) return;
     this.shaolinDao.register();
     this.conLuanArt = new ConLuanArt(this);
+    this.skillReviseArt = new SkillReviseArt(this);
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () =>
+      this.skillReviseArt?.clear(),
+    );
     this.duongMonArt = new DuongMonArt(this);
     this.nguDocArt = new NguDocArt(this);
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () =>
@@ -824,6 +840,7 @@ export class ArenaScene extends Phaser.Scene {
     this.vfx?.clear();
     this.creepEffects?.clear();
     this.time.removeAllEvents();
+    this.skillReviseArt?.clear();
     this.conLuanArt?.clear();
     this.duongMonArt?.clear();
     this.nguDocArt?.clear();
@@ -1468,6 +1485,16 @@ export class ArenaScene extends Phaser.Scene {
         );
       if (!enemy)
         this.nguDocArt?.canonicalHands(id, view.sprite, actor, states, tick);
+      if (!enemy) {
+        const player = state?.players.get(id);
+        if (player)
+          this.skillReviseArt?.body(
+            view.sprite,
+            player,
+            actorZoneTick ?? tick,
+            id,
+          );
+      }
       if (cast)
         this.vfx?.observeCharacter(
           texture,
@@ -1624,6 +1651,11 @@ export class ArenaScene extends Phaser.Scene {
     );
     this.conLuanArt?.sync(state, this.zoneId);
     this.duongMonArt?.sync(state, this.zoneId);
+    this.skillReviseArt?.sync(
+      state,
+      this.zoneId,
+      (id) => this.actors.get(id)?.sprite,
+    );
     this.nguDocArt?.sync(state, this.zoneId);
     this.coMoEffects?.sync(state, this.zoneId);
     this.creepEffects?.sync(
@@ -1856,6 +1888,7 @@ export class ArenaScene extends Phaser.Scene {
       });
       if (this.impacts.length > 60) this.impacts.shift();
     } else if (
+      !this.skillReviseArt?.event(event) &&
       !this.nguDocArt?.event(event, this.actors.get(event.sourceId)?.sprite) &&
       !this.duongMonArt?.event(event) &&
       !this.conLuanArt?.event(event, this.actors.get(event.sourceId)?.sprite) &&
@@ -1892,6 +1925,7 @@ export class ArenaScene extends Phaser.Scene {
     }
   }
   reviewClearTransientEffects(): void {
+    this.skillReviseArt?.clear();
     this.conLuanArt?.clear();
     this.duongMonArt?.clear();
     this.nguDocArt?.clear();
@@ -2002,6 +2036,7 @@ export class ArenaScene extends Phaser.Scene {
       hitArt: this.hitArt.inspect(),
       skills: this.vfx?.inspect(),
       conLuan: this.conLuanArt?.inspect(),
+      skillRevise: this.skillReviseArt?.inspect(),
       duongMon: this.duongMonArt?.inspect(),
       nguDoc: this.nguDocArt?.inspect(),
       shaolinDao: {

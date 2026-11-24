@@ -95,6 +95,14 @@ const nguDocIcons = new Set([
   'thi_quy_phong_tan',
 ]);
 export function skillIcon(id: string): string {
+  const revised: Record<string, string> = {
+    hoa_van_chuong: 'hoa-long',
+    chiet_mai_thu: 'phong-quyen',
+    that_tinh_kiem: 'that-tinh',
+    ngu_loi_chinh_phap_the: 'ngu-loi',
+  };
+  if (revised[id])
+    return `/assets/skill-revise-feedback-v04/icons/${revised[id]}.png`;
   if (nguDocIcons.has(id)) return `/assets/ngu-doc-feedback-v1/icons/${id}.png`;
   if (duongMonIcons.has(id))
     return `/assets/skills/duong-mon-icons-v1/${id}.png`;

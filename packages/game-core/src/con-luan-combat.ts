@@ -17,7 +17,9 @@ export function conLuanBasic(
   tick: number,
 ): Ability | undefined {
   const ability =
-    hero.basicId === conLuan.monk && hasStatus(hero, 'con_luan_ranged', tick)
+    hero.basicId === conLuan.monk &&
+    !config.skillCatalogue?.[conLuan.stance]?.passive &&
+    hasStatus(hero, 'con_luan_ranged', tick)
       ? config.skillCatalogue?.[conLuan.bolt]
       : config.basics[hero.basicId];
   if (

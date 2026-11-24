@@ -3,6 +3,10 @@ const positive = z.number().finite().positive();
 const count = z.number().int().nonnegative();
 const status = z.strictObject({
   kind: z.enum([
+    'concealed',
+    'staff_charge',
+    'attack_buff',
+    'mana_regen_buff',
     'slow',
     'attack_slow',
     'attack_break',
@@ -33,6 +37,7 @@ const status = z.strictObject({
     'dash_lock',
   ]),
   blocksMovementSkills: z.boolean().optional(),
+  delayTicks: count.optional(),
   durationTicks: count.min(1),
   magnitude: z.number().finite().nonnegative(),
   secondary: z.number().finite().nonnegative().optional(),
@@ -40,6 +45,29 @@ const status = z.strictObject({
   toggle: z.boolean().optional(),
 });
 const dash = z.strictObject({
+  windupTicks: count.optional(),
+  damageOffset: count.optional(),
+  endBlast: z.strictObject({ damage: positive, radius: positive }).optional(),
+  gather: z
+    .strictObject({
+      range: positive,
+      halfAngle: positive.max(Math.PI),
+      centerOffset: positive,
+    })
+    .optional(),
+  afterProjectile: z
+    .strictObject({
+      damage: positive,
+      range: positive,
+      speed: positive,
+      radius: positive,
+      count: count.min(1).max(8),
+      delayTicks: count,
+      radial: z.boolean(),
+      stage: z.string(),
+      attackPowerScale: z.number().min(0).max(1),
+    })
+    .optional(),
   mode: z.literal('dash'),
   distance: positive,
   speed: positive,
@@ -74,6 +102,10 @@ const projectile = z.strictObject({
   windupTicks: count.min(1).optional(),
   scatter: z
     .strictObject({
+      centerOnTarget: z.boolean().optional(),
+      replaceProjectiles: z.boolean().optional(),
+      stage: z.string().optional(),
+      statuses: z.array(status).optional(),
       count: count.min(1).max(20),
       appearanceTicks: count,
       delayTicks: count.min(1),
@@ -125,6 +157,10 @@ const projectile = z.strictObject({
   slowedBonus: z.number().finite().nonnegative().optional(),
 });
 const area = z.strictObject({
+  expireBurst: z
+    .strictObject({ damage: positive, radius: positive })
+    .optional(),
+  volleyDamageMultiplier: z.number().positive().optional(),
   radiusY: positive.optional(),
   pentagon: z.boolean().optional(),
   occupantStatuses: z.array(status).optional(),
@@ -163,6 +199,9 @@ const area = z.strictObject({
   oncePerTarget: z.boolean().optional(),
 });
 const arc = z.strictObject({
+  manaSteal: z
+    .strictObject({ amount: positive, manaLessRefund: positive })
+    .optional(),
   lineWidth: positive.optional(),
   knockbackChance: z.number().min(0).max(1).optional(),
   residualArea: area.optional(),
@@ -194,6 +233,18 @@ const allies = z.strictObject({
 });
 export const abilitySchema = z
   .strictObject({
+    airborneEffect: z.union([projectile, dash]).optional(),
+    targeting: z.enum(['facing', 'nearestEnemyAtCast']).optional(),
+    focusRange: positive.optional(),
+    passive: z.boolean().optional(),
+    reactiveBlock: z
+      .strictObject({
+        chance: z.number().min(0).max(1),
+        damage: positive,
+        stunTicks: count.min(1),
+      })
+      .optional(),
+    consumeStaffChargeScale: z.number().positive().optional(),
     id: z.string().regex(/^[a-z_]+$/),
     nameVi: z.string().min(1),
     cooldownTicks: count,
@@ -242,6 +293,7 @@ export const abilitySchema = z
       arc,
       z.strictObject({
         mode: z.literal('support'),
+        selfHeal: positive.optional(),
         radius: positive,
         heal: positive.optional(),
         statuses: z.array(status).optional(),
@@ -307,6 +359,16 @@ export const abilitySchema = z
       dash,
       z.strictObject({
         mode: z.literal('multi_hit'),
+        targetArea: z
+          .strictObject({
+            range: positive,
+            radius: positive,
+            scatterRadius: positive,
+            fallTicks: count.min(1),
+          })
+          .optional(),
+        detached: z.boolean().optional(),
+        finisherStatuses: z.array(status).optional(),
         statuses: z.array(status).optional(),
         attackPowerScale: z.number().min(0).max(1).optional(),
         range: positive,

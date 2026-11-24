@@ -1,0 +1,73 @@
+{
+  "schema": "volam.skill-revise.concept-review.v2",
+  "date": "2026-11-22",
+  "branch": "wip/m3d/skill-revise",
+  "art_source": "host_image",
+  "tool": "image_gen",
+  "model": null,
+  "cost_usd": null,
+  "status": "PENDING_DIRECTOR_REVIEW",
+  "scope": "two revised static concept boards; no animation/runtime change",
+  "items": [
+    {
+      "id": "07-than-long-cuu-hien",
+      "file": "07-than-long-cuu-hien.png",
+      "source_path": "C:\\Users\\ADMIN\\.codex\\generated_images\\01a2014f-de3b-7630-8a96-76b2f6fd48bb\\exec-0059ef54-6319-4620-bcf2-451c9dfbb796.png",
+      "prompt": "prompts/07-than-long-cuu-hien.txt",
+      "reference": "D:/Projects/volam-hero-defense/assets/concepts/skill-revise/v01/07-than-long-cuu-hien.png",
+      "status": "PENDING_DIRECTOR_REVIEW",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "sha256": "1b7c4ab05fffab41a4dec4314392d52828c2b16a8ecc145f4e73561e9fc956e9",
+      "prompt_sha256": "9bc198baf7eb28b003e1aba6487542dc4dcf50552fd1ee30fb378246ceb148ae",
+      "reference_sha256": "2ae4142987486772e034d8003f667e09e8c030f74e7827e46afd82314df9ac51"
+    },
+    {
+      "id": "05-thien-su-the-bua",
+      "file": "05-thien-su-the-bua.png",
+      "source_path": "C:\\Users\\ADMIN\\.codex\\generated_images\\01a2014f-de3b-7630-8a96-76b2f6fd48bb\\exec-e25bc00b-cd84-4634-9faa-5f044c5e34db.png",
+      "prompt": "prompts/05-thien-su-the-bua.txt",
+      "reference": "D:/Projects/volam-hero-defense/assets/concepts/skill-revise/v01/05-thien-su-the-bua.png",
+      "status": "PENDING_DIRECTOR_REVIEW",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "sha256": "f5c8a447bdc464e864c613f9d2e8d5518f6d23fcb4d0eddbb0c343a3946e91fe",
+      "prompt_sha256": "3b1146062384b541c54b0c57ae3b0802c5a26f65b37aa66ef4d43afcd7603605",
+      "reference_sha256": "909931c3cf0fe698b0da9e211b2c081449f147aa1ba5267846e7327134e0eef5"
+    }
+  ],
+  "iterations": [
+    {
+      "id": "hammer-take1",
+      "file": "iterations/05-thien-su-the-bua-take1.png",
+      "source_path": "C:\\Users\\ADMIN\\.codex\\generated_images\\01a2014f-de3b-7630-8a96-76b2f6fd48bb\\exec-b66a2b70-1c01-434a-af51-c509ce37edb9.png",
+      "status": "SUPERSEDED_BY_SWEEP_CORRECTION",
+      "reason": "Pose 3 was too similar to thrust; final edit rotates torso/hip to show horizontal sweep.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "sha256": "d90e744eb9fe8e0bd8493787e60d9973793368bbbb0ebaf096060efaa2639c82"
+    }
+  ],
+  "correction": {
+    "prompt": "prompts/05-thien-su-the-bua-sweep-correction.txt",
+    "reference": "iterations/05-thien-su-the-bua-take1.png",
+    "prompt_sha256": "10a101ec8e267b88366559525c8359b2937256ba4ec03d08a298cf2bf1eadedd",
+    "reference_sha256": "d90e744eb9fe8e0bd8493787e60d9973793368bbbb0ebaf096060efaa2639c82"
+  },
+  "visual_review": [
+    "07: each top vignette has five planted swords, the connecting chords form a crossing five-point star instead of the previous outer pentagon. Five separate terminal bursts retained.",
+    "05: one long-haft blunt hammer per pose; both hands visibly grip the same shaft. Poses in reading order: thrust, rising hit, horizontal sweep, downward slam. Final sweep shows back/hip rotation.",
+    "05: four static key poses, not a completed animated sequence; handedness, constant weapon dimensions, transitions and eight facings require later animation/runtime validation.",
+    "06 v01 still illustrates obsolete short hammer; its Q/E effect ideas remain reference-only and body must use revised long hammer in later production.",
+    "Other eight v01 artwork boards are retained, not newly approved by this correction."
+  ]
+}

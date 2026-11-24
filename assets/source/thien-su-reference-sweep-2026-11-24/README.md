@@ -1,0 +1,9 @@
+# Additional two-handed sweep — 2026-11-24
+
+Requested after the director accepted the prior four-pose overhead study. New motion reference: the attached low preparation → shoulder load → forward cross-body sweep → low opposite-side follow-through sequence. Identity/style come from the reviewed overhead sheet. Exactly four newly generated key poses, one facing, are selected in `raw/four-poses-01.png`; exact prompt and tool receipt are in `generation.json`.
+
+Review: `http://127.0.0.1:5634/moves?action=sweep`. The new selector also displays the retained overhead study. The old `/` page and its four-pose art are preserved. The new sweep remains pending director review, with no in-between animation, other facings, or game integration claimed.
+
+Export: `python -X utf8 assets/source/thien-su-reference-sweep-2026-11-24/build.py`. It reuses the existing connected-alpha extractor, one uniform source scale, annotated boot roots and 4× raster density. It verifies every retained overhead source/export/reference hash before writing only the sibling `sweep/` assets. Registration, alpha, atlas gutters and hashes are recorded in `validation.json`. Review timing: 200 / 250 / 110 / 340ms, followed by a 500ms loop gap; no invented recovery motion.
+
+Validation actually run: browser preflight passed seven checks; `node assets/reviews/thien-su-reference-motion-2026-11-24/verify-sweep.mjs` passed. Live Phaser post-render observations covered sweep → overhead → sweep, all four poses over two loops each, stable positions/scales and scene object count, pause/restart, pose and timeline seeking, half-speed playback, quarter-speed selection and gameplay-size rendering. No browser errors. Evidence: `docs/evidence/thien-su-reference-sweep-2026-11-24/observations.json` and `sweep-preview.png`. This is isolated choreography QA, not combat or multiplayer validation.

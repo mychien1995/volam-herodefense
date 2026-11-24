@@ -1,3 +1,11 @@
+## Thiền Sư A · điều chỉnh nhịp 2026-11-24
+
+Director chọn làm chậm cả animation và nhịp ra đòn. Thiền Sư A nay có tối thiểu 12 tick/đòn (0,4 giây), kể cả bấm A liên tục và trong Phòng test; animation 375ms. Thứ quạt được cân lại mật độ sprite, giữ damage mỗi thức và lôi ảnh. Override này thay giới hạn nhịp cũ chỉ trong Thiền Sư A. [Chi tiết và kiểm chứng v07](docs/SKILL_REVISE_THIEN_SU_V07_2026_11_24.md).
+
+## Thiền Sư A · duyệt ba thức 2026-11-24
+
+Thay chuỗi hai thức v05 bằng **chọc → quạt hai tay → đập**, giữ hệ số từng thức, tầm/cleave, A thủ công không hồi chiêu và lôi ảnh hiện tại. Quạt/đập dùng các tư thế đã duyệt với tám hướng; chấn đất theo cel chạm, sát thương do server xử lý. [Hợp đồng tích hợp, nguồn và kiểm chứng](docs/SKILL_REVISE_THIEN_SU_V06_2026_11_24.md).
+
 ## Thiên Hạ Vô Cẩu · 2026-11-12
 
 Action Thiên Hạ Vô Cẩu cung cấp giảm sát thương 80% qua cùng luật giảm sát thương mạnh nhất với các chiêu phòng thủ khác. Cú đập cuối hồi 5% HP tối đa cho bản thân và phát sự kiện hồi máu theo lượng thực hồi, kể cả khi không có mục tiêu trong tầm. Stun, chết và rời map kết thúc action theo luật hiện hành.
@@ -250,3 +258,13 @@ Latest r4 override: Thi độc schedules its 88-radius poison area at the server
 ## Creep feedback r5 — 2026-11-06
 
 Sơn Tặc Đao uses normal attacks only. Its r3 Hoành trảm sector is no longer active content. Shared contact rasters are no longer drawn at creep attack/cast origins; actual hit feedback remains at the victim. Stomp/charge/control mechanics of other creeps retain server timing, damage and statuses without generic caster burst stamps. See `docs/CREEP_FEEDBACK_R5.md`.
+
+
+## 2026-11-23 — approved skill revise integration
+
+The director authorized the twelve-branch revision and selected the crescent Phong Quyển projectile. [Canonical integration contract and trial tuning](docs/SKILL_REVISE_INTEGRATION_2026_11_23.md) supersede the older skill behavior in this scope. Stable IDs, server authority and unrelated campaign/economy rules remain in force. Old active Q Ngũ Lôi stance is replaced by a reactive passive; E Lôi Đình Chấn Vực is a rename only. Gameplay feel awaits the director’s Phòng test review.
+
+
+### Thiền Sư A — cập nhật v05
+
+Theo yêu cầu tiếp theo của director, A chỉ luân phiên **chọc → đập**; bỏ hất/quạt khỏi chuỗi đang chơi. Thức đập mới có10pose: hai tay xoay nắm vào trong, nâng cả cán búa qua đầu, dồn lực, bổ xuống và giữ nhịp chạm đất. Hiệu ứng chấn đất theo frame chạm7; sát thương vẫn do server xử lý. Hệ số từng thức và luật A cận chiến không hồi chiêu được giữ. Bản này thay phần A bốn thức trước đó; [nguồn/prompt và phạm vi kiểm tra](assets/source/skill-revise-thien-su-v05/README.md).

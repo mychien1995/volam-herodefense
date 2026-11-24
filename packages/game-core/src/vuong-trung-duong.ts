@@ -10,7 +10,7 @@ import {
 import { namDeKeys, type NamDeControl, type NamDeKey } from './nam-de-types.js';
 import { gainExperience } from './progression.js';
 import { addCreep } from './simulation.js';
-import { applyStatus, cancelOwnedEffects } from './status.js';
+import { applyStatus, cancelOwnedEffects, hasStatus } from './status.js';
 import type { Creep, Hero, Point, SimulationConfig, World } from './types.js';
 
 export const VUONG_ID = 'vuong_trung_duong';
@@ -872,7 +872,7 @@ export class VuongEncounter {
       return;
     }
     const target = heroes
-      .filter((h) => h.hp > 0)
+      .filter((h) => h.hp > 0 && !hasStatus(h, 'concealed', w.tick))
       .sort((a, other) => distance(a, b) - distance(other, b))[0];
     if (!target) return;
     if (this.phase === 1 && this.lightningHits < 3) {

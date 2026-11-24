@@ -1,0 +1,31 @@
+{
+  "status":"asset-production plan; mechanics not implemented",
+  "newBanks":"assets/reviews/skill-revise-v01/catalogue.json",
+  "retainedFiles":[
+    "apps/game-client/src/unified-hero-body.ts",
+    "apps/game-client/src/con-luan-art.ts",
+    "apps/game-client/src/duong-mon-art.ts",
+    "assets/exports/con-luan-kiem-ton-unified-v2/body.png",
+    "assets/exports/duong-mon-am-khi-unified-v1/body.png",
+    "assets/exports/characters/con_luan_skill_preview/con_luan_spell_fx.png",
+    "assets/exports/characters/con_luan_thien_su_v03/con_luan_thien_su_fx.png",
+    "assets/exports/skills/thieu-lam/nhu_lai_niet_ban/nhu_lai_niet_ban_vfx.png",
+    "assets/exports/skills/thieu-lam/nhu_lai_thien_diep/nhu_lai_thien_diep_vfx.png",
+    "assets/exports/skills/thieu-lam/kim_quang_ho_tran/kim_quang_ho_tran_vfx.png",
+    "assets/exports/skills/thieu-lam/bat_dong_minh_vuong/bat_dong_minh_vuong_vfx.png"
+  ],
+  "branches":[
+    {"branch":"Cái Bang Chưởng","new":["cai-bang-fire-body","fire-dragon","fire-trail","fire-impact"],"composition":"Chamber/palm -> authoritative forward dash with direction-locked head -> endpoint burst; decorative trail causes no damage. Reuse other dragon/palm assets for auto-focus. Remove Kháng Long rank4 fire circle and front speck at presentation owner."},
+    {"branch":"Cái Bang Bổng","new":[],"composition":"Retain staff body/slam/fire-dog art. Phá Thạch rename, charge0..4 indicator and consume/reset logic,2sCC and auto-focus are later data/server/UI changes. No new character/effect art required."},
+    {"branch":"Thiên Sơn Phiến","new":["thien-son-retreat-body","thien-son-gust-body","wind-gather","wind-gust"],"composition":"Retreat and gathering begin together; fan release after retreat. Existing fan art for launch/stop/spin/recall state machine, mana and recall cleanup; do not represent changed controls as new frame generation."},
+    {"branch":"Thiên Sơn Đao","new":[],"composition":"Retain clone/blade bodies; stealth is visibility/alpha and targetability driven by server; player A/other skill reveals, clone attacks do not. Reuse stun/slow marks."},
+    {"branch":"Võ Đang Quyền","new":["sonic-wave","ink-impact"],"composition":"Retain palm cast body; wave widens along direction locked at release; ink burst at captured target area, never caster. Đoài radius and T area0.85 scale are server geometry; align art to resulting events. Mana steal, A reach/knockback and CC later."},
+    {"branch":"Võ Đang Kiếm","new":["sword-rain-impact"],"composition":"Retain summoning/cast body. Seven individual falling swords stagger tightly without ground telegraph; separate landing impacts. Bát Quái perimeter confinement and A proc15percent later server changes."},
+    {"branch":"Thiếu Lâm Quyền","new":[],"composition":"Retain both stance bodies and palm/kick/impact art. Remove specified light specks, move Vi Đà endpoint to40percent original offset, align real A reach. Auto-focus and Như Lai damage/slow later authority."},
+    {"branch":"Thiếu Lâm Đao","new":[],"composition":"Retain blade/aura/heal components. Denser lower-damage blade cadence; remove Hộ Trận speck. Minh Vương has owner-only heal pulse first then ally/self defense+damage buff. Source/rules unchanged in production."},
+    {"branch":"Côn Luân Thiền Sư","new":["thien-su","lightning-parry"],"composition":"New weapon-coherent full body state set. Q passive hit-react flash plus return lightning only on authoritative negate trigger; no active Q cast. E retains electrical ring named Lôi Đình Chấn Vực. R auto-focus reuses thrown-hammer effect, must update held/thrown head and sockets to approved proportions at integration."},
+    {"branch":"Côn Luân Kiếm Tôn","new":["lightning-star"],"composition":"Retain exactly5sword anchors and sword-master body, spread wider around owner, crossing chords form star. At expiry5instances of retained Q explosion, stun0. Ground-plane layout/individual anchors belong to existing effect owner."},
+    {"branch":"Đường Môn Cơ Quan","new":["co-quan-air-body","co-quan-air-q","co-quan-air-e","ice-bomb","laser-ground"],"composition":"A three separate feather darts in cone. Air Q three ice bombs to server-RNG points around target; ground Q unchanged. Air E downcast beam follows real airborne dash over straight ground path. New body includes wings: avoid duplicate retained wing overlay. R cancels flight/wings state."},
+    {"branch":"Đường Môn Ám Khí","new":[],"composition":"Retain trap/dart/dash body assets.3/4/5/5stored charges and5active trap cap later server work. W auto-focus. Emit8retained darts at dash completion, not at its start."}
+  ]
+}

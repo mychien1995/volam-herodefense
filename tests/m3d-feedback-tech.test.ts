@@ -6,6 +6,7 @@ import {
   stepWorld,
   submitInput,
   DungeonMatch,
+  hasStatus,
   type Command,
 } from '@volam/game-core';
 import {
@@ -270,29 +271,20 @@ describe('M3D feedback tech', () => {
       expect(f.events.filter((e) => e.kind === 'attack')).toHaveLength(3);
     },
   );
-  it('rank4 fire follows the owner every tick, hits only nearby visible enemies and expires', () => {
+  it('rank4 Kháng Long has mana regeneration and no damaging fire aura', () => {
     const f = fixture('khang_long_huu_hoi');
-    const rank = f.config.progression!.skills['khang_long_huu_hoi']!.ranks[3]!;
-    f.config.skillCatalogue!['khang_long_huu_hoi'] = rank;
-    f.enemy('old', 350);
-    f.enemy('new', 650);
+    f.config.skillCatalogue!['khang_long_huu_hoi'] =
+      m1Config.progression!.skills.khang_long_huu_hoi!.ranks[3]!;
+    f.enemy('near', 350);
     f.cast();
-    expect(f.world.areas).toHaveLength(1);
-    f.hero.x = 600;
+    expect(f.world.areas ?? []).toHaveLength(0);
+    expect(hasStatus(f.hero, 'mana_regen_buff', f.world.tick)).toBe(true);
     f.steps(30);
-    expect(f.world.areas![0]!.x).toBe(600);
-    expect(
-      f.events.filter((e) => e.kind === 'hit' && e.targetId === 'old'),
-    ).toHaveLength(1);
-    expect(
-      f.events.filter((e) => e.kind === 'hit' && e.targetId === 'new'),
-    ).toHaveLength(1);
+    expect(f.events.filter((e) => e.kind === 'hit')).toHaveLength(0);
     f.steps(300);
-    expect(f.world.areas).toHaveLength(0);
-    const g = fixture('khang_long_huu_hoi');
-    g.cast();
-    expect(g.world.areas ?? []).toHaveLength(0);
+    expect(hasStatus(f.hero, 'mana_regen_buff', f.world.tick)).toBe(false);
   });
+
   it('Liệt Phong has a real windup then one frontal strike with captured facing', () => {
     const f = fixture('liet_phong_dao');
     f.enemy('front', 420);
@@ -310,8 +302,8 @@ describe('M3D feedback tech', () => {
   });
   it('Vi Đà ground origin is forward and does not hit enemies behind its explosion', () => {
     const f = fixture('vi_da_quyen');
-    f.enemy('front', 505);
-    f.enemy('behind', 280);
+    f.enemy('front', 390);
+    f.enemy('behind', 200);
     f.cast();
     expect(
       f.events.filter((e) => e.kind === 'hit').map((e) => e.targetId),

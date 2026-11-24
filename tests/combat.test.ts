@@ -276,22 +276,19 @@ describe('M1 manual attacks and the two data-driven abilities', () => {
     expect(a.enemy.hp).toBe(120);
     expect(a.world.projectiles.size).toBe(0);
   });
-  it('Hỏa Vân Chưởng emits three simultaneous divergent straight shots, spends mana once and respects cooldown', () => {
-    const a = setup();
+  it('Hỏa Long dash spends mana once and respects cooldown under duplicate commands', () => {
+    const a = setup(),
+      start = a.hero.x;
     a.input({ kind: 'cast', slot: 0 });
     a.input({ kind: 'cast', slot: 0 });
     a.steps(1);
     expect(a.hero.mana).toBe(82);
-    expect(a.world.projectiles.size).toBe(3);
-    a.steps(7);
-    expect(a.world.projectiles.size).toBe(3);
-    expect(
-      [...a.world.projectiles.values()].every(
-        (shot) =>
-          shot.vx > 0 && Math.abs(Math.hypot(shot.vx, shot.vy) - 360) < 0.001,
-      ),
-    ).toBe(true);
+    expect(a.world.projectiles.size).toBe(0);
+    a.steps(20);
+    expect(a.hero.x).toBeCloseTo(start + 210);
+    expect(a.hero.skillCooldowns[0]).toBeGreaterThan(a.world.tick);
   });
+
   it('Cuồng Long Loạn Vũ explodes in an area, burns three times, then expires', () => {
     const a = setup();
     a.enemy.x = 260;
@@ -398,7 +395,7 @@ describe('M1 fixed-pool progression and replay', () => {
       abilitySchema.safeParse({ ...m1Config.skills[0], manaCost: -1 }).success,
     ).toBe(false);
     expect(m1Config.skills.map((skill) => skill.nameVi)).toEqual([
-      'Hỏa Vân Chưởng',
+      'Hỏa Long Xuyên Sơn',
       'Cuồng Long Loạn Vũ',
     ]);
   });

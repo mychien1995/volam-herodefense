@@ -480,7 +480,7 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
             ? (profile.captureByKey[key] ?? [])
             : d[0] === 'down_right' && profile.staffChoreography
               ? {
-                  KeyA: ['thrust', 'sweep', 'rising', 'overhead'],
+                  KeyA: ['thrust', 'overhead'],
                   KeyQ: [{ name: 'Q-hoanh-tao', prefix: 'sweep_' }],
                   KeyW: [{ name: 'W-pha-giap', prefix: 'slam_contact_' }],
                   KeyE: [{ name: 'E-cam-long', prefix: 'pull_' }],
@@ -497,7 +497,7 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
               : d[0] === 'down_right'
                 ? key === 'KeyA'
                   ? profile.basic === 'cai_bang_bong'
-                    ? ['thrust', 'sweep', 'rising', 'overhead']
+                    ? ['thrust', 'overhead']
                     : ['strike', 'alternate']
                   : key === 'KeyQ'
                     ? ['release']

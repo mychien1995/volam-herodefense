@@ -58,7 +58,7 @@ function setup(skill = 'hang_long_hoa_vu') {
   };
   return { c, w, h, step, events, target, cast };
 }
-it('dragon uses one landing pulse centered on the caster', () => {
+it('dragon uses one landing pulse at the locked nearest target', () => {
   const s = setup(),
     e = s.target('target', 450),
     near = s.target('near', 530),
@@ -70,7 +70,7 @@ it('dragon uses one landing pulse centered on the caster', () => {
   const duration = dragonDiveDuration(effect.dragonDive),
     stages = new Set<string>();
   const p = [...s.w.projectiles.values()][0]!;
-  expect(p.dragonFlight!.target).toEqual({ x: 400, y: 400 });
+  expect(p.dragonFlight!.target).toEqual({ x: 450, y: 400 });
   for (let i = 0; i < duration; i++) {
     for (const p of s.w.projectiles.values()) stages.add(p.stage!);
     s.step();
@@ -79,6 +79,7 @@ it('dragon uses one landing pulse centered on the caster', () => {
   expect([...stages].sort()).toEqual([
     'dragon_coil',
     'dragon_dive',
+    'dragon_forward',
     'dragon_rise',
   ]);
   expect(
@@ -88,11 +89,11 @@ it('dragon uses one landing pulse centered on the caster', () => {
     s.events.filter(
       (event) => event.kind === 'hit' && event.targetId === near.id,
     ),
-  ).toHaveLength(1);
+  ).toHaveLength(2);
   expect(miss.hp).toBe(10000);
   const impacts = s.events.filter((e) => e.stage === 'dragon_impact');
   expect(impacts).toHaveLength(1);
-  expect(impacts[0]).toMatchObject({ x: 400, y: 400, radius: 128.8 });
+  expect(impacts[0]).toMatchObject({ x: 450, y: 400, radius: 128.8 });
   expect(s.w.projectiles.size).toBe(0);
   expect(s.h.mana).toBe(955);
   const d = effect.dragonDive,
@@ -105,21 +106,22 @@ it('dragon uses one landing pulse centered on the caster', () => {
   expect(a.stage).toBe('dragon_coil');
   expect(b.stage).toBe('dragon_rise');
 });
-it('dragon lands on its moving caster, independently of enemies', () => {
+it('dragon locks the target point and does not follow moving target or caster', () => {
   const s = setup(),
     e = s.target('moving');
   s.cast();
+  const point = { x: e.x, y: e.y };
   e.x = 1000;
   e.y = 700;
-  s.step(83);
-  expect(s.events.some((event) => event.stage === 'dragon_impact')).toBe(false);
   s.h.x += 24;
   s.h.y += 12;
-  s.step();
+  s.step(110);
   expect(e.hp).toBe(10000);
-  const impact = s.events.find((e) => e.stage === 'dragon_impact')!;
-  expect([impact.x, impact.y]).toEqual([424, 412]);
+  const impacts = s.events.filter((e) => e.stage === 'dragon_impact');
+  expect(impacts).toHaveLength(1);
+  expect(impacts[0]).toMatchObject(point);
 });
+
 it.each(['death', 'zone'])(
   'dragon cancels without impact on %s cleanup',
   (kind) => {
@@ -140,11 +142,13 @@ it('seven sword hits retain approximately the four-hit budget after per-hit roun
   const s = setup('that_tinh_kiem');
   s.h.schoolId = 'vo_dang';
   const e = s.target('front', 450),
-    back = s.target('back', 350);
+    back = s.target('back', 200);
   s.cast();
   s.step(38);
   expect(
-    s.events.filter((e) => e.kind === 'pulse' && e.stage === 'sweep'),
+    s.events.filter(
+      (e) => e.kind === 'pulse' && e.stage === 'sword_rain_impact',
+    ),
   ).toHaveLength(7);
   expect(
     s.events.filter((e) => e.kind === 'hit' && e.targetId === 'front'),

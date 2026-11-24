@@ -11,6 +11,7 @@ import {
   insideEllipse,
   segmentCircle,
   segmentRect,
+  moveCircle,
 } from './geometry.js';
 import { emit, hurt, offensiveStats } from './combat.js';
 import {
@@ -18,6 +19,7 @@ import {
   displace,
   hasStatus,
   movementSkillLocked,
+  selectableTarget,
 } from './status.js';
 import { rankedAbility, characterStats, skillRank } from './progression.js';
 import { captureConfinement, confineMovement } from './confinement.js';
@@ -44,6 +46,10 @@ import type {
   StatusSpec,
   World,
 } from './types.js';
+import {
+  consumeStaffCharges,
+  revealOnAction,
+} from './skill-revise-passives.js';
 
 export function equippedAbility(
   hero: Hero,
@@ -88,6 +94,7 @@ export function basicTargetInRange(
   const reach =
     effect.range + (projectile ? 0 : targetRadius(world, target, config));
   return (
+    selectableTarget(target, world.tick) &&
     distance(hero, target) <= reach &&
     clearLine(world, hero, target, config, projectile)
   );
@@ -122,7 +129,7 @@ export function targetDirection(
   const enemy = [...opponents(world, hero.id)]
     .filter(
       (e) =>
-        e.hp > 0 &&
+        selectableTarget(e, world.tick) &&
         distance(e, hero) <= range &&
         !config?.collision.some(
           (w) =>
@@ -136,9 +143,10 @@ export function targetDirection(
         distance(a, hero) - distance(b, hero) ||
         (a.id < b.id ? -1 : a.id > b.id ? 1 : 0),
     )[0];
-  return enemy
+  const aim = enemy
     ? direction(enemy.x - hero.x, enemy.y - hero.y)
     : { x: hero.fx, y: hero.fy };
+  return aim.x || aim.y ? aim : hero.fx || hero.fy ? {x:hero.fx,y:hero.fy} : {x:1,y:0};
 }
 function damageFor(
   hero: Hero,
@@ -178,7 +186,12 @@ function queueProjectiles(
   dy: number,
   stage?: string,
   comboTargets: Record<string, boolean> = {},
-  snapshot?: { rawDamage: number; critChance: number; critMultiplier: number },
+  snapshot?: {
+    rawDamage: number;
+    critChance: number;
+    critMultiplier: number;
+    areaCenter?: Point;
+  },
 ): void {
   const crit = snapshot
     ? {
@@ -190,7 +203,11 @@ function queueProjectiles(
     ? { amount: effect.manaRefund, used: false }
     : undefined;
   const spread = ability.equipmentAttack?.spread;
-  for (let index = 0; index < effect.count; index++) {
+  for (
+    let index = 0;
+    index < (effect.scatter?.replaceProjectiles ? 0 : effect.count);
+    index++
+  ) {
     // Give the central ray first contact if multiple rays overlap at launch.
     const i = spread && index < 2 ? 1 - index : index;
     const angle = effect.radial
@@ -202,7 +219,15 @@ function queueProjectiles(
     world.shots.push({
       ...(effect.dragonDive
         ? {
-            dragonTarget: dragonDiveTarget(world, hero, dx, dy, effect, config),
+            dragonTarget: dragonDiveTarget(
+              world,
+              hero,
+              dx,
+              dy,
+              effect,
+              config,
+              hero.id,
+            ),
           }
         : {}),
       tick: world.tick + i * effect.spacingTicks,
@@ -237,6 +262,28 @@ function queueProjectiles(
       ownerId: hero.id,
       abilityId: ability.id,
       effect: burst,
+      ...(burst.centerOnTarget
+        ? {
+            center:
+              snapshot?.areaCenter ??
+              castAreaCenter(
+                world,
+                hero,
+                {
+                  mode: 'area',
+                  durationTicks: 1,
+                  tickInterval: 1,
+                  radius: burst.radius,
+                  damage: 0,
+                  nearestRange: ability.focusRange ?? effect.range,
+                },
+                config,
+              ),
+          }
+        : {}),
+      ...(burst.stage === 'ice_bomb'
+        ? { launch: { x: hero.x, y: hero.y, fx: dx, fy: dy } }
+        : {}),
       rawDamage: damageFor(
         hero,
         burst.damage,
@@ -268,12 +315,13 @@ export function stepScatters(world: World, config: SimulationConfig): void {
       const spread =
         effect.innerRadius +
         world.random() * (effect.outerRadius - effect.innerRadius);
-      let point = { x: owner.x, y: owner.y };
+      const center = burst.center ?? owner;
+      let point = { x: center.x, y: center.y };
       // Pull a blocked marker toward the caster so the warning stays on walkable ground.
       for (let radius = spread; radius > 0; radius -= 12) {
         const candidate = {
-          x: owner.x + Math.cos(angle) * radius,
-          y: owner.y + Math.sin(angle) * radius,
+          x: center.x + Math.cos(angle) * radius,
+          y: center.y + Math.sin(angle) * radius,
         };
         if (
           !blocked(
@@ -286,7 +334,7 @@ export function stepScatters(world: World, config: SimulationConfig): void {
           (!config.heroBounds ||
             insideEllipse(candidate, config.heroBounds, 1)) &&
           !config.collision.some(
-            (wall) => segmentRect(owner, candidate, wall) !== undefined,
+            (wall) => segmentRect(center, candidate, wall) !== undefined,
           )
         ) {
           point = candidate;
@@ -299,6 +347,8 @@ export function stepScatters(world: World, config: SimulationConfig): void {
         id: `area_${world.nextId++}`,
         ownerId: owner.id,
         abilityId: burst.abilityId,
+        ...(effect.stage ? { stage: effect.stage } : {}),
+        ...(burst.launch ? { launch: burst.launch } : {}),
         ...(burst.abilityId === duongMon.flowers
           ? { launch: { x: owner.x, y: owner.y, fx: owner.fx, fy: owner.fy } }
           : {}),
@@ -310,6 +360,7 @@ export function stepScatters(world: World, config: SimulationConfig): void {
           tickInterval: duration,
           radius: effect.radius,
           damage: effect.damage,
+          ...(effect.statuses ? { statuses: effect.statuses } : {}),
         },
         rawDamage: burst.rawDamage,
         critChance: burst.critChance,
@@ -350,7 +401,29 @@ function openArea(
     rawDamage,
     critChance: crit.critChance,
     critMultiplier: crit.critMultiplier,
+    ...(effect.expireBurst
+      ? {
+          expireRawDamage: damageFor(
+            hero,
+            effect.expireBurst.damage,
+            config,
+            world.tick,
+          ),
+        }
+      : {}),
   });
+  if (abilityId === duongMon.trap) {
+    const traps = world.areas.filter(
+      (a) =>
+        a.ownerId === hero.id &&
+        a.abilityId === abilityId &&
+        a.until > world.tick,
+    );
+    if (traps.length > 5) {
+      const removed = new Set(traps.slice(0, traps.length - 5));
+      world.areas = world.areas.filter((a) => !removed.has(a));
+    }
+  }
   captureConfinement(world, config);
 }
 
@@ -364,6 +437,7 @@ function castAreaCenter(
     const target = [...opponents(world, hero.id)]
       .filter(
         (enemy) =>
+          selectableTarget(enemy, world.tick) &&
           distance(hero, enemy) <= effect.nearestRange! &&
           clearLine(world, hero, enemy, config),
       )
@@ -372,10 +446,16 @@ function castAreaCenter(
           distance(hero, a) - distance(hero, b) || a.id.localeCompare(b.id),
       )[0];
     if (target) return { x: target.x, y: target.y };
-    return {
-      x: hero.x + hero.fx * effect.nearestRange,
-      y: hero.y + hero.fy * effect.nearestRange,
-    };
+    const point = { x: hero.x, y: hero.y };
+    moveCircle(
+      point,
+      { x: hero.fx * effect.nearestRange, y: hero.fy * effect.nearestRange },
+      1,
+      config.width,
+      config.height,
+      config.collision,
+    );
+    return point;
   }
   return {
     x: hero.x + hero.fx * (effect.forwardOffset ?? 0),
@@ -622,6 +702,7 @@ function strikeArc(
   let hit = false;
   let damageDealt = 0;
   targets.forEach((enemy, i) => {
+    let contacted = effect.damage <= 0;
     if (effect.damage > 0) {
       const hpBefore = enemy.hp;
       const landed = hurt(
@@ -653,11 +734,32 @@ function strikeArc(
           slowedBonus: effect.slowedBonus,
         },
       );
+      contacted = landed;
       if (landed && !hit && ability.id === tamLienTram.basicId)
         recordTamLienHit(world, hero, enemy.id, config);
       if (landed && effect.lifesteal)
         damageDealt += Math.max(0, hpBefore - enemy.hp);
       hit ||= landed;
+    }
+    if (!contacted) return;
+    if (effect.manaSteal && world.random() < (effect.knockbackChance ?? 1)) {
+      const victim = world.heroes.get(enemy.id);
+      const drained = victim
+        ? Math.min(victim.mana, effect.manaSteal.amount)
+        : effect.manaSteal.manaLessRefund;
+      if (victim) victim.mana -= drained;
+      hero.mana = Math.min(hero.maxMana, hero.mana + drained);
+      const before = { x: enemy.x, y: enemy.y };
+      if (effect.knockback)
+        displace(
+          enemy,
+          heading.fx * effect.knockback,
+          heading.fy * effect.knockback,
+          targetRadius(world, enemy, config),
+          config,
+          world.tick,
+        );
+      confineMovement(world, enemy, before, config);
     }
     if (enemy.hp <= 0) return;
     const before = { x: enemy.x, y: enemy.y };
@@ -677,6 +779,7 @@ function strikeArc(
     }
     if (
       effect.knockback &&
+      !effect.manaSteal &&
       (effect.knockbackChance === undefined ||
         world.random() < effect.knockbackChance)
     )
@@ -759,7 +862,63 @@ export function perform(
   stage?: string,
   basicTarget?: Point,
 ): void {
+  revealOnAction(hero, ability.id);
+  ability = consumeStaffCharges(hero, ability);
+  if (
+    ability.airborneEffect &&
+    hasStatus(hero, 'duong_mon_flight', world.tick)
+  ) {
+    ability = { ...ability, effect: ability.airborneEffect };
+    stage = ability.effect.mode === 'dash' ? 'air_laser' : 'air_bombs';
+  }
+  if (
+    ability.id === duongMon.coQuan &&
+    hasStatus(hero, 'duong_mon_flight', world.tick) &&
+    ability.effect.mode === 'projectile'
+  )
+    ability = {
+      ...ability,
+      effect: { ...ability.effect, count: 3, spreadAngle: 0.46 },
+    };
+  if (ability.id === duongMon.shell)
+    hero.statuses = (hero.statuses ?? []).filter(
+      (s) => s.abilityId !== duongMon.flight,
+    );
   const original = ability.effect;
+  const focusRange =
+    ability.focusRange ??
+    ('range' in original
+      ? original.range
+      : original.mode === 'dash'
+        ? original.distance
+        : 0);
+  const lockedTarget =
+    ability.targeting === 'nearestEnemyAtCast' ||
+    (original.mode === 'multi_hit' && original.targetArea)
+      ? castAreaCenter(
+          world,
+          hero,
+          {
+            mode: 'area',
+            durationTicks: 1,
+            tickInterval: 1,
+            radius: 1,
+            damage: 0,
+            nearestRange:
+              original.mode === 'multi_hit' && original.targetArea
+                ? original.targetArea.range
+                : focusRange,
+          },
+          config,
+        )
+      : undefined;
+  let gatherCenter: Point | undefined;
+  const gatherIds: string[] = [];
+  if (ability.targeting === 'nearestEnemyAtCast') {
+    const aim = targetDirection(world, hero, focusRange, config);
+    hero.fx = aim.x;
+    hero.fy = aim.y;
+  }
   if (ability.id === duongMon.elements) return;
   if (original.mode === 'dash' && movementSkillLocked(hero, world.tick)) return;
   const dash = original.mode === 'projectile' ? original.comboDash : undefined;
@@ -805,7 +964,11 @@ export function perform(
       hero.fx = aim.x;
       hero.fy = aim.y;
     }
-  } else if (effect.mode === 'projectile' && !effect.useFacing) {
+  } else if (
+    effect.mode === 'projectile' &&
+    !effect.useFacing &&
+    ability.targeting !== 'nearestEnemyAtCast'
+  ) {
     const aim =
       aimNguDocWorms(world, hero, ability, config) ??
       targetDirection(
@@ -847,6 +1010,39 @@ export function perform(
     ...(stage ? { stage } : {}),
   });
   if (executeNguDocAbility(world, hero, ability, config)) return;
+  if (effect.mode === 'dash' && effect.gather) {
+    const center = {
+      x: hero.x + hero.fx * effect.gather.centerOffset,
+      y: hero.y + hero.fy * effect.gather.centerOffset,
+    };
+    gatherCenter = center;
+    for (const enemy of opponents(world, hero.id)) {
+      const toward = direction(enemy.x - hero.x, enemy.y - hero.y);
+      if (
+        enemy.hp <= 0 ||
+        distance(hero, enemy) > effect.gather.range ||
+        toward.x * hero.fx + toward.y * hero.fy <
+          Math.cos(effect.gather.halfAngle) ||
+        !clearLine(world, hero, enemy, config)
+      )
+        continue;
+      gatherIds.push(enemy.id);
+    }
+    emit(world, {
+      kind: 'pulse',
+      sourceId: hero.id,
+      targetId: '',
+      abilityId: ability.id,
+      stage: 'wind_gather',
+      x: center.x,
+      y: center.y,
+      radius: effect.gather.range,
+      fx: hero.fx,
+      fy: hero.fy,
+      damage: 0,
+      critical: false,
+    });
+  }
   if (ability.id === duongMon.flight) {
     if (hasStatus(hero, 'duong_mon_flight', world.tick)) {
       hero.statuses =
@@ -1031,6 +1227,7 @@ export function perform(
         hitIds: [],
         effect,
         ability,
+        ...(lockedTarget ? { areaCenter: lockedTarget } : {}),
         rawDamage: damageFor(
           hero,
           effect.damage,
@@ -1086,6 +1283,8 @@ export function perform(
     } else
       strikeArc(world, hero, ability, config, hero, crit, undefined, stage);
   } else if (effect.mode === 'support') {
+    if (effect.selfHeal)
+      healHero(world, hero, hero, ability.id, effect.selfHeal);
     if (effect.durationTicks > 1)
       applyStatus(
         hero,
@@ -1330,19 +1529,22 @@ export function perform(
     world.actions ??= [];
     const duration =
       effect.mode === 'dash'
-        ? Math.ceil((effect.distance / effect.speed) * config.tickRate)
+        ? Math.ceil((effect.distance / effect.speed) * config.tickRate) +
+          (effect.windupTicks ?? 0) +
+          (effect.afterProjectile?.delayTicks ?? 0)
         : (effect.durationTicks ?? effect.spacingTicks * effect.hits + 1);
-    applyStatus(
-      hero,
-      {
-        kind: effect.mode === 'dash' ? 'dash' : 'channel',
-        durationTicks: duration,
-        magnitude: effect.mode === 'multi_hit' ? effect.range : 1,
-      },
-      hero.id,
-      ability.id,
-      world.tick,
-    );
+    if (!(effect.mode === 'multi_hit' && effect.detached))
+      applyStatus(
+        hero,
+        {
+          kind: effect.mode === 'dash' ? 'dash' : 'channel',
+          durationTicks: duration,
+          magnitude: effect.mode === 'multi_hit' ? effect.range : 1,
+        },
+        hero.id,
+        ability.id,
+        world.tick,
+      );
     if (ability.id === duongMon.evade)
       applyStatus(
         hero,
@@ -1355,10 +1557,49 @@ export function perform(
         ability.id,
         world.tick,
       );
-    hero.actionUntil = world.tick + Math.max(12, duration);
+    hero.actionUntil =
+      world.tick +
+      (effect.mode === 'multi_hit' && effect.detached
+        ? (effect.inwardBurst?.windupTicks ?? 9)
+        : Math.max(12, duration));
     const inward = effect.mode === 'multi_hit' ? effect.inwardBurst : undefined;
     const damageEffect =
       effect.mode === 'multi_hit' && inward ? effect.projectileBurst! : effect;
+    const rain = effect.mode === 'multi_hit' ? effect.targetArea : undefined;
+    const impactPoints = rain
+      ? Array.from(
+          { length: effect.mode === 'multi_hit' ? effect.hits : 0 },
+          () => {
+            const center = lockedTarget ?? hero,
+              angle = world.random() * Math.PI * 2,
+              dist = Math.sqrt(world.random()) * rain.scatterRadius;
+            const p = {
+              x: center.x + Math.cos(angle) * dist,
+              y: center.y + Math.sin(angle) * dist,
+            };
+            return blocked(p, 1, config.width, config.height, config.collision)
+              ? { x: center.x, y: center.y }
+              : p;
+          },
+        )
+      : undefined;
+    if (impactPoints)
+      for (const [index, p] of impactPoints.entries())
+        emit(world, {
+          kind: 'pulse',
+          sourceId: hero.id,
+          targetId: '',
+          abilityId: ability.id,
+          stage: 'sword_rain_fall',
+          hitIndex: index,
+          x: p.x,
+          y: p.y,
+          radius: rain!.radius,
+          fx: hero.fx,
+          fy: hero.fy,
+          damage: 0,
+          critical: false,
+        });
     world.actions.push({
       startedAt: world.tick,
       id: `action_${world.nextId++}`,
@@ -1366,8 +1607,19 @@ export function perform(
       abilityId: ability.id,
       kind: effect.mode,
       until: world.tick + duration,
-      nextTick: world.tick + (inward?.windupTicks ?? 0),
-      ...(inward ? { origin: { x: hero.x, y: hero.y } } : {}),
+      nextTick:
+        world.tick +
+        (rain?.fallTicks ??
+          inward?.windupTicks ??
+          (effect.mode === 'dash' ? (effect.windupTicks ?? 0) : 0)),
+      ...(impactPoints ? { impactPoints } : {}),
+      ...(effect.mode === 'multi_hit' && effect.detached
+        ? { detached: true }
+        : {}),
+      ...(gatherCenter ? { gatherCenter, gatherIds } : {}),
+      ...(inward || effect.mode === 'dash'
+        ? { origin: { x: hero.x, y: hero.y } }
+        : {}),
       remaining: effect.mode === 'dash' ? effect.distance : effect.hits,
       fx: effect.mode === 'dash' && effect.backward ? -hero.fx : hero.fx,
       fy: effect.mode === 'dash' && effect.backward ? -hero.fy : hero.fy,
@@ -1394,6 +1646,50 @@ export function perform(
 }
 /** Stationary zones use current target positions, one hit per target per scheduled tick. */
 export function stepAreas(world: World, config: SimulationConfig): void {
+  for (const area of world.areas ?? []) {
+    if (
+      area.until > world.tick ||
+      !area.effect.expireBurst ||
+      (world.heroes.get(area.ownerId)?.hp ?? 0) <= 0
+    )
+      continue;
+    const burst = area.effect.expireBurst;
+    for (const p of fiveSwordPoints(
+      area.x,
+      area.y,
+      area.effect.radius,
+      area.effect.radiusY ?? area.effect.radius,
+    )) {
+      emit(world, {
+        kind: 'pulse',
+        sourceId: area.ownerId,
+        targetId: '',
+        abilityId: area.abilityId,
+        stage: 'formation_burst',
+        x: p.x,
+        y: p.y,
+        radius: burst.radius,
+        damage: 0,
+        critical: false,
+      });
+      for (const enemy of opponents(world, area.ownerId))
+        if (
+          enemy.hp > 0 &&
+          distance(p, enemy) <=
+            burst.radius + targetRadius(world, enemy, config) &&
+          !config.collision.some((w) => segmentRect(p, enemy, w) !== undefined)
+        )
+          hurt(
+            world,
+            enemy,
+            area.ownerId,
+            area.abilityId,
+            area.expireRawDamage ?? burst.damage,
+            config,
+            area,
+          );
+    }
+  }
   world.areas = (world.areas ?? []).filter(
     (a) => a.until > world.tick && (world.heroes.get(a.ownerId)?.hp ?? 0) > 0,
   );
@@ -1436,7 +1732,9 @@ export function stepAreas(world: World, config: SimulationConfig): void {
     const { volley } = area.effect;
     if (pulse && volley) {
       const { radius, durationTicks, tickInterval } = area.effect;
-      const damage = area.rawDamage / Math.ceil(durationTicks / tickInterval);
+      const damage =
+        (area.rawDamage / Math.ceil(durationTicks / tickInterval)) *
+        (area.effect.volleyDamageMultiplier ?? 1);
       const effect: ProjectileEffect = {
         mode: 'projectile',
         damage,
@@ -1451,7 +1749,7 @@ export function stepAreas(world: World, config: SimulationConfig): void {
       };
       for (const enemy of opponents(world, area.ownerId)) {
         if (
-          enemy.hp <= 0 ||
+          !selectableTarget(enemy, world.tick) ||
           distance(area, enemy) > radius ||
           config.collision.some(
             (w) =>
@@ -1553,11 +1851,15 @@ export function stepAreas(world: World, config: SimulationConfig): void {
         area.abilityId,
         area.rawDamage,
         config,
-        area.abilityId === nguDoc.pool || area.abilityId === nguDoc.aura
+        area.abilityId === nguDoc.pool ||
+          area.abilityId === nguDoc.aura ||
+          (area.effect.tickInterval < area.effect.durationTicks &&
+            !area.effect.oncePerTarget &&
+            !area.effect.expandTicks)
           ? { ...area, periodic: true }
           : area,
       );
-      if (enemy.hp > 0)
+      if (landed && enemy.hp > 0)
         for (const status of area.effect.statuses ?? [])
           applyStatus(enemy, status, area.ownerId, area.abilityId, world.tick);
       if (
@@ -1587,7 +1889,7 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
     if (
       !hero ||
       hero.hp <= 0 ||
-      hasStatus(hero, 'stun', world.tick) ||
+      (!action.detached && hasStatus(hero, 'stun', world.tick)) ||
       ((action.effect.mode === 'dash' || action.tamLien) &&
         movementSkillLocked(hero, world.tick)) ||
       (action.effect.mode === 'dash' &&
@@ -1739,6 +2041,7 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
     } else if (action.tamLien) {
       stepTamLienTram(world, hero, action, config);
     } else if (action.effect.mode === 'dash') {
+      if (world.tick < action.nextTick || action.endTriggered) continue;
       const e = action.effect,
         old = { x: hero.x, y: hero.y },
         n = Math.min(action.remaining, e.speed / config.tickRate);
@@ -1753,6 +2056,33 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
           world.tick,
         );
       action.remaining -= n;
+      if (action.gatherCenter)
+        for (const id of action.gatherIds ?? []) {
+          const enemy = opponent(world, hero.id, id);
+          if (!enemy || enemy.hp <= 0) continue;
+          const before = { x: enemy.x, y: enemy.y },
+            left = Math.max(
+              1,
+              Math.ceil((action.remaining + n) / (e.speed / config.tickRate)),
+            );
+          displace(
+            enemy,
+            (action.gatherCenter.x - enemy.x) / left,
+            (action.gatherCenter.y - enemy.y) / left,
+            targetRadius(world, enemy, config),
+            config,
+            world.tick,
+          );
+          confineMovement(world, enemy, before, config);
+        }
+      const damageStart = {
+          x: old.x + action.fx * (e.damageOffset ?? 0),
+          y: old.y + action.fy * (e.damageOffset ?? 0),
+        },
+        damageEnd = {
+          x: hero.x + action.fx * (e.damageOffset ?? 0),
+          y: hero.y + action.fy * (e.damageOffset ?? 0),
+        };
       for (const enemy of opponents(world, action.ownerId)) {
         if (
           e.damage <= 0 ||
@@ -1760,8 +2090,8 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
           (enemy.x - old.x) * action.fx + (enemy.y - old.y) * action.fy < 0 ||
           !clearLine(world, hero, enemy, config) ||
           segmentCircle(
-            old,
-            hero,
+            damageStart,
+            damageEnd,
             enemy,
             e.radius + targetRadius(world, enemy, config),
           ) === undefined
@@ -1785,7 +2115,7 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
           recordTamLienHit(world, hero, enemy.id, config);
           action.tamLienCharged = true;
         }
-        if (enemy.hp > 0 && e.stunTicks > 0)
+        if (landed && enemy.hp > 0 && e.stunTicks > 0)
           applyStatus(
             enemy,
             { kind: 'stun', durationTicks: e.stunTicks, magnitude: 1 },
@@ -1795,7 +2125,70 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
           );
       }
       if (action.remaining <= 0 || distance(old, hero) < 0.01) {
+        action.endTriggered = true;
         action.until = world.tick;
+        if (e.endBlast) {
+          const blast: AreaEffect = {
+            mode: 'area',
+            damage: e.endBlast.damage,
+            radius: e.endBlast.radius,
+            durationTicks: 1,
+            tickInterval: 1,
+          };
+          openArea(
+            world,
+            hero,
+            action.abilityId,
+            blast,
+            config,
+            damageFor(hero, blast.damage, config, world.tick),
+            action,
+          );
+          cue(
+            world,
+            hero,
+            action.abilityId,
+            'dash_impact',
+            blast.radius,
+            action,
+          );
+        }
+        if (e.afterProjectile) {
+          const follow = e.afterProjectile;
+          const projectile: ProjectileEffect = {
+            mode: 'projectile',
+            damage: follow.damage,
+            range: follow.range,
+            speed: follow.speed,
+            radius: follow.radius,
+            count: follow.count,
+            spacingTicks: 0,
+            splashRadius: 0,
+            burnDamage: 0,
+            burnTicks: 0,
+            piercing: true,
+            useFacing: true,
+            radial: follow.radial,
+            attackPowerScale: follow.attackPowerScale,
+          };
+          const first = world.shots.length,
+            sign = e.backward ? -1 : 1;
+          queueProjectiles(
+            world,
+            hero,
+            action.ability!,
+            projectile,
+            config,
+            action.fx * sign,
+            action.fy * sign,
+            follow.stage,
+          );
+          for (const shot of world.shots.slice(first))
+            shot.tick += follow.delayTicks;
+          if (follow.delayTicks)
+            action.until = world.tick + follow.delayTicks + 1;
+          cue(world, hero, action.abilityId, 'dash_end', 0, action);
+        }
         const immunity = hero.statuses?.find(
           (status) => status.kind === 'duong_mon_evade',
         );
@@ -1809,6 +2202,49 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
       const e = action.effect,
         finish = action.remaining === 0,
         radius = finish ? e.finisherRange : e.range;
+      if (e.targetArea && action.impactPoints) {
+        const index = e.hits - action.remaining,
+          p = action.impactPoints[index];
+        if (!p) {
+          action.until = world.tick;
+          continue;
+        }
+        emit(world, {
+          kind: 'pulse',
+          sourceId: hero.id,
+          targetId: '',
+          abilityId: action.abilityId,
+          stage: 'sword_rain_impact',
+          hitIndex: index,
+          x: p.x,
+          y: p.y,
+          radius: e.targetArea.radius,
+          damage: 0,
+          critical: false,
+        });
+        for (const enemy of opponents(world, hero.id))
+          if (
+            enemy.hp > 0 &&
+            distance(p, enemy) <=
+              e.targetArea.radius + targetRadius(world, enemy, config) &&
+            !config.collision.some(
+              (w) => segmentRect(p, enemy, w) !== undefined,
+            )
+          )
+            hurt(
+              world,
+              enemy,
+              hero.id,
+              action.abilityId,
+              action.rawDamage,
+              config,
+              action,
+            );
+        action.remaining--;
+        action.nextTick += e.spacingTicks;
+        if (action.remaining === 0) action.until = world.tick;
+        continue;
+      }
       if (e.inwardBurst) {
         if (action.remaining > 0) {
           queueInwardVolley(world, action, e, config);
@@ -1879,6 +2315,9 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
               comboTargets: action.comboTargets,
             },
           );
+          if (landed && finish && enemy.hp > 0)
+            for (const spec of e.finisherStatuses ?? [])
+              applyStatus(enemy, spec, hero.id, action.abilityId, world.tick);
           if (
             landed &&
             enemy.hp > 0 &&
@@ -1956,7 +2395,10 @@ function supportAllies(
 ): void {
   for (const ally of world.heroes.values()) {
     if (
-      (world.duel && ally.id !== hero.id && (!world.duelTeams || world.duelTeams.get(ally.id) !== world.duelTeams.get(hero.id))) ||
+      (world.duel &&
+        ally.id !== hero.id &&
+        (!world.duelTeams ||
+          world.duelTeams.get(ally.id) !== world.duelTeams.get(hero.id))) ||
       ally.hp <= 0 ||
       distance(hero, ally) > effect.radius ||
       config.collision.some((w) => segmentRect(hero, ally, w) !== undefined)

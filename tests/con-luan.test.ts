@@ -64,7 +64,26 @@ function trial(branch: string, seed = 42, level = 6) {
 
 describe('Côn Luân server inputs', () => {
   it.each([false, true])(
-    'adds four points of A damage per Q rank (ranged: %s)',
+    'accepts one hammer beat every twelve ticks without skipping stages (automatic: %s)',
+    (automatic) => {
+      const { hero, send, step, enemy, events } = trial(conLuan.monk);
+      enemy('cadence-target', 55);
+      if (automatic) {
+        send({ kind: 'auto-basic', enabled: true });
+        step(24);
+      } else for (let i = 0; i < 25; i++) send({ kind: 'basic' });
+      const accepted = events.filter((e) => e.kind === 'attack');
+      expect(accepted.map((e) => e.tick)).toEqual([1, 13, 25]);
+      expect(accepted.map((e) => e.stage)).toEqual([
+        'thrust',
+        'sweep',
+        'overhead',
+      ]);
+      expect(hero.basicChains?.[conLuan.monk]).toBe(0);
+    },
+  );
+  it.each([false, true])(
+    'Q passive no longer adds stance damage per rank (ranged: %s)',
     (ranged) => {
       const damage = (rank: number) => {
         const { hero, config, world, send, step, enemy, events } = trial(
@@ -95,51 +114,85 @@ describe('Côn Luân server inputs', () => {
       };
       const ranks = [1, 2, 3, 4].map(damage);
       for (let i = 1; i < ranks.length; i++)
-        expect(ranks[i]! - ranks[i - 1]!).toBe(4);
+        expect(ranks[i]! - ranks[i - 1]!).toBe(0);
     },
   );
-  it('accepts four melee beats, changes stats without spending mana and rate limits target lightning to 1s', () => {
+  it('cycles thrust, two-hand sweep and overhead on accepted inputs; passive Q preserves stance and stats', () => {
     const { hero, world, config, send, step, enemy, events } = trial(
       conLuan.monk,
     );
     const close = enemy('close', 55),
-      other = enemy('other', 68, 17);
-    const original = characterStats(hero, config, 0).total;
-    for (let i = 0; i < 4; i++) {
+      original = characterStats(hero, config, 0).total;
+    for (let i = 0; i < 6; i++) {
       send({ kind: 'basic' });
+      step(11);
     }
     expect(
       events.filter((e) => e.kind === 'attack').map((e) => e.stage),
-    ).toEqual(['thrust', 'sweep', 'rising', 'overhead']);
-    expect(
-      events.filter((e) => e.kind === 'attack').map((e) => e.tick),
-    ).toEqual([1, 2, 3, 4]);
+    ).toEqual(['thrust', 'sweep', 'overhead', 'thrust', 'sweep', 'overhead']);
     expect(close.hp).toBeLessThan(1000);
-    expect(
-      events.some(
-        (e) => e.abilityId === conLuan.monk && e.stage === 'area_tick',
-      ),
-    ).toBe(true);
     const mana = hero.mana;
     send({ kind: 'cast', slot: 0 });
     expect(hero.mana).toBe(mana);
-    const ranged = characterStats(hero, config, world.tick).total;
-    expect(hero.maxHp).toBeLessThan(original.maxHp);
-    expect(ranged.hpRegen).toBeLessThan(original.hpRegen);
-    expect(ranged.attackPower).toBeLessThan(original.attackPower);
-    const hp = other.hp;
+    expect(hasStatus(hero, 'con_luan_ranged', world.tick)).toBe(false);
+    expect(characterStats(hero, config, world.tick).total).toEqual(original);
+  });
+
+  it('a missed thrust advances through sweep and overhead before returning to thrust', () => {
+    const { hero, config, send, step, enemy, events } = trial(conLuan.monk);
+    expect(config.basics[conLuan.monk]!.cooldownTicks).toBe(0);
     send({ kind: 'basic' });
-    const first = world.tick;
-    step(9);
-    expect(other.hp).toBeLessThan(hp);
+    expect(events.filter((e) => e.kind === 'hit')).toHaveLength(0);
+    step(11);
+    const target = enemy('after-miss', 55);
     send({ kind: 'basic' });
-    step(19);
+    step(11);
+    send({ kind: 'basic' });
+    step(11);
     send({ kind: 'basic' });
     expect(
-      events
-        .filter((e) => e.kind === 'attack' && e.abilityId === conLuan.bolt)
-        .map((e) => e.tick),
-    ).toEqual([first, first + 30]);
+      events.filter((e) => e.kind === 'attack').map((e) => e.stage),
+    ).toEqual(['thrust', 'sweep', 'overhead', 'thrust']);
+    expect(target.hp).toBeLessThan(1000);
+    expect(hero.basicChains?.[conLuan.monk]).toBe(1);
+  });
+
+  it('retains the sweep cleave and only creates the existing lightning ground pulse on overhead', () => {
+    const { hero, world, config, send, step, enemy, events } = trial(
+      conLuan.monk,
+    );
+    world.random = () => 0.99;
+    const front = enemy('front', 55),
+      side = enemy('side', 20, 70);
+    send({ kind: 'basic' });
+    expect(side.hp).toBe(1000);
+    expect(events.filter((e) => e.stage === 'area_tick')).toHaveLength(0);
+    step(11);
+    send({ kind: 'basic' });
+    const sideAfterSweep = side.hp;
+    expect(sideAfterSweep).toBeLessThan(1000);
+    expect(hero.basicChains?.[conLuan.monk]).toBe(2);
+    expect(events.filter((e) => e.stage === 'area_tick')).toHaveLength(0);
+    step(11);
+    send({ kind: 'basic' });
+    expect(side.hp).toBe(sideAfterSweep);
+    expect(front.hp).toBeLessThan(1000);
+    expect(hero.basicChains?.[conLuan.monk]).toBe(0);
+    expect(
+      events.filter(
+        (e) => e.abilityId === conLuan.monk && e.stage === 'area_tick',
+      ),
+    ).toEqual([
+      expect.objectContaining({
+        kind: 'pulse',
+        x: hero.x + 42,
+        y: hero.y,
+        radius: 37,
+      }),
+    ]);
+    expect(
+      config.basics[conLuan.monk]!.basicCombo!.map((s) => s.damageMultiplier),
+    ).toEqual([1, 1, 1.2]);
   });
 
   it('expands the ring, slows once, and expires Chaos stats while retaining cooldown', () => {
@@ -185,44 +238,24 @@ describe('Côn Luân server inputs', () => {
     expect(hero.skillCooldowns[4]).toBeGreaterThan(world.tick);
   });
 
-  it('keeps ranged recovery when returning to ranged stance after a melee attack', () => {
+  it('passive Q spam cannot enable the removed ranged stance', () => {
     const { hero, world, send, step, events } = trial(conLuan.monk);
-    const cast = { kind: 'cast', slot: 0 } as const;
-    const attack = { kind: 'basic' } as const;
-    send(cast);
-    send(attack);
-    const first = world.tick;
-    step(9);
-    send(cast);
+    for (let i = 0; i < 4; i++) {
+      send({ kind: 'cast', slot: 0 });
+      send({ kind: 'basic' });
+      step(11);
+    }
+    expect(
+      events.filter((e) => e.kind === 'cast' && e.abilityId === conLuan.stance),
+    ).toHaveLength(0);
+    expect(
+      events.filter((e) => e.kind === 'attack' && e.abilityId === conLuan.monk),
+    ).toHaveLength(4);
+    expect(events.filter((e) => e.abilityId === conLuan.bolt)).toHaveLength(0);
     expect(hasStatus(hero, 'con_luan_ranged', world.tick)).toBe(false);
-    send(attack);
-    expect(
-      events.some(
-        (event) =>
-          event.tick === world.tick &&
-          event.kind === 'attack' &&
-          event.abilityId === conLuan.monk,
-      ),
-    ).toBe(true);
-    step(5);
-    send(cast);
-    expect(hasStatus(hero, 'con_luan_ranged', world.tick)).toBe(true);
-    send(attack);
-    expect(
-      events.filter(
-        (event) => event.kind === 'attack' && event.abilityId === conLuan.bolt,
-      ),
-    ).toHaveLength(1);
-    step(first + 30 - world.tick - 1);
-    send(attack);
-    expect(
-      events.filter(
-        (event) => event.kind === 'attack' && event.abilityId === conLuan.bolt,
-      ),
-    ).toHaveLength(2);
   });
 
-  it('uses a four-stage búa set with distinct W/R impact points and actual crowd control', () => {
+  it('retains distinct W/R impact points and actual crowd control', () => {
     const { hero, world, send, step, enemy, events } = trial(conLuan.monk, 91);
     const near = enemy('near', 55);
     const splash = enemy('splash', 45, 50);
@@ -334,14 +367,14 @@ describe('Côn Luân server inputs', () => {
       events.some((e) => e.kind === 'hit' && e.abilityId === conLuan.dragon),
     ).toBe(true);
     const inside = enemy('inside', 12),
-      outside = enemy('outside', 90, -45);
+      outside = enemy('outside', 300, -180);
     const center = { x: hero.x, y: hero.y };
     send({ kind: 'cast', slot: 4 });
     step(15);
     const area = world.areas!.find((a) => a.abilityId === conLuan.star)!;
     expect({ x: area.x, y: area.y }).toEqual(center);
     expect(area.effect.radius * area.effect.radiusY!).toBeCloseTo(
-      69 * 44 * 1.2 * 1.2,
+      69 * 44 * 1.2 * 1.2 * 1.35 ** 2,
     );
     expect(
       fiveSwordPoints(area.x, area.y, area.effect.radius, area.effect.radiusY!),
@@ -355,7 +388,10 @@ describe('Côn Luân server inputs', () => {
     ).toBeDefined();
     step();
     const pulses = events.filter(
-      (e) => e.abilityId === conLuan.star && e.kind === 'pulse',
+      (e) =>
+        e.abilityId === conLuan.star &&
+        e.kind === 'pulse' &&
+        e.stage !== 'formation_burst',
     );
     expect(pulses.map((e) => e.tick)).toEqual([
       start,

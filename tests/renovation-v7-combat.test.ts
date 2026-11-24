@@ -45,7 +45,7 @@ it.each([
   [0, 1],
   [0, -1],
 ])(
-  'accepted cast follows the caster through coil and rise (%s,%s)',
+  'accepted cast locks a forward point through coil and rise (%s,%s)',
   (fx, fy) => {
     const c = structuredClone(m1Config);
     Object.assign(c, {
@@ -72,18 +72,19 @@ it.each([
       e = p.effect,
       d = e.dragonDive!;
     expect(h.mana).toBe(955);
+    const locked = { ...p.dragonFlight!.target };
     h.x += 12;
-    stepWorld(w, c);
+    for (let i = 0; i < d.forwardTicks; i++) stepWorld(w, c);
     expect(p.stage).toBe('dragon_coil');
-    expect(p.x).toBeCloseTo(h.x);
-    expect(p.y).toBeCloseTo(h.y);
-    for (let age = 1; age < d.orbitTicks; age++) stepWorld(w, c);
+    expect(p.x).toBeCloseTo(locked.x);
+    expect(p.y).toBeCloseTo(locked.y);
+    for (let age = 0; age < d.orbitTicks; age++) stepWorld(w, c);
     expect(p.stage).toBe('dragon_rise');
     const { target } = p.dragonFlight!;
-    expect(target.x).toBeCloseTo(h.x);
-    expect(target.y).toBeCloseTo(h.y);
+    expect(target.x).toBeCloseTo(locked.x);
+    expect(target.y).toBeCloseTo(locked.y);
     h.x += 12;
     stepWorld(w, c);
-    expect(p.dragonFlight!.target).toEqual({ x: h.x, y: h.y });
+    expect(p.dragonFlight!.target).toEqual(locked);
   },
 );
