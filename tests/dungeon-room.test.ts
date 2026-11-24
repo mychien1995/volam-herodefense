@@ -352,7 +352,11 @@ describe('M2A real Colyseus zone authority and views', () => {
     expect(b!.state.players.get(b!.sessionId)!.xp).toBe(0);
     expect([...zb.world.creeps.values()][0]!.hp).toBe(zb.config.creep.hp);
     expect(observed).toEqual([]);
-    Object.assign(authority.simulation.hero(a!.sessionId)!, { x: 340, y: 240 });
+    Object.assign(authority.simulation.hero(a!.sessionId)!, {
+      x: 340,
+      y: 240,
+      skillIds: ['cuong_long_loan_vu', '', '', ''],
+    });
     a!.send('input', {
       protocolVersion: PROTOCOL_VERSION,
       sequence: next(a!),

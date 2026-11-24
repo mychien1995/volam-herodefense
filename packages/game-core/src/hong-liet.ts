@@ -194,10 +194,16 @@ export class HongLietEncounter {
       boss.pose = 'idle';
       return;
     }
-    const nearest = heroes.sort(
-      (a, b) =>
-        distance(boss!, a) - distance(boss!, b) || a.id.localeCompare(b.id),
-    )[0]!;
+    const nearest = heroes
+      .filter((h) => !hasStatus(h, 'concealed', world.tick))
+      .sort(
+        (a, b) =>
+          distance(boss!, a) - distance(boss!, b) || a.id.localeCompare(b.id),
+      )[0];
+    if (!nearest) {
+      boss.pose = 'idle';
+      return;
+    }
     if (world.tick >= this.nextActionAt) {
       const order: HongLietAbility[] = this.artillery.length
         ? ['hong_liet_a1', 'hong_liet_a2']

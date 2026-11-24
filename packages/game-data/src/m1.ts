@@ -1,5 +1,9 @@
 import { addNguDocProgression, nguDocBasics, nguDocSkills } from './ngu-doc.js';
-import { addDuongMonProgression, duongMonBasics, duongMonSkills } from './duong-mon.js';
+import {
+  addDuongMonProgression,
+  duongMonBasics,
+  duongMonSkills,
+} from './duong-mon.js';
 import { bossBanterDefinition } from './boss-banter.js';
 import {
   thieuLamBasics,
@@ -7,6 +11,7 @@ import {
   addThieuLamProgression,
 } from './thieu-lam.js';
 import { z } from 'zod';
+import { applySkillRevisions } from './skill-revise.js';
 import { economySchema, economyTrial } from './economy.js';
 import { defaultBranches, fixedBranches } from './default-builds.js';
 import type { SimulationConfig } from '@volam/game-core';
@@ -288,4 +293,5 @@ addDuongMonProgression(m1Config.progression);
 addNguDocProgression(m1Config.progression);
 m1Config.progression.defaultBranches = defaultBranches;
 m1Config.progression.fixedBranches = fixedBranches;
+applySkillRevisions(m1Config);
 progressionSchema.parse(m1Config.progression);

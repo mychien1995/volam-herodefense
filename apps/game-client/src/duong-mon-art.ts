@@ -153,7 +153,8 @@ export class DuongMonArt {
         'feather',
       ].includes(stage)
         ? stage
-        : shot.abilityId === duongMon.knives ||
+        : shot.abilityId === duongMon.evade ||
+            shot.abilityId === duongMon.knives ||
             shot.abilityId === duongMon.storm
           ? 'knife'
           : 'arrow';

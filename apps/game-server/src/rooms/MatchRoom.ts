@@ -106,46 +106,61 @@ export class MatchRoom extends Room<{
     process.env['NODE_ENV'] !== 'production' &&
     process.env['VOLAM_DEV_CREEP_TEST'] === '1';
   readonly waveBossTestOptions = serverWaveBossTestOptions(m1Config.tickRate);
-  protected get standaloneLoiDai(): boolean { return false; }
-  protected get standalonePractice(): boolean { return false; }
+  protected get standaloneLoiDai(): boolean {
+    return false;
+  }
+  protected get standalonePractice(): boolean {
+    return false;
+  }
   readonly simulation: DungeonMatch = this.standalonePractice
-    ? new PracticeMatch(m1Config,creepDungeon,structuredClone(practiceDefinition),this.seed)
+    ? new PracticeMatch(
+        m1Config,
+        creepDungeon,
+        structuredClone(practiceDefinition),
+        this.seed,
+      )
     : this.standaloneLoiDai
-    ? new StandaloneLoiDai(m1Config, creepDungeon, structuredClone(pvpDefinition), this.seed)
-    : new DungeonMatch(
-    {
-      ...m1Config,
-      ...(!this.devCreepTest &&
-      !this.waveBossTestOptions &&
-      process.env['VOLAM_DEV_LEGACY_SKILLS'] !== '1' &&
-      process.env['VOLAM_TEST_LEGACY_PROGRESSION'] !== '1'
-        ? { campaign: structuredClone(campaignDefinition) }
-        : {}),
-      personalCraftLoot: true,
-      creepCombat: creepCombatDefinition,
-    },
-    creepDungeon,
-    this.seed,
-    serverInvasionDefinition(),
-    [
-      desertDungeon,
-      beachDungeon,
-      chuBaThongDungeon,
-      hongLietDungeon,
-      kimLuanDungeon,
-      coMoDungeon,
-      hellDungeon,
-    ],
-    this.devCreepTest ? undefined : structuredClone(dongTaDefinition),
-    this.devCreepTest ? undefined : structuredClone(tayDocDefinition),
-    this.devCreepTest ? undefined : namDeDefinition,
-    this.devCreepTest ? undefined : bacCaiDefinition,
-    this.waveBossTestOptions,
-    !this.devCreepTest &&
-      (!this.waveBossTestOptions || process.env['VOLAM_DEV_FINAL_BOSS'] === '1')
-      ? vuongDefinition
-      : undefined,
-  );
+      ? new StandaloneLoiDai(
+          m1Config,
+          creepDungeon,
+          structuredClone(pvpDefinition),
+          this.seed,
+        )
+      : new DungeonMatch(
+          {
+            ...m1Config,
+            ...(!this.devCreepTest &&
+            !this.waveBossTestOptions &&
+            process.env['VOLAM_DEV_LEGACY_SKILLS'] !== '1' &&
+            process.env['VOLAM_TEST_LEGACY_PROGRESSION'] !== '1'
+              ? { campaign: structuredClone(campaignDefinition) }
+              : {}),
+            personalCraftLoot: true,
+            creepCombat: creepCombatDefinition,
+          },
+          creepDungeon,
+          this.seed,
+          serverInvasionDefinition(),
+          [
+            desertDungeon,
+            beachDungeon,
+            chuBaThongDungeon,
+            hongLietDungeon,
+            kimLuanDungeon,
+            coMoDungeon,
+            hellDungeon,
+          ],
+          this.devCreepTest ? undefined : structuredClone(dongTaDefinition),
+          this.devCreepTest ? undefined : structuredClone(tayDocDefinition),
+          this.devCreepTest ? undefined : namDeDefinition,
+          this.devCreepTest ? undefined : bacCaiDefinition,
+          this.waveBossTestOptions,
+          !this.devCreepTest &&
+            (!this.waveBossTestOptions ||
+              process.env['VOLAM_DEV_FINAL_BOSS'] === '1')
+            ? vuongDefinition
+            : undefined,
+        );
   readonly world = this.simulation.arena.world;
   private creepPreview: CreepPreviewSession | undefined;
   readonly devTayDoc =
@@ -258,540 +273,560 @@ export class MatchRoom extends Room<{
     }
   }
 
-  protected getMatchMessages() { return {
-    'pvp-action':validate(pvpActionSchema,(client:MatchClient,action)=>client.send('command-rejected',{protocolVersion:PROTOCOL_VERSION,sequence:action.sequence,reason:'Phòng này không phải Lôi Đài độc lập.'})),
-    'loi-dai-action': validate(
-      loiDaiActionSchema,
-      (client: MatchClient, input) => {
-        if (
-          this.state.phase !== 'IN_GAME' ||
-          this.creepPreview ||
-          !this.state.players.get(client.sessionId)?.confirmed
-        )
-          return;
-        const hero = this.simulation.hero(client.sessionId);
-        if (!hero || input.sequence <= hero.lastSequence) return;
-        hero.lastSequence = input.sequence;
-        const reason =
-          input.action === 'enter'
-            ? this.simulation.enterLoiDai(client.sessionId)
-            : this.simulation.exitLoiDai(client.sessionId);
-        if (reason)
-          client.send('command-rejected', {
-            protocolVersion: PROTOCOL_VERSION,
-            sequence: input.sequence,
-            reason,
-          });
-        this.syncState();
-      },
-    ),
-    'boss-retry-action': validate(
-      bossRetryActionSchema,
-      (client: MatchClient, input) => {
-        const hero = this.simulation.hero(client.sessionId);
-        if (
-          !hero ||
-          !this.simulation.base.campaign ||
-          this.state.phase !== 'IN_GAME' ||
-          input.sequence <= hero.lastSequence
-        )
-          return;
-        hero.lastSequence = input.sequence;
-        const reason =
-          input.action === 'vote'
-            ? this.simulation.bossRetries.vote(
-                client.sessionId,
-                input.id,
-                input.accept,
+  protected getMatchMessages() {
+    return {
+      'pvp-action': validate(pvpActionSchema, (client: MatchClient, action) =>
+        client.send('command-rejected', {
+          protocolVersion: PROTOCOL_VERSION,
+          sequence: action.sequence,
+          reason: 'Phòng này không phải Lôi Đài độc lập.',
+        }),
+      ),
+      'loi-dai-action': validate(
+        loiDaiActionSchema,
+        (client: MatchClient, input) => {
+          if (
+            this.state.phase !== 'IN_GAME' ||
+            this.creepPreview ||
+            !this.state.players.get(client.sessionId)?.confirmed
+          )
+            return;
+          const hero = this.simulation.hero(client.sessionId);
+          if (!hero || input.sequence <= hero.lastSequence) return;
+          hero.lastSequence = input.sequence;
+          const reason =
+            input.action === 'enter'
+              ? this.simulation.enterLoiDai(client.sessionId)
+              : this.simulation.exitLoiDai(client.sessionId);
+          if (reason)
+            client.send('command-rejected', {
+              protocolVersion: PROTOCOL_VERSION,
+              sequence: input.sequence,
+              reason,
+            });
+          this.syncState();
+        },
+      ),
+      'boss-retry-action': validate(
+        bossRetryActionSchema,
+        (client: MatchClient, input) => {
+          const hero = this.simulation.hero(client.sessionId);
+          if (
+            !hero ||
+            !this.simulation.base.campaign ||
+            this.state.phase !== 'IN_GAME' ||
+            input.sequence <= hero.lastSequence
+          )
+            return;
+          hero.lastSequence = input.sequence;
+          const reason =
+            input.action === 'vote'
+              ? this.simulation.bossRetries.vote(
+                  client.sessionId,
+                  input.id,
+                  input.accept,
+                )
+              : this.simulation.bossRetries.call(client.sessionId, input.id);
+          if (reason)
+            client.send('command-rejected', {
+              protocolVersion: PROTOCOL_VERSION,
+              sequence: input.sequence,
+              reason,
+            });
+          this.syncState();
+        },
+      ),
+      'creep-preview-action': validate(
+        creepPreviewActionSchema,
+        (client: MatchClient, input) => {
+          const reason =
+            !this.creepPreview || !this.devCreepTest
+              ? 'Preview creep chỉ dùng trong phòng test riêng.'
+              : client.sessionId !== this.state.hostId
+                ? 'Chỉ host điều khiển preview creep.'
+                : this.state.phase !== 'IN_GAME' ||
+                    !this.state.players.get(client.sessionId)?.confirmed
+                  ? 'Hãy chọn và xác nhận môn phái trước.'
+                  : this.creepPreview.action(input);
+          if (reason)
+            client.send('command-rejected', {
+              protocolVersion: PROTOCOL_VERSION,
+              sequence: input.sequence,
+              reason,
+            });
+          this.syncState();
+        },
+      ),
+      'merchant-action': validate(
+        merchantActionSchema,
+        (client: MatchClient, input) => {
+          const hero = this.simulation.hero(client.sessionId),
+            zone = this.simulation.zoneOf(client.sessionId);
+          if (
+            this.state.phase !== 'IN_GAME' ||
+            !hero ||
+            !zone ||
+            !this.state.players.get(client.sessionId)?.confirmed
+          )
+            return;
+          if (input.sequence <= hero.lastSequence) return;
+          hero.lastSequence = input.sequence;
+          const beforePotions = { ...hero.inventory?.potions };
+          const reason =
+            zone.access === 'duel'
+              ? 'Không thể dùng vật phẩm hoặc mở Thương Gia trong Lôi Đài.'
+              : this.simulation.base.campaign &&
+                  input.action !== 'use-potion' &&
+                  this.simulation.waveBossLocked
+                ? 'Không thể mua hoặc chế tạo khi đang giao chiến boss.'
+                : transactMerchant(
+                    hero,
+                    m1Config,
+                    {
+                      inArena: zone.access === 'arena',
+                      matchTick: this.simulation.tick,
+                      worldTick: zone.world.tick,
+                    },
+                    input.revision,
+                    input,
+                  );
+          if (!reason && input.action === 'use-potion')
+            for (const key of Object.keys(beforePotions) as PotionId[]) {
+              const used =
+                (beforePotions[key] ?? 0) - (hero.inventory?.potions[key] ?? 0);
+              if (used > 0)
+                this.simulation.bossRetries.recordPotion(hero.id, key, used);
+            }
+          if (reason)
+            client.send('command-rejected', {
+              protocolVersion: PROTOCOL_VERSION,
+              sequence: input.sequence,
+              reason,
+            });
+          else
+            client.send('merchant-result', {
+              protocolVersion: PROTOCOL_VERSION,
+              sequence: input.sequence,
+              revision: hero.inventory!.revision,
+              message:
+                input.action === 'use-potion'
+                  ? 'Đã dùng bình.'
+                  : input.action === 'craft'
+                    ? 'Đã chế tạo và trang bị.'
+                    : 'Đã mua và cập nhật hành trang.',
+            });
+          this.syncState();
+        },
+      ),
+      'skill-preview-action': validate(
+        skillPreviewActionSchema,
+        (client: MatchClient, input) => {
+          const hero = this.simulation.hero(client.sessionId),
+            zone = this.simulation.zoneOf(client.sessionId);
+          if (
+            !this.devSkillLoadout ||
+            this.state.phase !== 'IN_GAME' ||
+            !hero ||
+            hero.hp <= 0 ||
+            zone?.access !== 'arena'
+          )
+            return;
+          const prefix = `preview_${client.sessionId}_`;
+          zone.world.combos = (zone.world.combos ?? []).filter(
+            (c) => !c.targetId.startsWith(prefix),
+          );
+          for (const id of zone.world.creeps.keys())
+            if (id.startsWith(prefix)) zone.world.creeps.delete(id);
+          if (input.action !== 'clear')
+            for (let i = 0; i < (input.action === 'attacker' ? 1 : 3); i++) {
+              const point = {
+                x: hero.x + hero.fx * (24 + i * 48),
+                y: hero.y + hero.fy * (24 + i * 48),
+              };
+              if (
+                blocked(
+                  point,
+                  zone.config.creep.radius,
+                  zone.config.width,
+                  zone.config.height,
+                  zone.config.collision,
+                )
               )
-            : this.simulation.bossRetries.call(client.sessionId, input.id);
-        if (reason)
-          client.send('command-rejected', {
-            protocolVersion: PROTOCOL_VERSION,
-            sequence: input.sequence,
-            reason,
-          });
-        this.syncState();
-      },
-    ),
-    'creep-preview-action': validate(
-      creepPreviewActionSchema,
-      (client: MatchClient, input) => {
-        const reason =
-          !this.creepPreview || !this.devCreepTest
-            ? 'Preview creep chỉ dùng trong phòng test riêng.'
-            : client.sessionId !== this.state.hostId
-              ? 'Chỉ host điều khiển preview creep.'
-              : this.state.phase !== 'IN_GAME' ||
-                  !this.state.players.get(client.sessionId)?.confirmed
-                ? 'Hãy chọn và xác nhận môn phái trước.'
-                : this.creepPreview.action(input);
-        if (reason)
-          client.send('command-rejected', {
-            protocolVersion: PROTOCOL_VERSION,
-            sequence: input.sequence,
-            reason,
-          });
-        this.syncState();
-      },
-    ),
-    'merchant-action': validate(
-      merchantActionSchema,
-      (client: MatchClient, input) => {
-        const hero = this.simulation.hero(client.sessionId),
-          zone = this.simulation.zoneOf(client.sessionId);
-        if (
-          this.state.phase !== 'IN_GAME' ||
-          !hero ||
-          !zone ||
-          !this.state.players.get(client.sessionId)?.confirmed
-        )
-          return;
-        if (input.sequence <= hero.lastSequence) return;
-        hero.lastSequence = input.sequence;
-        const beforePotions = { ...hero.inventory?.potions };
-        const reason =
-          zone.access === 'duel'
-            ? 'Không thể dùng vật phẩm hoặc mở Thương Gia trong Lôi Đài.'
-            : this.simulation.base.campaign &&
-                input.action !== 'use-potion' &&
-                this.simulation.waveBossLocked
-              ? 'Không thể mua hoặc chế tạo khi đang giao chiến boss.'
-              : transactMerchant(
-                  hero,
-                  m1Config,
-                  {
-                    inArena: zone.access === 'arena',
-                    matchTick: this.simulation.tick,
-                    worldTick: zone.world.tick,
-                  },
+                continue;
+              const enemy = addCreep(
+                zone.world,
+                prefix + i,
+                point,
+                zone.config,
+              );
+              enemy.hp = enemy.maxHp = 10000;
+              enemy.stats = {
+                ...zone.config.creep,
+                hp: 10000,
+                speed: 0,
+                defense: 0,
+                xp: 0,
+                gold: 0,
+                damage: 12,
+                attackCooldownTicks: 45,
+                attackRange: 40,
+                detectionRange: input.action === 'attacker' ? 65 : 1,
+              };
+            }
+          this.syncState();
+        },
+      ),
+      'build-action': validate(
+        buildActionSchema,
+        (client: MatchClient, input) => {
+          const reason =
+            this.state.phase !== 'IN_GAME' ||
+            !this.state.players.get(client.sessionId)?.confirmed
+              ? 'Chọn và xác nhận môn phái trước khi đổi võ học.'
+              : this.simulation.modifyBuild(
+                  client.sessionId,
+                  input.sequence,
                   input.revision,
                   input,
                 );
-        if (!reason && input.action === 'use-potion')
-          for (const key of Object.keys(beforePotions) as PotionId[]) {
-            const used =
-              (beforePotions[key] ?? 0) - (hero.inventory?.potions[key] ?? 0);
-            if (used > 0)
-              this.simulation.bossRetries.recordPotion(hero.id, key, used);
-          }
-        if (reason)
-          client.send('command-rejected', {
-            protocolVersion: PROTOCOL_VERSION,
-            sequence: input.sequence,
-            reason,
-          });
-        else
-          client.send('merchant-result', {
-            protocolVersion: PROTOCOL_VERSION,
-            sequence: input.sequence,
-            revision: hero.inventory!.revision,
-            message:
-              input.action === 'use-potion'
-                ? 'Đã dùng bình.'
-                : input.action === 'craft'
-                  ? 'Đã chế tạo và trang bị.'
-                  : 'Đã mua và cập nhật hành trang.',
-          });
-        this.syncState();
-      },
-    ),
-    'skill-preview-action': validate(
-      skillPreviewActionSchema,
-      (client: MatchClient, input) => {
-        const hero = this.simulation.hero(client.sessionId),
-          zone = this.simulation.zoneOf(client.sessionId);
-        if (
-          !this.devSkillLoadout ||
-          this.state.phase !== 'IN_GAME' ||
-          !hero ||
-          hero.hp <= 0 ||
-          zone?.access !== 'arena'
-        )
-          return;
-        const prefix = `preview_${client.sessionId}_`;
-        zone.world.combos = (zone.world.combos ?? []).filter(
-          (c) => !c.targetId.startsWith(prefix),
-        );
-        for (const id of zone.world.creeps.keys())
-          if (id.startsWith(prefix)) zone.world.creeps.delete(id);
-        if (input.action !== 'clear')
-          for (let i = 0; i < (input.action === 'attacker' ? 1 : 3); i++) {
-            const point = {
-              x: hero.x + hero.fx * (24 + i * 48),
-              y: hero.y + hero.fy * (24 + i * 48),
-            };
+          if (reason)
+            client.send('command-rejected', {
+              protocolVersion: PROTOCOL_VERSION,
+              sequence: input.sequence,
+              reason,
+            });
+          this.syncState();
+        },
+      ),
+      'lobby-action': validate(
+        lobbyActionSchema,
+        (client: MatchClient, action) => {
+          const player = this.state.players.get(client.sessionId);
+          if (!player || !player.connected) return;
+          const reject = (reason: string) =>
+            client.send('command-rejected', {
+              protocolVersion: PROTOCOL_VERSION,
+              sequence: 1,
+              reason,
+            });
+          if (action.action === 'start') {
             if (
-              blocked(
-                point,
-                zone.config.creep.radius,
-                zone.config.width,
-                zone.config.height,
-                zone.config.collision,
-              )
+              this.state.phase !== 'WAITING_LOBBY' ||
+              client.sessionId !== this.state.hostId
             )
-              continue;
-            const enemy = addCreep(zone.world, prefix + i, point, zone.config);
-            enemy.hp = enemy.maxHp = 10000;
-            enemy.stats = {
-              ...zone.config.creep,
-              hp: 10000,
-              speed: 0,
-              defense: 0,
-              xp: 0,
-              gold: 0,
-              damage: 12,
-              attackCooldownTicks: 45,
-              attackRange: 40,
-              detectionRange: input.action === 'attacker' ? 65 : 1,
-            };
-          }
-        this.syncState();
-      },
-    ),
-    'build-action': validate(
-      buildActionSchema,
-      (client: MatchClient, input) => {
-        const reason =
-          this.state.phase !== 'IN_GAME' ||
-          !this.state.players.get(client.sessionId)?.confirmed
-            ? 'Chọn và xác nhận môn phái trước khi đổi võ học.'
-            : this.simulation.modifyBuild(
-                client.sessionId,
-                input.sequence,
-                input.revision,
-                input,
+              return reject('Chỉ host được bắt đầu từ phòng chờ.');
+            if ([...this.state.players.values()].some((p) => !p.connected))
+              return reject(
+                'Có người chơi mất kết nối. Hãy rời và tạo phòng mới.',
               );
-        if (reason)
-          client.send('command-rejected', {
-            protocolVersion: PROTOCOL_VERSION,
-            sequence: input.sequence,
-            reason,
-          });
-        this.syncState();
-      },
-    ),
-    'lobby-action': validate(
-      lobbyActionSchema,
-      (client: MatchClient, action) => {
-        const player = this.state.players.get(client.sessionId);
-        if (!player || !player.connected) return;
-        const reject = (reason: string) =>
-          client.send('command-rejected', {
-            protocolVersion: PROTOCOL_VERSION,
-            sequence: 1,
-            reason,
-          });
-        if (action.action === 'start') {
-          if (
-            this.state.phase !== 'WAITING_LOBBY' ||
-            client.sessionId !== this.state.hostId
-          )
-            return reject('Chỉ host được bắt đầu từ phòng chờ.');
-          if ([...this.state.players.values()].some((p) => !p.connected))
-            return reject(
-              'Có người chơi mất kết nối. Hãy rời và tạo phòng mới.',
-            );
-          this.state.phase = 'SCHOOL_SELECTION';
-          void this.setMetadata({ phase: this.state.phase });
-        } else {
-          if (
-            !['SCHOOL_SELECTION', 'IN_GAME'].includes(this.state.phase) ||
-            player.confirmed
-          )
-            return reject('Không thể đổi lựa chọn ở giai đoạn này.');
-          if (action.action === 'select') {
-            if (player.schoolId !== action.schoolId) player.selectedBranch = '';
-            player.schoolId = action.schoolId;
-          } else if (action.action === 'branch') {
-            if (
-              !m1Config.progression?.schools[
-                player.schoolId
-              ]?.basicIds.includes(action.basicId)
-            )
-              return reject('Nhánh võ học không thuộc môn phái đã chọn.');
-            player.selectedBranch = action.basicId;
+            this.state.phase = 'SCHOOL_SELECTION';
+            void this.setMetadata({ phase: this.state.phase });
           } else {
-            if (!player.schoolId) return reject('Hãy chọn môn phái trước.');
-            if (this.state.requiresBranch && !player.selectedBranch)
-              return reject('Hãy chọn nhánh võ học trước khi xác nhận.');
-            player.confirmed = true;
-            if (this.state.phase === 'IN_GAME') {
-              this.spawnPlayer(client.sessionId, player);
-              this.syncState();
-            } else if (
-              [...this.state.players.values()].every(
-                (p) => p.connected && p.confirmed,
+            if (
+              !['SCHOOL_SELECTION', 'IN_GAME'].includes(this.state.phase) ||
+              player.confirmed
+            )
+              return reject('Không thể đổi lựa chọn ở giai đoạn này.');
+            if (action.action === 'select') {
+              if (player.schoolId !== action.schoolId)
+                player.selectedBranch = '';
+              player.schoolId = action.schoolId;
+            } else if (action.action === 'branch') {
+              if (
+                !m1Config.progression?.schools[
+                  player.schoolId
+                ]?.basicIds.includes(action.basicId)
               )
-            ) {
-              for (const [id, p] of this.state.players) this.spawnPlayer(id, p);
-              this.state.phase = 'IN_GAME';
-              void this.setMetadata({ phase: this.state.phase });
-              this.syncState();
+                return reject('Nhánh võ học không thuộc môn phái đã chọn.');
+              player.selectedBranch = action.basicId;
+            } else {
+              if (!player.schoolId) return reject('Hãy chọn môn phái trước.');
+              if (this.state.requiresBranch && !player.selectedBranch)
+                return reject('Hãy chọn nhánh võ học trước khi xác nhận.');
+              player.confirmed = true;
+              if (this.state.phase === 'IN_GAME') {
+                this.spawnPlayer(client.sessionId, player);
+                this.syncState();
+              } else if (
+                [...this.state.players.values()].every(
+                  (p) => p.connected && p.confirmed,
+                )
+              ) {
+                for (const [id, p] of this.state.players)
+                  this.spawnPlayer(id, p);
+                this.state.phase = 'IN_GAME';
+                void this.setMetadata({ phase: this.state.phase });
+                this.syncState();
+              }
             }
           }
-        }
-      },
-    ),
-    'connection-check': validate(
-      connectionCheckSchema,
-      (client: MatchClient, input) => {
-        const player = this.state.players.get(client.sessionId);
-        if (!player) return;
-        if (input.sequence > (this.checkSequences.get(client.sessionId) ?? 0)) {
-          this.checkSequences.set(client.sessionId, input.sequence);
-          player.checks += 1;
-        }
-        client.send('connection-ack', {
-          protocolVersion: PROTOCOL_VERSION,
-          sequence: input.sequence,
-          checks: player.checks,
-        });
-      },
-    ),
-    'boss-item-action': validate(
-      bossItemActionSchema,
-      (client: MatchClient, input) => {
-        const hero = this.simulation.hero(client.sessionId),
-          zone = this.simulation.zoneOf(client.sessionId);
-        if (
-          this.state.phase !== 'IN_GAME' ||
-          !hero ||
-          !zone ||
-          input.sequence <= hero.lastSequence
-        )
+        },
+      ),
+      'connection-check': validate(
+        connectionCheckSchema,
+        (client: MatchClient, input) => {
+          const player = this.state.players.get(client.sessionId);
+          if (!player) return;
+          if (
+            input.sequence > (this.checkSequences.get(client.sessionId) ?? 0)
+          ) {
+            this.checkSequences.set(client.sessionId, input.sequence);
+            player.checks += 1;
+          }
+          client.send('connection-ack', {
+            protocolVersion: PROTOCOL_VERSION,
+            sequence: input.sequence,
+            checks: player.checks,
+          });
+        },
+      ),
+      'boss-item-action': validate(
+        bossItemActionSchema,
+        (client: MatchClient, input) => {
+          const hero = this.simulation.hero(client.sessionId),
+            zone = this.simulation.zoneOf(client.sessionId);
+          if (
+            this.state.phase !== 'IN_GAME' ||
+            !hero ||
+            !zone ||
+            input.sequence <= hero.lastSequence
+          )
+            return;
+          hero.lastSequence = input.sequence;
+          client.send('command-rejected', {
+            protocolVersion: PROTOCOL_VERSION,
+            sequence: input.sequence,
+            reason: 'Nguyên liệu cá nhân không thể bán hoặc thả.',
+          });
+          this.syncState();
+        },
+      ),
+      'boss-loot-action': validate(
+        bossLootActionSchema,
+        (client: MatchClient, input) => {
+          if (this.state.phase !== 'IN_GAME') return;
+          const hero = this.simulation.hero(client.sessionId),
+            zone = this.simulation.zoneOf(client.sessionId);
+          if (!hero || !zone || input.sequence <= hero.lastSequence) return;
+          hero.lastSequence = input.sequence;
+          client.send('command-rejected', {
+            protocolVersion: PROTOCOL_VERSION,
+            sequence: input.sequence,
+            reason:
+              'Nguyên liệu cá nhân được cấp tự động, không cần nhận hoặc quay thưởng.',
+          });
+          this.syncState();
+        },
+      ),
+      'dungeon-action': validate(
+        dungeonActionSchema,
+        (client: MatchClient, input) => {
+          const reject = (reason: string) =>
+            client.send('command-rejected', {
+              protocolVersion: PROTOCOL_VERSION,
+              sequence: input.sequence,
+              reason,
+            });
+          if (this.state.phase !== 'IN_GAME')
+            return reject('Trận đấu chưa bắt đầu.');
+          if (this.creepPreview)
+            return reject(
+              'Phòng preview dùng bộ chọn creep ngay trong sân test.',
+            );
+          if (!this.state.players.get(client.sessionId)?.confirmed)
+            return reject('Hãy chọn và xác nhận môn phái trước khi chơi.');
+          if (
+            input.sequence <= (this.dungeonSequences.get(client.sessionId) ?? 0)
+          )
+            return;
+          this.dungeonSequences.set(client.sessionId, input.sequence);
+          if (this.simulation.zoneOf(client.sessionId)?.access === 'duel')
+            return reject('Hãy rời Lôi Đài trước khi mở phó bản.');
+          if (input.action === 'open') {
+            if (!this.simulation.canEnterDungeon(client.sessionId))
+              return reject('Chỉ vào phó bản khi còn sống tại đấu trường.');
+            client.send(
+              'dungeon-menu',
+              { protocolVersion: PROTOCOL_VERSION },
+              { afterNextPatch: true },
+            );
+            return;
+          }
+          let reason =
+            input.action === 'enter'
+              ? this.simulation.enter(
+                  client.sessionId,
+                  input.access ?? 'private',
+                  input.destination,
+                )
+              : input.action === 'summon-help'
+                ? this.simulation.summonHelp(client.sessionId, Date.now())
+                : input.action === 'reply-invitation'
+                  ? this.simulation.replyInvitation(
+                      client.sessionId,
+                      input.invitationId,
+                      input.accept,
+                      Date.now(),
+                    )
+                  : input.action === 'interact'
+                    ? this.simulation.interact(client.sessionId)
+                    : this.simulation.exit(client.sessionId);
+          if (!reason && input.action === 'enter' && input.summonHelp)
+            reason = this.simulation.summonHelp(client.sessionId, Date.now());
+          if (reason) return reject(reason);
+          const hero = this.simulation.hero(client.sessionId);
+          if (hero)
+            hero.lastSequence = Math.max(hero.lastSequence, input.sequence);
+          this.syncState();
+        },
+      ),
+      input: validate(inputSchema, (client: MatchClient, input) => {
+        const receivedAt = this.collectInputTiming ? performance.now() : 0;
+        if (this.state.phase !== 'IN_GAME') {
+          client.send('command-rejected', {
+            protocolVersion: PROTOCOL_VERSION,
+            sequence: input.sequence,
+            reason: 'Trận đấu chưa bắt đầu.',
+          });
           return;
-        hero.lastSequence = input.sequence;
-        client.send('command-rejected', {
-          protocolVersion: PROTOCOL_VERSION,
-          sequence: input.sequence,
-          reason: 'Nguyên liệu cá nhân không thể bán hoặc thả.',
-        });
-        this.syncState();
-      },
-    ),
-    'boss-loot-action': validate(
-      bossLootActionSchema,
-      (client: MatchClient, input) => {
-        if (this.state.phase !== 'IN_GAME') return;
-        const hero = this.simulation.hero(client.sessionId),
-          zone = this.simulation.zoneOf(client.sessionId);
-        if (!hero || !zone || input.sequence <= hero.lastSequence) return;
-        hero.lastSequence = input.sequence;
-        client.send('command-rejected', {
-          protocolVersion: PROTOCOL_VERSION,
-          sequence: input.sequence,
-          reason:
-            'Nguyên liệu cá nhân được cấp tự động, không cần nhận hoặc quay thưởng.',
-        });
-        this.syncState();
-      },
-    ),
-    'dungeon-action': validate(
-      dungeonActionSchema,
-      (client: MatchClient, input) => {
-        const reject = (reason: string) =>
+        }
+        if (!this.state.players.get(client.sessionId)?.confirmed) {
+          client.send('command-rejected', {
+            protocolVersion: PROTOCOL_VERSION,
+            sequence: input.sequence,
+            reason: 'Hãy chọn và xác nhận môn phái trước khi chơi.',
+          });
+          return;
+        }
+        if (
+          input.kind === 'select-basic' &&
+          (!this.legacySkills ||
+            !m1Config.progression?.schools[
+              this.simulation.hero(client.sessionId)?.schoolId ?? ''
+            ]?.basicIds.includes(input.id))
+        ) {
+          client.send('command-rejected', {
+            protocolVersion: PROTOCOL_VERSION,
+            sequence: input.sequence,
+            reason: 'Đòn đánh đã được khóa theo nhánh khi vào trận.',
+          });
+          return;
+        }
+        if (
+          input.kind === 'dev-loadout' &&
+          (!this.devSkillLoadout ||
+            !['cai_bang', 'thien_son', 'vo_dang', 'thieu_lam'].includes(
+              this.simulation.hero(client.sessionId)?.schoolId ?? '',
+            ))
+        ) {
+          client.send('command-rejected', {
+            protocolVersion: PROTOCOL_VERSION,
+            sequence: input.sequence,
+            reason: 'Bộ kỹ năng thử nghiệm đang tắt.',
+          });
+          return;
+        }
+        if (
+          input.kind === 'dev-loadout' &&
+          (input.ids.some(
+            (id) =>
+              id &&
+              m1Config.progression?.skills[id]?.schoolId !==
+                this.simulation.hero(client.sessionId)?.schoolId,
+          ) ||
+            new Set(input.ids.filter(Boolean)).size !==
+              input.ids.filter(Boolean).length)
+        ) {
+          client.send('command-rejected', {
+            protocolVersion: PROTOCOL_VERSION,
+            sequence: input.sequence,
+            reason: 'Bộ thử nghiệm có kỹ năng không hợp lệ hoặc bị trùng.',
+          });
+          return;
+        }
+        if (
+          input.kind === 'cast' &&
+          !equippedAbility(
+            this.simulation.hero(client.sessionId)!,
+            input.slot,
+            m1Config,
+          )
+        ) {
+          client.send('command-rejected', {
+            protocolVersion: PROTOCOL_VERSION,
+            sequence: input.sequence,
+            reason: this.simulation.hero(client.sessionId)?.progression
+              ? 'Kỹ năng chưa trang bị hoặc chưa học. Dùng dấu cộng trên thanh kỹ năng để học.'
+              : 'Ô này chưa được trang bị.',
+          });
+          return;
+        }
+        if (this.devSkillLoadout) {
+          const h = this.simulation.hero(client.sessionId)!,
+            zone = this.simulation.zoneOf(client.sessionId)!;
+          if (
+            ['dev-loadout', 'select-basic'].includes(input.kind) &&
+            zone.access !== 'arena'
+          ) {
+            client.send('command-rejected', {
+              protocolVersion: PROTOCOL_VERSION,
+              sequence: input.sequence,
+              reason: 'Chỉ đổi bộ thử nghiệm tại đấu trường.',
+            });
+            return;
+          }
+          if (zone.access !== 'duel') resetSkillReviewResources(h, zone.world);
+          if (
+            zone.access === 'arena' &&
+            applySkillReviewLoadout(
+              zone.world,
+              h,
+              zone.config,
+              input.sequence,
+              input,
+            )
+          ) {
+            this.syncState();
+            return;
+          }
+        }
+        let command = input;
+        if (
+          (input.kind === 'basic' || input.kind === 'move-to') &&
+          input.targetId
+        ) {
+          const zone = this.simulation.zoneOf(client.sessionId);
+          const prefix = zone ? this.entityKey(zone, '') : '';
+          if (prefix && input.targetId.startsWith(prefix))
+            command = {
+              ...input,
+              targetId: input.targetId.slice(prefix.length),
+            };
+        }
+        const reason = this.simulation.input(
+          client.sessionId,
+          input.sequence,
+          command,
+        );
+        if (
+          !reason &&
+          this.collectInputTiming &&
+          (input.kind === 'move' || input.kind === 'basic')
+        ) {
+          const samples = this.inputTiming.get(client.sessionId) ?? [];
+          if (samples.length < 16)
+            samples.push({ sequence: input.sequence, receivedAt });
+          this.inputTiming.set(client.sessionId, samples);
+        }
+        if (reason)
           client.send('command-rejected', {
             protocolVersion: PROTOCOL_VERSION,
             sequence: input.sequence,
             reason,
           });
-        if (this.state.phase !== 'IN_GAME')
-          return reject('Trận đấu chưa bắt đầu.');
-        if (this.creepPreview)
-          return reject(
-            'Phòng preview dùng bộ chọn creep ngay trong sân test.',
-          );
-        if (!this.state.players.get(client.sessionId)?.confirmed)
-          return reject('Hãy chọn và xác nhận môn phái trước khi chơi.');
-        if (
-          input.sequence <= (this.dungeonSequences.get(client.sessionId) ?? 0)
-        )
-          return;
-        this.dungeonSequences.set(client.sessionId, input.sequence);
-        if (this.simulation.zoneOf(client.sessionId)?.access === 'duel')
-          return reject('Hãy rời Lôi Đài trước khi mở phó bản.');
-        if (input.action === 'open') {
-          if (!this.simulation.canEnterDungeon(client.sessionId))
-            return reject('Chỉ vào phó bản khi còn sống tại đấu trường.');
-          client.send(
-            'dungeon-menu',
-            { protocolVersion: PROTOCOL_VERSION },
-            { afterNextPatch: true },
-          );
-          return;
-        }
-        let reason =
-          input.action === 'enter'
-            ? this.simulation.enter(
-                client.sessionId,
-                input.access ?? 'private',
-                input.destination,
-              )
-            : input.action === 'summon-help'
-              ? this.simulation.summonHelp(client.sessionId, Date.now())
-              : input.action === 'reply-invitation'
-                ? this.simulation.replyInvitation(
-                    client.sessionId,
-                    input.invitationId,
-                    input.accept,
-                    Date.now(),
-                  )
-                : input.action === 'interact'
-                  ? this.simulation.interact(client.sessionId)
-                  : this.simulation.exit(client.sessionId);
-        if (!reason && input.action === 'enter' && input.summonHelp)
-          reason = this.simulation.summonHelp(client.sessionId, Date.now());
-        if (reason) return reject(reason);
-        const hero = this.simulation.hero(client.sessionId);
-        if (hero)
-          hero.lastSequence = Math.max(hero.lastSequence, input.sequence);
-        this.syncState();
-      },
-    ),
-    input: validate(inputSchema, (client: MatchClient, input) => {
-      const receivedAt = this.collectInputTiming ? performance.now() : 0;
-      if (this.state.phase !== 'IN_GAME') {
-        client.send('command-rejected', {
-          protocolVersion: PROTOCOL_VERSION,
-          sequence: input.sequence,
-          reason: 'Trận đấu chưa bắt đầu.',
-        });
-        return;
-      }
-      if (!this.state.players.get(client.sessionId)?.confirmed) {
-        client.send('command-rejected', {
-          protocolVersion: PROTOCOL_VERSION,
-          sequence: input.sequence,
-          reason: 'Hãy chọn và xác nhận môn phái trước khi chơi.',
-        });
-        return;
-      }
-      if (
-        input.kind === 'select-basic' &&
-        (!this.legacySkills ||
-          !m1Config.progression?.schools[
-            this.simulation.hero(client.sessionId)?.schoolId ?? ''
-          ]?.basicIds.includes(input.id))
-      ) {
-        client.send('command-rejected', {
-          protocolVersion: PROTOCOL_VERSION,
-          sequence: input.sequence,
-          reason: 'Đòn đánh đã được khóa theo nhánh khi vào trận.',
-        });
-        return;
-      }
-      if (
-        input.kind === 'dev-loadout' &&
-        (!this.devSkillLoadout ||
-          !['cai_bang', 'thien_son', 'vo_dang', 'thieu_lam'].includes(
-            this.simulation.hero(client.sessionId)?.schoolId ?? '',
-          ))
-      ) {
-        client.send('command-rejected', {
-          protocolVersion: PROTOCOL_VERSION,
-          sequence: input.sequence,
-          reason: 'Bộ kỹ năng thử nghiệm đang tắt.',
-        });
-        return;
-      }
-      if (
-        input.kind === 'dev-loadout' &&
-        (input.ids.some(
-          (id) =>
-            id &&
-            m1Config.progression?.skills[id]?.schoolId !==
-              this.simulation.hero(client.sessionId)?.schoolId,
-        ) ||
-          new Set(input.ids.filter(Boolean)).size !==
-            input.ids.filter(Boolean).length)
-      ) {
-        client.send('command-rejected', {
-          protocolVersion: PROTOCOL_VERSION,
-          sequence: input.sequence,
-          reason: 'Bộ thử nghiệm có kỹ năng không hợp lệ hoặc bị trùng.',
-        });
-        return;
-      }
-      if (
-        input.kind === 'cast' &&
-        !equippedAbility(
-          this.simulation.hero(client.sessionId)!,
-          input.slot,
-          m1Config,
-        )
-      ) {
-        client.send('command-rejected', {
-          protocolVersion: PROTOCOL_VERSION,
-          sequence: input.sequence,
-          reason: this.simulation.hero(client.sessionId)?.progression
-            ? 'Kỹ năng chưa trang bị hoặc chưa học. Dùng dấu cộng trên thanh kỹ năng để học.'
-            : 'Ô này chưa được trang bị.',
-        });
-        return;
-      }
-      if (this.devSkillLoadout) {
-        const h = this.simulation.hero(client.sessionId)!,
-          zone = this.simulation.zoneOf(client.sessionId)!;
-        if (
-          ['dev-loadout', 'select-basic'].includes(input.kind) &&
-          zone.access !== 'arena'
-        ) {
-          client.send('command-rejected', {
-            protocolVersion: PROTOCOL_VERSION,
-            sequence: input.sequence,
-            reason: 'Chỉ đổi bộ thử nghiệm tại đấu trường.',
-          });
-          return;
-        }
-        if (zone.access !== 'duel') resetSkillReviewResources(h, zone.world);
-        if (
-          zone.access === 'arena' &&
-          applySkillReviewLoadout(
-            zone.world,
-            h,
-            zone.config,
-            input.sequence,
-            input,
-          )
-        ) {
-          this.syncState();
-          return;
-        }
-      }
-      let command = input;
-      if (
-        (input.kind === 'basic' || input.kind === 'move-to') &&
-        input.targetId
-      ) {
-        const zone = this.simulation.zoneOf(client.sessionId);
-        const prefix = zone ? this.entityKey(zone, '') : '';
-        if (prefix && input.targetId.startsWith(prefix))
-          command = { ...input, targetId: input.targetId.slice(prefix.length) };
-      }
-      const reason = this.simulation.input(
-        client.sessionId,
-        input.sequence,
-        command,
-      );
-      if (
-        !reason &&
-        this.collectInputTiming &&
-        (input.kind === 'move' || input.kind === 'basic')
-      ) {
-        const samples = this.inputTiming.get(client.sessionId) ?? [];
-        if (samples.length < 16)
-          samples.push({ sequence: input.sequence, receivedAt });
-        this.inputTiming.set(client.sessionId, samples);
-      }
-      if (reason)
-        client.send('command-rejected', {
-          protocolVersion: PROTOCOL_VERSION,
-          sequence: input.sequence,
-          reason,
-        });
-    }),
-  }; }
+      }),
+    };
+  }
   override messages = this.getMatchMessages();
   override onCreate(
     options: { portalCount?: unknown; creepPreview?: unknown } = {},
@@ -1045,7 +1080,7 @@ export class MatchRoom extends Room<{
     };
     actor.statuses = JSON.stringify(
       (source.statuses ?? [])
-        .filter((s) => s.until > tick)
+        .filter((s) => s.until > tick && (s.startsAt ?? 0) <= tick)
         .map((s) => ({
           kind: s.kind,
           abilityId: s.abilityId,
@@ -1184,6 +1219,8 @@ export class MatchRoom extends Room<{
             startedAt: action.startedAt,
             nextTick: action.nextTick,
             until: action.until,
+            originX: action.origin?.x,
+            originY: action.origin?.y,
             remaining: action.remaining,
             fx: action.fx,
             fy: action.fy,
@@ -1543,6 +1580,7 @@ export class MatchRoom extends Room<{
         }
         Object.assign(target, {
           startedAt: area.until - area.effect.durationTicks,
+          stage: area.stage ?? '',
           launchX: area.launch?.x ?? 0,
           launchY: area.launch?.y ?? 0,
           launchFx: area.launch?.fx ?? 0,

@@ -17,7 +17,9 @@ export function statusValue(
   return Math.max(
     0,
     ...(actor.statuses ?? [])
-      .filter((s) => s.kind === kind && s.until > tick)
+      .filter(
+        (s) => s.kind === kind && s.until > tick && (s.startsAt ?? 0) <= tick,
+      )
       .map((s) => s.magnitude),
   );
 }
@@ -26,8 +28,12 @@ export function hasStatus(
   kind: StatusKind,
   tick: number,
 ): boolean {
-  return (actor.statuses ?? []).some((s) => s.kind === kind && s.until > tick);
+  return (actor.statuses ?? []).some(
+    (s) => s.kind === kind && s.until > tick && (s.startsAt ?? 0) <= tick,
+  );
 }
+export const selectableTarget = (actor: Actor, tick: number) =>
+  actor.hp > 0 && !hasStatus(actor, 'concealed', tick);
 export function movementSkillLocked(actor: Actor, tick: number): boolean {
   return (actor.statuses ?? []).some(
     (s) =>
@@ -82,6 +88,16 @@ export function applyStatus(
         : spec.magnitude,
     };
   actor.statuses ??= [];
+  if (spec.delayTicks && spec.kind === 'slow') {
+    const preceding = actor.statuses.find(
+      (s) =>
+        s.kind === 'stun' &&
+        s.sourceId === sourceId &&
+        s.abilityId === abilityId &&
+        s.until > tick,
+    );
+    spec = { ...spec, delayTicks: preceding ? preceding.until - tick : 0 };
+  }
   const old = actor.statuses.find(
     (s) =>
       s.kind === spec.kind &&
@@ -90,13 +106,15 @@ export function applyStatus(
   );
   if (old) {
     Object.assign(old, spec);
-    old.until = tick + spec.durationTicks;
+    old.startsAt = tick + (spec.delayTicks ?? 0);
+    old.until = old.startsAt + spec.durationTicks;
   } else
     actor.statuses.push({
       ...spec,
       sourceId,
       abilityId,
-      until: tick + spec.durationTicks,
+      startsAt: tick + (spec.delayTicks ?? 0),
+      until: tick + (spec.delayTicks ?? 0) + spec.durationTicks,
     });
 }
 export function expireStatuses(world: World): void {
@@ -113,6 +131,7 @@ export function cancelOwnedEffects(world: World, id: string): void {
   if (world.chu?.wineDrinkers) delete world.chu.wineDrinkers[id];
   const owner = world.heroes.get(id);
   if (owner) {
+    delete owner.staffCharges;
     delete owner.comboFinisher;
     delete owner.tamLien;
     delete owner.fortune;

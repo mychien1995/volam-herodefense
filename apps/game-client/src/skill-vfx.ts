@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { revisedSkillVisual } from './skill-revise-art.js';
 import { nguDocHandles } from './ngu-doc-art.js';
 import { duongMonHandles } from './duong-mon-art.js';
 import {
@@ -432,6 +433,7 @@ export class SkillVfx {
     );
   }
   event(e: CombatEvent, genericImpact = true): void {
+    if (revisedSkillVisual(e.abilityId)) return;
     if (this.voDangKiem.event(e)) return;
     if (this.voDangQuyen.event(e)) return;
     if (this.thienSon.event(e)) return;
@@ -699,6 +701,7 @@ export class SkillVfx {
         magnitude: number;
       }>;
       for (const s of statuses) {
+        if (revisedSkillVisual(s.abilityId)) continue;
         if (voDangQuyenHandled(s.abilityId) || voDangKiemHandled(s.abilityId))
           continue;
         if (this.r3.handles(s.abilityId)) continue;
@@ -856,6 +859,7 @@ export class SkillVfx {
     const shots = new Set<string>();
     const showNewPalm = caiBangPalmEnabled();
     state?.projectiles.forEach((p, id) => {
+      if (revisedSkillVisual(p.abilityId)) return;
       if (nguDocHandles(p.abilityId) || duongMonHandles(p.abilityId)) return;
       if (voDangQuyenHandled(p.abilityId)) return;
       if (p.abilityId === fanId || p.abilityId === flurryId) return;

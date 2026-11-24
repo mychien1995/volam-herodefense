@@ -1,0 +1,1482 @@
+{
+  "coverage": "Actual Phaser frames after arrow keys, normal casts and damage in a two-client room. Skill samples record startup and early phase in right facing.",
+  "branches": [
+    {
+      "branch": "cai_bang_chuong",
+      "locomotion": {
+        "right": {
+          "initialized": true,
+          "idle": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "idle_right_0",
+            "pose": "idle",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          },
+          "walk": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "walk_right_1",
+            "pose": "walk",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          },
+          "reaction": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "idle_right_0",
+            "pose": "hurt",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          }
+        },
+        "down": {
+          "initialized": true,
+          "idle": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "idle_down_0",
+            "pose": "idle",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          },
+          "walk": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "walk_down_0",
+            "pose": "walk",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          },
+          "reaction": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "idle_down_0",
+            "pose": "hurt",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          }
+        },
+        "left": {
+          "initialized": true,
+          "idle": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "idle_left_0",
+            "pose": "idle",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          },
+          "walk": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "walk_left_2",
+            "pose": "walk",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          },
+          "reaction": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "idle_left_0",
+            "pose": "hurt",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          }
+        },
+        "up": {
+          "initialized": true,
+          "idle": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "idle_up_0",
+            "pose": "idle",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          },
+          "walk": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "walk_up_3",
+            "pose": "walk",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          },
+          "reaction": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "idle_up_0",
+            "pose": "hurt",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          }
+        }
+      },
+      "skills": {
+        "hoa_van_chuong": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "renovated-action-hero_vo_dang_actions",
+              "frame": "right_0",
+              "pose": "cast",
+              "source": "/assets/renovation-v3/actors/hero_vo_dang_actions.png",
+              "scale": 0.5,
+              "phase": "anticipation"
+            },
+            {
+              "texture": "renovated-action-hero_vo_dang_actions",
+              "frame": "right_1",
+              "pose": "cast",
+              "source": "/assets/renovation-v3/actors/hero_vo_dang_actions.png",
+              "scale": 0.5,
+              "phase": "strike"
+            }
+          ]
+        },
+        "cuong_long_loan_vu": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "renovated-action-hero_vo_dang_actions",
+              "frame": "right_0",
+              "pose": "action",
+              "source": "/assets/renovation-v3/actors/hero_vo_dang_actions.png",
+              "scale": 0.5,
+              "phase": "recover"
+            },
+            {
+              "texture": "renovated-action-hero_vo_dang_actions",
+              "frame": "right_1",
+              "pose": "action",
+              "source": "/assets/renovation-v3/actors/hero_vo_dang_actions.png",
+              "scale": 0.5,
+              "phase": "strike"
+            }
+          ]
+        },
+        "phi_long_tai_thien": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "renovated-action-hero_vo_dang_actions",
+              "frame": "right_0",
+              "pose": "action",
+              "source": "/assets/renovation-v3/actors/hero_vo_dang_actions.png",
+              "scale": 0.5,
+              "phase": "recover"
+            },
+            {
+              "texture": "renovated-action-hero_vo_dang_actions",
+              "frame": "right_1",
+              "pose": "action",
+              "source": "/assets/renovation-v3/actors/hero_vo_dang_actions.png",
+              "scale": 0.5,
+              "phase": "strike"
+            }
+          ]
+        },
+        "khang_long_huu_hoi": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "renovated-action-hero_vo_dang_actions",
+              "frame": "right_0",
+              "pose": "cast",
+              "source": "/assets/renovation-v3/actors/hero_vo_dang_actions.png",
+              "scale": 0.5,
+              "phase": "recover"
+            },
+            {
+              "texture": "renovated-action-hero_vo_dang_actions",
+              "frame": "right_1",
+              "pose": "cast",
+              "source": "/assets/renovation-v3/actors/hero_vo_dang_actions.png",
+              "scale": 0.5,
+              "phase": "strike"
+            }
+          ]
+        },
+        "hang_long_hoa_vu": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "renovated-action-hero_vo_dang_actions",
+              "frame": "right_0",
+              "pose": "cast",
+              "source": "/assets/renovation-v3/actors/hero_vo_dang_actions.png",
+              "scale": 0.5,
+              "phase": "anticipation"
+            },
+            {
+              "texture": "renovated-action-hero_vo_dang_actions",
+              "frame": "right_1",
+              "pose": "cast",
+              "source": "/assets/renovation-v3/actors/hero_vo_dang_actions.png",
+              "scale": 0.5,
+              "phase": "strike"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "branch": "thien_son_phien",
+      "locomotion": {
+        "right": {
+          "initialized": true,
+          "idle": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "idle_right_0",
+            "pose": "idle",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          },
+          "walk": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "walk_right_0",
+            "pose": "walk",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          },
+          "reaction": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "idle_right_0",
+            "pose": "hurt",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          }
+        },
+        "down": {
+          "initialized": true,
+          "idle": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "idle_down_0",
+            "pose": "idle",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          },
+          "walk": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "walk_down_2",
+            "pose": "walk",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          },
+          "reaction": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "idle_down_0",
+            "pose": "hurt",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          }
+        },
+        "left": {
+          "initialized": true,
+          "idle": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "idle_left_0",
+            "pose": "idle",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          },
+          "walk": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "walk_left_0",
+            "pose": "walk",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          },
+          "reaction": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "idle_left_0",
+            "pose": "hurt",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          }
+        },
+        "up": {
+          "initialized": true,
+          "idle": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "idle_up_0",
+            "pose": "idle",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          },
+          "walk": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "walk_up_3",
+            "pose": "walk",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          },
+          "reaction": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "idle_up_0",
+            "pose": "hurt",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          }
+        }
+      },
+      "skills": {
+        "lien_hoa_phien": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "renovated-action-hero_vo_dang_actions",
+              "frame": "right_0",
+              "pose": "cast",
+              "source": "/assets/renovation-v3/actors/hero_vo_dang_actions.png",
+              "scale": 0.5,
+              "phase": "anticipation"
+            },
+            {
+              "texture": "renovated-action-hero_vo_dang_actions",
+              "frame": "right_1",
+              "pose": "cast",
+              "source": "/assets/renovation-v3/actors/hero_vo_dang_actions.png",
+              "scale": 0.5,
+              "phase": "strike"
+            }
+          ]
+        },
+        "luc_duong_chuong": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "renovated-action-hero_vo_dang_actions",
+              "frame": "right_0",
+              "pose": "cast",
+              "source": "/assets/renovation-v3/actors/hero_vo_dang_actions.png",
+              "scale": 0.5,
+              "phase": "recover"
+            },
+            {
+              "texture": "renovated-action-hero_vo_dang_actions",
+              "frame": "right_1",
+              "pose": "cast",
+              "source": "/assets/renovation-v3/actors/hero_vo_dang_actions.png",
+              "scale": 0.5,
+              "phase": "strike"
+            }
+          ]
+        },
+        "luu_phong_bo": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "renovated-action-hero_vo_dang_actions",
+              "frame": "right_0",
+              "pose": "cast",
+              "source": "/assets/renovation-v3/actors/hero_vo_dang_actions.png",
+              "scale": 0.5,
+              "phase": "recover"
+            },
+            {
+              "texture": "renovated-action-hero_vo_dang_actions",
+              "frame": "right_1",
+              "pose": "cast",
+              "source": "/assets/renovation-v3/actors/hero_vo_dang_actions.png",
+              "scale": 0.5,
+              "phase": "strike"
+            }
+          ]
+        },
+        "chiet_mai_thu": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "renovated-action-hero_vo_dang_actions",
+              "frame": "right_0",
+              "pose": "cast",
+              "source": "/assets/renovation-v3/actors/hero_vo_dang_actions.png",
+              "scale": 0.5,
+              "phase": "recover"
+            },
+            {
+              "texture": "renovated-action-hero_vo_dang_actions",
+              "frame": "right_1",
+              "pose": "cast",
+              "source": "/assets/renovation-v3/actors/hero_vo_dang_actions.png",
+              "scale": 0.5,
+              "phase": "strike"
+            }
+          ]
+        },
+        "bach_phien_phong_bao": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "renovated-action-hero_vo_dang_actions",
+              "frame": "right_0",
+              "pose": "cast",
+              "source": "/assets/renovation-v3/actors/hero_vo_dang_actions.png",
+              "scale": 0.5,
+              "phase": "recover"
+            },
+            {
+              "texture": "renovated-action-hero_vo_dang_actions",
+              "frame": "right_1",
+              "pose": "cast",
+              "source": "/assets/renovation-v3/actors/hero_vo_dang_actions.png",
+              "scale": 0.5,
+              "phase": "strike"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "branch": "thien_son_dao",
+      "locomotion": {
+        "right": {
+          "initialized": true,
+          "idle": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "idle_right_0",
+            "pose": "idle",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          },
+          "walk": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "walk_right_1",
+            "pose": "walk",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          },
+          "reaction": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "idle_right_0",
+            "pose": "hurt",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          }
+        },
+        "down": {
+          "initialized": true,
+          "idle": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "idle_down_0",
+            "pose": "idle",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          },
+          "walk": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "walk_down_3",
+            "pose": "walk",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          },
+          "reaction": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "idle_down_0",
+            "pose": "hurt",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          }
+        },
+        "left": {
+          "initialized": true,
+          "idle": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "idle_left_0",
+            "pose": "idle",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          },
+          "walk": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "walk_left_0",
+            "pose": "walk",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          },
+          "reaction": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "idle_left_0",
+            "pose": "hurt",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          }
+        },
+        "up": {
+          "initialized": true,
+          "idle": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "idle_up_0",
+            "pose": "idle",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          },
+          "walk": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "walk_up_0",
+            "pose": "walk",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          },
+          "reaction": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "idle_up_0",
+            "pose": "hurt",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          }
+        }
+      },
+      "skills": {
+        "phi_anh_tram": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "renovated-action-hero_vo_dang_actions",
+              "frame": "right_0",
+              "pose": "cast",
+              "source": "/assets/renovation-v3/actors/hero_vo_dang_actions.png",
+              "scale": 0.5,
+              "phase": "anticipation"
+            },
+            {
+              "texture": "renovated-action-hero_vo_dang_actions",
+              "frame": "right_1",
+              "pose": "cast",
+              "source": "/assets/renovation-v3/actors/hero_vo_dang_actions.png",
+              "scale": 0.5,
+              "phase": "strike"
+            }
+          ]
+        },
+        "truy_hon_dao": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "renovated-action-hero_vo_dang_actions",
+              "frame": "right_0",
+              "pose": "cast",
+              "source": "/assets/renovation-v3/actors/hero_vo_dang_actions.png",
+              "scale": 0.5,
+              "phase": "recover"
+            },
+            {
+              "texture": "renovated-action-hero_vo_dang_actions",
+              "frame": "right_1",
+              "pose": "cast",
+              "source": "/assets/renovation-v3/actors/hero_vo_dang_actions.png",
+              "scale": 0.5,
+              "phase": "strike"
+            }
+          ]
+        },
+        "phong_anh_hoan_vi": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "renovated-action-hero_vo_dang_actions",
+              "frame": "right_0",
+              "pose": "cast",
+              "source": "/assets/renovation-v3/actors/hero_vo_dang_actions.png",
+              "scale": 0.5,
+              "phase": "recover"
+            },
+            {
+              "texture": "renovated-action-hero_vo_dang_actions",
+              "frame": "right_1",
+              "pose": "cast",
+              "source": "/assets/renovation-v3/actors/hero_vo_dang_actions.png",
+              "scale": 0.5,
+              "phase": "strike"
+            }
+          ]
+        },
+        "liet_phong_dao": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "renovated-action-hero_vo_dang_actions",
+              "frame": "right_0",
+              "pose": "action",
+              "source": "/assets/renovation-v3/actors/hero_vo_dang_actions.png",
+              "scale": 0.5,
+              "phase": "anticipation"
+            }
+          ]
+        },
+        "bach_liet_thien_kich": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "renovated-v5-bach_liet_body",
+              "frame": "right_3",
+              "pose": "cast",
+              "source": "/assets/renovation-v5/bach_liet_body.png",
+              "scale": 0.5,
+              "phase": "flurry"
+            },
+            {
+              "texture": "renovated-v5-bach_liet_body",
+              "frame": "right_0",
+              "pose": "cast",
+              "source": "/assets/renovation-v5/bach_liet_body.png",
+              "scale": 0.5,
+              "phase": "flurry"
+            },
+            {
+              "texture": "renovated-v5-bach_liet_body",
+              "frame": "right_2",
+              "pose": "cast",
+              "source": "/assets/renovation-v5/bach_liet_body.png",
+              "scale": 0.5,
+              "phase": "flurry"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "branch": "vo_dang_quyen",
+      "locomotion": {
+        "right": {
+          "initialized": true,
+          "idle": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "idle_right_0",
+            "pose": "idle",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          },
+          "walk": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "walk_right_3",
+            "pose": "walk",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          },
+          "reaction": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "idle_right_0",
+            "pose": "hurt",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          }
+        },
+        "down": {
+          "initialized": true,
+          "idle": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "idle_down_0",
+            "pose": "idle",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          },
+          "walk": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "walk_down_2",
+            "pose": "walk",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          },
+          "reaction": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "idle_down_0",
+            "pose": "hurt",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          }
+        },
+        "left": {
+          "initialized": true,
+          "idle": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "idle_left_0",
+            "pose": "idle",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          },
+          "walk": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "walk_left_2",
+            "pose": "walk",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          },
+          "reaction": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "idle_left_0",
+            "pose": "hurt",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          }
+        },
+        "up": {
+          "initialized": true,
+          "idle": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "idle_up_0",
+            "pose": "idle",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          },
+          "walk": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "walk_up_3",
+            "pose": "walk",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          },
+          "reaction": {
+            "texture": "renovated-hero_vo_dang",
+            "frame": "idle_up_0",
+            "pose": "hurt",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+            "scale": 0.5
+          }
+        }
+      },
+      "skills": {
+        "luong_nghi_thu": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "vdq-cast",
+              "frame": "palm_right_0",
+              "pose": "cast",
+              "source": "/@fs/D:/Projects/volam-hero-defense/assets/exports/vo-dang-quyen-preview/casts.png",
+              "scale": 0.5,
+              "phase": "anticipation"
+            },
+            {
+              "texture": "vdq-cast",
+              "frame": "palm_right_2",
+              "pose": "cast",
+              "source": "/@fs/D:/Projects/volam-hero-defense/assets/exports/vo-dang-quyen-preview/casts.png",
+              "scale": 0.5,
+              "phase": "anticipation"
+            },
+            {
+              "texture": "vdq-cast",
+              "frame": "palm_right_3",
+              "pose": "cast",
+              "source": "/@fs/D:/Projects/volam-hero-defense/assets/exports/vo-dang-quyen-preview/casts.png",
+              "scale": 0.5,
+              "phase": "anticipation"
+            }
+          ]
+        },
+        "huyen_am_chuong": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "vdq-cast",
+              "frame": "palm_right_1",
+              "pose": "cast",
+              "source": "/@fs/D:/Projects/volam-hero-defense/assets/exports/vo-dang-quyen-preview/casts.png",
+              "scale": 0.5,
+              "phase": "anticipation"
+            },
+            {
+              "texture": "vdq-cast",
+              "frame": "palm_right_2",
+              "pose": "cast",
+              "source": "/@fs/D:/Projects/volam-hero-defense/assets/exports/vo-dang-quyen-preview/casts.png",
+              "scale": 0.5,
+              "phase": "anticipation"
+            },
+            {
+              "texture": "vdq-cast",
+              "frame": "palm_right_3",
+              "pose": "cast",
+              "source": "/@fs/D:/Projects/volam-hero-defense/assets/exports/vo-dang-quyen-preview/casts.png",
+              "scale": 0.5,
+              "phase": "anticipation"
+            }
+          ]
+        },
+        "duong_khi_kich": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "renovated-action-hero_vo_dang_actions",
+              "frame": "right_0",
+              "pose": "cast",
+              "source": "/assets/renovation-v3/actors/hero_vo_dang_actions.png",
+              "scale": 0.5,
+              "phase": "recover"
+            },
+            {
+              "texture": "renovated-action-hero_vo_dang_actions",
+              "frame": "right_1",
+              "pose": "cast",
+              "source": "/assets/renovation-v3/actors/hero_vo_dang_actions.png",
+              "scale": 0.5,
+              "phase": "strike"
+            }
+          ]
+        },
+        "thai_cuc_than_cong": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "renovated-action-hero_vo_dang_actions",
+              "frame": "right_3",
+              "pose": "cast",
+              "source": "/assets/renovation-v3/actors/hero_vo_dang_actions.png",
+              "scale": 0.5,
+              "phase": "channel"
+            }
+          ]
+        },
+        "thai_cuc_tran": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "vdq-cast",
+              "frame": "taichi_0",
+              "pose": "cast",
+              "source": "/@fs/D:/Projects/volam-hero-defense/assets/exports/vo-dang-quyen-preview/casts.png",
+              "scale": 0.5,
+              "phase": "channel"
+            },
+            {
+              "texture": "vdq-cast",
+              "frame": "taichi_1",
+              "pose": "cast",
+              "source": "/@fs/D:/Projects/volam-hero-defense/assets/exports/vo-dang-quyen-preview/casts.png",
+              "scale": 0.5,
+              "phase": "channel"
+            },
+            {
+              "texture": "vdq-cast",
+              "frame": "taichi_2",
+              "pose": "cast",
+              "source": "/@fs/D:/Projects/volam-hero-defense/assets/exports/vo-dang-quyen-preview/casts.png",
+              "scale": 0.5,
+              "phase": "channel"
+            },
+            {
+              "texture": "vdq-cast",
+              "frame": "taichi_3",
+              "pose": "cast",
+              "source": "/@fs/D:/Projects/volam-hero-defense/assets/exports/vo-dang-quyen-preview/casts.png",
+              "scale": 0.5,
+              "phase": "channel"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "branch": "vo_dang_kiem",
+      "locomotion": {
+        "right": {
+          "initialized": true,
+          "idle": {
+            "texture": "renovated-hero_vo_dang_kiem",
+            "frame": "idle_right_0",
+            "pose": "idle",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang_kiem.png",
+            "scale": 0.5
+          },
+          "walk": {
+            "texture": "renovated-hero_vo_dang_kiem",
+            "frame": "walk_right_1",
+            "pose": "walk",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang_kiem.png",
+            "scale": 0.5
+          },
+          "reaction": {
+            "texture": "renovated-hero_vo_dang_kiem",
+            "frame": "idle_right_0",
+            "pose": "hurt",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang_kiem.png",
+            "scale": 0.5
+          }
+        },
+        "down": {
+          "initialized": true,
+          "idle": {
+            "texture": "renovated-hero_vo_dang_kiem",
+            "frame": "idle_down_0",
+            "pose": "idle",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang_kiem.png",
+            "scale": 0.5
+          },
+          "walk": {
+            "texture": "renovated-hero_vo_dang_kiem",
+            "frame": "walk_down_1",
+            "pose": "walk",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang_kiem.png",
+            "scale": 0.5
+          },
+          "reaction": {
+            "texture": "renovated-hero_vo_dang_kiem",
+            "frame": "idle_down_0",
+            "pose": "hurt",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang_kiem.png",
+            "scale": 0.5
+          }
+        },
+        "left": {
+          "initialized": true,
+          "idle": {
+            "texture": "renovated-hero_vo_dang_kiem",
+            "frame": "idle_left_0",
+            "pose": "idle",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang_kiem.png",
+            "scale": 0.5
+          },
+          "walk": {
+            "texture": "renovated-hero_vo_dang_kiem",
+            "frame": "walk_left_3",
+            "pose": "walk",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang_kiem.png",
+            "scale": 0.5
+          },
+          "reaction": {
+            "texture": "renovated-hero_vo_dang_kiem",
+            "frame": "idle_left_0",
+            "pose": "hurt",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang_kiem.png",
+            "scale": 0.5
+          }
+        },
+        "up": {
+          "initialized": true,
+          "idle": {
+            "texture": "renovated-hero_vo_dang_kiem",
+            "frame": "idle_up_0",
+            "pose": "idle",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang_kiem.png",
+            "scale": 0.5
+          },
+          "walk": {
+            "texture": "renovated-hero_vo_dang_kiem",
+            "frame": "walk_up_2",
+            "pose": "walk",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang_kiem.png",
+            "scale": 0.5
+          },
+          "reaction": {
+            "texture": "renovated-hero_vo_dang_kiem",
+            "frame": "idle_up_0",
+            "pose": "hurt",
+            "source": "/assets/renovation-v1/runtime/hero_vo_dang_kiem.png",
+            "scale": 0.5
+          }
+        }
+      },
+      "skills": {
+        "that_tinh_kiem": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "vdk-body",
+              "frame": "right_cut_up",
+              "pose": "cast",
+              "source": "/@fs/D:/Projects/volam-hero-defense/assets/exports/vo-dang-kiem-rework/body.png",
+              "scale": 0.5,
+              "phase": "sword-strike"
+            },
+            {
+              "texture": "vdk-body",
+              "frame": "right_cut_down",
+              "pose": "cast",
+              "source": "/@fs/D:/Projects/volam-hero-defense/assets/exports/vo-dang-kiem-rework/body.png",
+              "scale": 0.5,
+              "phase": "sword-strike"
+            },
+            {
+              "texture": "vdk-body",
+              "frame": "right_cut_right",
+              "pose": "cast",
+              "source": "/@fs/D:/Projects/volam-hero-defense/assets/exports/vo-dang-kiem-rework/body.png",
+              "scale": 0.5,
+              "phase": "sword-strike"
+            }
+          ]
+        },
+        "nhan_kiem_hop_nhat": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "renovated-action-v2:vo_dang_cast",
+              "frame": "right_1",
+              "pose": "action",
+              "source": "/assets/renovation-v2/vo_dang_cast.png",
+              "scale": 0.5,
+              "phase": "empty-hand"
+            }
+          ]
+        },
+        "bat_quai_kiem_tran": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "renovated-action-v2:vo_dang_cast",
+              "frame": "right_2",
+              "pose": "action",
+              "source": "/assets/renovation-v2/vo_dang_cast.png",
+              "scale": 0.5,
+              "phase": "channel"
+            }
+          ]
+        },
+        "toa_sat_bac_do": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "renovated-action-v2:vo_dang_cast",
+              "frame": "right_3",
+              "pose": "action",
+              "source": "/assets/renovation-v2/vo_dang_cast.png",
+              "scale": 0.5,
+              "phase": "guard"
+            }
+          ]
+        },
+        "van_kiem_quy_tong": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "vdk-body",
+              "frame": "right_aim",
+              "pose": "cast",
+              "source": "/@fs/D:/Projects/volam-hero-defense/assets/exports/vo-dang-kiem-rework/body.png",
+              "scale": 0.5,
+              "phase": "channel"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "branch": "thieu_lam_quyen",
+      "locomotion": {
+        "right": {
+          "initialized": true,
+          "idle": {
+            "texture": "vdk-body",
+            "frame": "right_aim",
+            "pose": "idle",
+            "source": "/@fs/D:/Projects/volam-hero-defense/assets/exports/vo-dang-kiem-rework/body.png",
+            "scale": 0.5
+          },
+          "walk": {
+            "texture": "vdk-body",
+            "frame": "right_aim",
+            "pose": "walk",
+            "source": "/@fs/D:/Projects/volam-hero-defense/assets/exports/vo-dang-kiem-rework/body.png",
+            "scale": 0.5
+          },
+          "reaction": {
+            "texture": "renovated-hero_thieu_lam",
+            "frame": "idle_right_0",
+            "pose": "hurt",
+            "source": "/assets/renovation-v1/runtime/hero_thieu_lam.png",
+            "scale": 0.5
+          }
+        },
+        "down": {
+          "initialized": true,
+          "idle": {
+            "texture": "renovated-hero_thieu_lam",
+            "frame": "idle_down_0",
+            "pose": "hurt",
+            "source": "/assets/renovation-v1/runtime/hero_thieu_lam.png",
+            "scale": 0.5
+          },
+          "walk": {
+            "texture": "renovated-hero_thieu_lam",
+            "frame": "walk_down_0",
+            "pose": "walk",
+            "source": "/assets/renovation-v1/runtime/hero_thieu_lam.png",
+            "scale": 0.5
+          },
+          "reaction": {
+            "texture": "renovated-hero_thieu_lam",
+            "frame": "idle_down_0",
+            "pose": "hurt",
+            "source": "/assets/renovation-v1/runtime/hero_thieu_lam.png",
+            "scale": 0.5
+          }
+        },
+        "left": {
+          "initialized": true,
+          "idle": {
+            "texture": "renovated-hero_thieu_lam",
+            "frame": "idle_left_0",
+            "pose": "hurt",
+            "source": "/assets/renovation-v1/runtime/hero_thieu_lam.png",
+            "scale": 0.5
+          },
+          "walk": {
+            "texture": "renovated-hero_thieu_lam",
+            "frame": "walk_left_3",
+            "pose": "walk",
+            "source": "/assets/renovation-v1/runtime/hero_thieu_lam.png",
+            "scale": 0.5
+          },
+          "reaction": {
+            "texture": "renovated-hero_thieu_lam",
+            "frame": "idle_left_0",
+            "pose": "hurt",
+            "source": "/assets/renovation-v1/runtime/hero_thieu_lam.png",
+            "scale": 0.5
+          }
+        },
+        "up": {
+          "initialized": true,
+          "idle": {
+            "texture": "renovated-hero_thieu_lam",
+            "frame": "idle_up_0",
+            "pose": "hurt",
+            "source": "/assets/renovation-v1/runtime/hero_thieu_lam.png",
+            "scale": 0.5
+          },
+          "walk": {
+            "texture": "renovated-hero_thieu_lam",
+            "frame": "walk_up_2",
+            "pose": "walk",
+            "source": "/assets/renovation-v1/runtime/hero_thieu_lam.png",
+            "scale": 0.5
+          },
+          "reaction": {
+            "texture": "renovated-hero_thieu_lam",
+            "frame": "idle_up_0",
+            "pose": "hurt",
+            "source": "/assets/renovation-v1/runtime/hero_thieu_lam.png",
+            "scale": 0.5
+          }
+        }
+      },
+      "skills": {
+        "la_han_quyen": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "shaolin_quyen_body",
+              "frame": "left_fist_right_0",
+              "pose": "action",
+              "source": "/assets/skills/thieu-lam/quyen-rework/shaolin_quyen_body.png",
+              "scale": 1
+            },
+            {
+              "texture": "shaolin_quyen_body",
+              "frame": "left_fist_right_1",
+              "pose": "action",
+              "source": "/assets/skills/thieu-lam/quyen-rework/shaolin_quyen_body.png",
+              "scale": 1
+            }
+          ]
+        },
+        "vi_da_quyen": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "renovated-v5-vi_da_body",
+              "frame": "right_0",
+              "pose": "action",
+              "source": "/assets/renovation-v5/vi_da_body.png",
+              "scale": 0.5,
+              "phase": "ground-punch"
+            },
+            {
+              "texture": "renovated-v5-vi_da_body",
+              "frame": "right_1",
+              "pose": "action",
+              "source": "/assets/renovation-v5/vi_da_body.png",
+              "scale": 0.5,
+              "phase": "ground-punch"
+            },
+            {
+              "texture": "renovated-v5-vi_da_body",
+              "frame": "right_2",
+              "pose": "action",
+              "source": "/assets/renovation-v5/vi_da_body.png",
+              "scale": 0.5,
+              "phase": "ground-punch"
+            },
+            {
+              "texture": "renovated-v5-vi_da_body",
+              "frame": "right_3",
+              "pose": "action",
+              "source": "/assets/renovation-v5/vi_da_body.png",
+              "scale": 0.5,
+              "phase": "ground-punch"
+            }
+          ]
+        },
+        "dai_luc_kim_cuong_chuong": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "renovated-action-hero_thieu_lam_special",
+              "frame": "right_1",
+              "pose": "cast",
+              "source": "/assets/renovation-v3/actors/hero_thieu_lam_special.png",
+              "scale": 0.5,
+              "phase": "palm"
+            }
+          ]
+        },
+        "kim_cang_bat_hoai": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "renovated-action-hero_thieu_lam_special",
+              "frame": "right_2",
+              "pose": "action",
+              "source": "/assets/renovation-v3/actors/hero_thieu_lam_special.png",
+              "scale": 0.5,
+              "phase": "channel"
+            }
+          ]
+        },
+        "nhu_lai_niet_ban": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "renovated-action-hero_thieu_lam_special",
+              "frame": "right_2",
+              "pose": "action",
+              "source": "/assets/renovation-v3/actors/hero_thieu_lam_special.png",
+              "scale": 0.5,
+              "phase": "channel"
+            }
+          ]
+        },
+        "toan_phong_thoai": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "renovated-action-hero_thieu_lam_actions",
+              "frame": "right_0",
+              "pose": "action",
+              "source": "/assets/renovation-v3/actors/hero_thieu_lam_actions.png",
+              "scale": 0.5,
+              "phase": "recover"
+            },
+            {
+              "texture": "renovated-action-hero_thieu_lam_actions",
+              "frame": "right_3",
+              "pose": "action",
+              "source": "/assets/renovation-v3/actors/hero_thieu_lam_actions.png",
+              "scale": 0.5,
+              "phase": "strike"
+            }
+          ]
+        },
+        "hoanh_tao_cuoc": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "renovated-action-hero_thieu_lam_special",
+              "frame": "right_0",
+              "pose": "action",
+              "source": "/assets/renovation-v3/actors/hero_thieu_lam_special.png",
+              "scale": 0.5,
+              "phase": "stationary-stomp"
+            }
+          ]
+        },
+        "vo_anh_cuoc": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "shaolin_vo_anh_body",
+              "frame": "cast_right_0",
+              "pose": "action",
+              "source": "/assets/skills/thieu-lam/quyen-rework/shaolin_vo_anh_body.png",
+              "scale": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "branch": "thieu_lam_dao",
+      "locomotion": {
+        "right": {
+          "initialized": true,
+          "idle": {
+            "texture": "shaolin-dao-review",
+            "frame": "idle_right",
+            "source": "/assets/shaolin-dao-preview-v01/review.png",
+            "scale": 0.5
+          },
+          "walk": {
+            "texture": "shaolin-dao-review",
+            "frame": "walk_1_right",
+            "source": "/assets/shaolin-dao-preview-v01/review.png",
+            "scale": 0.5
+          },
+          "reaction": {
+            "texture": "renovated-hero_thieu_lam_dao",
+            "frame": "idle_right_0",
+            "pose": "hurt",
+            "source": "/assets/renovation-v1/runtime/hero_thieu_lam_dao.png",
+            "scale": 0.5
+          }
+        },
+        "down": {
+          "initialized": true,
+          "idle": {
+            "texture": "shaolin-dao-review",
+            "frame": "idle_down",
+            "source": "/assets/shaolin-dao-preview-v01/review.png",
+            "scale": 0.5
+          },
+          "walk": {
+            "texture": "shaolin-dao-review",
+            "frame": "walk_1_down",
+            "source": "/assets/shaolin-dao-preview-v01/review.png",
+            "scale": 0.5
+          },
+          "reaction": {
+            "texture": "renovated-hero_thieu_lam_dao",
+            "frame": "idle_down_0",
+            "pose": "hurt",
+            "source": "/assets/renovation-v1/runtime/hero_thieu_lam_dao.png",
+            "scale": 0.5
+          }
+        },
+        "left": {
+          "initialized": true,
+          "idle": {
+            "texture": "shaolin-dao-review",
+            "frame": "idle_left",
+            "source": "/assets/shaolin-dao-preview-v01/review.png",
+            "scale": 0.5
+          },
+          "walk": {
+            "texture": "shaolin-dao-review",
+            "frame": "walk_1_left",
+            "source": "/assets/shaolin-dao-preview-v01/review.png",
+            "scale": 0.5
+          },
+          "reaction": {
+            "texture": "renovated-hero_thieu_lam_dao",
+            "frame": "idle_left_0",
+            "pose": "hurt",
+            "source": "/assets/renovation-v1/runtime/hero_thieu_lam_dao.png",
+            "scale": 0.5
+          }
+        },
+        "up": {
+          "initialized": true,
+          "idle": {
+            "texture": "shaolin-dao-review",
+            "frame": "idle_up",
+            "source": "/assets/shaolin-dao-preview-v01/review.png",
+            "scale": 0.5
+          },
+          "walk": {
+            "texture": "shaolin-dao-review",
+            "frame": "walk_1_up",
+            "source": "/assets/shaolin-dao-preview-v01/review.png",
+            "scale": 0.5
+          },
+          "reaction": {
+            "texture": "renovated-hero_thieu_lam_dao",
+            "frame": "idle_up_0",
+            "pose": "hurt",
+            "source": "/assets/renovation-v1/runtime/hero_thieu_lam_dao.png",
+            "scale": 0.5
+          }
+        }
+      },
+      "skills": {
+        "tru_ta": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "shaolin-dao-review",
+              "frame": "idle_right",
+              "source": "/assets/shaolin-dao-preview-v01/review.png",
+              "scale": 0.5
+            },
+            {
+              "texture": "shaolin-dao-review",
+              "frame": "strike_right",
+              "source": "/assets/shaolin-dao-preview-v01/review.png",
+              "scale": 0.5
+            }
+          ]
+        },
+        "kim_quang_ho_tran": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "shaolin-dao-review",
+              "frame": "idle_right",
+              "source": "/assets/shaolin-dao-preview-v01/review.png",
+              "scale": 0.5
+            },
+            {
+              "texture": "renovated-action-hero_thieu_lam_dao_actions",
+              "frame": "right_3",
+              "pose": "action",
+              "source": "/assets/renovation-v3/actors/hero_thieu_lam_dao_actions.png",
+              "scale": 0.5,
+              "phase": "channel"
+            }
+          ]
+        },
+        "tam_gioi_quy_thien": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "shaolin-dao-review",
+              "frame": "idle_right",
+              "source": "/assets/shaolin-dao-preview-v01/review.png",
+              "scale": 0.5
+            },
+            {
+              "texture": "review3_tam_gioi_quy_thien_character",
+              "frame": "cast_right_0",
+              "pose": "action",
+              "source": "/assets/m3d_r3/review3_tam_gioi_quy_thien_character.png",
+              "scale": 1
+            },
+            {
+              "texture": "review3_tam_gioi_quy_thien_character",
+              "frame": "cast_right_1",
+              "pose": "action",
+              "source": "/assets/m3d_r3/review3_tam_gioi_quy_thien_character.png",
+              "scale": 1
+            }
+          ]
+        },
+        "bat_dong_minh_vuong": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "shaolin-dao-review",
+              "frame": "idle_right",
+              "source": "/assets/shaolin-dao-preview-v01/review.png",
+              "scale": 0.5
+            },
+            {
+              "texture": "renovated-action-hero_thieu_lam_dao_actions",
+              "frame": "right_3",
+              "pose": "cast",
+              "source": "/assets/renovation-v3/actors/hero_thieu_lam_dao_actions.png",
+              "scale": 0.5,
+              "phase": "channel"
+            }
+          ]
+        },
+        "nhu_lai_thien_diep": {
+          "accepted": true,
+          "frames": [
+            {
+              "texture": "shaolin-dao-review",
+              "frame": "idle_right",
+              "source": "/assets/shaolin-dao-preview-v01/review.png",
+              "scale": 0.5
+            },
+            {
+              "texture": "shaolin-dao-review",
+              "frame": "lotus_right",
+              "source": "/assets/shaolin-dao-preview-v01/review.png",
+              "scale": 0.5
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "bossFixtureError": "AssertionError [ERR_ASSERTION]: M3D selective Dong/Mai effect dan_chi_than_cong"
+}

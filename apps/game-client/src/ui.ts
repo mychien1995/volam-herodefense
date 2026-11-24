@@ -72,10 +72,10 @@ export class GameUI {
   onLoadout: (ids: string[]) => void = () => {};
   onCheck: () => void = () => {};
   onLeave: () => void = () => {};
-  onPracticeChange:()=>void=()=>{};
-  onPracticeEscape:()=>boolean=()=>false;
-  onPvpHistory:()=>void=()=>{};
-  onPvpEscape:()=>boolean=()=>false;
+  onPracticeChange: () => void = () => {};
+  onPracticeEscape: () => boolean = () => false;
+  onPvpHistory: () => void = () => {};
+  onPvpEscape: () => boolean = () => false;
   onLoiDai: (action: 'enter' | 'exit') => void = () => {};
   onDestinationPreview: (destination: DungeonDestination | 'loi_dai') => void =
     () => {};
@@ -133,7 +133,8 @@ export class GameUI {
         <p id="hero-stats" data-testid="hero-stats" class="sr-only"></p>
       </main>`;
     element('#practice-change').addEventListener('click', () => {
-      if (this.state?.practice.enabled && !this.reconnecting) this.onPracticeChange();
+      if (this.state?.practice.enabled && !this.reconnecting)
+        this.onPracticeChange();
     });
     this.defense = new DefenseHud(element('#viewport'), () => this.onLeave());
     this.bossRetry = new BossRetryUI(element('#viewport'), (action) =>
@@ -318,10 +319,18 @@ export class GameUI {
     if (!id) this.state = undefined;
   }
   open(menu: Menu): void {
-    if(this.state?.practice.enabled && ['dungeons','merchant','inventory','skills','pvp'].includes(menu))return;
-    if(this.state?.pvp.enabled) {
-      if(menu==='pvp'){this.onPvpHistory();return;}
-      if(['dungeons','merchant','inventory','skills'].includes(menu))return;
+    if (
+      this.state?.practice.enabled &&
+      ['dungeons', 'merchant', 'inventory', 'skills', 'pvp'].includes(menu)
+    )
+      return;
+    if (this.state?.pvp.enabled) {
+      if (menu === 'pvp') {
+        this.onPvpHistory();
+        return;
+      }
+      if (['dungeons', 'merchant', 'inventory', 'skills'].includes(menu))
+        return;
     }
     const hero = this.state?.players.get(this.sessionId);
     const leavingDuel = hero?.zoneId === loiDai.id;
@@ -612,8 +621,8 @@ export class GameUI {
   }
   refresh(state: LobbyState): void {
     this.state = state;
-    element('#viewport').dataset['practice']=String(state.practice.enabled);
-    element('#practice-banner').hidden=!state.practice.enabled;
+    element('#viewport').dataset['practice'] = String(state.practice.enabled);
+    element('#practice-banner').hidden = !state.practice.enabled;
     if (['DEFEAT', 'VICTORY'].includes(state.phase) && !this.ended) {
       this.ended = true;
       window.dispatchEvent(new Event('volam:controls-blocked'));
@@ -676,7 +685,11 @@ export class GameUI {
     const canDuel =
       !inDuel || (hero.loiDaiFighter && state.loiDaiFighters === 2);
     const pvp = element<HTMLButtonElement>('.system-buttons [data-menu="pvp"]');
-    const duelLabel = state.pvp.enabled ? 'Lịch sử' : inDuel ? 'Về đấu trường' : 'Lôi Đài';
+    const duelLabel = state.pvp.enabled
+      ? 'Lịch sử'
+      : inDuel
+        ? 'Về đấu trường'
+        : 'Lôi Đài';
     pvp.title = duelLabel;
     pvp.setAttribute('aria-label', duelLabel);
     pvp.querySelector('span:last-child')!.textContent = duelLabel;
@@ -707,7 +720,8 @@ export class GameUI {
       state.players.size <= 1 ||
       hero.hp <= 0;
     help.disabled = this.blocked;
-    const dead = !state.pvp.enabled && hero.hp <= 0 && state.phase === 'IN_GAME';
+    const dead =
+      !state.pvp.enabled && hero.hp <= 0 && state.phase === 'IN_GAME';
     if (dead && !this.dead)
       window.dispatchEvent(new Event('volam:controls-blocked'));
     this.dead = dead;
@@ -988,6 +1002,7 @@ export class GameUI {
     const activeStatuses = JSON.parse(hero.statuses) as Array<{
       kind: string;
       ticks: number;
+      magnitude: number;
     }>;
     const plant = hero.build.charges.get(conLuan.plant);
     const placed = [...(this.state?.areas.values() ?? [])].filter(
@@ -1005,11 +1020,7 @@ export class GameUI {
       : '';
     const conLuanStance = element('#con-luan-stance');
     conLuanStance.hidden = hero.basicId !== conLuan.monk;
-    conLuanStance.textContent = activeStatuses.some(
-      (s) => s.kind === 'con_luan_ranged',
-    )
-      ? 'Đánh xa'
-      : 'Đánh gần';
+    conLuanStance.textContent = 'Ngũ Lôi · Nội tại';
     const recallReady = [...(this.state?.projectiles.values() ?? [])].some(
       (shot) =>
         shot.ownerId === this.sessionId &&
@@ -1051,7 +1062,9 @@ export class GameUI {
           hero.blinkTicks > 0);
       const reaperActive = ability?.id === nguDoc.reaper && hasReaper;
       const passive =
-        ability?.id === nguDoc.counter || ability?.id === nguDoc.zombie;
+        ability?.passive === true ||
+        ability?.id === nguDoc.counter ||
+        ability?.id === nguDoc.zombie;
       const slot = element(`#slot-${key}`),
         cooling = remaining > 0 && !recast,
         cost = recast || state.practice.enabled ? 0 : (ability?.manaCost ?? 0);
@@ -1072,6 +1085,7 @@ export class GameUI {
           hero.mana < cost ||
           charge?.count === 0 ||
           reaperActive ||
+          passive ||
           controlled,
       );
       slot.classList.toggle('unequipped', !ability);
@@ -1185,31 +1199,39 @@ export class GameUI {
                         ? 'Phiến'
                         : 'Đao'
                       : hero.basicId === 'cai_bang_bong'
-                        ? 'Bổng'
+                        ? `${activeStatuses.find((s) => s.kind === 'staff_charge')?.magnitude ?? 0}/4 charge`
                         : 'Chưởng'
           : recast
             ? recall
-              ? 'Thu quạt'
+              ? [...(this.state?.projectiles.values() ?? [])].some(
+                  (p) =>
+                    p.ownerId === this.sessionId && p.stage === 'fan_outbound',
+                )
+                ? 'Dừng quạt'
+                : 'Thu quạt'
               : fortune
                 ? 'Chốt quẻ'
                 : 'Hiện thân'
-            : charge
-              ? `${charge.count}/${charge.capacity} lượt`
-              : ability
-                ? fixed && !rank
-                  ? 'Cấp ' +
-                    m1Config.progression?.skills[ability.id]?.levelGates[0]
-                  : `${cost} NL`
-                : 'Trống';
+            : passive
+              ? 'Nội tại'
+              : charge
+                ? `${charge.count}/${charge.capacity} lượt`
+                : ability
+                  ? fixed && !rank
+                    ? 'Cấp ' +
+                      m1Config.progression?.skills[ability.id]?.levelGates[0]
+                    : `${cost} NL`
+                  : 'Trống';
       const id = ability?.id ?? '';
       const definition = m1Config.progression?.skills[id];
       if (
         slot.dataset['skillId'] !== id ||
-        slot.dataset['skillRank'] !== String(rank) || slot.dataset['practice'] !== String(state.practice.enabled)
+        slot.dataset['skillRank'] !== String(rank) ||
+        slot.dataset['practice'] !== String(state.practice.enabled)
       ) {
         slot.dataset['skillId'] = id;
         slot.dataset['skillRank'] = String(rank);
-        slot.dataset['practice']=String(state.practice.enabled);
+        slot.dataset['practice'] = String(state.practice.enabled);
         const name = ability?.nameVi ?? 'Chưa trang bị';
         element(`#skill-tip-${key} strong`).textContent = name;
         slot
@@ -1219,7 +1241,13 @@ export class GameUI {
           definition?.descriptionVi ??
           (ability ? abilitySummary(ability).replace(/^ · /, '') : '');
         element(`#skill-tip-${key} .skill-tip-stats`).textContent =
-          ability && definition && rank > 0 ? skillRankStats(state.practice.enabled?{...ability,manaCost:0,cooldownTicks:0}:ability) : '';
+          ability && definition && rank > 0
+            ? skillRankStats(
+                state.practice.enabled
+                  ? { ...ability, manaCost: 0, cooldownTicks: 0 }
+                  : ability,
+              )
+            : '';
       }
       const status = !ability
         ? 'Chưa mở'

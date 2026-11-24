@@ -1,0 +1,103 @@
+{
+  "players": 2,
+  "development": true,
+  "protocol": 48,
+  "timings": [
+    {
+      "phase": "2 joined room",
+      "seconds": 3.79
+    },
+    {
+      "phase": "2 real clients ready",
+      "seconds": 16.4
+    }
+  ],
+  "directions": [],
+  "scenes": [],
+  "fixtures": "Server-owned wave placement/zone entry for coverage; natural keyboard combat and movement checked separately.",
+  "status": "FAIL",
+  "failure": "AssertionError [ERR_ASSERTION]: thrust/right: [{\"texture\":\"skill-revise:thien-su\",\"frame\":\"idle_1_right\",\"scale\":[0.5,0.5],\"origin\":[0.5,0.7142857142857143],\"alpha\":1,\"pose\":\"idle\",\"tick\":118,\"startedAt\":0,\"until\":0,\"fps\":17.113980293273926},{\"texture\":\"skill-revise:thien-su\",\"frame\":\"idle_2_right\",\"scale\":[0.5,0.5],\"origin\":[0.5,0.7142857142857143],\"alpha\":1,\"pose\":\"idle\",\"tick\":128,\"startedAt\":0,\"until\":0,\"fps\":13.835485219955444},{\"texture\":\"skill-revise:hammer-v2\",\"frame\":\"thrust_2_right\",\"scale\":[0.5,0.5],\"origin\":[0.5,0.7142857142857143],\"alpha\":1,\"pose\":\"basic_attack\",\"tick\":136,\"startedAt\":134,\"until\":143,\"fps\":13.835485219955444},{\"texture\":\"skill-revise:hammer-v2\",\"frame\":\"thrust_5_right\",\"scale\":[0.5,0.5],\"origin\":[0.5,0.7142857142857143],\"alpha\":1,\"pose\":\"idle\",\"tick\":144,\"startedAt\":134,\"until\":143,\"fps\":13.835485219955444},{\"texture\":\"skill-revise:thien-su\",\"frame\":\"idle_3_right\",\"scale\":[0.5,0.5],\"origin\":[0.5,0.7142857142857143],\"alpha\":1,\"pose\":\"idle\",\"tick\":161,\"startedAt\":134,\"until\":143,\"fps\":11.376613914966583}]",
+  "errors": [],
+  "serverLobby": {
+    "phase": "IN_GAME",
+    "host": "37zWz4Raw",
+    "players": [
+      {
+        "id": "37zWz4Raw",
+        "nickname": "Renovation 1",
+        "school": "con_luan",
+        "branch": "vo_dang_quyen",
+        "confirmed": true,
+        "connected": true
+      },
+      {
+        "id": "nuodhdaF_",
+        "nickname": "Renovation 2",
+        "school": "cai_bang",
+        "branch": "cai_bang_bong",
+        "confirmed": true,
+        "connected": true
+      }
+    ]
+  },
+  "clientLobby": [
+    {
+      "client": 1,
+      "session": "37zWz4Raw",
+      "phase": "IN_GAME",
+      "host": "37zWz4Raw",
+      "players": [
+        {
+          "id": "37zWz4Raw",
+          "nickname": "Renovation 1",
+          "school": "con_luan",
+          "branch": "vo_dang_quyen",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "nuodhdaF_",
+          "nickname": "Renovation 2",
+          "school": "cai_bang",
+          "branch": "cai_bang_bong",
+          "confirmed": true,
+          "connected": true
+        }
+      ],
+      "heading": "Chọn môn phái",
+      "schoolControls": 7,
+      "hidden": true,
+      "error": "",
+      "focused": true
+    },
+    {
+      "client": 2,
+      "session": "nuodhdaF_",
+      "phase": "IN_GAME",
+      "host": "37zWz4Raw",
+      "players": [
+        {
+          "id": "37zWz4Raw",
+          "nickname": "Renovation 1",
+          "school": "con_luan",
+          "branch": "vo_dang_quyen",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "nuodhdaF_",
+          "nickname": "Renovation 2",
+          "school": "cai_bang",
+          "branch": "cai_bang_bong",
+          "confirmed": true,
+          "connected": true
+        }
+      ],
+      "heading": "Chọn môn phái",
+      "schoolControls": 7,
+      "hidden": true,
+      "error": "",
+      "focused": true
+    }
+  ]
+}

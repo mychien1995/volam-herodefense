@@ -482,7 +482,9 @@ describe('M3C2 authoritative Yin–Yang', () => {
         f.steps(23);
         expect(f.world.areas).toHaveLength(0);
         f.steps(1);
-        expect(f.world.areas?.[0]?.effect.radius).toBe(192);
+        expect(f.world.areas?.[0]?.effect.radius).toBeCloseTo(
+          192 * Math.sqrt(0.85),
+        );
       }
       expect(f.hits()).toHaveLength(1);
       const area = f.world.areas![0]!;
@@ -523,29 +525,26 @@ describe('M3C2 authoritative Yin–Yang', () => {
     expect(b.hp).toBe(160);
     expect(f.enemies[0]!.hp).toBe(10000 - 12 * 22);
   });
-  it('Thất Tinh has seven timed frontal cuts regardless of cast spam, rear targets excluded', () => {
+  it('Thất Tinh has seven staggered remote impacts despite cast spam and no warning ring', () => {
     const f = fixture('that_tinh_kiem');
     f.cast();
     const castAt = f.world.tick;
-    f.steps(5);
-    expect(f.hits()).toHaveLength(1);
-    f.steps(1);
-    expect(f.hits()).toHaveLength(2);
-    f.steps(1);
-    expect(f.hits()).toHaveLength(2);
-    for (let i = 0; i < 35; i++) {
+    expect(f.world.areas ?? []).toHaveLength(0);
+    f.steps(14);
+    expect(f.hits()).toHaveLength(0);
+    for (let i = 0; i < 30; i++) {
       f.input({ kind: 'cast', slot: 0 });
       f.steps(1);
     }
     expect(f.hits().map((e) => e.damage)).toEqual(Array(7).fill(14));
-    expect(
-      f.events.filter((e) => e.stage === 'sweep').map((e) => e.hitIndex),
-    ).toEqual([0, 1, 2, 3, 4, 5, 6]);
-    expect(
-      f.events.filter((e) => e.stage === 'sweep').map((e) => e.tick! - castAt),
-    ).toEqual([0, 6, 12, 18, 24, 30, 36]);
+    const impacts = f.events.filter((e) => e.stage === 'sword_rain_impact');
+    expect(impacts.map((e) => e.hitIndex)).toEqual([0, 1, 2, 3, 4, 5, 6]);
+    expect(impacts.map((e) => e.tick! - castAt)).toEqual([
+      15, 17, 19, 21, 23, 25, 27,
+    ]);
     expect(f.enemies[2]!.hp).toBe(10000);
   });
+
   it('Nhân Kiếm pierces each target once along its original direction; walls stop travel', () => {
     const f = fixture('nhan_kiem_hop_nhat');
     f.cast();
@@ -822,7 +821,9 @@ describe('M3C2 authoritative Yin–Yang', () => {
           skillArt.assets.find((a) => a.id === skill.id + '_' + kind)
             ?.animations.length,
         ).toBeGreaterThan(0);
-      expect(skillIcon(skill.id)).toContain('/vo-dang/');
+      expect(skillIcon(skill.id)).toContain(
+        skill.id === 'that_tinh_kiem' ? '/skill-revise-feedback-v04/' : '/vo-dang/',
+      );
       expect(skillVisualStages[skill.id]).toBeDefined();
     }
   });

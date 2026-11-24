@@ -197,6 +197,39 @@ describe('M2A deterministic creep instances', () => {
     expect(b.hero.xp).toBe(0);
     expect(b.zone.world.creeps.get(id)!.hp).toBe(b.zone.config.creep.hp);
   });
+  it.each(['enter', 'exit'] as const)(
+    'keeps the remaining hammer beat when zone clocks differ (%s)',
+    (direction) => {
+      const match = setup(),
+        hero = match.add('hammer', 'Thiền Sư');
+      hero.schoolId = 'con_luan';
+      hero.basicId = 'con_luan_thien_su';
+      if (direction === 'exit') {
+        expect(match.enter(hero.id, 'private')).toBeUndefined();
+        match.zoneOf(hero.id)!.world.tick = 100;
+      } else match.arena.world.tick = 100;
+      hero.lastBasicTick = 98;
+      hero.cooldown = 110;
+      if (direction === 'exit') leave(match, hero.id);
+      else expect(match.enter(hero.id, 'private')).toBeUndefined();
+      const destination = match.zoneOf(hero.id)!;
+      expect(destination.world.tick).toBe(0);
+      expect(hero.cooldown).toBe(10);
+      const accepted: number[] = [];
+      for (let i = 1; i <= 25; i++) {
+        match.input(hero.id, i, { kind: 'basic' });
+        match.step();
+        if (
+          match.events.some(
+            ({ event }) =>
+              event.kind === 'attack' && event.sourceId === hero.id,
+          )
+        )
+          accepted.push(destination.world.tick);
+      }
+      expect(accepted).toEqual([10, 22]);
+    },
+  );
   it('keeps the hero identity, progression, school, normal style and remaining cooldowns on transfer', () => {
     const match = setup(),
       hero = match.add('a', 'Hero');

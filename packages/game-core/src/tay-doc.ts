@@ -800,9 +800,15 @@ export class TayDocEncounter {
       b.pose = 'idle';
       return;
     }
-    const target = heroes.sort(
-      (a, c) => distance(b, a) - distance(b, c) || a.id.localeCompare(c.id),
-    )[0]!;
+    const target = heroes
+      .filter((h) => !hasStatus(h, 'concealed', world.tick))
+      .sort(
+        (a, c) => distance(b, a) - distance(b, c) || a.id.localeCompare(c.id),
+      )[0];
+    if (!target) {
+      b.pose = 'idle';
+      return;
+    }
     if (world.tick >= this.nextActionAt) {
       const rotation = this.phase === 'phase2' ? p2 : p1;
       for (let i = 0; i < rotation.length; i++) {

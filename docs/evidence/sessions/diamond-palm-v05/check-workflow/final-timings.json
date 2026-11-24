@@ -1,0 +1,32 @@
+{
+  "runId": "8f47d52f-1813-43cc-8d7d-472e5ffae1df",
+  "mode": "final",
+  "args": [
+    "--config",
+    "playwright.diamond-palm.config.ts",
+    "tests/e2e/diamond-palm.spec.ts"
+  ],
+  "startedAt": "2026-11-09T11:14:17.646Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "prepare assets (once)",
+      "seconds": 94.83,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 1.15,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "typecheck tests and tools",
+      "seconds": 1.62,
+      "status": "FAIL",
+      "exitCode": 1
+    }
+  ],
+  "totalSeconds": 97.61
+}

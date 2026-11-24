@@ -129,9 +129,11 @@ export function chuWaves(t: number) {
 }
 function nearest(w: World) {
   const b = w.creeps.get(CHU_BOSS_ID)!;
-  return alive(w).sort(
-    (a, z) => distance(a, b) - distance(z, b) || a.id.localeCompare(z.id),
-  )[0];
+  return alive(w)
+    .filter((h) => !hasStatus(h, 'concealed', w.tick))
+    .sort(
+      (a, z) => distance(a, b) - distance(z, b) || a.id.localeCompare(z.id),
+    )[0];
 }
 function begin(
   w: World,

@@ -169,3 +169,8 @@ North/south gates now require a clear footprint-wide corridor toward the statue,
 ## Creep feedback r3 tuning — 2026-11-06
 
 Director approved larger frontal damage for Hoành trảm; trial coefficient2.4× (previous1.5×),192 reach and180° sector. Thổ Phỉ's target burst radius64 and Tà Tăng's target drain radius40 retain1.5× damage; drain retains40% actual-loss healing. Cương Thi actively lobs the retained88-radius/3-second poison field on a210-tick cooldown instead of leaving it only on death. Khô Lâu Kiếm Sĩ, Mông Cổ infantry and Ác Khuyển lose signatures. These targeted overrides do not retune per-creep XP/gold, stream density or school/item mechanics. Numerical exposure results are recorded separately in `docs/CREEP_FEEDBACK_R3.md`; no final difficulty claim follows from static bots.
+
+
+## 2026-11-23 — approved skill revise integration
+
+The director authorized the twelve-branch revision and selected the crescent Phong Quyển projectile. [Canonical integration contract and trial tuning](docs/SKILL_REVISE_INTEGRATION_2026_11_23.md) supersede the older skill behavior in this scope. Stable IDs, server authority and unrelated campaign/economy rules remain in force. Old active Q Ngũ Lôi stance is replaced by a reactive passive; E Lôi Đình Chấn Vực is a rename only. Gameplay feel awaits the director’s Phòng test review.

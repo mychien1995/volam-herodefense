@@ -6,7 +6,12 @@ import type {
   World,
 } from './types.js';
 import { opponent, opponents, targetRadius } from './opponents.js';
-import { cancelOwnedEffects, hasStatus, statusValue } from './status.js';
+import {
+  cancelOwnedEffects,
+  hasStatus,
+  statusValue,
+  applyStatus,
+} from './status.js';
 import {
   directDodgeChance,
   characterStats,
@@ -24,6 +29,7 @@ import type { ComboSpec } from './types.js';
 import { nguDocDamage } from './ngu-doc-combat.js';
 import { findNguDocSummon } from './ngu-doc-summons.js';
 import { recordTamLienHit } from './tam-lien-tram.js';
+import { lightningBlock, recordStaffHit } from './skill-revise-passives.js';
 export function emit(world: World, event: Omit<CombatEvent, 'id'>): void {
   world.events.push({ id: world.nextEvent++, tick: world.tick, ...event });
 }
@@ -55,7 +61,11 @@ export function hurt(
     comboTargets?: Record<string, boolean> | undefined;
   },
 ): boolean {
-  if (world.duel && !(world.duelTeams && sourceId === 'pvp_environment') && opponent(world, sourceId, target.id) !== target)
+  if (
+    world.duel &&
+    !(world.duelTeams && sourceId === 'pvp_environment') &&
+    opponent(world, sourceId, target.id) !== target
+  )
     return false;
   if (world.waveBossTest && world.heroes.has(target.id)) return false;
   if (
@@ -155,6 +165,52 @@ export function hurt(
     world.heroes.has(target.id) &&
     target.statuses?.find((s) => s.kind === 'counter' && s.until > world.tick);
   const attacker = opponent(world, target.id, sourceId);
+  const parry =
+    !snapshot?.unavoidableHpLoss &&
+    !snapshot?.directHp &&
+    !snapshot?.reactive &&
+    !snapshot?.periodic
+      ? lightningBlock(world, target, sourceId, abilityId, config)
+      : undefined;
+  if (parry) {
+    const aim = direction(parry.source.x - target.x, parry.source.y - target.y);
+    applyStatus(
+      parry.source,
+      { kind: 'stun', durationTicks: parry.stunTicks, magnitude: 1 },
+      target.id,
+      parry.abilityId,
+      world.tick,
+    );
+    emit(world, {
+      kind: 'pulse',
+      sourceId: target.id,
+      targetId: sourceId,
+      abilityId: parry.abilityId,
+      stage: 'lightning_parry',
+      x: target.x,
+      y: target.y,
+      fx: aim.x,
+      fy: aim.y,
+      radius: distance(target, parry.source),
+      damage: 0,
+      critical: false,
+    });
+    hurt(
+      world,
+      parry.source,
+      target.id,
+      parry.abilityId,
+      parry.damage,
+      config,
+      {
+        ...offensiveStats(world, target.id, config),
+        reactive: true,
+        fx: aim.x,
+        fy: aim.y,
+      },
+    );
+    return false;
+  }
   const retaliate = () => {
     if (!counter || !attacker || attacker.hp <= 0 || target.hp <= 0) return;
     const heading = direction(attacker.x - target.x, attacker.y - target.y);
@@ -439,6 +495,12 @@ export function hurt(
       (enemy.damagedBy ??= new Set()).add(sourceId);
   }
   const heading = world.heroes.get(sourceId) ?? world.creeps.get(sourceId);
+  if (
+    !snapshot?.periodic &&
+    !snapshot?.reactive &&
+    (snapshot?.cleaveIndex ?? 0) === 0
+  )
+    recordStaffHit(world, sourceId, abilityId, target.id);
   emit(world, {
     kind: 'hit',
     sourceId,

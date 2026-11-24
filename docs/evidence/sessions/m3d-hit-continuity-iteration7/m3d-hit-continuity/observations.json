@@ -1,0 +1,2952 @@
+{
+  "players": 2,
+  "development": true,
+  "protocol": 39,
+  "fixture": "Normal room and Phaser. Server fixtures select encounter, positions and legal skill loadout. Keyboard casts, encounter release and hurt use authoritative combat.",
+  "heroes": [],
+  "bosses": [
+    {
+      "form": "dong_ta",
+      "direction": "right",
+      "ability": "dan_chi_than_cong",
+      "idle": "idle_right_0",
+      "hit": {
+        "body": {
+          "id": "dong_ta",
+          "pose": "idle",
+          "direction": "right",
+          "locomotion": true,
+          "name": "dong_ta:dong_ta",
+          "texture": "renovated-dong_ta",
+          "source": "/assets/renovation-v1/runtime/dong_ta.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            463,
+            479.280029296875
+          ],
+          "frame": "idle_right_0",
+          "x": 800,
+          "y": 656.6400146484375,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 657.1400146484375,
+          "visible": true
+        },
+        "effect": {
+          "id": 1,
+          "target": "dong_ta",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 108,
+          "protocolVersion": 39,
+          "id": 1,
+          "kind": "hit",
+          "sourceId": "WHqX7pBfj",
+          "targetId": "dong_ta",
+          "abilityId": "fixture_resolved_strike_1",
+          "x": 800,
+          "y": 656.64,
+          "damage": 28,
+          "critical": false,
+          "zoneId": "arena",
+          "fx": -1,
+          "fy": 0
+        }
+      },
+      "release": {
+        "texture": "renovated-action-dong_ta_actions",
+        "frame": "right_1",
+        "source": "/assets/renovation-v3/actors/dong_ta_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "form": "dong_ta",
+      "direction": "down",
+      "ability": "dan_chi_than_cong",
+      "idle": "idle_down_0",
+      "hit": {
+        "body": {
+          "id": "dong_ta",
+          "pose": "idle",
+          "direction": "down",
+          "locomotion": true,
+          "name": "dong_ta:dong_ta",
+          "texture": "renovated-dong_ta",
+          "source": "/assets/renovation-v1/runtime/dong_ta.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            683,
+            259.280029296875
+          ],
+          "frame": "idle_down_0",
+          "x": 800,
+          "y": 656.6400146484375,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 657.1400146484375,
+          "visible": true
+        },
+        "effect": {
+          "id": 2,
+          "target": "dong_ta",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 196,
+          "protocolVersion": 39,
+          "id": 2,
+          "kind": "hit",
+          "sourceId": "WHqX7pBfj",
+          "targetId": "dong_ta",
+          "abilityId": "fixture_resolved_strike_2",
+          "x": 800,
+          "y": 656.64,
+          "damage": 28,
+          "critical": false,
+          "zoneId": "arena",
+          "fx": 0,
+          "fy": -1
+        }
+      },
+      "release": {
+        "texture": "renovated-action-dong_ta_actions",
+        "frame": "down_1",
+        "source": "/assets/renovation-v3/actors/dong_ta_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "form": "dong_ta",
+      "direction": "left",
+      "ability": "dan_chi_than_cong",
+      "idle": "idle_left_0",
+      "hit": {
+        "body": {
+          "id": "dong_ta",
+          "pose": "idle",
+          "direction": "left",
+          "locomotion": true,
+          "name": "dong_ta:dong_ta",
+          "texture": "renovated-dong_ta",
+          "source": "/assets/renovation-v1/runtime/dong_ta.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            903,
+            479.280029296875
+          ],
+          "frame": "idle_left_0",
+          "x": 800,
+          "y": 656.6400146484375,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 657.1400146484375,
+          "visible": true
+        },
+        "effect": {
+          "id": 6,
+          "target": "dong_ta",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 277,
+          "protocolVersion": 39,
+          "id": 6,
+          "kind": "hit",
+          "sourceId": "WHqX7pBfj",
+          "targetId": "dong_ta",
+          "abilityId": "fixture_resolved_strike_3",
+          "x": 800,
+          "y": 656.64,
+          "damage": 28,
+          "critical": false,
+          "zoneId": "arena",
+          "fx": 1,
+          "fy": 0
+        }
+      },
+      "release": {
+        "texture": "renovated-action-dong_ta_actions",
+        "frame": "left_1",
+        "source": "/assets/renovation-v3/actors/dong_ta_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "form": "dong_ta",
+      "direction": "up",
+      "ability": "dan_chi_than_cong",
+      "idle": "idle_up_0",
+      "hit": {
+        "body": {
+          "id": "dong_ta",
+          "pose": "idle",
+          "direction": "up",
+          "locomotion": true,
+          "name": "dong_ta:dong_ta",
+          "texture": "renovated-dong_ta",
+          "source": "/assets/renovation-v1/runtime/dong_ta.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            683,
+            699.280029296875
+          ],
+          "frame": "idle_up_0",
+          "x": 800,
+          "y": 656.6400146484375,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 657.1400146484375,
+          "visible": true
+        },
+        "effect": {
+          "id": 8,
+          "target": "dong_ta",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 350,
+          "protocolVersion": 39,
+          "id": 8,
+          "kind": "hit",
+          "sourceId": "WHqX7pBfj",
+          "targetId": "dong_ta",
+          "abilityId": "fixture_resolved_strike_4",
+          "x": 800,
+          "y": 656.64,
+          "damage": 28,
+          "critical": false,
+          "zoneId": "arena",
+          "fx": 0,
+          "fy": 1
+        }
+      },
+      "release": {
+        "texture": "renovated-action-dong_ta_actions",
+        "frame": "up_1",
+        "source": "/assets/renovation-v3/actors/dong_ta_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "form": "tay_doc",
+      "direction": "down",
+      "ability": "tay_doc_staff",
+      "idle": "idle_down_0",
+      "hit": {
+        "body": {
+          "id": "tay_doc",
+          "pose": "idle",
+          "direction": "down",
+          "locomotion": true,
+          "name": "tay_doc:boss",
+          "texture": "renovated-tay_doc",
+          "source": "/assets/renovation-v1/runtime/tay_doc.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            683,
+            259.280029296875
+          ],
+          "frame": "idle_down_0",
+          "x": 800,
+          "y": 656.6400146484375,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 656.6400146484375,
+          "visible": true
+        },
+        "effect": {
+          "id": 9,
+          "target": "tay_doc_boss",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 566,
+          "protocolVersion": 39,
+          "id": 9,
+          "kind": "hit",
+          "sourceId": "WHqX7pBfj",
+          "targetId": "tay_doc_boss",
+          "abilityId": "fixture_resolved_strike_5",
+          "x": 800,
+          "y": 656.64,
+          "damage": 33,
+          "critical": false,
+          "zoneId": "arena",
+          "fx": 0,
+          "fy": -1
+        }
+      },
+      "release": {
+        "texture": "renovated-action-tay_doc_actions",
+        "frame": "down_1",
+        "source": "/assets/renovation-v3/actors/tay_doc_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "form": "tay_doc",
+      "direction": "left",
+      "ability": "tay_doc_staff",
+      "idle": "idle_left_0",
+      "hit": {
+        "body": {
+          "id": "tay_doc",
+          "pose": "idle",
+          "direction": "left",
+          "locomotion": true,
+          "name": "tay_doc:boss",
+          "texture": "renovated-tay_doc",
+          "source": "/assets/renovation-v1/runtime/tay_doc.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            903,
+            479.280029296875
+          ],
+          "frame": "idle_left_0",
+          "x": 800,
+          "y": 656.6400146484375,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 656.6400146484375,
+          "visible": true
+        },
+        "effect": {
+          "id": 14,
+          "target": "tay_doc_boss",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 666,
+          "protocolVersion": 39,
+          "id": 14,
+          "kind": "hit",
+          "sourceId": "WHqX7pBfj",
+          "targetId": "tay_doc_boss",
+          "abilityId": "fixture_resolved_strike_6",
+          "x": 800,
+          "y": 656.64,
+          "damage": 33,
+          "critical": false,
+          "zoneId": "arena",
+          "fx": 1,
+          "fy": 0
+        }
+      },
+      "release": {
+        "texture": "renovated-action-tay_doc_actions",
+        "frame": "left_1",
+        "source": "/assets/renovation-v3/actors/tay_doc_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "form": "tay_doc",
+      "direction": "up",
+      "ability": "tay_doc_staff",
+      "idle": "idle_up_0",
+      "hit": {
+        "body": {
+          "id": "tay_doc",
+          "pose": "idle",
+          "direction": "up",
+          "locomotion": true,
+          "name": "tay_doc:boss",
+          "texture": "renovated-tay_doc",
+          "source": "/assets/renovation-v1/runtime/tay_doc.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            683,
+            699.280029296875
+          ],
+          "frame": "idle_up_0",
+          "x": 800,
+          "y": 656.6400146484375,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 656.6400146484375,
+          "visible": true
+        },
+        "effect": {
+          "id": 18,
+          "target": "tay_doc_boss",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 754,
+          "protocolVersion": 39,
+          "id": 18,
+          "kind": "hit",
+          "sourceId": "WHqX7pBfj",
+          "targetId": "tay_doc_boss",
+          "abilityId": "fixture_resolved_strike_7",
+          "x": 800,
+          "y": 656.64,
+          "damage": 33,
+          "critical": false,
+          "zoneId": "arena",
+          "fx": 0,
+          "fy": 1
+        }
+      },
+      "release": {
+        "texture": "renovated-action-tay_doc_actions",
+        "frame": "up_1",
+        "source": "/assets/renovation-v3/actors/tay_doc_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "form": "tay_doc_cap_mo",
+      "direction": "right",
+      "ability": "ngu_doc_than_chuong",
+      "idle": "idle_right_0",
+      "hit": {
+        "body": {
+          "id": "tay_doc_cap_mo",
+          "pose": "idle",
+          "direction": "right",
+          "locomotion": true,
+          "name": "tay_doc:boss",
+          "texture": "renovated-tay_doc_cap_mo",
+          "source": "/assets/renovation-v1/runtime/tay_doc_cap_mo.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            463,
+            479.280029296875
+          ],
+          "frame": "idle_right_0",
+          "x": 800,
+          "y": 656.6400146484375,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 656.6400146484375,
+          "visible": true
+        },
+        "effect": {
+          "id": 22,
+          "target": "tay_doc_boss",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 837,
+          "protocolVersion": 39,
+          "id": 22,
+          "kind": "hit",
+          "sourceId": "WHqX7pBfj",
+          "targetId": "tay_doc_boss",
+          "abilityId": "fixture_resolved_strike_8",
+          "x": 800,
+          "y": 656.64,
+          "damage": 33,
+          "critical": false,
+          "zoneId": "arena",
+          "fx": -1,
+          "fy": 0
+        }
+      },
+      "release": {
+        "texture": "renovated-action-tay_doc_cap_mo_actions",
+        "frame": "right_2",
+        "source": "/assets/renovation-v3/actors/tay_doc_cap_mo_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "form": "tay_doc_cap_mo",
+      "direction": "down",
+      "ability": "ngu_doc_than_chuong",
+      "idle": "idle_down_0",
+      "hit": {
+        "body": {
+          "id": "tay_doc_cap_mo",
+          "pose": "idle",
+          "direction": "down",
+          "locomotion": true,
+          "name": "tay_doc:boss",
+          "texture": "renovated-tay_doc_cap_mo",
+          "source": "/assets/renovation-v1/runtime/tay_doc_cap_mo.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            683,
+            259.280029296875
+          ],
+          "frame": "idle_down_0",
+          "x": 800,
+          "y": 656.6400146484375,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 656.6400146484375,
+          "visible": true
+        },
+        "effect": {
+          "id": 24,
+          "target": "tay_doc_boss",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 941,
+          "protocolVersion": 39,
+          "id": 24,
+          "kind": "hit",
+          "sourceId": "WHqX7pBfj",
+          "targetId": "tay_doc_boss",
+          "abilityId": "fixture_resolved_strike_9",
+          "x": 800,
+          "y": 656.64,
+          "damage": 33,
+          "critical": false,
+          "zoneId": "arena",
+          "fx": 0,
+          "fy": -1
+        }
+      },
+      "release": {
+        "texture": "renovated-action-tay_doc_cap_mo_actions",
+        "frame": "down_2",
+        "source": "/assets/renovation-v3/actors/tay_doc_cap_mo_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "form": "tay_doc_cap_mo",
+      "direction": "left",
+      "ability": "ngu_doc_than_chuong",
+      "idle": "idle_left_0",
+      "hit": {
+        "body": {
+          "id": "tay_doc_cap_mo",
+          "pose": "idle",
+          "direction": "left",
+          "locomotion": true,
+          "name": "tay_doc:boss",
+          "texture": "renovated-tay_doc_cap_mo",
+          "source": "/assets/renovation-v1/runtime/tay_doc_cap_mo.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            903,
+            479.280029296875
+          ],
+          "frame": "idle_left_0",
+          "x": 800,
+          "y": 656.6400146484375,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 656.6400146484375,
+          "visible": true
+        },
+        "effect": {
+          "id": 25,
+          "target": "tay_doc_boss",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 1027,
+          "protocolVersion": 39,
+          "id": 25,
+          "kind": "hit",
+          "sourceId": "WHqX7pBfj",
+          "targetId": "tay_doc_boss",
+          "abilityId": "fixture_resolved_strike_10",
+          "x": 800,
+          "y": 656.64,
+          "damage": 33,
+          "critical": false,
+          "zoneId": "arena",
+          "fx": 1,
+          "fy": 0
+        }
+      },
+      "release": {
+        "texture": "renovated-action-tay_doc_cap_mo_actions",
+        "frame": "left_2",
+        "source": "/assets/renovation-v3/actors/tay_doc_cap_mo_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "form": "tay_doc_cap_mo",
+      "direction": "up",
+      "ability": "ngu_doc_than_chuong",
+      "idle": "idle_up_0",
+      "hit": {
+        "body": {
+          "id": "tay_doc_cap_mo",
+          "pose": "idle",
+          "direction": "up",
+          "locomotion": true,
+          "name": "tay_doc:boss",
+          "texture": "renovated-tay_doc_cap_mo",
+          "source": "/assets/renovation-v1/runtime/tay_doc_cap_mo.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            683,
+            699.280029296875
+          ],
+          "frame": "idle_up_0",
+          "x": 800,
+          "y": 656.6400146484375,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 656.6400146484375,
+          "visible": true
+        },
+        "effect": {
+          "id": 26,
+          "target": "tay_doc_boss",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 1126,
+          "protocolVersion": 39,
+          "id": 26,
+          "kind": "hit",
+          "sourceId": "WHqX7pBfj",
+          "targetId": "tay_doc_boss",
+          "abilityId": "fixture_resolved_strike_11",
+          "x": 800,
+          "y": 656.64,
+          "damage": 33,
+          "critical": false,
+          "zoneId": "arena",
+          "fx": 0,
+          "fy": 1
+        }
+      },
+      "release": {
+        "texture": "renovated-action-tay_doc_cap_mo_actions",
+        "frame": "up_2",
+        "source": "/assets/renovation-v3/actors/tay_doc_cap_mo_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "form": "nam_de",
+      "direction": "down",
+      "ability": "nhat_duong_chi",
+      "idle": "idle_down_0",
+      "hit": {
+        "body": {
+          "id": "nam_de",
+          "pose": "idle",
+          "direction": "down",
+          "locomotion": true,
+          "name": "nam-de:boss",
+          "texture": "renovated-nam_de",
+          "source": "/assets/renovation-v1/runtime/nam_de.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            683,
+            259.280029296875
+          ],
+          "frame": "idle_down_0",
+          "x": 800,
+          "y": 656.6400146484375,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 656.6400146484375,
+          "visible": true
+        },
+        "effect": {
+          "id": 28,
+          "target": "boss_nam_de",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 1360,
+          "protocolVersion": 39,
+          "id": 28,
+          "kind": "hit",
+          "sourceId": "WHqX7pBfj",
+          "targetId": "boss_nam_de",
+          "abilityId": "fixture_resolved_strike_12",
+          "x": 800,
+          "y": 656.64,
+          "damage": 23,
+          "critical": false,
+          "zoneId": "arena",
+          "fx": 0,
+          "fy": -1
+        }
+      },
+      "release": {
+        "texture": "renovated-action-nam_de_actions",
+        "frame": "down_0",
+        "source": "/assets/renovation-v3/actors/nam_de_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "form": "nam_de",
+      "direction": "up",
+      "ability": "nhat_duong_chi",
+      "idle": "idle_up_0",
+      "hit": {
+        "body": {
+          "id": "nam_de",
+          "pose": "hurt",
+          "direction": "up",
+          "locomotion": false,
+          "name": "nam-de:boss",
+          "texture": "renovated-nam_de",
+          "source": "/assets/renovation-v1/runtime/nam_de.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            683,
+            699.280029296875
+          ],
+          "frame": "idle_up_0",
+          "x": 800,
+          "y": 656.6400146484375,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 656.6400146484375,
+          "visible": true
+        },
+        "effect": {
+          "id": 45,
+          "target": "boss_nam_de",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 1687,
+          "protocolVersion": 39,
+          "id": 45,
+          "kind": "hit",
+          "sourceId": "WHqX7pBfj",
+          "targetId": "boss_nam_de",
+          "abilityId": "fixture_resolved_strike_14",
+          "x": 800,
+          "y": 656.64,
+          "damage": 23,
+          "critical": false,
+          "zoneId": "arena",
+          "fx": 0,
+          "fy": 1
+        }
+      },
+      "release": {
+        "texture": "renovated-action-nam_de_actions",
+        "frame": "up_0",
+        "source": "/assets/renovation-v3/actors/nam_de_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "form": "bac_cai",
+      "direction": "right",
+      "ability": "palms",
+      "idle": "idle_right_0",
+      "hit": {
+        "body": {
+          "id": "bac_cai",
+          "pose": "hurt",
+          "direction": "right",
+          "locomotion": false,
+          "name": "bac_cai:boss",
+          "texture": "renovated-bac_cai",
+          "source": "/assets/renovation-v1/runtime/bac_cai.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            303,
+            561.28
+          ],
+          "frame": "idle_right_0",
+          "x": 800,
+          "y": 656.64,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 656.64,
+          "visible": true
+        },
+        "effect": {
+          "id": 47,
+          "target": "bac_cai",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 1785,
+          "protocolVersion": 39,
+          "id": 47,
+          "kind": "hit",
+          "sourceId": "WHqX7pBfj",
+          "targetId": "bac_cai",
+          "abilityId": "fixture_resolved_strike_15",
+          "x": 800,
+          "y": 656.64,
+          "damage": 27,
+          "critical": false,
+          "zoneId": "arena",
+          "fx": -1,
+          "fy": 0
+        }
+      },
+      "release": {
+        "texture": "renovated-action-bac_cai_actions",
+        "frame": "right_2",
+        "source": "/assets/renovation-v3/actors/bac_cai_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "form": "bac_cai",
+      "direction": "down",
+      "ability": "palms",
+      "idle": "idle_down_0",
+      "hit": {
+        "body": {
+          "id": "bac_cai",
+          "pose": "hurt",
+          "direction": "down",
+          "locomotion": false,
+          "name": "bac_cai:boss",
+          "texture": "renovated-bac_cai",
+          "source": "/assets/renovation-v1/runtime/bac_cai.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            683,
+            259.28
+          ],
+          "frame": "idle_down_0",
+          "x": 800,
+          "y": 656.64,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 656.64,
+          "visible": true
+        },
+        "effect": {
+          "id": 49,
+          "target": "bac_cai",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 1864,
+          "protocolVersion": 39,
+          "id": 49,
+          "kind": "hit",
+          "sourceId": "WHqX7pBfj",
+          "targetId": "bac_cai",
+          "abilityId": "fixture_resolved_strike_16",
+          "x": 800,
+          "y": 656.64,
+          "damage": 27,
+          "critical": false,
+          "zoneId": "arena",
+          "fx": 0,
+          "fy": -1
+        }
+      },
+      "release": {
+        "texture": "renovated-action-bac_cai_actions",
+        "frame": "down_2",
+        "source": "/assets/renovation-v3/actors/bac_cai_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "form": "bac_cai",
+      "direction": "left",
+      "ability": "palms",
+      "idle": "idle_left_0",
+      "hit": {
+        "body": {
+          "id": "bac_cai",
+          "pose": "hurt",
+          "direction": "left",
+          "locomotion": false,
+          "name": "bac_cai:boss",
+          "texture": "renovated-bac_cai",
+          "source": "/assets/renovation-v1/runtime/bac_cai.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            903,
+            479.28
+          ],
+          "frame": "idle_left_0",
+          "x": 800,
+          "y": 656.64,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 656.64,
+          "visible": true
+        },
+        "effect": {
+          "id": 51,
+          "target": "bac_cai",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 1934,
+          "protocolVersion": 39,
+          "id": 51,
+          "kind": "hit",
+          "sourceId": "WHqX7pBfj",
+          "targetId": "bac_cai",
+          "abilityId": "fixture_resolved_strike_17",
+          "x": 800,
+          "y": 656.64,
+          "damage": 27,
+          "critical": false,
+          "zoneId": "arena",
+          "fx": 1,
+          "fy": 0
+        }
+      },
+      "release": {
+        "texture": "renovated-action-bac_cai_actions",
+        "frame": "left_2",
+        "source": "/assets/renovation-v3/actors/bac_cai_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "form": "bac_cai",
+      "direction": "up",
+      "ability": "palms",
+      "idle": "idle_up_0",
+      "hit": {
+        "body": {
+          "id": "bac_cai",
+          "pose": "hurt",
+          "direction": "up",
+          "locomotion": false,
+          "name": "bac_cai:boss",
+          "texture": "renovated-bac_cai",
+          "source": "/assets/renovation-v1/runtime/bac_cai.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            683,
+            699.28
+          ],
+          "frame": "idle_up_0",
+          "x": 800,
+          "y": 656.64,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 656.64,
+          "visible": true
+        },
+        "effect": {
+          "id": 53,
+          "target": "bac_cai",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 2013,
+          "protocolVersion": 39,
+          "id": 53,
+          "kind": "hit",
+          "sourceId": "WHqX7pBfj",
+          "targetId": "bac_cai",
+          "abilityId": "fixture_resolved_strike_18",
+          "x": 800,
+          "y": 656.64,
+          "damage": 27,
+          "critical": false,
+          "zoneId": "arena",
+          "fx": 0,
+          "fy": 1
+        }
+      },
+      "release": {
+        "texture": "renovated-action-bac_cai_actions",
+        "frame": "up_2",
+        "source": "/assets/renovation-v3/actors/bac_cai_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "form": "chu_ba_thong",
+      "direction": "right",
+      "ability": "palm",
+      "idle": "idle_right_0",
+      "hit": {
+        "body": {
+          "id": "chu_ba_thong",
+          "pose": "hurt",
+          "direction": "right",
+          "locomotion": false,
+          "name": "",
+          "texture": "renovated-chu_ba_thong",
+          "source": "/assets/renovation-v1/runtime/chu_ba_thong.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            463,
+            480
+          ],
+          "frame": "idle_right_0",
+          "x": 704,
+          "y": 451,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 451.74,
+          "visible": true
+        },
+        "effect": {
+          "id": 58,
+          "target": "chu_ba_thong_shared:chu_ba_thong",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 53,
+          "protocolVersion": 39,
+          "id": 58,
+          "kind": "hit",
+          "sourceId": "WHqX7pBfj",
+          "targetId": "chu_ba_thong_shared:chu_ba_thong",
+          "abilityId": "fixture_resolved_strike_19",
+          "x": 704,
+          "y": 451.44,
+          "damage": 13,
+          "critical": false,
+          "zoneId": "chu_ba_thong_shared",
+          "fx": -1,
+          "fy": 0
+        }
+      },
+      "release": {
+        "texture": "renovated-action-chu_ba_thong_actions",
+        "frame": "right_1",
+        "source": "/assets/renovation-v3/actors/chu_ba_thong_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "form": "chu_ba_thong",
+      "direction": "down",
+      "ability": "palm",
+      "idle": "idle_down_0",
+      "hit": {
+        "body": {
+          "id": "chu_ba_thong",
+          "pose": "hurt",
+          "direction": "down",
+          "locomotion": false,
+          "name": "",
+          "texture": "renovated-chu_ba_thong",
+          "source": "/assets/renovation-v1/runtime/chu_ba_thong.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            683,
+            260
+          ],
+          "frame": "idle_down_0",
+          "x": 704,
+          "y": 451,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 451.74,
+          "visible": true
+        },
+        "effect": {
+          "id": 61,
+          "target": "chu_ba_thong_shared:chu_ba_thong",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 103,
+          "protocolVersion": 39,
+          "id": 61,
+          "kind": "hit",
+          "sourceId": "WHqX7pBfj",
+          "targetId": "chu_ba_thong_shared:chu_ba_thong",
+          "abilityId": "fixture_resolved_strike_20",
+          "x": 704,
+          "y": 451.44,
+          "damage": 13,
+          "critical": false,
+          "zoneId": "chu_ba_thong_shared",
+          "fx": 0,
+          "fy": -1
+        }
+      },
+      "release": {
+        "texture": "renovated-action-chu_ba_thong_actions",
+        "frame": "down_1",
+        "source": "/assets/renovation-v3/actors/chu_ba_thong_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "form": "chu_ba_thong",
+      "direction": "left",
+      "ability": "palm",
+      "idle": "idle_left_0",
+      "hit": {
+        "body": {
+          "id": "chu_ba_thong",
+          "pose": "hurt",
+          "direction": "left",
+          "locomotion": false,
+          "name": "",
+          "texture": "renovated-chu_ba_thong",
+          "source": "/assets/renovation-v1/runtime/chu_ba_thong.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            903,
+            480
+          ],
+          "frame": "idle_left_0",
+          "x": 704,
+          "y": 451,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 451.74,
+          "visible": true
+        },
+        "effect": {
+          "id": 65,
+          "target": "chu_ba_thong_shared:chu_ba_thong",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 172,
+          "protocolVersion": 39,
+          "id": 65,
+          "kind": "hit",
+          "sourceId": "WHqX7pBfj",
+          "targetId": "chu_ba_thong_shared:chu_ba_thong",
+          "abilityId": "fixture_resolved_strike_21",
+          "x": 704,
+          "y": 451.44,
+          "damage": 13,
+          "critical": false,
+          "zoneId": "chu_ba_thong_shared",
+          "fx": 1,
+          "fy": 0
+        }
+      },
+      "release": {
+        "texture": "renovated-action-chu_ba_thong_actions",
+        "frame": "left_1",
+        "source": "/assets/renovation-v3/actors/chu_ba_thong_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "form": "chu_ba_thong",
+      "direction": "up",
+      "ability": "palm",
+      "idle": "idle_up_0",
+      "hit": {
+        "body": {
+          "id": "chu_ba_thong",
+          "pose": "hurt",
+          "direction": "up",
+          "locomotion": false,
+          "name": "",
+          "texture": "renovated-chu_ba_thong",
+          "source": "/assets/renovation-v1/runtime/chu_ba_thong.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            683,
+            700
+          ],
+          "frame": "idle_up_0",
+          "x": 704,
+          "y": 451,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 451.74,
+          "visible": true
+        },
+        "effect": {
+          "id": 70,
+          "target": "chu_ba_thong_shared:chu_ba_thong",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 235,
+          "protocolVersion": 39,
+          "id": 70,
+          "kind": "hit",
+          "sourceId": "WHqX7pBfj",
+          "targetId": "chu_ba_thong_shared:chu_ba_thong",
+          "abilityId": "fixture_resolved_strike_22",
+          "x": 704,
+          "y": 451.44,
+          "damage": 13,
+          "critical": false,
+          "zoneId": "chu_ba_thong_shared",
+          "fx": 0,
+          "fy": 1
+        }
+      },
+      "release": {
+        "texture": "renovated-action-chu_ba_thong_actions",
+        "frame": "up_1",
+        "source": "/assets/renovation-v3/actors/chu_ba_thong_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "form": "hoan_nhan_hong_liet",
+      "direction": "right",
+      "ability": "hong_liet_a2",
+      "idle": "idle_right_0",
+      "hit": {
+        "body": {
+          "id": "hoan_nhan_hong_liet",
+          "pose": "idle",
+          "direction": "right",
+          "locomotion": true,
+          "name": "hong_liet:hong_liet_shared:hong_liet_boss",
+          "texture": "renovated-hoan_nhan_hong_liet",
+          "source": "/assets/renovation-v1/runtime/hoan_nhan_hong_liet.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            463,
+            480.6080322265625
+          ],
+          "frame": "idle_right_0",
+          "x": 704,
+          "y": 722.3040161132812,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 722.3040161132812,
+          "visible": true
+        },
+        "effect": {
+          "id": 74,
+          "target": "hong_liet_shared:hong_liet_boss",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 36,
+          "protocolVersion": 39,
+          "id": 74,
+          "kind": "hit",
+          "sourceId": "WHqX7pBfj",
+          "targetId": "hong_liet_shared:hong_liet_boss",
+          "abilityId": "fixture_resolved_strike_23",
+          "x": 704,
+          "y": 722.304,
+          "damage": 31,
+          "critical": false,
+          "zoneId": "hong_liet_shared",
+          "fx": -1,
+          "fy": 0
+        }
+      },
+      "release": {
+        "texture": "renovated-action-hoan_nhan_hong_liet_actions",
+        "frame": "right_1",
+        "source": "/assets/renovation-v3/actors/hoan_nhan_hong_liet_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "form": "hoan_nhan_hong_liet",
+      "direction": "down",
+      "ability": "hong_liet_a2",
+      "idle": "idle_down_0",
+      "hit": {
+        "body": {
+          "id": "hoan_nhan_hong_liet",
+          "pose": "idle",
+          "direction": "down",
+          "locomotion": true,
+          "name": "hong_liet:hong_liet_shared:hong_liet_boss",
+          "texture": "renovated-hoan_nhan_hong_liet",
+          "source": "/assets/renovation-v1/runtime/hoan_nhan_hong_liet.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            683,
+            260.6080322265625
+          ],
+          "frame": "idle_down_0",
+          "x": 704,
+          "y": 722.3040161132812,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 722.3040161132812,
+          "visible": true
+        },
+        "effect": {
+          "id": 78,
+          "target": "hong_liet_shared:hong_liet_boss",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 94,
+          "protocolVersion": 39,
+          "id": 78,
+          "kind": "hit",
+          "sourceId": "WHqX7pBfj",
+          "targetId": "hong_liet_shared:hong_liet_boss",
+          "abilityId": "fixture_resolved_strike_24",
+          "x": 704,
+          "y": 722.304,
+          "damage": 31,
+          "critical": false,
+          "zoneId": "hong_liet_shared",
+          "fx": 0,
+          "fy": -1
+        }
+      },
+      "release": {
+        "texture": "renovated-action-hoan_nhan_hong_liet_actions",
+        "frame": "down_1",
+        "source": "/assets/renovation-v3/actors/hoan_nhan_hong_liet_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "form": "hoan_nhan_hong_liet",
+      "direction": "left",
+      "ability": "hong_liet_a2",
+      "idle": "idle_left_0",
+      "hit": {
+        "body": {
+          "id": "hoan_nhan_hong_liet",
+          "pose": "idle",
+          "direction": "left",
+          "locomotion": true,
+          "name": "hong_liet:hong_liet_shared:hong_liet_boss",
+          "texture": "renovated-hoan_nhan_hong_liet",
+          "source": "/assets/renovation-v1/runtime/hoan_nhan_hong_liet.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            903,
+            480.6080322265625
+          ],
+          "frame": "idle_left_0",
+          "x": 704,
+          "y": 722.3040161132812,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 722.3040161132812,
+          "visible": true
+        },
+        "effect": {
+          "id": 82,
+          "target": "hong_liet_shared:hong_liet_boss",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 155,
+          "protocolVersion": 39,
+          "id": 82,
+          "kind": "hit",
+          "sourceId": "WHqX7pBfj",
+          "targetId": "hong_liet_shared:hong_liet_boss",
+          "abilityId": "fixture_resolved_strike_25",
+          "x": 704,
+          "y": 722.304,
+          "damage": 31,
+          "critical": false,
+          "zoneId": "hong_liet_shared",
+          "fx": 1,
+          "fy": 0
+        }
+      },
+      "release": {
+        "texture": "renovated-action-hoan_nhan_hong_liet_actions",
+        "frame": "left_1",
+        "source": "/assets/renovation-v3/actors/hoan_nhan_hong_liet_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "form": "hoan_nhan_hong_liet",
+      "direction": "up",
+      "ability": "hong_liet_a2",
+      "idle": "idle_up_0",
+      "hit": {
+        "body": {
+          "id": "hoan_nhan_hong_liet",
+          "pose": "idle",
+          "direction": "up",
+          "locomotion": true,
+          "name": "hong_liet:hong_liet_shared:hong_liet_boss",
+          "texture": "renovated-hoan_nhan_hong_liet",
+          "source": "/assets/renovation-v1/runtime/hoan_nhan_hong_liet.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            683,
+            700.6080322265625
+          ],
+          "frame": "idle_up_0",
+          "x": 704,
+          "y": 722.3040161132812,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 722.3040161132812,
+          "visible": true
+        },
+        "effect": {
+          "id": 87,
+          "target": "hong_liet_shared:hong_liet_boss",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 213,
+          "protocolVersion": 39,
+          "id": 87,
+          "kind": "hit",
+          "sourceId": "WHqX7pBfj",
+          "targetId": "hong_liet_shared:hong_liet_boss",
+          "abilityId": "fixture_resolved_strike_26",
+          "x": 704,
+          "y": 722.304,
+          "damage": 31,
+          "critical": false,
+          "zoneId": "hong_liet_shared",
+          "fx": 0,
+          "fy": 1
+        }
+      },
+      "release": {
+        "texture": "renovated-action-hoan_nhan_hong_liet_actions",
+        "frame": "up_1",
+        "source": "/assets/renovation-v3/actors/hoan_nhan_hong_liet_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "form": "ly_mac_sau",
+      "direction": "right",
+      "ability": "phat_tran_cong",
+      "idle": "idle_right_0",
+      "hit": {
+        "body": {
+          "id": "ly_mac_sau",
+          "pose": "hurt",
+          "direction": "right",
+          "locomotion": false,
+          "name": "actor:co_mo_shared:boss_ly_mac_sau",
+          "texture": "renovated-ly_mac_sau",
+          "source": "/assets/renovation-v1/runtime/ly_mac_sau.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            553,
+            480
+          ],
+          "frame": "idle_right_0",
+          "x": 704,
+          "y": 602,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 602,
+          "visible": true
+        },
+        "effect": {
+          "id": 105,
+          "target": "co_mo_shared:boss_ly_mac_sau",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 32,
+          "protocolVersion": 39,
+          "id": 105,
+          "kind": "hit",
+          "sourceId": "WHqX7pBfj",
+          "targetId": "co_mo_shared:boss_ly_mac_sau",
+          "abilityId": "fixture_resolved_strike_31",
+          "x": 704,
+          "y": 601.92,
+          "damage": 33,
+          "critical": false,
+          "zoneId": "co_mo_shared",
+          "fx": -1,
+          "fy": 0
+        }
+      },
+      "release": {
+        "texture": "renovated-action-ly_mac_sau_actions",
+        "frame": "right_1",
+        "source": "/assets/renovation-v3/actors/ly_mac_sau_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "form": "ly_mac_sau",
+      "direction": "down",
+      "ability": "phat_tran_cong",
+      "idle": "idle_down_0",
+      "hit": {
+        "body": {
+          "id": "ly_mac_sau",
+          "pose": "hurt",
+          "direction": "down",
+          "locomotion": false,
+          "name": "actor:co_mo_shared:boss_ly_mac_sau",
+          "texture": "renovated-ly_mac_sau",
+          "source": "/assets/renovation-v1/runtime/ly_mac_sau.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            683,
+            350
+          ],
+          "frame": "idle_down_0",
+          "x": 704,
+          "y": 602,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 602,
+          "visible": true
+        },
+        "effect": {
+          "id": 111,
+          "target": "co_mo_shared:boss_ly_mac_sau",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 101,
+          "protocolVersion": 39,
+          "id": 111,
+          "kind": "hit",
+          "sourceId": "WHqX7pBfj",
+          "targetId": "co_mo_shared:boss_ly_mac_sau",
+          "abilityId": "fixture_resolved_strike_32",
+          "x": 704,
+          "y": 601.92,
+          "damage": 33,
+          "critical": false,
+          "zoneId": "co_mo_shared",
+          "fx": 0,
+          "fy": -1
+        }
+      },
+      "release": {
+        "texture": "renovated-action-ly_mac_sau_actions",
+        "frame": "down_1",
+        "source": "/assets/renovation-v3/actors/ly_mac_sau_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "form": "ly_mac_sau",
+      "direction": "left",
+      "ability": "phat_tran_cong",
+      "idle": "idle_left_0",
+      "hit": {
+        "body": {
+          "id": "ly_mac_sau",
+          "pose": "hurt",
+          "direction": "left",
+          "locomotion": false,
+          "name": "actor:co_mo_shared:boss_ly_mac_sau",
+          "texture": "renovated-ly_mac_sau",
+          "source": "/assets/renovation-v1/runtime/ly_mac_sau.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            813,
+            480
+          ],
+          "frame": "idle_left_0",
+          "x": 704,
+          "y": 602,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 602,
+          "visible": true
+        },
+        "effect": {
+          "id": 114,
+          "target": "co_mo_shared:boss_ly_mac_sau",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 150,
+          "protocolVersion": 39,
+          "id": 114,
+          "kind": "hit",
+          "sourceId": "WHqX7pBfj",
+          "targetId": "co_mo_shared:boss_ly_mac_sau",
+          "abilityId": "fixture_resolved_strike_33",
+          "x": 704,
+          "y": 601.92,
+          "damage": 33,
+          "critical": false,
+          "zoneId": "co_mo_shared",
+          "fx": 1,
+          "fy": 0
+        }
+      },
+      "release": {
+        "texture": "renovated-action-ly_mac_sau_actions",
+        "frame": "left_1",
+        "source": "/assets/renovation-v3/actors/ly_mac_sau_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    },
+    {
+      "form": "ly_mac_sau",
+      "direction": "up",
+      "ability": "phat_tran_cong",
+      "idle": "idle_up_0",
+      "hit": {
+        "body": {
+          "id": "ly_mac_sau",
+          "pose": "hurt",
+          "direction": "up",
+          "locomotion": false,
+          "name": "actor:co_mo_shared:boss_ly_mac_sau",
+          "texture": "renovated-ly_mac_sau",
+          "source": "/assets/renovation-v1/runtime/ly_mac_sau.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            683,
+            610
+          ],
+          "frame": "idle_up_0",
+          "x": 704,
+          "y": 602,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 602,
+          "visible": true
+        },
+        "effect": {
+          "id": 118,
+          "target": "co_mo_shared:boss_ly_mac_sau",
+          "critical": false,
+          "spark": "spark-0",
+          "outline": true
+        },
+        "event": {
+          "tick": 200,
+          "protocolVersion": 39,
+          "id": 118,
+          "kind": "hit",
+          "sourceId": "WHqX7pBfj",
+          "targetId": "co_mo_shared:boss_ly_mac_sau",
+          "abilityId": "fixture_resolved_strike_34",
+          "x": 704,
+          "y": 601.92,
+          "damage": 33,
+          "critical": false,
+          "zoneId": "co_mo_shared",
+          "fx": 0,
+          "fy": 1
+        }
+      },
+      "release": {
+        "texture": "renovated-action-ly_mac_sau_actions",
+        "frame": "up_1",
+        "source": "/assets/renovation-v3/actors/ly_mac_sau_actions.png",
+        "origin": [
+          0.5,
+          0.8
+        ]
+      }
+    }
+  ],
+  "impacts": [],
+  "bossFailures": [
+    {
+      "form": "tay_doc",
+      "direction": "right",
+      "ability": "tay_doc_staff",
+      "id": "tay_doc_boss",
+      "error": "TimeoutError: page.waitForFunction: Timeout 5500ms exceeded.",
+      "forms": [
+        {
+          "id": "hero_vo_dang",
+          "pose": "idle",
+          "direction": "left",
+          "frame": "idle_left_0",
+          "texture": "renovated-hero_vo_dang"
+        },
+        {
+          "id": "tay_doc",
+          "pose": "idle",
+          "direction": "down",
+          "frame": "idle_down_0",
+          "texture": "renovated-tay_doc"
+        },
+        {
+          "id": "hero_cai_bang",
+          "pose": "idle",
+          "direction": "left",
+          "frame": "idle_left_0",
+          "texture": "renovated-bong-combo-body"
+        }
+      ],
+      "zone": "arena",
+      "tayDoc": "phase1",
+      "actors": [
+        {
+          "archetypeId": "tay_doc",
+          "hp": 29400,
+          "pose": "idle",
+          "fx": 0.6653741598129272,
+          "fy": 0.7465100288391113
+        }
+      ]
+    },
+    {
+      "form": "nam_de",
+      "direction": "right",
+      "ability": "nhat_duong_chi",
+      "id": "boss_nam_de",
+      "error": "TimeoutError: page.waitForFunction: Timeout 5500ms exceeded.",
+      "forms": [
+        {
+          "id": "hero_vo_dang",
+          "pose": "idle",
+          "direction": "left",
+          "frame": "idle_left_0",
+          "texture": "renovated-hero_vo_dang"
+        },
+        {
+          "id": "nam_de",
+          "pose": "idle",
+          "direction": "down",
+          "frame": "idle_down_0",
+          "texture": "renovated-nam_de"
+        },
+        {
+          "id": "hero_cai_bang",
+          "pose": "idle",
+          "direction": "left",
+          "frame": "idle_left_0",
+          "texture": "renovated-bong-combo-body"
+        }
+      ],
+      "zone": "arena",
+      "actors": [
+        {
+          "archetypeId": "nam_de",
+          "hp": 54600,
+          "pose": "idle",
+          "fx": 0.6653741598129272,
+          "fy": 0.7465100288391113
+        }
+      ]
+    },
+    {
+      "form": "nam_de",
+      "direction": "left",
+      "ability": "nhat_duong_chi",
+      "id": "boss_nam_de",
+      "error": "AssertionError [ERR_ASSERTION]: {\"kind\":\"boss\",\"query\":{\"form\":\"nam_de\",\"ability\":\"nhat_duong_chi\"},\"seen\":[\"  renovated-nam_de idle_left_0  \",\"  renovated-action-nam_de_actions left_2 nhat_duong_chi windup\",\"  renovated-nam_de idle_left_0   WHqX7pBfj:spark-0:true\",\"  renovated-nam_de idle_left_0  \",\"  renovated-action-nam_de_actions left_1 nam_de_palm release\",\"  renovated-action-nam_de_actions left_2 nam_de_palm recovery WHqX7pBfj:spark-0:true\",\"  renovated-action-nam_de_actions left_2 nam_de_palm recovery iN_XlouwX:spark-0:true\",\"  renovated-action-nam_de_actions left_2 nam_de_palm recovery\",\"  renovated-nam_de idle_left_0  \",\"  renovated-action-nam_de_actions left_1 nam_de_aura strike\",\"  renovated-action-nam_de_actions left_1 nam_de_aura strike WHqX7pBfj:spark-0:true iN_XlouwX:spark-0:true\",\"  renovated-nam_de idle_left_0  \"],\"events\":[{\"tick\":1375,\"protocolVersion\":39,\"id\":29,\"kind\":\"effect\",\"sourceId\":\"boss_nam_de\",\"targetId\":\"\",\"abilityId\":\"banter_boss_nam_de_3\",\"x\":800,\"y\":656.64,\"damage\":0,\"critical\":false,\"zoneId\":\"arena\",\"stage\":\"boss_banter\"},{\"tick\":1416,\"protocolVersion\":39,\"id\":30,\"kind\":\"hit\",\"sourceId\":\"boss_nam_de\",\"targetId\":\"WHqX7pBfj\",\"abilityId\":\"nhat_duong_chi\",\"x\":800,\"y\":766.64,\"damage\":90000,\"critical\":false,\"zoneId\":\"arena\",\"fx\":-0.17601626475091342,\"fy\":0.984387258421774},{\"tick\":1454,\"protocolVersion\":39,\"id\":31,\"kind\":\"hit\",\"sourceId\":\"WHqX7pBfj\",\"targetId\":\"boss_nam_de\",\"abilityId\":\"fixture_resolved_strike_13\",\"x\":800,\"y\":656.64,\"damage\":23,\"critical\":false,\"zoneId\":\"arena\",\"fx\":1,\"fy\":0},{\"tick\":1507,\"protocolVersion\":39,\"id\":32,\"kind\":\"hit\",\"sourceId\":\"boss_nam_de\",\"targetId\":\"WHqX7pBfj\",\"abilityId\":\"nhat_duong_chi\",\"x\":690,\"y\":656.64,\"damage\":90000,\"critical\":false,\"zoneId\":\"arena\",\"fx\":-0.9123587084670061,\"fy\":0.40939172815827213},{\"tick\":1556,\"protocolVersion\":39,\"id\":35,\"kind\":\"hit\",\"sourceId\":\"boss_nam_de\",\"targetId\":\"WHqX7pBfj\",\"abilityId\":\"nam_de_palm\",\"x\":690,\"y\":656.64,\"damage\":66,\"critical\":false,\"zoneId\":\"arena\",\"fx\":-1,\"fy\":0},{\"tick\":1558,\"protocolVersion\":39,\"id\":36,\"kind\":\"hit\",\"sourceId\":\"boss_nam_de\",\"targetId\":\"iN_XlouwX\",\"abilityId\":\"nam_de_palm\",\"x\":690,\"y\":591.64,\"damage\":69,\"critical\":false,\"zoneId\":\"arena\",\"fx\":-1,\"fy\":0},{\"tick\":1605,\"protocolVersion\":39,\"id\":37,\"kind\":\"effect\",\"sourceId\":\"boss_nam_de\",\"targetId\":\"\",\"abilityId\":\"nam_de_aura\",\"x\":800,\"y\":656.64,\"damage\":0,\"critical\":false,\"zoneId\":\"arena\",\"stage\":\"boss_shout\"},{\"tick\":1615,\"protocolVersion\":39,\"id\":40,\"kind\":\"hit\",\"sourceId\":\"boss_nam_de\",\"targetId\":\"WHqX7pBfj\",\"abilityId\":\"nam_de_aura\",\"x\":690,\"y\":656.64,\"damage\":51,\"critical\":false,\"zoneId\":\"arena\",\"fx\":1,\"fy\":0},{\"tick\":1616,\"protocolVersion\":39,\"id\":41,\"kind\":\"hit\",\"sourceId\":\"boss_nam_de\",\"targetId\":\"iN_XlouwX\",\"abilityId\":\"nam_de_aura\",\"x\":690,\"y\":591.64,\"damage\":53,\"critical\":false,\"zoneId\":\"arena\",\"fx\":1,\"fy\":0},{\"tick\":1645,\"protocolVersion\":39,\"id\":42,\"kind\":\"effect\",\"sourceId\":\"boss_nam_de\",\"targetId\":\"\",\"abilityId\":\"banter_boss_nam_de_12\",\"x\":800,\"y\":656.64,\"damage\":0,\"critical\":false,\"zoneId\":\"arena\",\"stage\":\"boss_banter\"}]}",
+      "forms": [
+        {
+          "id": "hero_cai_bang",
+          "pose": "idle",
+          "direction": "right",
+          "frame": "idle_right_0",
+          "texture": "renovated-bong-combo-body"
+        },
+        {
+          "id": "nam_de",
+          "pose": "idle",
+          "direction": "left",
+          "frame": "idle_left_0",
+          "texture": "renovated-nam_de"
+        },
+        {
+          "id": "hero_vo_dang",
+          "pose": "idle",
+          "direction": "right",
+          "frame": "idle_right_0",
+          "texture": "renovated-hero_vo_dang"
+        }
+      ],
+      "zone": "arena",
+      "actors": [
+        {
+          "archetypeId": "nam_de",
+          "hp": 54577,
+          "pose": "idle",
+          "fx": -1,
+          "fy": 0
+        }
+      ]
+    },
+    {
+      "form": "vuong_trung_duong_p1",
+      "direction": "right",
+      "ability": "slash",
+      "id": "vuong_trung_duong",
+      "error": "TypeError: Cannot read properties of undefined (reading 'clear')",
+      "forms": [
+        {
+          "id": "hero_cai_bang",
+          "pose": "idle",
+          "direction": "down",
+          "frame": "idle_down_0",
+          "texture": "renovated-bong-combo-body"
+        },
+        {
+          "id": "hero_vo_dang",
+          "pose": "hurt",
+          "direction": "down",
+          "frame": "idle_down_0",
+          "texture": "renovated-hero_vo_dang"
+        },
+        {
+          "id": "bac_cai",
+          "pose": "action",
+          "direction": "up",
+          "frame": "up_0",
+          "texture": "renovated-action-bac_cai_actions"
+        }
+      ],
+      "zone": "arena",
+      "actors": []
+    },
+    {
+      "form": "vuong_trung_duong_p1",
+      "direction": "down",
+      "ability": "slash",
+      "id": "vuong_trung_duong",
+      "error": "TypeError: Cannot read properties of undefined (reading 'clear')",
+      "forms": [
+        {
+          "id": "hero_vo_dang",
+          "pose": "idle",
+          "direction": "down",
+          "frame": "idle_down_0",
+          "texture": "renovated-hero_vo_dang"
+        },
+        {
+          "id": "vuong_trung_duong_p1",
+          "pose": "idle",
+          "direction": "left",
+          "frame": "idle_left_0",
+          "texture": "renovated-vuong_trung_duong_p1"
+        },
+        {
+          "id": "hero_cai_bang",
+          "pose": "idle",
+          "direction": "down",
+          "frame": "idle_down_0",
+          "texture": "renovated-bong-combo-body"
+        }
+      ],
+      "zone": "arena",
+      "actors": []
+    },
+    {
+      "form": "vuong_trung_duong_p1",
+      "direction": "left",
+      "ability": "slash",
+      "id": "vuong_trung_duong",
+      "error": "TypeError: Cannot read properties of undefined (reading 'clear')",
+      "forms": [
+        {
+          "id": "hero_vo_dang",
+          "pose": "idle",
+          "direction": "down",
+          "frame": "idle_down_0",
+          "texture": "renovated-hero_vo_dang"
+        },
+        {
+          "id": "vuong_trung_duong_p1",
+          "pose": "idle",
+          "direction": "left",
+          "frame": "idle_left_0",
+          "texture": "renovated-vuong_trung_duong_p1"
+        },
+        {
+          "id": "hero_cai_bang",
+          "pose": "idle",
+          "direction": "down",
+          "frame": "idle_down_0",
+          "texture": "renovated-bong-combo-body"
+        }
+      ],
+      "zone": "arena",
+      "actors": []
+    },
+    {
+      "form": "vuong_trung_duong_p1",
+      "direction": "up",
+      "ability": "slash",
+      "id": "vuong_trung_duong",
+      "error": "TypeError: Cannot read properties of undefined (reading 'clear')",
+      "forms": [
+        {
+          "id": "hero_vo_dang",
+          "pose": "idle",
+          "direction": "down",
+          "frame": "idle_down_0",
+          "texture": "renovated-hero_vo_dang"
+        },
+        {
+          "id": "vuong_trung_duong_p1",
+          "pose": "idle",
+          "direction": "left",
+          "frame": "idle_left_0",
+          "texture": "renovated-vuong_trung_duong_p1"
+        },
+        {
+          "id": "hero_cai_bang",
+          "pose": "idle",
+          "direction": "down",
+          "frame": "idle_down_0",
+          "texture": "renovated-bong-combo-body"
+        }
+      ],
+      "zone": "arena",
+      "actors": []
+    },
+    {
+      "form": "vuong_trung_duong_p2",
+      "direction": "right",
+      "ability": "pulse",
+      "id": "vuong_trung_duong",
+      "error": "TypeError: Cannot read properties of undefined (reading 'clear')",
+      "forms": [
+        {
+          "id": "hero_vo_dang",
+          "pose": "idle",
+          "direction": "down",
+          "frame": "idle_down_0",
+          "texture": "renovated-hero_vo_dang"
+        },
+        {
+          "id": "vuong_trung_duong_p1",
+          "pose": "idle",
+          "direction": "left",
+          "frame": "idle_left_0",
+          "texture": "renovated-vuong_trung_duong_p1"
+        },
+        {
+          "id": "hero_cai_bang",
+          "pose": "idle",
+          "direction": "down",
+          "frame": "idle_down_0",
+          "texture": "renovated-bong-combo-body"
+        }
+      ],
+      "zone": "arena",
+      "actors": []
+    },
+    {
+      "form": "vuong_trung_duong_p2",
+      "direction": "down",
+      "ability": "pulse",
+      "id": "vuong_trung_duong",
+      "error": "TypeError: Cannot read properties of undefined (reading 'clear')",
+      "forms": [
+        {
+          "id": "hero_vo_dang",
+          "pose": "idle",
+          "direction": "down",
+          "frame": "idle_down_0",
+          "texture": "renovated-hero_vo_dang"
+        },
+        {
+          "id": "vuong_trung_duong_p1",
+          "pose": "idle",
+          "direction": "left",
+          "frame": "idle_left_0",
+          "texture": "renovated-vuong_trung_duong_p1"
+        },
+        {
+          "id": "hero_cai_bang",
+          "pose": "idle",
+          "direction": "down",
+          "frame": "idle_down_0",
+          "texture": "renovated-bong-combo-body"
+        }
+      ],
+      "zone": "arena",
+      "actors": []
+    },
+    {
+      "form": "vuong_trung_duong_p2",
+      "direction": "left",
+      "ability": "pulse",
+      "id": "vuong_trung_duong",
+      "error": "TypeError: Cannot read properties of undefined (reading 'clear')",
+      "forms": [
+        {
+          "id": "hero_vo_dang",
+          "pose": "idle",
+          "direction": "down",
+          "frame": "idle_down_0",
+          "texture": "renovated-hero_vo_dang"
+        },
+        {
+          "id": "vuong_trung_duong_p2",
+          "pose": "idle",
+          "direction": "left",
+          "frame": "idle_left_0",
+          "texture": "renovated-vuong_trung_duong_p2"
+        },
+        {
+          "id": "hero_cai_bang",
+          "pose": "idle",
+          "direction": "down",
+          "frame": "idle_down_0",
+          "texture": "renovated-bong-combo-body"
+        }
+      ],
+      "zone": "arena",
+      "actors": []
+    },
+    {
+      "form": "vuong_trung_duong_p2",
+      "direction": "up",
+      "ability": "pulse",
+      "id": "vuong_trung_duong",
+      "error": "TypeError: Cannot read properties of undefined (reading 'clear')",
+      "forms": [
+        {
+          "id": "hero_vo_dang",
+          "pose": "idle",
+          "direction": "down",
+          "frame": "idle_down_0",
+          "texture": "renovated-hero_vo_dang"
+        },
+        {
+          "id": "vuong_trung_duong_p2",
+          "pose": "idle",
+          "direction": "left",
+          "frame": "idle_left_0",
+          "texture": "renovated-vuong_trung_duong_p2"
+        },
+        {
+          "id": "hero_cai_bang",
+          "pose": "idle",
+          "direction": "down",
+          "frame": "idle_down_0",
+          "texture": "renovated-bong-combo-body"
+        }
+      ],
+      "zone": "arena",
+      "actors": []
+    },
+    {
+      "form": "kim_luan",
+      "direction": "right",
+      "ability": "kim_sweep",
+      "id": "kim_luan_phap_vuong",
+      "error": "AssertionError [ERR_ASSERTION]: {\"body\":{\"id\":\"kim_luan\",\"pose\":\"walk\",\"direction\":\"left\",\"locomotion\":true,\"name\":\"kim_luan:kim_luan_shared:kim_luan_phap_vuong\",\"texture\":\"renovated-kim_luan\",\"source\":\"/assets/renovation-v1/runtime/kim_luan.png\",\"density\":1,\"effectiveDensity\":2,\"screen\":[675.6666259765625,480.9439697265625],\"frame\":\"walk_left_2\",\"x\":810.3333129882812,\"y\":461.47198486328125,\"origin\":[0.5,0.875],\"scale\":[0.5,0.5],\"depth\":461.5719848632813,\"visible\":true},\"effect\":{\"id\":91,\"target\":\"kim_luan_shared:kim_luan_phap_vuong\",\"critical\":false,\"spark\":\"spark-0\",\"outline\":true},\"event\":{\"tick\":36,\"protocolVersion\":39,\"id\":91,\"kind\":\"hit\",\"sourceId\":\"WHqX7pBfj\",\"targetId\":\"kim_luan_shared:kim_luan_phap_vuong\",\"abilityId\":\"fixture_resolved_strike_27\",\"x\":815.1666666666649,\"y\":461.472,\"damage\":31,\"critical\":false,\"zoneId\":\"kim_luan_shared\",\"fx\":-1,\"fy\":0}}",
+      "forms": [
+        {
+          "id": "hero_vo_dang",
+          "pose": "idle",
+          "direction": "left",
+          "frame": "idle_left_0",
+          "texture": "renovated-hero_vo_dang"
+        },
+        {
+          "id": "kim_luan",
+          "pose": "walk",
+          "direction": "left",
+          "frame": "walk_left_2",
+          "texture": "renovated-kim_luan"
+        },
+        {
+          "id": "dat_nhi_ba",
+          "pose": "walk",
+          "direction": "down",
+          "frame": "walk_down_2",
+          "texture": "renovated-dat_nhi_ba"
+        },
+        {
+          "id": "hero_cai_bang",
+          "pose": "idle",
+          "direction": "left",
+          "frame": "idle_left_0",
+          "texture": "renovated-bong-combo-body"
+        },
+        {
+          "id": "hoac_do",
+          "pose": "walk",
+          "direction": "down",
+          "frame": "walk_down_2",
+          "texture": "renovated-hoac_do"
+        }
+      ],
+      "zone": "kim_luan_shared",
+      "actors": [
+        {
+          "archetypeId": "hoac_do",
+          "hp": 1100,
+          "pose": "walk",
+          "fx": -0.5398797988891602,
+          "fy": 0.8417421579360962
+        },
+        {
+          "archetypeId": "dat_nhi_ba",
+          "hp": 1600,
+          "pose": "walk",
+          "fx": -0.14482523500919342,
+          "fy": 0.9894572496414185
+        },
+        {
+          "archetypeId": "kim_luan_phap_vuong",
+          "hp": 94469,
+          "pose": "walk",
+          "fx": 1,
+          "fy": 0
+        }
+      ]
+    },
+    {
+      "form": "kim_luan",
+      "direction": "down",
+      "ability": "kim_sweep",
+      "id": "kim_luan_phap_vuong",
+      "error": "AssertionError [ERR_ASSERTION]: {\"id\":\"kim_luan\",\"pose\":\"action\",\"direction\":\"up\",\"locomotion\":false,\"name\":\"kim_luan:kim_luan_shared:kim_luan_phap_vuong\",\"texture\":\"renovated-action-kim_luan_actions\",\"source\":\"/assets/renovation-v3/actors/kim_luan_actions.png\",\"density\":1,\"effectiveDensity\":2,\"action\":{\"ability\":\"kim_sweep\",\"phase\":\"release\",\"sourceTexture\":\"renovated-action-kim_luan_actions\",\"sourceFrame\":\"up_1\"},\"screen\":[683,473.6107177734375],\"frame\":\"up_1\",\"x\":704,\"y\":567.8053588867188,\"origin\":[0.5,0.8],\"scale\":[0.5,0.5],\"depth\":567.9053588867188,\"visible\":true}",
+      "forms": [
+        {
+          "id": "hoac_do",
+          "pose": "walk",
+          "direction": "right",
+          "frame": "walk_right_3",
+          "texture": "renovated-hoac_do"
+        },
+        {
+          "id": "dat_nhi_ba",
+          "pose": "walk",
+          "direction": "right",
+          "frame": "walk_right_3",
+          "texture": "renovated-dat_nhi_ba"
+        },
+        {
+          "id": "kim_luan",
+          "pose": "action",
+          "direction": "up",
+          "frame": "up_1",
+          "texture": "renovated-action-kim_luan_actions"
+        },
+        {
+          "id": "hero_vo_dang",
+          "pose": "idle",
+          "direction": "up",
+          "frame": "idle_up_0",
+          "texture": "renovated-hero_vo_dang"
+        },
+        {
+          "id": "hero_cai_bang",
+          "pose": "idle",
+          "direction": "up",
+          "frame": "idle_up_0",
+          "texture": "renovated-bong-combo-body"
+        }
+      ],
+      "zone": "kim_luan_shared",
+      "actors": [
+        {
+          "archetypeId": "hoac_do",
+          "hp": 1100,
+          "pose": "walk",
+          "fx": 0.9115613698959351,
+          "fy": 0.4111640453338623
+        },
+        {
+          "archetypeId": "dat_nhi_ba",
+          "hp": 1600,
+          "pose": "walk",
+          "fx": 0.9927452206611633,
+          "fy": 0.1202370673418045
+        },
+        {
+          "archetypeId": "kim_luan_phap_vuong",
+          "hp": 94469,
+          "pose": "cast",
+          "fx": 0,
+          "fy": -1
+        }
+      ]
+    },
+    {
+      "form": "kim_luan",
+      "direction": "left",
+      "ability": "kim_sweep",
+      "id": "kim_luan_phap_vuong",
+      "error": "AssertionError [ERR_ASSERTION]: {\"body\":{\"id\":\"kim_luan\",\"pose\":\"walk\",\"direction\":\"right\",\"locomotion\":true,\"name\":\"kim_luan:kim_luan_shared:kim_luan_phap_vuong\",\"texture\":\"renovated-kim_luan\",\"source\":\"/assets/renovation-v1/runtime/kim_luan.png\",\"density\":1,\"effectiveDensity\":2,\"screen\":[690.3333740234375,480.9439697265625],\"frame\":\"walk_right_1\",\"x\":597.6666870117188,\"y\":461.47198486328125,\"origin\":[0.5,0.875],\"scale\":[0.5,0.5],\"depth\":461.5719848632813,\"visible\":true},\"effect\":{\"id\":98,\"target\":\"kim_luan_shared:kim_luan_phap_vuong\",\"critical\":false,\"spark\":\"spark-0\",\"outline\":true},\"event\":{\"tick\":165,\"protocolVersion\":39,\"id\":98,\"kind\":\"hit\",\"sourceId\":\"WHqX7pBfj\",\"targetId\":\"kim_luan_shared:kim_luan_phap_vuong\",\"abilityId\":\"fixture_resolved_strike_29\",\"x\":597.6666666666683,\"y\":461.472,\"damage\":31,\"critical\":false,\"zoneId\":\"kim_luan_shared\",\"fx\":1,\"fy\":0}}",
+      "forms": [
+        {
+          "id": "hero_cai_bang",
+          "pose": "idle",
+          "direction": "right",
+          "frame": "idle_right_0",
+          "texture": "renovated-bong-combo-body"
+        },
+        {
+          "id": "hero_vo_dang",
+          "pose": "idle",
+          "direction": "right",
+          "frame": "idle_right_0",
+          "texture": "renovated-hero_vo_dang"
+        },
+        {
+          "id": "kim_luan",
+          "pose": "walk",
+          "direction": "right",
+          "frame": "walk_right_1",
+          "texture": "renovated-kim_luan"
+        },
+        {
+          "id": "dat_nhi_ba",
+          "pose": "walk",
+          "direction": "left",
+          "frame": "walk_left_1",
+          "texture": "renovated-dat_nhi_ba"
+        },
+        {
+          "id": "hoac_do",
+          "pose": "walk",
+          "direction": "left",
+          "frame": "walk_left_1",
+          "texture": "renovated-hoac_do"
+        }
+      ],
+      "zone": "kim_luan_shared",
+      "actors": [
+        {
+          "archetypeId": "hoac_do",
+          "hp": 1100,
+          "pose": "walk",
+          "fx": -0.8348661065101624,
+          "fy": -0.5504530668258667
+        },
+        {
+          "archetypeId": "dat_nhi_ba",
+          "hp": 1600,
+          "pose": "walk",
+          "fx": -0.9437664151191711,
+          "fy": -0.33061298727989197
+        },
+        {
+          "archetypeId": "kim_luan_phap_vuong",
+          "hp": 94469,
+          "pose": "walk",
+          "fx": -1,
+          "fy": 0
+        }
+      ]
+    },
+    {
+      "form": "kim_luan",
+      "direction": "up",
+      "ability": "kim_sweep",
+      "id": "kim_luan_phap_vuong",
+      "error": "AssertionError [ERR_ASSERTION]: {\"body\":{\"id\":\"kim_luan\",\"pose\":\"walk\",\"direction\":\"down\",\"locomotion\":true,\"name\":\"kim_luan:kim_luan_shared:kim_luan_phap_vuong\",\"texture\":\"renovated-kim_luan\",\"source\":\"/assets/renovation-v1/runtime/kim_luan.png\",\"density\":1,\"effectiveDensity\":2,\"screen\":[683,488.27734375],\"frame\":\"walk_down_0\",\"x\":704,\"y\":355.138671875,\"origin\":[0.5,0.875],\"scale\":[0.5,0.5],\"depth\":355.238671875,\"visible\":true},\"effect\":{\"id\":102,\"target\":\"kim_luan_shared:kim_luan_phap_vuong\",\"critical\":false,\"spark\":\"spark-0\",\"outline\":true},\"event\":{\"tick\":214,\"protocolVersion\":39,\"id\":102,\"kind\":\"hit\",\"sourceId\":\"WHqX7pBfj\",\"targetId\":\"kim_luan_shared:kim_luan_phap_vuong\",\"abilityId\":\"fixture_resolved_strike_30\",\"x\":704,\"y\":350.30533333333244,\"damage\":31,\"critical\":false,\"zoneId\":\"kim_luan_shared\",\"fx\":0,\"fy\":1}}",
+      "forms": [
+        {
+          "id": "hero_cai_bang",
+          "pose": "idle",
+          "direction": "down",
+          "frame": "idle_down_0",
+          "texture": "renovated-bong-combo-body"
+        },
+        {
+          "id": "hero_vo_dang",
+          "pose": "idle",
+          "direction": "down",
+          "frame": "idle_down_0",
+          "texture": "renovated-hero_vo_dang"
+        },
+        {
+          "id": "kim_luan",
+          "pose": "walk",
+          "direction": "down",
+          "frame": "walk_down_0",
+          "texture": "renovated-kim_luan"
+        },
+        {
+          "id": "hoac_do",
+          "pose": "walk",
+          "direction": "right",
+          "frame": "walk_right_0",
+          "texture": "renovated-hoac_do"
+        },
+        {
+          "id": "dat_nhi_ba",
+          "pose": "walk",
+          "direction": "right",
+          "frame": "walk_right_0",
+          "texture": "renovated-dat_nhi_ba"
+        }
+      ],
+      "zone": "kim_luan_shared",
+      "actors": [
+        {
+          "archetypeId": "hoac_do",
+          "hp": 1100,
+          "pose": "walk",
+          "fx": 0.9832298755645752,
+          "fy": -0.18237055838108063
+        },
+        {
+          "archetypeId": "dat_nhi_ba",
+          "hp": 1600,
+          "pose": "walk",
+          "fx": 0.8662344217300415,
+          "fy": -0.49963781237602234
+        },
+        {
+          "archetypeId": "kim_luan_phap_vuong",
+          "hp": 94469,
+          "pose": "walk",
+          "fx": 0,
+          "fy": -1
+        }
+      ]
+    }
+  ],
+  "currentBoss": {
+    "form": "ly_mac_sau",
+    "direction": "up",
+    "ability": "phat_tran_cong",
+    "id": "boss_ly_mac_sau"
+  },
+  "lastFixture": {
+    "accepted": true,
+    "hp": 15087,
+    "zoneId": "co_mo_shared",
+    "events": [
+      {
+        "id": 16,
+        "tick": 200,
+        "kind": "hit",
+        "sourceId": "WHqX7pBfj",
+        "targetId": "boss_ly_mac_sau",
+        "abilityId": "fixture_resolved_strike_34",
+        "damage": 33,
+        "critical": false,
+        "x": 704,
+        "y": 601.92,
+        "fx": 0,
+        "fy": 1
+      }
+    ]
+  },
+  "failure": {
+    "message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n\u001b[32m+ actual\u001b[39m \u001b[31m- expected\u001b[39m\n\n\u001b[32m+\u001b[39m [\n\u001b[32m+\u001b[39m   'tay_doc/right',\n\u001b[32m+\u001b[39m   'nam_de/right',\n\u001b[32m+\u001b[39m   'nam_de/left',\n\u001b[32m+\u001b[39m   'vuong_trung_duong_p1/right',\n\u001b[32m+\u001b[39m   'vuong_trung_duong_p1/down',\n\u001b[32m+\u001b[39m   'vuong_trung_duong_p1/left',\n\u001b[32m+\u001b[39m   'vuong_trung_duong_p1/up',\n\u001b[32m+\u001b[39m   'vuong_trung_duong_p2/right',\n\u001b[32m+\u001b[39m   'vuong_trung_duong_p2/down',\n\u001b[32m+\u001b[39m   'vuong_trung_duong_p2/left',\n\u001b[32m+\u001b[39m   'vuong_trung_duong_p2/up',\n\u001b[32m+\u001b[39m   'kim_luan/right',\n\u001b[32m+\u001b[39m   'kim_luan/down',\n\u001b[32m+\u001b[39m   'kim_luan/left',\n\u001b[32m+\u001b[39m   'kim_luan/up'\n\u001b[32m+\u001b[39m ]\n\u001b[31m-\u001b[39m []\n",
+    "events": [
+      {
+        "tick": 101,
+        "protocolVersion": 39,
+        "id": 111,
+        "kind": "hit",
+        "sourceId": "WHqX7pBfj",
+        "targetId": "co_mo_shared:boss_ly_mac_sau",
+        "abilityId": "fixture_resolved_strike_32",
+        "x": 704,
+        "y": 601.92,
+        "damage": 33,
+        "critical": false,
+        "zoneId": "co_mo_shared",
+        "fx": 0,
+        "fy": -1
+      },
+      {
+        "tick": 123,
+        "protocolVersion": 39,
+        "id": 112,
+        "kind": "cast",
+        "sourceId": "co_mo_shared:boss_ly_mac_sau",
+        "targetId": "WHqX7pBfj",
+        "abilityId": "phat_tran_cong",
+        "x": 704,
+        "y": 601.92,
+        "damage": 0,
+        "critical": false,
+        "zoneId": "co_mo_shared",
+        "fx": 0,
+        "fy": 1,
+        "stage": "warning"
+      },
+      {
+        "tick": 123,
+        "protocolVersion": 39,
+        "id": 113,
+        "kind": "effect",
+        "sourceId": "co_mo_shared:boss_ly_mac_sau",
+        "targetId": "",
+        "abilityId": "phat_tran_cong",
+        "x": 704,
+        "y": 601.92,
+        "damage": 0,
+        "critical": false,
+        "zoneId": "co_mo_shared",
+        "stage": "boss_shout"
+      },
+      {
+        "tick": 150,
+        "protocolVersion": 39,
+        "id": 114,
+        "kind": "hit",
+        "sourceId": "WHqX7pBfj",
+        "targetId": "co_mo_shared:boss_ly_mac_sau",
+        "abilityId": "fixture_resolved_strike_33",
+        "x": 704,
+        "y": 601.92,
+        "damage": 33,
+        "critical": false,
+        "zoneId": "co_mo_shared",
+        "fx": 1,
+        "fy": 0
+      },
+      {
+        "tick": 172,
+        "protocolVersion": 39,
+        "id": 115,
+        "kind": "cast",
+        "sourceId": "co_mo_shared:boss_ly_mac_sau",
+        "targetId": "WHqX7pBfj",
+        "abilityId": "phat_tran_cong",
+        "x": 704,
+        "y": 601.92,
+        "damage": 0,
+        "critical": false,
+        "zoneId": "co_mo_shared",
+        "fx": -1,
+        "fy": 0,
+        "stage": "warning"
+      },
+      {
+        "tick": 172,
+        "protocolVersion": 39,
+        "id": 116,
+        "kind": "effect",
+        "sourceId": "co_mo_shared:boss_ly_mac_sau",
+        "targetId": "",
+        "abilityId": "phat_tran_cong",
+        "x": 704,
+        "y": 601.92,
+        "damage": 0,
+        "critical": false,
+        "zoneId": "co_mo_shared",
+        "stage": "boss_shout"
+      },
+      {
+        "tick": 181,
+        "protocolVersion": 39,
+        "id": 117,
+        "kind": "effect",
+        "sourceId": "co_mo_shared:boss_ly_mac_sau",
+        "targetId": "",
+        "abilityId": "banter_boss_ly_mac_sau_11",
+        "x": 704,
+        "y": 601.92,
+        "damage": 0,
+        "critical": false,
+        "zoneId": "co_mo_shared",
+        "stage": "boss_banter"
+      },
+      {
+        "tick": 200,
+        "protocolVersion": 39,
+        "id": 118,
+        "kind": "hit",
+        "sourceId": "WHqX7pBfj",
+        "targetId": "co_mo_shared:boss_ly_mac_sau",
+        "abilityId": "fixture_resolved_strike_34",
+        "x": 704,
+        "y": 601.92,
+        "damage": 33,
+        "critical": false,
+        "zoneId": "co_mo_shared",
+        "fx": 0,
+        "fy": 1
+      },
+      {
+        "tick": 228,
+        "protocolVersion": 39,
+        "id": 119,
+        "kind": "cast",
+        "sourceId": "co_mo_shared:boss_ly_mac_sau",
+        "targetId": "WHqX7pBfj",
+        "abilityId": "phat_tran_cong",
+        "x": 704,
+        "y": 601.92,
+        "damage": 0,
+        "critical": false,
+        "zoneId": "co_mo_shared",
+        "fx": 0,
+        "fy": -1,
+        "stage": "warning"
+      },
+      {
+        "tick": 228,
+        "protocolVersion": 39,
+        "id": 120,
+        "kind": "effect",
+        "sourceId": "co_mo_shared:boss_ly_mac_sau",
+        "targetId": "",
+        "abilityId": "phat_tran_cong",
+        "x": 704,
+        "y": 601.92,
+        "damage": 0,
+        "critical": false,
+        "zoneId": "co_mo_shared",
+        "stage": "boss_shout"
+      }
+    ],
+    "presentation": {
+      "hero": {
+        "id": "WHqX7pBfj",
+        "x": 704,
+        "y": 537,
+        "depth": 537,
+        "animation": "hero_vo_dang:idle:down",
+        "frame": "idle_down_0",
+        "texture": "renovated-hero_vo_dang",
+        "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+        "filterMode": 0,
+        "origin": [
+          0.5,
+          0.875
+        ],
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "alpha": 1,
+        "playing": false,
+        "hp": 100000,
+        "pose": "idle",
+        "label": {
+          "text": "Renovation 1",
+          "visible": true,
+          "resolution": 2,
+          "fontFamily": "Segoe UI, Tahoma, Arial, sans-serif"
+        },
+        "healthBarVisible": true
+      },
+      "effects": [],
+      "bodies": [
+        {
+          "id": "hero_cai_bang",
+          "pose": "idle",
+          "direction": "down",
+          "locomotion": true,
+          "name": "actor:iN_XlouwX",
+          "texture": "renovated-bong-combo-body",
+          "source": "/@fs/D:/Projects/volam-hero-defense/assets/exports/cai-bang-bong-reach/bong.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            813,
+            480
+          ],
+          "frame": "idle_down_0",
+          "x": 769,
+          "y": 537,
+          "origin": [
+            0.5,
+            0.734375
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 537,
+          "visible": true
+        },
+        {
+          "id": "hero_vo_dang",
+          "pose": "idle",
+          "direction": "down",
+          "locomotion": true,
+          "name": "actor:WHqX7pBfj",
+          "texture": "renovated-hero_vo_dang",
+          "source": "/assets/renovation-v1/runtime/hero_vo_dang.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "screen": [
+            683,
+            480
+          ],
+          "frame": "idle_down_0",
+          "x": 704,
+          "y": 537,
+          "origin": [
+            0.5,
+            0.875
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 537,
+          "visible": true
+        },
+        {
+          "id": "ly_mac_sau",
+          "pose": "fast_sweep",
+          "direction": "up",
+          "locomotion": false,
+          "name": "actor:co_mo_shared:boss_ly_mac_sau",
+          "texture": "renovated-action-ly_mac_sau_actions",
+          "source": "/assets/renovation-v3/actors/ly_mac_sau_actions.png",
+          "density": 1,
+          "effectiveDensity": 2,
+          "action": {
+            "ability": "phat_tran_cong",
+            "phase": "release",
+            "sourceTexture": "renovated-action-ly_mac_sau_actions",
+            "sourceFrame": "up_1"
+          },
+          "screen": [
+            683,
+            610
+          ],
+          "frame": "up_1",
+          "x": 704,
+          "y": 602,
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "scale": [
+            0.5,
+            0.5
+          ],
+          "depth": 602,
+          "visible": true
+        }
+      ],
+      "boss": {},
+      "zone": "co_mo_shared",
+      "zoom": 2
+    }
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "players": 6,
+  "browserClients": 2,
+  "sdkClients": 4,
+  "scope": [
+    "truc_xa",
+    "doc_chu"
+  ],
+  "coverage": {
+    "truc_xa": {
+      "locomotion": {
+        "texture": "renovated-forest_truc_xa",
+        "source": "/assets/renovation-v1/runtime/forest_truc_xa.png",
+        "frame": "idle_right_0",
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "cels": [
+          "renovated-forest_truc_xa:idle_right_0"
+        ],
+        "windup": 0
+      },
+      "hurt": {
+        "texture": "renovated-forest_truc_xa",
+        "source": "/assets/renovation-v1/runtime/forest_truc_xa.png",
+        "frame": "idle_right_0",
+        "scale": [
+          0.5,
+          0.48096428571428596
+        ],
+        "cels": [
+          "renovated-forest_truc_xa:idle_right_0"
+        ],
+        "windup": 0
+      },
+      "basic": {
+        "texture": "renovated-forest-truc-xa-actions",
+        "source": "/assets/forest_truc_xa-Db3NahFJ.png",
+        "frame": "basic_attack_right_0",
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "cels": [
+          "renovated-forest-truc-xa-actions:basic_attack_right_0"
+        ],
+        "windup": 6
+      },
+      "special": {
+        "texture": "renovated-forest_truc_xa",
+        "source": "/assets/renovation-v1/runtime/forest_truc_xa.png",
+        "frame": "idle_right_0",
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "cels": [
+          "renovated-forest_truc_xa:idle_right_0",
+          "renovated-forest-truc-xa-actions:basic_attack_right_0",
+          "renovated-forest-truc-xa-actions:basic_attack_right_1",
+          "renovated-forest-truc-xa-actions:basic_attack_right_2",
+          "renovated-forest-truc-xa-actions:basic_attack_right_3"
+        ],
+        "windup": 16
+      },
+      "death": {
+        "texture": "renovated-forest-truc-xa-actions",
+        "source": "/assets/forest_truc_xa-Db3NahFJ.png",
+        "frame": "death_right_0",
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "cels": [
+          "renovated-forest-truc-xa-actions:death_right_0",
+          "renovated-forest-truc-xa-actions:death_right_1",
+          "renovated-forest-truc-xa-actions:death_right_2"
+        ],
+        "windup": 0
+      },
+      "deathAbility": false,
+      "effects": [
+        {
+          "id": "forest_private_-7yTHkOpT:creep_fx_1",
+          "abilityId": "creep_truc_xa_basic",
+          "suppressed": false,
+          "frames": [
+            "renovated-forest-combat-effects:truc_xa_venom_release_0",
+            "renovated-forest-combat-effects:truc_xa_venom_release_1",
+            "renovated-forest-combat-effects:truc_xa_venom_projectile_right_0"
+          ]
+        },
+        {
+          "id": "forest_private_-7yTHkOpT:creep_fx_2",
+          "abilityId": "creep_truc_xa_special",
+          "suppressed": false,
+          "frames": [
+            "renovated-forest-combat-effects:truc_xa_venom_release_0",
+            "renovated-forest-combat-effects:truc_xa_venom_release_1"
+          ]
+        }
+      ]
+    },
+    "doc_chu": {
+      "locomotion": {
+        "texture": "renovated-forest_doc_chu",
+        "source": "/assets/renovation-v1/runtime/forest_doc_chu.png",
+        "frame": "idle_right_0",
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "cels": [
+          "renovated-forest_doc_chu:idle_right_0"
+        ],
+        "windup": 0
+      },
+      "hurt": {
+        "texture": "renovated-forest_doc_chu",
+        "source": "/assets/renovation-v1/runtime/forest_doc_chu.png",
+        "frame": "idle_right_0",
+        "scale": [
+          0.5,
+          0.48243749999999963
+        ],
+        "cels": [
+          "renovated-forest_doc_chu:idle_right_0"
+        ],
+        "windup": 0
+      },
+      "basic": {
+        "texture": "renovated-forest-doc-chu-actions",
+        "source": "/assets/forest_doc_chu-CdvlzPND.png",
+        "frame": "basic_attack_right_0",
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "cels": [
+          "renovated-forest-doc-chu-actions:basic_attack_right_0",
+          "renovated-forest-doc-chu-actions:basic_attack_right_1"
+        ],
+        "windup": 14
+      },
+      "death": {
+        "texture": "renovated-forest-doc-chu-actions",
+        "source": "/assets/forest_doc_chu-CdvlzPND.png",
+        "frame": "death_right_0",
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "cels": [
+          "renovated-forest-doc-chu-actions:death_right_0",
+          "renovated-forest-doc-chu-actions:death_right_1",
+          "renovated-forest-doc-chu-actions:death_right_2"
+        ],
+        "windup": 0
+      },
+      "deathAbility": false,
+      "effects": [
+        {
+          "id": "forest_private_-7yTHkOpT:creep_fx_6",
+          "abilityId": "creep_doc_chu_basic",
+          "suppressed": false,
+          "frames": [
+            "renovated-forest-combat-effects:doc_chu_web_projectile_right_0",
+            "renovated-forest-combat-effects:doc_chu_web_projectile_right_1",
+            "renovated-forest-combat-effects:doc_chu_web_projectile_right_2",
+            "renovated-forest-combat-effects:doc_chu_web_projectile_right_3"
+          ]
+        }
+      ]
+    }
+  },
+  "errors": []
+}

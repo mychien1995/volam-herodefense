@@ -149,6 +149,7 @@ export class VoDangQuyenArt {
   constructor(private readonly scene: Phaser.Scene) {}
 
   event(event: CombatEvent): boolean {
+    if (event.abilityId === quyen.wave) return true;
     if (!voDangQuyenHandled(event.abilityId)) return false;
     if (event.abilityId === quyen.basic && event.kind === 'attack') {
       const timer = this.scene.time.delayedCall(2 * tickMs, () => {
@@ -266,6 +267,7 @@ export class VoDangQuyenArt {
     };
     if (tick !== undefined) {
       state?.projectiles.forEach((shot, id) => {
+        if (shot.abilityId === quyen.wave) return;
         if (
           shot.zoneId !== zone ||
           (shot.abilityId !== quyen.palm && shot.abilityId !== quyen.wave)
@@ -306,6 +308,7 @@ export class VoDangQuyenArt {
           .setData('projectile-stage', shot.stage);
       });
       state?.areas.forEach((area, id) => {
+        if (area.abilityId === quyen.wave) return;
         if (area.zoneId !== zone) return;
         if (area.abilityId === quyen.wave && area.ticks > 1) {
           const age = (tick - area.startedAt) * tickMs;

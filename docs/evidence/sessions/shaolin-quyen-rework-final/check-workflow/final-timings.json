@@ -1,0 +1,35 @@
+{
+  "runId": "c3b0711a-f4ed-4d73-b5f9-6d41beefc538",
+  "mode": "final",
+  "args": [
+    "--config",
+    "playwright.diamond-palm.config.ts",
+    "tests/e2e/shaolin-quyen-rework.spec.ts",
+    "tests/e2e/diamond-palm.spec.ts",
+    "--trace",
+    "off"
+  ],
+  "startedAt": "2026-11-09T11:36:35.315Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "prepare assets (once)",
+      "seconds": 29.64,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 0.17,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "typecheck tests and tools",
+      "seconds": 1.79,
+      "status": "FAIL",
+      "exitCode": 1
+    }
+  ],
+  "totalSeconds": 31.62
+}

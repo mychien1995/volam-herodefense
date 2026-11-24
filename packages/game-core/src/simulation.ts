@@ -71,6 +71,7 @@ import {
   statusValue,
   displace,
   movementSkillLocked,
+  selectableTarget,
 } from './status.js';
 import { createSeededRandom } from './random.js';
 import {
@@ -368,14 +369,20 @@ function runCommand(
       hasStatus(hero, 'stun', world.tick) ||
       hasStatus(hero, 'disarm', world.tick) ||
       raisingSwords ||
-      (world.actions ?? []).some((a) => a.ownerId === hero.id)
+      (world.actions ?? []).some((a) => a.ownerId === hero.id && !a.detached)
     )
       return;
     const ability = conLuanBasic(hero, config, world.tick);
     const conLuanMelee = ability?.id === conLuan.monk;
+    const instantConLuanMelee = conLuanMelee && !ability.minIntervalTicks;
+    const conLuanBeatReady =
+      !conLuanMelee ||
+      hero.lastBasicTick === undefined ||
+      world.tick >= hero.lastBasicTick + (ability.minIntervalTicks ?? 0);
     if (
       ability &&
-      (conLuanMelee || world.tick >= hero.cooldown) &&
+      conLuanBeatReady &&
+      (instantConLuanMelee || world.tick >= hero.cooldown) &&
       ((!automatic && ability.cooldownTicks !== 0) ||
         hero.lastBasicTick !== world.tick)
     ) {
@@ -395,7 +402,7 @@ function runCommand(
       }
       const dao = ability.id === tamLienTram.basicId;
       hero.lastBasicTick = world.tick;
-      if (!conLuanMelee)
+      if (!instantConLuanMelee)
         hero.cooldown =
           world.tick +
           (ability.id === conLuan.bolt
@@ -442,6 +449,7 @@ function runCommand(
     if (
       (ability && !canCastNguDoc(world, hero, ability.id)) ||
       ability?.id === duongMon.elements ||
+      ability?.passive ||
       (ability?.id === duongMon.flight &&
         hero.mana < 1 &&
         !hasStatus(hero, 'duong_mon_flight', world.tick))
@@ -455,11 +463,13 @@ function runCommand(
       return;
     if (
       raisingSwords ||
-      (world.actions ?? []).some((a) => a.ownerId === hero.id)
+      (world.actions ?? []).some((a) => a.ownerId === hero.id && !a.detached)
     )
       return;
     if (
-      ability?.effect.mode === 'dash' &&
+      (ability?.effect.mode === 'dash' ||
+        (ability?.airborneEffect?.mode === 'dash' &&
+          hasStatus(hero, 'duong_mon_flight', world.tick))) &&
       (movementSkillLocked(hero, world.tick) || inQuicksand(world, hero))
     )
       return;
@@ -473,7 +483,13 @@ function runCommand(
         (p) => p.ownerId === hero.id && p.abilityId === ability.id,
       );
       if (shot) {
-        if (shot.leg !== 'return') recallSpinningProjectile(shot);
+        if (shot.leg !== 'return') {
+          if (shot.remaining > 0) {
+            shot.remaining = 0;
+            shot.vx = shot.vy = 0;
+            shot.stage = 'fan_hold';
+          } else recallSpinningProjectile(shot);
+        }
         return;
       }
       if (
@@ -519,7 +535,7 @@ function runCommand(
         : cooldown);
     hero.abilityCooldowns ??= {};
     hero.abilityCooldowns[ability.id] = hero.skillCooldowns[command.slot]!;
-    if (ability.id === conLuan.stance)
+    if (ability.id === conLuan.stance && !ability.passive)
       toggleConLuanStance(hero, config, world.tick);
     perform(
       world,
@@ -1253,7 +1269,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
     const nearest = [...world.heroes.values()]
       .filter(
         (player) =>
-          player.hp > 0 &&
+          selectableTarget(player, world.tick) &&
           (config.dungeonAggro ||
             distance(player, enemy) < stats.detectionRange),
       )
@@ -1268,7 +1284,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       hero = world.heroes.get(ai.targetId);
       if (
         hero &&
-        (hero.hp <= 0 ||
+        (!selectableTarget(hero, world.tick) ||
           distance(hero, enemy) > ai.chaseRange ||
           distance(hero, ai.chaseOrigin) > ai.chaseRange)
       )

@@ -199,3 +199,13 @@ A skill definition should have at minimum:
 - Server validates eligibility/rank/cooldown; client renders effect. Keep `nameVi` in localization data, not embedded in simulation code.
 
 Examples in `/examples` are *schemas/shapes for Codex to consider*, not production-validated types. Actual implementation must use validation and tests.
+
+
+## 2026-11-23 — approved skill revise integration
+
+The director authorized the twelve-branch revision and selected the crescent Phong Quyển projectile. [Canonical integration contract and trial tuning](docs/SKILL_REVISE_INTEGRATION_2026_11_23.md) supersede the older skill behavior in this scope. Stable IDs, server authority and unrelated campaign/economy rules remain in force. Old active Q Ngũ Lôi stance is replaced by a reactive passive; E Lôi Đình Chấn Vực is a rename only. Gameplay feel awaits the director’s Phòng test review.
+
+
+### Thiền Sư A — cập nhật v05
+
+Theo yêu cầu tiếp theo của director, A chỉ luân phiên **chọc → đập**; bỏ hất/quạt khỏi chuỗi đang chơi. Thức đập mới có10pose: hai tay xoay nắm vào trong, nâng cả cán búa qua đầu, dồn lực, bổ xuống và giữ nhịp chạm đất. Hiệu ứng chấn đất theo frame chạm7; sát thương vẫn do server xử lý. Hệ số từng thức và luật A cận chiến không hồi chiêu được giữ. Bản này thay phần A bốn thức trước đó; [nguồn/prompt và phạm vi kiểm tra](assets/source/skill-revise-thien-su-v05/README.md).

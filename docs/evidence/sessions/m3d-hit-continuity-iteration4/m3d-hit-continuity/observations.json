@@ -1,0 +1,85 @@
+{
+  "players": 2,
+  "development": true,
+  "protocol": 39,
+  "fixture": "Normal room and Phaser. Server fixtures select encounter, positions and legal skill loadout. Keyboard casts, encounter release and hurt use authoritative combat.",
+  "heroes": [],
+  "bosses": [],
+  "impacts": [],
+  "lastFixture": {
+    "accepted": true,
+    "hp": 600,
+    "zoneId": "arena",
+    "events": [
+      {
+        "id": 1,
+        "tick": 95,
+        "kind": "hit",
+        "sourceId": "fixture_attacker",
+        "targetId": "d59-MdBKK",
+        "abilityId": "fixture_resolved_strike_1",
+        "damage": 26,
+        "critical": false,
+        "x": 658.9333333333325,
+        "y": 770,
+        "fx": 1,
+        "fy": 0
+      }
+    ]
+  },
+  "failure": {
+    "message": "TimeoutError: page.waitForFunction: Timeout 5500ms exceeded.",
+    "events": [
+      {
+        "tick": 95,
+        "protocolVersion": 39,
+        "id": 1,
+        "kind": "hit",
+        "sourceId": "fixture_attacker",
+        "targetId": "d59-MdBKK",
+        "abilityId": "fixture_resolved_strike_1",
+        "x": 658.9333333333325,
+        "y": 770,
+        "damage": 26,
+        "critical": false,
+        "zoneId": "arena",
+        "fx": 1,
+        "fy": 0
+      }
+    ],
+    "presentation": {
+      "hero": {
+        "id": "d59-MdBKK",
+        "x": 659,
+        "y": 770,
+        "depth": 770,
+        "animation": "shaolin-dao-review:idle:right",
+        "frame": "idle_right",
+        "texture": "shaolin-dao-review",
+        "source": "/assets/shaolin-dao-preview-v01/review.png",
+        "filterMode": 0,
+        "origin": [
+          0.5,
+          0.8055555555555556
+        ],
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "alpha": 1,
+        "playing": false,
+        "hp": 625.583984375,
+        "label": {
+          "text": "Renovation 1",
+          "visible": true,
+          "resolution": 2,
+          "fontFamily": "Segoe UI, Tahoma, Arial, sans-serif"
+        },
+        "healthBarVisible": true
+      },
+      "effects": [],
+      "zone": "arena",
+      "zoom": 2
+    }
+  }
+}

@@ -1,0 +1,443 @@
+{
+  "players": 6,
+  "development": false,
+  "protocol": 39,
+  "timings": [
+    {
+      "phase": "6 joined room",
+      "seconds": 32.16
+    },
+    {
+      "phase": "6 real clients ready",
+      "seconds": 42.57
+    }
+  ],
+  "directions": [],
+  "scenes": [],
+  "fixtures": "Server-owned wave placement/zone entry for coverage; natural keyboard combat and movement checked separately.",
+  "status": "FAIL",
+  "failure": "AssertionError [ERR_ASSERTION]: {\"kind\":\"cleave\",\"query\":{\"ids\":[\"impact_0\",\"impact_1\",\"impact_2\"],\"before\":50},\"seen\":[\"     \",\"      impact_0:spark-0:true\",\"      impact_1:spark-0:true impact_2:spark-0:true\",\"     \"],\"events\":[{\"tick\":2298,\"protocolVersion\":39,\"id\":45,\"kind\":\"effect\",\"sourceId\":\"_ge-qsWsP\",\"targetId\":\"dao_aim\",\"abilityId\":\"tam_gioi_quy_thien\",\"x\":580,\"y\":690,\"damage\":0,\"critical\":false,\"zoneId\":\"arena\",\"fx\":0,\"fy\":-1,\"stage\":\"control\"},{\"tick\":2298,\"protocolVersion\":39,\"id\":46,\"kind\":\"pulse\",\"sourceId\":\"_ge-qsWsP\",\"targetId\":\"\",\"abilityId\":\"tam_gioi_quy_thien\",\"x\":580,\"y\":770,\"damage\":0,\"critical\":false,\"zoneId\":\"arena\",\"fx\":0,\"fy\":-1,\"radius\":210,\"stage\":\"strike\"},{\"tick\":2423,\"protocolVersion\":39,\"id\":47,\"kind\":\"attack\",\"sourceId\":\"_ge-qsWsP\",\"targetId\":\"\",\"abilityId\":\"cai_bang_bong\",\"x\":580,\"y\":770,\"damage\":0,\"critical\":false,\"zoneId\":\"arena\",\"fx\":1,\"fy\":0,\"radius\":105,\"stage\":\"thrust\"},{\"tick\":2423,\"protocolVersion\":39,\"id\":48,\"kind\":\"hit\",\"sourceId\":\"_ge-qsWsP\",\"targetId\":\"impact_0\",\"abilityId\":\"cai_bang_bong\",\"x\":632,\"y\":770,\"damage\":90,\"critical\":false,\"zoneId\":\"arena\",\"fx\":1,\"fy\":0},{\"tick\":2423,\"hitIndex\":1,\"protocolVersion\":39,\"id\":49,\"kind\":\"hit\",\"sourceId\":\"_ge-qsWsP\",\"targetId\":\"impact_1\",\"abilityId\":\"cai_bang_bong\",\"x\":656,\"y\":751,\"damage\":45,\"critical\":false,\"zoneId\":\"arena\",\"fx\":1,\"fy\":0},{\"tick\":2423,\"hitIndex\":2,\"protocolVersion\":39,\"id\":50,\"kind\":\"hit\",\"sourceId\":\"_ge-qsWsP\",\"targetId\":\"impact_2\",\"abilityId\":\"cai_bang_bong\",\"x\":656,\"y\":789,\"damage\":45,\"critical\":false,\"zoneId\":\"arena\",\"fx\":1,\"fy\":0},{\"tick\":2579,\"protocolVersion\":39,\"id\":51,\"kind\":\"attack\",\"sourceId\":\"_ge-qsWsP\",\"targetId\":\"\",\"abilityId\":\"cai_bang_bong\",\"x\":580,\"y\":770,\"damage\":0,\"critical\":false,\"zoneId\":\"arena\",\"fx\":1,\"fy\":0,\"radius\":105,\"stage\":\"thrust\"},{\"tick\":2579,\"protocolVersion\":39,\"id\":52,\"kind\":\"hit\",\"sourceId\":\"_ge-qsWsP\",\"targetId\":\"impact_0\",\"abilityId\":\"cai_bang_bong\",\"x\":632,\"y\":770,\"damage\":148,\"critical\":true,\"zoneId\":\"arena\",\"fx\":1,\"fy\":0},{\"tick\":2579,\"hitIndex\":1,\"protocolVersion\":39,\"id\":53,\"kind\":\"hit\",\"sourceId\":\"_ge-qsWsP\",\"targetId\":\"impact_1\",\"abilityId\":\"cai_bang_bong\",\"x\":656,\"y\":751,\"damage\":74,\"critical\":true,\"zoneId\":\"arena\",\"fx\":1,\"fy\":0},{\"tick\":2579,\"hitIndex\":2,\"protocolVersion\":39,\"id\":54,\"kind\":\"hit\",\"sourceId\":\"_ge-qsWsP\",\"targetId\":\"impact_2\",\"abilityId\":\"cai_bang_bong\",\"x\":656,\"y\":789,\"damage\":74,\"critical\":true,\"zoneId\":\"arena\",\"fx\":1,\"fy\":0}]}",
+  "errors": [],
+  "serverLobby": {
+    "phase": "IN_GAME",
+    "host": "_ge-qsWsP",
+    "players": [
+      {
+        "id": "_ge-qsWsP",
+        "nickname": "Renovation 1",
+        "school": "cai_bang",
+        "branch": "vo_dang_quyen",
+        "confirmed": true,
+        "connected": true
+      },
+      {
+        "id": "uPYuUtFeW",
+        "nickname": "Renovation 2",
+        "school": "cai_bang",
+        "branch": "cai_bang_bong",
+        "confirmed": true,
+        "connected": true
+      },
+      {
+        "id": "HMWOdRwaH",
+        "nickname": "Renovation 3",
+        "school": "thien_son",
+        "branch": "thien_son_phien",
+        "confirmed": true,
+        "connected": true
+      },
+      {
+        "id": "oaZr4j6aQ",
+        "nickname": "Renovation 4",
+        "school": "thieu_lam",
+        "branch": "thieu_lam_quyen",
+        "confirmed": true,
+        "connected": true
+      },
+      {
+        "id": "Nu3cs-c7T",
+        "nickname": "Renovation 5",
+        "school": "vo_dang",
+        "branch": "vo_dang_quyen",
+        "confirmed": true,
+        "connected": true
+      },
+      {
+        "id": "kUvM-WYUk",
+        "nickname": "Renovation 6",
+        "school": "cai_bang",
+        "branch": "cai_bang_bong",
+        "confirmed": true,
+        "connected": true
+      }
+    ]
+  },
+  "clientLobby": [
+    {
+      "client": 1,
+      "session": "_ge-qsWsP",
+      "phase": "IN_GAME",
+      "host": "_ge-qsWsP",
+      "players": [
+        {
+          "id": "_ge-qsWsP",
+          "nickname": "Renovation 1",
+          "school": "cai_bang",
+          "branch": "vo_dang_quyen",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "uPYuUtFeW",
+          "nickname": "Renovation 2",
+          "school": "cai_bang",
+          "branch": "cai_bang_bong",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "HMWOdRwaH",
+          "nickname": "Renovation 3",
+          "school": "thien_son",
+          "branch": "thien_son_phien",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "oaZr4j6aQ",
+          "nickname": "Renovation 4",
+          "school": "thieu_lam",
+          "branch": "thieu_lam_quyen",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "Nu3cs-c7T",
+          "nickname": "Renovation 5",
+          "school": "vo_dang",
+          "branch": "vo_dang_quyen",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "kUvM-WYUk",
+          "nickname": "Renovation 6",
+          "school": "cai_bang",
+          "branch": "cai_bang_bong",
+          "confirmed": true,
+          "connected": true
+        }
+      ],
+      "heading": "Chọn môn phái",
+      "schoolControls": 4,
+      "hidden": true,
+      "error": "",
+      "focused": true
+    },
+    {
+      "client": 2,
+      "session": "uPYuUtFeW",
+      "phase": "IN_GAME",
+      "host": "_ge-qsWsP",
+      "players": [
+        {
+          "id": "_ge-qsWsP",
+          "nickname": "Renovation 1",
+          "school": "cai_bang",
+          "branch": "vo_dang_quyen",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "uPYuUtFeW",
+          "nickname": "Renovation 2",
+          "school": "cai_bang",
+          "branch": "cai_bang_bong",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "HMWOdRwaH",
+          "nickname": "Renovation 3",
+          "school": "thien_son",
+          "branch": "thien_son_phien",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "oaZr4j6aQ",
+          "nickname": "Renovation 4",
+          "school": "thieu_lam",
+          "branch": "thieu_lam_quyen",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "Nu3cs-c7T",
+          "nickname": "Renovation 5",
+          "school": "vo_dang",
+          "branch": "vo_dang_quyen",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "kUvM-WYUk",
+          "nickname": "Renovation 6",
+          "school": "cai_bang",
+          "branch": "cai_bang_bong",
+          "confirmed": true,
+          "connected": true
+        }
+      ],
+      "heading": "Chọn môn phái",
+      "schoolControls": 4,
+      "hidden": true,
+      "error": "",
+      "focused": true
+    },
+    {
+      "client": 3,
+      "session": "HMWOdRwaH",
+      "phase": "IN_GAME",
+      "host": "_ge-qsWsP",
+      "players": [
+        {
+          "id": "_ge-qsWsP",
+          "nickname": "Renovation 1",
+          "school": "cai_bang",
+          "branch": "vo_dang_quyen",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "uPYuUtFeW",
+          "nickname": "Renovation 2",
+          "school": "cai_bang",
+          "branch": "cai_bang_bong",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "HMWOdRwaH",
+          "nickname": "Renovation 3",
+          "school": "thien_son",
+          "branch": "thien_son_phien",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "oaZr4j6aQ",
+          "nickname": "Renovation 4",
+          "school": "thieu_lam",
+          "branch": "thieu_lam_quyen",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "Nu3cs-c7T",
+          "nickname": "Renovation 5",
+          "school": "vo_dang",
+          "branch": "vo_dang_quyen",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "kUvM-WYUk",
+          "nickname": "Renovation 6",
+          "school": "cai_bang",
+          "branch": "cai_bang_bong",
+          "confirmed": true,
+          "connected": true
+        }
+      ],
+      "heading": "Chọn môn phái",
+      "schoolControls": 4,
+      "hidden": true,
+      "error": "",
+      "focused": true
+    },
+    {
+      "client": 4,
+      "session": "oaZr4j6aQ",
+      "phase": "IN_GAME",
+      "host": "_ge-qsWsP",
+      "players": [
+        {
+          "id": "_ge-qsWsP",
+          "nickname": "Renovation 1",
+          "school": "cai_bang",
+          "branch": "vo_dang_quyen",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "uPYuUtFeW",
+          "nickname": "Renovation 2",
+          "school": "cai_bang",
+          "branch": "cai_bang_bong",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "HMWOdRwaH",
+          "nickname": "Renovation 3",
+          "school": "thien_son",
+          "branch": "thien_son_phien",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "oaZr4j6aQ",
+          "nickname": "Renovation 4",
+          "school": "thieu_lam",
+          "branch": "thieu_lam_quyen",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "Nu3cs-c7T",
+          "nickname": "Renovation 5",
+          "school": "vo_dang",
+          "branch": "vo_dang_quyen",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "kUvM-WYUk",
+          "nickname": "Renovation 6",
+          "school": "cai_bang",
+          "branch": "cai_bang_bong",
+          "confirmed": true,
+          "connected": true
+        }
+      ],
+      "heading": "Chọn môn phái",
+      "schoolControls": 4,
+      "hidden": true,
+      "error": "",
+      "focused": true
+    },
+    {
+      "client": 5,
+      "session": "Nu3cs-c7T",
+      "phase": "IN_GAME",
+      "host": "_ge-qsWsP",
+      "players": [
+        {
+          "id": "_ge-qsWsP",
+          "nickname": "Renovation 1",
+          "school": "cai_bang",
+          "branch": "vo_dang_quyen",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "uPYuUtFeW",
+          "nickname": "Renovation 2",
+          "school": "cai_bang",
+          "branch": "cai_bang_bong",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "HMWOdRwaH",
+          "nickname": "Renovation 3",
+          "school": "thien_son",
+          "branch": "thien_son_phien",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "oaZr4j6aQ",
+          "nickname": "Renovation 4",
+          "school": "thieu_lam",
+          "branch": "thieu_lam_quyen",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "Nu3cs-c7T",
+          "nickname": "Renovation 5",
+          "school": "vo_dang",
+          "branch": "vo_dang_quyen",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "kUvM-WYUk",
+          "nickname": "Renovation 6",
+          "school": "cai_bang",
+          "branch": "cai_bang_bong",
+          "confirmed": true,
+          "connected": true
+        }
+      ],
+      "heading": "Chọn môn phái",
+      "schoolControls": 4,
+      "hidden": true,
+      "error": "",
+      "focused": true
+    },
+    {
+      "client": 6,
+      "session": "kUvM-WYUk",
+      "phase": "IN_GAME",
+      "host": "_ge-qsWsP",
+      "players": [
+        {
+          "id": "_ge-qsWsP",
+          "nickname": "Renovation 1",
+          "school": "cai_bang",
+          "branch": "vo_dang_quyen",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "uPYuUtFeW",
+          "nickname": "Renovation 2",
+          "school": "cai_bang",
+          "branch": "cai_bang_bong",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "HMWOdRwaH",
+          "nickname": "Renovation 3",
+          "school": "thien_son",
+          "branch": "thien_son_phien",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "oaZr4j6aQ",
+          "nickname": "Renovation 4",
+          "school": "thieu_lam",
+          "branch": "thieu_lam_quyen",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "Nu3cs-c7T",
+          "nickname": "Renovation 5",
+          "school": "vo_dang",
+          "branch": "vo_dang_quyen",
+          "confirmed": true,
+          "connected": true
+        },
+        {
+          "id": "kUvM-WYUk",
+          "nickname": "Renovation 6",
+          "school": "cai_bang",
+          "branch": "cai_bang_bong",
+          "confirmed": true,
+          "connected": true
+        }
+      ],
+      "heading": "Chọn môn phái",
+      "schoolControls": 4,
+      "hidden": true,
+      "error": "",
+      "focused": true
+    }
+  ]
+}

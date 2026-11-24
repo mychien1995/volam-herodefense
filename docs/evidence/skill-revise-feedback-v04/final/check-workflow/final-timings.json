@@ -1,0 +1,106 @@
+{
+  "runId": "f69c0e4c-03b2-4941-868a-c367d059e15e",
+  "mode": "final",
+  "args": [
+    "--config",
+    "playwright.skill-revise.config.ts"
+  ],
+  "startedAt": "2026-11-23T10:15:28.983Z",
+  "status": "RUNNING",
+  "stages": [
+    {
+      "label": "environment preflight",
+      "seconds": 0.683,
+      "status": "PASS",
+      "checks": [
+        {
+          "id": "workspace",
+          "status": "PASS",
+          "detail": {
+            "mode": "final",
+            "stage": "before-build",
+            "managed": true
+          }
+        },
+        {
+          "id": "session",
+          "status": "PASS",
+          "detail": {
+            "serverPort": 2927,
+            "clientPort": 5530
+          }
+        },
+        {
+          "id": "ports",
+          "status": "PASS"
+        },
+        {
+          "id": "node",
+          "status": "PASS",
+          "detail": "26.0.0"
+        },
+        {
+          "id": "installation",
+          "status": "PASS",
+          "detail": "pnpm@11.25.0"
+        },
+        {
+          "id": "tools",
+          "status": "PASS",
+          "detail": {
+            "typescript": "7.0.2",
+            "vitest": "5.0.5",
+            "vite": "8.3.5",
+            "@playwright/test": "1.64.1"
+          }
+        },
+        {
+          "id": "chromium",
+          "status": "PASS",
+          "detail": {
+            "version": "156.0.8078.4",
+            "cache": "D:\\Projects\\volam-hero-defense\\.cache\\ms-playwright"
+          }
+        },
+        {
+          "id": "python",
+          "status": "PASS",
+          "detail": "Python 3.13.5"
+        }
+      ]
+    },
+    {
+      "label": "prepare assets (once)",
+      "seconds": 17.38,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\skill-revise-feedback-v04\\final\\check-workflow\\f69c0e4c-03b2-4941-868a-c367d059e15e\\1-prepare-assets-once-.log",
+      "outputBytes": 738
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 0.23,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\skill-revise-feedback-v04\\final\\check-workflow\\f69c0e4c-03b2-4941-868a-c367d059e15e\\2-compile-TypeScript.log",
+      "outputBytes": 0
+    },
+    {
+      "label": "typecheck tests and tools",
+      "seconds": 2.66,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\skill-revise-feedback-v04\\final\\check-workflow\\f69c0e4c-03b2-4941-868a-c367d059e15e\\3-typecheck-tests-and-tools.log",
+      "outputBytes": 0
+    },
+    {
+      "label": "workflow regression checks",
+      "seconds": 13.76,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\skill-revise-feedback-v04\\final\\check-workflow\\f69c0e4c-03b2-4941-868a-c367d059e15e\\4-workflow-regression-checks.log",
+      "outputBytes": 7382
+    }
+  ],
+  "totalSeconds": 34.71
+}

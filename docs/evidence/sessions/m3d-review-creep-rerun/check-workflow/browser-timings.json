@@ -1,0 +1,38 @@
+{
+  "runId": "102d5833-912c-48fa-aa97-a3a38196e0a4",
+  "mode": "browser",
+  "args": [
+    "--config",
+    "playwright.creep-upgrade.config.ts",
+    "tests/e2e/creep-upgrade.spec.ts"
+  ],
+  "startedAt": "2026-11-11T22:16:39.674Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "prepare assets (once)",
+      "seconds": 16.6,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 0.91,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "production client build",
+      "seconds": 12.26,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "browser verification",
+      "seconds": 149.46,
+      "status": "FAIL",
+      "exitCode": 1
+    }
+  ],
+  "totalSeconds": 179.24
+}

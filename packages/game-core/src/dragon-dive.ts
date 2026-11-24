@@ -1,7 +1,7 @@
 import { opponents, targetRadius } from './opponents.js';
 import { distance, segmentRect, direction } from './geometry.js';
 import { emit, hurt } from './combat.js';
-import { applyStatus } from './status.js';
+import { applyStatus, selectableTarget } from './status.js';
 import type {
   Point,
   Projectile,
@@ -30,12 +30,13 @@ export function dragonDiveTarget(
   fy: number,
   e: ProjectileEffect,
   c: SimulationConfig,
+  ownerId?: string,
 ): Point {
   if (e.dragonDive!.forwardTicks === 0) return { x: origin.x, y: origin.y };
-  const target = [...w.creeps.values()]
+  const target = [...(ownerId ? opponents(w, ownerId) : w.creeps.values())]
     .filter(
       (t) =>
-        t.hp > 0 &&
+        selectableTarget(t, w.tick) &&
         distance(origin, t) <= e.range &&
         (t.x - origin.x) * fx + (t.y - origin.y) * fy >= 0 &&
         !c.collision.some(
@@ -49,8 +50,9 @@ export function dragonDiveTarget(
         distance(origin, a) - distance(origin, b) ||
         (a.id < b.id ? -1 : a.id > b.id ? 1 : 0),
     )[0];
-  const margin =
-    Math.max(e.dragonDive!.loopRadius, e.dragonDive!.impactRadius) + 1;
+  // Lock the enemy's ground point even near the map edge. Clamping by the VFX
+  // radius would move the aim away from the enemy, or behind a forward cast.
+  const margin = 1;
   return {
     x: Math.max(
       margin,

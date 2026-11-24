@@ -1,0 +1,81 @@
+{
+  "status": "PASS_WITH_TARGETED_TEST_RETRY",
+  "branch": "wip/m3d/skill-revise",
+  "completedAt": "2026-11-23T10:42:37.225223+00:00",
+  "scope": [
+    "Four revised HUD icons without baked gold frame",
+    "Fire endpoint burst on ground below player; authoritative radial AOE retained",
+    "Coherent eight-facing idle/A entry/recovery plus corrected three left-facing walking clips",
+    "Two-handed overhead slam in eight facings"
+  ],
+  "logic": {
+    "totalVerifiedAcrossRuns": 1269,
+    "originalFullCommand": "pnpm check:final --config playwright.skill-revise.config.ts",
+    "originalReport": "final-ready/check-workflow/final-timings.json",
+    "originalStatus": "FAIL",
+    "originalOutcome": "1268 passed; one obsolete V01 icon path expectation failed. Original FAIL retained.",
+    "targetedRetry": "final-ready/affected-icon-tests.log",
+    "targetedRetryTests": 54,
+    "changedExpectation": "Thất Tinh icon directory now points to the requested borderless V04 export. Gameplay unchanged."
+  },
+  "remainingFinalStages": {
+    "report": "final-ready/remaining-stages.json",
+    "status": "PASS",
+    "productionBuild": true,
+    "assetValidators": 34,
+    "browserPreflight": true,
+    "sixClientBrowser": true
+  },
+  "native": {
+    "report": "../../../assets/source/skill-revise-feedback-v04/validation.json",
+    "frames": 236,
+    "walkingMirroredCels": 12,
+    "exactIconCrops": 4
+  },
+  "browser": {
+    "report": "six/skill-revise-game/feedback-v04.json",
+    "status": "PASS",
+    "finalAcceptance": true,
+    "players": 6,
+    "renderClientsDuringArt": 2,
+    "renderClientsDuringNaturalCombat": 6,
+    "attackStageFacingTakes": 32,
+    "allSixAttackCelsObserved": true,
+    "walkingDirections": 3,
+    "allFourGaitCelsObserved": true,
+    "fireAOE": {
+      "crossed": 109,
+      "left": 131,
+      "right": 131,
+      "outside": 0
+    },
+    "naturalCombatRewardsIncomingDamageCleanup": true,
+    "recording": "none; live frame/event observations and PNG proofs"
+  },
+  "normalGame": {
+    "status": "READY",
+    "url": "http://127.0.0.1:5529/?revision=skill-revise-v04",
+    "server": "http://127.0.0.1:2926",
+    "health": {
+      "status": "ok",
+      "service": "volam-game-server",
+      "runId": "f4b4135c-4c40-4694-af73-56dda825cdbc",
+      "milestone": "M3B",
+      "protocolVersion": 48
+    },
+    "endpoint": {
+      "serverUrl": "http://127.0.0.1:2926"
+    },
+    "verifiedAt": "2026-11-23T17:41:58.7346976+07:00",
+    "normalClientBuild": "PASS"
+  },
+  "retainedHistory": [
+    "baseline/",
+    "pilot/",
+    "pilot-ready/",
+    "two/",
+    "walk-two/",
+    "final/interrupted.json"
+  ],
+  "approval": "Runtime repair candidate; director visual/gameplay feel review remains separate."
+}

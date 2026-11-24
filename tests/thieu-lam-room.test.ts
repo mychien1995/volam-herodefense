@@ -180,14 +180,14 @@ it('four schools share authoritative combos, support, damage and rewards; zones/
     )
     .toBe(1);
   // Vi Đà now detonates 189px ahead; keep the same target inside that footprint.
-  h.x -= 126;
+  h.x -= 12;
   cast(gold, 1);
   await expect
     .poll(
       () => JSON.parse(fire.state.players.get(gold.sessionId)!.combos)[0]?.step,
     )
     .toBe(2);
-  h.x += 126;
+  h.x += 12;
   cast(gold, 2);
   await expect
     .poll(

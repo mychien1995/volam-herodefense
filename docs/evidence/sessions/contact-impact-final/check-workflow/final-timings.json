@@ -1,0 +1,43 @@
+{
+  "runId": "67b0bc7e-0ff5-42c9-a934-1fa0b81fdf75",
+  "mode": "final",
+  "args": [
+    "--config",
+    "playwright.arena-creeps.config.ts"
+  ],
+  "startedAt": "2026-11-15T18:28:07.354Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "prepare assets (once)",
+      "seconds": 60.46,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 1.95,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "typecheck tests and tools",
+      "seconds": 2.48,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "workflow regression checks",
+      "seconds": 0.41,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "all unit/integration tests",
+      "seconds": 264.28,
+      "status": "FAIL",
+      "exitCode": 1
+    }
+  ],
+  "totalSeconds": 329.6
+}

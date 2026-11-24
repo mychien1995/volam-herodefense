@@ -1,0 +1,17 @@
+# Thiền Sư A — ba thức được duyệt ngày 2026-11-24
+
+Director: “Duyệt integrate vào game 3 động tác của đánh thường, chọc, quạt hai tay và đập, kèm theo lôi ảnh như hiện tại”. Đây là override cho chuỗi hai thức v05 trong phạm vi Thiền Sư A; các thay đổi mười hai hệ phái trước đó được giữ.
+
+Server luân phiên **chọc → quạt hai tay → đập → chọc** trên mỗi input A được chấp nhận, kể cả đánh trượt. Nhiều target cùng trúng không tăng thêm bước combo. Giữ không hồi chiêu A thủ công, cửa sổ pose 9 tick ở 30Hz, tầm 105, cleave 0,5; hệ số từng thức là 1 / 1 / 1,2 và nửa góc lần lượt π/5 / π/2 / π/4. Đập vẫn tạo vùng lôi/chấn đất ở 42 đơn vị trước người, bán kính 37, sát thương cơ bản 13; không thêm damage hay status từ animation.
+
+Chọc dùng nguyên `hammer-coherent-v4`. Quạt và đập dùng `hammer-combo-v6`: hai động tác đã duyệt qua bản xem có ảnh tham chiếu, bổ sung các hướng chính diện/chéo/sau; ba hướng trái được mirror từ hướng phải tương ứng. Tổng 96 cels/16 clips, mỗi clip có bốn tư thế vẽ cùng entry/recovery giữ đúng pixel idle hiện tại. Đây không phải 96 khung chuyển tiếp được vẽ mới. Foot pivot (256,320), canvas (512,448), scale 0,5; Chaos vẫn nhân 1,34. Mỗi clip mới có timing native 285ms, không thay nhịp combat server.
+
+Giữ nguyên bộ lôi ảnh/contact `hammer-point`, `hammer-sweep` và `con_luan_thien_su_fx`. Chấn đất hiển thị ở cel chạm 4 của động tác đập mới, với tọa độ từ server. Chết, di chuyển, choáng, skill khác hoặc đòn A mới vẫn ngắt presentation theo luật hiện tại. Không thay Q passive hay animation/logic kỹ năng khác.
+
+Nguồn/prompt, hướng và native: `assets/source/skill-revise-thien-su-v06/`. Export: `assets/exports/skill-revise-thien-su-v06/hammer-combo-v6/`. Hai bộ ảnh mẫu đã duyệt và các take cũ được giữ nguyên byte. Duyệt mẫu và cho phép tích hợp không được ghi thành duyệt cuối toàn bộ hình ảnh trong trận.
+
+Kiểm tra đã chạy trước final: 53 unit/integration tests liên quan; validator 96 cels, tám hướng, alpha/gutters, neutral/mirror, hash nguồn, native roundtrip/timing và bản public. Phiên hai người chơi thật qua đủ 24 tổ hợp thức/hướng, ba bộ đi trái, fire AOE hiện có, natural damage/death/reward và cleanup. Final sáu người cùng kết quả tổng hợp được ghi riêng trong `docs/evidence/skill-revise-thien-su-v06/` sau khi hoàn tất.
+
+Mô phỏng so sánh: mỗi cấu hình 288 lượt, 12 hệ phái, cấp 1/6/15/30, solo/sáu người, seed 42/1337/9001. Chỉ thay chuỗi Thiền Sư từ hai sang ba thức; 264 trường hợp hệ khác giống hệt. Trong 24 trường hợp Thiền Sư, DPS/player đổi −7,46% đến +0,12%, trung vị −4,84%, do thức quạt trở lại và đập/lôi chấn ít thường xuyên hơn. Giữ nguyên hệ số từng thức; không tự bù damage. Đây là thử nghiệm phơi nhiễm 12 giây với mục tiêu đứng yên, không là kết luận cân bằng campaign/PvP.
+
+Final đã hoàn tất: `pnpm check:final --config playwright.skill-revise.config.ts` PASS, run `d1e2e660-2d59-4633-b812-fbf805821082`, 1.273 tests/128 files, 35 asset validators, build production và browser sáu người. Browser qua 24 tổ hợp thức/hướng, lôi ảnh/contact giữ lại, fire AOE regression, natural damage/death/reward và cleanup; phần đi trái tái dùng rõ ràng từ lượt hai người mới chạy, cùng byte sprite không đổi. Hai renderer hoạt động khi soi từng pose; cả sáu tiếp tục render ở phần giao tranh tự nhiên. [Tổng hợp bằng chứng](evidence/skill-revise-thien-su-v06/acceptance-summary.json), [game thường đã sẵn sàng, không encounter fixture](evidence/skill-revise-thien-su-v06/manual-service.json).

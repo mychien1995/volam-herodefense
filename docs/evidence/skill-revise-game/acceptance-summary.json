@@ -1,0 +1,49 @@
+{
+  "status": "PASS_WITH_TARGETED_RERUNS",
+  "date": "2026-11-23T08:38:23.838Z",
+  "branch": "wip/m3d/skill-revise",
+  "scope": "Integration verification; director live-game feel/balance approval remains pending.",
+  "pipeline": {
+    "path": "final-verified/check-workflow/final-timings.json",
+    "originalStatus": "FAIL",
+    "note": "Original final command failed its browser endpoint check. Passing non-browser stages retained; affected browser/client stages rerun below.",
+    "passedNonBrowserStages": 41,
+    "unitTests": 1268,
+    "workflowTests": 70,
+    "assetValidators": 34
+  },
+  "latestClient": {
+    "build": "final-acceptance/client-laser-verified-build.log",
+    "typescript": "PASS: tsc -b and tsconfig.tools.json, rerun after final client fixes",
+    "diffCheck": "PASS"
+  },
+  "browser": {
+    "hammerAndFirstFiveSkills": {
+      "path": "final-acceptance/skill-revise-game/skill-revise-game.json",
+      "passingCases": 37,
+      "note": "Run subsequently failed the short laser presentation; preserve original FAIL."
+    },
+    "laserUltimatePassive": {
+      "path": "laser-final/skill-revise-game/skill-revise-game.json",
+      "passingCases": 3,
+      "note": "Run subsequently missed the transient fan outbound stage under six-window load; preserve original FAIL."
+    },
+    "fanThreeInputs": {
+      "path": "two-client-skills/skill-revise-game/skill-revise-game.json",
+      "status": "PASS",
+      "players": 2
+    },
+    "naturalSixClientCombat": {
+      "path": "natural-final/skill-revise-game/skill-revise-game.json",
+      "status": "PASS",
+      "players": 6,
+      "naturalDeathRewardsIncomingDamageCleanup": true
+    },
+    "rendering": "Two active renderers during focused art checks; all six connected. All six renderers resumed for natural combat. No video or trace."
+  },
+  "balance": {
+    "path": "balance/balance.json",
+    "runs": 288,
+    "note": "Fixed-seed exposure diagnostic only; 73 all-dead configurations under artificial pressure; no campaign/PVP balance approval."
+  }
+}

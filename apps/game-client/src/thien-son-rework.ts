@@ -23,7 +23,8 @@ const peachWind = 'peach-wind';
 
 export function preloadThienSonRework(scene: Phaser.Scene) {
   scene.load.spritesheet(daoPoses, tamLienArt + 'poses.png', {
-    frameWidth: 160, frameHeight: 144,
+    frameWidth: 160,
+    frameHeight: 144,
   });
   for (const name of [...sweepTextures, peachWind])
     scene.load.image(name, tamLienArt + name + '.png');
@@ -32,31 +33,51 @@ export function preloadThienSonRework(scene: Phaser.Scene) {
     [fan, 'bao-vu-cuong-phong'],
     [crescents, 'bach-liet-x-flurry'],
   ])
-    if (key !== shadows || !unifiedHeroProfile('thien_son_dao')) scene.load.atlas(
-      key!,
-      skillPath + name + '.png',
-      skillPath + name + '.json',
-    );
+    if (key !== shadows || !unifiedHeroProfile('thien_son_dao'))
+      scene.load.atlas(
+        key!,
+        skillPath + name + '.png',
+        skillPath + name + '.json',
+      );
 }
 
 export function presentTamLienBody(
   sprite: Phaser.GameObjects.Sprite,
-  actor: { hp: number; pose: string; basicId?: string; basicStage?: string; castAbilityId?: string; actionStartedAt?: number },
+  actor: {
+    hp: number;
+    pose: string;
+    basicId?: string;
+    basicStage?: string;
+    castAbilityId?: string;
+    actionStartedAt?: number;
+  },
   tick: number | undefined,
 ) {
-  if (actor.hp <= 0 || actor.basicId !== tamLienTram.basicId ||
-      tick === undefined || actor.actionStartedAt === undefined) return;
+  if (
+    actor.hp <= 0 ||
+    actor.basicId !== tamLienTram.basicId ||
+    tick === undefined ||
+    actor.actionStartedAt === undefined
+  )
+    return;
   const age = Math.max(0, tick - actor.actionStartedAt);
   let frame: number;
-  if (actor.pose === 'basic_attack' && actor.basicStage?.startsWith('dao_swing_')) {
+  if (
+    actor.pose === 'basic_attack' &&
+    actor.basicStage?.startsWith('dao_swing_')
+  ) {
     const row = Number(actor.basicStage.at(-1));
     frame = row * 4 + (age < 2 ? 0 : age < 4 ? 1 : age < 7 ? 2 : 3);
   } else if (actor.pose === 'cast' && actor.castAbilityId === tamLienTram.id) {
     frame = 13 + Math.min(2, Math.floor(age / tamLienTram.passTicks));
   } else return;
   sprite.anims.stop();
-  sprite.setTexture(daoPoses, frame).setOrigin(0.5, 112 / 144)
-    .setScale(0.5).setFlip(false, false).setRotation(0);
+  sprite
+    .setTexture(daoPoses, frame)
+    .setOrigin(0.5, 112 / 144)
+    .setScale(0.5)
+    .setFlip(false, false)
+    .setRotation(0);
 }
 
 export class ThienSonRework {
@@ -71,13 +92,17 @@ export class ThienSonRework {
   constructor(private readonly scene: Phaser.Scene) {}
 
   event(event: CombatEvent): boolean {
-    if (event.abilityId === tamLienTram.basicId && event.kind === 'attack' &&
-        event.stage?.startsWith('dao_swing_')) {
+    if (
+      event.abilityId === tamLienTram.basicId &&
+      event.kind === 'attack' &&
+      event.stage?.startsWith('dao_swing_')
+    ) {
       this.sweep(event, Number(event.stage.at(-1)));
       return true;
     }
     if (event.abilityId === tamLienTram.id) {
-      if (event.kind === 'pulse' && event.stage?.startsWith('cross_')) this.cross(event);
+      if (event.kind === 'pulse' && event.stage?.startsWith('cross_'))
+        this.cross(event);
       return true;
     }
     if (event.abilityId === flurryId && event.kind === 'cast')
@@ -92,20 +117,34 @@ export class ThienSonRework {
   private sweep(event: CombatEvent, row: number) {
     const key = sweepTextures[row];
     if (!key) return;
-    const y = event.y + (row === 1 ? 0 : (event.fy ?? 0) * 12) -
+    const y =
+      event.y +
+      (row === 1 ? 0 : (event.fy ?? 0) * 12) -
       ([21, 13, 26.5][row] ?? 21);
     const x = event.x + (event.fx ?? 0) * 21;
-    const image = this.scene.add.image(x, y, key).setDepth(event.y + 1).setFlipY(row === 0);
+    const image = this.scene.add
+      .image(x, y, key)
+      .setDepth(event.y + 1)
+      .setFlipY(row === 0);
     image.setScale((row === 2 ? 58 : 79) / image.width).setVisible(false);
     this.transients.add(image);
     const reveal = { amount: 0 };
     this.scene.tweens.add({
-      targets: reveal, amount: 1, delay: 72, duration: 62,
+      targets: reveal,
+      amount: 1,
+      delay: 72,
+      duration: 62,
       onUpdate: () => {
         if (!this.transients.has(image)) return;
         image.setVisible(true);
-        const width = row === 2 ? image.width : Math.max(1, Math.round(image.width * reveal.amount));
-        const height = row === 2 ? Math.max(1, Math.round(image.height * reveal.amount)) : image.height;
+        const width =
+          row === 2
+            ? image.width
+            : Math.max(1, Math.round(image.width * reveal.amount));
+        const height =
+          row === 2
+            ? Math.max(1, Math.round(image.height * reveal.amount))
+            : image.height;
         image.setCrop(row === 1 ? image.width - width : 0, 0, width, height);
       },
     });
@@ -115,20 +154,31 @@ export class ThienSonRework {
   private cross(event: CombatEvent) {
     const pass = Number(event.stage?.at(-1));
     const passMs = (1000 * tamLienTram.passTicks) / m1Config.tickRate;
-    const image = this.scene.add.image(event.x, event.y - 18, peachWind)
-      .setOrigin(0, 0.5).setDepth(event.y + 200)
+    const image = this.scene.add
+      .image(event.x, event.y - 18, peachWind)
+      .setOrigin(0, 0.5)
+      .setDepth(event.y + 200)
       .setRotation(Math.atan2(event.fy ?? 0, event.fx ?? 1));
     image.setDisplaySize(1, event.stage === 'cross_2' ? 26 : 21);
     this.transients.add(image);
     this.scene.tweens.add({
-      targets: image, scaleX: (event.radius ?? 1) / image.width, duration: passMs,
+      targets: image,
+      scaleX: (event.radius ?? 1) / image.width,
+      duration: passMs,
     });
     this.fade(image, (tamLienTram.offsets.length - pass) * passMs + 60, 400);
   }
 
-  private fade(image: Phaser.GameObjects.Image, delay: number, duration: number) {
+  private fade(
+    image: Phaser.GameObjects.Image,
+    delay: number,
+    duration: number,
+  ) {
     this.scene.tweens.add({
-      targets: image, alpha: 0, delay, duration,
+      targets: image,
+      alpha: 0,
+      delay,
+      duration,
       onComplete: () => {
         if (this.transients.delete(image)) image.destroy();
       },
@@ -155,7 +205,9 @@ export class ThienSonRework {
   private image(id: string, texture: string, frame: string) {
     let image = this.sprites.get(id);
     if (!image) {
-      image = this.scene.add.image(0, 0, texture, frame).setName('ts-rework:' + id);
+      image = this.scene.add
+        .image(0, 0, texture, frame)
+        .setName('ts-rework:' + id);
       this.sprites.set(id, image);
     } else image.setTexture(texture, frame);
     return image;
@@ -193,7 +245,14 @@ export class ThienSonRework {
         }
         const spread = 1 - (1 - Math.min(1, age / 6)) ** 2;
         const fade = Math.min(1, (action.until - tick) / 4);
-        this.opacities.set(id, 1 - spread * fade);
+        this.opacities.set(
+          id,
+          JSON.parse(player.statuses).some(
+            (s: { kind: string }) => s.kind === 'concealed',
+          )
+            ? 0.22
+            : 1,
+        );
         const interval = pattern.intervalTicks;
         const sinceRelease = age - pattern.windupTicks;
         const beat = (sinceRelease % interval) / interval;
@@ -212,13 +271,21 @@ export class ThienSonRework {
                       ? 'ready'
                       : 'windup';
         const coherent = unifiedHeroProfile('thien_son_dao');
-        const coherentPose = { ready: 'ready', windup: 'windup', sweep: 'flurry_sweep', follow: 'follow' }[pose];
+        const coherentPose = {
+          ready: 'ready',
+          windup: 'windup',
+          sweep: 'flurry_sweep',
+          follow: 'follow',
+        }[pose];
         directions.forEach((direction, row) => {
           const key = `shadow:${id}:${row}`;
           const x = origin.x + (row % 2 ? 1 : -1) * pattern.offsetX * spread;
           const y = origin.y + (row < 2 ? -1 : 1) * pattern.offsetY * spread;
-          this.image(key, coherent?.texture ?? shadows,
-            coherent ? `${coherentPose}_${direction}` : `${direction}_${pose}`)
+          this.image(
+            key,
+            coherent?.texture ?? shadows,
+            coherent ? `${coherentPose}_${direction}` : `${direction}_${pose}`,
+          )
             .setOrigin(coherent?.pivot[0] ?? 0.5, coherent?.pivot[1] ?? 0.8)
             .setScale(coherent?.scale ?? 0.88)
             .setPosition(Math.round(x), Math.round(y))
@@ -253,8 +320,7 @@ export class ThienSonRework {
         this.sprites.delete(id);
       }
     for (const id of this.origins.keys())
-      if (!casting.has(id))
-        this.origins.delete(id);
+      if (!casting.has(id)) this.origins.delete(id);
   }
 
   clear() {

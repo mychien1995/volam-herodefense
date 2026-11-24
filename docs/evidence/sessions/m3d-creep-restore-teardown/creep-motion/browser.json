@@ -1,0 +1,184 @@
+{
+  "players": 6,
+  "browserClients": 2,
+  "sdkClients": 4,
+  "scope": [
+    "wave_14",
+    "truc_xa"
+  ],
+  "coverage": {
+    "wave_14": {
+      "locomotion": {
+        "texture": "renovated-creep_fire_imp",
+        "source": "/assets/renovation-v1/runtime/creep_fire_imp.png",
+        "frame": "idle_right_0",
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "cels": [
+          "renovated-creep_fire_imp:idle_right_0"
+        ],
+        "windup": 0
+      },
+      "hurt": {
+        "texture": "renovated-creep_fire_imp",
+        "source": "/assets/renovation-v1/runtime/creep_fire_imp.png",
+        "frame": "idle_right_0",
+        "scale": [
+          0.5,
+          0.48366666666666636
+        ],
+        "cels": [
+          "renovated-creep_fire_imp:idle_right_0"
+        ],
+        "windup": 0
+      },
+      "basic": {
+        "texture": "creep_fire_imp",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__creep_fire_imp.png",
+        "frame": "basic_attack_right_0",
+        "scale": [
+          1,
+          1
+        ],
+        "cels": [
+          "creep_fire_imp:basic_attack_right_0"
+        ],
+        "windup": 6
+      },
+      "special": {
+        "texture": "renovated-creep_fire_imp",
+        "source": "/assets/renovation-v1/runtime/creep_fire_imp.png",
+        "frame": "idle_right_0",
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "cels": [
+          "renovated-creep_fire_imp:idle_right_0",
+          "renovated-creep_fire_imp:walk_right_1"
+        ],
+        "windup": 20
+      },
+      "death": {
+        "texture": "creep_fire_imp",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__creep_fire_imp.png",
+        "frame": "death_right_0",
+        "scale": [
+          1,
+          1
+        ],
+        "cels": [
+          "creep_fire_imp:death_right_0",
+          "creep_fire_imp:death_right_1"
+        ],
+        "windup": 20
+      },
+      "deathAbility": false,
+      "effects": [
+        {
+          "id": "creep_fx_2",
+          "abilityId": "creep_wave_14_basic",
+          "suppressed": true,
+          "frames": []
+        }
+      ]
+    },
+    "truc_xa": {
+      "locomotion": {
+        "texture": "renovated-forest_truc_xa",
+        "source": "/assets/renovation-v1/runtime/forest_truc_xa.png",
+        "frame": "idle_right_0",
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "cels": [
+          "renovated-forest_truc_xa:idle_right_0"
+        ],
+        "windup": 0
+      },
+      "hurt": {
+        "texture": "renovated-forest_truc_xa",
+        "source": "/assets/renovation-v1/runtime/forest_truc_xa.png",
+        "frame": "idle_right_0",
+        "scale": [
+          0.5,
+          0.4824464285714287
+        ],
+        "cels": [
+          "renovated-forest_truc_xa:idle_right_0"
+        ],
+        "windup": 0
+      },
+      "basic": {
+        "texture": "forest_truc_xa",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__forest_truc_xa.png",
+        "frame": "basic_attack_right_0",
+        "scale": [
+          1,
+          1
+        ],
+        "cels": [
+          "forest_truc_xa:basic_attack_right_0",
+          "forest_truc_xa:basic_attack_right_1"
+        ],
+        "windup": 6
+      },
+      "special": {
+        "texture": "renovated-forest_truc_xa",
+        "source": "/assets/renovation-v1/runtime/forest_truc_xa.png",
+        "frame": "idle_right_0",
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "cels": [
+          "renovated-forest_truc_xa:idle_right_0",
+          "renovated-forest_truc_xa:walk_right_1",
+          "renovated-forest_truc_xa:walk_right_2"
+        ],
+        "windup": 16
+      },
+      "death": {
+        "texture": "forest_truc_xa",
+        "source": "/assets/visual-improvement-approved/creep_motion_v08__forest_truc_xa.png",
+        "frame": "death_right_0",
+        "scale": [
+          1,
+          1
+        ],
+        "cels": [
+          "forest_truc_xa:death_right_0",
+          "forest_truc_xa:death_right_1",
+          "forest_truc_xa:death_right_2"
+        ],
+        "windup": 0
+      },
+      "deathAbility": false,
+      "effects": [
+        {
+          "id": "forest_private_xa6UnsF1d:creep_fx_1",
+          "abilityId": "creep_truc_xa_basic",
+          "suppressed": false,
+          "frames": [
+            "forest_creep_fx:truc_xa_venom_release_0",
+            "forest_creep_fx:truc_xa_venom_release_1",
+            "forest_creep_fx:truc_xa_venom_projectile_right_0"
+          ]
+        },
+        {
+          "id": "forest_private_xa6UnsF1d:creep_fx_2",
+          "abilityId": "creep_truc_xa_special",
+          "suppressed": false,
+          "frames": [
+            "forest_creep_fx:truc_xa_venom_release_0",
+            "forest_creep_fx:truc_xa_venom_release_1"
+          ]
+        }
+      ]
+    }
+  },
+  "errors": []
+}

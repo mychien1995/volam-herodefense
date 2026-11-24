@@ -72,6 +72,10 @@ export interface ProjectileEffect {
     | undefined;
 }
 export interface ProjectileScatter {
+  replaceProjectiles?: boolean | undefined;
+  centerOnTarget?: boolean | undefined;
+  stage?: string | undefined;
+  statuses?: StatusSpec[] | undefined;
   count: number;
   appearanceTicks: number;
   delayTicks: number;
@@ -99,6 +103,7 @@ export interface FortuneEffect {
   blastRadius: number;
 }
 export interface ArcEffect {
+  manaSteal?: { amount: number; manaLessRefund: number } | undefined;
   lineWidth?: number | undefined;
   knockbackChance?: number | undefined;
   residualArea?: AreaEffect | undefined;
@@ -134,11 +139,14 @@ export interface AllyEffect {
   statuses?: StatusSpec[] | undefined;
 }
 export interface SupportEffect extends AllyEffect {
+  selfHeal?: number | undefined;
   mode: 'support';
   durationTicks: number;
   tickInterval: number;
 }
 export type StatusKind =
+  | 'concealed'
+  | 'staff_charge'
   | 'burn'
   | 'poison'
   | 'root'
@@ -177,6 +185,7 @@ export type StatusKind =
   | 'con_luan_chaos'
   | 'channel';
 export interface StatusSpec {
+  delayTicks?: number | undefined;
   blocksMovementSkills?: boolean | undefined;
   kind: StatusKind;
   durationTicks: number;
@@ -186,6 +195,7 @@ export interface StatusSpec {
   toggle?: boolean | undefined;
 }
 export interface StatusEffect extends StatusSpec {
+  startsAt?: number | undefined;
   sourceId: string;
   abilityId: string;
   until: number;
@@ -231,6 +241,8 @@ export interface GuardCounterEffect {
   range: number;
 }
 export interface AreaEffect {
+  expireBurst?: { damage: number; radius: number } | undefined;
+  volleyDamageMultiplier?: number | undefined;
   radiusY?: number | undefined;
   pentagon?: boolean | undefined;
   passiveField?: boolean | undefined;
@@ -267,6 +279,24 @@ export interface AreaEffect {
   ownerRegenFraction?: number | undefined;
 }
 export interface DashEffect {
+  windupTicks?: number | undefined;
+  damageOffset?: number | undefined;
+  endBlast?: { damage: number; radius: number } | undefined;
+  gather?:
+    { range: number; halfAngle: number; centerOffset: number } | undefined;
+  afterProjectile?:
+    | {
+        damage: number;
+        range: number;
+        speed: number;
+        radius: number;
+        count: number;
+        delayTicks: number;
+        radial: boolean;
+        stage: string;
+        attackPowerScale: number;
+      }
+    | undefined;
   mode: 'dash';
   distance: number;
   speed: number;
@@ -279,6 +309,16 @@ export interface DashEffect {
     { durationTicks: number; damage: number; range: number } | undefined;
 }
 export interface MultiHitEffect {
+  targetArea?:
+    | {
+        range: number;
+        radius: number;
+        scatterRadius: number;
+        fallTicks: number;
+      }
+    | undefined;
+  detached?: boolean | undefined;
+  finisherStatuses?: StatusSpec[] | undefined;
   statuses?: StatusSpec[] | undefined;
   attackPowerScale?: number | undefined;
   mode: 'multi_hit';
@@ -307,6 +347,13 @@ export interface MultiHitEffect {
   durationTicks?: number | undefined;
 }
 export interface Ability {
+  airborneEffect?: ProjectileEffect | DashEffect | undefined;
+  targeting?: 'facing' | 'nearestEnemyAtCast' | undefined;
+  focusRange?: number | undefined;
+  passive?: boolean | undefined;
+  reactiveBlock?:
+    { chance: number; damage: number; stunTicks: number } | undefined;
+  consumeStaffChargeScale?: number | undefined;
   equipmentAttack?: EquipmentAttack | undefined;
   manualChain?:
     | {
@@ -464,7 +511,7 @@ export interface Actor extends Point {
   actionUntil: number;
   hurtUntil: number;
   cooldown: number;
-  statuses?: StatusEffect[];
+  statuses?: StatusEffect[] | undefined;
   castAbilityId?: string;
   /** Future boss adapters can opt out of forced movement without inventing a boss system. */
   forcedMovementImmune?: boolean;
@@ -489,6 +536,7 @@ export interface NguDocVenom {
   damage: number;
 }
 export interface Hero extends Actor {
+  staffCharges?: { targetId: string; count: number };
   nguDocSummons?: NguDocSummon[];
   nguDocSummonSerial?: number;
   nguDocTargetId?: string;
@@ -632,7 +680,7 @@ export interface Projectile extends Point {
   critMultiplier?: number;
   leg?: 'outbound' | 'return';
   refund?: { amount: number; used: boolean };
-  stage?: string;
+  stage?: string | undefined;
 }
 export interface CombatEvent extends Point {
   tick?: number | undefined;
@@ -653,6 +701,11 @@ export interface CombatEvent extends Point {
   stage?: string | undefined;
 }
 export interface SkillAction {
+  gatherCenter?: Point | undefined;
+  gatherIds?: string[] | undefined;
+  endTriggered?: boolean | undefined;
+  impactPoints?: Point[] | undefined;
+  detached?: boolean | undefined;
   strikePhase?: string | undefined;
   areaCenter?: Point;
   tamLien?: { center: Point; targetId: string };
@@ -679,6 +732,8 @@ export interface SkillAction {
   critMultiplier: number;
 }
 export interface CombatArea extends Point {
+  expireRawDamage?: number | undefined;
+  stage?: string | undefined;
   launch?: (Point & { fx: number; fy: number }) | undefined;
   hitIds?: string[];
   id: string;
@@ -707,6 +762,8 @@ export interface World {
   duelTeams?: ReadonlyMap<string, string>;
   duelWalkWalls?: Rect[];
   pendingScatters?: Array<{
+    center?: Point;
+    launch?: Point & { fx: number; fy: number };
     tick: number;
     ownerId: string;
     abilityId: string;
@@ -767,7 +824,7 @@ export interface World {
     critChance?: number;
     critMultiplier?: number;
     refund?: { amount: number; used: boolean };
-    stage?: string;
+    stage?: string | undefined;
   }>;
   actions?: SkillAction[];
   areas?: CombatArea[];

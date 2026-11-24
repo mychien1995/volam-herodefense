@@ -1,0 +1,61 @@
+{
+  "players": 6,
+  "actualGame": true,
+  "renderClientsDuringArt": 2,
+  "coverage": "laser-and-combat-retry",
+  "naturalCombat": false,
+  "cases": [
+    {
+      "type": "skill",
+      "skill": "luu_tinh_truc_nguyet",
+      "hpLost": 112,
+      "frames": [
+        "hero-unified:duong_mon_co_quan:idle_0_right",
+        "hero-unified:duong_mon_co_quan:hover_1_right",
+        "hero-unified:duong_mon_co_quan:hover_0_right"
+      ],
+      "effects": [
+        "skill-revise:laser-ground:beam2",
+        "skill-revise:laser-ground:contact2"
+      ]
+    },
+    {
+      "type": "skill",
+      "skill": "con_luan_kiem_tran",
+      "hpLost": 111,
+      "frames": [
+        "hero-unified:con_luan_kiem_ton:idle_1_right",
+        "hero-unified:con_luan_kiem_ton:star_hold_right",
+        "hero-unified:con_luan_kiem_ton:idle_0_right",
+        "hero-unified:con_luan_kiem_ton:idle_2_right"
+      ],
+      "effects": [
+        "con_luan_spell_fx:violet_bolt_0",
+        "con_luan_spell_fx:violet_ring_0"
+      ]
+    },
+    {
+      "type": "passive",
+      "hpLost": 0,
+      "effects": [
+        {
+          "frame": "parry1",
+          "texture": "skill-revise:lightning-parry",
+          "x": 700,
+          "y": 700,
+          "visible": true
+        },
+        {
+          "frame": "bolt1",
+          "texture": "skill-revise:lightning-parry",
+          "x": 717.5,
+          "y": 682.5,
+          "visible": true
+        }
+      ]
+    }
+  ],
+  "fixtures": "Server arranges legal builds and stationary target placement; normal keyboard A/Q/T and real simulation resolve every hit. No client damage/position injection.",
+  "status": "FAIL",
+  "error": "Error: Timeout: fan launched after 12019ms (152 observations)\n    at waitForQa (file:///D:/Projects/volam-hero-defense/tools/qa-wait.mjs:23:9)\n    at verifySkillReviseGame (file:///D:/Projects/volam-hero-defense/tests/e2e/skill-revise-game-probe.mjs:354:5)\n    at verifyRenovationRuntime (file:///D:/Projects/volam-hero-defense/tools/verify-renovation-runtime.mjs:194:22)\n    at file:///D:/Projects/volam-hero-defense/tests/e2e/skill-revise-game.spec.ts:8:3\n    at D:\\Projects\\volam-hero-defense\\node_modules\\.pnpm\\playwright@1.64.1\\node_modules\\playwright\\lib\\worker\\workerProcessEntry.js:1654:9\n    at D:\\Projects\\volam-hero-defense\\node_modules\\.pnpm\\playwright@1.64.1\\node_modules\\playwright\\lib\\worker\\workerProcessEntry.js:1134:11\n    at TimeoutManager.withRunnable (D:\\Projects\\volam-hero-defense\\node_modules\\.pnpm\\playwright@1.64.1\\node_modules\\playwright\\lib\\worker\\workerProcessEntry.js:403:14)\n    at TestInfoImpl._runWithTimeout (D:\\Projects\\volam-hero-defense\\node_modules\\.pnpm\\playwright@1.64.1\\node_modules\\playwright\\lib\\worker\\workerProcessEntry.js:1132:7)\n    at D:\\Projects\\volam-hero-defense\\node_modules\\.pnpm\\playwright@1.64.1\\node_modules\\playwright\\lib\\worker\\workerProcessEntry.js:1652:7\n    at WorkerMain._runTest (D:\\Projects\\volam-hero-defense\\node_modules\\.pnpm\\playwright@1.64.1\\node_modules\\playwright\\lib\\worker\\workerProcessEntry.js:1625:5)\n    at WorkerMain.runTestGroup (D:\\Projects\\volam-hero-defense\\node_modules\\.pnpm\\playwright@1.64.1\\node_modules\\playwright\\lib\\worker\\workerProcessEntry.js:1520:9)\n    at process.<anonymous> (D:\\Projects\\volam-hero-defense\\node_modules\\.pnpm\\playwright@1.64.1\\node_modules\\playwright\\lib\\common\\index.js:1955:25)"
+}

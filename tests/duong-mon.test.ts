@@ -95,28 +95,27 @@ describe('Đường Môn authoritative combat', () => {
     }
   });
 
-  it('flies, fires iron feathers and prevents movement while protected by its wings', () => {
+  it('flight fires three retained feathers, replaces Q with ice bombs, and R folds wings', () => {
     const { hero, world, cast, step, send, upgrade } = trial(duongMon.coQuan);
     upgrade(3);
     cast(1);
     expect(hasStatus(hero, 'duong_mon_flight', world.tick)).toBe(true);
-    const mana = hero.mana;
-    step(15);
-    expect(hero.mana).toBeLessThan(mana);
     send({ kind: 'basic' });
-    expect([...world.projectiles.values()]).toContainEqual(
-      expect.objectContaining({ stage: 'feather' }),
-    );
+    expect(
+      [...world.projectiles.values()].filter((p) => p.stage === 'feather'),
+    ).toHaveLength(3);
+    step(20);
     cast(0);
-    const arrows = [...world.projectiles.values()].filter(
-      (p) => p.abilityId === duongMon.arrows,
-    );
-    expect(arrows).toHaveLength(3);
-    expect(new Set(arrows.map((p) => p.vx)).size).toBe(1);
-    expect(new Set(arrows.map((p) => p.vy)).size).toBe(1);
-    cast(1);
-    expect(hasStatus(hero, 'duong_mon_flight', world.tick)).toBe(false);
+    step(12);
+    expect(world.areas!.filter((a) => a.stage === 'ice_bomb')).toHaveLength(3);
+    expect(
+      [...world.projectiles.values()].filter(
+        (p) => p.abilityId === duongMon.arrows,
+      ),
+    ).toHaveLength(0);
+    step(20);
     cast(3);
+    expect(hasStatus(hero, 'duong_mon_flight', world.tick)).toBe(false);
     expect(hasStatus(hero, 'duong_mon_shell', world.tick)).toBe(true);
     const x = hero.x;
     send({ kind: 'move', x: 1, y: 0 });

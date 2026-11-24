@@ -63,13 +63,13 @@ function fixture(id = 'lien_hoa_phien') {
   return { config, world, hero, enemies, events, steps, input, cast, hits };
 }
 describe('M3C1 authoritative wind mechanics', () => {
-  it('keeps Q at 40% mitigation while healing scales from 3% to 4% per second', () => {
+  it('scales Q mitigation from 40 to 60 percent while healing scales from 3% to 4% per second', () => {
     const q = m1Config.progression!.skills['lien_hoa_phien']!;
     expect(q.levelGates).toEqual([1, 3, 5, 7]);
     for (const [i, rank] of q.ranks.entries()) {
       expect(rank.effect).toMatchObject({
         mode: 'area',
-        ownerDamageReduction: 0.4,
+        ownerDamageReduction: [0.4, 0.47, 0.53, 0.6][i],
         ownerRegenFraction: 0.03 + (0.01 * i) / 3,
         durationTicks: 180,
         damage: 0,
@@ -227,30 +227,18 @@ describe('M3C1 authoritative wind mechanics', () => {
     expect(fan(v).y).toBeCloseTo(300 - (11 * 400) / 30);
     expect(fan(v).x).toBe(300);
   });
-  it('Chiết Mai increases movement and A cadence only for its owner, does not stack, and expires exactly', () => {
+  it('Phong Quyển retreats and finishes without retaining the removed cadence buff', () => {
     const f = fixture('chiet_mai_thu'),
-      partner = addHero(f.world, 'b', 'B', f.config);
-    const before = characterStats(f.hero, f.config).total;
+      start = f.hero.x;
     f.cast();
-    expect(
-      characterStats(f.hero, f.config, f.world.tick).total.movementSpeed,
-    ).toBeCloseTo(before.movementSpeed * 1.3);
-    expect(
-      characterStats(f.hero, f.config, f.world.tick).total.attackSpeed,
-    ).toBeCloseTo(before.attackSpeed * 1.35);
-    expect(
-      characterStats(partner, f.config, f.world.tick).total.movementSpeed,
-    ).toBe(before.movementSpeed);
-    f.cast();
-    expect(
-      f.hero.statuses?.filter((s) => s.kind === 'speed_buff'),
-    ).toHaveLength(1);
-    f.steps(179);
+    expect(f.hero.x).toBeLessThan(start);
     expect(hasStatus(f.hero, 'speed_buff', f.world.tick)).toBe(false);
-    expect(characterStats(f.hero, f.config, f.world.tick).total).toEqual(
-      before,
-    );
+    f.steps(20);
+    expect(f.hero.x).toBeCloseTo(start - 78);
+    expect(f.world.actions).toEqual([]);
+    expect(f.events.filter((e) => e.kind === 'cast')).toHaveLength(1);
   });
+
   it('Bách Phiến has twelve radial pulses plus eight-way projectiles', () => {
     const f = fixture('bach_phien_phong_bao');
     f.enemies[0]!.x = 410;
@@ -319,7 +307,10 @@ describe('M3C1 authoritative wind mechanics', () => {
     f.cast();
     f.steps(18);
     expect(f.hits()[0]!.damage).toBe(50);
-    expect(f.enemies[0]!.statuses ?? []).toHaveLength(0);
+    expect(f.enemies[0]!.statuses!.map((s) => s.kind)).toEqual([
+      'stun',
+      'slow',
+    ]);
     f.steps(15);
     f.hero.basicId = 'thien_son_dao';
     f.input({ kind: 'basic' });

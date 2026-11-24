@@ -107,13 +107,14 @@ def export_profile(profile_path,direction=None):
    thumb=tile.resize((w//2,h//2),Image.Resampling.LANCZOS);crop=thumb.crop(thumb.getbbox());px=i*256+(256-crop.width)//2;guide.alpha_composite(crop,(px,row*224+204-crop.height));draw.text((i*256,row*224+208),poses[i],fill='white')
   records.append({'direction':d,'path':str(raw.relative_to(ROOT)).replace('\\','/'),'sha256':sha(raw),'extraSources':extraRecords,'celGroupOverrides':[{**o,'sha256':sha(src/o['path'])} for o in replacements],'ratio':ratio,'walkRatio':walkRatio,'actionRatio':actionRatio,'reactionRatio':reactionRatio,'targetHairWidth':headTarget,'frames':entries})
  # Trim transparent whitespace while preserving the exact logical canvas/root in Phaser.
+ gutter=cfg.get('atlasGutter',4);assert gutter in (2,4),'Atlas gutter must preserve transparent padding';pad=gutter//2
  packed=Image.new('RGBA',(4096,4096));frames={};x=y=rowh=0;maxx=maxy=0
  for name,tile in tiles:
   box=tile.getbbox();box=(max(0,box[0]-2),max(0,box[1]-2),min(w,box[2]+2),min(h,box[3]+2));crop=tile.crop(box)
-  if x+crop.width+4>4096:x=0;y+=rowh+4;rowh=0
-  assert y+crop.height+4<=4096,'Atlas exceeded bounded texture size'
-  packed.alpha_composite(crop,(x+2,y+2));frames[name]={'frame':{'x':x+2,'y':y+2,'w':crop.width,'h':crop.height},'trimmed':True,'rotated':False,'spriteSourceSize':{'x':box[0],'y':box[1],'w':crop.width,'h':crop.height},'sourceSize':{'w':w,'h':h}}
-  maxx=max(maxx,x+crop.width+4);maxy=max(maxy,y+crop.height+4);x+=crop.width+4;rowh=max(rowh,crop.height)
+  if x+crop.width+gutter>4096:x=0;y+=rowh+gutter;rowh=0
+  assert y+crop.height+gutter<=4096,'Atlas exceeded bounded texture size'
+  packed.alpha_composite(crop,(x+pad,y+pad));frames[name]={'frame':{'x':x+pad,'y':y+pad,'w':crop.width,'h':crop.height},'trimmed':True,'rotated':False,'spriteSourceSize':{'x':box[0],'y':box[1],'w':crop.width,'h':crop.height},'sourceSize':{'w':w,'h':h}}
+  maxx=max(maxx,x+crop.width+gutter);maxy=max(maxy,y+crop.height+gutter);x+=crop.width+gutter;rowh=max(rowh,crop.height)
  packed=packed.crop((0,0,maxx,maxy));packed.save(out/'body.png');(out/'body.json').write_text(json.dumps({'frames':frames,'meta':{'image':'body.png','size':{'w':maxx,'h':maxy},'scale':'1'}},indent=2)+'\n')
  if 'down' in dirs:avatar(next(t for n,t in tiles if n=='idle_0_down'),out)
  manifest={**cfg,'status':'prototype pending director review','directions':dirs,'pivot':[foot[0]/w,foot[1]/h],'source':cfg.get('sourceDescription','Built-in imagegen; sharp retained native art for identity/quality; separate body and VFX'),'groupsAuthored':records,'references':[{'path':p,'sha256':sha(ROOT/p)} for p in cfg['references']],'logicalBytes':w*h*len(tiles)*4,'packedTextureBytes':maxx*maxy*4}

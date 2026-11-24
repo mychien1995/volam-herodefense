@@ -304,7 +304,7 @@ export class DongTaEncounter {
   }
   private nearest(world: World, p: Point): Hero | undefined {
     return [...world.heroes.values()]
-      .filter((h) => h.hp > 0)
+      .filter((h) => h.hp > 0 && !hasStatus(h, 'concealed', world.tick))
       .sort(
         (a, b) => distance(a, p) - distance(b, p) || a.id.localeCompare(b.id),
       )[0];

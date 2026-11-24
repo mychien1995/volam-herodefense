@@ -1,19 +1,7 @@
-import { m1Config } from '@volam/game-data';
 import type {
   UnifiedHeroClock,
   UnifiedBodySample,
 } from './unified-hero-policy.js';
-const seven = m1Config.skillCatalogue!['that_tinh_kiem']!.effect;
-const sevenSpacing = seven.mode === 'multi_hit' ? seven.spacingTicks : 6;
-const cuts = [
-  'cut_up',
-  'cut_down',
-  'cut_right',
-  'cut_down',
-  'cut_up',
-  'cut_left',
-  'cut_right',
-];
 const taichi = [
   'charge',
   'taichi_open',
@@ -142,7 +130,7 @@ export function voDangUnifiedSample(
                 : 'thrust',
         );
       if (clock.ability === 'that_tinh_kiem')
-        return cel(cuts[Math.floor(age / sevenSpacing)] ?? 'recover');
+        return cel(age < 4 ? 'charge' : age < 28 ? 'aim' : 'recover');
       if (clock.ability === 'van_kiem_quy_tong') return cel('aim');
       if (clock.ability === 'nhan_kiem_hop_nhat')
         return cel(age < 3 ? 'charge' : 'palm_release');

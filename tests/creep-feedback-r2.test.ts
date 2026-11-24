@@ -155,6 +155,7 @@ it('root permits a real non-movement skill cast', () => {
     'web',
     w.tick,
   );
+  h.skillIds = ['cuong_long_loan_vu', '', '', ''];
   submitInput(w, h.id, 1, { kind: 'cast', slot: 0 });
   stepWorld(w, c);
   expect(w.events.some((e) => e.kind === 'cast' && e.sourceId === h.id)).toBe(

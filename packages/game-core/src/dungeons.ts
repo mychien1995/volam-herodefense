@@ -527,6 +527,7 @@ export class DungeonMatch {
     const now = this.arena.world.tick;
     const deadline = (until: number) => now + Math.max(0, until - tick);
     hero.cooldown = deadline(hero.cooldown);
+    if (hero.lastBasicTick !== undefined) hero.lastBasicTick += now - tick;
     hero.skillCooldowns = hero.skillCooldowns.map(deadline);
     for (const [id, until] of Object.entries(hero.abilityCooldowns ?? {}))
       hero.abilityCooldowns![id] = deadline(until);
@@ -1588,6 +1589,8 @@ export class DungeonMatch {
     const convert = (until: number) =>
       destination.world.tick + Math.max(0, until - source.world.tick);
     hero.cooldown = convert(hero.cooldown);
+    if (hero.lastBasicTick !== undefined)
+      hero.lastBasicTick += destination.world.tick - source.world.tick;
     if (hero.basicChainDeadline)
       hero.basicChainDeadline.until = convert(hero.basicChainDeadline.until);
     if (hero.dashRechargeAt !== undefined)

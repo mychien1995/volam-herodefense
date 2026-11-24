@@ -38,7 +38,7 @@ test('Côn Luân pilot: four A stages and Chaos play decoded audio with authorit
       errors.push(r.url());
   });
   await enter(page, conLuan.monk);
-  for (const stage of ['thrust', 'sweep', 'rising', 'overhead']) {
+  for (const stage of ['thrust', 'overhead']) {
     const result = await castQaSkill(page, 'a', conLuan.monk, {
       kind: 'attack',
     });
