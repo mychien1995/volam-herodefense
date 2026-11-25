@@ -98,6 +98,7 @@ export class DongTaRenderer {
     { bundle: string; clip: string; x: number; y: number; at: number }
   >();
   private health: WaveBossHealth;
+  private dashWarning: Phaser.GameObjects.Graphics | undefined;
   private trail: Array<{ x: number; y: number; tick: number }> = [];
   constructor(private scene: Phaser.Scene) {
     this.health = new WaveBossHealth(scene);
@@ -111,6 +112,8 @@ export class DongTaRenderer {
     this.labels.clear();
     this.boundary?.destroy();
     this.boundary = undefined;
+    this.dashWarning?.destroy();
+    this.dashWarning = undefined;
     this.latest = undefined;
     this.poses.clear();
     this.corpses.clear();
@@ -219,6 +222,36 @@ export class DongTaRenderer {
     this.health.begin();
     const tick =
       view.tick + Math.min(2, (this.scene.time.now - this.received) * 0.03);
+    const warningCasts = view.casts.filter(
+      (c) => c.telegraphHalfWidth && c.path && tick < c.activeAt,
+    );
+    if (warningCasts.length && !this.dashWarning)
+      this.dashWarning = this.scene.add.graphics().setDepth(100);
+    this.dashWarning?.clear().setVisible(warningCasts.length > 0);
+    for (const cast of warningCasts) {
+      const path = cast.path!,
+        width = cast.telegraphHalfWidth!;
+      for (let i = 1; i < path.length; i++) {
+        const a = path[i - 1]!,
+          b = path[i]!,
+          length = Math.hypot(b.x - a.x, b.y - a.y);
+        if (!length) continue;
+        const nx = (-(b.y - a.y) / length) * width,
+          ny = ((b.x - a.x) / length) * width;
+        const vertices = [
+          { x: a.x + nx, y: a.y + ny },
+          { x: b.x + nx, y: b.y + ny },
+          { x: b.x - nx, y: b.y - ny },
+          { x: a.x - nx, y: a.y - ny },
+        ];
+        const points = vertices.map((p) => new Phaser.Math.Vector2(p.x, p.y));
+        this.dashWarning!.fillStyle(0xff9b36, 0.2).fillPoints(points, true);
+        this.dashWarning!.lineStyle(2, 0xffd06b, 0.95).strokePoints(
+          points,
+          true,
+        );
+      }
+    }
     for (const [id, actor] of state.creeps) {
       const bundle = actors[actor.archetypeId];
       if (!bundle || actor.zoneId !== zone) continue;
@@ -397,14 +430,14 @@ export class DongTaRenderer {
           clip = 'thrust_streak';
           x += (e.fx * e.length) / 2;
           y += (e.fy * e.length) / 2;
-          scale = 3;
+          scale = (3 * e.length) / 380;
           break;
         case 'fan':
           bundle = 'fan';
           clip = 'sword_fan_wave';
           x += e.fx * 75;
           y += e.fy * 75;
-          scale = 2;
+          scale = (2 * e.length) / 180;
           break;
         case 'bead':
           clip = 'pebble';
@@ -546,6 +579,7 @@ export class DongTaRenderer {
   inspect() {
     return {
       view: this.latest,
+      dashTelegraphVisible: this.dashWarning?.visible ?? false,
       observed: Object.fromEntries(
         [...this.frames].map(([k, v]) => [k, [...v]]),
       ),

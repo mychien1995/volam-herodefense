@@ -22,6 +22,7 @@ const positive = z.number().positive(),
   ticks = z.number().int().positive();
 export const dongTaDefinitionSchema = z
   .strictObject({
+    difficulty: z.enum(['easy', 'hard']).optional(),
     center: point,
     entry: point,
     bounds: point.extend({ radiusX: positive, radiusY: positive }),
@@ -132,7 +133,7 @@ export const dongTaDefinitionSchema = z
         message: 'East entry must align with the court center.',
       });
     if (
-      d.thrust.range < 320 ||
+      d.thrust.range < (d.difficulty === 'easy' ? 320 * Math.sqrt(0.3) : 320) ||
       d.slash.travelTicks > d.abilities['lac_anh_kiem_phap']!.duration
     )
       ctx.addIssue({

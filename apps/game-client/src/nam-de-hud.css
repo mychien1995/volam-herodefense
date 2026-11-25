@@ -17,14 +17,18 @@
 }
 #nam-de-qte div {
   display: flex;
-  gap: 5px;
+  gap: 7px;
   justify-content: center;
   margin: 10px 0;
 }
 #nam-de-qte span {
-  font-size: 24px;
-  padding: 3px;
-  border: 1px solid #91845d;
+  font-size: 34px;
+  min-width: 42px;
+  line-height: 48px;
+  padding: 4px;
+  border: 2px solid #c2ad72;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 #nam-de-qte .done {
   color: #8edf7c;
@@ -38,4 +42,19 @@
 }
 #nam-de-qte[hidden] {
   display: none;
+}
+
+@media (max-width: 650px) {
+  #nam-de-qte {
+    padding: 10px;
+  }
+  #nam-de-qte div {
+    gap: 3px;
+  }
+  #nam-de-qte span {
+    font-size: 26px;
+    min-width: 29px;
+    line-height: 36px;
+    padding: 2px;
+  }
 }

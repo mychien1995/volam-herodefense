@@ -1,3 +1,8 @@
+import {
+  enterNamDeDark,
+  limitNamDeDamage,
+  namDeFrostContact,
+} from './nam-de-dark.js';
 import { provokeBossFight } from './boss-provocation.js';
 import { pvpDamageMultiplier } from './pvp-balance.js';
 import type {
@@ -71,7 +76,12 @@ export function hurt(
     opponent(world, sourceId, target.id) !== target
   )
     return false;
-  if (world.waveBossTest && world.heroes.has(target.id)) return false;
+  if (
+    world.waveBossTest &&
+    !world.waveBossTest.progression &&
+    world.heroes.has(target.id)
+  )
+    return false;
   if (
     target.hp <= 0 ||
     (!snapshot?.unavoidableHpLoss &&
@@ -449,6 +459,7 @@ export function hurt(
   const beforeHp = target.hp;
   const testBossHit =
     world.waveBossTest &&
+    !world.waveBossTest.progression &&
     world.heroes.has(sourceId) &&
     waveBossTestArchetypes.has(enemy?.archetypeId ?? '');
   if (testBossHit && world.waveBossTest) {
@@ -457,8 +468,23 @@ export function hurt(
   }
   if (enemy && world.vuong?.bossId === enemy.id)
     damage = world.vuong.limitIncoming(enemy, damage);
+  damage = limitNamDeDamage(
+    world,
+    target.id,
+    damage,
+    !!snapshot?.resolvedReflection,
+  );
   const practiceTarget = world.practiceTargets?.has(target.id) ?? false;
   target.hp = Math.max(practiceTarget ? 1 : 0, target.hp - damage);
+  if (target.id === 'boss_nam_de' && target.hp < beforeHp) {
+    enterNamDeDark(world, config);
+    namDeFrostContact(
+      world,
+      target.id,
+      sourceId,
+      !!snapshot?.resolvedReflection,
+    );
+  }
   const receivedHpLoss = beforeHp - target.hp;
   if (receivedHpLoss > 0 && enemy && world.heroes.has(sourceId))
     provokeBossFight(world, config, enemy);

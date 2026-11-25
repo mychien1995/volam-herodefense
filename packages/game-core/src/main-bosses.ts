@@ -33,7 +33,12 @@ export class MainBossDirector {
     if (this.encounter?.phase === 'defeated') this.recordDefeat('bac_cai');
     if (!invasion || invasion.defeated) return;
     if (this.final && this.completed.length === 4) {
-      if (c.campaign && !w.campaign?.cleared.has('kim_luan_phap_vuong')) return;
+      if (
+        c.campaign &&
+        !w.waveBossTest?.progression &&
+        !w.campaign?.cleared.has('kim_luan_phap_vuong')
+      )
+        return;
       if (w.vuong) {
         if (w.vuong.defeat(w, c)) this.recordDefeat('vuong_trung_duong');
         return;
@@ -43,7 +48,7 @@ export class MainBossDirector {
         Math.max(
           1,
           Math.round(
-            c.campaign
+            c.campaign && !w.waveBossTest?.progression
               ? c.campaign.finalRestSeconds * c.tickRate
               : (this.final.restMs * c.tickRate) / 1000,
           ),

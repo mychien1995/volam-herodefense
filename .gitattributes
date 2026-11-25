@@ -656,3 +656,16 @@ assets/reviews/thien-su-reference-motion-2026-11-24/sweep/study.json text eol=cr
 assets/exports/skill-revise-thien-su-v06/hammer-combo-v6/body.json text eol=crlf whitespace=cr-at-eol
 assets/exports/skill-revise-thien-su-v06/hammer-combo-v6/manifest.json text eol=crlf whitespace=cr-at-eol
 assets/source/skill-revise-thien-su-v08/registration-config.json text eol=crlf whitespace=cr-at-eol
+
+# Preserve reviewed M4D boss source, atlas and prompt bytes across checkouts.
+assets/concepts/bosses/nam-de-dark-v01/** -text -eol whitespace=cr-at-eol
+assets/source/boss-nam-de-dark-v1/** -text -eol whitespace=cr-at-eol
+assets/exports/boss-nam-de-dark-v1/** -text -eol whitespace=cr-at-eol
+assets/source/effects/nam_de_dark_v01/** -text -eol whitespace=cr-at-eol
+assets/exports/effects/nam_de_dark_v01/** -text -eol whitespace=cr-at-eol
+assets/source/effects/bac_cai_m4d_v0[45]/** -text -eol whitespace=cr-at-eol
+assets/exports/effects/bac_cai_m4d_v0[45]/** -text -eol whitespace=cr-at-eol
+docs/evidence/nam-de-dark/** -text -eol whitespace=cr-at-eol
+# Raw diagnostic output includes intentional banner whitespace.
+docs/evidence/nam-de-dark/*.log -whitespace
+docs/evidence/nam-de-dark/**/*.log -whitespace

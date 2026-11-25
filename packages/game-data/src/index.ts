@@ -80,3 +80,4 @@ export * from './con-luan.js';
 export * from './arena-variants.js';
 
 export * from './arena-props.js';
+export * from './difficulty.js';

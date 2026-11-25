@@ -171,3 +171,35 @@ it.each([
     expect(bossBanterLines[heard[0]!.event.abilityId]).toBeTruthy();
   },
 );
+
+it('defers new dialogue for the entire skill-name window, then resumes the same seeded deck', async () => {
+  const { announceBossSkill } =
+    await import('../packages/game-core/src/boss-skill-announcement.js');
+  const { w, c } = setup();
+  stepBossBanter(w, c);
+  w.tick = 2;
+  w.events = [];
+  announceBossSkill(w, 'hong_liet_boss', 'hong_liet_hoa_son_bao_phat');
+  stepBossBanter(w, c);
+  expect(
+    w.events.some(
+      (e) => e.sourceId === 'hong_liet_boss' && e.stage === 'boss_banter',
+    ),
+  ).toBe(false);
+  w.tick++;
+  w.events = [];
+  stepBossBanter(w, c);
+  expect(
+    w.events.some(
+      (e) => e.sourceId === 'hong_liet_boss' && e.stage === 'boss_banter',
+    ),
+  ).toBe(false);
+  w.tick = 2 + Math.ceil(c.tickRate * 1.25);
+  w.events = [];
+  stepBossBanter(w, c);
+  expect(
+    w.events.filter(
+      (e) => e.sourceId === 'hong_liet_boss' && e.stage === 'boss_banter',
+    ),
+  ).toHaveLength(1);
+});

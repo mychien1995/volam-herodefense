@@ -1,6 +1,11 @@
 import type { LobbyState } from '@volam/game-protocol';
 import { m1Config, invasionCreepName } from '@volam/game-data';
-import { loiDai, type WaveArenaView } from '@volam/game-core';
+import {
+  loiDai,
+  waveBossTestNext,
+  type BossTestSkipStage,
+  type WaveArenaView,
+} from '@volam/game-core';
 
 import { statueName } from '@volam/game-data';
 
@@ -9,14 +14,33 @@ export class DefenseHud {
   private readonly warning = document.createElement('p');
   private readonly defeat = document.createElement('div');
   private wasDefeated = false;
-  constructor(viewport: HTMLElement, onLeave: () => void) {
+  private skipStage: BossTestSkipStage | 'vuong_trung_duong' | undefined;
+  constructor(
+    viewport: HTMLElement,
+    onLeave: () => void,
+    onSkip: (
+      stage:
+        BossTestSkipStage | 'vuong_trung_duong' | 'vuong_notes' | 'nam_de_dark',
+    ) => void,
+  ) {
     this.panel.id = 'defense-hud';
     this.panel.className = 'framed';
     this.panel.hidden = true;
     this.panel.innerHTML =
       '<strong>' +
       statueName +
-      '</strong><div id="statue-meter" role="meter" aria-label="Sinh lực tượng" aria-valuemin="0"><i></i><span></span></div><span id="dong-ta-status" hidden></span><span id="invasion-countdown"></span><span id="next-invasion-creep"></span>';
+      '</strong><div id="statue-meter" role="meter" aria-label="Sinh lực tượng" aria-valuemin="0"><i></i><span></span></div><span id="dong-ta-status" hidden></span><span id="invasion-countdown"></span><span id="next-invasion-creep"></span><button id="boss-test-skip" hidden></button><button id="boss-test-notes" hidden>Test Thất Tuyệt Lôi Âm</button><button id="boss-test-nam-dark" hidden>Test Nam Đế hắc hóa</button>';
+    this.panel
+      .querySelector<HTMLButtonElement>('#boss-test-skip')!
+      .addEventListener('click', () => {
+        if (this.skipStage) onSkip(this.skipStage);
+      });
+    this.panel
+      .querySelector('#boss-test-notes')!
+      .addEventListener('click', () => onSkip('vuong_notes'));
+    this.panel
+      .querySelector('#boss-test-nam-dark')!
+      .addEventListener('click', () => onSkip('nam_de_dark'));
     this.warning.id = 'invasion-warning';
     this.warning.hidden = true;
     this.warning.setAttribute('role', 'status');
@@ -35,7 +59,7 @@ export class DefenseHud {
     this.wasDefeated = false;
     document.body.classList.remove('invasion-notice');
   }
-  update(state: LobbyState): void {
+  update(state: LobbyState, host = false): void {
     const won = state.phase === 'VICTORY';
     const d = state.defense,
       active =
@@ -146,14 +170,60 @@ export class DefenseHud {
         'Đã mở đủ 20 đợt xâm lăng';
     if (d.devWaveBosses) {
       this.panel.querySelector('strong')!.textContent =
-        'DEV · ' + (testBossNames[d.devWaveBossStage] ?? 'Boss wave');
+        'DEV · ' +
+        (testBossNames[d.devWaveBossStage] ?? 'Boss wave') +
+        (d.difficulty === 'easy' ? ' · Dễ' : ' · Khó');
       this.panel.querySelector('#invasion-countdown')!.textContent = d.paused
         ? 'Tạm dừng — toàn đội đang trong phó bản boss'
         : 'Đông Tà → Tây Độc → Nam Đế → Bắc Cái' +
           (d.devFinalBoss ? ' → Vương Trùng Dương' : '');
       roster.hidden = false;
-      roster.textContent = 'Bất tử · Chạy ×3 · Mỗi hit boss −5% HP';
+      roster.textContent = campaign
+        ? 'Test progression · Cấp 6/12/18/24/27 · Đồ theo boss · 3 hồi sinh'
+        : 'Bất tử · Chạy ×3 · Mỗi hit boss −5% HP';
     }
+    const skip =
+      this.panel.querySelector<HTMLButtonElement>('#boss-test-skip')!;
+    const stage = d.devWaveBossStage;
+    const vtd = state.vuong.get('arena')?.snapshot;
+    const notesTest = !!vtd && !!JSON.parse(vtd).notesTest;
+    const notesButton =
+      this.panel.querySelector<HTMLButtonElement>('#boss-test-notes')!;
+    notesButton.hidden = !(
+      host &&
+      state.phase === 'IN_GAME' &&
+      d.devWaveBosses &&
+      campaign
+    );
+    notesButton.textContent = notesTest
+      ? 'Test lại Thất Tuyệt Lôi Âm'
+      : 'Test Thất Tuyệt Lôi Âm';
+    this.skipStage =
+      host &&
+      state.phase === 'IN_GAME' &&
+      d.devWaveBosses &&
+      campaign &&
+      (Object.hasOwn(waveBossTestNext, stage) ||
+        (stage === 'vuong_trung_duong' &&
+          !!state.vuong.get('arena')?.snapshot &&
+          (JSON.parse(state.vuong.get('arena')!.snapshot).phase === 1 ||
+            notesTest)))
+        ? (stage as BossTestSkipStage | 'vuong_trung_duong')
+        : undefined;
+    this.panel.querySelector<HTMLButtonElement>('#boss-test-nam-dark')!.hidden =
+      !(
+        host &&
+        state.phase === 'IN_GAME' &&
+        d.devWaveBosses &&
+        campaign &&
+        ['dong_ta', 'tay_doc', 'nam_de'].includes(stage)
+      );
+    skip.hidden = !this.skipStage;
+    if (this.skipStage)
+      skip.textContent =
+        this.skipStage === 'vuong_trung_duong'
+          ? 'Bỏ qua → Vương Trùng Dương phase 2'
+          : 'Bỏ qua → ' + testBossNames[waveBossTestNext[this.skipStage]];
     const noticeName = invasionCreepName(d.noticeWave);
     const rosterNotice = noticeName ? ` · ${noticeName}` : '';
     const showNotice =

@@ -400,6 +400,7 @@ export interface Ability {
 export interface SimulationConfig {
   /** Installed only in the independent PvP round's copied configuration. */
   pvp1v1?: Pvp1v1Tuning;
+  difficulty?: 'easy' | 'hard';
   bossesWaitForHit?: boolean;
   combatCollision?: Rect[] | undefined;
   campaign?: CampaignDefinition;
@@ -478,6 +479,7 @@ export interface SimulationConfig {
   };
 }
 export type Command =
+  | { kind: 'nam-de-guard' }
   | { kind: 'tam-lien-tram' }
   | { kind: 'nam-de-key'; castId: string; index: number; key: NamDeKey }
   | { kind: 'move'; x: number; y: number }
@@ -584,6 +586,7 @@ export interface Hero extends Actor {
   basicStage?: string | undefined;
   basicChainDeadline?: { abilityId: string; until: number };
   bossSpectator?: boolean;
+  lastUniversalDashTick?: number;
   dashCharges?: number;
   dashRechargeAt?: number;
 
@@ -613,6 +616,7 @@ export interface Hero extends Actor {
   basicChains?: Record<string, number>;
 }
 export interface Creep extends Actor {
+  bossShoutTick?: number;
   provoked?: boolean;
   campaignPlayers?: number;
   damagedBy?: Set<string>;

@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-25",
+  "branch": "milestone/m4d",
+  "protocol": 51,
+  "checks": [
+    {
+      "command": "node node_modules/typescript/bin/tsc -b",
+      "status": "PASS"
+    },
+    {
+      "command": "node node_modules/typescript/bin/tsc -p tsconfig.tools.json --noEmit",
+      "status": "PASS"
+    },
+    {
+      "command": "node node_modules/vitest/vitest.mjs run tests/boss-progression.test.ts tests/boss-progression-skip-room.test.ts tests/wave-boss-test.test.ts",
+      "status": "PASS",
+      "tests": 14,
+      "log": ".cache/m4d-skip-focused.log"
+    },
+    {
+      "command": "pnpm check:browser --config playwright.boss-progression.config.ts --grep 'solo host skips'",
+      "status": "Preparation/compile/build PASS; browser first stopped on a fixture assuming one death per loop. Browser retried separately."
+    },
+    {
+      "command": "node tools/run-playwright.mjs test --config playwright.boss-progression.config.ts --grep 'solo host skips'",
+      "status": "PASS",
+      "tests": 1,
+      "log": ".cache/m4d-skip-browser-confirmed.log"
+    }
+  ],
+  "observations": [
+    "Host-only expected-stage command; forged/stale requests rejected.",
+    "Both peers receive exact next preset.",
+    "Actual four-life solo wipe enters a real ballot; skip works there.",
+    "DOM button advances Tây Độc/Lv12/one craft, Nam Đế/Lv18/two, Bắc Cái/Lv24/three, VTD/Lv27/four.",
+    "VTD actual network encounter projection reaches fighting with positive HP.",
+    "Skip is tracked separately and grants no kill/death rewards or actual campaign clears."
+  ],
+  "retry_notes": "Fixture now treats already-dead actors/ballots as no-op prerequisites and waits for server receipts. Final assertion reads the dedicated VTD projection; VTD intentionally is absent from generic creep state.",
+  "evidence": "skip-ballot.png",
+  "recordings_created": false,
+  "full_suite_run": false,
+  "manual_service": {
+    "client": "http://127.0.0.1:5560/?debug=1&m4d=1&fix=skip-boss",
+    "server_port": 2960,
+    "run_id": "b6308e90-6e7d-45f6-a84f-12afdb2f9919",
+    "protocol": 51
+  }
+}

@@ -24,7 +24,11 @@ import {
   creepDungeon,
   createInvasionDefinition,
 } from '@volam/game-data';
-import { inputSchema, PROTOCOL_VERSION } from '@volam/game-protocol';
+import {
+  inputSchema,
+  combatEventSchema,
+  PROTOCOL_VERSION,
+} from '@volam/game-protocol';
 function setup() {
   const c = structuredClone(m1Config);
   c.creepSpawns = [];
@@ -226,7 +230,7 @@ describe('Nam Đế authoritative encounter', () => {
     'QTE %s loses70%% maxHP, heals10%%, closes and stuns2s; replay cannot heal twice',
     (result) => {
       const s = challenge();
-      s.b.hp = s.b.maxHp * 0.4;
+      s.b.hp = s.b.maxHp * 0.5;
       const mana = s.h.mana;
       s.h.statuses = [
         {
@@ -259,7 +263,7 @@ describe('Nam Đế authoritative encounter', () => {
       expect(s.q.state).toBe(result);
       expect(s.h.hp).toBeCloseTo(s.h.maxHp * 0.3);
       expect(s.h.mana).toBeGreaterThanOrEqual(mana);
-      expect(s.b.hp).toBe(s.b.maxHp * 0.5);
+      expect(s.b.hp).toBe(s.b.maxHp * 0.6);
       expect(s.h.namDeLocked).toBe(false);
       expect(
         s.h.statuses?.some(
@@ -270,7 +274,7 @@ describe('Nam Đế authoritative encounter', () => {
         [...s.w.namDe!.effects.values()].some((e) => e.kind === 'backlash'),
       ).toBe(true);
       answerNamDe(s.w, s.c, s.h, s.q.id, 0, 'up');
-      expect(s.b.hp).toBe(s.b.maxHp * 0.5);
+      expect(s.b.hp).toBe(s.b.maxHp * 0.6);
       steps(s, 60);
       expect(s.w.namDe!.controls.get('a')?.stunUntil ?? 0).toBeLessThanOrEqual(
         s.w.tick,
@@ -372,6 +376,8 @@ describe('Nam Đế authoritative encounter', () => {
     expect(s.w.namDe!.controls.has('a')).toBe(false);
     s.b.hits = { a: s.w.tick, b: s.w.tick };
     const gold = s.h.gold;
+    hurt(s.w, s.b, 'a', 'test', 1e9, s.c);
+    expect(s.w.namDe!.dark).toBeDefined();
     hurt(s.w, s.b, 'a', 'test', 1e9, s.c);
     steps(s, 1);
     expect(s.w.namDe!.phase).toBe('defeated');
@@ -522,4 +528,35 @@ describe('Nam Đế authoritative encounter', () => {
     steps(s, 1);
     expect(s.w.namDe!.cast).toBeUndefined();
   });
+});
+
+it('gives Đại Lý Phong Huyệt seven seconds and reduces small-finger base damage by 15 percent', () => {
+  const s = challenge();
+  expect(s.d.qteTicks).toBe(210);
+  expect(s.q.until - s.w.tick).toBe(209); // challenge() has already advanced one QTE tick.
+  expect(s.d.damage.small).toBeCloseTo(45 * 0.85);
+  steps(s, 150);
+  expect(s.w.namDe!.controls.get(s.h.id)!.qte!.state).toBe('pending');
+});
+
+it('sends a valid sealed event without spreading hero fields into the combat envelope', () => {
+  const s = setup();
+  s.h.x = 760;
+  s.h.y = 800;
+  beginNamDeCast(s.w, s.c, 'dai_ly_phong_huyet', s.h.id);
+  let sealed;
+  for (let i = 0; i < 30; i++) {
+    steps(s, 1);
+    sealed = s.w.events.find((e) => e.stage === 'sealed');
+    if (sealed) break;
+  }
+  expect(sealed).toBeDefined();
+  expect(
+    combatEventSchema.safeParse({
+      ...sealed,
+      id: 1,
+      protocolVersion: PROTOCOL_VERSION,
+      zoneId: 'arena',
+    }).success,
+  ).toBe(true);
 });

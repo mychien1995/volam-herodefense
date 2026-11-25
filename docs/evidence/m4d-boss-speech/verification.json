@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-25",
+  "branch": "milestone/m4d",
+  "protocol": 50,
+  "damage_ratio": 0.85,
+  "checks": [
+    {
+      "command": "node node_modules/vitest/vitest.mjs run tests/difficulty.test.ts tests/difficulty-room.test.ts tests/boss-banter.test.ts",
+      "status": "PASS",
+      "tests": 19,
+      "log": ".cache/m4d-boss-text-focused.log"
+    },
+    {
+      "command": "node node_modules/typescript/bin/tsc -b",
+      "status": "PASS"
+    },
+    {
+      "command": "node node_modules/typescript/bin/tsc -p tsconfig.tools.json --noEmit",
+      "status": "PASS"
+    },
+    {
+      "command": "pnpm check:browser --config playwright.boss-progression.config.ts --grep 'boss skill names'",
+      "status": "PASS",
+      "tests": 1,
+      "clients": 2,
+      "log": ".cache/check-workflow/36afb0ce-5c80-48f5-b093-af4cdba162be/4-browser-verification.log"
+    }
+  ],
+  "reproduced_before_fix": "Four failing regressions demonstrated wrong damage and banter during the name display window; .cache/m4d-boss-text-before.log",
+  "observations": [
+    "Existing dialogue replaced by a real server cast announcement on both clients.",
+    "No visible banter alongside the skill name.",
+    "Skill names and dialogue use 14px text with camera/DPR-aware resolution >=2.",
+    "One actual postrender PNG inspected at gameplay zoom."
+  ],
+  "evidence": "boss-speech.png",
+  "recordings_created": false,
+  "full_suite_run": false
+}

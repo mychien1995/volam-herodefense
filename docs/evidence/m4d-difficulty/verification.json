@@ -1,0 +1,58 @@
+{
+  "date": "2026-11-25",
+  "branch": "milestone/m4d",
+  "baseline": "82ddf8e0",
+  "protocol": 50,
+  "scope": "Focused difficulty/Đông Tà/progression/M4D checks, per user request; no full suite or human campaign victory claim.",
+  "checks": [
+    {
+      "command": "node node_modules/typescript/bin/tsc -b",
+      "result": "PASS"
+    },
+    {
+      "command": "node node_modules/typescript/bin/tsc -p tsconfig.tools.json --noEmit",
+      "result": "PASS"
+    },
+    {
+      "command": "node node_modules/vitest/vitest.mjs run tests/difficulty.test.ts tests/difficulty-room.test.ts tests/dong-ta.test.ts tests/boss-progression.test.ts tests/m4d.test.ts",
+      "result": "PASS",
+      "files": 5,
+      "tests": 54,
+      "log": ".cache/difficulty-focused-retry.log"
+    },
+    {
+      "command": "pnpm check:browser --config playwright.boss-progression.config.ts",
+      "result": "Preparation, compile and production build PASS; browser initially failed on test locator. Retried browser only after fixing locator."
+    },
+    {
+      "command": "node tools/run-playwright.mjs test --config playwright.boss-progression.config.ts",
+      "result": "PASS",
+      "tests": 2,
+      "log": ".cache/difficulty-browser-retry.log"
+    },
+    {
+      "command": "node tools/run-playwright.mjs test --config playwright.boss-progression.config.ts --grep 'easy room'",
+      "result": "PASS",
+      "tests": 1,
+      "log": ".cache/difficulty-visual-final.log",
+      "note": "Same easy case, not additive coverage; uses existing afterRender hook for one real GPU PNG. Float32 network coordinates compared with 0.01 world-unit tolerance."
+    }
+  ],
+  "evidence": "easy-rectangle.png",
+  "observed": [
+    "Two peers receive easy room selection, level 6 and gear level 2.",
+    "Default new room remains hard.",
+    "Real player A damages boss to provoke M4D combat.",
+    "Rectangle warning is visible before movement on normal gameplay canvas.",
+    "Real Ngọc Tiêu holds boss position; deterministic core tests cover all petal expiration ticks."
+  ],
+  "manual_service": {
+    "client": "http://127.0.0.1:5560/?debug=1&m4d=1",
+    "server": "http://127.0.0.1:2960",
+    "milestone": "M4D",
+    "protocol": 50,
+    "run_id": "4d0a3354-aed8-4b56-9883-231f4d025bd2"
+  },
+  "recordings_created": false,
+  "art_approval_granted": false
+}

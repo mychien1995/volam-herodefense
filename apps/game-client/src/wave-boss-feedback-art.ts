@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { readableWorldText } from './readable-world-text.js';
 import {
   renovationEnabled,
   renovationHeight,
@@ -288,18 +289,20 @@ export class WaveBossHealth {
       v = {
         text: this.scene.add
           .text(0, 0, '', {
-            fontSize: '11px',
+            fontFamily: 'Segoe UI, sans-serif',
+            fontSize: '14px',
             color: '#fff1bc',
             stroke: '#151b14',
-            strokeThickness: 3,
+            strokeThickness: 2,
           })
+          .setName('boss-name:' + id)
           .setOrigin(0.5, 1),
         bar: this.scene.add.graphics(),
       };
       this.views.set(id, v);
     }
-    v.text
-      .setText(name)
+    readableWorldText(v.text)
+      .setText(name.normalize('NFC'))
       .setPosition(x, y)
       .setDepth(y + 200);
     v.bar.clear().setVisible(width > 0);
@@ -338,7 +341,17 @@ export class WaveArenaPresentation {
     const v = state?.defense.waveArena
       ? (JSON.parse(state.defense.waveArena) as WaveArenaView | null)
       : null;
-    const locked = zone === 'arena' && !!v?.locked;
+    const bac = state?.bacCai.get('arena')?.snapshot;
+    const vuong = state?.vuong.get('arena')?.snapshot;
+    const bacPhase = bac ? (JSON.parse(bac) as { phase: string }).phase : '';
+    const vuongPhase = vuong
+      ? (JSON.parse(vuong) as { state: string }).state
+      : '';
+    const locked =
+      zone === 'arena' &&
+      (!!v?.locked ||
+        (!!bacPhase && !['cleared', 'defeated'].includes(bacPhase)) ||
+        vuongPhase === 'fighting');
     for (const name of [
       'art01:statue_male',
       'art01:lantern:left',

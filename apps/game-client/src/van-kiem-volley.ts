@@ -6,8 +6,8 @@ if (effect.mode !== 'area' || !effect.skyfall)
   throw Error('Vạn Kiếm Quy Tông requires a skyfall definition');
 export const vanKiemSky = effect.skyfall;
 const tickMs = 1000 / m1Config.tickRate;
-const firstLaunch = 120;
-const riseDuration = 520;
+const firstLaunch = 80;
+const riseDuration = 300;
 const burstDuration = 235;
 const bladeWidthScale = 1.1;
 const bladeLengthScale = 1.2;

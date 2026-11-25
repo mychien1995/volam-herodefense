@@ -1,3 +1,5 @@
+M4D current test override: [Bắc Đẩu28 sao, pulse di chuyển, Cửu Âm giữ khoảng và mode luyện âm](M4D_VTD_FOLLOW_UP_2026_11_25.md). Historical seven-star layout below remains the baseline record.
+
 # Vương Trùng Dương — Trung Thần Thông
 
 Thiết kế chốt ngày 2026-11-05. Vương Trùng Dương là boss cuối, xuất hiện ở sân chính sau khi cả bốn wave boss Đông Tà, Tây Độc, Nam Đế và Bắc Cái đã bị đánh bại. Hạ ông khi tượng còn sống thì thắng trận. Phần thưởng boss xâm lăng là vàng và EXP. [Luật tiến trình trận](../GAME_DESIGN.md#4-invasion-timetable-and-boss-gates)

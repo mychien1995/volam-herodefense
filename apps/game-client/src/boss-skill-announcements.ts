@@ -4,7 +4,11 @@ import {
   bossBanterLines,
   waveBossFarewells,
 } from '@volam/game-data';
-import type { CombatEvent, BacCaiView } from '@volam/game-core';
+import {
+  bossSkillAnnouncementSeconds,
+  type CombatEvent,
+  type BacCaiView,
+} from '@volam/game-core';
 import type { LobbyState } from '@volam/game-protocol';
 
 /** One server-authored announcement per special cast, shared by arena and dungeons. */
@@ -37,6 +41,22 @@ export class BossSkillAnnouncements {
       ? (waveBossFarewells as Readonly<Record<string, string>>)[event.abilityId]
       : (banter ? bossBanterLines : bossSkillNames)[event.abilityId];
     if (!name) return true;
+    const shout = this.labels.get(event.sourceId);
+    if (
+      banter &&
+      shout &&
+      this.scene.time.now - shout.at < bossSkillAnnouncementSeconds * 1000
+    )
+      return true;
+    if (!banter) {
+      const dialogueKey = event.sourceId + ':banter';
+      this.labels.get(dialogueKey)?.text.destroy();
+      this.labels.delete(dialogueKey);
+      if (farewell) {
+        shout?.text.destroy();
+        this.labels.delete(event.sourceId);
+      }
+    }
     const key = event.sourceId + (banter || farewell ? ':banter' : '');
     const old = this.labels.get(key);
     const text =
@@ -44,10 +64,10 @@ export class BossSkillAnnouncements {
       this.scene.add
         .text(0, 0, '', {
           fontFamily: 'Segoe UI, sans-serif',
-          fontSize: '12px',
+          fontSize: '14px',
           color: '#fff1bc',
           stroke: '#151b14',
-          strokeThickness: 3,
+          strokeThickness: 2,
           align: 'center',
           wordWrap: { width: 300, useAdvancedWrap: true },
         })
@@ -63,7 +83,9 @@ export class BossSkillAnnouncements {
       (banter ? 'boss-banter:' : farewell ? 'boss-farewell:' : 'boss-shout:') +
         event.sourceId,
     );
-    text.setText(name);
+    text.setResolution(this.textResolution());
+    text.texture.setFilter(Phaser.Textures.FilterMode.LINEAR);
+    text.setText(name.normalize('NFC'));
     this.labels.set(key, {
       sourceId: event.sourceId,
       banter,
@@ -83,6 +105,17 @@ export class BossSkillAnnouncements {
     if (this.observed.length > 128) this.observed.shift();
     return true;
   }
+  private textResolution(): number {
+    return Math.min(
+      6,
+      Math.max(
+        2,
+        Math.ceil(
+          this.scene.cameras.main.zoom * (window.devicePixelRatio || 1),
+        ),
+      ),
+    );
+  }
   sync(state: LobbyState | undefined, zone: string) {
     if (!this.labels.size) return;
     const raw = zone === 'arena' ? state?.bacCai.get('arena')?.snapshot : '';
@@ -95,7 +128,14 @@ export class BossSkillAnnouncements {
         : 12;
     for (const [key, v] of this.labels) {
       const id = v.sourceId;
-      const lifetime = v.farewell ? 4.7 : v.banter ? 4 : 1.25;
+      const lifetime = v.farewell
+        ? 4.7
+        : v.banter
+          ? 4
+          : bossSkillAnnouncementSeconds;
+      const resolution = this.textResolution();
+      if (v.text.style.resolution !== resolution)
+        v.text.setResolution(resolution);
       const actor =
           id === 'bac_cai' &&
           bc &&
@@ -116,8 +156,12 @@ export class BossSkillAnnouncements {
       const position = v.farewell ? v.anchor : actor!;
       const dialogue = v.banter || v.farewell;
       let x = position.x;
+      const darkNamDe =
+        id === 'boss_nam_de' &&
+        !!JSON.parse(state?.defense.namDe || 'null')?.dark;
       let y =
         position.y -
+        (darkNamDe ? 70 : 0) -
         (dialogue ? 116 : 85) -
         10 * Math.min(1, Math.max(0, age / 0.35));
       const view = camera.worldView;
@@ -148,6 +192,8 @@ export class BossSkillAnnouncements {
         y: v.text.y,
         alpha: v.text.alpha,
         visible: v.text.visible,
+        resolution: v.text.style.resolution,
+        fontSize: v.text.style.fontSize,
       })),
       observed: this.observed,
     };

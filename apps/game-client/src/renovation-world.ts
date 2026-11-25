@@ -7,6 +7,7 @@ export function createRenovationWorld(
   scene: Phaser.Scene,
   zone: string,
   arenaGroundKey = 'renovated-arena-layout',
+  center = { x: 800, y: 576 },
 ): Phaser.GameObjects.Image[] {
   const map = zone === 'arena' ? arena : dungeonForZone(zone),
     id = zone === 'arena' ? 'arena' : dungeonForZone(zone).id;
@@ -59,9 +60,9 @@ export function createRenovationWorld(
     return image;
   };
   if (id === 'arena') {
-    prop(4, 800, 576, 1, 'art01:statue_male');
-    prop(2, 744, 578, 0.65, 'art01:lantern:left');
-    prop(2, 856, 578, 0.65, 'art01:lantern:right');
+    prop(4, center.x, center.y, 1, 'art01:statue_male');
+    prop(2, center.x - 56, center.y + 2, 0.65, 'art01:lantern:left');
+    prop(2, center.x + 56, center.y + 2, 0.65, 'art01:lantern:right');
   } else {
     prop(0, map.width * 0.08, map.height * 0.24, 0.8);
     prop(1, map.width * 0.92, map.height * 0.24, 0.8);

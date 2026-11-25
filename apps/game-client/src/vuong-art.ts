@@ -1,3 +1,4 @@
+import { readableWorldText } from './readable-world-text.js';
 import { markImpactTarget } from './m3d-hit-art.js';
 import { clipBeat } from './m3d-approved-boss-body.js';
 import Phaser from 'phaser';
@@ -7,6 +8,7 @@ import {
   VUONG_ID,
   vuongElements,
   vuongNotes,
+  vuongStarLight,
   type VuongView,
 } from '@volam/game-core';
 import { WaveBossHealth } from './wave-boss-feedback-art.js';
@@ -95,18 +97,18 @@ export class VuongArt {
       text = this.scene.add
         .text(x, y, value, {
           fontFamily: 'Segoe UI, sans-serif',
-          fontSize: '13px',
+          fontSize: '14px',
           color: '#ffe9af',
           stroke: '#201824',
-          strokeThickness: 4,
+          strokeThickness: 2,
           resolution: 2,
         })
         .setOrigin(0.5)
         .setName('vtd:' + id);
       this.text.set(id, text);
     }
-    text
-      .setText(value)
+    readableWorldText(text)
+      .setText(value.normalize('NFC'))
       .setPosition(x, y)
       .setColor(bright ? '#fffad5' : '#ead9ad')
       .setDepth(18500);
@@ -218,6 +220,43 @@ export class VuongArt {
     const fade = warning
       ? 0.65 + Math.sin(now * 0.4) * 0.17
       : Math.max(0.2, Math.min(1, (e.until - now) / 5));
+    if (e.kind === 'starLine' && e.end) {
+      const dx = e.end.x - e.x,
+        dy = e.end.y - e.y,
+        angle = Math.atan2(dy, dx);
+      this.fx(
+        id + ':guide',
+        'line2',
+        e.x + dx / 2,
+        e.y + dy / 2,
+        Math.hypot(dx, dy),
+        warning ? 5 : 3,
+      )
+        ?.setRotation(angle)
+        .setAlpha(warning ? 0.38 : 0.12);
+      if (!warning) {
+        const point = vuongStarLight(e, now),
+          tail = vuongStarLight(e, now - 3);
+        this.fx(
+          'star-trail:' + id,
+          'thrust2',
+          (point.x + tail.x) / 2,
+          (point.y + tail.y) / 2,
+          Math.max(10, Math.hypot(point.x - tail.x, point.y - tail.y) + 12),
+          16,
+          32,
+        )
+          ?.setRotation(angle)
+          .setAlpha(fade);
+        this.fx('star-glow:' + id, 'star', point.x, point.y, 44, 44, 32)
+          ?.setAlpha(fade * 0.28)
+          .setBlendMode(Phaser.BlendModes.ADD);
+        this.fx('star-light:' + id, 'star', point.x, point.y, 32, 32, 33)
+          ?.setAlpha(fade)
+          .setBlendMode(Phaser.BlendModes.ADD);
+      }
+      return;
+    }
     if (e.velocity) {
       const frame = (e.kind === 'crescent' ? 'slash' : 'thrust') + phase;
       this.fx(
@@ -329,6 +368,8 @@ export class VuongArt {
     const phrase = new SpeechSynthesisUtterance(message);
     phrase.voice = voice;
     phrase.lang = 'vi-VN';
+    // Never let the previous seven-note recital delay the current server beat.
+    if (key.startsWith('notes:')) window.speechSynthesis.cancel();
     window.speechSynthesis.speak(phrase);
   }
   sync(state: LobbyState | undefined, zone: string) {
@@ -525,12 +566,23 @@ export class VuongArt {
       this.restorePalette();
     }
     this.view = undefined;
+    if (this.spoken.startsWith('notes:')) window.speechSynthesis?.cancel();
     this.spoken = '';
   }
   inspect() {
     const actor = this.images.get('actor');
     return {
       phase: this.view?.phase,
+      stars: this.view?.stars.length ?? 0,
+      notesTest: this.view?.notesTest ?? false,
+      starLights: [...this.images]
+        .filter(([id]) => id.startsWith('star-light:'))
+        .map(([id, image]) => ({
+          id,
+          x: image.x,
+          y: image.y,
+          visible: image.visible,
+        })),
       frames: [...this.observed],
       visible: this.images.size,
       actor: actor

@@ -1,3 +1,4 @@
+import { readableWorldText } from './readable-world-text.js';
 import { arenaVariants, type ArenaId } from '@volam/game-data';
 import { frameWorld, nativeGameplayZoom } from './camera-policy.js';
 import { SkillReviseArt, preloadSkillRevise } from './skill-revise-art.js';
@@ -236,6 +237,7 @@ export class ArenaScene extends Phaser.Scene {
   private story: Phaser.GameObjects.Text | undefined;
   private storyStartedAt = 0;
   private followOffsetY = 48;
+  private notesFraming = false;
 
   private presentStatueStory(): void {
     const player = this.snapshot?.players.get(this.sessionId);
@@ -259,7 +261,8 @@ export class ArenaScene extends Phaser.Scene {
       this.story = this.add
         .text(at.x, at.y + 62, '', {
           fontFamily: 'Segoe UI, sans-serif',
-          fontSize: '10px',
+          fontSize: '14px',
+          resolution: 4,
           color: '#fff1c5',
           backgroundColor: '#192117',
           align: 'center',
@@ -276,12 +279,11 @@ export class ArenaScene extends Phaser.Scene {
         Math.floor((this.time.now - this.storyStartedAt) / 6500)
       ];
     if (line)
-      this.story
+      readableWorldText(this.story)
         .setText(line)
         .setVisible(
           statue.visible &&
-            Math.hypot(player.x - arena.spawn.x, player.y - arena.spawn.y) <
-              110,
+            Math.hypot(player.x - statue.x, player.y - statue.y) < 190,
         );
     else {
       this.story.destroy();
@@ -1568,6 +1570,7 @@ export class ArenaScene extends Phaser.Scene {
         if (this.followed) this.cameras.main.stopFollow();
         this.followed = '';
       } else if (
+        !this.notesFraming &&
         this.zoneId !== loiDai.id &&
         !isKimLuanZone(this.zoneId) &&
         id === this.sessionId &&
@@ -1662,6 +1665,38 @@ export class ArenaScene extends Phaser.Scene {
     this.followOffsetY +=
       (introOffset - this.followOffsetY) * Math.min(1, delta / 85);
     camera.setFollowOffset(0, this.followOffsetY);
+    const notesRaw =
+      this.zoneId === 'arena' ? state?.vuong.get('arena')?.snapshot : undefined;
+    const notesView = notesRaw ? JSON.parse(notesRaw) : null;
+    const framingNotes = notesView?.action?.skill === 'notes';
+    if (framingNotes) {
+      // Keep the entire six-note ring visible above the skill bar, even when
+      // the player travels to its northern/southern edge.
+      camera.stopFollow();
+      this.followed = '';
+      const top = this.scale.width < 700 ? 185 : 210;
+      const bottom = 140;
+      const safeHeight = Math.max(120, this.scale.height - top - bottom);
+      const safeWidth = Math.max(
+        240,
+        this.scale.width - Math.min(520, this.scale.width / 2),
+      );
+      const zoom = Math.min(
+        nativeGameplayZoom(this.scale),
+        safeWidth / 360,
+        safeHeight / 360,
+      );
+      camera.setZoom(zoom);
+      const middle = top + safeHeight / 2;
+      camera.centerOn(
+        notesView.center.x,
+        notesView.center.y + (this.scale.height / 2 - middle) / zoom,
+      );
+    } else if (this.notesFraming) {
+      this.fitCamera();
+      this.followed = '';
+    }
+    this.notesFraming = framingNotes;
     this.vfx?.sync(
       state,
       this.zoneId,
@@ -1989,6 +2024,35 @@ export class ArenaScene extends Phaser.Scene {
       bossShouts: this.bossShouts?.inspect(),
       waveArena: this.waveArena?.inspect(),
       chu: this.chu?.inspect(),
+      readableWorldLabels: this.children.list
+        .filter(
+          (o) =>
+            o instanceof Phaser.GameObjects.Text &&
+            (o.name === 'statue-introduction' ||
+              o.name.startsWith('boss-name:')),
+        )
+        .map((o) => {
+          const t = o as Phaser.GameObjects.Text;
+          return {
+            name: t.name,
+            text: t.text,
+            resolution: t.style.resolution,
+            fontSize: t.style.fontSize,
+            visible: t.visible,
+          };
+        }),
+      hangLongFrames: this.children.list
+        .filter((o) => o.name.startsWith('hang-long:'))
+        .map((o) => {
+          const image = o as Phaser.GameObjects.Image;
+          return {
+            name: image.name,
+            x: image.x,
+            y: image.y,
+            frame: image.frame.name,
+            elevation: image.getData('server-elevation'),
+          };
+        }),
       ready: this.ready,
       sceneSnapshot: {
         session: this.sessionId,
@@ -2031,6 +2095,8 @@ export class ArenaScene extends Phaser.Scene {
           'art01:lantern:right',
         ].map((name) => ({
           name,
+          x: (this.children.getByName(name) as Phaser.GameObjects.Image)?.x,
+          y: (this.children.getByName(name) as Phaser.GameObjects.Image)?.y,
           visible:
             this.children.getByName(name)?.active &&
             (this.children.getByName(name) as Phaser.GameObjects.Image)
@@ -2158,6 +2224,7 @@ export class ArenaScene extends Phaser.Scene {
         .filter((object) => object.name === 'loi-dai:victory')
         .map((object) => (object as Phaser.GameObjects.Sprite).frame.name),
       zoom: this.cameras.main.zoom,
+      notesFraming: this.notesFraming,
       roundPixels: this.cameras.main.roundPixels,
       camera: { x: this.cameras.main.scrollX, y: this.cameras.main.scrollY },
       worldView: {

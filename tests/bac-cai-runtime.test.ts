@@ -7,7 +7,6 @@ import {
   submitInput,
   BacCaiEncounter,
   bacCaiFieldHit,
-  bacCaiSpiral,
   MainBossDirector,
   InvasionDirector,
   DungeonMatch,
@@ -428,17 +427,8 @@ describe('Bắc Cái authoritative encounter', () => {
     expect(e.cast?.ability).toBe('beam');
     expect(e.effects.has(dragon.id)).toBe(true);
     expect(dragon.origin).toEqual(origin);
-    expect(dragon).toMatchObject(
-      bacCaiSpiral(
-        origin,
-        { x: dragon.fx, y: dragon.fy },
-        (w.tick - dragon.start) / (dragon.end - dragon.start),
-        d.spiral.radius,
-        d.spiral.turns,
-        d.spiral.startRadius,
-        d.spiral.yScale,
-      ),
-    );
+    expect({ x: dragon.x, y: dragon.y }).toEqual(d.center);
+    expect(dragon.origin).toEqual(d.center);
   });
   it('vortex replaces pull/slam with nine wandering damage sources and cleans up on recovery', () => {
     const { w, c, e, b, step, ms } = setup(),
@@ -625,5 +615,89 @@ describe('Bắc Cái authoritative encounter', () => {
     const { w, c, d } = setup();
     d.dogs.cadenceMs = NaN;
     expect(() => new BacCaiEncounter(d).initialize(w, c)).toThrow();
+  });
+});
+
+describe('Bắc Cái requested mechanics', () => {
+  it('pauses auto basics throughout the clone choice, accepts manual A, and retains the auto preference', () => {
+    const { w, c, e, d, step, ms } = setup(1);
+    const h = w.heroes.get('hero_0')!;
+    h.autoBasic = true;
+    e.begin(w, c, 'clones');
+    let attacks = 0;
+    for (let i = 0; i < ms(d.clones.splitMs + 5 * 2100); i++) {
+      step();
+      attacks += w.events.filter(
+        (x) => x.kind === 'attack' && x.sourceId === h.id,
+      ).length;
+    }
+    expect(attacks).toBe(0);
+    expect(e.suppressAutoBasic).toBe(true);
+    const copy = [...w.creeps.values()].find(
+      (a) => a.archetypeId === 'bc_form',
+    )!;
+    h.x = copy.x - 40;
+    h.y = copy.y;
+    h.fx = 1;
+    h.fy = 0;
+    submitInput(w, h.id, 1, { kind: 'basic' });
+    step();
+    expect(
+      w.events.some((x) => x.kind === 'attack' && x.sourceId === h.id),
+    ).toBe(true);
+    expect(e.suppressAutoBasic).toBe(false);
+    expect(h.autoBasic).toBe(true);
+  });
+  it('expands a complete ring at arena center, hits either side, and permits an actual Shift crossing', () => {
+    const { w, e, d, step } = setup(3);
+    const [east, west, dasher] = [...w.heroes.values()];
+    for (const [i, h] of [east!, west!, dasher!].entries()) {
+      h.x = d.center.x + (i === 1 ? -120 : 120);
+      h.y = d.center.y;
+      h.moveX = h.moveY = 0;
+    }
+    // Isolate one real released effect at its middle radius; server still owns all hits and dash movement.
+    e.effects.set('ring', {
+      id: 'ring',
+      kind: 'spiral',
+      x: d.center.x,
+      y: d.center.y,
+      origin: { ...d.center },
+      previous: { ...d.center },
+      fx: 1,
+      fy: 0,
+      start: -40,
+      end: 100,
+      targetIds: [],
+      hits: {},
+    });
+    dasher!.fx = -1;
+    dasher!.fy = 0;
+    submitInput(w, dasher!.id, 1, { kind: 'dash' });
+    const hp = [east!.hp, west!.hp, dasher!.hp];
+    step();
+    expect(east!.hp).toBeLessThan(hp[0]!);
+    expect(west!.hp).toBeLessThan(hp[1]!);
+    expect(dasher!.lastUniversalDashTick).toBe(w.tick);
+    expect(
+      w.events.some(
+        (x) => x.targetId === dasher!.id && x.abilityId === 'bc_spiral',
+      ),
+    ).toBe(false);
+    expect(dasher!.hp).toBe(hp[2]);
+    expect(e.effects.get('ring')!.origin).toEqual(d.center);
+  });
+  it('places three preference choices north of the center', () => {
+    const { w, c, e, d, step } = setup(1, (d) => {
+      d.preferences.voteEveryMs = 1;
+    });
+    step();
+    const vote = e.view(w, c).vote!;
+    expect(vote.options.map((o) => o.y)).toEqual([
+      d.center.y - 80,
+      d.center.y - 80,
+      d.center.y - 80,
+    ]);
+    expect(vote.options[1]!.x).toBe(d.center.x);
   });
 });

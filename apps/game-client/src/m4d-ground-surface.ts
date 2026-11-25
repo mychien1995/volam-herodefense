@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 import { materialPattern } from './world-depth-material.js';
-import type { ArenaId } from '@volam/game-data';
+import { arenaVariants, type ArenaId } from '@volam/game-data';
 import plazas from './m4d-plazas.generated.json';
 
 export function preloadGroundSurface(scene: Phaser.Scene): void {
@@ -12,9 +12,24 @@ const geometry: Record<
   ArenaId,
   { x: number; y: number; rx: number; ry: number; cell: number }
 > = {
-  dao_hoa_dao: { x: 800, y: 535, rx: 340, ry: 275, cell: 0 },
-  tuong_duong: { x: 800, y: 500, rx: 340, ry: 280, cell: 1 },
-  tu_hien_trang: { x: 800, y: 535, rx: 305, ry: 256, cell: 2 },
+  dao_hoa_dao: {
+    ...arenaVariants.dao_hoa_dao.circleCenter,
+    rx: 340,
+    ry: 275,
+    cell: 0,
+  },
+  tuong_duong: {
+    ...arenaVariants.tuong_duong.circleCenter,
+    rx: 340,
+    ry: 280,
+    cell: 1,
+  },
+  tu_hien_trang: {
+    ...arenaVariants.tu_hien_trang.circleCenter,
+    rx: 305,
+    ry: 256,
+    cell: 2,
+  },
 };
 /** Native-density authored materials keep the canonical shoreline/layout mask. */
 export function createGroundSurface(scene: Phaser.Scene, id: ArenaId): void {

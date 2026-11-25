@@ -1,0 +1,114 @@
+{
+  "branch": "milestone/m4d",
+  "protocol": 53,
+  "checks": [
+    {
+      "command": "node node_modules/typescript/bin/tsc -b",
+      "result": "PASS"
+    },
+    {
+      "command": "node node_modules/typescript/bin/tsc -p tsconfig.tools.json --noEmit",
+      "result": "PASS"
+    },
+    {
+      "command": "VITE_SERVER_URL=http://127.0.0.1:2959 vite build (apps/game-client)",
+      "result": "PASS; final presenter build13.76s"
+    },
+    {
+      "command": "vitest run tests/vuong-trung-duong.test.ts tests/boss-progression.test.ts tests/boss-progression-skip-room.test.ts tests/bac-cai-runtime.test.ts",
+      "result": "57 PASS; new successful-practice-idle regression subsequently added"
+    },
+    {
+      "command": "vitest run tests/boss-progression.test.ts",
+      "result": "12 PASS; includes added success/idle/no-kill check; 58 unique focused tests across the four files"
+    },
+    {
+      "command": "pnpm qa:preflight --mode browser --config playwright.boss-progression.config.ts",
+      "result": "7 checks PASS"
+    },
+    {
+      "command": "node tools/run-playwright.mjs test --config playwright.boss-progression.config.ts --grep \"M4D VTD follow-up\"",
+      "result": "2 PASS,2.8m; two peers, direct practice/wipe/retry/exit, 28 stars/moving light, native dragon tail"
+    },
+    {
+      "command": "node tools/run-playwright.mjs test --config playwright.boss-progression.config.ts --grep \"M4D VTD follow-up practices notes\"",
+      "result": "1 PASS,1.1m; final brighter/larger moving head and halo; no unrelated case rerun"
+    },
+    {
+      "command": "prepareM4dBossVfx() and alpha validation",
+      "result": "PASS; master/export hashes, RGBA/dimensions,4 unchanged exports, full silhouette and zero-alpha gutters"
+    }
+  ],
+  "focusedUniqueTestCount": 58,
+  "liveUniqueCases": 2,
+  "peers": 2,
+  "mechanics": {
+    "stars": 28,
+    "groups": 4,
+    "simultaneousLinks": 4,
+    "totalPulses": 32,
+    "warningMs": 600,
+    "pulseSpeed": 330,
+    "pulseGapMs": 260,
+    "damagePerPulse": 116,
+    "eyeCount": 1,
+    "shieldHoldRange": 120,
+    "shieldMoveSpeed": 90,
+    "notesReadingMs": 4100,
+    "notesBeatMs": 2600,
+    "notesSequenceLength": 7,
+    "notesDistinctSeals": 6
+  },
+  "practice": {
+    "hostOnly": true,
+    "devProgressionOnly": true,
+    "directFromDongTa": true,
+    "level": 27,
+    "normalHeroGearPreset": true,
+    "noOtherBossHazards": true,
+    "bossCannotBeKilledInPractice": true,
+    "realWipeBallotAndRetry": true,
+    "normalPhaseTwoExit": true,
+    "noRewardOrClearOnPracticeSuccess": true
+  },
+  "art": {
+    "version": "bac_cai_m4d_v05",
+    "staticNativeRGBA": true,
+    "wholeSilhouette": true,
+    "pivot": [
+      0.8,
+      0.5
+    ],
+    "width": 132,
+    "retainedV04": true,
+    "foregroundPixelsUnchangedBySub4AlphaCleanup": true,
+    "approval": "candidate, final director approval pending"
+  },
+  "limits": [
+    "No full suite/check:final, per user focused-check request",
+    "Two clients, not six-player readability/final art acceptance",
+    "Visual palm fixture arranges legal position and HP10000, then real server release/motion; not a normal survival/clear-time claim",
+    "Notes UI trial intentionally fails its first real beat, then retries; all-seven success/isolation verified deterministically in core",
+    "No video/trace/recording",
+    "After the palm live view, alpha below4/255 was removed from transparent noise; painted silhouette unchanged and final static export validated"
+  ],
+  "iterations": [
+    "Before fixes two focused assertions reproduced seven-star layout and close chase",
+    "All-map footprint test caught a star touching TH pond collision; spreadY95 was moved to85, same12-unit legality test passed",
+    "Review at game zoom led to distinct32-unit moving core plus44-unit faint halo; reran affected browser case only"
+  ],
+  "service": {
+    "health": {
+      "status": "ok",
+      "service": "volam-game-server",
+      "runId": "b4088fd7-41e4-4bf7-b31e-99be051f0ce3",
+      "milestone": "M4D",
+      "protocolVersion": 53
+    },
+    "client": {
+      "service": "volam-qa-client",
+      "runId": "b4088fd7-41e4-4bf7-b31e-99be051f0ce3",
+      "serverUrl": "http://127.0.0.1:2960"
+    }
+  }
+}

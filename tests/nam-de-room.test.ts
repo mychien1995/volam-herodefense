@@ -3,7 +3,6 @@ import { startRoomTestServer } from './room-test-server.js';
 import type { MatchRoom } from '../apps/game-server/src/rooms/MatchRoom.js';
 import { MATCH_ROOM, PROTOCOL_VERSION } from '@volam/game-protocol';
 import { spawnNamDeIfReady, beginNamDeCast } from '@volam/game-core';
-import { hurt } from '../packages/game-core/src/combat.js';
 let server: Awaited<ReturnType<typeof startRoomTestServer>>;
 let client: Awaited<ReturnType<typeof startRoomTestServer>>['sdk'];
 beforeAll(async () => {
@@ -42,17 +41,20 @@ it('real SDK reveals only owner QTE; rejects forged owner/order/replay, closes a
   s.phase = 'idle';
   s.nextActionAt = 1e9;
   const boss = w.creeps.get('boss_nam_de')!;
-  boss.x = 800;
-  boss.y = 790;
-  boss.invulnerable = false; // The fixture starts after the entry phase.
-  h.x = 760;
-  h.y = 790;
-  expect(
-    hurt(w, boss, h.id, 'fixture-provoke', 1, room.simulation.arena.config, {
-      critChance: 0,
-      critMultiplier: 1,
-    }),
-  ).toBe(true);
+  boss.x = s.definition.entrance.x;
+  boss.y = s.definition.entrance.y + 70;
+  h.x = boss.x - 40;
+  h.y = boss.y;
+  h.fx = 1;
+  h.fy = 0;
+  for (const hero of w.heroes.values()) hero.autoBasic = false;
+  await expect.poll(() => boss.invulnerable).toBe(false);
+  a.send('input', {
+    protocolVersion: PROTOCOL_VERSION,
+    sequence: 1,
+    kind: 'basic',
+  });
+  await expect.poll(() => boss.provoked).toBe(true);
   beginNamDeCast(w, room.simulation.arena.config, 'dai_ly_phong_huyet', h.id);
   await expect.poll(() => s.controls.get(h.id)?.qte?.state).toBe('pending');
   await expect.poll(() => a.state.namDeControls.has(h.id)).toBe(true);
@@ -68,18 +70,18 @@ it('real SDK reveals only owner QTE; rejects forged owner/order/replay, closes a
   });
   a.send('input', {
     protocolVersion: PROTOCOL_VERSION,
-    sequence: 1,
+    sequence: 2,
     kind: 'nam-de-key',
     castId: q.id,
     index: 1,
     key: q.keys[1]!,
   });
-  await expect.poll(() => h.lastSequence).toBe(1);
+  await expect.poll(() => h.lastSequence).toBe(2);
   expect(q.index).toBe(0);
   for (let i = 0; i < 10; i++)
     a.send('input', {
       protocolVersion: PROTOCOL_VERSION,
-      sequence: 2 + i,
+      sequence: 3 + i,
       kind: 'nam-de-key',
       castId: q.id,
       index: i,
@@ -94,13 +96,13 @@ it('real SDK reveals only owner QTE; rejects forged owner/order/replay, closes a
     bhp = boss.hp;
   a.send('input', {
     protocolVersion: PROTOCOL_VERSION,
-    sequence: 11,
+    sequence: 12,
     kind: 'nam-de-key',
     castId: q.id,
     index: 9,
     key: 'up',
   });
-  await expect.poll(() => h.lastSequence).toBe(11);
+  await expect.poll(() => h.lastSequence).toBe(12);
   expect(q.state).toBe('success');
   expect(h.hp).toBeGreaterThanOrEqual(hp);
   expect(boss.hp).toBe(bhp);

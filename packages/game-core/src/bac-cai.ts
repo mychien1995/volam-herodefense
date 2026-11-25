@@ -86,6 +86,7 @@ export class BacCaiEncounter {
   private cooldowns = new Map<BacCaiAbility, number>();
   private forms: string[] = [];
   private spinHits = new Map<string, number>();
+  private ringHeroPositions = new Map<string, Point>();
   private slots: number[] = [];
   private splitOrigin: Point = { x: 0, y: 0 };
   private cloneStart = 0;
@@ -108,6 +109,9 @@ export class BacCaiEncounter {
       }
     | undefined;
   constructor(readonly definition: BacCaiDefinition) {}
+  get suppressAutoBasic(): boolean {
+    return this.forms.length > 0 && !this.realHit && !this.cloneHits.size;
+  }
   ticks(ms: number, c: SimulationConfig) {
     return Math.max(1, Math.round((ms * c.tickRate) / 1000));
   }
@@ -553,7 +557,7 @@ export class BacCaiEncounter {
         break;
       }
       case 'spiral':
-        this.addEffect(w, 'spiral', b, heading, d.spiral.flightMs, c);
+        this.addEffect(w, 'spiral', d.center, heading, d.spiral.flightMs, c);
         break;
     }
   }
@@ -677,19 +681,30 @@ export class BacCaiEncounter {
         e.x += (e.fx * d.palms.speed) / c.tickRate;
         e.y += (e.fy * d.palms.speed) / c.tickRate;
       }
-      if (e.kind === 'spiral')
-        Object.assign(
-          e,
-          bacCaiSpiral(
-            e.origin,
-            { x: e.fx, y: e.fy },
-            (w.tick - e.start) / (e.end - e.start),
-            d.spiral.radius,
-            d.spiral.turns,
-            d.spiral.startRadius,
-            d.spiral.yScale,
-          ),
-        );
+      if (e.kind === 'spiral') {
+        const radiusAt = (tick: number) =>
+          d.spiral.startRadius +
+          (d.spiral.radius - d.spiral.startRadius) *
+            Math.max(0, Math.min(1, (tick - e.start) / (e.end - e.start)));
+        const radial = (p: Point) =>
+          Math.hypot(p.x - e.origin.x, (p.y - e.origin.y) / d.spiral.yScale);
+        for (const h of this.living(w)) {
+          const previous = this.ringHeroPositions.get(h.id) ?? h;
+          const before = radial(previous) - radiusAt(w.tick - 1);
+          const after = radial(h) - radiusAt(w.tick);
+          const pad = d.spiral.hitRadius + c.radius / d.spiral.yScale;
+          if (
+            w.tick < (e.hits[h.id] ?? 0) ||
+            h.lastUniversalDashTick === w.tick ||
+            Math.min(before, after) > pad ||
+            Math.max(before, after) < -pad
+          )
+            continue;
+          this.damage(w, c, h, 'spiral', d.damage.spiral);
+          e.hits[h.id] = w.tick + this.ticks(d.spiral.cadenceMs, c);
+        }
+        continue;
+      }
       const end =
         e.kind === 'beam'
           ? { x: e.x + e.fx * d.beam.length, y: e.y + e.fy * d.beam.length }
@@ -710,13 +725,12 @@ export class BacCaiEncounter {
           e.kind === 'palm' ? 'palms' : e.kind,
           d.damage[e.kind === 'palm' ? 'palms' : e.kind],
         );
-        e.hits[h.id] =
-          e.kind === 'spiral'
-            ? w.tick + this.ticks(d.spiral.cadenceMs, c)
-            : Infinity;
+        e.hits[h.id] = Infinity;
       }
       e.previous = old;
     }
+    for (const h of w.heroes.values())
+      this.ringHeroPositions.set(h.id, { x: h.x, y: h.y });
   }
   private stepDogs(w: World, c: SimulationConfig) {
     const d = this.definition;
@@ -800,7 +814,7 @@ export class BacCaiEncounter {
         options: options.map((preference, i) => ({
           preference,
           x: d.center.x + (i - 1) * 150,
-          y: d.center.y + 235,
+          y: d.center.y - 80,
         })),
         deadline: w.tick + this.ticks(p.voteMs, c),
         counts: [0, 0, 0],

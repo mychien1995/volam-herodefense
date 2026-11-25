@@ -1,4 +1,5 @@
 import { emit } from './combat.js';
+import { bossSkillAnnouncementSeconds } from './boss-skill-announcement.js';
 import { createSeededRandom } from './random.js';
 import type { Creep, SimulationConfig, World } from './types.js';
 
@@ -84,6 +85,8 @@ export function stepBossBanter(w: World, c: SimulationConfig): void {
     if (
       (Object.hasOwn(d.farewells, id) &&
         (actor.pose === 'cast' || actor.actionUntil > w.tick)) ||
+      w.tick - (actor.bossShoutTick ?? -Infinity) <
+        Math.ceil(c.tickRate * bossSkillAnnouncementSeconds) ||
       w.events.some((e) => e.sourceId === id && e.stage === 'boss_shout')
     )
       continue;

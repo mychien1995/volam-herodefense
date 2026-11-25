@@ -40,6 +40,7 @@ export function createGameServer(transport?: WebSocketTransport) {
           locked: room.locked,
           phase: room.metadata?.phase ?? 'WAITING_LOBBY',
           arenaId: room.metadata?.arenaId ?? 'dao_hoa_dao',
+          difficulty: room.metadata?.difficulty ?? 'hard',
         }));
       }),
       health: createEndpoint('/health', { method: 'GET' }, async () => ({
@@ -47,7 +48,7 @@ export function createGameServer(transport?: WebSocketTransport) {
         ...(validationRunId
           ? { service: 'volam-game-server', runId: validationRunId }
           : {}),
-        milestone: 'M3B',
+        milestone: 'M4D',
         protocolVersion: PROTOCOL_VERSION,
       })),
     }),

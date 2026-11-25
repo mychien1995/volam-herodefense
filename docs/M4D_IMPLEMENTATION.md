@@ -1,3 +1,9 @@
+Latest VTD follow-up, protocol53: [28 stars, moving light and Thất Tuyệt practice](M4D_VTD_FOLLOW_UP_2026_11_25.md).
+
+Current boss follow-up: [arena registration, skill tuning and phase-two test](M4D_BOSS_FIXES_2026_11_25.md).
+
+Current difficulty/protocol 52 and boss test launch: [M4D_DIFFICULTY.md](M4D_DIFFICULTY.md).
+
 Latest arena/cooldown follow-up: [R3 native ground surfaces and anchored torches](M4D_ARENA_REVIEW_R3.md).
 
 R2 arena feedback: [shared prop collision, create-room modal, registered lanes, sharp ground and ambient motion](M4D_ARENA_REVIEW_R2.md). This follow-up supersedes the initial M4D arena presentation below.

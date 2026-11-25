@@ -607,21 +607,21 @@ describe('M3C2 authoritative Yin–Yang', () => {
       y: 300,
       launch: { x: 300, y: 300, fx: 1, fy: 0 },
     });
-    expect(area.nextTick - f.world.tick).toBe(80);
+    expect(area.nextTick - f.world.tick).toBe(59);
     expect(f.world.projectiles.size).toBe(0);
     expect(hasStatus(f.hero, 'channel', f.world.tick)).toBe(true);
     boss.x = 700;
     f.enemies[0]!.x = 534;
-    f.steps(36);
+    f.steps(24);
     expect(hasStatus(f.hero, 'channel', f.world.tick)).toBe(false);
-    f.steps(43);
+    f.steps(34);
     expect(f.hits()).toHaveLength(0);
     f.steps(1);
     expect(f.hits().map((e) => e.damage)).toEqual([108]);
     expect(f.hits(boss.id)).toHaveLength(0);
     expect(f.events.filter((e) => e.stage === 'area_tick')).toHaveLength(1);
     expect(f.world.areas).toHaveLength(1);
-    f.steps(40);
+    f.steps(62);
     expect(f.world.areas).toEqual([]);
     expect(f.events.filter((e) => e.stage === 'area_tick')).toHaveLength(1);
   });
@@ -847,4 +847,12 @@ describe('M3C2 authoritative Yin–Yang', () => {
       expect(skillVisualStages[skill.id]).toBeDefined();
     }
   });
+});
+
+it('Vạn Kiếm can select a boss at 450 units, beyond the previous 320-unit range', () => {
+  const f = fixture('van_kiem_quy_tong');
+  Object.assign(f.enemies[1]!, { x: 750, y: 300, encounterBoss: true });
+  f.enemies[2]!.hp = 0;
+  f.cast();
+  expect(f.world.areas![0]).toMatchObject({ x: 750, y: 300 });
 });

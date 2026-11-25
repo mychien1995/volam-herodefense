@@ -278,21 +278,19 @@ export class RenovationRevision {
       if (dragon && showHangLong) {
         const effect = m1Config.skillCatalogue![hangLongId]!.effect;
         if (effect.mode !== 'projectile' || !effect.dragonDive) return;
-        const d = effect.dragonDive;
-        const coilEnd = d.forwardTicks + d.orbitTicks;
-        const riseEnd = coilEnd + d.riseTicks;
         const coiling = p.stage === 'dragon_coil';
         const rising = p.stage === 'dragon_rise';
         const stage = coiling
           ? 'dragon_coil'
-          : rising
+          : rising || p.stage === 'dragon_forward'
             ? 'dragon_rise'
             : 'dragon_dive';
-        const progress = coiling
-          ? (((age - d.forwardTicks) * (d.coilTurns ?? 1)) / d.orbitTicks) % 1
-          : rising
-            ? (age - coilEnd) / d.riseTicks
-            : (age - riseEnd) / d.diveTicks;
+        const progress = Phaser.Math.Clamp(
+          ((zoneTick(state, zone) ?? p.stageStartedAt) - p.stageStartedAt) /
+            Math.max(1, p.stageTicks),
+          0,
+          1,
+        );
         const clip = hangLongArt.animations.find((tag) => tag.name === stage)!;
         const index = Math.max(
           0,
@@ -302,11 +300,20 @@ export class RenovationRevision {
           ),
         );
         const frame = clip.frames[index]!;
-        const point = position?.(p.ownerId) ?? p;
-        const height =
+        const owner =
+          position?.(p.ownerId) ?? state?.players.get(p.ownerId) ?? p;
+        // The dragon rises from its caster, then travels continuously toward the
+        // authoritative landing point during the dive.
+        const point =
           coiling || rising
-            ? 0
-            : d.height * (1 - Phaser.Math.Clamp(progress, 0, 1) ** 1.6);
+            ? owner
+            : p.stage === 'dragon_dive'
+              ? {
+                  x: owner.x + (p.x - owner.x) * progress,
+                  y: owner.y + (p.y - owner.y) * progress,
+                }
+              : p;
+        const height = p.elevation;
         if (!v) {
           v = {
             image: this.scene.add
@@ -316,7 +323,9 @@ export class RenovationRevision {
           this.shots.set(id, v);
         }
         v.image
-          .setFrame(frame)
+          .setTexture(hangLongArt.id, frame)
+          .setName('hang-long:' + p.stage)
+          .setData('server-elevation', height)
           .setFlipX(p.vx < 0)
           .setPosition(Math.round(point.x), Math.round(point.y - height))
           .setDepth(point.y + (coiling ? -0.3 : 0.8));

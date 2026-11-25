@@ -449,7 +449,13 @@ export class DongTaEncounter {
     if (abilityId === 'lac_anh_normal') {
       const d = this.definition,
         shape =
-          d.normalDash.paths[Math.min(3, Math.floor(world.random() * 4))]!;
+          d.normalDash.paths[
+            config.difficulty === 'easy'
+              ? 1
+              : Math.min(3, Math.floor(world.random() * 4))
+          ]!;
+      if (config.difficulty === 'easy')
+        cast.telegraphHalfWidth = d.normalDash.halfWidth;
       const angle =
         Math.abs(a.fx) > Math.abs(a.fy)
           ? a.fx < 0
@@ -597,6 +603,15 @@ export class DongTaEncounter {
         }
         if (points.length !== d.petals.count)
           throw Error('Unable to place approved flower count');
+        if (config.difficulty === 'easy') {
+          c.endsAt = Math.max(
+            c.endsAt,
+            ...this.effects
+              .filter((e) => e.ownerId === c.actorId && e.kind === 'petal')
+              .map((e) => e.expiresAt),
+          );
+          world.creeps.get(c.actorId)!.actionUntil = c.endsAt;
+        }
         break;
       }
       case 'trieu_hon_dong_hai':

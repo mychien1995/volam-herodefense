@@ -1,0 +1,63 @@
+#vuong-notes-hud {
+  position: absolute;
+  z-index: 15;
+  top: 102px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: calc(100% - 24px);
+  padding: 8px 14px;
+  text-align: center;
+  pointer-events: none;
+  background: #172421f2;
+}
+#vuong-notes-hud[hidden] {
+  display: none;
+}
+#vuong-notes-hud strong {
+  display: block;
+  color: #ffe4a3;
+}
+#vuong-notes-hud div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 6px 0;
+}
+#vuong-notes-hud span {
+  min-width: 30px;
+  padding: 2px 4px;
+  border: 1px solid #69766b;
+  border-radius: 4px;
+}
+#vuong-notes-hud .done {
+  color: #a4dbaa;
+  opacity: 0.65;
+}
+#vuong-notes-hud .current {
+  color: #fff4ba;
+  border-color: #ffe4a3;
+  background: #51472a;
+}
+#vuong-notes-hud[data-ready='true'] .current {
+  color: #c8ffd3;
+  border-color: #94d7a5;
+  background: #244c35;
+}
+#vuong-notes-hud small {
+  display: block;
+  font-size: 13px;
+}
+@media (max-width: 700px) {
+  #vuong-notes-hud {
+    top: 85px;
+    padding: 6px;
+    font-size: 12px;
+  }
+  #vuong-notes-hud div {
+    gap: 2px;
+  }
+  #vuong-notes-hud span {
+    min-width: 24px;
+  }
+}

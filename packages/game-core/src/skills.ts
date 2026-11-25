@@ -2055,6 +2055,8 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
         n = Math.min(action.remaining, e.speed / config.tickRate);
       displace(hero, action.fx * n, action.fy * n, config.radius, config);
       resetConLuanDashOnEntry(world, hero, old);
+      if (action.abilityId === 'universal_dash' && distance(old, hero) > 0.01)
+        hero.lastUniversalDashTick = world.tick;
       if (e.invulnerable && distance(old, hero) > 0.01)
         applyStatus(
           hero,

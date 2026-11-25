@@ -24,6 +24,8 @@ import { skillRankStats } from './skill-rank-stats.js';
 import { BossPartyUI, isBossDestination } from './boss-party-ui.js';
 import {
   conLuan,
+  waveBossTestNext,
+  type BossTestSkipStage,
   duongMon,
   nguDoc,
   directDodgeChance,
@@ -44,6 +46,10 @@ const dodgePercentage = new Intl.NumberFormat('vi-VN', {
 export class GameUI {
   readonly bossRetry: BossRetryUI;
   onBossRetry: (action: RetryAction) => void = () => {};
+  onBossSkip: (
+    stage:
+      BossTestSkipStage | 'vuong_trung_duong' | 'vuong_notes' | 'nam_de_dark',
+  ) => void = () => {};
   readonly bossParty: BossPartyUI;
   reconnecting = false;
   private menu: Menu | undefined;
@@ -138,9 +144,15 @@ export class GameUI {
       if (this.state?.practice.enabled && !this.reconnecting)
         this.onPracticeChange();
     });
-    this.defense = new DefenseHud(element('#viewport'), () => this.onLeave());
-    this.bossRetry = new BossRetryUI(element('#viewport'), (action) =>
-      this.onBossRetry(action),
+    this.defense = new DefenseHud(
+      element('#viewport'),
+      () => this.onLeave(),
+      (stage) => this.onBossSkip(stage),
+    );
+    this.bossRetry = new BossRetryUI(
+      element('#viewport'),
+      (action) => this.onBossRetry(action),
+      (stage) => this.onBossSkip(stage),
     );
     this.bossParty = new BossPartyUI(element('#viewport'));
     const help = document.createElement('button');
@@ -631,7 +643,7 @@ export class GameUI {
       this.close(false);
       this.setStudy(false);
     }
-    this.defense.update(state);
+    this.defense.update(state, state.hostId === this.sessionId);
     element('#player-count').textContent =
       `${state.players.size} / ${state.maxPlayers}`;
     const list = document.querySelector('#players');
@@ -680,6 +692,18 @@ export class GameUI {
           ),
       ].join('');
     const hero = state.players.get(this.sessionId);
+    this.bossRetry.setSkip(
+      state.phase === 'IN_GAME' &&
+        state.hostId === this.sessionId &&
+        state.defense.devWaveBosses &&
+        hero?.inventory.campaign &&
+        (Object.hasOwn(waveBossTestNext, state.defense.devWaveBossStage) ||
+          (state.defense.devWaveBossStage === 'vuong_trung_duong' &&
+            !!state.vuong.get('arena')?.snapshot))
+        ? (state.defense.devWaveBossStage as
+            BossTestSkipStage | 'vuong_trung_duong')
+        : undefined,
+    );
     this.bossRetry.sync(hero, state.phase === 'IN_GAME');
     if (!hero) return;
     this.bossParty.sync(hero.bossInvitation);

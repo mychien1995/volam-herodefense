@@ -1,3 +1,5 @@
+import { prepareNamDeDark } from './prepare-nam-de-dark.mjs';
+import { prepareM4dBossVfx } from './prepare-m4d-boss-vfx.mjs';
 import { preparePvpAssets } from './prepare-pvp.mjs';
 import { prepareWaveBossFeedback } from './prepare-wave-boss-feedback.mjs';
 import { prepareTayDocAssets } from './prepare-tay-doc-assets.mjs';
@@ -31,6 +33,8 @@ import {
 import { prepareHongLietAssets } from './prepare-hong-liet-assets.mjs';
 const root = new URL('../', import.meta.url);
 preparePvpAssets();
+prepareM4dBossVfx();
+prepareNamDeDark();
 const caiBangIcons = new URL('assets/exports/skills/cai-bang-icons-v2/', root);
 const iconManifest = JSON.parse(
   readFileSync(new URL('manifest.json', caiBangIcons), 'utf8'),

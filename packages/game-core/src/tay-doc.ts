@@ -306,17 +306,21 @@ export class TayDocEncounter {
       points = this.legal(
         world,
         config,
-        { x: 800, y: 660 },
+        {
+          x: config.waveArena?.center.x ?? 800,
+          y: (config.waveArena?.center.y ?? 616) + 44,
+        },
         this.definition.cloudRadius,
         this.definition.cloudCount,
       );
     if (ability === 'hon_thien_phuc_long_chan') {
-      const field = config.heroBounds ?? {
-        x: 800,
-        y: 616,
-        radiusX: 324,
-        radiusY: 294,
-      };
+      const field = config.heroBounds ??
+        config.waveArena?.bounds ?? {
+          x: 800,
+          y: 616,
+          radiusX: 324,
+          radiusY: 294,
+        };
       points = Array.from({ length: 6 }, (_, i) => ({
         x: field.x + Math.cos((i * Math.PI) / 3) * (field.radiusX - 39),
         y: field.y + Math.sin((i * Math.PI) / 3) * (field.radiusY - 39),
@@ -340,7 +344,10 @@ export class TayDocEncounter {
         const candidates = this.legal(
           world,
           config,
-          { x: 800, y: 660 },
+          {
+            x: config.waveArena?.center.x ?? 800,
+            y: (config.waveArena?.center.y ?? 616) + 44,
+          },
           this.definition.radius,
           6,
         ).filter(
@@ -461,8 +468,8 @@ export class TayDocEncounter {
           ...p,
           at: world.tick,
           heading: Math.atan2(
-            (config.heroBounds?.y ?? 616) - p.y,
-            (config.heroBounds?.x ?? 800) - p.x,
+            (config.heroBounds?.y ?? config.waveArena?.center.y ?? 616) - p.y,
+            (config.heroBounds?.x ?? config.waveArena?.center.x ?? 800) - p.x,
           ),
           nextShot: world.tick + 15,
         });

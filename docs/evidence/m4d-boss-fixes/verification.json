@@ -1,0 +1,86 @@
+{
+  "branch": "milestone/m4d",
+  "protocol": 52,
+  "checks": [
+    {
+      "command": "node node_modules/typescript/bin/tsc -b",
+      "result": "PASS"
+    },
+    {
+      "command": "node node_modules/typescript/bin/tsc -p tsconfig.tools.json --noEmit",
+      "result": "PASS"
+    },
+    {
+      "command": "VITE_SERVER_URL=http://127.0.0.1:2959 node ../../node_modules/vite/bin/vite.js build (cwd apps/game-client)",
+      "result": "PASS, 21.68s"
+    },
+    {
+      "command": "vitest run boss-progression, bac-cai-runtime, vuong-trung-duong, nam-de, vo-dang-skills, boss-progression-skip-room, difficulty-room, difficulty, m4d-boss-tuning",
+      "result": "137 PASS in 9 files"
+    },
+    {
+      "command": "vitest run tests/nam-de.test.ts tests/nam-de-room.test.ts (after cue fix)",
+      "result": "23 PASS; supersedes the 21 Nam tests in the earlier 137 set"
+    },
+    {
+      "command": "vitest run tests/tay-doc.test.ts --testNamePattern '^(?!.*ordered wave10).*'",
+      "result": "16 PASS, 1 excluded historical M3D interval assertion"
+    },
+    {
+      "command": "pnpm qa:preflight --mode browser --config playwright.boss-progression.config.ts",
+      "result": "7 checks PASS"
+    },
+    {
+      "command": "node tools/run-playwright.mjs test --config playwright.boss-progression.config.ts --grep \"M4D arena fixes|M4D skill fixes\"",
+      "result": "All three two-client map cases PASS; first QTE timing assertion failed due RPC latency"
+    },
+    {
+      "command": "node tools/run-playwright.mjs test --config playwright.boss-progression.config.ts --grep \"M4D skill fixes\" (final atomic observation)",
+      "result": "1 PASS, 1.5m; 210 server ticks, ten enlarged boxes, 450-unit target at both peers"
+    },
+    {
+      "command": "prepareM4dBossVfx()",
+      "result": "PASS: two master hashes, three RGBA PNG headers/dimensions/export hashes; 0 changed, 3 unchanged"
+    }
+  ],
+  "uniqueFocusedTestsPassed": 155,
+  "browserCasesPassed": 4,
+  "observed": {
+    "allMaps": [
+      "dao_hoa_dao",
+      "tuong_duong",
+      "tu_hien_trang"
+    ],
+    "peers": 2,
+    "statueCenter": true,
+    "lateBossSceneryHidden": true,
+    "phaseTwoButton": true,
+    "casterDragonRisesFromOwner": true,
+    "nativeBeamAndExpandingFireRing": true,
+    "globalElementsHitOutsideAllSeals": true,
+    "qteTicks": 210,
+    "extendedSwordTargetDistance": 450
+  },
+  "iterations": "Retained earlier failed assertions in logs. Replaced wall-clock QTE assertion with server ticks, then reproduced/fixed invalid Nam cue payload (actor fields spread into strict envelope). SDK fixture now uses registered geometry and an accepted A to satisfy M4D provocation. Final UI measurements are atomic to avoid expiry during multiple RPCs.",
+  "limits": [
+    "No full suite or full check:final; user requested only necessary checks",
+    "Historical Tay test expects 180s, M4D approved wave interval is 120s; excluded rather than changing gameplay",
+    "Two-client VFX review; no six-player readability/final-art approval",
+    "Frequency probes reset HP and position and clear pillars after 1s; no survival, clear-time or campaign-economy claim",
+    "No videos, traces or animated evidence"
+  ],
+  "manualService": {
+    "health": {
+      "status": "ok",
+      "service": "volam-game-server",
+      "runId": "e37f262c-3d46-4387-b6f3-de0c3bb8ce18",
+      "milestone": "M4D",
+      "protocolVersion": 52
+    },
+    "client": {
+      "service": "volam-qa-client",
+      "runId": "e37f262c-3d46-4387-b6f3-de0c3bb8ce18",
+      "serverUrl": "http://127.0.0.1:2960"
+    }
+  }
+}

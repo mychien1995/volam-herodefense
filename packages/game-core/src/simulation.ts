@@ -1,3 +1,4 @@
+import { guardNamDeBlade } from './nam-de-dark.js';
 import { invasionApproach } from './invasion-route.js';
 import { bossFightReady } from './boss-provocation.js';
 import { nguDoc } from './ngu-doc-ids.js';
@@ -308,6 +309,10 @@ function runCommand(
     hasStatus(hero, 'duong_mon_shell', world.tick)
   )
     return;
+  if (command.kind === 'nam-de-guard') {
+    guardNamDeBlade(world, hero);
+    return;
+  }
   if (command.kind === 'tam-lien-tram') {
     if (hero.basicId === conLuan.sword)
       useConLuanPlant(world, hero, config, perform);
@@ -1105,6 +1110,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
     if (command) runCommand(world, hero, command, config);
     else if (
       hero.autoBasic &&
+      !world.bacCai?.suppressAutoBasic &&
       !hero.comboFinisher &&
       !world.duel &&
       world.creeps.size

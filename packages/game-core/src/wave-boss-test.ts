@@ -1,15 +1,33 @@
 import type { InvasionDirector } from './invasions.js';
 import type { World } from './types.js';
 export type WaveBossTestStage =
-  'dong_ta' | 'tay_doc' | 'nam_de' | 'bac_cai' | 'vuong_trung_duong' | 'complete';
+  | 'dong_ta'
+  | 'tay_doc'
+  | 'nam_de'
+  | 'bac_cai'
+  | 'vuong_trung_duong'
+  | 'complete';
+export const waveBossTestNext = {
+  dong_ta: 'tay_doc',
+  tay_doc: 'nam_de',
+  nam_de: 'bac_cai',
+  bac_cai: 'vuong_trung_duong',
+} as const;
+export type BossTestSkipStage = keyof typeof waveBossTestNext;
+export type BossTestAction =
+  BossTestSkipStage | 'vuong_trung_duong' | 'vuong_notes';
 export interface WaveBossTestOptions {
+  /** Campaign readiness presets with normal damage, movement and revival rules. */
+  readonly progression?: boolean;
   readonly bossHitFraction: number;
   readonly runSpeedMultiplier: number;
   readonly firstRestTicks: number;
   readonly restTicks: number;
 }
 export interface WaveBossTestRuntime extends WaveBossTestOptions {
+  scenario?: 'vuong_notes';
   stage: WaveBossTestStage;
+  skipped?: BossTestSkipStage[];
 }
 export function validateWaveBossTest(o: WaveBossTestOptions): void {
   if (
@@ -48,7 +66,9 @@ export function stepWaveBossTest(
         ? 'nam_de'
         : !completed.bacCai
           ? 'bac_cai'
-          : completed.final === false ? 'vuong_trung_duong' : 'complete';
+          : completed.final === false
+            ? 'vuong_trung_duong'
+            : 'complete';
   invasion.wave = {
     dong_ta: 5,
     tay_doc: 10,

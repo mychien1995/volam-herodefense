@@ -1,6 +1,8 @@
 import type { World } from './types.js';
 import { emit } from './combat.js';
 
+export const bossSkillAnnouncementSeconds = 1.25;
+
 /** Basic attack identity is shared by every authoritative boss adapter. */
 export const bossNormalAbilities = new Set([
   'idle',
@@ -31,6 +33,7 @@ export function announceBossSkill(
 ): void {
   const actor = world.creeps.get(actorId);
   if (!actor || actor.hp <= 0 || bossNormalAbilities.has(abilityId)) return;
+  actor.bossShoutTick = world.tick;
   emit(world, {
     kind: 'effect',
     sourceId: actorId,

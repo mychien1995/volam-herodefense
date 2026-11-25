@@ -1,3 +1,10 @@
+import {
+  enterNamDeDark,
+  stepNamDeDark,
+  namDeDarkView,
+  clearNamDeDarkTransient,
+  beginNamDeDarkCast,
+} from './nam-de-dark.js';
 import { bossFightReady } from './boss-provocation.js';
 import { waveBossFarewell } from './boss-banter.js';
 import { announceBossSkill } from './boss-skill-announcement.js';
@@ -30,6 +37,16 @@ export function validateNamDe(d: NamDeDefinition, c: SimulationConfig): void {
     if (v && typeof v === 'object') Object.values(v).forEach(finite);
   };
   finite(d);
+  if (
+    d.dark.hpFraction !== 0.4 ||
+    d.dark.shieldMultiplier <= 0 ||
+    d.dark.shieldMultiplier >= 1 ||
+    d.dark.slow <= 0 ||
+    d.dark.slow >= 1 ||
+    d.dark.reflectionsRequired !== 3 ||
+    Object.values(d.dark).some((v) => v <= 0)
+  )
+    throw Error('Invalid Nam Đế dark tuning');
   for (const k of [
     'restTicks',
     'actionRestTicks',
@@ -114,6 +131,7 @@ export function initializeNamDe(
       spawn: { ...definition.spawn },
       entrance: { ...definition.entrance },
       stats: { ...definition.stats },
+      dark: { ...definition.dark },
       damage: { ...definition.damage },
       rotation: [...definition.rotation],
     },
@@ -147,6 +165,7 @@ export function namDeView(world: World): NamDeView | null {
   if (!s) return null;
   return {
     actorId: NAM_DE_ID,
+    dark: namDeDarkView(world),
     phase: s.phase,
     spawnAt: s.spawnAt,
     spawnCount: s.spawnCount,
@@ -187,6 +206,7 @@ export function clearNamDe(world: World): void {
   const s = world.namDe;
   if (!s) return;
   s.effects.clear();
+  clearNamDeDarkTransient(world);
   delete s.cast;
   delete s.smallCast;
   s.nextSmallAt = world.tick + s.definition.openingTicks;
@@ -205,6 +225,8 @@ export function clearNamDeIfEmpty(world: World): void {
   s.nextActionAt = world.tick + s.definition.openingTicks;
 }
 export function namDeMovement(world: World, hero: Hero): Point {
+  if ((world.namDe?.dark?.guards.get(hero.id)?.until ?? 0) > world.tick)
+    return { x: 0, y: 0 };
   const confusion = world.namDe?.controls.get(hero.id)?.confusion;
   if (!confusion || confusion.until <= world.tick)
     return direction(hero.moveX, hero.moveY);
@@ -256,7 +278,8 @@ function cue(
     targetId,
     abilityId: id,
     stage,
-    ...point,
+    x: point.x,
+    y: point.y,
     damage: 0,
     critical: false,
   });
@@ -378,7 +401,16 @@ function startChallenge(w: World, h: Hero, cast: NamDeCast): void {
   );
   cue(w, 'dai_ly_phong_huyet', 'sealed', h.id, h);
 }
-function socket(p: Point, aim: Point): Point {
+function socket(p: Point, aim: Point, dark?: NamDeDefinition['dark']): Point {
+  if (dark)
+    return {
+      x:
+        p.x +
+        (Math.abs(aim.x) > Math.abs(aim.y)
+          ? Math.sign(aim.x) * dark.handSide
+          : dark.handSide * 0.45),
+      y: p.y - dark.handHeight * (aim.y < -0.7 ? 1.2 : 1),
+    };
   const offset =
     Math.abs(aim.x) > Math.abs(aim.y)
       ? aim.x >= 0
@@ -443,7 +475,7 @@ function beam(
 ): void {
   const d = w.namDe!.definition,
     v = { x: Math.cos(a), y: Math.sin(a) },
-    p = socket(cast.origin, v);
+    p = socket(cast.origin, v, w.namDe!.dark ? d.dark : undefined);
   // Map-sized, world-space geometry is identical for every client viewport.
   const limits = [
     v.x > 0 ? (c.width - p.x) / v.x : v.x < 0 ? -p.x / v.x : Infinity,
@@ -482,6 +514,14 @@ export function beginNamDeCast(
       (a, z) => distance(a, b) - distance(z, b) || a.id.localeCompare(z.id),
     )[0];
   if (!h) return false;
+  if (
+    s.dark &&
+    ['dai_ly_phong_huyet', 'lien_hoan_nhat_duong_chi'].includes(ability)
+  )
+    return false;
+  if (['tien_thien_bang_dao', 'dai_ly_hoang_quyen'].includes(ability))
+    return beginNamDeDarkCast(w, ability, h);
+  if (ability === 'tien_thien_canh_khi') return false;
   const d = s.definition,
     aim = direction(h.x - b.x, h.y - b.y);
   if (ability === 'nam_de_small_finger' && s.smallCast) return false;
@@ -523,7 +563,7 @@ export function beginNamDeCast(
   b.pose = 'cast';
   b.castAbilityId = ability;
   if (ability === 'nhat_duong_chi') {
-    const hand = socket(b, aim),
+    const hand = socket(b, aim, s.dark ? d.dark : undefined),
       ray = direction(h.x - hand.x, h.y - hand.y);
     cast.fx = ray.x;
     cast.fy = ray.y;
@@ -751,7 +791,11 @@ function stepSmallBurst(w: World, c: SimulationConfig): void {
         cast.nextVolley = cast.burstCount ?? 1;
         break;
       }
-      const p = socket(b, direction(target.x - b.x, target.y - b.y)),
+      const p = socket(
+          b,
+          direction(target.x - b.x, target.y - b.y),
+          s.dark ? d.dark : undefined,
+        ),
         v = direction(target.x - p.x, target.y - p.y);
       cast.fx = v.x;
       cast.fy = v.y;
@@ -835,6 +879,12 @@ export function stepNamDe(w: World, c: SimulationConfig): void {
     s.effects.clear();
     if (s.phase !== 'enter') s.phase = 'idle';
     s.nextActionAt = w.tick + d.openingTicks;
+    return;
+  }
+  enterNamDeDark(w, c);
+  if (stepNamDeDark(w, c)) {
+    stepSmallBurst(w, c);
+    stepEffects(w, c);
     return;
   }
   if (
@@ -984,10 +1034,16 @@ export function stepNamDe(w: World, c: SimulationConfig): void {
       !hasStatus(b, 'silence', w.tick) &&
       !hasStatus(b, 'disarm', w.tick)
     ) {
+      const rotation = s.dark
+        ? d.rotation.filter(
+            (id) =>
+              !['dai_ly_phong_huyet', 'lien_hoan_nhat_duong_chi'].includes(id),
+          )
+        : d.rotation;
       const ability =
         w.random() < d.dashChance
           ? 'nam_de_dash'
-          : d.rotation[s.rotationIndex++ % d.rotation.length]!;
+          : rotation[s.rotationIndex++ % rotation.length]!;
       beginNamDeCast(w, c, ability, target.id);
     }
   } else if (!targets.some((h) => !hasStatus(h, 'concealed', w.tick)))

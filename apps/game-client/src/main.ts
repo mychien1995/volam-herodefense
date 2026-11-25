@@ -9,6 +9,8 @@ import {
 import type { PvpMapId } from '@volam/game-core';
 import type { StandaloneLoiDaiRoom } from '../../game-server/src/rooms/StandaloneLoiDaiRoom.js';
 import { NamDeHud } from './nam-de-hud.js';
+import { NamDeDarkHud } from './nam-de-dark-hud.js';
+import { VuongNotesHud } from './vuong-notes-hud.js';
 import { TamLienHud } from './tam-lien-hud.js';
 import { ChuHud } from './chu-hud.js';
 import { isBossDestination } from './boss-party-ui.js';
@@ -80,7 +82,17 @@ ui.onBossRetry = (action) => {
       protocolVersion: PROTOCOL_VERSION,
     });
 };
+ui.onBossSkip = (stage) => {
+  if (room && !ui.reconnecting && room.state.phase === 'IN_GAME')
+    room.send('boss-test-skip', {
+      stage,
+      sequence: ++sequence,
+      protocolVersion: PROTOCOL_VERSION,
+    });
+};
 const namDeHud = new NamDeHud();
+const namDeDarkHud = new NamDeDarkHud(() => send({ kind: 'nam-de-guard' }));
+const vuongNotesHud = new VuongNotesHud();
 const tamLienHud = new TamLienHud();
 const chuHud = new ChuHud((action, id, itemId) => {
   if (itemId && (action === 'sell' || action === 'drop'))
@@ -561,6 +573,10 @@ const unbindInput = bindGameplayInput(
     upgrade: (slot) => ui.onBuild({ action: 'upgrade-slot', slot }),
   },
   mouseMode,
+  {
+    enabled: () => namDeDarkHud.active,
+    use: () => send({ kind: 'nam-de-guard' }),
+  },
 );
 const worldCanvas = element('#game');
 const worldMouse = (event: MouseEvent) =>
@@ -650,6 +666,7 @@ async function connect(existing: boolean): Promise<void> {
               ...parsed.data,
               portalCount: pregame.portalCount,
               arenaId: pregame.arenaId,
+              difficulty: pregame.difficulty,
               creepPreview: creepPreviewRequested,
             });
     joined.reconnection.enabled = !requestedPvp && !requestedPractice;
@@ -685,6 +702,8 @@ async function connect(existing: boolean): Promise<void> {
         }
         chuHud.sync(state, joined.sessionId);
         namDeHud.sync(state, joined.sessionId);
+        namDeDarkHud.sync(state, joined.sessionId);
+        vuongNotesHud.sync(state, joined.sessionId);
         tamLienHud.sync(state, joined.sessionId);
         const zone = state.players.get(joined.sessionId)?.zoneId ?? 'arena';
         if (zone !== previousZone) {
@@ -783,6 +802,8 @@ async function connect(existing: boolean): Promise<void> {
       pendingEntry = undefined;
       creepPreview.hide();
       namDeHud.sync(undefined, '');
+      namDeDarkHud.sync(undefined, '');
+      vuongNotesHud.sync(undefined, '');
       tamLienHud.sync(undefined, '');
       ui.reconnecting = true;
       window.dispatchEvent(new Event('volam:controls-blocked'));
@@ -807,6 +828,8 @@ async function connect(existing: boolean): Promise<void> {
       syncMatchMusic(false);
       chuHud.sync(undefined, '');
       namDeHud.sync(undefined, '');
+      namDeDarkHud.sync(undefined, '');
+      vuongNotesHud.sync(undefined, '');
       tamLienHud.sync(undefined, '');
       const wasPractice = joined.state.practice.enabled;
       const wasPvp = joined.state.pvp.enabled;

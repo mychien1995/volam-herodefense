@@ -25,6 +25,7 @@ export interface DongProfile {
   cooldown: number;
 }
 export interface DongDefinition {
+  difficulty?: 'easy' | 'hard';
   center: Point;
   entry: Point;
   bounds: EllipseBounds;
@@ -70,7 +71,13 @@ export interface DongDefinition {
     speed: number;
     radius: number;
   };
-  pull: { range: number; speed: number; stopDistance: number; lockTicks: number; followupTicks: number };
+  pull: {
+    range: number;
+    speed: number;
+    stopDistance: number;
+    lockTicks: number;
+    followupTicks: number;
+  };
   poison: {
     radius: number;
     flightTicks: number;
@@ -96,6 +103,7 @@ export interface DongCast extends Point {
   pulse: number;
   pattern: 'plus' | 'x';
   path?: Point[];
+  telegraphHalfWidth?: number;
   hitIds?: string[];
 }
 export interface DongEffect extends Point {

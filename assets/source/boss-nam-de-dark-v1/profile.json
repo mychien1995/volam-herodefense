@@ -1,0 +1,77 @@
+{
+  "sources": {
+    "down": "down.png",
+    "right": "right.png",
+    "up": "up.png",
+    "up_right": "up_right.png"
+  },
+  "derived": {
+    "down_right": {
+      "from": "down",
+      "mirror": false
+    },
+    "down_left": {
+      "from": "down",
+      "mirror": true
+    },
+    "left": {
+      "from": "right",
+      "mirror": true
+    },
+    "up_left": {
+      "from": "up_right",
+      "mirror": true
+    }
+  },
+  "folder": "boss-nam-de-dark-v1",
+  "canvas": [
+    640,
+    704
+  ],
+  "groups": [
+    {
+      "name": "idle",
+      "poses": [
+        "idle"
+      ],
+      "durationMs": 160
+    },
+    {
+      "name": "walk",
+      "poses": [
+        "walk_a",
+        "walk_b"
+      ],
+      "durationMs": 180
+    },
+    {
+      "name": "slash",
+      "poses": [
+        "slash_windup",
+        "slash_release"
+      ],
+      "durationMs": 180
+    },
+    {
+      "name": "summon",
+      "poses": [
+        "summon"
+      ],
+      "durationMs": 250
+    },
+    {
+      "name": "hurt",
+      "poses": [
+        "hurt"
+      ],
+      "durationMs": 140
+    },
+    {
+      "name": "death",
+      "poses": [
+        "death"
+      ],
+      "durationMs": 600
+    }
+  ]
+}

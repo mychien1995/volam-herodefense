@@ -1,3 +1,4 @@
+import { enterNamDeDark } from './nam-de-dark.js';
 import { LoiDai, loiDai } from './loi-dai.js';
 import { canDuel } from './opponents.js';
 import { TayDocEncounter, TayDocGate } from './tay-doc.js';
@@ -5,6 +6,8 @@ import { enforceConfinement } from './confinement.js';
 import { resetQuicksand } from './creep-abilities.js';
 import {
   stepWaveBossTest,
+  waveBossTestNext,
+  type BossTestSkipStage,
   validateWaveBossTest,
   type WaveBossTestOptions,
 } from './wave-boss-test.js';
@@ -339,6 +342,57 @@ export class DungeonMatch {
         },
       });
     if (namDe) initializeNamDe(this.arena.world, this.arena.config, namDe);
+  }
+  /** Register all arena authority to the selected ground's authored circle center. */
+  registerArenaCenter(center: Point): void {
+    if (this.tick || this.arena.world.heroes.size)
+      throw Error('Arena registration must precede simulation and players');
+    const origin = this.waveField?.center ?? { x: 800, y: 616 };
+    const dx = center.x - origin.x,
+      dy = center.y - origin.y;
+    const moved = new Set<object>();
+    const shift = (p: Point | undefined, x = dx, y = dy) => {
+      if (!p || moved.has(p)) return;
+      moved.add(p);
+      p.x += x;
+      p.y += y;
+    };
+    const statue = this.invasion?.definition.statue;
+    if (statue) {
+      const sx = center.x - statue.position.x,
+        sy = center.y - statue.position.y;
+      shift(statue.position, sx, sy);
+      shift(statue.collision, sx, sy);
+      shift(this.arena.world.statue, sx, sy);
+    }
+    shift(this.base.spawn);
+    for (const field of [this.waveField, this.base.waveArena]) {
+      shift(field?.center);
+      shift(field?.bounds);
+    }
+    const dong = this.dongTa?.definition;
+    shift(dong?.center);
+    shift(dong?.bounds);
+    shift(dong?.entry);
+    const tay = this.tayDoc?.definition;
+    if (tay) {
+      shift(tay.spawn);
+      shift(tay.bounds);
+      tay.entryEndX += dx;
+    }
+    const nam = this.arena.world.namDe?.definition;
+    shift(nam?.spawn);
+    shift(nam?.entrance);
+    shift(nam?.arenaBounds);
+    shift(this.mainBosses?.definition.center);
+    shift(this.mainBosses?.definition.entry);
+    // Every native map has a north approach; Tụ Hiền Trang's diagonal approach is pond water.
+    if (this.mainBosses)
+      Object.assign(this.mainBosses.definition.entry, {
+        x: center.x,
+        y: center.y - 276,
+      });
+    shift(this.mainBosses?.final?.center);
   }
   add(id: string, nickname: string): Hero {
     const hero = addHero(this.arena.world, id, nickname, this.base);
@@ -1524,6 +1578,205 @@ export class DungeonMatch {
     zone.world.pending = [];
     zone.world.actions = [];
     zone.world.areas = [];
+  }
+  /** Explicit DEV progression skip: retire actors without damage, death or reward callbacks. */
+  skipWaveBossTest(expected: BossTestSkipStage): string | undefined {
+    const w = this.arena.world,
+      test = w.waveBossTest;
+    if (!test?.progression || !this.invasion || !this.mainBosses)
+      return 'Chỉ bỏ qua boss trong phòng test progression.';
+    if (test.stage !== expected || !Object.hasOwn(waveBossTestNext, expected))
+      return 'Mốc boss đã thay đổi. Hãy thử lại.';
+    if (expected === 'dong_ta') {
+      this.dongTa!.suspendCampaign(w);
+      this.dongTa!.phase = 'cleared';
+    } else if (expected === 'tay_doc') {
+      this.tayDoc!.dispose(w);
+      this.tayDocGate.spawned = true;
+    } else if (expected === 'nam_de') {
+      clearNamDe(w);
+      w.namDe!.phase = 'defeated';
+    } else {
+      w.bacCai?.clear(w);
+      delete w.bacCai;
+      this.mainBosses.encounter = undefined;
+    }
+    this.waveArena = undefined;
+    this.bossRetries.trials.delete(this.arena.id);
+    this.lockWaveArena(false);
+    w.creeps.clear();
+    w.projectiles.clear();
+    w.pending = [];
+    w.shots = [];
+    w.actions = [];
+    w.areas = [];
+    w.supports = [];
+    w.combos = [];
+    w.events = [];
+    for (const h of w.heroes.values()) {
+      cancelOwnedEffects(w, h.id);
+      h.statuses = [];
+      h.namDeLocked = false;
+      h.bossSpectator = false;
+      h.moveX = h.moveY = 0;
+      h.pose = 'idle';
+      h.hp = h.maxHp;
+      h.mana = h.maxMana;
+      this.respawns.delete(h.id);
+    }
+    // Test gates may advance, but the actual campaign clear/reward ledger stays unchanged.
+    this.mainBosses.recordDefeat(expected);
+    (test.skipped ??= []).push(expected);
+    test.stage = waveBossTestNext[expected];
+    this.invasion.wave = {
+      tay_doc: 10,
+      nam_de: 15,
+      bac_cai: 20,
+      vuong_trung_duong: 20,
+    }[test.stage];
+    return;
+  }
+  startNamDeDarkTest(): string | undefined {
+    const w = this.arena.world,
+      test = w.waveBossTest;
+    if (
+      !test?.progression ||
+      !w.namDe ||
+      !['dong_ta', 'tay_doc', 'nam_de'].includes(test.stage)
+    )
+      return 'Chỉ test hắc hóa trước hoặc trong mốc Nam Đế của phòng progression.';
+    for (let i = 0; test.stage !== 'nam_de' && i < 2; i++) {
+      const error = this.skipWaveBossTest(test.stage as BossTestSkipStage);
+      if (error) return error;
+    }
+    const definition = w.namDe.definition;
+    clearNamDe(w);
+    w.creeps.delete('boss_nam_de');
+    w.projectiles.clear();
+    w.pending = [];
+    w.shots = [];
+    w.actions = [];
+    w.areas = [];
+    w.supports = [];
+    w.combos = [];
+    this.bossRetries.trials.delete(this.arena.id);
+    this.waveArena = undefined;
+    // Reuse the already validated/rebased encounter. Its unused entrance marker
+    // can now overlap dynamic arena props; the review starts at the authored center.
+    const runtime = w.namDe!;
+    delete runtime.dark;
+    delete runtime.defeatedAt;
+    runtime.spawnCount = 0;
+    runtime.serial = runtime.rotationIndex = 0;
+    runtime.phase = 'rest';
+    runtime.spawnAt = w.tick;
+    runtime.nextActionAt = runtime.nextSmallAt =
+      w.tick + definition.openingTicks;
+    spawnNamDeIfReady(w, this.arena.config, w.tick);
+    w.namDe!.phase = 'idle';
+    const boss = w.creeps.get('boss_nam_de')!;
+    boss.x = definition.arenaBounds.x;
+    boss.y = definition.arenaBounds.y;
+    boss.provoked = true;
+    for (const [i, h] of [...w.heroes.values()].entries()) {
+      cancelOwnedEffects(w, h.id);
+      h.statuses = [];
+      h.namDeLocked = false;
+      h.bossSpectator = false;
+      h.moveX = h.moveY = 0;
+      delete h.moveDestination;
+      h.hp = h.maxHp;
+      h.mana = h.maxMana;
+      h.pose = 'idle';
+      h.x = boss.x + 165;
+      h.y = boss.y + (i - (w.heroes.size - 1) / 2) * 40;
+      this.respawns.delete(h.id);
+    }
+    this.syncWaveArena();
+    boss.hp = Math.ceil(boss.maxHp * definition.dark.hpFraction);
+    enterNamDeDark(w, this.arena.config);
+    return;
+  }
+  startVuongNotesTest(): string | undefined {
+    const w = this.arena.world,
+      test = w.waveBossTest;
+    if (!test?.progression || !this.mainBosses?.final)
+      return 'Chỉ test Thất Tuyệt trong phòng progression.';
+    if (test.stage === 'complete') return 'Trận test đã kết thúc.';
+    for (let i = 0; test.stage !== VUONG_ID && i < 4; i++) {
+      const error = this.skipWaveBossTest(test.stage as BossTestSkipStage);
+      if (error) return error;
+    }
+    if (test.stage !== VUONG_ID) return 'Chưa thể vào trận Vương Trùng Dương.';
+    w.vuong?.clear(w);
+    w.creeps.clear();
+    w.projectiles.clear();
+    w.pending = [];
+    w.shots = [];
+    w.actions = [];
+    w.areas = [];
+    w.supports = [];
+    w.combos = [];
+    this.bossRetries.trials.delete(this.arena.id);
+    this.waveArena = undefined;
+    for (const h of w.heroes.values()) {
+      cancelOwnedEffects(w, h.id);
+      h.statuses = [];
+      h.namDeLocked = false;
+      h.bossSpectator = false;
+      h.moveX = h.moveY = 0;
+      delete h.moveDestination;
+      h.hp = h.maxHp;
+      h.mana = h.maxMana;
+      h.pose = 'idle';
+      this.respawns.delete(h.id);
+    }
+    test.scenario = 'vuong_notes';
+    new VuongEncounter(this.mainBosses.final).initialize(w, this.arena.config);
+    this.syncWaveArena();
+    return;
+  }
+  skipVuongPhaseOneTest(): string | undefined {
+    const w = this.arena.world;
+    if (
+      !w.waveBossTest?.progression ||
+      w.waveBossTest.stage !== VUONG_ID ||
+      !w.vuong
+    )
+      return 'Chỉ chuyển phase trong trận test Vương Trùng Dương.';
+    if (
+      w.vuong.phase === 2 &&
+      w.vuong.state === 'fighting' &&
+      !this.bossRetries.voting &&
+      !w.waveBossTest.scenario
+    )
+      return 'Đã ở phase 2.';
+    if (
+      this.bossRetries.voting ||
+      w.vuong.state !== 'fighting' ||
+      w.waveBossTest.scenario
+    ) {
+      delete w.waveBossTest.scenario;
+      this.bossRetries.trials.delete(this.arena.id);
+      w.vuong.clear(w);
+      this.restartCampaignBoss(this.arena, VUONG_ID);
+    }
+    this.bossRetries.trials.delete(this.arena.id);
+    for (const h of w.heroes.values()) {
+      cancelOwnedEffects(w, h.id);
+      h.statuses = [];
+      h.namDeLocked = false;
+      h.bossSpectator = false;
+      h.moveX = h.moveY = 0;
+      delete h.moveDestination;
+      h.hp = h.maxHp;
+      h.mana = h.maxMana;
+      h.pose = 'idle';
+      this.respawns.delete(h.id);
+    }
+    return w.vuong.startPhaseTwoTest(w, this.arena.config)
+      ? undefined
+      : 'Chưa thể chuyển phase.';
   }
   resetCampaignDungeon(zone: MatchZone): void {
     const d = zone.dungeon!;

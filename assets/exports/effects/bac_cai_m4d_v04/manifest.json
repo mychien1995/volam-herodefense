@@ -1,0 +1,63 @@
+{
+  "status": "candidate; user requested rework, final director approval pending",
+  "generator": "OpenAI image_gen",
+  "source": "master.png",
+  "sourceSha256": "97acb33c7a6a04c1e1ca943dee5244f1998e7d1adf230fba01c1fc4498d86519",
+  "reference": "assets/sprites/bosses/main/bac-cai/rework-v03/source/beam_source.png",
+  "purpose": "Clean jade-gold dragon blast and expanding orange-gold fire ring; native transparent crops; original assets retained",
+  "exports": {
+    "dragon-beam.png": {
+      "size": [
+        1495,
+        170
+      ],
+      "sha256": "2142f932badbcec8507b1d640340a79fd0bbbf6179dff220b17d364ee7a7ef4d",
+      "crop": [
+        20,
+        495,
+        1515,
+        665
+      ]
+    },
+    "dragon-palm.png": {
+      "size": [
+        387,
+        300
+      ],
+      "sha256": "fa72b7925628f82fa4123c0b32c214f922770f2e85f43aa2535856d3e5f6ef20",
+      "crop": [
+        850,
+        185,
+        1237,
+        485
+      ],
+      "tailFeatherPixels": 48
+    },
+    "fire-ring.png": {
+      "size": [
+        656,
+        656
+      ],
+      "sha256": "890cc5b466f483b21cd54ac6faca4a9fb64f3d1ad3a2d7ecb5e0a444b2cca392",
+      "crop": [
+        290,
+        560,
+        946,
+        1216
+      ]
+    }
+  },
+  "alphaCleanup": "Fire ring: alpha below 12/255 removed. Palm: smooth alpha ramp over 48 native tail pixels. Beam: native crop, no repaint.",
+  "beamSource": "beam-master.png",
+  "beamSourceSha256": "d0c06336e9c96d7d2600db59f38d9ab3395b5021c63e4680de2c2d0af998fd8e",
+  "generationPrompts": [
+    {
+      "master": "master.png",
+      "summary": "Transparent two-asset HD wuxia sheet: jade-gold right-facing dragon blast above, hollow orange-gold circular flame ring below; no text/UI; clean readable edges, retain reference identity."
+    },
+    {
+      "master": "beam-master.png",
+      "summary": "Transparent extremely slender horizontal jade-gold dragon beam, compact right-facing head at right tip; narrow golden core, clean green streams, no ring/text; preserve gameplay readability."
+    }
+  ]
+}

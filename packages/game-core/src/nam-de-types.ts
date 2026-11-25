@@ -1,8 +1,16 @@
+import type {
+  NamDeDarkDefinition,
+  NamDeDarkState,
+  NamDeDarkView,
+} from './nam-de-dark.js';
 import type { EllipseBounds } from './dong-ta-types.js';
 import type { Point, SimulationConfig } from './types.js';
 
 export const NAM_DE_ID = 'boss_nam_de';
 export const namDeAbilities = [
+  'tien_thien_canh_khi',
+  'tien_thien_bang_dao',
+  'dai_ly_hoang_quyen',
   'nam_de_palm',
   'nam_de_aura',
   'nam_de_small_finger',
@@ -17,6 +25,7 @@ export type NamDeAbility = (typeof namDeAbilities)[number];
 export type NamDeKey = 'up' | 'right' | 'down' | 'left';
 export const namDeKeys: NamDeKey[] = ['up', 'right', 'down', 'left'];
 export interface NamDeDefinition {
+  dark: NamDeDarkDefinition;
   wave: number;
   restTicks: number;
   spawn: Point;
@@ -129,6 +138,7 @@ export interface NamDeCast {
   burstCount?: number;
 }
 export interface NamDeRuntime {
+  dark?: NamDeDarkState;
   definition: NamDeDefinition;
   phase: 'waiting' | 'rest' | 'enter' | 'idle' | 'defeated' | NamDeAbility;
   spawnAt: number;
@@ -144,6 +154,7 @@ export interface NamDeRuntime {
   controls: Map<string, NamDeControl>;
 }
 export interface NamDeView {
+  dark: NamDeDarkView | null;
   actorId: string;
   phase: NamDeRuntime['phase'];
   spawnAt: number;

@@ -23,6 +23,7 @@ export interface BossRetryView {
   choice: boolean | null;
   revivals: number;
   revivalTicks: number;
+  notesFailure?: { beat: number; note: number; missed: string[] };
 }
 interface Trial {
   id: number;
@@ -35,6 +36,7 @@ interface Trial {
   electorate: string[];
   votes: Map<string, boolean>;
   deadline: number;
+  notesFailure?: BossRetryView['notesFailure'];
 }
 /** One server-owned finite-life ledger per encounter; transport/UI never mutate it. */
 export class BossRetries {
@@ -121,6 +123,7 @@ export class BossRetries {
         continue;
       }
       if (forceWipe) {
+        t.notesFailure = zone.world.vuong?.notesFailure;
         h.hp = 0;
         life.eliminated = true;
         delete life.reviveAt;
@@ -255,6 +258,7 @@ export class BossRetries {
     t.electorate = [];
     this.match.restartCampaignBoss(t.zone, t.bossId);
     t.actor = t.zone.kim?.generation ?? t.zone.world.creeps.get(t.bossId);
+    delete t.notesFailure;
     t.lives.clear();
     for (const id of ids) {
       const h = this.match.hero(id);
@@ -337,6 +341,7 @@ export class BossRetries {
       retry: t
         ? {
             id: t.id,
+            ...(t.notesFailure ? { notesFailure: t.notesFailure } : {}),
             bossId: t.bossId,
             zoneId: t.zone.id,
             phase: t.phase,

@@ -1368,6 +1368,14 @@
       "channels": [null],
       "setup": "./tests/e2e/wave-boss-feedback-setup.ts"
     },
+    "playwright.boss-progression.config.ts": {
+      "profile": "boss-progression",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [{ "serverPort": 2959, "clientPort": 5559 }],
+      "channels": [null],
+      "setup": "./tests/e2e/boss-progression-setup.ts"
+    },
     "playwright.wave-boss-test.config.ts": {
       "profile": "wave-boss-test",
       "ports": "shared",

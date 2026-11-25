@@ -1,3 +1,4 @@
+import { readableWorldText } from './readable-world-text.js';
 import { markImpactTarget } from './m3d-hit-art.js';
 import { releaseBeat } from './m3d-approved-boss-body.js';
 import {
@@ -28,6 +29,15 @@ type Clip = {
 type Bundle = { id: string; origin: [number, number]; animations: Clip[] };
 export function preloadBacCaiArt(scene: Phaser.Scene) {
   scene.load.json('bc_manifest', '/assets/bac-cai-preview/manifest.json');
+  scene.load.image(
+    'bc-m4d-dragon-beam',
+    '/assets/bac-cai-m4d-v04/dragon-beam.png',
+  );
+  scene.load.image('bc-m4d-fire-ring', '/assets/bac-cai-m4d-v04/fire-ring.png');
+  scene.load.image(
+    'bc-m4d-dragon-palm',
+    '/assets/bac-cai-m4d-v05/dragon-palm.png',
+  );
   for (const id of ids)
     scene.load.atlas(
       id,
@@ -145,6 +155,35 @@ export class BacCaiRenderer {
     }
     return v;
   }
+  private nativeEffect(
+    key: string,
+    texture: string,
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    rotation = 0,
+    originX = 0.5,
+    alpha = 1,
+  ) {
+    let image = this.images.get(key);
+    if (!image) {
+      image = this.scene.add.image(x, y, texture).setName('bac_cai:' + key);
+      this.images.set(key, image);
+      image.texture.setFilter(Phaser.Textures.FilterMode.LINEAR);
+    }
+    image
+      .setOrigin(originX, 0.5)
+      .setPosition(x, y)
+      .setDisplaySize(width, height)
+      .setRotation(rotation)
+      .setAlpha(alpha)
+      .setDepth(y + 0.2);
+    this.seen.add(key);
+    const frames = this.observed.get(texture) ?? new Set<string>();
+    frames.add(texture);
+    this.observed.set(texture, frames);
+  }
   private text(
     key: string,
     value: string,
@@ -158,7 +197,7 @@ export class BacCaiRenderer {
         .text(x, y, value, {
           resolution: 2,
           fontFamily: 'Segoe UI, sans-serif',
-          fontSize: '12px',
+          fontSize: '14px',
           color,
           backgroundColor: '#182a25e8',
           padding: { x: 5, y: 3 },
@@ -169,7 +208,11 @@ export class BacCaiRenderer {
         .setName('bac_cai:' + key);
       this.labels.set(key, t);
     }
-    t.setText(value).setPosition(x, y).setColor(color).setDepth(19000);
+    readableWorldText(t)
+      .setText(value.normalize('NFC'))
+      .setPosition(x, y)
+      .setColor(color)
+      .setDepth(19000);
     if (key === 'dialogue') {
       const rect = this.scene.cameras.main.worldView;
       if (rect.width > t.width + 16)
@@ -348,7 +391,11 @@ export class BacCaiRenderer {
       markImpactTarget(renderedBody, 'bac_cai');
       if (v.phase !== 'defeated')
         this.health.draw('bac_cai', 'Bắc Cái', x, y - 65, v.hp, v.maxHp);
-      if (v.dialogue && v.phase !== 'defeated')
+      if (
+        v.dialogue &&
+        v.phase !== 'defeated' &&
+        (!v.action || this.clock - v.action.start > v.tickRate * 1.25)
+      )
         this.text('dialogue', v.dialogue, x, y - 110);
     } else if (v.forms.length) {
       const center = v.forms.reduce(
@@ -492,19 +539,27 @@ export class BacCaiRenderer {
       const angle = (Math.atan2(e.fy, e.fx) * 180) / Math.PI,
         clock = age(e.start);
       if (e.kind === 'beam')
-        this.cel(e.id, 'bac_cai_beam_v03', 'qi_beam', e.x, e.y - 20, clock, {
-          angle,
-          depth: e.y + 30,
-        });
-      else if (e.kind === 'palm')
-        this.cel(
+        this.nativeEffect(
           e.id,
-          'bac_cai_dragon_palms',
-          'dragon_projectile',
+          'bc-m4d-dragon-beam',
+          e.x,
+          e.y - 20,
+          v.tuning.beam.length,
+          (v.tuning.beam.length * 170) / 1495,
+          (angle * Math.PI) / 180,
+          0,
+          Math.min(1, Math.max(0.3, (e.end - this.clock) / 3)),
+        );
+      else if (e.kind === 'palm')
+        this.nativeEffect(
+          e.id,
+          'bc-m4d-dragon-palm',
           e.x,
           e.y - 24,
-          clock,
-          { angle, loop: true },
+          132,
+          (132 * 887) / 1774,
+          (angle * Math.PI) / 180,
+          0.8,
         );
       else if (e.kind === 'field')
         this.cel(e.id, 'bac_cai_rework_vfx', 'field_impact', e.x, e.y, clock, {
@@ -514,52 +569,26 @@ export class BacCaiRenderer {
           depth: 20,
         });
       else if (e.kind === 'spiral') {
-        this.cel(
-          e.id,
-          'bac_cai_rework_vfx',
-          'fire_dragon',
-          e.x,
-          e.y - 24,
-          clock,
-          {
-            angle:
-              angle +
-              ((this.clock - e.start) / (e.end - e.start)) *
-                v.tuning.spiral.turns *
-                360 +
-              90,
-            loop: true,
-          },
+        const p = Phaser.Math.Clamp(
+          (this.clock - e.start) / (e.end - e.start),
+          0,
+          1,
         );
-        for (let i = 1; i < 12; i++) {
-          const p = Math.max(
-              0,
-              Math.min(
-                1,
-                (this.clock - e.start - i * 1.14) / (e.end - e.start),
-              ),
-            ),
-            a =
-              Math.atan2(e.fy, e.fx) + p * Math.PI * 2 * v.tuning.spiral.turns,
-            r =
-              v.tuning.spiral.startRadius +
-              (v.tuning.spiral.radius - v.tuning.spiral.startRadius) * p;
-          if (this.clock - e.start < i * 1.14) continue;
-          this.cel(
-            e.id + '_trail_' + i,
-            'bac_cai_dragon_palms',
-            'dragon_trail',
-            e.origin.x + Math.cos(a) * r,
-            e.origin.y + Math.sin(a) * r * v.tuning.spiral.yScale - 24,
-            clock + i * 50,
-            {
-              sx: 0.42,
-              angle: (a * 180) / Math.PI + 90,
-              alpha: (1 - i / 13) * 0.4,
-              loop: true,
-            },
-          );
-        }
+        const radius =
+          v.tuning.spiral.startRadius +
+          (v.tuning.spiral.radius - v.tuning.spiral.startRadius) * p;
+        const diameter = 2 * (radius + v.tuning.spiral.hitRadius);
+        this.nativeEffect(
+          e.id,
+          'bc-m4d-fire-ring',
+          e.origin.x,
+          e.origin.y,
+          diameter,
+          diameter * v.tuning.spiral.yScale,
+          0,
+          0.5,
+          0.92 + 0.06 * Math.sin(clock / 85),
+        );
       } else if (e.kind === 'tether') {
         const a = state!.players.get(e.targetIds[0]!),
           b2 = state!.players.get(e.targetIds[1]!);

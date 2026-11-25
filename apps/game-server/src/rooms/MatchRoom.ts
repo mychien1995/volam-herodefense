@@ -1,6 +1,7 @@
 import { namDeView, PracticeMatch } from '@volam/game-core';
 import { practiceDefinition } from '@volam/game-data';
 import { serverWaveBossTestOptions } from '../wave-boss-test-config.js';
+import { prepareBossProgressionHero } from '../boss-progression-mode.js';
 import {
   prepareSkillReviewHero,
   resetSkillReviewResources,
@@ -23,6 +24,7 @@ import {
   pvpDefinition,
   m1Config,
   arenaVariants,
+  dongTaForDifficulty,
   creepDungeon,
   desertDungeon,
   beachDungeon,
@@ -89,9 +91,11 @@ import {
   skillPreviewActionSchema,
   merchantActionSchema,
   portalCountSchema,
+  difficultySchema,
   arenaIdSchema,
   creepPreviewActionSchema,
   bossRetryActionSchema,
+  bossTestSkipSchema,
   loiDaiActionSchema,
 } from '@volam/game-protocol';
 
@@ -108,6 +112,25 @@ export class MatchRoom extends Room<{
     process.env['NODE_ENV'] !== 'production' &&
     process.env['VOLAM_DEV_CREEP_TEST'] === '1';
   readonly waveBossTestOptions = serverWaveBossTestOptions(m1Config.tickRate);
+  private readonly bossPresetStages = new Map<string, string>();
+  private prepareBossPresets(): void {
+    if (!this.waveBossTestOptions?.progression) return;
+    const stage = this.world.waveBossTest!.stage;
+    for (const id of this.simulation.membership.keys()) {
+      if (this.bossPresetStages.get(id) === stage) continue;
+      const hero = this.simulation.hero(id);
+      if (
+        hero &&
+        prepareBossProgressionHero(
+          hero,
+          this.world,
+          this.simulation.base,
+          stage,
+        )
+      )
+        this.bossPresetStages.set(id, stage);
+    }
+  }
   protected get standaloneLoiDai(): boolean {
     return false;
   }
@@ -131,8 +154,11 @@ export class MatchRoom extends Room<{
       : new DungeonMatch(
           {
             ...m1Config,
+            spawn: { ...m1Config.spawn },
+            waveArena: structuredClone(m1Config.waveArena),
             ...(!this.devCreepTest &&
-            !this.waveBossTestOptions &&
+            (!this.waveBossTestOptions ||
+              this.waveBossTestOptions.progression) &&
             process.env['VOLAM_DEV_LEGACY_SKILLS'] !== '1' &&
             process.env['VOLAM_TEST_LEGACY_PROGRESSION'] !== '1'
               ? { campaign: structuredClone(campaignDefinition) }
@@ -155,13 +181,13 @@ export class MatchRoom extends Room<{
           ],
           this.devCreepTest ? undefined : structuredClone(dongTaDefinition),
           this.devCreepTest ? undefined : structuredClone(tayDocDefinition),
-          this.devCreepTest ? undefined : namDeDefinition,
-          this.devCreepTest ? undefined : bacCaiDefinition,
+          this.devCreepTest ? undefined : structuredClone(namDeDefinition),
+          this.devCreepTest ? undefined : structuredClone(bacCaiDefinition),
           this.waveBossTestOptions,
           !this.devCreepTest &&
             (!this.waveBossTestOptions ||
               process.env['VOLAM_DEV_FINAL_BOSS'] === '1')
-            ? vuongDefinition
+            ? structuredClone(vuongDefinition)
             : undefined,
         );
   readonly world = this.simulation.arena.world;
@@ -216,6 +242,7 @@ export class MatchRoom extends Room<{
       );
     }
     if (this.devSkillLoadout) prepareSkillReviewHero(hero, m1Config);
+    this.prepareBossPresets();
     const conLuanTrial =
       hero.schoolId === conLuan.school &&
       process.env['NODE_ENV'] !== 'production' &&
@@ -307,6 +334,40 @@ export class MatchRoom extends Room<{
               sequence: input.sequence,
               reason,
             });
+          this.syncState();
+        },
+      ),
+      'boss-test-skip': validate(
+        bossTestSkipSchema,
+        (client: MatchClient, input) => {
+          const reject = (reason: string) =>
+            client.send('command-rejected', {
+              protocolVersion: PROTOCOL_VERSION,
+              sequence: input.sequence,
+              reason,
+            });
+          if (
+            !this.waveBossTestOptions?.progression ||
+            this.state.phase !== 'IN_GAME'
+          )
+            return reject(
+              'Chỉ bỏ qua boss trong phòng test progression đang chơi.',
+            );
+          if (client.sessionId !== this.state.hostId)
+            return reject('Chỉ chủ phòng được chuyển mốc test.');
+          const hero = this.simulation.hero(client.sessionId);
+          if (!hero || input.sequence <= hero.lastSequence) return;
+          hero.lastSequence = input.sequence;
+          const reason =
+            input.stage === 'nam_de_dark'
+              ? this.simulation.startNamDeDarkTest()
+              : input.stage === 'vuong_notes'
+                ? this.simulation.startVuongNotesTest()
+                : input.stage === 'vuong_trung_duong'
+                  ? this.simulation.skipVuongPhaseOneTest()
+                  : this.simulation.skipWaveBossTest(input.stage);
+          if (reason) return reject(reason);
+          this.prepareBossPresets();
           this.syncState();
         },
       ),
@@ -642,6 +703,8 @@ export class MatchRoom extends Room<{
             return reject(
               'Phòng preview dùng bộ chọn creep ngay trong sân test.',
             );
+          if (this.waveBossTestOptions?.progression)
+            return reject('Phòng thử này chỉ đánh wave boss.');
           if (!this.state.players.get(client.sessionId)?.confirmed)
             return reject('Hãy chọn và xác nhận môn phái trước khi chơi.');
           if (
@@ -842,6 +905,7 @@ export class MatchRoom extends Room<{
       portalCount?: unknown;
       creepPreview?: unknown;
       arenaId?: unknown;
+      difficulty?: unknown;
     } = {},
   ): void {
     if (
@@ -857,6 +921,16 @@ export class MatchRoom extends Room<{
         );
       this.creepPreview = new CreepPreviewSession(this.simulation);
     }
+    const difficulty = difficultySchema.safeParse(options.difficulty ?? 'hard');
+    if (!difficulty.success) throw new ServerError(400, 'Độ khó không hợp lệ.');
+    this.state.defense.difficulty = difficulty.data;
+    this.simulation.base.difficulty = difficulty.data;
+    this.simulation.arena.config.difficulty = difficulty.data;
+    if (this.simulation.dongTa)
+      Object.assign(
+        this.simulation.dongTa.definition,
+        dongTaForDifficulty(this.simulation.dongTa.definition, difficulty.data),
+      );
     const portals = portalCountSchema.safeParse(
       options.portalCount ?? (this.simulation.base.campaign ? 4 : 2),
     );
@@ -869,6 +943,7 @@ export class MatchRoom extends Room<{
       throw new ServerError(400, 'Loại arena không hợp lệ.');
     this.state.defense.arenaId = selected.data;
     const geometry = arenaVariants[selected.data];
+    this.simulation.registerArenaCenter(geometry.circleCenter);
     this.simulation.base.collision = geometry.collision.map((w) => ({ ...w }));
     this.simulation.base.combatCollision = [];
     this.simulation.arena.config.collision = [
@@ -895,7 +970,9 @@ export class MatchRoom extends Room<{
     }
     if (this.waveBossTestOptions)
       console.info(
-        '[DEV] VOLAM_DEV_WAVE_BOSSES=1: four live wave bosses, god mode, run x3, valid boss hits -5% max HP. New rooms only.',
+        this.waveBossTestOptions.progression
+          ? '[DEV] Boss progression: five real wave bosses; level/gear presets; normal combat and campaign revivals.'
+          : '[DEV] VOLAM_DEV_WAVE_BOSSES=1: four live wave bosses, god mode, run x3, valid boss hits -5% max HP. New rooms only.',
       );
     // Historical combat targets are explicit development fixtures, never match spawns.
     if (!(
@@ -922,6 +999,7 @@ export class MatchRoom extends Room<{
     this.metadata = {
       phase: this.state.phase,
       arenaId: this.state.defense.arenaId,
+      difficulty: this.state.defense.difficulty,
     };
     this.patchRate = 1000 / m1Config.tickRate;
     this.syncState();
@@ -943,6 +1021,7 @@ export class MatchRoom extends Room<{
         this.simulation.tayDoc.spawn(this.world, this.simulation.arena.config);
       this.creepPreview?.beforeStep();
       this.simulation.step(Date.now());
+      this.prepareBossPresets();
       if (this.inputTiming.size) {
         const steppedAt = performance.now();
         for (const samples of this.inputTiming.values())
@@ -1650,6 +1729,44 @@ export class MatchRoom extends Room<{
         target.zoneId = zone.id;
         target.radius = shot.effect.radius;
         target.stage = shot.stage ?? '';
+        target.elevation = 0;
+        target.stageStartedAt = shot.spawnedAt;
+        target.stageTicks = 1;
+        if (shot.effect.dragonDive) {
+          const d = shot.effect.dragonDive;
+          const coilAt = shot.spawnedAt + d.forwardTicks;
+          const riseAt = coilAt + d.orbitTicks;
+          const diveAt = riseAt + d.riseTicks;
+          target.stageStartedAt =
+            shot.stage === 'dragon_coil'
+              ? coilAt
+              : shot.stage === 'dragon_rise'
+                ? riseAt
+                : shot.stage === 'dragon_dive'
+                  ? diveAt
+                  : shot.spawnedAt;
+          target.stageTicks =
+            shot.stage === 'dragon_coil'
+              ? d.orbitTicks
+              : shot.stage === 'dragon_rise'
+                ? d.riseTicks
+                : shot.stage === 'dragon_dive'
+                  ? d.diveTicks
+                  : Math.max(1, d.forwardTicks);
+          const progress = Math.max(
+            0,
+            Math.min(
+              1,
+              (zone.world.tick - target.stageStartedAt) / target.stageTicks,
+            ),
+          );
+          target.elevation =
+            shot.stage === 'dragon_rise'
+              ? d.height * progress
+              : shot.stage === 'dragon_dive'
+                ? d.height * (1 - progress)
+                : 0;
+        }
         target.leg = shot.leg ?? '';
         target.lingerTicks = Math.max(
           0,

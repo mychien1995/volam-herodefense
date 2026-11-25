@@ -49,6 +49,7 @@ export const arenaVariants = {
     concept: 'DH-B',
     collision: arenaPropCollision('dao_hoa_dao'),
     roadCenter: { x: 804, y: 512 },
+    circleCenter: { x: 800, y: 535 },
     night: false,
   },
   tuong_duong: {
@@ -57,6 +58,7 @@ export const arenaVariants = {
     concept: 'TD-B',
     collision: arenaPropCollision('tuong_duong'),
     roadCenter: { x: 801, y: 498 },
+    circleCenter: { x: 800, y: 500 },
     night: true,
   },
   tu_hien_trang: {
@@ -65,6 +67,7 @@ export const arenaVariants = {
     concept: 'TH-B',
     collision: [...lotusCollision(), ...arenaPropCollision('tu_hien_trang')],
     roadCenter: { x: 802, y: 535 },
+    circleCenter: { x: 800, y: 535 },
     night: true,
   },
 } satisfies Record<
@@ -75,6 +78,7 @@ export const arenaVariants = {
     concept: string;
     collision: Rect[];
     roadCenter: { x: number; y: number };
+    circleCenter: { x: number; y: number };
     night: boolean;
   }
 >;

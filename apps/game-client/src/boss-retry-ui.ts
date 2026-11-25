@@ -1,5 +1,9 @@
 import type { LobbyPlayer } from '@volam/game-protocol';
-import type { BossRetryView } from '@volam/game-core';
+import {
+  vuongNotes,
+  type BossRetryView,
+  type BossTestSkipStage,
+} from '@volam/game-core';
 export type RetryAction =
   | { action: 'vote'; id: number; accept: boolean }
   | { action: 'call'; id: number };
@@ -7,14 +11,26 @@ export class BossRetryUI {
   readonly layer = document.createElement('div');
   private readonly status = document.createElement('span');
   private view: BossRetryView | null = null;
+  private skipStage: BossTestSkipStage | 'vuong_trung_duong' | undefined;
   constructor(
     viewport: HTMLElement,
     private send: (action: RetryAction) => void,
+    skip: (
+      stage: BossTestSkipStage | 'vuong_trung_duong' | 'vuong_notes',
+    ) => void,
   ) {
     this.layer.id = 'boss-retry-dialog';
     this.layer.hidden = true;
     this.layer.innerHTML =
-      '<section class="framed" role="dialog" aria-modal="true" aria-labelledby="boss-retry-title"><h2 id="boss-retry-title">Thử lại trận boss?</h2><p data-retry-summary></p><p data-retry-votes aria-live="polite"></p><div class="retry-actions"><button data-retry-yes>Đánh lại</button><button data-retry-no>Dừng lượt đánh</button></div></section>';
+      '<section class="framed" role="dialog" aria-modal="true" aria-labelledby="boss-retry-title"><h2 id="boss-retry-title">Thử lại trận boss?</h2><p data-retry-summary></p><p data-retry-votes aria-live="polite"></p><div class="retry-actions"><button data-retry-yes>Đánh lại</button><button data-retry-no>Dừng lượt đánh</button><button data-retry-skip hidden>Bỏ qua → mốc tiếp theo</button><button data-retry-notes hidden>Test lại Thất Tuyệt Lôi Âm</button></div></section>';
+    this.layer
+      .querySelector<HTMLButtonElement>('[data-retry-skip]')!
+      .addEventListener('click', () => {
+        if (this.skipStage) skip(this.skipStage);
+      });
+    this.layer
+      .querySelector('[data-retry-notes]')!
+      .addEventListener('click', () => skip('vuong_notes'));
     this.status.id = 'boss-lives';
     this.status.className = 'framed';
     this.status.hidden = true;
@@ -25,7 +41,7 @@ export class BossRetryUI {
       if (event.code !== 'Tab') return;
       const buttons = [
         ...this.layer.querySelectorAll<HTMLButtonElement>(
-          'button:not(:disabled)',
+          'button:not(:disabled):not([hidden])',
         ),
       ];
       event.preventDefault();
@@ -51,6 +67,13 @@ export class BossRetryUI {
       if (this.view) this.send({ action: 'call', id: this.view.id });
     });
   }
+  setSkip(stage: BossTestSkipStage | 'vuong_trung_duong' | undefined): void {
+    this.skipStage = stage;
+    this.layer.querySelector<HTMLButtonElement>('[data-retry-notes]')!.hidden =
+      !stage;
+    this.layer.querySelector<HTMLButtonElement>('[data-retry-skip]')!.hidden =
+      !stage;
+  }
   get blocked(): boolean {
     return !this.layer.hidden;
   }
@@ -73,10 +96,14 @@ export class BossRetryUI {
         : `Lần ${v.attempt} · Còn ${v.revivals} lượt hồi sinh${v.revivalTicks ? ` · Hồi sinh sau ${Math.ceil(v.revivalTicks / 30)}s` : ''}`;
     this.status.querySelector('button')!.hidden = v.phase !== 'waiting';
     this.layer.querySelector('[data-retry-summary]')!.textContent =
-      'Cả đội đã hết lượt hồi sinh. Đánh lại giữ cấp, trang bị và Long Châu; boss trở về đầy máu.';
+      v.notesFailure
+        ? `Thất Tuyệt Lôi Âm: hụt nhịp ${v.notesFailure.beat}/7 (${vuongNotes[v.notesFailure.note]}). Cần đứng trong ô đúng lúc hết nhịp; rời ô sớm cũng tính sai. Đánh lại giữ cấp, trang bị và Long Châu.`
+        : 'Cả đội đã hết lượt hồi sinh. Đánh lại giữ cấp, trang bị và Long Châu; boss trở về đầy máu.';
     this.layer.querySelector('[data-retry-votes]')!.textContent =
       `${v.yes}/${v.required} phiếu đồng ý · ${v.total} người · Còn ${Math.ceil(v.remainingMs / 1000)} giây`;
-    for (const b of this.layer.querySelectorAll<HTMLButtonElement>('button'))
+    for (const b of this.layer.querySelectorAll<HTMLButtonElement>(
+      'button:not([data-retry-skip]):not([data-retry-notes])',
+    ))
       b.disabled = v.choice !== null;
     if (!this.layer.hidden && wasHidden) {
       window.dispatchEvent(new Event('volam:controls-blocked'));

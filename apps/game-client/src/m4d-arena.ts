@@ -29,7 +29,12 @@ export function createM4dArena(
   scene.textures
     .get('m4d-ground-' + id)
     .setFilter(Phaser.Textures.FilterMode.NEAREST);
-  const props = createRenovationWorld(scene, 'arena', 'm4d-ground-' + id);
+  const props = createRenovationWorld(
+    scene,
+    'arena',
+    'm4d-ground-' + id,
+    arenaVariants[id].circleCenter,
+  );
   createGroundSurface(scene, id);
   const add = (kind: string, x: number, y: number, scale = 1) => {
     const spec = raw.props.find((p) => p.id === kind);

@@ -1,3 +1,27 @@
+## Nam Đế hắc hóa M4D · 2026-11-25
+
+Người dùng duyệt concept và yêu cầu tích hợp: ở 40% HP, Nam Đế mắt đỏ, thân đen trắng, cởi trần cơ bắp và lớn gấp đôi. Phase này bỏ Đại Lý Phong Huyệt/Liên Hoàn Nhất Dương Chỉ; thêm Canh Khí bảo hộ và làm chậm người đánh, Băng Đao bán nguyệt dùng Z đỡ/phản (ba lần phản trúng mới vỡ bảo hộ), Hoàng Quyền báo trước rồi đấm từ trên xuống gây stun với tần suất cao. Có nút DEV host vào thẳng phase để thử progression cấp 18. [Phạm vi, nguồn art và kiểm chứng](docs/NAM_DE_DARK_2026_11_25.md). Sau khi xem bản chơi, người dùng duyệt runtime art/integration và yêu cầu commit trên milestone/m4d; [hash bản đã duyệt](assets/approved_nam_de_dark_v01.lock.json). Giữ tuning hiện tại, không suy ra kết quả cân bằng toàn campaign từ lần duyệt này.
+
+## Bắc Đẩu và luyện Thất Tuyệt M4D · 2026-11-25
+
+Yêu cầu mới: tăng sao/độ rõ luồng damage Bắc Đẩu, mode luyện Thất Tuyệt, khoảng cách Cửu Âm và sửa đuôi rồng bị cắt. Bản test hiện dùng28 sao, các pulse di chuyển, giữ khoảng120/tốc độ90, nút vào/luyện lại Thất Tuyệt và sprite đuôi v05 hoàn chỉnh. Giữ một Thiên Quyền, ba sét phá giáp và luật âm luật gốc. [Triển khai, tuning thử và kiểm chứng](docs/M4D_VTD_FOLLOW_UP_2026_11_25.md) thay phần7 sao/bám24 cũ; không tự coi số tuning/ảnh mới là final approval.
+
+## Boss và arena M4D · 2026-11-25
+
+Theo phản hồi mới: cùng tâm sân cho tượng/cơ chế boss trên cả ba arena; tượng/đèn ẩn trong Bắc Cái và Vương Trùng Dương; giảm tần suất các chiêu độc nổ/Hỗn Thiên; Vạn Kiếm chọn xa hơn và kiếm bay lên nhanh hơn; Phong Huyệt 7s, Tiểu Nhất Dương Chỉ giảm 15%; Phi Long Bắc Cái là vòng lửa nở rộng và Shift xuyên được; tạm ngưng auto trong Mục Hạ, chuyển ba ô sở thích lên phía bắc tâm sân; test host có nút sang VTD phase 2. [Chi tiết triển khai, tuning thử và giới hạn xác minh](docs/M4D_BOSS_FIXES_2026_11_25.md). VFX raster mới là candidate để director test, không tự coi là final-art approval.
+
+## M4D · bỏ qua boss trong DEV progression — 2026-11-25
+
+Người dùng muốn thử boss kế tiếp khi solo không thắng được. Thêm skip theo thứ tự Đông Tà → Tây Độc → Nam Đế → Bắc Cái → Vương Trùng Dương, chỉ trong DEV boss-progression. Host chuyển mốc cho cả phòng, kể cả khi chết/quan chiến/ballot; gỡ đòn/hazard/trạng thái và ledger lượt cũ, cấp preset mốc mới. Skip ghi riêng, không gây chết boss, không thưởng kill hay sửa campaign clear ledger thật. Yêu cầu phải khớp mốc hiện tại để chống gửi lặp. VTD là mốc cuối, không có nút skip thành chiến thắng. Protocol51, cần phòng mới.
+
+## M4D · đính chính sát thương Dễ và ưu tiên tên chiêu — 2026-11-25
+
+Người dùng đính chính: Dễ giảm 15% sát thương cũ, tức còn 85% (hệ số 0,85); cách hiểu còn 15% trước đó bị thay thế. Khi boss gọi tên chiêu, bỏ hội thoại đang hiện và chặn hội thoại mới trong cửa sổ tên chiêu. Chữ tên chiêu/hội thoại tăng độ phân giải và giảm viền để rõ ở zoom game. Tiếp tục chạy milestone/m4d, kiểm tra tập trung.
+
+## M4D · lựa chọn Dễ/Khó và Đông Tà dễ — 2026-11-25
+
+Người dùng yêu cầu từ nay chạy `milestone/m4d`, thêm độ khó khi tạo phòng, giữ hiện tại là Khó. Dễ: đường lướt Đông Tà chỉ chữ nhật có báo trước, đòn quét nhiều tia phía trước còn 30% diện tích, đứng yên suốt Ngọc Tiêu và damage encounter còn 15%. Người dùng xác nhận đòn quạt nhiều tia, không phải bốn đường +/X. [Hợp đồng và cách chạy test boss](docs/M4D_DIFFICULTY.md). Chỉ chạy kiểm tra liên quan theo yêu cầu; không mở rộng boss khác hoặc xác nhận cân bằng người chơi/art.
+
 ## M4D — arena và improvement · 2026-11-25
 
 Người dùng chọn DH-B, TD-B và TH-B (bản đã bỏ shop/cổng phó bản) để tích hợp. Quyết định mới: hai hàng/quái gấp đôi mỗi cổng, chu kỳ 120s, giữ tổng thưởng mỗi wave; boss giữ mốc wave; dungeon floor mỗi 600s; boss chờ đội gây sát thương trước; Shift thoát hố cát; ba giày thụ động thay Z. Nước Tụ Hiền Trang chặn di chuyển, bốn cầu nối đảo giữa hồ. [Triển khai và giới hạn kiểm chứng M4D](docs/M4D_IMPLEMENTATION.md). Concept đã chọn; art trong game vẫn chờ duyệt cuối.

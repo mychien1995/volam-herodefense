@@ -54,6 +54,14 @@ export interface VuongDefinition {
   hpPerPlayer: number;
   radius: number;
   speed: number;
+  shieldHoldRange: number;
+  shieldMoveSpeed: number;
+  starGroups: number;
+  starSpreadX: number;
+  starSpreadY: number;
+  starWarningMs: number;
+  starSpeed: number;
+  starGapMs: number;
   defense: number;
   phase2Hp: number;
   notesHp: number;
@@ -87,6 +95,9 @@ export function validateVuong(d: VuongDefinition, c: SimulationConfig) {
     d.phase2Hp >= 1 ||
     d.notesHp >= d.phase2Hp ||
     Math.max(d.shieldMultiplier, d.starMultiplier, d.qteFraction) >= 1 ||
+    !Number.isInteger(d.starGroups) ||
+    d.starGroups < 1 ||
+    d.starGroups > 4 ||
     !Number.isInteger(d.swordsCount) ||
     d.swordsCount > 6 ||
     !Number.isInteger(d.xp) ||
@@ -136,13 +147,13 @@ interface Action {
 const rotation1 = ['tam', 'counter', 'elements'] as const;
 const rotation2 = ['stars', 'pulse', 'swords', 'pulse'] as const;
 const starOffsets = [
-  [-200, -85],
-  [-155, -118],
-  [-99, -101],
-  [-37, -69],
-  [30, -89],
-  [106, -56],
-  [125, -135],
+  [-95, -40],
+  [-60, -62],
+  [-22, -50],
+  [20, -20],
+  [66, -18],
+  [88, 34],
+  [40, 49],
 ] as const;
 const starLinks = [
   [0, 1],
@@ -160,6 +171,19 @@ const starRadius = 18;
 const innerRadius = 95;
 const outerRadius = 185;
 
+export function vuongStarLight(
+  cue: Point & { end?: Point | undefined; at: number; until: number },
+  tick: number,
+): Point {
+  const progress = Math.max(
+    0,
+    Math.min(1, (tick - cue.at) / Math.max(1, cue.until - cue.at - 1)),
+  );
+  return {
+    x: cue.x + ((cue.end?.x ?? cue.x) - cue.x) * progress,
+    y: cue.y + ((cue.end?.y ?? cue.y) - cue.y) * progress,
+  };
+}
 export class VuongEncounter {
   readonly bossId = VUONG_ID;
   phase: 1 | 2 = 1;
@@ -180,6 +204,7 @@ export class VuongEncounter {
   private burns = new Map<string, { next: number; remaining: number }>();
   private notes: number[] = [];
   private notesDone = false;
+  private practiceNotes = false;
   private exposedUntil = 0;
   private transitionUntil = 0;
   private corpseUntil = 0;
@@ -210,10 +235,23 @@ export class VuongEncounter {
     }));
   }
   private stars() {
-    return starOffsets.map(([x, y]) => ({
-      x: this.definition.center.x + x,
-      y: this.definition.center.y + y,
-    }));
+    const d = this.definition;
+    return Array.from({ length: d.starGroups }, (_, group) => {
+      const angle = (group * Math.PI) / 2,
+        cos = Math.cos(angle),
+        sin = Math.sin(angle);
+      const cx = d.center.x + (group % 2 ? 1 : -1) * d.starSpreadX;
+      const cy = d.center.y + (group < 2 ? -1 : 1) * d.starSpreadY;
+      return starOffsets.map(([x, y]) => ({
+        x: cx + x * cos - y * sin,
+        y: cy + x * sin + y * cos,
+      }));
+    }).flat();
+  }
+  private notesTest(w: World): boolean {
+    return (
+      !!w.waveBossTest?.progression && w.waveBossTest.scenario === 'vuong_notes'
+    );
   }
   initialize(w: World, c: SimulationConfig) {
     if (w.creeps.has(VUONG_ID)) throw Error('Vương Trùng Dương already exists');
@@ -244,6 +282,13 @@ export class VuongEncounter {
       this.nextHazard =
         w.tick + this.ticks(d.openingMs, c);
     w.vuong = this;
+    this.practiceNotes = this.notesTest(w);
+    if (this.practiceNotes) {
+      this.phase = 2;
+      this.lightningHits = 3;
+      b.provoked = true;
+      b.hp = Math.ceil(b.maxHp * this.definition.notesHp);
+    }
   }
   scaleParty(w: World) {
     const boss = w.creeps.get(VUONG_ID)!;
@@ -251,10 +296,12 @@ export class VuongEncounter {
       this.definition.hp *
         (1 + this.definition.hpPerPlayer * Math.max(0, w.heroes.size - 1)),
     );
-    boss.hp = boss.maxHp = hp;
+    boss.maxHp = hp;
+    boss.hp = this.notesTest(w) ? Math.ceil(hp * this.definition.notesHp) : hp;
     if (boss.stats) boss.stats.hp = hp;
   }
   limitIncoming(boss: Creep, damage: number) {
+    if (this.practiceNotes) return 0;
     const d = this.definition;
     const shield = this.phase === 1 && this.lightningHits < 3;
     const reduction = shield
@@ -274,6 +321,14 @@ export class VuongEncounter {
     return this.failedNotes;
   }
   private failedNotes = false;
+  notesFailure: { beat: number; note: number; missed: string[] } | undefined;
+  private noteMisses(w: World, stage: number): string[] {
+    const seal = this.around(6, 142)[this.notes[stage - 1]!];
+    return [...this.participants].filter((id) => {
+      const h = w.heroes.get(id);
+      return !seal || !h || h.hp <= 0 || distance(h, seal) > noteRadius;
+    });
+  }
   locked(id: string) {
     return this.controls.has(id);
   }
@@ -593,17 +648,37 @@ export class VuongEncounter {
     } else if (a.skill === 'slash') {
       this.arc(w, c, b, a.direction, a.skill, 94);
     } else if (a.skill === 'tam' || a.skill === 'stars') {
-      if (a.skill === 'stars' && a.stage < starLinks.length) {
-        const [start, end] = starLinks[a.stage++]!;
-        const stars = this.stars();
-        this.cue(w, c, 'starLine', stars[start]!, 12, 660, 240, {
-          end: stars[end]!,
-          skill: 'stars',
-        });
-        a.next = w.tick + this.ticks(550, c);
+      const starStages = starLinks.length + 1;
+      if (a.skill === 'stars' && a.stage < starStages) {
+        const stars = this.stars(),
+          stage = a.stage++;
+        for (let group = 0; group < d.starGroups; group++) {
+          const pair =
+            stage < starLinks.length ? starLinks[stage]! : [eyeIndex, eyeIndex];
+          const from = group * 7 + pair[0]!;
+          const to =
+            stage < starLinks.length
+              ? group * 7 + pair[1]!
+              : ((group + 1) % d.starGroups) * 7 + eyeIndex;
+          if (from === to) continue;
+          const start = stars[from]!,
+            end = stars[to]!;
+          const flightMs = (distance(start, end) / d.starSpeed) * 1000;
+          this.cue(
+            w,
+            c,
+            'starLine',
+            start,
+            12,
+            d.starWarningMs,
+            flightMs + 1000 / c.tickRate,
+            { end, skill: 'stars', hit: new Set() },
+          );
+        }
+        a.next = w.tick + this.ticks(d.starGapMs, c);
         return;
       }
-      const stage = a.stage - (a.skill === 'stars' ? starLinks.length : 0);
+      const stage = a.stage - (a.skill === 'stars' ? starStages : 0);
       if (stage < 2) {
         const sign = stage ? -1 : 1;
         const angle = Math.atan2(a.direction.y, a.direction.x) + sign * 0.64;
@@ -687,13 +762,15 @@ export class VuongEncounter {
         a.next = w.tick + this.ticks(d.beatMs, c);
         return;
       }
-      const seal = this.around(6, 142)[this.notes[a.stage - 1]!]!;
-      const every = [...this.participants].every((id) => {
-        const h = w.heroes.get(id);
-        return !!h && h.hp > 0 && distance(h, seal) <= noteRadius;
-      });
-      if (!every) this.failedNotes = true;
-      else if (a.stage++ < this.notes.length) {
+      const missed = this.noteMisses(w, a.stage);
+      if (missed.length) {
+        this.failedNotes = true;
+        this.notesFailure = {
+          beat: a.stage,
+          note: this.notes[a.stage - 1]!,
+          missed,
+        };
+      } else if (a.stage++ < this.notes.length) {
         a.next = w.tick + this.ticks(d.beatMs, c);
         return;
       } else this.notesDone = true;
@@ -742,6 +819,19 @@ export class VuongEncounter {
           this.hit(w, c, h, e.skill!, d.damage[e.skill!]);
         }
         Object.assign(e, next);
+        continue;
+      }
+      if (e.kind === 'starLine' && e.end) {
+        const before = vuongStarLight(e, w.tick - 1),
+          after = vuongStarLight(e, w.tick);
+        for (const h of heroes)
+          if (
+            !e.hit!.has(h.id) &&
+            segmentCircle(before, after, h, e.radius + c.radius) !== undefined
+          ) {
+            e.hit!.add(h.id);
+            this.hit(w, c, h, 'stars', d.damage.stars);
+          }
         continue;
       }
       e.resolved = true;
@@ -804,7 +894,7 @@ export class VuongEncounter {
   }
   private stepAmbient(w: World, c: SimulationConfig, b: Creep, heroes: Hero[]) {
     const d = this.definition;
-    if (w.tick < this.nextHazard || !heroes.length) return;
+    if (this.notesTest(w) || w.tick < this.nextHazard || !heroes.length) return;
     if (this.phase === 1 && this.lightningHits < 3) {
       const target = this.choose(w, heroes);
       const dir = direction(target.x - b.x, target.y - b.y);
@@ -839,7 +929,7 @@ export class VuongEncounter {
     const d = this.definition;
     const heroes = this.living(w);
     if (!heroes.length) return;
-    if (!this.shieldAnnounced) {
+    if (this.phase === 1 && !this.shieldAnnounced) {
       this.shieldAnnounced = true;
       announceBossSkill(w, VUONG_ID, vuongSkills.shield);
     }
@@ -848,13 +938,7 @@ export class VuongEncounter {
       this.lightningHits === 3 &&
       b.hp <= Math.ceil(b.maxHp * d.phase2Hp)
     ) {
-      this.clearTransient(w);
-      this.phase = 2;
-      this.transitionUntil = w.tick + this.ticks(1100, c);
-      this.nextAction = this.nextSpecial = this.transitionUntil;
-      this.nextHazard = w.tick;
-      this.rotation = 0;
-      b.pose = 'cast';
+      this.enterPhaseTwo(w, c);
     }
     this.stepAmbient(w, c, b, heroes);
     this.stepHazards(w, c, b, heroes);
@@ -877,9 +961,14 @@ export class VuongEncounter {
       .filter((h) => h.hp > 0 && !hasStatus(h, 'concealed', w.tick))
       .sort((a, other) => distance(a, b) - distance(other, b))[0];
     if (!target) return;
+    if (this.notesTest(w)) {
+      if (!this.notesDone) this.start(w, c, b, 'notes', target, heroes);
+      else b.pose = 'idle';
+      return;
+    }
     if (this.phase === 1 && this.lightningHits < 3) {
-      if (distance(b, target) > 24) {
-        const v = this.move(b, target, d.speed, c, d.radius);
+      if (distance(b, target) > d.shieldHoldRange) {
+        const v = this.move(b, target, d.shieldMoveSpeed, c, d.radius);
         b.fx = v.x;
         b.fy = v.y;
         b.pose = 'walk';
@@ -915,6 +1004,35 @@ export class VuongEncounter {
       target,
       heroes,
     );
+  }
+  private enterPhaseTwo(w: World, c: SimulationConfig): void {
+    this.clearTransient(w);
+    this.phase = 2;
+    this.transitionUntil = w.tick + this.ticks(1100, c);
+    this.nextAction = this.nextSpecial = this.transitionUntil;
+    this.nextHazard = w.tick;
+    this.rotation = 0;
+    w.creeps.get(VUONG_ID)!.pose = 'cast';
+  }
+  startPhaseTwoTest(w: World, c: SimulationConfig): boolean {
+    const boss = w.creeps.get(VUONG_ID);
+    if (
+      !w.waveBossTest?.progression ||
+      w.waveBossTest.stage !== VUONG_ID ||
+      this.phase !== 1 ||
+      this.state !== 'fighting' ||
+      !boss ||
+      boss.hp <= 0
+    )
+      return false;
+    this.lightningHits = 3;
+    boss.hp = Math.min(
+      boss.hp,
+      Math.ceil(boss.maxHp * this.definition.phase2Hp),
+    );
+    Object.assign(boss, this.definition.center);
+    this.enterPhaseTwo(w, c);
+    return true;
   }
   private clearTransient(w: World) {
     this.action = undefined;
@@ -958,6 +1076,15 @@ export class VuongEncounter {
       tick: w.tick,
       rate: c.tickRate,
       phase: this.phase,
+      notesTest: this.notesTest(w),
+      notesComplete: this.notesDone,
+      noteReadyIds:
+        a?.skill === 'notes' && a.stage > 0
+          ? [...this.participants].filter(
+              (id) => !this.noteMisses(w, a.stage).includes(id),
+            )
+          : [],
+      noteParticipants: this.participants.size,
       state: this.state,
       x: b.x,
       y: b.y,

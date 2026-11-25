@@ -3,6 +3,7 @@ import {
   addCreep,
   addHero,
   BacCaiEncounter,
+  blocked,
   createWorld,
   DungeonMatch,
   InvasionDirector,
@@ -24,6 +25,7 @@ import {
   creepDungeon,
   m1Config,
   vuongDefinition,
+  arenaVariants,
 } from '@volam/game-data';
 import { hurt } from '../packages/game-core/src/combat.js';
 
@@ -99,7 +101,7 @@ describe('Vương Trùng Dương server combat', () => {
         .cues.find((e) => e.kind === 'lightning' && e.at > a.world.tick)!;
       let sequence = h.lastSequence;
       for (let tick = a.world.tick; tick < point.at; tick++) {
-        const dx = point.x - h.x,
+        const dx = point.x + 150 - h.x,
           dy = point.y - h.y;
         const x = Math.abs(dx) > 7 ? Math.sign(dx) : 0;
         const y = Math.abs(dy) > 7 ? Math.sign(dy) : 0;
@@ -185,21 +187,29 @@ describe('Vương Trùng Dương server combat', () => {
 
   it('uses all five counter seals and never damages the occupant of the correct seal', () => {
     const tested = new Set<number>();
-    for (let seed = 1; seed <= 25 && tested.size < 5; seed++) {
-      const a = arena(2, seed);
+    for (let seed = 1; seed <= 100 && tested.size < 5; seed++) {
+      const a = arena(3, seed);
       a.encounter.lightningHits = 3;
       a.until(() => a.view().action?.skill === 'elements');
       const v = a.view(),
         index = v.action!.index;
       if (tested.has(index)) continue;
       tested.add(index);
-      const [safe, wrong] = a.party as [Hero, Hero];
+      const [safe, wrong, outside] = a.party as [Hero, Hero, Hero];
       place(safe, v.elements[vuongCounters[index]!]!);
       place(wrong, v.elements[index]!);
-      const hp = [safe.hp, wrong.hp];
+      place(outside, { x: 1100, y: 800 });
+      const hp = [safe.hp, wrong.hp, outside.hp];
       a.until(() => !a.view().action);
       expect(safe.hp).toBe(hp[0]);
       expect(wrong.hp).toBeLessThan(hp[1]!);
+      expect(outside.hp).toBeLessThan(hp[2]!);
+      expect(
+        a.world.events.some(
+          (e) =>
+            e.abilityId === vuongSkills.elements && e.targetId === outside.id,
+        ),
+      ).toBe(true);
       if (index === 1) {
         expect(wrong.statuses?.some((s) => s.kind === 'root')).toBe(true);
         const start = { x: wrong.x, y: wrong.y, charges: wrong.dashCharges };
@@ -225,7 +235,7 @@ describe('Vương Trùng Dương server combat', () => {
     (breaks) => {
       const a = arena(1);
       a.phase2();
-      a.until(() => a.view().stars.length === 7);
+      a.until(() => a.view().stars.length === 28);
       const stars = a.view().stars;
       place(
         a.party[0]!,
@@ -440,3 +450,107 @@ it('publishes victory and fixed rewards only once when the statue survives the f
   expect(w.tick).toBe(endTick);
   expect(h.gold - gold).toBe(e.definition.gold);
 });
+
+describe('M4D VTD follow-up', () => {
+  it('holds a readable shield chase distance instead of walking into the player', () => {
+    const a = arena(1),
+      h = a.party[0]!;
+    place(h, { x: a.actor.x + 200, y: a.actor.y });
+    for (let i = 0; i < 120; i++) a.step();
+    expect(Math.hypot(a.actor.x - h.x, a.actor.y - h.y)).toBeGreaterThanOrEqual(
+      110,
+    );
+  });
+  it('spreads 28 stars across all four arena quadrants', () => {
+    const a = arena(1);
+    a.phase2();
+    a.until(() => a.view().stars.length > 0);
+    const v = a.view();
+    expect(v.stars).toHaveLength(28);
+    const quadrants = new Set(
+      v.stars.map((p) =>
+        [Math.sign(p.x - v.center.x), Math.sign(p.y - v.center.y)].join(':'),
+      ),
+    );
+    expect(quadrants.size).toBe(4);
+  });
+});
+
+it('moves star damage with the bright pulse instead of hitting the whole link at release', () => {
+  const a = arena(1);
+  a.phase2();
+  a.until(() => a.view().cues.some((e) => e.kind === 'starLine'));
+  const cue = a.view().cues.find((e) => e.kind === 'starLine')!,
+    h = a.party[0]!;
+  place(h, cue.end!);
+  const hits: any[] = [];
+  while (a.world.tick < cue.at + 1) {
+    a.step();
+    hits.push(
+      ...a.world.events.filter(
+        (e) =>
+          e.abilityId === vuongSkills.stars &&
+          e.targetId === h.id &&
+          e.kind === 'hit',
+      ),
+    );
+  }
+  expect(hits).toHaveLength(0);
+  while (a.world.tick < cue.until) {
+    a.step();
+    hits.push(
+      ...a.world.events.filter(
+        (e) =>
+          e.abilityId === vuongSkills.stars &&
+          e.targetId === h.id &&
+          e.kind === 'hit',
+      ),
+    );
+  }
+  expect(hits.length).toBeGreaterThan(0);
+});
+
+it('keeps the expanded stars on walkable stone in every M4D arena', () => {
+  for (const variant of Object.values(arenaVariants)) {
+    const a = arena(1, 42, { center: { ...variant.circleCenter } });
+    a.phase2();
+    a.until(() => a.view().stars.length > 0);
+    for (const point of a.view().stars)
+      expect(
+        blocked(point, 12, a.config.width, a.config.height, variant.collision),
+      ).toBe(false);
+  }
+});
+
+it.each([false, true])(
+  'checks notes only at the deadline and reports who missed (return before deadline: %s)',
+  (returnInTime) => {
+    const a = arena(2);
+    a.phase2();
+    a.damageBoss(1e5);
+    a.until(
+      () => a.view().action?.skill === 'notes' && a.view().action?.stage === 1,
+    );
+    const v = a.view(),
+      seal = v.noteSeals[v.notes[0]!]!;
+    for (const h of a.party) place(h, seal);
+    expect(a.view().noteReadyIds).toEqual(a.party.map((h) => h.id));
+    const missing = a.party[1]!;
+    place(missing, v.center);
+    expect(a.view().noteReadyIds).toEqual([a.party[0]!.id]);
+    a.until(() => a.world.tick === v.action!.next - 1);
+    expect(a.encounter.wipeRequested).toBe(false);
+    if (returnInTime) place(missing, seal);
+    a.step();
+    expect(a.encounter.wipeRequested).toBe(!returnInTime);
+    if (returnInTime) {
+      expect(a.view().action?.stage).toBe(2);
+      expect(a.encounter.notesFailure).toBeUndefined();
+    } else
+      expect(a.encounter.notesFailure).toEqual({
+        beat: 1,
+        note: v.notes[0],
+        missed: [missing.id],
+      });
+  },
+);

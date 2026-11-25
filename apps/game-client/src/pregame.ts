@@ -27,6 +27,7 @@ export class PreGame {
   nickname = '';
   portalCount: 1 | 2 | 3 | 4 = 4;
   arenaId: ArenaId = 'dao_hoa_dao';
+  difficulty: 'easy' | 'hard' = 'hard';
   private screen = 'home';
   private guideTab: GuideTab = 'campaign';
   private guideSchool = schools[0].id as string;
@@ -64,6 +65,11 @@ export class PreGame {
         arenaIds.includes(select.value as ArenaId)
       )
         this.arenaId = select.value as ArenaId;
+      if (
+        select.id === 'pre-difficulty' &&
+        (select.value === 'easy' || select.value === 'hard')
+      )
+        this.difficulty = select.value;
       if (select.id === 'pre-portals')
         this.portalCount = Number(select.value) as 1 | 2 | 3 | 4;
       if (select.id === 'guide-school') {
@@ -450,6 +456,7 @@ export class PreGame {
         content += `<dialog class="branch-dialog create-room-dialog" aria-labelledby="create-room-title">
         <h2 id="create-room-title">Tạo phòng</h2>
         <label class="pre-gates" for="pre-arena">Arena <select id="pre-arena">${arenaIds.map((id) => `<option value="${id}" ${id === this.arenaId ? 'selected' : ''}>${arenaVariants[id].nameVi}</option>`).join('')}</select></label>
+        <label class="pre-gates" for="pre-difficulty">Độ khó <select id="pre-difficulty"><option value="easy" ${this.difficulty === 'easy' ? 'selected' : ''}>Dễ</option><option value="hard" ${this.difficulty === 'hard' ? 'selected' : ''}>Khó</option></select></label>
         <label class="pre-gates" for="pre-portals">Số cổng xâm lăng <select id="pre-portals">${[1, 2, 3, 4].map((n) => `<option value="${n}" ${n === this.portalCount ? 'selected' : ''}>${n} cổng</option>`).join('')}</select></label>
         <p class="pre-note">Quái tràn trong 60 giây mỗi đợt · Đợt mới mỗi 2 phút, hai hàng mỗi cổng.</p>
         <div class="pre-actions">${button('Hủy', 'cancel-create')}${button('Tạo phòng', 'confirm-create', this.busy)}</div>
@@ -462,7 +469,7 @@ export class PreGame {
       const list = '<ul class="pre-players"></ul>';
       if (state.phase === 'WAITING_LOBBY') {
         title = 'Phòng chờ';
-        content = `<p class="pre-room">Phòng ${escape(this.roomId)} · <span class="pre-seat-count"></span>/6 người chơi · ${arenaVariants[state.defense.arenaId as ArenaId]?.nameVi ?? 'Đào Hoa Đảo'} · ${state.defense.portalCount} cổng${state.defense.devCreepTest ? ' · TEST CREEP' : ''}</p><div class="parchment">${list}</div><p>${hostHere ? 'Host bắt đầu để mọi người chọn phái.' : 'Host đã mất kết nối. Hãy rời và tạo phòng mới.'}</p><div class="pre-actions">${button('Bắt đầu', 'start', this.session !== state.hostId || !hostHere)}${button('Rời phòng', 'leave')}</div>`;
+        content = `<p class="pre-room">Phòng ${escape(this.roomId)} · <span class="pre-seat-count"></span>/6 người chơi · ${arenaVariants[state.defense.arenaId as ArenaId]?.nameVi ?? 'Đào Hoa Đảo'} · ${state.defense.portalCount} cổng · ${state.defense.difficulty === 'easy' ? 'Dễ' : 'Khó'}${state.defense.devCreepTest ? ' · TEST CREEP' : ''}</p><div class="parchment">${list}</div><p>${hostHere ? 'Host bắt đầu để mọi người chọn phái.' : 'Host đã mất kết nối. Hãy rời và tạo phòng mới.'}</p><div class="pre-actions">${button('Bắt đầu', 'start', this.session !== state.hostId || !hostHere)}${button('Rời phòng', 'leave')}</div>`;
       } else {
         title = 'Chọn môn phái';
         const dialogSchool = schools.find(

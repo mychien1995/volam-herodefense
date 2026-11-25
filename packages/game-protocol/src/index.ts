@@ -2,7 +2,7 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig, arenaIds } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 49;
+export const PROTOCOL_VERSION = 55;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -26,15 +26,30 @@ export const portalCountSchema = z.union([
   z.literal(3),
   z.literal(4),
 ]);
+export const difficultySchema = z.enum(['easy', 'hard']);
 export const arenaIdSchema = z.enum(arenaIds);
 export const joinOptionsSchema = z.strictObject({
   creepPreview: z.boolean().optional(),
   portalCount: portalCountSchema.optional(),
   arenaId: arenaIdSchema.optional(),
+  difficulty: difficultySchema.optional(),
   nickname: nicknameSchema,
   protocolVersion: z.literal(PROTOCOL_VERSION),
 });
 export type JoinOptions = z.infer<typeof joinOptionsSchema>;
+export const bossTestSkipSchema = z.strictObject({
+  stage: z.enum([
+    'dong_ta',
+    'tay_doc',
+    'nam_de',
+    'bac_cai',
+    'vuong_trung_duong',
+    'vuong_notes',
+    'nam_de_dark',
+  ]),
+  sequence: z.number().int().positive(),
+  protocolVersion: z.literal(PROTOCOL_VERSION),
+});
 export const bossRetryActionSchema = z.discriminatedUnion('action', [
   z.strictObject({
     action: z.literal('vote'),
@@ -90,6 +105,11 @@ export const connectionAckSchema = z.strictObject({
   checks: z.number().int().positive(),
 });
 export const inputSchema = z.discriminatedUnion('kind', [
+  z.strictObject({
+    protocolVersion: z.literal(PROTOCOL_VERSION),
+    sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
+    kind: z.literal('nam-de-guard'),
+  }),
   z.strictObject({
     protocolVersion: z.literal(PROTOCOL_VERSION),
     sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
@@ -551,6 +571,9 @@ export const BossEffectState = schema(
 export type BossEffectState = SchemaType<typeof BossEffectState>;
 export const ProjectileState = schema(
   {
+    elevation: t.number().default(0),
+    stageStartedAt: t.number().default(0),
+    stageTicks: t.number().default(1),
     startedAt: t.number().default(0),
     x: t.number().default(0),
     y: t.number().default(0),
@@ -612,6 +635,7 @@ export const DefenseState = schema(
     creepPreview: t.string().default(''),
     portalCount: t.number().default(2),
     arenaId: t.string().default('dao_hoa_dao'),
+    difficulty: t.string().default('hard'),
     streamUntilTick: t.number().default(0),
     devCreepTest: t.boolean().default(false),
     devWaveBosses: t.boolean().default(false),

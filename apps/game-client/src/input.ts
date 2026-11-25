@@ -16,6 +16,7 @@ export function bindGameplayInput(
   switchStance: () => void = () => {},
   skillUpgrade?: { enabled: () => boolean; upgrade: (slot: number) => void },
   mouseMode: () => boolean = () => false,
+  namDeGuard?: { enabled: () => boolean; use: () => void },
 ): () => void {
   const held = new Set<string>();
   let learning = false;
@@ -77,6 +78,11 @@ export function bindGameplayInput(
       return;
     }
     if (event.repeat) return;
+    if (event.code === 'KeyZ' && namDeGuard?.enabled()) {
+      event.preventDefault();
+      namDeGuard.use();
+      return;
+    }
     if (spectator?.active()) {
       if (event.code === 'Space') {
         event.preventDefault();

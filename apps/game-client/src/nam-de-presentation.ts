@@ -1,3 +1,8 @@
+import {
+  preloadNamDeDark,
+  presentNamDeDark,
+  NamDeDarkArt,
+} from './nam-de-dark-art.js';
 import { markImpactTarget } from './m3d-hit-art.js';
 import { releaseBeat } from './m3d-approved-boss-body.js';
 import {
@@ -23,6 +28,7 @@ interface Bundle {
 }
 const bundles = raw.bundles as unknown as Record<string, Bundle>;
 export function preloadNamDe(s: Phaser.Scene) {
+  preloadNamDeDark(s);
   if (renovationFollowupEnabled())
     s.load.atlas('v6_nd_phat', '/assets/nam_de/rework.png', {
       frames: bundles.rework!.frames,
@@ -47,8 +53,10 @@ export class NamDePresentation {
   private pose = { key: '', at: 0 };
   private feedback: WaveBossFeedbackArt;
   private health: WaveBossHealth;
+  private darkArt: NamDeDarkArt;
   constructor(private scene: Phaser.Scene) {
     this.feedback = new WaveBossFeedbackArt(scene);
+    this.darkArt = new NamDeDarkArt(scene);
     this.health = new WaveBossHealth(scene);
   }
   clear() {
@@ -56,6 +64,7 @@ export class NamDePresentation {
     this.sprites.clear();
     this.feedback.clear();
     this.health.clear();
+    this.darkArt.clear();
   }
   private draw(
     id: string,
@@ -122,6 +131,7 @@ export class NamDePresentation {
       zone === 'arena' && state?.defense.namDe
         ? (JSON.parse(state.defense.namDe) as NamDeView)
         : null;
+    this.darkArt.sync(state, zone, v);
     const b = state?.creeps.get('boss_nam_de'),
       tick = state?.tick ?? 0,
       c = v?.cast ?? v?.smallCast;
@@ -171,7 +181,14 @@ export class NamDePresentation {
                             ? 'finger_charge'
                             : 'finger_release';
       }
-      this.health.draw('nam_de', 'Nam Đế', b.x, b.y - 65, b.hp, b.maxHp);
+      this.health.draw(
+        v.dark ? 'nam_de_dark' : 'nam_de',
+        v.dark ? 'Nam Đế hắc hóa' : 'Nam Đế',
+        b.x,
+        b.y - (v.dark ? 138 : 65),
+        b.hp,
+        b.maxHp,
+      );
       const pose = action + '_' + facing(b.fx, b.fy),
         token = (c?.id ?? '') + ':' + action;
       if (token !== this.pose.key) this.pose = { key: token, at: tick };
@@ -207,6 +224,7 @@ export class NamDePresentation {
         c?.ability ?? b.castAbilityId,
         c ? { beat: releaseBeat(tick, c.releaseAt) } : undefined,
       );
+      if (v.dark) presentNamDeDark(this.scene, renovatedBody, v, b, tick);
       markImpactTarget(renovatedBody, 'boss_nam_de');
       if (
         c &&
@@ -346,6 +364,7 @@ export class NamDePresentation {
   inspect() {
     return {
       feedback: this.feedback.inspect(),
+      dark: this.darkArt.inspect(),
       rays: Object.fromEntries(this.observedRays),
       sprites: [...this.sprites].map(([id, s]) => ({
         id,
@@ -358,6 +377,7 @@ export class NamDePresentation {
         renderFlags: s.renderFlags,
         depth: s.depth,
         texture: s.texture.key,
+        dark: s.getData('nam-de-dark'),
         origin: [s.originX, s.originY],
         width: s.displayWidth,
         height: s.displayHeight,
