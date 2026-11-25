@@ -3,6 +3,7 @@ import { startRoomTestServer } from './room-test-server.js';
 import type { MatchRoom } from '../apps/game-server/src/rooms/MatchRoom.js';
 import { MATCH_ROOM, PROTOCOL_VERSION } from '@volam/game-protocol';
 import { spawnNamDeIfReady, beginNamDeCast } from '@volam/game-core';
+import { hurt } from '../packages/game-core/src/combat.js';
 let server: Awaited<ReturnType<typeof startRoomTestServer>>;
 let client: Awaited<ReturnType<typeof startRoomTestServer>>['sdk'];
 beforeAll(async () => {
@@ -43,8 +44,15 @@ it('real SDK reveals only owner QTE; rejects forged owner/order/replay, closes a
   const boss = w.creeps.get('boss_nam_de')!;
   boss.x = 800;
   boss.y = 790;
+  boss.invulnerable = false; // The fixture starts after the entry phase.
   h.x = 760;
   h.y = 790;
+  expect(
+    hurt(w, boss, h.id, 'fixture-provoke', 1, room.simulation.arena.config, {
+      critChance: 0,
+      critMultiplier: 1,
+    }),
+  ).toBe(true);
   beginNamDeCast(w, room.simulation.arena.config, 'dai_ly_phong_huyet', h.id);
   await expect.poll(() => s.controls.get(h.id)?.qte?.state).toBe('pending');
   await expect.poll(() => a.state.namDeControls.has(h.id)).toBe(true);

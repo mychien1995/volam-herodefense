@@ -3,6 +3,7 @@ import { MATCH_ROOM, PROTOCOL_VERSION } from '@volam/game-protocol';
 import { startRoomTestServer } from './room-test-server.js';
 import type { MatchRoom } from '../apps/game-server/src/rooms/MatchRoom.js';
 import type { DongView } from '@volam/game-core';
+import { hurt } from '../packages/game-core/src/combat.js';
 let server: Awaited<ReturnType<typeof startRoomTestServer>>;
 let client: Awaited<ReturnType<typeof startRoomTestServer>>['sdk'];
 const options = (nickname: string) => ({
@@ -99,6 +100,18 @@ it('two SDK clients observe authoritative recall, bounds, attacks, legacy auto-r
   });
   await new Promise((resolve) => setTimeout(resolve, 100));
   expect(m.zoneOf(a.sessionId)!.id).toBe('arena');
+  // Exercise the legacy retry after the M4D encounter has actually been provoked.
+  expect(
+    hurt(
+      w,
+      w.creeps.get('dong_ta')!,
+      a.sessionId,
+      'fixture-provoke',
+      1,
+      m.arena.config,
+      { critChance: 0, critMultiplier: 1 },
+    ),
+  ).toBe(true);
   for (const h of w.heroes.values()) h.hp = 0;
   m.step();
   await expect.poll(() => view().attempt).toBe(2);

@@ -3,6 +3,7 @@ import { MATCH_ROOM, PROTOCOL_VERSION } from '@volam/game-protocol';
 import { startRoomTestServer } from './room-test-server.js';
 import type { MatchRoom } from '../apps/game-server/src/rooms/MatchRoom.js';
 import type { TayDocView } from '@volam/game-core';
+import { hurt } from '../packages/game-core/src/combat.js';
 let server: Awaited<ReturnType<typeof startRoomTestServer>>;
 const previous = process.env['VOLAM_DEV_TAY_DOC'];
 let client: Awaited<ReturnType<typeof startRoomTestServer>>['sdk'];
@@ -144,8 +145,15 @@ it('A through SDK damages/destructs pillars; disconnect and dispose clear owned 
   e.nextActionAt = Infinity;
   boss.x = 600;
   boss.y = 650;
+  boss.invulnerable = false; // The fixture starts in phase1, after entry.
   h.x = 720;
   h.y = 650;
+  expect(
+    hurt(w, boss, h.id, 'fixture-provoke', 1, sim.arena.config, {
+      critChance: 0,
+      critMultiplier: 1,
+    }),
+  ).toBe(true);
   e.begin(w, sim.arena.config, 'hon_thien_phuc_long_chan', h);
   for (let i = 0; i < 28; i++) sim.step();
   expect(e.pillars.size).toBe(6);

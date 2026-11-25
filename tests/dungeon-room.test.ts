@@ -5,6 +5,7 @@ import { startRoomTestServer } from './room-test-server.js';
 import type { MatchRoom } from '../apps/game-server/src/rooms/MatchRoom.js';
 import { MATCH_ROOM, PROTOCOL_VERSION } from '@volam/game-protocol';
 import { creepDungeon, desertDungeon, desertRoster } from '@volam/game-data';
+import { hurt } from '../packages/game-core/src/combat.js';
 
 let server: Awaited<ReturnType<typeof startRoomTestServer>>;
 const previousLegacy = process.env['VOLAM_DEV_LEGACY_SKILLS'];
@@ -435,6 +436,17 @@ describe('M2A real Colyseus zone authority and views', () => {
     const z = authority.simulation.zoneOf(a!.sessionId)!,
       e = z.encounter!;
     e.clear(z.world);
+    expect(
+      hurt(
+        z.world,
+        z.world.creeps.get(e.bossId)!,
+        a!.sessionId,
+        'fixture-provoke',
+        1,
+        z.config,
+        { critChance: 0, critMultiplier: 1 },
+      ),
+    ).toBe(true);
     e.begin(
       z.world,
       z.config,

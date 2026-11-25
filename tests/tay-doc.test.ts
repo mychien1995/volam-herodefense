@@ -327,7 +327,7 @@ describe('Tay Doc authoritative arena encounter', () => {
     ).toBe(0);
     expect(f.world.creeps.has(f.encounter.bossId)).toBe(false);
   });
-  it('ordered wave10 hook does not invent Dong Ta completion or alter180s clock', () => {
+  it('ordered wave10 hook does not invent Dong Ta completion or alter the M4D 120s clock', () => {
     const f = fixture(),
       e = new TayDocEncounter(tayDocDefinition),
       gate = new TayDocGate();
@@ -350,7 +350,7 @@ describe('Tay Doc authoritative arena encounter', () => {
       undefined,
       tayDocDefinition,
     );
-    expect(m.invasion?.definition.intervalTicks).toBe(5400);
+    expect(m.invasion?.definition.intervalTicks).toBe(3600);
   });
   it('sweeps a fast shot through a hero, stops at walls, and expires at exact configured range', () => {
     const f = fixture();
