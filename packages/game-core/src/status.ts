@@ -88,6 +88,19 @@ export function applyStatus(
         ? spec.magnitude * (1 - actor.controlResistance)
         : spec.magnitude,
     };
+  const durationPolicy =
+    sourceId !== actor.id ? actor.statusDurationPolicy?.[spec.kind] : undefined;
+  if (durationPolicy)
+    spec = {
+      ...spec,
+      durationTicks: Math.min(
+        durationPolicy.maxTicks,
+        Math.max(
+          1,
+          Math.ceil(spec.durationTicks * durationPolicy.durationMultiplier),
+        ),
+      ),
+    };
   actor.statuses ??= [];
   if (spec.delayTicks && spec.kind === 'slow') {
     const preceding = actor.statuses.find(

@@ -1,0 +1,63 @@
+{
+  "runId": "c192abb2-8154-4b2f-bcb3-87ddcc63bb8d",
+  "status": "PASS",
+  "scope": "Retry the failed existing browser flow after foregrounding the guest scene; passing 1v1 profile test retained.",
+  "args": [
+    "--config",
+    "playwright.standalone-pvp.config.ts",
+    "--grep",
+    "entry, link"
+  ],
+  "stages": [
+    {
+      "label": "browser retry preflight",
+      "command": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "tools/qa-preflight.mjs",
+        "--mode",
+        "final",
+        "--config",
+        "playwright.standalone-pvp.config.ts",
+        "--grep",
+        "entry, link"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 1.7512983,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\browser-diagnostic\\c192abb2-8154-4b2f-bcb3-87ddcc63bb8d\\0-browser-retry-preflight.log"
+    },
+    {
+      "label": "browser fixture typecheck",
+      "command": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\node_modules\\.pnpm\\typescript@7.0.2\\node_modules\\typescript\\bin\\tsc",
+        "-p",
+        "tsconfig.tools.json",
+        "--noEmit"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 6.5882893,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\browser-diagnostic\\c192abb2-8154-4b2f-bcb3-87ddcc63bb8d\\1-browser-fixture-typecheck.log"
+    },
+    {
+      "label": "existing PvP browser flow retry",
+      "command": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "tools/run-playwright.mjs",
+        "test",
+        "--config",
+        "playwright.standalone-pvp.config.ts",
+        "--grep",
+        "entry, link"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 113.1445624,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\browser-diagnostic\\c192abb2-8154-4b2f-bcb3-87ddcc63bb8d\\2-existing-PvP-browser-flow-retry.log"
+    }
+  ]
+}

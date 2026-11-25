@@ -158,3 +158,7 @@ The director-approved first wave boss targets players, not the statue. It enters
 ## Creep upgrade override — 2026-11-06
 
 The director authorizes 44 distinct regular creep combat profiles and the five listed boss-support roles. Host selects 2/3/4 invasion gates before creating a room. Waves still start every 180 seconds, but spawn continuously for 60 seconds, with configurable cadence and player-count/stat snapshots at opening. Pending spawns count as an uncleared wave for boss gates. This supersedes old two-gate/fixed-count text. Full catalogue and rules: [CREEP_UPGRADE.md](docs/CREEP_UPGRADE.md).
+
+## Cân bằng Lôi Đài 1v1 — 2026-11-25
+
+Đội hình một người mỗi phe trong Lôi Đài độc lập tự dùng tuning1v1 riêng, giữ nguyên luồng chia phe và điều khiển. Profile khóa lúc bắt đầu hiệp; đấu đội không đổi luật khi chỉ còn hai người. Đây là số thử đã được phép triển khai, giữ nguyên tiến trình PvE. [Thông số và giới hạn kiểm chứng](docs/PVP_1V1_BALANCE.md).

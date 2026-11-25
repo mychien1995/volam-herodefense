@@ -5,6 +5,7 @@ import type { PvpSnapshot } from '@volam/game-core';
 import { qaSession } from '../../tools/qa-session.mjs';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
+import { pressQaAndWait, observeQa } from '../../tools/qa-browser.mjs';
 const evidence = join(
   'docs/evidence/sessions',
   process.env['VOLAM_QA_SESSION'] ?? 'pvp',
@@ -28,6 +29,7 @@ interface Snapshot {
   };
   events: Array<{
     kind: string;
+    abilityId: string;
     sourceId: string;
     targetId: string;
     damage: number;
@@ -108,8 +110,10 @@ async function assertArenaView(page: Page, mapId: string) {
   expect(widths.every((w) => w <= 73)).toBe(true);
 }
 
+const sceneErrors = new WeakMap<Page, string[]>();
 const errors = (p: Page) => {
   const found: string[] = [];
+  sceneErrors.set(p, found);
   p.on('pageerror', (e) => found.push(e.message));
   p.on('console', (m) => {
     if (m.type() === 'error') found.push(m.text());
@@ -130,17 +134,27 @@ async function create(p: Page, nickname: string, map = 'rung_truc') {
 }
 async function joinRoom(p: Page, id: string, nickname: string) {
   await p.goto('/?debug&pvp=' + encodeURIComponent(id));
+  // Phaser's first rendered frame requires the guest tab to be foregrounded.
+  await p.bringToFront();
   await p.locator('#pvp-nickname').fill(nickname);
   await p.getByRole('button', { name: 'Vào phòng', exact: true }).click();
   await expect(p.locator('.pvp-lobby')).toBeVisible({ timeout: 30000 });
   await expect.poll(async () => (await snapshot(p)).roomId).toBe(id);
   // Joining the replicated lobby precedes Phaser's asset/scene boot. Apply
   // the same initial-render gate as create(), before exercising transitions.
-  await expect(p.locator('#scene-status')).toHaveAttribute(
-    'data-ready',
-    'true',
-    { timeout: 45000 },
-  );
+  try {
+    await expect(p.locator('#scene-status')).toHaveAttribute(
+      'data-ready',
+      'true',
+      { timeout: 45000 },
+    );
+  } catch (cause) {
+    console.error('Guest scene diagnostic', {
+      errors: sceneErrors.get(p),
+      presentation: await presentation(p),
+    });
+    throw cause;
+  }
   await expect
     .poll(async () => (await presentation(p)).pvpMap, { timeout: 45000 })
     .toBe((await view(p)).mapId);
@@ -207,6 +221,139 @@ async function sdkPeer(
     .toBe(true);
   return p;
 }
+test('1v1 profile publishes adjusted mana costs and replicates real skill damage', async ({
+  page,
+  browser,
+}) => {
+  const context = await browser.newContext({
+    viewport: { width: 1280, height: 720 },
+  });
+  const guest = await context.newPage(),
+    hostErrors = errors(page),
+    guestErrors = errors(guest);
+  try {
+    const host = await create(page, 'Cân bằng 1v1');
+    await joinRoom(guest, host.roomId, 'Đối thủ');
+    const other = await snapshot(guest);
+    await choose(page, 'thien_son:thien_son_dao');
+    await choose(guest, 'vo_dang:vo_dang_kiem');
+    await assign(page, host.sessionId, 'chinh');
+    await assign(page, other.sessionId, 'ta');
+    await page.getByRole('button', { name: 'Cài đặt', exact: true }).click();
+    await page.locator('#pvp-hazards').uncheck();
+    await expect
+      .poll(async () => (await view(page)).hazardsEnabled)
+      .toBe(false);
+    await page.getByRole('button', { name: 'Quay lại', exact: true }).click();
+    await page.getByRole('button', { name: 'Bắt đầu', exact: true }).click();
+    await expect
+      .poll(async () => (await view(guest)).combatProfile)
+      .toBe('pvp_1v1');
+    await expect
+      .poll(async () => (await view(page)).phase, { timeout: 7000 })
+      .toBe('fighting');
+    await expect(page.locator('#cooldown-q')).toHaveText('23 NL');
+    await expect(page.locator('#cooldown-t')).toHaveText('49 NL');
+    const before = await hero(page);
+    await pressQaAndWait(
+      page,
+      'ArrowRight',
+      (sequence) => {
+        const s = (window as any).__VOLAM__?.snapshot();
+        return (
+          s &&
+          s.state.players[s.sessionId].lastSequence > sequence &&
+          s.state.players[s.sessionId].pose !== 'walk'
+        );
+      },
+      before.lastSequence,
+      { keyDelay: 1900, label: '1v1 movement acknowledged' },
+    );
+    expect((await hero(page)).x).toBeGreaterThan(before.x + 250);
+    const castSequence = (await hero(page)).lastSequence;
+    await pressQaAndWait(
+      page,
+      'q',
+      ({ seq, id }) => {
+        const s = (window as any).__VOLAM__?.snapshot();
+        return (
+          s &&
+          s.state.players[id].lastSequence > seq &&
+          s.events.some(
+            (e: any) =>
+              e.kind === 'cast' &&
+              e.sourceId === id &&
+              e.abilityId === 'phi_anh_tram',
+          )
+        );
+      },
+      { seq: castSequence, id: host.sessionId },
+      { label: '1v1 adjusted-cost dash accepted' },
+    );
+    await observeQa(
+      page,
+      () => {
+        const s = (window as any).__VOLAM__?.snapshot();
+        return (
+          s &&
+          !JSON.parse(s.state.players[s.sessionId].statuses).some(
+            (e: any) => e.kind === 'dash',
+          )
+        );
+      },
+      undefined,
+      { label: '1v1 dash completed' },
+    );
+    const hp = (await hero(guest)).hp,
+      sequence = (await hero(page)).lastSequence;
+    await pressQaAndWait(
+      page,
+      'w',
+      ({ seq, id, targetId }) => {
+        const s = (window as any).__VOLAM__?.snapshot();
+        const hits = s?.events.filter(
+          (e: any) =>
+            e.kind === 'hit' &&
+            e.sourceId === id &&
+            e.targetId === targetId &&
+            e.abilityId === 'truy_hon_dao',
+        );
+        return (
+          s &&
+          s.state.players[id].lastSequence > seq &&
+          hits?.length >= 2 && { hits: hits.length }
+        );
+      },
+      { seq: sequence, id: host.sessionId, targetId: other.sessionId },
+      { label: '1v1 real projectile hit' },
+    );
+    await expect.poll(async () => (await hero(guest)).hp).toBeLessThan(hp);
+    const finalHp = (await hero(guest)).hp;
+    await expect
+      .poll(
+        async () => (await snapshot(page)).state.players[other.sessionId]!.hp,
+      )
+      .toBe(finalHp);
+    await expect
+      .poll(async () =>
+        (await snapshot(guest)).events.some(
+          (e) =>
+            e.kind === 'hit' &&
+            e.sourceId === host.sessionId &&
+            e.targetId === other.sessionId &&
+            e.abilityId === 'truy_hon_dao',
+        ),
+      )
+      .toBe(true);
+    await mkdir(evidence, { recursive: true });
+    await page.screenshot({ path: join(evidence, 'pvp-1v1-balance.png') });
+    expect(hostErrors).toEqual([]);
+    expect(guestErrors).toEqual([]);
+  } finally {
+    await context.close();
+  }
+});
+
 test('entry, link, host team assignment, countdown freeze and replicated manual combat', async ({
   page,
   browser,

@@ -1,0 +1,69 @@
+{
+  "runId": "9f8e597b-2b18-46bf-86ea-39ec82c346a9",
+  "status": "FAIL",
+  "scope": "Final failed-asset retry and browser stages; prior passing stages and failures retained.",
+  "args": [
+    "--config",
+    "playwright.standalone-pvp.config.ts",
+    "--grep",
+    "1v1 profile|entry, link"
+  ],
+  "stages": [
+    {
+      "label": "asset synchronization after exact CRLF restoration",
+      "command": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "scripts/prepare-assets.mjs"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 15.9506157,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\final-retry\\9f8e597b-2b18-46bf-86ea-39ec82c346a9\\0-asset-synchronization-after-exact-CRLF-restoration.log"
+    },
+    {
+      "label": "retained Thien Su asset validator retry",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-skill-revise-thien-su.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 2.7617841999999984,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\final-retry\\9f8e597b-2b18-46bf-86ea-39ec82c346a9\\1-retained-Thien-Su-asset-validator-retry.log"
+    },
+    {
+      "label": "production build after metadata restoration",
+      "command": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\node_modules\\.pnpm\\vite@8.3.5_@types+node@26.6.5_esbuild@0.28.2_tsx@4.23.15\\node_modules\\vite\\bin\\vite.js",
+        "build"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\apps\\game-client",
+      "seconds": 21.217815099999996,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\final-retry\\9f8e597b-2b18-46bf-86ea-39ec82c346a9\\2-production-build-after-metadata-restoration.log"
+    },
+    {
+      "label": "browser verification",
+      "command": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "tools/run-playwright.mjs",
+        "test",
+        "--config",
+        "playwright.standalone-pvp.config.ts",
+        "--grep",
+        "1v1 profile|entry, link"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 173.31039839999997,
+      "exitCode": 1,
+      "status": "FAIL",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\final-retry\\9f8e597b-2b18-46bf-86ea-39ec82c346a9\\3-browser-verification.log"
+    }
+  ]
+}

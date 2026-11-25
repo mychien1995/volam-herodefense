@@ -1,4 +1,5 @@
 import type { EquipmentAttack } from './economy-types.js';
+import type { Pvp1v1Tuning } from './pvp-balance.js';
 import type { NguDocSummonKind } from './ngu-doc-ids.js';
 import type { CampaignDefinition, CampaignRuntime } from './campaign.js';
 import type {
@@ -397,6 +398,8 @@ export interface Ability {
     | SupportEffect;
 }
 export interface SimulationConfig {
+  /** Installed only in the independent PvP round's copied configuration. */
+  pvp1v1?: Pvp1v1Tuning;
   bossesWaitForHit?: boolean;
   combatCollision?: Rect[] | undefined;
   campaign?: CampaignDefinition;
@@ -492,6 +495,10 @@ export type Command =
   | { kind: 'dev-loadout'; ids: string[] }
   | { kind: 'select-basic'; id: string };
 export interface Actor extends Point {
+  /** Enemy-applied control only; absent preserves the PvE and team-PvP contract. */
+  statusDurationPolicy?: Partial<
+    Record<StatusKind, { durationMultiplier: number; maxTicks: number }>
+  >;
   nguDocVenom?: NguDocVenom[];
   invulnerable?: boolean;
   duongMonPoison?: {
@@ -750,6 +757,8 @@ export interface CombatArea extends Point {
   trappedIds?: string[];
 }
 export interface World {
+  /** Selected from the starting lineup, never from the number of survivors. */
+  pvp1v1?: Pvp1v1Tuning;
   /** Server-only private practice targets: hittable but cannot die or grant rewards. */
   practiceTargets?: ReadonlySet<string>;
   nguDocMarks?: (Point & {

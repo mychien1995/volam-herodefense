@@ -16,6 +16,14 @@ const session = (name, env = {}) =>
     env,
   );
 
+// These existing manual review profiles intentionally have no managed lifecycle.
+// M4D tracks them too; tracking a file must not contradict the exclusion below.
+const manualReviews = new Set([
+  'playwright.boss-combat-review.config.ts',
+  'playwright.hong-liet-vfx-review.config.ts',
+  'playwright.kim-xiangyang-review.config.ts',
+]);
+
 test('all tracked Playwright profiles have explicit preflight contracts; WIP configs are excluded', () => {
   const tracked = execFileSync('git', ['ls-files', 'playwright*.config.ts'], {
     encoding: 'utf8',
@@ -23,7 +31,7 @@ test('all tracked Playwright profiles have explicit preflight contracts; WIP con
   })
     .trim()
     .split(/\r?\n/);
-  for (const name of tracked)
+  for (const name of tracked.filter((name) => !manualReviews.has(name)))
     assert.ok(qaProfileContracts[name], `Missing ${name}`);
   for (const [name, contract] of Object.entries(qaProfileContracts)) {
     assert.ok(existsSync(name));
@@ -35,12 +43,8 @@ test('all tracked Playwright profiles have explicit preflight contracts; WIP con
     assert.ok(contract.channels.length);
     assert.ok(qaProfilePorts({ name, ...contract }, {}).ports.length);
   }
-  for (const name of [
-    'boss-combat-review',
-    'hong-liet-vfx-review',
-    'kim-xiangyang-review',
-  ])
-    assert.equal(qaProfileContracts[`playwright.${name}.config.ts`], undefined);
+  for (const name of manualReviews)
+    assert.equal(qaProfileContracts[name], undefined);
 });
 
 test('legacy contracts preserve fixed, shared, alias, multi-service and extra fixture ports', () => {

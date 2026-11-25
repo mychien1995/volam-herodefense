@@ -1,0 +1,103 @@
+{
+  "runId": "eef32039-e4d2-4f72-8b44-845b8bc80d3d",
+  "mode": "browser",
+  "args": [
+    "--config",
+    "playwright.standalone-pvp.config.ts",
+    "--grep",
+    "1v1 profile"
+  ],
+  "startedAt": "2026-11-25T12:56:39.841Z",
+  "status": "PASS",
+  "stages": [
+    {
+      "label": "environment preflight",
+      "seconds": 1.539,
+      "status": "PASS",
+      "checks": [
+        {
+          "id": "workspace",
+          "status": "PASS",
+          "detail": {
+            "mode": "browser",
+            "stage": "before-build",
+            "managed": true
+          }
+        },
+        {
+          "id": "session",
+          "status": "PASS",
+          "detail": {
+            "serverPort": 2986,
+            "clientPort": 5686
+          }
+        },
+        {
+          "id": "ports",
+          "status": "PASS"
+        },
+        {
+          "id": "node",
+          "status": "PASS",
+          "detail": "26.0.0"
+        },
+        {
+          "id": "installation",
+          "status": "PASS",
+          "detail": "pnpm@11.25.0"
+        },
+        {
+          "id": "tools",
+          "status": "PASS",
+          "detail": {
+            "typescript": "7.0.2",
+            "vitest": "5.0.5",
+            "vite": "8.3.5",
+            "@playwright/test": "1.64.1"
+          }
+        },
+        {
+          "id": "chromium",
+          "status": "PASS",
+          "detail": {
+            "version": "156.0.8078.4",
+            "cache": "D:\\Projects\\volam-hero-defense\\.cache\\ms-playwright"
+          }
+        }
+      ]
+    },
+    {
+      "label": "prepare assets (once)",
+      "seconds": 16.35,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance\\check-workflow\\eef32039-e4d2-4f72-8b44-845b8bc80d3d\\1-prepare-assets-once-.log",
+      "outputBytes": 794
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 0.37,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance\\check-workflow\\eef32039-e4d2-4f72-8b44-845b8bc80d3d\\2-compile-TypeScript.log",
+      "outputBytes": 0
+    },
+    {
+      "label": "production client build",
+      "seconds": 15.59,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance\\check-workflow\\eef32039-e4d2-4f72-8b44-845b8bc80d3d\\3-production-client-build.log",
+      "outputBytes": 25658
+    },
+    {
+      "label": "browser verification",
+      "seconds": 111.97,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance\\check-workflow\\eef32039-e4d2-4f72-8b44-845b8bc80d3d\\4-browser-verification.log",
+      "outputBytes": 1034
+    }
+  ],
+  "totalSeconds": 145.84
+}

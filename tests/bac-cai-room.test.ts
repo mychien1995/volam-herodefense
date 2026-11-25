@@ -4,6 +4,7 @@ import type { MatchRoom } from '../apps/game-server/src/rooms/MatchRoom.js';
 import { MATCH_ROOM, PROTOCOL_VERSION } from '@volam/game-protocol';
 import { BacCaiEncounter, type BacCaiView } from '@volam/game-core';
 import { bacCaiDefinition } from '@volam/game-data';
+import { hurt } from '../packages/game-core/src/combat.js';
 let server: Awaited<ReturnType<typeof startRoomTestServer>>;
 beforeAll(async () => {
   server = await startRoomTestServer();
@@ -48,6 +49,13 @@ it('real SDK: late snapshots, no real-form leak, zone filtering, authoritative H
     h.y = 850;
     h.hp = h.maxHp = 100000;
   }
+  // M4D encounters begin only after an authoritative player hit.
+  expect(
+    hurt(w, boss, a.sessionId, 'fixture-provoke', 1, c, {
+      critChance: 0,
+      critMultiplier: 1,
+    }),
+  ).toBe(true);
   e.begin(w, c, 'spiral');
   const view = (r: typeof a) =>
     JSON.parse(
@@ -108,6 +116,12 @@ it('real SDK: late snapshots, no real-form leak, zone filtering, authoritative H
   const target = w.creeps.get('bac_cai')!;
   target.x = 800;
   target.y = 780;
+  expect(
+    hurt(w, target, a.sessionId, 'fixture-provoke', 1, c, {
+      critChance: 0,
+      critMultiplier: 1,
+    }),
+  ).toBe(true);
   // Three players are alive: arrange B as an actual tether victim before testing B's leave.
   // Room seeds and random session IDs must not decide whether this fixture tests cleanup at all.
   const combatRandom = w.random;

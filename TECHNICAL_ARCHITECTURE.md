@@ -392,3 +392,7 @@ Creep feedback r3 adds validated sector/ground-lob/presentation fields to the in
 ## Boss balance update — 2026-11-13
 
 The campaign definition supplies the nine main boss HP baselines. The Kim Luân definition supplies disciple HP. Boss meters read zone-filtered replicated HP and the wave encounter view. Hồng Liệt’s sweep keeps the replicated cue alive for its visual recovery after the damage window closes. Burn and poison reuse the server’s strongest-per-element periodic damage rules. The existing protocol carries the statuses and cue clocks.
+
+## Combat profile PvP 1v1 — 2026-11-25
+
+StandaloneLoiDai tạo cấu hình combat riêng từ lineup đầu hiệp, gắn policy thời lượng lên đấu thủ và khóa hệ số damage trong world. Không kiểm tra số người sống để bật profile. JSON PvP snapshot công bố combatProfile, HUD dùng cùng bộ tạo Ability/rank; schema Colyseus và message input không đổi. Dữ liệu tuning ở game-data, handler thuần ở game-core; catalogue PvE không bị mutate. [Chi tiết](docs/PVP_1V1_BALANCE.md).

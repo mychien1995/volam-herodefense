@@ -1,6 +1,8 @@
 import { heroPortraitUrl } from './hero-portraits.js';
 import { heroTexture } from './hero-texture.js';
 import { heroIdleUrl } from './character-revision.js';
+import { pvpCombatConfig } from './pvp-combat-config.js';
+import { readPvp } from './pvp-ui.js';
 import {
   arena,
   lobbyConfig,
@@ -977,11 +979,12 @@ export class GameUI {
       'Bắc Minh Thần Công · Né đòn ' + dodgePercentage.format(dodge);
     element('.loadout-toggle').hidden = !!this.state?.requiresBranch;
     element('#slot-t').hidden = !fixed;
+    const combatConfig = pvpCombatConfig(readPvp(this.state));
     const slots = [
       {
         key: 'a' as const,
         remaining: hero.basicCooldown,
-        ability: m1Config.basics[hero.basicId],
+        ability: combatConfig.basics[hero.basicId],
       },
       ...(['q', 'w', 'e', 'r', 't'] as const).map((key, index) => {
         const id = fixed
@@ -991,10 +994,10 @@ export class GameUI {
           key,
           remaining: hero[`${key}Cooldown`],
           ability: hero.build.enabled
-            ? m1Config.progression?.skills[id]?.ranks[
+            ? combatConfig.progression?.skills[id]?.ranks[
                 Math.max(0, (hero.build.ranks.get(id) ?? 0) - 1)
               ]
-            : m1Config.skillCatalogue?.[id],
+            : combatConfig.skillCatalogue?.[id],
         };
       }),
     ];
@@ -1223,13 +1226,16 @@ export class GameUI {
                   : 'Trống';
       const id = ability?.id ?? '';
       const definition = m1Config.progression?.skills[id];
+      const combatProfile = combatConfig.pvp1v1 ? 'pvp_1v1' : 'standard';
       if (
         slot.dataset['skillId'] !== id ||
         slot.dataset['skillRank'] !== String(rank) ||
+        slot.dataset['combatProfile'] !== combatProfile ||
         slot.dataset['practice'] !== String(state.practice.enabled)
       ) {
         slot.dataset['skillId'] = id;
         slot.dataset['skillRank'] = String(rank);
+        slot.dataset['combatProfile'] = combatProfile;
         slot.dataset['practice'] = String(state.practice.enabled);
         const name = ability?.nameVi ?? 'Chưa trang bị';
         element(`#skill-tip-${key} strong`).textContent = name;

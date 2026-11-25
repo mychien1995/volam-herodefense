@@ -215,3 +215,7 @@ The director authorized the twelve-branch revision and selected the crescent Pho
 ### Thiền Sư A — cập nhật v05
 
 Theo yêu cầu tiếp theo của director, A chỉ luân phiên **chọc → đập**; bỏ hất/quạt khỏi chuỗi đang chơi. Thức đập mới có10pose: hai tay xoay nắm vào trong, nâng cả cán búa qua đầu, dồn lực, bổ xuống và giữ nhịp chạm đất. Hiệu ứng chấn đất theo frame chạm7; sát thương vẫn do server xử lý. Hệ số từng thức và luật A cận chiến không hồi chiêu được giữ. Bản này thay phần A bốn thức trước đó; [nguồn/prompt và phạm vi kiểm tra](assets/source/skill-revise-thien-su-v05/README.md).
+
+## Catalogue PvP 1v1 — 2026-11-25
+
+Chỉ profile1v1 của Lôi Đài độc lập dùng override nhịp A, Kim Cang, nội tại Thiền Sư/Chaos, tốc độ Nhân Kiếm, bán kính Thất Tinh48, hồi Kinh Lôi3s và mana Thiên Sơn Đao. ID/tên, rank gate, chuỗi chiêu và catalogue PvE giữ nguyên. [Bảng thông số đã được phép triển khai](docs/PVP_1V1_BALANCE.md).

@@ -431,7 +431,7 @@ describe('timed invasion streams and server-owned gates', () => {
       },
       4,
     );
-    expect(prod.intervalTicks).toBe(5400);
+    expect(prod.intervalTicks).toBe(3600);
     expect(prod.streamTicks).toBe(1800);
     expect(prod.statue.maxHp).toBe(2000);
     const dev = serverInvasionDefinition({
