@@ -1,4 +1,9 @@
+param([string]$ArchiveName = 'volam-hero-defense-windows-iis.zip')
+
 $ErrorActionPreference = 'Stop'
+if ([IO.Path]::GetFileName($ArchiveName) -cne $ArchiveName -or !$ArchiveName.EndsWith('.zip')) {
+    throw 'ArchiveName must be a ZIP filename inside artifacts.'
+}
 
 function Invoke-Checked {
     param([string]$File, [string[]]$Arguments)
@@ -33,7 +38,7 @@ if (!$pnpm) {
 
 $artifactDir = Join-Path $repo 'artifacts'
 $stage = Join-Path $artifactDir ('.iis-build-' + [Guid]::NewGuid().ToString('N'))
-$archive = Join-Path $artifactDir 'volam-hero-defense-windows-iis.zip'
+$archive = Join-Path $artifactDir $ArchiveName
 $client = Join-Path $stage 'client'
 $server = Join-Path $stage 'server'
 $previousEndpoint = [Environment]::GetEnvironmentVariable('VITE_SERVER_URL', 'Process')
@@ -52,6 +57,8 @@ try {
     Write-Host "Building game for $gameUrl..."
     $env:VITE_SERVER_URL = "$gameUrl/game-api"
     Invoke-Pnpm @('assets:prepare')
+    Write-Host 'Checking audited production atlas selection against current sources...'
+    Invoke-Checked $node.Source @('tools/audit-deploy-assets.mjs', '--check')
     Invoke-Checked $node.Source @('scripts/stage-runtime-assets.mjs', $stage)
     $env:VOLAM_RUNTIME_PUBLIC_DIR = Join-Path $stage 'runtime-public'
     Invoke-Pnpm @('exec', 'tsc', '-b')
@@ -181,6 +188,12 @@ console.log(`Verified ${installed.size} runtime packages against the installed d
       <mimeMap fileExtension=".json" mimeType="application/json" />
       <remove fileExtension=".tmj" />
       <mimeMap fileExtension=".tmj" mimeType="application/json" />
+      <remove fileExtension=".ogg" />
+      <mimeMap fileExtension=".ogg" mimeType="audio/ogg" />
+      <remove fileExtension=".mp3" />
+      <mimeMap fileExtension=".mp3" mimeType="audio/mpeg" />
+      <remove fileExtension=".wav" />
+      <mimeMap fileExtension=".wav" mimeType="audio/wav" />
     </staticContent>
     <rewrite>
 __VOLAM_RASTER_MAP__
@@ -231,6 +244,7 @@ Vo Lam Hero Defense on Windows IIS
     $stagedArchive = Join-Path $stage 'release.zip'
     Invoke-Checked $tar.Source @('-a', '-cf', $stagedArchive, '-C', $stage, 'client', 'server', 'DEPLOY.txt')
     Move-Item -LiteralPath $stagedArchive -Destination $archive -Force
+    Copy-Item -LiteralPath (Join-Path $stage 'runtime-assets.json') -Destination ($archive + '.assets.json')
     Write-Host "Deployment ZIP: $archive"
 } finally {
     [Environment]::SetEnvironmentVariable('VITE_SERVER_URL', $previousEndpoint, 'Process')

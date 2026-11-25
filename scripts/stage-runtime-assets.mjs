@@ -8,6 +8,11 @@ import {
   writeFileSync,
 } from 'node:fs';
 import { dirname, extname, join, resolve } from 'node:path';
+import {
+  deploymentInputs,
+  validateSelection,
+  keepDeploymentAsset,
+} from './deploy-asset-selection.mjs';
 
 // Phaser uses assembled PNG/JSON atlases. The skill frame directories are
 // individual authoring cels, kept in the normal development and review build.
@@ -50,6 +55,13 @@ const source = resolve(
   '../apps/game-client/public/assets',
 );
 const output = resolve(stage, 'runtime-public/assets');
+const repo = resolve(import.meta.dirname, '..');
+const selection = validateSelection(
+  JSON.parse(
+    readFileSync(resolve(repo, 'assets/deploy-runtime-assets.json'), 'utf8'),
+  ),
+  deploymentInputs(repo),
+);
 mkdirSync(resolve(stage), { recursive: true });
 mkdirSync(dirname(output));
 mkdirSync(output);
@@ -58,11 +70,16 @@ const runtime = [];
 const rasters = new Map();
 let sourceBytes = 0,
   runtimeBytes = 0;
+const excluded = [];
 for (const path of [...files(source)].sort()) {
   const from = join(source, path);
   const size = statSync(from).size;
   sourceBytes += size;
   if (!isRuntime(path)) continue;
+  if (!keepDeploymentAsset(path, selection)) {
+    excluded.push({ path: '/assets/' + path, bytes: size });
+    continue;
+  }
   if (extname(path) === '.png') {
     const bytes = readFileSync(from);
     const hash = createHash('sha256').update(bytes).digest('hex');
@@ -84,10 +101,12 @@ const summary = {
   runtimeBytes,
   files: runtime.length,
   aliases: Object.keys(aliases).length,
+  unusedAtlasFiles: excluded.length,
+  unusedAtlasBytes: excluded.reduce((sum, file) => sum + file.bytes, 0),
 };
 writeFileSync(
   resolve(stage, 'runtime-assets.json'),
-  JSON.stringify({ runtime, aliases, summary }),
+  JSON.stringify({ runtime, aliases, summary, excluded }),
 );
 writeFileSync(
   resolve(stage, 'runtime-assets-iis.xml'),
