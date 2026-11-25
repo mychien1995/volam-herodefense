@@ -15,6 +15,7 @@ export const invasionDefinitionSchema = z
     portalCount: z
       .union([z.literal(1), z.literal(2), z.literal(3), z.literal(4)])
       .optional(),
+    rowsPerGate: z.union([z.literal(1), z.literal(2)]).optional(),
     maxWaves: z.number().int().min(1).max(20).optional(),
     warningTicks: z.array(z.number().int().positive()).length(2),
     noticeTicks: z.number().int().positive(),
@@ -90,18 +91,19 @@ const marker = (name: string) => {
 };
 /** Three M2B prototype recipes; later waves reuse the third, not a production 20-wave catalogue. */
 export function createInvasionDefinition(
-  intervalSeconds = 180,
+  intervalSeconds = 120,
   statueHp = 2000,
   stream?: {
     portalCount: 1 | 2 | 3 | 4;
     durationSeconds?: number;
     spawnEverySeconds?: number;
+    rowsPerGate?: 1 | 2;
   },
 ): InvasionDefinition {
   const seconds = z.number().int().min(3).max(3600).parse(intervalSeconds),
     rate = m1Config.tickRate;
   const warnings =
-    seconds >= 180
+    seconds >= 90
       ? [60, 15]
       : [
           Math.max(2, Math.floor(seconds / 3)),
@@ -146,6 +148,7 @@ export function createInvasionDefinition(
     ...(stream
       ? {
           portalCount: stream.portalCount,
+          rowsPerGate: stream.rowsPerGate ?? 1,
           streamTicks: Math.round((stream.durationSeconds ?? 60) * rate),
           spawnEveryTicks: Math.round((stream.spawnEverySeconds ?? 2) * rate),
           maxWaves: 20,

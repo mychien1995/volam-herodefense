@@ -1,5 +1,7 @@
 import { expect, it } from 'vitest';
 import { arena, creepDungeon, creepDungeons, m1Config } from '@volam/game-data';
+import { findWalkPath } from '../packages/game-core/src/dungeon-navigation.js';
+import { segmentRect } from '../packages/game-core/src/geometry.js';
 import { blocked, moveCircle } from '@volam/game-core';
 it('lets real movement cross the clearing and reach the south of Bamboo Forest', () => {
   const p = { ...creepDungeon.spawn };
@@ -45,4 +47,21 @@ it('keeps sparse visible rocks and removes obsolete arena barriers', () => {
         d.id + JSON.stringify(p),
       ).toBe(false);
   }
+});
+
+it('cached navigation respects swept collision, mutated wall geometry and per-query bounds', () => {
+  const from = { x: 48, y: 48 },
+    to = { x: 208, y: 48 },
+    size = { width: 256, height: 256 };
+  const walls = [{ x: 112, y: 0, width: 32, height: 128 }];
+  const path = findWalkPath(from, to, 8, size, walls);
+  expect(path.length).toBeGreaterThan(0);
+  let previous = from;
+  for (const p of path) {
+    expect(segmentRect(previous, p, walls[0]!, 8 - 1e-7)).toBeUndefined();
+    previous = p;
+  }
+  expect(findWalkPath(from, to, 8, size, walls, (p) => p.y < 100)).toEqual([]);
+  walls[0]!.height = 256;
+  expect(findWalkPath(from, to, 8, size, walls)).toEqual([]);
 });

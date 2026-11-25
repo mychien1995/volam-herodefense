@@ -163,7 +163,8 @@ export function characterStats(
     statusValue(hero, 'defense_buff', tick) -
     statusValue(hero, 'defense_break', tick);
   if (hero.basicId === nguDoc.taiHiep)
-    sources.temporary.defense += nguDocDefense[skillRank(hero, nguDoc.counter, config)] ?? 0;
+    sources.temporary.defense +=
+      nguDocDefense[skillRank(hero, nguDoc.counter, config)] ?? 0;
   sources.temporary.cooldownReduction = statusValue(
     hero,
     'cooldown_buff',
@@ -266,6 +267,9 @@ export function refreshCharacter(
   config: SimulationConfig,
   tick = 0,
 ): void {
+  if (hero.inventory && config.economy)
+    hero.inventory.bootsCooldownTicks =
+      config.economy.craftedCombat.bootCooldownSeconds * config.tickRate;
   if (!hero.progression) return;
   const s = characterStats(hero, config, tick).total;
   hero.maxHp = s.maxHp;
@@ -338,7 +342,8 @@ export function initializeProgression(
   hero.skillIds = Array<string>(fixed ? 5 : 4).fill('');
   hero.skillCooldowns = hero.skillIds.map(() => 0);
   hero.basicId = branchId;
-  if (branchId === duongMon.amKhi) hero.dashCharges = dashCapacity(hero, config);
+  if (branchId === duongMon.amKhi)
+    hero.dashCharges = dashCapacity(hero, config);
   if (mode === 'default') applyAutomaticProgression(hero, config);
   refreshCharacter(hero, config);
   hero.hp = hero.maxHp;

@@ -6,6 +6,7 @@ import { arena, dungeonForZone, renovationRocks } from '@volam/game-data';
 export function createRenovationWorld(
   scene: Phaser.Scene,
   zone: string,
+  arenaGroundKey = 'renovated-arena-layout',
 ): Phaser.GameObjects.Image[] {
   const map = zone === 'arena' ? arena : dungeonForZone(zone),
     id = zone === 'arena' ? 'arena' : dungeonForZone(zone).id;
@@ -13,12 +14,17 @@ export function createRenovationWorld(
     .image(
       map.width / 2,
       map.height / 2,
-      id === 'arena' ? 'renovated-arena-layout' : 'renovated-ground-' + id,
+      id === 'arena' ? arenaGroundKey : 'renovated-ground-' + id,
     )
     .setDisplaySize(map.width, map.height)
     .setDepth(-10000)
     .setName(id === 'arena' ? 'arena:ground' : 'renovation:ground:' + id)
-    .setData('renovation-world', true);
+    .setData('renovation-world', true)
+    .setData('m4d-ground', arenaGroundKey.startsWith('m4d-'));
+  if (zone === 'arena' && arenaGroundKey.startsWith('m4d-'))
+    ground.setScale(
+      Math.max(map.width / ground.width, map.height / ground.height),
+    );
   const backdrop = scene.add
     .image(map.width / 2, map.height / 2, ground.texture.key)
     .setDepth(-10001)

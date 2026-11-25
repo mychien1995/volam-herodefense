@@ -1,3 +1,4 @@
+import { cleanseBoots } from './boot-passives.js';
 import { nguDoc } from './ngu-doc-ids.js';
 import { nguDocSummons } from './ngu-doc-summons.js';
 import { moveCircle, clampEllipse } from './geometry.js';
@@ -116,8 +117,10 @@ export function applyStatus(
       startsAt: tick + (spec.delayTicks ?? 0),
       until: tick + (spec.delayTicks ?? 0) + spec.durationTicks,
     });
+  cleanseBoots(actor, tick);
 }
 export function expireStatuses(world: World): void {
+  for (const h of world.heroes.values()) cleanseBoots(h, world.tick);
   for (const a of [
     ...world.heroes.values(),
     ...world.creeps.values(),

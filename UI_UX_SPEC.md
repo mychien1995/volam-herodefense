@@ -1,3 +1,9 @@
+R2 arena feedback: [shared prop collision, create-room modal, registered lanes, sharp ground and ambient motion](docs/M4D_ARENA_REVIEW_R2.md). This follow-up supersedes the initial M4D arena presentation below.
+
+## M4D · arena, status và giày — 2026-11-25
+
+Menu tạo phòng có chọn arena; phòng chờ hiện tên arena đã được server chốt. Khi vào trận vẫn một viewport và HUD hiện có. Bỏ slot/hướng dẫn Z, phần giày hiển thị đặc tính thụ động. Không in Chậm/Choáng/Câm lặng/Định thân/Tước vũ khí dưới tên; dấu hiệu authored phía trên đầu ưu tiên tối đa ba loại, choáng có ba sao orbit. [Chi tiết M4D](docs/M4D_IMPLEMENTATION.md).
+
 ## Tỉ lệ map và form PvP/Practice · 2026-11-19
 
 Dùng native gameplay zoom Defense, camera theo hero và clamped theo map; khán giả pan trong bounds. Không zoom out để chứa toàn sân, không thêm dải ảnh lặp ngoài map. Các nút utility giữ đúng cỡ từng nút Defense dù chỉ còn2/3nút. Form tên Practice dùng label/input/button một hàng khi đủ chỗ, không bẻ chữ label/nút; chỉ chuyển hàng có chủ đích ở viewport hẹp. Nhát chém raster giữ đúng tỉ lệ, quét theo tick, cảnh báo đúng nửa sân. [Kiểm chứng](docs/PVP_VISUAL_REPAIR.md).

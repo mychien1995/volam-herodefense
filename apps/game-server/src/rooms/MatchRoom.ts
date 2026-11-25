@@ -22,6 +22,7 @@ import {
   lobbyConfig,
   pvpDefinition,
   m1Config,
+  arenaVariants,
   creepDungeon,
   desertDungeon,
   beachDungeon,
@@ -88,6 +89,7 @@ import {
   skillPreviewActionSchema,
   merchantActionSchema,
   portalCountSchema,
+  arenaIdSchema,
   creepPreviewActionSchema,
   bossRetryActionSchema,
   loiDaiActionSchema,
@@ -135,6 +137,7 @@ export class MatchRoom extends Room<{
             process.env['VOLAM_TEST_LEGACY_PROGRESSION'] !== '1'
               ? { campaign: structuredClone(campaignDefinition) }
               : {}),
+            bossesWaitForHit: true,
             personalCraftLoot: true,
             creepCombat: creepCombatDefinition,
           },
@@ -520,7 +523,10 @@ export class MatchRoom extends Room<{
                 'Có người chơi mất kết nối. Hãy rời và tạo phòng mới.',
               );
             this.state.phase = 'SCHOOL_SELECTION';
-            void this.setMetadata({ phase: this.state.phase });
+            void this.setMetadata({
+              ...this.metadata,
+              phase: this.state.phase,
+            });
           } else {
             if (
               !['SCHOOL_SELECTION', 'IN_GAME'].includes(this.state.phase) ||
@@ -555,7 +561,10 @@ export class MatchRoom extends Room<{
                 for (const [id, p] of this.state.players)
                   this.spawnPlayer(id, p);
                 this.state.phase = 'IN_GAME';
-                void this.setMetadata({ phase: this.state.phase });
+                void this.setMetadata({
+                  ...this.metadata,
+                  phase: this.state.phase,
+                });
                 this.syncState();
               }
             }
@@ -829,7 +838,11 @@ export class MatchRoom extends Room<{
   }
   override messages = this.getMatchMessages();
   override onCreate(
-    options: { portalCount?: unknown; creepPreview?: unknown } = {},
+    options: {
+      portalCount?: unknown;
+      creepPreview?: unknown;
+      arenaId?: unknown;
+    } = {},
   ): void {
     if (
       options.creepPreview !== undefined &&
@@ -851,6 +864,24 @@ export class MatchRoom extends Room<{
       throw new ServerError(400, 'Số cổng phải là 1, 2, 3 hoặc 4.');
     this.simulation.invasion!.definition.portalCount = portals.data;
     this.state.defense.portalCount = portals.data;
+    const selected = arenaIdSchema.safeParse(options.arenaId ?? 'dao_hoa_dao');
+    if (!selected.success)
+      throw new ServerError(400, 'Loại arena không hợp lệ.');
+    this.state.defense.arenaId = selected.data;
+    const geometry = arenaVariants[selected.data];
+    this.simulation.base.collision = geometry.collision.map((w) => ({ ...w }));
+    this.simulation.base.combatCollision = [];
+    this.simulation.arena.config.collision = [
+      ...this.simulation.base.collision,
+      this.simulation.invasion!.definition.statue.collision,
+    ];
+    this.simulation.arena.config.combatCollision = [
+      this.simulation.invasion!.definition.statue.collision,
+    ];
+    const lanes = this.simulation.invasion!.definition.lanes;
+    lanes.west.y = lanes.east.y = geometry.roadCenter.y;
+    if (lanes.north) lanes.north.x = geometry.roadCenter.x;
+    if (lanes.south) lanes.south.x = geometry.roadCenter.x;
     this.state.defense.devCreepTest = this.devCreepTest;
     if (this.devLoiDai)
       console.info('[DEV] Lôi Đài: người chơi bắt đầu ở cấp 6.');
@@ -888,7 +919,10 @@ export class MatchRoom extends Room<{
     }
     this.state.devSkillLoadout = this.devSkillLoadout;
     this.state.requiresBranch = !this.legacySkills && !this.legacyProgression;
-    this.metadata = { phase: this.state.phase };
+    this.metadata = {
+      phase: this.state.phase,
+      arenaId: this.state.defense.arenaId,
+    };
     this.patchRate = 1000 / m1Config.tickRate;
     this.syncState();
     this.setFixedTimestep(() => {
@@ -927,7 +961,7 @@ export class MatchRoom extends Room<{
       if (this.simulation.invasion?.defeated || this.simulation.victory) {
         this.state.phase = this.simulation.victory ? 'VICTORY' : 'DEFEAT';
         void this.lock();
-        void this.setMetadata({ phase: this.state.phase });
+        void this.setMetadata({ ...this.metadata, phase: this.state.phase });
       }
       this.syncState();
       for (const { zoneId, event } of this.simulation.events) {

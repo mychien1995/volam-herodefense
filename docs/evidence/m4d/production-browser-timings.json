@@ -1,0 +1,101 @@
+{
+  "runId": "cdfe8703-ef98-4fbd-9e4d-08711fea6bed",
+  "mode": "browser",
+  "args": [
+    "--config",
+    "playwright.m4d.config.ts"
+  ],
+  "startedAt": "2026-11-25T05:39:19.492Z",
+  "status": "PASS",
+  "stages": [
+    {
+      "label": "environment preflight",
+      "seconds": 0.586,
+      "status": "PASS",
+      "checks": [
+        {
+          "id": "workspace",
+          "status": "PASS",
+          "detail": {
+            "mode": "browser",
+            "stage": "before-build",
+            "managed": true
+          }
+        },
+        {
+          "id": "session",
+          "status": "PASS",
+          "detail": {
+            "serverPort": 2954,
+            "clientPort": 5554
+          }
+        },
+        {
+          "id": "ports",
+          "status": "PASS"
+        },
+        {
+          "id": "node",
+          "status": "PASS",
+          "detail": "26.0.0"
+        },
+        {
+          "id": "installation",
+          "status": "PASS",
+          "detail": "pnpm@11.25.0"
+        },
+        {
+          "id": "tools",
+          "status": "PASS",
+          "detail": {
+            "typescript": "7.0.2",
+            "vitest": "5.0.5",
+            "vite": "8.3.5",
+            "@playwright/test": "1.64.1"
+          }
+        },
+        {
+          "id": "chromium",
+          "status": "PASS",
+          "detail": {
+            "version": "156.0.8078.4",
+            "cache": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\.cache\\ms-playwright"
+          }
+        }
+      ]
+    },
+    {
+      "label": "prepare assets (once)",
+      "seconds": 32.99,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\.cache\\check-workflow\\cdfe8703-ef98-4fbd-9e4d-08711fea6bed\\1-prepare-assets-once-.log",
+      "outputBytes": 806
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 0.4,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\.cache\\check-workflow\\cdfe8703-ef98-4fbd-9e4d-08711fea6bed\\2-compile-TypeScript.log",
+      "outputBytes": 0
+    },
+    {
+      "label": "production client build",
+      "seconds": 13.16,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\.cache\\check-workflow\\cdfe8703-ef98-4fbd-9e4d-08711fea6bed\\3-production-client-build.log",
+      "outputBytes": 25600
+    },
+    {
+      "label": "browser verification",
+      "seconds": 191.11,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\.cache\\check-workflow\\cdfe8703-ef98-4fbd-9e4d-08711fea6bed\\4-browser-verification.log",
+      "outputBytes": 1645
+    }
+  ],
+  "totalSeconds": 238.26
+}

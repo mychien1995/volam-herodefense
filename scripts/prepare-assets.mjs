@@ -112,6 +112,7 @@ for (const [name, label] of [
   }
 }
 const dest = new URL('apps/game-client/public/assets/', root);
+copyTreeIfChanged(new URL('assets/exports/m4d/', root), new URL('m4d/', dest));
 copyTreeIfChanged(
   new URL('assets/exports/m3d-hit-continuity/', root),
   new URL('m3d-hit-continuity/', dest),

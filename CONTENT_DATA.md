@@ -1,3 +1,9 @@
+M4D · Thất Tinh Kiếm: hồi chiêu cơ bản 135→90 tick (4,5→3 giây), giữ giảm hồi chiêu theo bậc/nội tại hiện hành; không đổi mana, sát thương hay bảy nhịp kiếm. Theo yêu cầu người dùng ngày 2026-11-25.
+
+## M4D · 2026-11-25
+
+Arena IDs: `dao_hoa_dao` (DH-B), `tuong_duong` (TD-B), `tu_hien_trang` (TH-B). Nhánh giày là Thanh Tâm/`cleanse`, Tốc hành/`haste`, Phùng Xuân/`spring`; bỏ Blink/Phi châm giày và Z. Data wave production: 120s, stream 60s, hai hàng/cổng; floor dungeon 600s. [Chi tiết](docs/M4D_IMPLEMENTATION.md).
+
 ## Ngũ Độc · Bản chơi thử
 
 Âm Phong Thực Cốt có bán kính 180, tồn tại 5 giây và gây sát thương trực tiếp một lần lên mỗi mục tiêu, kèm độc. Tâm Hình Cổ thu hồi trùng sau khi nổ ở giây thứ ba, khi mục tiêu chết sớm hoặc khi trùng bay hết tầm.

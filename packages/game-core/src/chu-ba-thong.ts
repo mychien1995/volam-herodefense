@@ -1,3 +1,4 @@
+import { bossFightReady } from './boss-provocation.js';
 import { grantCraftMaterial } from './economy.js';
 import { announceBossSkill } from './boss-skill-announcement.js';
 import type {
@@ -412,6 +413,7 @@ export function chuHandContact(
   return false;
 }
 export function stepChu(w: World, c: SimulationConfig): void {
+  if (!bossFightReady(w, c)) return;
   const s = w.chu;
   if (!s) return;
   settleBossLoot(w);

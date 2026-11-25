@@ -1,3 +1,7 @@
+## M4D — arena và improvement · 2026-11-25
+
+Người dùng chọn DH-B, TD-B và TH-B (bản đã bỏ shop/cổng phó bản) để tích hợp. Quyết định mới: hai hàng/quái gấp đôi mỗi cổng, chu kỳ 120s, giữ tổng thưởng mỗi wave; boss giữ mốc wave; dungeon floor mỗi 600s; boss chờ đội gây sát thương trước; Shift thoát hố cát; ba giày thụ động thay Z. Nước Tụ Hiền Trang chặn di chuyển, bốn cầu nối đảo giữa hồ. [Triển khai và giới hạn kiểm chứng M4D](docs/M4D_IMPLEMENTATION.md). Concept đã chọn; art trong game vẫn chờ duyệt cuối.
+
 ## Thiền Sư A · nhịp chậm và sửa sprite 2026-11-24
 
 Director chọn “Chậm cả animation và nhịp ra đòn”. Giới hạn A thủ công/tự động của Thiền Sư là 12 tick (0,4 giây), gồm Phòng test; giữ damage từng thức. Quạt xuất lại đúng mật độ đầu/thân, timing ba thức 375ms. Điều này thay phần A không giới hạn nhịp trước đó. [Hợp đồng v07](docs/SKILL_REVISE_THIEN_SU_V07_2026_11_24.md).

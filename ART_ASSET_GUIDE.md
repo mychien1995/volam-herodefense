@@ -1,3 +1,9 @@
+M4D R3: [native material/plaza layers, original-prop torch masks, source density and verification](docs/M4D_ARENA_REVIEW_R3.md). Earlier whole-map underlays remain retained landscape inputs, not the native-density paving layer.
+
+## M4D arena/status layers — 2026-11-25
+
+DH-B/TD-B/TH-B đã được chọn làm concept. Nguồn mới ở `assets/source/m4d-arena-v01`, exports ở `assets/exports/m4d`; ground tách khỏi alpha props, cầu/lan can, tượng/đèn và lighting. Statue/lamps cùng hero/creep source bytes M3D được giữ. Không bake shop/cổng phó bản vào cảnh. Manifest ghi hashes, crops, pivots, native alpha và phạm vi duyệt; chạy `python scripts/verify-m4d-art.py`. [Tích hợp và kiểm chứng](docs/M4D_IMPLEMENTATION.md). Art trong game chờ duyệt cuối.
+
 ## Inventory/merchant UI exports — 2026-11-02
 
 Director-approved concepts supply eleven static icon backplates in `assets/exports/inventory_ui/`, exported by `scripts/export-inventory-ui.py` with source regions/hashes in the manifest. Retained ART-01 nine-slice frames and hero art remain unchanged; copy/numbers/selections stay live DOM inside the Phaser viewport. No whole-screen concept is used as a menu, no animation/authority comes from icons, and runtime approval remains separate. See [integration/checks](docs/INVENTORY_HUD_INTEGRATION.md).

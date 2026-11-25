@@ -1,3 +1,4 @@
+import { bossFightReady } from './boss-provocation.js';
 import { grantCraftMaterial } from './economy.js';
 import { announceBossSkill } from './boss-skill-announcement.js';
 import { addCreep } from './simulation.js';
@@ -209,6 +210,7 @@ export class KimLuanEncounter {
     }
   }
   step(w: World, c: SimulationConfig) {
+    if (!bossFightReady(w, c)) return;
     this.emptySince = undefined;
     settleBossLoot(w);
     const d = this.definition;

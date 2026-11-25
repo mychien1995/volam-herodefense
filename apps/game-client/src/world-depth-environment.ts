@@ -24,14 +24,16 @@ export class WorldDepthEnvironment {
   }
   private floor(p: WorldDepthProfile): Image | undefined {
     const names =
-      p.id === 'loi_dai'
-        ? ['loi-dai:ground']
-        : [
-            'kim_luan:xiangyang-court',
-            'chu:ground',
-            'hong_liet:ground',
-            'renovation:ground:' + p.id,
-          ];
+      p.id === 'arena'
+        ? ['arena:ground']
+        : p.id === 'loi_dai'
+          ? ['loi-dai:ground']
+          : [
+              'kim_luan:xiangyang-court',
+              'chu:ground',
+              'hong_liet:ground',
+              'renovation:ground:' + p.id,
+            ];
     return names
       .map((n) => this.scene.children.getByName(n) as Image | undefined)
       .find((i) => i?.visible);
@@ -146,7 +148,7 @@ export class WorldDepthEnvironment {
     return key;
   }
   sync(zone: string, p: WorldDepthProfile) {
-    const floor = p.id === 'arena' ? undefined : this.floor(p);
+    const floor = this.floor(p);
     if (this.zone !== zone || this.ground !== floor) {
       this.clear();
       this.zone = zone;
@@ -155,7 +157,7 @@ export class WorldDepthEnvironment {
         this.build(floor, p);
       }
     }
-    if (p.id === 'arena') return;
+    if (p.id === 'arena' && !floor?.getData('m4d-ground')) return;
     const active = new Set<Image>();
     for (const node of this.scene.children.list) {
       const source = node as Image;

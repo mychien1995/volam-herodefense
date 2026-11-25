@@ -1,3 +1,4 @@
+import { bossFightReady } from './boss-provocation.js';
 import { waveBossFarewell } from './boss-banter.js';
 import { announceBossSkill } from './boss-skill-announcement.js';
 import { addCreep } from './simulation.js';
@@ -526,6 +527,7 @@ export class TayDocEncounter {
     this.deathAt = world.tick;
   }
   step(world: World, config: SimulationConfig): void {
+    if (!bossFightReady(world, config) && this.phase !== 'enter') return;
     if (this.phase === 'waiting') return;
     const b = world.creeps.get(this.bossId),
       d = this.definition;

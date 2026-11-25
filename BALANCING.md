@@ -1,3 +1,9 @@
+M4D · Thất Tinh Kiếm: hồi chiêu cơ bản 135→90 tick (4,5→3 giây), giữ giảm hồi chiêu theo bậc/nội tại hiện hành; không đổi mana, sát thương hay bảy nhịp kiếm. Theo yêu cầu người dùng ngày 2026-11-25.
+
+## M4D · mật độ và nhịp trận — 2026-11-25
+
+Gấp đôi quái mỗi wave và rút chu kỳ 180→120s tạo mật độ xuất hiện theo thời gian gấp ba; tổng EXP/vàng mỗi wave giữ nguyên. Boss theo mốc wave cũ, floor dungeon mỗi 10 phút. Thăm dò lịch spawn thực và ba seed Phùng Xuân được ghi ở [báo cáo M4D](docs/M4D_IMPLEMENTATION.md); đây không phải kết quả chơi hết chiến dịch hoặc chứng minh độ khó cho người thật. Không tự đổi HP tượng, quái, giá đồ hoặc thưởng để bù.
+
 ## Nhịp phòng thủ M3D · 2026-11-12
 
 Wave creep trong chiến dịch nhân 1,10 HP và 1,08 sát thương cơ bản trước làm tròn. Mô phỏng đòn A với ba seed và một mục tiêu mỗi lượt cho thấy Bổng cấp 1 ở wave đầu tăng trung bình từ 4 lên 4,67 đòn trong solo. Cùng thử nghiệm với hệ số phòng sáu người tăng từ 8 lên 9 đòn. Đây là phép đo một mục tiêu đứng yên ở 65 đơn vị, A mỗi 9 tick.

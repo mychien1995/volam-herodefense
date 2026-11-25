@@ -21,7 +21,7 @@ function campaign(): string {
     <h2>Giữ Tượng Võ Thần</h2>
     <p>${statueIntroduction.join(' ')}</p>
     <ol class="campaign-steps">
-      <li><strong>Thủ thành</strong><p>Mỗi 3 phút có một đợt xâm lăng, kéo dài 60 giây. Trận có 20 đợt và mặc định mở bốn cổng. Dọn quái trước khi chúng phá tượng.</p></li>
+      <li><strong>Thủ thành</strong><p>Mỗi 2 phút có một đợt xâm lăng, hai hàng quái mỗi cổng, kéo dài 60 giây. Trận có 20 đợt và mặc định mở bốn cổng. Dọn quái trước khi chúng phá tượng.</p></li>
       <li><strong>Luyện cấp và kiếm vàng</strong><p>Mở Phó Bản để vào khu quái khi có thời gian giữa các đợt. Hạ quái hoặc góp sát thương để nhận kinh nghiệm và vàng. Dùng nút + hoặc giữ O rồi bấm Q/W/E/R/T để học và tăng bậc kỹ năng. Dùng vàng để mua, nâng cấp trang bị.</p></li>
       <li><strong>Đối đầu Tứ Tuyệt</strong><p>Sau khi dọn các đợt 5, 10, 15 và 20, lần lượt đối đầu Đông Tà, Tây Độc, Nam Đế và Bắc Cái. Hạ cả bốn và thắng Kim Luân Pháp Vương để mở trận với Vương Trùng Dương sau 60 giây.</p></li>
       <li><strong>Đánh boss phó bản</strong><p>Gây sát thương và có mặt trong phó bản khi boss bị hạ để đủ điều kiện nhận thưởng. Dùng nguyên liệu boss để chế tạo đồ từ trang bị cơ bản bậc 5. Lần hạ đầu của các boss đủ điều kiện còn trao Long Châu tăng chỉ số.</p></li>

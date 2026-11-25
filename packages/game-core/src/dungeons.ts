@@ -1153,6 +1153,14 @@ export class DungeonMatch {
         ? [...this.base.collision]
         : [...this.base.collision, this.invasion.definition.statue.collision],
       heroBounds: locked ? d.bounds : undefined,
+      combatCollision: this.base.combatCollision
+        ? locked
+          ? this.base.combatCollision
+          : [
+              ...this.base.combatCollision,
+              this.invasion.definition.statue.collision,
+            ]
+        : undefined,
     };
     if (this.arena.world.statue) this.arena.world.statue.invulnerable = locked;
     if (!locked) this.releaseStatueOccupants();
@@ -1409,6 +1417,7 @@ export class DungeonMatch {
     return {
       ...this.base,
       bossEncounter: d.bossEncounter,
+      combatCollision: undefined,
       width: d.width,
       height: d.height,
       collision: d.collision,

@@ -1,3 +1,4 @@
+import { bossFightReady } from './boss-provocation.js';
 import { announceBossSkill } from './boss-skill-announcement.js';
 import { hurt } from './combat.js';
 import {
@@ -831,6 +832,7 @@ export class VuongEncounter {
     }
   }
   step(w: World, c: SimulationConfig) {
+    if (!bossFightReady(w, c)) return;
     const b = w.creeps.get(VUONG_ID);
     if (!b || this.state !== 'fighting' || b.hp <= 0 || this.failedNotes)
       return;

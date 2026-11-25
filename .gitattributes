@@ -639,3 +639,10 @@ assets/source/audio/**/*.wav binary
 assets/sounds/skills/**/*.ogg binary
 assets/source/*-unified-v3/*.json -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 assets/exports/*-unified-v3/*.json -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# Preserve M4D source/export/evidence bytes referenced by SHA-256 manifests.
+assets/source/m4d-arena-v*/** -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/exports/m4d/** -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/concepts/arenas/m4d/** -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/evidence/m4d*/** -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/evidence/m4d-r3/*.log -whitespace

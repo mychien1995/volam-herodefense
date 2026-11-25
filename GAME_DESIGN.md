@@ -1,3 +1,7 @@
+## M4D · 2026-11-25
+
+Chủ phòng chọn Đào Hoa Đảo, Tương Dương đêm chiến tranh hoặc Tụ Hiền Trang hồ sen. Tụ Hiền Trang có nước chặn di chuyển và bốn cầu nối đảo trung tâm. Wave thường hai hàng mỗi cổng, mỗi 2 phút; boss chỉ tấn công sau khi đội đánh trước. Giày ghép chuyển sang ba nội tại và bỏ Z. [Đặc tả triển khai M4D](docs/M4D_IMPLEMENTATION.md) ghi các thay đổi và phạm vi duyệt art.
+
 ## Phòng test · 2026-11-19
 
 Menu chính có Phòng test: nhập tên và chọn phái/hệ bằng menu hiện có, vào Rừng Trúc không hiểm họa. Nhân vật cấp30, max năm kỹ năng, bất tử, đầy nội lực và không CD; ba Chó Hoang không tự đi/đánh, nhận hit/CC nhưng không chết hoặc phát thưởng. Mỗi người một room riêng; nút Đổi phái/hệ phái mở menu Defense ngay trong room, đổi hero tại chỗ và giữ ba mục tiêu. [Chi tiết](docs/PRACTICE_ROOM.md).

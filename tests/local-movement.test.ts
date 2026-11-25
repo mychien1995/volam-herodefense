@@ -36,3 +36,18 @@ it('uses the arena boundary and stops prediction for movement locks, release and
   movement.patch(1051);
   expect(movement.project(origin, 120, [], 1070)).toBeUndefined();
 });
+
+it('honors the selected arena movement-only obstacles without predicting through water', () => {
+  const movement = new LocalMovement(),
+    origin = { x: 100, y: 100 };
+  movement.patch(1000);
+  movement.move(1, 0, 1000);
+  expect(
+    movement.project(origin, 120, [], 1033, [
+      { x: 100 + m1Config.radius, y: 50, width: 80, height: 100 },
+    ]),
+  ).toBeUndefined();
+  expect(movement.project(origin, 120, [], 1033, [])!.x).toBeGreaterThan(
+    origin.x,
+  );
+});

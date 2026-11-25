@@ -1,3 +1,7 @@
+## M4D · first hit và giày thụ động — 2026-11-25
+
+Boss wave/dungeon chờ một đòn gây mất HP hợp lệ từ người chơi; đòn đầu mở giao chiến cho cả đội. Đường vào sân vẫn chạy, trước giao chiến không cast/đánh/sinh hiểm họa hoặc triệu hồi. Retry bắt đầu bằng actor chưa bị khiêu chiến. Shift thoát hố cát nhưng vẫn tôn trọng CC, biên và vật cản khác. Giày thụ động mới thay toàn bộ lệnh Z; RNG/heal/cleanse/cooldown do server quyết định. [Luật và kiểm chứng](docs/M4D_IMPLEMENTATION.md).
+
 ## Thiền Sư A · điều chỉnh nhịp 2026-11-24
 
 Director chọn làm chậm cả animation và nhịp ra đòn. Thiền Sư A nay có tối thiểu 12 tick/đòn (0,4 giây), kể cả bấm A liên tục và trong Phòng test; animation 375ms. Thứ quạt được cân lại mật độ sprite, giữ damage mỗi thức và lôi ảnh. Override này thay giới hạn nhịp cũ chỉ trong Thiền Sư A. [Chi tiết và kiểm chứng v07](docs/SKILL_REVISE_THIEN_SU_V07_2026_11_24.md).

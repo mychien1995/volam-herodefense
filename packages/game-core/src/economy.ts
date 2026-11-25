@@ -6,6 +6,7 @@ import type {
 } from './economy-types.js';
 import { refreshCharacter } from './progression.js';
 import { equipmentSlots } from './economy-types.js';
+import { dashCapacity } from './mobility.js';
 import { hasStatus } from './status.js';
 
 export function emptyInventory(): HeroInventory {
@@ -86,12 +87,16 @@ export function transactMerchant(
     const count = inventory.materials?.[action.slot] ?? 0;
     if (count < 1) return 'Thiếu ' + recipe.materialNameVi + '.';
     if (hero.gold < basic.craftGold) return 'Không đủ vàng.';
+    const oldDashCapacity = dashCapacity(hero, config);
     hero.gold -= basic.craftGold;
     inventory.materials![action.slot] = count - 1;
     (inventory.crafted ??= {})[action.slot] = action.branch;
     hero.inventory = inventory;
     inventory.revision++;
     refreshCharacter(hero, config);
+    const addedCharges = dashCapacity(hero, config) - oldDashCapacity;
+    if (addedCharges > 0)
+      hero.dashCharges = (hero.dashCharges ?? oldDashCapacity) + addedCharges;
     return;
   }
   if (action.action === 'buy-basic') {

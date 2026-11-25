@@ -107,16 +107,6 @@ export function bindGameplayInput(
       return;
     }
     if (
-      event.code === 'KeyZ' &&
-      !event.ctrlKey &&
-      !event.altKey &&
-      !event.metaKey
-    ) {
-      event.preventDefault();
-      send({ kind: 'gear-skill' });
-      return;
-    }
-    if (
       event.code === inputBindings.stance &&
       !event.ctrlKey &&
       !event.altKey &&

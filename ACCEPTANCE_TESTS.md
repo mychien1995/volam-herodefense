@@ -1,3 +1,7 @@
+## M4D acceptance — 2026-11-25
+
+Phạm vi mới: 2/3/4 cổng × 1/2/6 người với hai hàng/đôi số creep, chu kỳ 120s, ngân sách thưởng không đổi, floor 600s; boss đủ chín controller chờ hit và retry reset; ba giày thụ động, no Z, proc/threshold/cooldown/debt; Shift thoát hố cát; ba arena giữ sprite scale/shading/Y-depth, hồ sen authoritative collision và dự đoán; đồng bộ status trên đầu và cả tượng/hai đèn ẩn trong boss wave. [Kết quả thực tế và giới hạn](docs/M4D_IMPLEMENTATION.md), không suy diễn PASS từ checklist này.
+
 ## Component UI/camera dùng chung · 2026-11-19
 
 `playwright.ui-camera.config.ts` kiểm tra popup ba mode có cùng skin, group/label hợp lệ, nằm trong viewport; hủy Lôi Đài không ready; input và xác nhận giữ hành vi hiện hành. Camera cả ba mode ở1280×720,1872×800,850×480; cả5map PvP trong bounds, không thu hero dưới native Defense, utility cùng cỡ mỗi nút. Giữ kiểm tra Practice đổi phái/khóa input, PvP hai browser/combat thật và lời dẫn Defense. [Quy ước và cách chạy](docs/SHARED_UI_CAMERA.md).

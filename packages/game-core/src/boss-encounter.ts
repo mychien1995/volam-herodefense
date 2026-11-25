@@ -1,3 +1,4 @@
+import { bossFightReady } from './boss-provocation.js';
 import { grantCraftMaterial } from './economy.js';
 import { announceBossSkill } from './boss-skill-announcement.js';
 const compareId = (a: string, b: string) => (a < b ? -1 : a > b ? 1 : 0);
@@ -248,6 +249,7 @@ export function stepBossEncounter(
   world: World,
   config: SimulationConfig,
 ): void {
+  if (!bossFightReady(world, config)) return;
   const d = config.bossEncounter,
     runtime = world.boss;
   if (!d || !runtime) return;

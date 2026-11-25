@@ -1,4 +1,4 @@
-import { direction, moveCircle, type Point } from '@volam/game-core';
+import { direction, moveCircle, type Point, type Rect } from '@volam/game-core';
 import { m1Config } from '@volam/game-data';
 
 const tickMs = 1000 / m1Config.tickRate;
@@ -31,6 +31,7 @@ export class LocalMovement {
     speed: number,
     statuses: readonly { kind: string }[],
     now: number,
+    collision: Rect[] = m1Config.collision,
   ): (Point & { fx: number; fy: number }) | undefined {
     const vector = this.input;
     if (
@@ -59,7 +60,7 @@ export class LocalMovement {
       m1Config.radius,
       m1Config.width,
       m1Config.height,
-      m1Config.collision,
+      collision,
     );
     return point.x === origin.x && point.y === origin.y
       ? undefined

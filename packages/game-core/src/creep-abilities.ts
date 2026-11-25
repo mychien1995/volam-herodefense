@@ -1,3 +1,4 @@
+import { invasionApproach } from './invasion-route.js';
 import { emit, hurt } from './combat.js';
 import { nguDocSummons } from './ngu-doc-summons.js';
 import {
@@ -447,7 +448,7 @@ function environmentCue(
   e.kind = 'creep_trap_' + name;
   return e;
 }
-/** Authoritative cue positions also define the active slow and dash-lock areas. */
+/** Authoritative cue positions also define the active slow areas. */
 export function resetQuicksand(world: World, config: SimulationConfig): void {
   const hazard = dungeonHazard(config);
   if (hazard?.kind !== 'quicksand') return;
@@ -502,13 +503,6 @@ function scheduleDungeonHazards(world: World, config: SimulationConfig): void {
       applyStatus(
         hero,
         { kind: 'slow', magnitude: h.slow, durationTicks: 1 },
-        trapOwner.id,
-        'quicksand',
-        tick,
-      );
-      applyStatus(
-        hero,
-        { kind: 'dash_lock', magnitude: 1, durationTicks: 1 },
         trapOwner.id,
         'quicksand',
         tick,
@@ -912,7 +906,12 @@ export function stepCreepActor(
     }
   }
   if (!inRange) {
-    const waypoint = dungeonWaypoint(enemy, target, world.tick, config);
+    const waypoint = dungeonWaypoint(
+      enemy,
+      invasionApproach(enemy, target, !!combatant),
+      world.tick,
+      config,
+    );
     const v = direction(waypoint.x - enemy.x, waypoint.y - enemy.y);
     moveCircle(
       enemy,

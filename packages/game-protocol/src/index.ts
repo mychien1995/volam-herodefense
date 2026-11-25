@@ -1,8 +1,8 @@
 import { schema, t, type SchemaType } from '@colyseus/schema';
-import { lobbyConfig } from '@volam/game-data';
+import { lobbyConfig, arenaIds } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 48;
+export const PROTOCOL_VERSION = 49;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -16,7 +16,7 @@ export const nicknameSchema = z
       .max(lobbyConfig.nicknameMaxLength)
       .regex(
         /^[\p{L}\p{M}\p{N} _.'-]+$/u,
-        'Chỉ dùng chữ, số, khoảng trắng hoặc dấu câu đơn giản.',
+        'Chá»‰ dÃ¹ng chá»¯, sá»‘, khoáº£ng tráº¯ng hoáº·c dáº¥u cÃ¢u Ä‘Æ¡n giáº£n.',
       ),
   );
 
@@ -26,9 +26,11 @@ export const portalCountSchema = z.union([
   z.literal(3),
   z.literal(4),
 ]);
+export const arenaIdSchema = z.enum(arenaIds);
 export const joinOptionsSchema = z.strictObject({
   creepPreview: z.boolean().optional(),
   portalCount: portalCountSchema.optional(),
+  arenaId: arenaIdSchema.optional(),
   nickname: nicknameSchema,
   protocolVersion: z.literal(PROTOCOL_VERSION),
 });
@@ -142,11 +144,6 @@ export const inputSchema = z.discriminatedUnion('kind', [
     protocolVersion: z.literal(PROTOCOL_VERSION),
     sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
     kind: z.literal('dash'),
-  }),
-  z.strictObject({
-    protocolVersion: z.literal(PROTOCOL_VERSION),
-    sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
-    kind: z.literal('gear-skill'),
   }),
   z.strictObject({
     protocolVersion: z.literal(PROTOCOL_VERSION),
@@ -338,8 +335,8 @@ export const merchantActionSchema = z.discriminatedUnion('action', [
       'fortitude',
       'assault',
       'cleanse',
-      'blink',
-      'needle',
+      'haste',
+      'spring',
     ]),
   }),
   merchantBase.extend({
@@ -614,6 +611,7 @@ export const DefenseState = schema(
   {
     creepPreview: t.string().default(''),
     portalCount: t.number().default(2),
+    arenaId: t.string().default('dao_hoa_dao'),
     streamUntilTick: t.number().default(0),
     devCreepTest: t.boolean().default(false),
     devWaveBosses: t.boolean().default(false),

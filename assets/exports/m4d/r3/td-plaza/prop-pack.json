@@ -1,0 +1,196 @@
+{
+  "schema": "generate2dmap.prop_pack.v2",
+  "tool": {
+    "name": "extract_prop_pack",
+    "version": "0.5.0"
+  },
+  "input": "../../../../source/m4d-arena-v03/td-plaza.png",
+  "source_size": [
+    1383,
+    1137
+  ],
+  "source_sha256": "490fb20e9576840ac5c567c54e38ac2fc1db329a4625f4e01d8cb1e1cebe2bc8",
+  "source_mode": "RGBA",
+  "layout_mode": "grid",
+  "boxes_file": null,
+  "labels_file": null,
+  "background_mode": "native_alpha",
+  "rows": 1,
+  "cols": 1,
+  "threshold": 100,
+  "edge_threshold": 150,
+  "despill_radius": 0,
+  "despill": {
+    "mode": "off",
+    "applied": "off",
+    "radius": 0,
+    "margin": 12,
+    "changed_px": 0
+  },
+  "hygiene": {
+    "mode": "floor",
+    "floor": 8,
+    "solid_min": 32,
+    "attach_radius": 2,
+    "connectivity": 8,
+    "floor_px": 10023,
+    "detached_px": 0,
+    "detached_components": 0,
+    "max_removed_alpha": 8
+  },
+  "alpha_floor": 8,
+  "alpha_floor_pixels_removed": 10023,
+  "trim_border": 0,
+  "edge_clean_depth": 0,
+  "component_mode": "all",
+  "component_padding": 8,
+  "min_component_area": 1,
+  "edge_touch_margin": 0,
+  "geometry": {
+    "connectivity": 8,
+    "alpha_geometry_threshold": 16,
+    "anchor_mode": "center",
+    "support_band_fraction": 0.25,
+    "anchor_rounding": "whole pixels, half-up",
+    "grid_rounding": "exact",
+    "keep_canvas": false,
+    "world_scale": null
+  },
+  "accepted": [
+    {
+      "index": 0,
+      "label": "td-plaza",
+      "display_name": "td-plaza",
+      "status": "accepted",
+      "image": "td-plaza/prop.png",
+      "sha256": "65c49b9fd090e9ced944e0fb56ffe41a799914ab67fe8b120d5c662dc0914d64",
+      "output_size": [
+        1374,
+        1124
+      ],
+      "grid": [
+        0,
+        0
+      ],
+      "cell_box": [
+        0,
+        0,
+        1383,
+        1137
+      ],
+      "source_box": [
+        0,
+        0,
+        1383,
+        1137
+      ],
+      "source_rect": [
+        3,
+        0,
+        1377,
+        1124
+      ],
+      "trim_offset": [
+        3,
+        0
+      ],
+      "padding": [
+        8,
+        6,
+        8,
+        8
+      ],
+      "anchor_px": [
+        687,
+        561
+      ],
+      "anchor_source": "measured",
+      "component_mode": "all",
+      "component_count": 2,
+      "min_component_area": 1,
+      "trim_applied": 0,
+      "crop_bbox": [
+        11,
+        6,
+        1369,
+        1116
+      ],
+      "padded_crop_bbox": [
+        3,
+        0,
+        1377,
+        1124
+      ],
+      "selected_component_area": null,
+      "selected_component_bbox": null,
+      "kept_area": 1162535,
+      "dropped_components": 0,
+      "dropped_area": 0,
+      "edge_touch": false
+    }
+  ],
+  "rejected": [],
+  "edge_touch_props": [],
+  "warnings": [],
+  "qa": {
+    "status": "pass",
+    "method": "native alpha, not keyed; alpha hygiene floor; 8-connected components (all); checks measured on the published pixels",
+    "notProven": [
+      "that each label names the art in its cell or box",
+      "that a prop is complete: clipping is detected only where art meets the cell edge",
+      "keyed-edge quality beyond the edge fringe count",
+      "that anchors and suggested footprints match gameplay contact (both are measured from alpha)",
+      "runtime placement, collision or occlusion"
+    ],
+    "checks": [
+      {
+        "id": "accepted",
+        "status": "pass",
+        "value": 1,
+        "threshold": ">= 1"
+      },
+      {
+        "id": "edge_touch",
+        "status": "pass",
+        "value": [],
+        "threshold": 0
+      },
+      {
+        "id": "dropped_area",
+        "status": "pass",
+        "value": {},
+        "threshold": 0.01
+      },
+      {
+        "id": "strategy_aspect",
+        "status": "skipped",
+        "value": null,
+        "threshold": 1.6
+      },
+      {
+        "id": "edge_fringe",
+        "status": "skipped",
+        "value": null,
+        "threshold": 0.02
+      }
+    ],
+    "inputs": [
+      {
+        "path": "../../../../source/m4d-arena-v03/td-plaza.png",
+        "sha256": "490fb20e9576840ac5c567c54e38ac2fc1db329a4625f4e01d8cb1e1cebe2bc8",
+        "bytes": 2714966
+      }
+    ],
+    "outputs": [
+      {
+        "path": "td-plaza/prop.png",
+        "sha256": "65c49b9fd090e9ced944e0fb56ffe41a799914ab67fe8b120d5c662dc0914d64",
+        "bytes": 2490548
+      }
+    ],
+    "tool": {
+      "name": "extract_prop_pack",
+      "version": "0.5.0"
+    }
+  }
+}

@@ -177,7 +177,7 @@ export const voDangSkills: Ability[] = [
     id: 'that_tinh_kiem',
     nameVi: 'Thất Tinh Kiếm',
     manaCost: 18,
-    cooldownTicks: 135,
+    cooldownTicks: 90,
     effect: {
       mode: 'multi_hit',
       range: 80,

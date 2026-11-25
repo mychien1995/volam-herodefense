@@ -397,6 +397,8 @@ export interface Ability {
     | SupportEffect;
 }
 export interface SimulationConfig {
+  bossesWaitForHit?: boolean;
+  combatCollision?: Rect[] | undefined;
   campaign?: CampaignDefinition;
   creepCombat?: CreepCombatDefinition;
   dungeonId?: string;
@@ -486,7 +488,6 @@ export type Command =
   | { kind: 'auto-basic'; enabled: boolean }
   | { kind: 'basic'; targetId?: string | undefined }
   | { kind: 'dash' }
-  | { kind: 'gear-skill' }
   | { kind: 'cast'; slot: number }
   | { kind: 'dev-loadout'; ids: string[] }
   | { kind: 'select-basic'; id: string };
@@ -605,9 +606,9 @@ export interface Hero extends Actor {
   basicChains?: Record<string, number>;
 }
 export interface Creep extends Actor {
+  provoked?: boolean;
   campaignPlayers?: number;
   damagedBy?: Set<string>;
-  needlePoison?: { sourceId: string; until: number; next: number };
   waveBossActor?: boolean;
 
   rangedAttack?: ProjectileEffect;
@@ -634,6 +635,7 @@ export interface Creep extends Actor {
   invasion?: {
     wave: number;
     lane: 'west' | 'east' | 'north' | 'south';
+    approach?: Point;
     targetId: string;
     chaseOrigin: Point;
     reacquireAt: number;

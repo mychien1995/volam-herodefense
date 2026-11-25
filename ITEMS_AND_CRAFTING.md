@@ -1,3 +1,7 @@
+## M4D · giày thụ động thay Z — 2026-11-25
+
+Giày ghép chọn Thanh Tâm (`cleanse`), Tốc hành (`haste`) hoặc Phùng Xuân (`spring`). Thanh Tâm tự giải debuff thông thường gồm choáng, hồi 30s, không miễn nhiễm tiếp diễn và không gỡ khóa cơ chế boss. Tốc hành thêm hai charge Shift, cộng dồn Đường Môn, giữ nợ hồi charge. Phùng Xuân có 10% cơ hội hồi 10% HP tối đa sau một lần thực mất >5% HP tối đa, hồi 30s chỉ khi kích hoạt thành công, không hồi sinh từ hit chết. Không còn kỹ năng/nút Z. Giá, nguyên liệu, stats và các ô khác giữ hợp đồng hiện hành; không gộp migration inventory-v2. [Triển khai](docs/M4D_IMPLEMENTATION.md).
+
 ## Campaign balance và thử lại boss — 2026-11-06
 
 Long Châu đã được triển khai: mỗi tứ tuyệt8%, mỗi dungeon boss4% vào HP/MP/công/thủ nền, cộng dồn tối đa48% từ tám boss. Tự áp dụng một lần/nhân vật/boss/trận, cần gây mất HP và còn hiện diện. Boss đánh lại không thưởng thêm EXP/vàng; nguyên liệu vẫn theo luật riêng. Bình dùng ở lượt thất bại được hoàn đúng lượng đã tiêu. [Quy tắc, cấu hình và kiểm chứng](docs/CAMPAIGN_BALANCE_2026_11_06.md).

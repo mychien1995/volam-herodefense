@@ -1,7 +1,11 @@
 import { PvpUI, readPvp } from './pvp-ui.js';
 import { PracticeUI } from './practice-ui.js';
 import type { PracticeRoom } from '../../game-server/src/rooms/PracticeRoom.js';
-import { PRACTICE_ROOM, type PracticeJoinOptions, type PracticeSelection } from '@volam/game-protocol';
+import {
+  PRACTICE_ROOM,
+  type PracticeJoinOptions,
+  type PracticeSelection,
+} from '@volam/game-protocol';
 import type { PvpMapId } from '@volam/game-core';
 import type { StandaloneLoiDaiRoom } from '../../game-server/src/rooms/StandaloneLoiDaiRoom.js';
 import { NamDeHud } from './nam-de-hud.js';
@@ -100,42 +104,80 @@ const endpoint = import.meta.env['VITE_SERVER_URL'] ?? 'http://localhost:2567';
 const pregame = new PreGame(endpoint);
 const pvpUi = new PvpUI();
 const practiceUi = new PracticeUI();
-let requestedPractice: Pick<PracticeJoinOptions,'schoolId'|'branchId'>|undefined;
-pregame.onPractice=()=>{requestedPvp=false;pvpUi.clear();pregame.node.hidden=true;practiceUi.open(pregame.nickname);};
-practiceUi.onBack=()=>{requestedPractice=undefined;practiceUi.clear();pregame.openHome();};
-ui.onPracticeEscape=()=>practiceUi.escape();
-ui.onPracticeChange=()=>{
- if(!room?.state.practice.enabled || ui.reconnecting)return;
- ui.close();
- practiceUi.openChange();
- window.dispatchEvent(new Event('volam:controls-blocked'));
+let requestedPractice:
+  Pick<PracticeJoinOptions, 'schoolId' | 'branchId'> | undefined;
+pregame.onPractice = () => {
+  requestedPvp = false;
+  pvpUi.clear();
+  pregame.node.hidden = true;
+  practiceUi.open(pregame.nickname);
 };
-practiceUi.onChange=({schoolId,branchId})=>{
- if(!room?.state.practice.enabled)return;
- const selection={protocolVersion:PROTOCOL_VERSION,sequence:++sequence,schoolId,branchId} satisfies PracticeSelection;
- practiceUi.pending(selection.sequence);
- (room as unknown as Room<PracticeRoom>).send('practice-select',selection);
+practiceUi.onBack = () => {
+  requestedPractice = undefined;
+  practiceUi.clear();
+  pregame.openHome();
 };
-practiceUi.onConnect=({nickname,schoolId,branchId})=>{
- requestedPractice={schoolId,branchId};requestedPvp=false;
- element<HTMLInputElement>('#nickname').value=nickname;void connect(false);
+ui.onPracticeEscape = () => practiceUi.escape();
+ui.onPracticeChange = () => {
+  if (!room?.state.practice.enabled || ui.reconnecting) return;
+  ui.close();
+  practiceUi.openChange();
+  window.dispatchEvent(new Event('volam:controls-blocked'));
+};
+practiceUi.onChange = ({ schoolId, branchId }) => {
+  if (!room?.state.practice.enabled) return;
+  const selection = {
+    protocolVersion: PROTOCOL_VERSION,
+    sequence: ++sequence,
+    schoolId,
+    branchId,
+  } satisfies PracticeSelection;
+  practiceUi.pending(selection.sequence);
+  (room as unknown as Room<PracticeRoom>).send('practice-select', selection);
+};
+practiceUi.onConnect = ({ nickname, schoolId, branchId }) => {
+  requestedPractice = { schoolId, branchId };
+  requestedPvp = false;
+  element<HTMLInputElement>('#nickname').value = nickname;
+  void connect(false);
 };
 let requestedPvp = false;
 let requestedPvpMap: PvpMapId = 'hong_moc';
-pregame.onLoiDai = () => { pregame.node.hidden=true;pvpUi.openEntry(pregame.nickname); };
-pvpUi.onBack = () => {requestedPvp=false;pvpUi.clear();pregame.openHome();};
-pvpUi.onLeave = () => void room?.leave();
-pvpUi.onConnect = (nickname,mapId,id) => {
- requestedPractice=undefined;practiceUi.clear();requestedPvp=true;requestedPvpMap=mapId;
- element<HTMLInputElement>('#nickname').value=nickname;
- element<HTMLInputElement>('#room-id').value=id??'';
- void connect(!!id);
+pregame.onLoiDai = () => {
+  pregame.node.hidden = true;
+  pvpUi.openEntry(pregame.nickname);
 };
-pvpUi.onAction = action => {if(room?.state.pvp.enabled)room.send('pvp-action',{...action,protocolVersion:PROTOCOL_VERSION,sequence:++sequence});};
+pvpUi.onBack = () => {
+  requestedPvp = false;
+  pvpUi.clear();
+  pregame.openHome();
+};
+pvpUi.onLeave = () => void room?.leave();
+pvpUi.onConnect = (nickname, mapId, id) => {
+  requestedPractice = undefined;
+  practiceUi.clear();
+  requestedPvp = true;
+  requestedPvpMap = mapId;
+  element<HTMLInputElement>('#nickname').value = nickname;
+  element<HTMLInputElement>('#room-id').value = id ?? '';
+  void connect(!!id);
+};
+pvpUi.onAction = (action) => {
+  if (room?.state.pvp.enabled)
+    room.send('pvp-action', {
+      ...action,
+      protocolVersion: PROTOCOL_VERSION,
+      sequence: ++sequence,
+    });
+};
 ui.onPvpHistory = () => pvpUi.toggleHistory();
 ui.onPvpEscape = () => pvpUi.closeOverlay();
-const sharedPvpId=new URLSearchParams(location.search).get('pvp');
-if(sharedPvpId&&!artPreview){requestedPvp=true;pregame.node.hidden=true;pvpUi.openEntry(pregame.nickname,sharedPvpId);}
+const sharedPvpId = new URLSearchParams(location.search).get('pvp');
+if (sharedPvpId && !artPreview) {
+  requestedPvp = true;
+  pregame.node.hidden = true;
+  pvpUi.openEntry(pregame.nickname, sharedPvpId);
+}
 if (artPreview) pregame.node.hidden = true;
 const matchTracks = [gameOstUrl, gameOst2Url, gameOst3Url];
 const matchMusic = artPreview ? undefined : new Audio();
@@ -147,7 +189,8 @@ if (matchMusic) {
 }
 function applySettings(key?: keyof Preferences): void {
   if (matchMusic) matchMusic.volume = preferences.musicVolume / 100;
-  if (key === 'volume' && arenaScene?.presentationReady) refreshSkillSoundVolumes(arenaScene);
+  if (key === 'volume' && arenaScene?.presentationReady)
+    refreshSkillSoundVolumes(arenaScene);
   element('#viewport').toggleAttribute(
     'data-mouse-controls',
     preferences.controls === 'mouse',
@@ -572,30 +615,43 @@ async function connect(existing: boolean): Promise<void> {
   const roomId = element<HTMLInputElement>('#room-id').value.trim();
   if (!parsed.success) {
     status.textContent = `Biệt danh cần từ 1–${lobbyConfig.nicknameMaxLength} ký tự chữ, số hoặc dấu câu đơn giản.`;
-    if(requestedPractice)practiceUi.error(status.textContent);else if(requestedPvp)pvpUi.error(status.textContent);else pregame.fail(status.textContent);
+    if (requestedPractice) practiceUi.error(status.textContent);
+    else if (requestedPvp) pvpUi.error(status.textContent);
+    else pregame.fail(status.textContent);
     return;
   }
   if (existing && !roomId) {
     status.textContent = 'Hãy nhập mã phòng để tham gia.';
-    if(requestedPvp)pvpUi.error(status.textContent);
+    if (requestedPvp) pvpUi.error(status.textContent);
     return;
   }
   controls(false, true);
   status.textContent = 'Đang kết nối…';
   try {
     const joined = requestedPractice
-      ? await client.create<PracticeRoom>(PRACTICE_ROOM,{...parsed.data,...requestedPractice})
-      : requestedPvp
-      ? existing
-        ? await client.joinById<StandaloneLoiDaiRoom>(roomId,{...parsed.data,pvp:true})
-        : await client.create<StandaloneLoiDaiRoom>(PVP_ROOM,{...parsed.data,pvp:true,mapId:requestedPvpMap})
-      : existing
-      ? await client.joinById<MatchRoom>(roomId, parsed.data)
-      : await client.create<MatchRoom>(MATCH_ROOM, {
+      ? await client.create<PracticeRoom>(PRACTICE_ROOM, {
           ...parsed.data,
-          portalCount: pregame.portalCount,
-          creepPreview: creepPreviewRequested,
-        });
+          ...requestedPractice,
+        })
+      : requestedPvp
+        ? existing
+          ? await client.joinById<StandaloneLoiDaiRoom>(roomId, {
+              ...parsed.data,
+              pvp: true,
+            })
+          : await client.create<StandaloneLoiDaiRoom>(PVP_ROOM, {
+              ...parsed.data,
+              pvp: true,
+              mapId: requestedPvpMap,
+            })
+        : existing
+          ? await client.joinById<MatchRoom>(roomId, parsed.data)
+          : await client.create<MatchRoom>(MATCH_ROOM, {
+              ...parsed.data,
+              portalCount: pregame.portalCount,
+              arenaId: pregame.arenaId,
+              creepPreview: creepPreviewRequested,
+            });
     joined.reconnection.enabled = !requestedPvp && !requestedPractice;
     room = joined;
     sequence = 0;
@@ -637,13 +693,27 @@ async function connect(existing: boolean): Promise<void> {
           ui.close();
         }
         const wasChoosing = !pregame.node.hidden;
-        if(state.practice.enabled) {pregame.node.hidden=true;pvpUi.clear();if(arenaScene?.presentationReady)practiceUi.connected(state.players.get(joined.sessionId));else practiceUi.loading();}
-        else if(state.pvp.enabled) {
-          pregame.node.hidden=true;pvpUi.update(state,joined.roomId,joined.sessionId);
-          const phase=readPvp(state)?.phase;
-          if(phase==='fighting'&&phase!==previousPvpPhase&&preferences.autoBasic)send({kind:'auto-basic',enabled:true});
-          previousPvpPhase=phase??'';
-        } else {pvpUi.clear();pregame.update(state, joined.roomId, joined.sessionId);}
+        if (state.practice.enabled) {
+          pregame.node.hidden = true;
+          pvpUi.clear();
+          if (arenaScene?.presentationReady)
+            practiceUi.connected(state.players.get(joined.sessionId));
+          else practiceUi.loading();
+        } else if (state.pvp.enabled) {
+          pregame.node.hidden = true;
+          pvpUi.update(state, joined.roomId, joined.sessionId);
+          const phase = readPvp(state)?.phase;
+          if (
+            phase === 'fighting' &&
+            phase !== previousPvpPhase &&
+            preferences.autoBasic
+          )
+            send({ kind: 'auto-basic', enabled: true });
+          previousPvpPhase = phase ?? '';
+        } else {
+          pvpUi.clear();
+          pregame.update(state, joined.roomId, joined.sessionId);
+        }
         syncMatchRender();
         if (wasChoosing && pregame.node.hidden && state.phase === 'IN_GAME')
           document.querySelector<HTMLCanvasElement>('#game canvas')?.focus();
@@ -689,7 +759,10 @@ async function connect(existing: boolean): Promise<void> {
       if (rejected.success) {
         ui.resolveMerchant();
         ui.notify(rejected.data.reason);
-        if(joined.state.practice.enabled)practiceUi.rejected(rejected.data.sequence,rejected.data.reason);else if(joined.state.pvp.enabled)pvpUi.error(rejected.data.reason);else pregame.fail(rejected.data.reason);
+        if (joined.state.practice.enabled)
+          practiceUi.rejected(rejected.data.sequence, rejected.data.reason);
+        else if (joined.state.pvp.enabled) pvpUi.error(rejected.data.reason);
+        else pregame.fail(rejected.data.reason);
       }
     });
     joined.onMessage('merchant-result', (payload: unknown) => {
@@ -714,7 +787,13 @@ async function connect(existing: boolean): Promise<void> {
       ui.reconnecting = true;
       window.dispatchEvent(new Event('volam:controls-blocked'));
       arenaScene?.setSnapshot(undefined);
-      ui.notify(joined.state.practice.enabled?'Mất kết nối phòng test.':joined.state.pvp.enabled?'Mất kết nối Lôi Đài.':'Mất kết nối · Đang kết nối lại…');
+      ui.notify(
+        joined.state.practice.enabled
+          ? 'Mất kết nối phòng test.'
+          : joined.state.pvp.enabled
+            ? 'Mất kết nối Lôi Đài.'
+            : 'Mất kết nối · Đang kết nối lại…',
+      );
     });
     joined.onReconnect(() => {
       if (room !== joined) return;
@@ -729,15 +808,28 @@ async function connect(existing: boolean): Promise<void> {
       chuHud.sync(undefined, '');
       namDeHud.sync(undefined, '');
       tamLienHud.sync(undefined, '');
-      const wasPractice=joined.state.practice.enabled;
-      const wasPvp=joined.state.pvp.enabled;
-      const nickname=joined.state.players.get(joined.sessionId)?.nickname??'';
+      const wasPractice = joined.state.practice.enabled;
+      const wasPvp = joined.state.pvp.enabled;
+      const nickname =
+        joined.state.players.get(joined.sessionId)?.nickname ?? '';
       room = undefined;
-      if(wasPractice){pregame.node.hidden=true;practiceUi.open(nickname);}
-      else if(wasPvp){pvpUi.clear();pregame.node.hidden=true;pvpUi.openEntry(nickname,'',code===4011?'Phòng đã đóng · Chủ phòng đã rời phòng.':'Bạn đã rời phòng Lôi Đài.');}
-      else pregame.disconnected(
-        `Mất kết nối (${code}). Hãy tạo hoặc vào phòng để trở lại.`,
-      );
+      if (wasPractice) {
+        pregame.node.hidden = true;
+        practiceUi.open(nickname);
+      } else if (wasPvp) {
+        pvpUi.clear();
+        pregame.node.hidden = true;
+        pvpUi.openEntry(
+          nickname,
+          '',
+          code === 4011
+            ? 'Phòng đã đóng · Chủ phòng đã rời phòng.'
+            : 'Bạn đã rời phòng Lôi Đài.',
+        );
+      } else
+        pregame.disconnected(
+          `Mất kết nối (${code}). Hãy tạo hoặc vào phòng để trở lại.`,
+        );
       syncMatchRender();
       arenaScene?.setSnapshot(undefined);
       controls(false);
@@ -753,11 +845,18 @@ async function connect(existing: boolean): Promise<void> {
   } catch (error: unknown) {
     status.textContent = `Không thể kết nối: ${connectionReason(error instanceof Error ? error.message : '')}`;
     controls(false);
-    if(requestedPractice)practiceUi.error(status.textContent ?? 'Kết nối thất bại');else if(requestedPvp)pvpUi.error(status.textContent ?? 'Kết nối thất bại');else pregame.fail(status.textContent ?? 'Kết nối thất bại');
+    if (requestedPractice)
+      practiceUi.error(status.textContent ?? 'Kết nối thất bại');
+    else if (requestedPvp)
+      pvpUi.error(status.textContent ?? 'Kết nối thất bại');
+    else pregame.fail(status.textContent ?? 'Kết nối thất bại');
   }
 }
 pregame.onConnect = (nickname, id) => {
-  requestedPractice=undefined;practiceUi.clear();requestedPvp=false;pvpUi.clear();
+  requestedPractice = undefined;
+  practiceUi.clear();
+  requestedPvp = false;
+  pvpUi.clear();
   element<HTMLInputElement>('#nickname').value = nickname;
   element<HTMLInputElement>('#room-id').value = id ?? '';
   void connect(!!id);

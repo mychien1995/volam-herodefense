@@ -1,3 +1,4 @@
+import { bossFightReady } from './boss-provocation.js';
 import { waveBossFarewell } from './boss-banter.js';
 import { announceBossSkill } from './boss-skill-announcement.js';
 import { bacCaiWander } from './bac-cai-wander.js';
@@ -840,6 +841,7 @@ export class BacCaiEncounter {
     } else this.dialogue = 'Đúng ý lão rồi… ngủ một giấc đã!';
   }
   step(w: World, c: SimulationConfig) {
+    if (!bossFightReady(w, c) && this.phase !== 'entering') return;
     const b = w.creeps.get(this.bossId);
     if (!b || this.phase === 'cleared' || this.phase === 'defeated') return;
     // Resolve the complete tick hit set, including simultaneous real and clone hits.

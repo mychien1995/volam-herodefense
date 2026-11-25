@@ -1,3 +1,4 @@
+import { provokeBossFight } from './boss-provocation.js';
 import type {
   Actor,
   CombatEvent,
@@ -449,6 +450,9 @@ export function hurt(
     damage = world.vuong.limitIncoming(enemy, damage);
   const practiceTarget = world.practiceTargets?.has(target.id) ?? false;
   target.hp = Math.max(practiceTarget ? 1 : 0, target.hp - damage);
+  const receivedHpLoss = beforeHp - target.hp;
+  if (receivedHpLoss > 0 && enemy && world.heroes.has(sourceId))
+    provokeBossFight(world, config, enemy);
   reflectCreepDamage(
     world,
     target,
@@ -610,6 +614,35 @@ export function hurt(
         Number.EPSILON * Math.max(1, target.maxHp) * 8
   )
     releaseGuardCounter(world, target.id, guardCounter, config);
+  const inv = hero?.inventory,
+    bootTuning = config.economy?.craftedCombat;
+  if (
+    hero &&
+    inv?.crafted?.boots === 'spring' &&
+    bootTuning &&
+    hero.hp > 0 &&
+    receivedHpLoss > hero.maxHp * bootTuning.springDamageThreshold &&
+    world.tick >= (inv.auxiliaryReadyAt ?? 0) &&
+    world.random() < bootTuning.springChance
+  ) {
+    const healed = Math.min(
+      hero.maxHp - hero.hp,
+      hero.maxHp * bootTuning.springHealFraction,
+    );
+    hero.hp += healed;
+    inv.auxiliaryReadyAt =
+      world.tick + bootTuning.bootCooldownSeconds * config.tickRate;
+    emit(world, {
+      kind: 'effect',
+      sourceId: hero.id,
+      targetId: hero.id,
+      abilityId: 'gear_spring',
+      x: hero.x,
+      y: hero.y,
+      damage: healed,
+      critical: false,
+    });
+  }
   // Preserve real damage/on-hit/status processing, then refill before the next hit.
   if (practiceTarget) target.hp = target.maxHp;
   return true;

@@ -79,7 +79,7 @@ it('publishes one match clock/warning across zones, filters enemies, and isolate
   expect(b.state.players.get(b.sessionId)!.zoneId).toBe(zone);
   expect(
     [...a.state.creeps.values()].filter((e) => e.invasionWave === 1),
-  ).toHaveLength(2); // A timed stream opens with one spawn per gate, then continues.
+  ).toHaveLength(4); // A timed stream opens with two rows per gate, then continues.
   expect(a.state.defense.streamUntilTick).toBeGreaterThan(a.state.tick);
   expect(
     [...b.state.creeps.values()].every(
@@ -100,10 +100,10 @@ it('publishes one match clock/warning across zones, filters enemies, and isolate
     [...a.state.creeps.values()].filter(
       (e) => e.invasionWave === 1 && e.hp > 0,
     ),
-  ).toHaveLength(6); // t=90/128/166, two gates; player count was snapshotted at opening.
+  ).toHaveLength(12); // t=90/128/166, two rows at each of two gates; player count was snapshotted at opening.
   expect(
     [...a.state.creeps.values()].filter((e) => e.invasionWave === 2),
-  ).toHaveLength(2); // Wave two just opened; the first stream remains active.
+  ).toHaveLength(4); // Wave two just opened with two rows per gate; the first stream remains active.
 });
 
 it('shares one enemy HP/death and one reward pool between two SDK attackers', async () => {

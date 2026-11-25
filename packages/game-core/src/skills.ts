@@ -74,7 +74,7 @@ function clearLine(
   return (
     enemy.hp > 0 &&
     world.heroes.has(hero.id) &&
-    !config.collision.some(
+    !(config.combatCollision ?? config.collision).some(
       (w) =>
         (!projectile || w !== world.statue?.collision) &&
         segmentRect(hero, enemy, w) !== undefined,
@@ -146,7 +146,11 @@ export function targetDirection(
   const aim = enemy
     ? direction(enemy.x - hero.x, enemy.y - hero.y)
     : { x: hero.fx, y: hero.fy };
-  return aim.x || aim.y ? aim : hero.fx || hero.fy ? {x:hero.fx,y:hero.fy} : {x:1,y:0};
+  return aim.x || aim.y
+    ? aim
+    : hero.fx || hero.fy
+      ? { x: hero.fx, y: hero.fy }
+      : { x: 1, y: 0 };
 }
 function damageFor(
   hero: Hero,
@@ -333,7 +337,7 @@ export function stepScatters(world: World, config: SimulationConfig): void {
           ) &&
           (!config.heroBounds ||
             insideEllipse(candidate, config.heroBounds, 1)) &&
-          !config.collision.some(
+          !(config.combatCollision ?? config.collision).some(
             (wall) => segmentRect(center, candidate, wall) !== undefined,
           )
         ) {
@@ -521,7 +525,7 @@ function openSkyfall(
       };
       if (
         !blocked(candidate, 1, config.width, config.height, config.collision) &&
-        !config.collision.some(
+        !(config.combatCollision ?? config.collision).some(
           (wall) => segmentRect(hero, candidate, wall) !== undefined,
         )
       ) {
@@ -579,7 +583,7 @@ function queueInwardVolley(
         config.height,
         config.collision,
       ) ||
-      config.collision.some(
+      (config.combatCollision ?? config.collision).some(
         (wall) => segmentRect(center, origin, wall, shot.radius) !== undefined,
       )
     )
@@ -1677,7 +1681,9 @@ export function stepAreas(world: World, config: SimulationConfig): void {
           enemy.hp > 0 &&
           distance(p, enemy) <=
             burst.radius + targetRadius(world, enemy, config) &&
-          !config.collision.some((w) => segmentRect(p, enemy, w) !== undefined)
+          !(config.combatCollision ?? config.collision).some(
+            (w) => segmentRect(p, enemy, w) !== undefined,
+          )
         )
           hurt(
             world,
@@ -1701,7 +1707,7 @@ export function stepAreas(world: World, config: SimulationConfig): void {
         (enemy) =>
           enemy.hp > 0 &&
           distance(area, enemy) <= 20 + targetRadius(world, enemy, config) &&
-          !config.collision.some(
+          !(config.combatCollision ?? config.collision).some(
             (wall) => segmentRect(area, enemy, wall) !== undefined,
           ),
       );
@@ -1751,7 +1757,7 @@ export function stepAreas(world: World, config: SimulationConfig): void {
         if (
           !selectableTarget(enemy, world.tick) ||
           distance(area, enemy) > radius ||
-          config.collision.some(
+          (config.combatCollision ?? config.collision).some(
             (w) =>
               w !== world.statue?.collision &&
               segmentRect(area, enemy, w) !== undefined,
@@ -1821,7 +1827,9 @@ export function stepAreas(world: World, config: SimulationConfig): void {
               ) > progress
             : distance(area, enemy) >
               area.effect.radius + targetRadius(world, enemy, config)) ||
-        config.collision.some((w) => segmentRect(area, enemy, w) !== undefined)
+        (config.combatCollision ?? config.collision).some(
+          (w) => segmentRect(area, enemy, w) !== undefined,
+        )
       )
         continue;
       for (const status of area.effect.occupantStatuses ?? [])
@@ -1964,7 +1972,7 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
         const beamRange =
           ability.id === duongMon.laser
             ? effect.range *
-              config.collision.reduce(
+              (config.combatCollision ?? config.collision).reduce(
                 (fraction, wall) =>
                   wall === world.statue?.collision
                     ? fraction
@@ -2227,7 +2235,7 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
             enemy.hp > 0 &&
             distance(p, enemy) <=
               e.targetArea.radius + targetRadius(world, enemy, config) &&
-            !config.collision.some(
+            !(config.combatCollision ?? config.collision).some(
               (w) => segmentRect(p, enemy, w) !== undefined,
             )
           )
@@ -2401,7 +2409,9 @@ function supportAllies(
           world.duelTeams.get(ally.id) !== world.duelTeams.get(hero.id))) ||
       ally.hp <= 0 ||
       distance(hero, ally) > effect.radius ||
-      config.collision.some((w) => segmentRect(hero, ally, w) !== undefined)
+      (config.combatCollision ?? config.collision).some(
+        (w) => segmentRect(hero, ally, w) !== undefined,
+      )
     )
       continue;
     for (const spec of effect.statuses ?? [])

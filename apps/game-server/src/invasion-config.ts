@@ -14,8 +14,8 @@ export function serverInvasionDefinition(
     test
       ? 20
       : development
-        ? Number(env['VOLAM_INVASION_INTERVAL_SECONDS'] ?? 180)
-        : 180,
+        ? Number(env['VOLAM_INVASION_INTERVAL_SECONDS'] ?? 120)
+        : 120,
     test
       ? 1000000000
       : development
@@ -25,6 +25,7 @@ export function serverInvasionDefinition(
       portalCount,
       durationSeconds: test ? 12 : 60,
       spawnEverySeconds: test ? 3 : 2,
+      rowsPerGate: 2,
     },
   );
   if (test) definition.warningTicks = [60, 30];

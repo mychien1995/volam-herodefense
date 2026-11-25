@@ -6,6 +6,7 @@ export interface InvasionDefinition {
   streamTicks?: number | undefined;
   spawnEveryTicks?: number | undefined;
   portalCount?: 1 | 2 | 3 | 4 | undefined;
+  rowsPerGate?: 1 | 2 | undefined;
   maxWaves?: number | undefined;
   warningTicks: number[];
   noticeTicks: number;
@@ -147,7 +148,9 @@ export class InvasionDirector {
         const total =
           Math.ceil(
             (this.definition.streamTicks ?? config.tickRate * 60) / every,
-          ) * gates;
+          ) *
+          gates *
+          (this.definition.rowsPerGate ?? 1);
         stats.xp = (config.campaign.invasionXp[chapter]! * players) / total;
         stats.gold = (config.campaign.invasionGold[chapter]! * players) / total;
       }
@@ -212,31 +215,52 @@ export class InvasionDirector {
     for (const stream of this.streams) {
       while (stream.next <= tick && stream.next < stream.until) {
         for (const lane of lanes) {
-          const start = this.definition.lanes[lane];
-          if (!start) throw Error(`Missing invasion gate ${lane}`);
-          const offset = ((stream.index % 3) - 1) * 20;
-          const spawn = {
-            x: start.x + (lane === 'north' || lane === 'south' ? offset : 0),
-            y: start.y + (lane === 'west' || lane === 'east' ? offset : 0),
-          };
-          const enemy = addCreep(
-            world,
-            `invasion_${stream.wave}_${lane}_${stream.index}`,
-            spawn,
-            { ...config, creep: stream.stats },
-          );
-          enemy.stats = { ...stream.stats };
-          const archetype = config.creepCombat?.waveIds[stream.wave - 1];
-          if (archetype) enemy.archetypeId = archetype;
-          enemy.invasion = {
-            wave: stream.wave,
-            lane,
-            targetId: '',
-            chaseOrigin: { ...spawn },
-            reacquireAt: 0,
-            chaseRange: this.definition.chaseRange,
-            aggroRestTicks: this.definition.aggroRestTicks,
-          };
+          for (let row = 0; row < (this.definition.rowsPerGate ?? 1); row++) {
+            const start = this.definition.lanes[lane];
+            if (!start) throw Error(`Missing invasion gate ${lane}`);
+            const offset =
+              this.definition.rowsPerGate === 2
+                ? row === 0
+                  ? -18
+                  : 18
+                : ((stream.index % 3) - 1) * 20;
+            const spawn = {
+              x: start.x + (lane === 'north' || lane === 'south' ? offset : 0),
+              y: start.y + (lane === 'west' || lane === 'east' ? offset : 0),
+            };
+            const enemy = addCreep(
+              world,
+              `invasion_${stream.wave}_${lane}_${stream.index}${row ? '_r2' : ''}`,
+              spawn,
+              { ...config, creep: stream.stats },
+            );
+            enemy.stats = { ...stream.stats };
+            const archetype = config.creepCombat?.waveIds[stream.wave - 1];
+            if (archetype) enemy.archetypeId = archetype;
+            enemy.invasion = {
+              wave: stream.wave,
+              lane,
+              approach: {
+                x:
+                  lane === 'west'
+                    ? this.definition.statue.position.x - 285
+                    : lane === 'east'
+                      ? this.definition.statue.position.x + 285
+                      : spawn.x,
+                y:
+                  lane === 'north'
+                    ? this.definition.statue.position.y - 235
+                    : lane === 'south'
+                      ? this.definition.statue.position.y + 235
+                      : spawn.y,
+              },
+              targetId: '',
+              chaseOrigin: { ...spawn },
+              reacquireAt: 0,
+              chaseRange: this.definition.chaseRange,
+              aggroRestTicks: this.definition.aggroRestTicks,
+            };
+          }
         }
         stream.index++;
         stream.next += stream.every;

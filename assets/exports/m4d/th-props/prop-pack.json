@@ -1,0 +1,524 @@
+{
+  "schema": "generate2dmap.prop_pack.v2",
+  "tool": {
+    "name": "extract_prop_pack",
+    "version": "0.5.0"
+  },
+  "input": "../../../source/m4d-arena-v01/th-props.png",
+  "source_size": [
+    1536,
+    1024
+  ],
+  "source_sha256": "283c952ae9b4d8f09fc0843c55ad5d95daa73993e547fcb5ab494fb0cf799e45",
+  "source_mode": "RGBA",
+  "layout_mode": "explicit_boxes",
+  "boxes_file": "../../../source/m4d-arena-v01/th-crops.json",
+  "labels_file": null,
+  "background_mode": "native_alpha",
+  "art_source": "host_image",
+  "rows": null,
+  "cols": null,
+  "threshold": 100,
+  "edge_threshold": 150,
+  "despill_radius": 0,
+  "despill": {
+    "mode": "off",
+    "applied": "off",
+    "radius": 0,
+    "margin": 12,
+    "changed_px": 0
+  },
+  "hygiene": {
+    "mode": "floor",
+    "floor": 12,
+    "solid_min": 32,
+    "attach_radius": 2,
+    "connectivity": 8,
+    "floor_px": 135924,
+    "detached_px": 0,
+    "detached_components": 0,
+    "max_removed_alpha": 12
+  },
+  "alpha_floor": 12,
+  "alpha_floor_pixels_removed": 135924,
+  "trim_border": 0,
+  "edge_clean_depth": 0,
+  "component_mode": "largest",
+  "component_padding": 8,
+  "min_component_area": "auto",
+  "edge_touch_margin": 0,
+  "geometry": {
+    "connectivity": 8,
+    "alpha_geometry_threshold": 16,
+    "anchor_mode": "feet",
+    "support_band_fraction": 0.25,
+    "anchor_rounding": "whole pixels, half-up",
+    "grid_rounding": null,
+    "keep_canvas": false,
+    "world_scale": "1/3"
+  },
+  "accepted": [
+    {
+      "index": 0,
+      "label": "willow",
+      "display_name": "willow",
+      "status": "accepted",
+      "image": "willow/prop.png",
+      "sha256": "9c5d4c1625adc28123d4293f1fec00491c5741da7225d5600d2b5491337783dd",
+      "output_size": [
+        528,
+        453
+      ],
+      "grid": null,
+      "cell_box": [
+        0,
+        0,
+        630,
+        512
+      ],
+      "source_box": [
+        0,
+        0,
+        630,
+        512
+      ],
+      "source_rect": [
+        81,
+        15,
+        609,
+        468
+      ],
+      "trim_offset": [
+        81,
+        15
+      ],
+      "padding": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "anchor_px": [
+        246,
+        444
+      ],
+      "anchor_source": "measured",
+      "component_mode": "largest",
+      "component_count": 1,
+      "min_component_area": 100,
+      "trim_applied": 0,
+      "crop_bbox": [
+        89,
+        23,
+        601,
+        460
+      ],
+      "padded_crop_bbox": [
+        81,
+        15,
+        609,
+        468
+      ],
+      "selected_component_area": 138957,
+      "selected_component_bbox": [
+        89,
+        23,
+        601,
+        460
+      ],
+      "kept_area": 138957,
+      "dropped_components": 23,
+      "dropped_area": 25,
+      "edge_touch": false,
+      "world_size": [
+        176,
+        151
+      ],
+      "world_anchor": [
+        82,
+        148
+      ],
+      "footprint": {
+        "shape": "ellipse",
+        "width": 172,
+        "depth": 86,
+        "offset": [
+          -8,
+          -43
+        ],
+        "rotate": 0,
+        "basis": "prop_px",
+        "suggested": true,
+        "method": "columns at least half covered in the bottom 25% of alpha > 16; depth = width x 0.5; front edge on the ground line"
+      }
+    },
+    {
+      "index": 1,
+      "label": "manor-hall",
+      "display_name": "manor-hall",
+      "status": "accepted",
+      "image": "manor-hall/prop.png",
+      "sha256": "6fa2734dd7325df793e44ecdd88fceafd872b77691973eb44f6759997326e9b6",
+      "output_size": [
+        879,
+        336
+      ],
+      "grid": null,
+      "cell_box": [
+        630,
+        0,
+        1536,
+        512
+      ],
+      "source_box": [
+        630,
+        0,
+        1536,
+        512
+      ],
+      "source_rect": [
+        641,
+        96,
+        1520,
+        432
+      ],
+      "trim_offset": [
+        11,
+        96
+      ],
+      "padding": [
+        9,
+        8,
+        8,
+        9
+      ],
+      "anchor_px": [
+        441,
+        327
+      ],
+      "anchor_source": "measured",
+      "component_mode": "largest",
+      "component_count": 1,
+      "min_component_area": 100,
+      "trim_applied": 0,
+      "crop_bbox": [
+        20,
+        104,
+        882,
+        423
+      ],
+      "padded_crop_bbox": [
+        11,
+        96,
+        890,
+        432
+      ],
+      "selected_component_area": 187812,
+      "selected_component_bbox": [
+        20,
+        104,
+        882,
+        423
+      ],
+      "kept_area": 187812,
+      "dropped_components": 0,
+      "dropped_area": 0,
+      "edge_touch": false,
+      "world_size": [
+        293,
+        112
+      ],
+      "world_anchor": [
+        147,
+        109
+      ],
+      "footprint": {
+        "shape": "ellipse",
+        "width": 771,
+        "depth": 385.5,
+        "offset": [
+          -0.5,
+          -192.75
+        ],
+        "rotate": 0,
+        "basis": "prop_px",
+        "suggested": true,
+        "method": "columns at least half covered in the bottom 25% of alpha > 16; depth = width x 0.5; front edge on the ground line"
+      }
+    },
+    {
+      "index": 2,
+      "label": "lotus-pavilion",
+      "display_name": "lotus-pavilion",
+      "status": "accepted",
+      "image": "lotus-pavilion/prop.png",
+      "sha256": "ed720fb87f35d2c31cb3004c64869e5a0a24f5db9fc5b62b085fdb5ec6f0f128",
+      "output_size": [
+        441,
+        456
+      ],
+      "grid": null,
+      "cell_box": [
+        0,
+        512,
+        660,
+        1024
+      ],
+      "source_box": [
+        0,
+        512,
+        660,
+        1024
+      ],
+      "source_rect": [
+        125,
+        513,
+        566,
+        969
+      ],
+      "trim_offset": [
+        125,
+        1
+      ],
+      "padding": [
+        10,
+        8,
+        10,
+        9
+      ],
+      "anchor_px": [
+        222,
+        447
+      ],
+      "anchor_source": "measured",
+      "component_mode": "largest",
+      "component_count": 1,
+      "min_component_area": 100,
+      "trim_applied": 0,
+      "crop_bbox": [
+        135,
+        9,
+        556,
+        448
+      ],
+      "padded_crop_bbox": [
+        125,
+        1,
+        566,
+        457
+      ],
+      "selected_component_area": 115659,
+      "selected_component_bbox": [
+        135,
+        9,
+        556,
+        448
+      ],
+      "kept_area": 115659,
+      "dropped_components": 0,
+      "dropped_area": 0,
+      "edge_touch": false,
+      "world_size": [
+        147,
+        152
+      ],
+      "world_anchor": [
+        74,
+        149
+      ],
+      "footprint": {
+        "shape": "ellipse",
+        "width": 365,
+        "depth": 182.5,
+        "offset": [
+          0.5,
+          -91.25
+        ],
+        "rotate": 0,
+        "basis": "prop_px",
+        "suggested": true,
+        "method": "columns at least half covered in the bottom 25% of alpha > 16; depth = width x 0.5; front edge on the ground line"
+      }
+    },
+    {
+      "index": 3,
+      "label": "bridge-railing",
+      "display_name": "bridge-railing",
+      "status": "accepted",
+      "image": "bridge-railing/prop.png",
+      "sha256": "5f3040941dc8e705fcf47b0cab5a733cabe0b42f637cfc16ac20b434291ae389",
+      "output_size": [
+        678,
+        246
+      ],
+      "grid": null,
+      "cell_box": [
+        660,
+        512,
+        1536,
+        1024
+      ],
+      "source_box": [
+        660,
+        512,
+        1536,
+        1024
+      ],
+      "source_rect": [
+        739,
+        638,
+        1417,
+        884
+      ],
+      "trim_offset": [
+        79,
+        126
+      ],
+      "padding": [
+        8,
+        8,
+        10,
+        9
+      ],
+      "anchor_px": [
+        339,
+        237
+      ],
+      "anchor_source": "measured",
+      "component_mode": "largest",
+      "component_count": 1,
+      "min_component_area": 100,
+      "trim_applied": 0,
+      "crop_bbox": [
+        87,
+        134,
+        747,
+        363
+      ],
+      "padded_crop_bbox": [
+        79,
+        126,
+        757,
+        372
+      ],
+      "selected_component_area": 79648,
+      "selected_component_bbox": [
+        87,
+        134,
+        747,
+        363
+      ],
+      "kept_area": 79648,
+      "dropped_components": 0,
+      "dropped_area": 0,
+      "edge_touch": false,
+      "world_size": [
+        226,
+        82
+      ],
+      "world_anchor": [
+        113,
+        79
+      ],
+      "footprint": {
+        "shape": "ellipse",
+        "width": 73,
+        "depth": 36.5,
+        "offset": [
+          -0.5,
+          -18.25
+        ],
+        "rotate": 0,
+        "basis": "prop_px",
+        "suggested": true,
+        "method": "columns at least half covered in the bottom 25% of alpha > 16; depth = width x 0.5; front edge on the ground line"
+      }
+    }
+  ],
+  "rejected": [],
+  "edge_touch_props": [],
+  "warnings": [],
+  "qa": {
+    "status": "pass",
+    "method": "native alpha, not keyed; alpha hygiene floor; 8-connected components (largest); checks measured on the published pixels",
+    "notProven": [
+      "that each label names the art in its cell or box",
+      "that a prop is complete: clipping is detected only where art meets the cell edge",
+      "keyed-edge quality beyond the edge fringe count",
+      "that anchors and suggested footprints match gameplay contact (both are measured from alpha)",
+      "runtime placement, collision or occlusion"
+    ],
+    "checks": [
+      {
+        "id": "accepted",
+        "status": "pass",
+        "value": 4,
+        "threshold": ">= 1"
+      },
+      {
+        "id": "edge_touch",
+        "status": "pass",
+        "value": [],
+        "threshold": 0
+      },
+      {
+        "id": "dropped_area",
+        "status": "pass",
+        "value": {
+          "willow": 0.0002
+        },
+        "threshold": 0.01
+      },
+      {
+        "id": "strategy_aspect",
+        "status": "skipped",
+        "value": null,
+        "threshold": 1.6
+      },
+      {
+        "id": "edge_fringe",
+        "status": "skipped",
+        "value": null,
+        "threshold": 0.02
+      }
+    ],
+    "inputs": [
+      {
+        "path": "../../../source/m4d-arena-v01/th-props.png",
+        "sha256": "283c952ae9b4d8f09fc0843c55ad5d95daa73993e547fcb5ab494fb0cf799e45",
+        "bytes": 2203318
+      },
+      {
+        "path": "../../../source/m4d-arena-v01/th-crops.json",
+        "sha256": "e856515b78409e91166d044612ac824feaa686418631bc1096dbdf0ed63e0d24",
+        "bytes": 189
+      }
+    ],
+    "outputs": [
+      {
+        "path": "willow/prop.png",
+        "sha256": "9c5d4c1625adc28123d4293f1fec00491c5741da7225d5600d2b5491337783dd",
+        "bytes": 401104
+      },
+      {
+        "path": "manor-hall/prop.png",
+        "sha256": "6fa2734dd7325df793e44ecdd88fceafd872b77691973eb44f6759997326e9b6",
+        "bytes": 430944
+      },
+      {
+        "path": "lotus-pavilion/prop.png",
+        "sha256": "ed720fb87f35d2c31cb3004c64869e5a0a24f5db9fc5b62b085fdb5ec6f0f128",
+        "bytes": 305203
+      },
+      {
+        "path": "bridge-railing/prop.png",
+        "sha256": "5f3040941dc8e705fcf47b0cab5a733cabe0b42f637cfc16ac20b434291ae389",
+        "bytes": 167662
+      }
+    ],
+    "tool": {
+      "name": "extract_prop_pack",
+      "version": "0.5.0"
+    }
+  }
+}

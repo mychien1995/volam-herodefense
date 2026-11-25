@@ -29,7 +29,7 @@ import {
   type BuildChange,
 } from '@volam/game-core';
 import type { MerchantAction, PotionId } from '@volam/game-core';
-import { ItemMenu, auxiliarySlot, updateAuxiliarySlot } from './item-menu.js';
+import { ItemMenu } from './item-menu.js';
 export function element<T extends HTMLElement>(selector: string): T {
   const found = document.querySelector<T>(selector);
   if (!found) throw new Error(`Missing element: ${selector}`);
@@ -118,7 +118,7 @@ export class GameUI {
               .join('')}
             <div id="dash-status" class="dash-status" role="status" aria-label="Lướt · Shift"><img src="/assets/m3d_feedback/dash_icon_frame.png" alt="" width="32" height="32"><b id="dash-charges">2</b><kbd>Shift</kbd><small id="dash-timer"></small><progress id="dash-progress" max="180" value="180" aria-label="Hồi lượt lướt"></progress></div>
             <div id="kinh-loi-status" class="dash-status" role="status" aria-label="Kinh Lôi · S" hidden><img src="${skillIcon(conLuan.plant)}" alt="" width="32" height="32"><b id="kinh-loi-charges"></b><kbd>S</kbd><small id="kinh-loi-timer"></small></div>
-            ${auxiliarySlot()}
+
             <span id="fixed-skill-points" class="skill-points" hidden></span><span id="shaolin-stance" class="stance-indicator" hidden></span><span id="con-luan-stance" class="stance-indicator" hidden></span><span id="innate-dodge" class="stance-indicator" hidden></span>
             <button hidden class="loadout-toggle" data-menu="skills" title="Võ Công · O" aria-label="Võ Công · O">◇<span id="available-points"></span></button>
           </section>
@@ -977,7 +977,6 @@ export class GameUI {
       'Bắc Minh Thần Công · Né đòn ' + dodgePercentage.format(dodge);
     element('.loadout-toggle').hidden = !!this.state?.requiresBranch;
     element('#slot-t').hidden = !fixed;
-    updateAuxiliarySlot(hero);
     const slots = [
       {
         key: 'a' as const,

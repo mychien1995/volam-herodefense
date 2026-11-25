@@ -1,0 +1,98 @@
+{
+  "date": "2026-11-25",
+  "revision": "M4D R3 native ground / anchored torches / Thất Tinh Kiếm",
+  "branch": "milestone/m4d",
+  "protocol": 49,
+  "checks": [
+    {
+      "command": "pnpm exec tsc -b packages/game-core packages/game-data packages/game-protocol; pnpm exec vitest run tests/vo-dang-skills.test.ts tests/skill-revise.test.ts",
+      "status": "PASS",
+      "files": 2,
+      "tests": 81,
+      "note": "New cooldown boundary, catalogue/ranks and existing seven impacts/dodge/mana behavior."
+    },
+    {
+      "command": "pnpm exec tsc -b",
+      "status": "PASS"
+    },
+    {
+      "command": "pnpm exec tsc -p tsconfig.tools.json --noEmit",
+      "status": "PASS"
+    },
+    {
+      "command": "python scripts/verify-m4d-art.py",
+      "status": "PASS",
+      "note": "Retained V1/R2 and all new R3 source/export hashes, three RGBA floor packs, native density >=1.75 each axis, no crop warnings."
+    },
+    {
+      "command": "pnpm check:browser --config playwright.m4d.config.ts --grep 'M4D-R3|TH-B six-player'",
+      "status": "INTERRUPTED",
+      "runId": "aa32dbd4-ca28-4186-b6a0-d58f1d036f62",
+      "note": "Preflight/assets/compile/build passed; two arena cases passed before interrupting to correct water depth and pond exclusion. Not a final PASS."
+    },
+    {
+      "command": "pnpm --filter @volam/game-client build",
+      "status": "PASS",
+      "note": "Production endpoint 127.0.0.1:2954. Rebuilt after water/pond correction and once more after the TD-only rock matte."
+    },
+    {
+      "command": "pnpm qa:preflight --mode browser --config playwright.m4d.config.ts; node tools/run-playwright.mjs test --config playwright.m4d.config.ts --grep 'M4D-R3|TH-B six-player' --output artifacts/m4d-r3-final",
+      "status": "PASS",
+      "tests": 4,
+      "log": "production-browser.log",
+      "mode": "Production preview with owned server/client identities"
+    },
+    {
+      "command": "pnpm qa:preflight --mode browser --config playwright.m4d.config.ts --ready; node tools/run-playwright.mjs test --config playwright.m4d.config.ts --grep 'M4D-R3 tuong_duong' --output artifacts/m4d-r3-river-rock",
+      "status": "PASS",
+      "tests": 1,
+      "log": "river-rock-browser.log",
+      "note": "Only affected arena repeated after final TD rock-protection matte; DH/TH behavior unchanged."
+    },
+    {
+      "command": "pnpm exec prettier --check <13 affected code/test/config files>; git diff --check",
+      "status": "PASS"
+    }
+  ],
+  "coverage": [
+    "Three two-client native-floor comparisons at matched camera, unchanged actor textures/scales/filter modes",
+    "Actual water texture frame changes; four original-prop braziers with positive flame mask pixel counts and changing frames, correct source anchors; actual detached flame/ember node count zero",
+    "Final TD source boulder protected: native replacement texture alpha zero at its registered center; close-up PNG inspected",
+    "Six TH clients: bank blocks movement, bridge passage, paired creep rows, actual A produces HP0 native corpse, statue and lamps hidden for boss, boss waits then accepts player first hit"
+  ],
+  "limits": [
+    "Final art remains pending director review; source/PNG test PASS is not art approval",
+    "Native ground materials/plazas improve density; retained shoreline/landscape illustration is not a full native 4K redraw",
+    "Parameterized pixel motion, not newly painted full-scene animation or video",
+    "No full-campaign/FPS claim; tests narrowed per user request"
+  ],
+  "iterations": [
+    "Whole-map/quadrant redraws did not preserve grid registration at joins; rejected and retained under source",
+    "Shared data was rebuilt after the initial unit assertion read an older dist cooldown value",
+    "Water depth/pond masks corrected before final four-case production run",
+    "Final TD-only source boulder matte protects its original shape from pavement material"
+  ],
+  "evidence": {
+    "dao_hoa_dao-after.png": "8722c49c0be772c0f94366477802a400edf98c7c5c22de5791e10b60deaaf044",
+    "dao_hoa_dao-before.png": "8f9b771c8317ee6d5681e3c37a76d53d1bd1fc30616e76eab2f37b078173d9eb",
+    "dao_hoa_dao.json": "83022380d08e747235e8bcdca726b771a147492f34543e48c922e1a4732fcb3a",
+    "production-browser.log": "f37be7722af700e5db23f48cde7876a61c51f55b4b8fd5b2323bf3ad60544207",
+    "river-rock-browser.log": "ea2b3946dca3f80bf48b3da309f11babe30551bff77e306b3d8386595d645630",
+    "six-player.json": "d48997737c523ddb97af7442c072a9c5ff0b969d100745d3c37164858eb5dca3",
+    "th-b-six-player.png": "7013be0ecdaa434061bef0bbef7f38a3cf53feef32b3ba94007596e9677d7853",
+    "tu_hien_trang-after.png": "4cc0470aaba616b52fc89637671603ae604134051c7f36d9b472743e7936ad88",
+    "tu_hien_trang-before.png": "99ffd4e28245b2d7e18af369f3c5755134f5762bd85af2ead07657f3f89888f5",
+    "tu_hien_trang.json": "3d03cde6c21773387482bf9dd0b9c7ee126ff669bc7f3434b9f506f13f119353",
+    "tuong-duong-torches-stream.png": "c26d2e0643524cc3b15c254f63324b7f27d73b30412c8d979bb2581f4a7f01d6",
+    "tuong_duong-after.png": "668162132cec305e386f7606f703c6b9fb9155edd0d98003cb67e5282b5065a0",
+    "tuong_duong-before.png": "dbce6a44e4c1339efbfe737c75390df0a8e1b156599855dbbd2afb5e411b0aaa",
+    "tuong_duong.json": "c3fb9a079c9c4c39f62c91f888696f4da525620ef85f3d7d65f24d92e52ff540"
+  },
+  "localReview": {
+    "url": "http://127.0.0.1:5554/",
+    "protocol": 49,
+    "serverPort": 2954,
+    "mode": "Normal production server and preview; no QA prerequisite middleware",
+    "httpStatus": 200
+  }
+}

@@ -1,0 +1,526 @@
+{
+  "schema": "generate2dmap.prop_pack.v2",
+  "tool": {
+    "name": "extract_prop_pack",
+    "version": "0.5.0"
+  },
+  "input": "../../../source/m4d-arena-v01/td-props.png",
+  "source_size": [
+    1536,
+    1024
+  ],
+  "source_sha256": "f8939ef93f3a5ef0031b59a1a82d1ebfdd639d0b3834bbb5663ba323d1bba4c1",
+  "source_mode": "RGBA",
+  "layout_mode": "explicit_boxes",
+  "boxes_file": "../../../source/m4d-arena-v01/td-crops.json",
+  "labels_file": null,
+  "background_mode": "native_alpha",
+  "art_source": "host_image",
+  "rows": null,
+  "cols": null,
+  "threshold": 100,
+  "edge_threshold": 150,
+  "despill_radius": 0,
+  "despill": {
+    "mode": "off",
+    "applied": "off",
+    "radius": 0,
+    "margin": 12,
+    "changed_px": 0
+  },
+  "hygiene": {
+    "mode": "floor",
+    "floor": 12,
+    "solid_min": 32,
+    "attach_radius": 2,
+    "connectivity": 8,
+    "floor_px": 97634,
+    "detached_px": 0,
+    "detached_components": 0,
+    "max_removed_alpha": 12
+  },
+  "alpha_floor": 12,
+  "alpha_floor_pixels_removed": 97634,
+  "trim_border": 0,
+  "edge_clean_depth": 0,
+  "component_mode": "largest",
+  "component_padding": 8,
+  "min_component_area": "auto",
+  "edge_touch_margin": 0,
+  "geometry": {
+    "connectivity": 8,
+    "alpha_geometry_threshold": 16,
+    "anchor_mode": "feet",
+    "support_band_fraction": 0.25,
+    "anchor_rounding": "whole pixels, half-up",
+    "grid_rounding": null,
+    "keep_canvas": false,
+    "world_scale": "1/3"
+  },
+  "accepted": [
+    {
+      "index": 0,
+      "label": "fortress-gate",
+      "display_name": "fortress-gate",
+      "status": "accepted",
+      "image": "fortress-gate/prop.png",
+      "sha256": "c17e8b555e941f9a7acf260fce87eaf88ad38b59239365085d756acb15d1156d",
+      "output_size": [
+        732,
+        477
+      ],
+      "grid": null,
+      "cell_box": [
+        0,
+        0,
+        900,
+        512
+      ],
+      "source_box": [
+        0,
+        0,
+        900,
+        512
+      ],
+      "source_rect": [
+        76,
+        36,
+        808,
+        513
+      ],
+      "trim_offset": [
+        76,
+        36
+      ],
+      "padding": [
+        9,
+        8,
+        8,
+        6
+      ],
+      "anchor_px": [
+        372,
+        471
+      ],
+      "anchor_source": "measured",
+      "component_mode": "largest",
+      "component_count": 1,
+      "min_component_area": 100,
+      "trim_applied": 0,
+      "crop_bbox": [
+        85,
+        44,
+        800,
+        507
+      ],
+      "padded_crop_bbox": [
+        76,
+        36,
+        808,
+        513
+      ],
+      "selected_component_area": 216611,
+      "selected_component_bbox": [
+        85,
+        44,
+        800,
+        507
+      ],
+      "kept_area": 216611,
+      "dropped_components": 4,
+      "dropped_area": 5,
+      "edge_touch": false,
+      "world_size": [
+        244,
+        159
+      ],
+      "world_anchor": [
+        124,
+        157
+      ],
+      "footprint": {
+        "shape": "ellipse",
+        "width": 191,
+        "depth": 95.5,
+        "offset": [
+          -0.5,
+          -47.75
+        ],
+        "rotate": 0,
+        "basis": "prop_px",
+        "suggested": true,
+        "method": "columns at least half covered in the bottom 25% of alpha > 16; depth = width x 0.5; front edge on the ground line"
+      }
+    },
+    {
+      "index": 1,
+      "label": "watchtower",
+      "display_name": "watchtower",
+      "status": "accepted",
+      "image": "watchtower/prop.png",
+      "sha256": "70090addd42fd36ecd253d7461165e27935156afeb71eb512552da83342f79aa",
+      "output_size": [
+        336,
+        489
+      ],
+      "grid": null,
+      "cell_box": [
+        900,
+        0,
+        1536,
+        512
+      ],
+      "source_box": [
+        900,
+        0,
+        1536,
+        512
+      ],
+      "source_rect": [
+        1001,
+        3,
+        1337,
+        492
+      ],
+      "trim_offset": [
+        101,
+        3
+      ],
+      "padding": [
+        9,
+        8,
+        8,
+        9
+      ],
+      "anchor_px": [
+        168,
+        480
+      ],
+      "anchor_source": "measured",
+      "component_mode": "largest",
+      "component_count": 1,
+      "min_component_area": 100,
+      "trim_applied": 0,
+      "crop_bbox": [
+        110,
+        11,
+        429,
+        483
+      ],
+      "padded_crop_bbox": [
+        101,
+        3,
+        437,
+        492
+      ],
+      "selected_component_area": 87377,
+      "selected_component_bbox": [
+        110,
+        11,
+        429,
+        483
+      ],
+      "kept_area": 87377,
+      "dropped_components": 3,
+      "dropped_area": 3,
+      "edge_touch": false,
+      "world_size": [
+        112,
+        163
+      ],
+      "world_anchor": [
+        56,
+        160
+      ],
+      "footprint": {
+        "shape": "ellipse",
+        "width": 256,
+        "depth": 128,
+        "offset": [
+          -3,
+          -64
+        ],
+        "rotate": 0,
+        "basis": "prop_px",
+        "suggested": true,
+        "method": "columns at least half covered in the bottom 25% of alpha > 16; depth = width x 0.5; front edge on the ground line"
+      }
+    },
+    {
+      "index": 2,
+      "label": "barracks",
+      "display_name": "barracks",
+      "status": "accepted",
+      "image": "barracks/prop.png",
+      "sha256": "75c7ea41a69cf3249ef462d2e3a78f9241625eb4b8442b30d89ac969ee373849",
+      "output_size": [
+        576,
+        390
+      ],
+      "grid": null,
+      "cell_box": [
+        0,
+        512,
+        768,
+        1024
+      ],
+      "source_box": [
+        0,
+        512,
+        768,
+        1024
+      ],
+      "source_rect": [
+        155,
+        588,
+        731,
+        978
+      ],
+      "trim_offset": [
+        155,
+        76
+      ],
+      "padding": [
+        10,
+        10,
+        10,
+        9
+      ],
+      "anchor_px": [
+        309,
+        381
+      ],
+      "anchor_source": "measured",
+      "component_mode": "largest",
+      "component_count": 1,
+      "min_component_area": 100,
+      "trim_applied": 0,
+      "crop_bbox": [
+        165,
+        86,
+        721,
+        457
+      ],
+      "padded_crop_bbox": [
+        155,
+        76,
+        731,
+        466
+      ],
+      "selected_component_area": 136275,
+      "selected_component_bbox": [
+        165,
+        86,
+        721,
+        457
+      ],
+      "kept_area": 136275,
+      "dropped_components": 2,
+      "dropped_area": 2,
+      "edge_touch": false,
+      "world_size": [
+        192,
+        130
+      ],
+      "world_anchor": [
+        103,
+        127
+      ],
+      "footprint": {
+        "shape": "ellipse",
+        "width": 367,
+        "depth": 183.5,
+        "offset": [
+          5.5,
+          -91.75
+        ],
+        "rotate": 0,
+        "basis": "prop_px",
+        "suggested": true,
+        "method": "columns at least half covered in the bottom 25% of alpha > 16; depth = width x 0.5; front edge on the ground line"
+      }
+    },
+    {
+      "index": 3,
+      "label": "war-banner",
+      "display_name": "war-banner",
+      "status": "accepted",
+      "image": "war-banner/prop.png",
+      "sha256": "2ce95d287425dadca2e52c853479b036e8e41d863a36cb7154b1abffd51277ac",
+      "output_size": [
+        291,
+        489
+      ],
+      "grid": null,
+      "cell_box": [
+        768,
+        512,
+        1536,
+        1024
+      ],
+      "source_box": [
+        768,
+        512,
+        1536,
+        1024
+      ],
+      "source_rect": [
+        1027,
+        511,
+        1318,
+        1000
+      ],
+      "trim_offset": [
+        259,
+        -1
+      ],
+      "padding": [
+        10,
+        8,
+        10,
+        9
+      ],
+      "anchor_px": [
+        144,
+        480
+      ],
+      "anchor_source": "measured",
+      "component_mode": "largest",
+      "component_count": 1,
+      "min_component_area": 100,
+      "trim_applied": 0,
+      "crop_bbox": [
+        269,
+        7,
+        540,
+        479
+      ],
+      "padded_crop_bbox": [
+        259,
+        -1,
+        550,
+        488
+      ],
+      "selected_component_area": 48818,
+      "selected_component_bbox": [
+        269,
+        7,
+        540,
+        479
+      ],
+      "kept_area": 48818,
+      "dropped_components": 0,
+      "dropped_area": 0,
+      "edge_touch": false,
+      "world_size": [
+        97,
+        163
+      ],
+      "world_anchor": [
+        48,
+        160
+      ],
+      "footprint": {
+        "shape": "ellipse",
+        "width": 189,
+        "depth": 94.5,
+        "offset": [
+          12.5,
+          -47.25
+        ],
+        "rotate": 0,
+        "basis": "prop_px",
+        "suggested": true,
+        "method": "columns at least half covered in the bottom 25% of alpha > 16; depth = width x 0.5; front edge on the ground line"
+      }
+    }
+  ],
+  "rejected": [],
+  "edge_touch_props": [],
+  "warnings": [],
+  "qa": {
+    "status": "pass",
+    "method": "native alpha, not keyed; alpha hygiene floor; 8-connected components (largest); checks measured on the published pixels",
+    "notProven": [
+      "that each label names the art in its cell or box",
+      "that a prop is complete: clipping is detected only where art meets the cell edge",
+      "keyed-edge quality beyond the edge fringe count",
+      "that anchors and suggested footprints match gameplay contact (both are measured from alpha)",
+      "runtime placement, collision or occlusion"
+    ],
+    "checks": [
+      {
+        "id": "accepted",
+        "status": "pass",
+        "value": 4,
+        "threshold": ">= 1"
+      },
+      {
+        "id": "edge_touch",
+        "status": "pass",
+        "value": [],
+        "threshold": 0
+      },
+      {
+        "id": "dropped_area",
+        "status": "pass",
+        "value": {
+          "fortress-gate": 0.0,
+          "watchtower": 0.0,
+          "barracks": 0.0
+        },
+        "threshold": 0.01
+      },
+      {
+        "id": "strategy_aspect",
+        "status": "skipped",
+        "value": null,
+        "threshold": 1.6
+      },
+      {
+        "id": "edge_fringe",
+        "status": "skipped",
+        "value": null,
+        "threshold": 0.02
+      }
+    ],
+    "inputs": [
+      {
+        "path": "../../../source/m4d-arena-v01/td-props.png",
+        "sha256": "f8939ef93f3a5ef0031b59a1a82d1ebfdd639d0b3834bbb5663ba323d1bba4c1",
+        "bytes": 2179551
+      },
+      {
+        "path": "../../../source/m4d-arena-v01/td-crops.json",
+        "sha256": "3e9f3476e9223c8d963f81e7c7642a09eb59e87f75b1309eebc08de8abc47fec",
+        "bytes": 186
+      }
+    ],
+    "outputs": [
+      {
+        "path": "fortress-gate/prop.png",
+        "sha256": "c17e8b555e941f9a7acf260fce87eaf88ad38b59239365085d756acb15d1156d",
+        "bytes": 529211
+      },
+      {
+        "path": "watchtower/prop.png",
+        "sha256": "70090addd42fd36ecd253d7461165e27935156afeb71eb512552da83342f79aa",
+        "bytes": 230341
+      },
+      {
+        "path": "barracks/prop.png",
+        "sha256": "75c7ea41a69cf3249ef462d2e3a78f9241625eb4b8442b30d89ac969ee373849",
+        "bytes": 356726
+      },
+      {
+        "path": "war-banner/prop.png",
+        "sha256": "2ce95d287425dadca2e52c853479b036e8e41d863a36cb7154b1abffd51277ac",
+        "bytes": 135796
+      }
+    ],
+    "tool": {
+      "name": "extract_prop_pack",
+      "version": "0.5.0"
+    }
+  }
+}

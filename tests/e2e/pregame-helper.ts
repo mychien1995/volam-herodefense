@@ -23,8 +23,10 @@ export async function joinWaiting(
     await page
       .getByRole('button', { name: 'Vào bằng mã', exact: true })
       .click();
-  } else
+  } else {
     await page.getByRole('button', { name: 'Tạo phòng', exact: true }).click();
+    await page.locator('[data-action="confirm-create"]').click();
+  }
   try {
     await expect(page.locator('#pregame .pre-title')).toHaveText('Phòng chờ', {
       timeout,
@@ -74,7 +76,11 @@ export async function startTogether(
         : profile.schools[school]!.basicIds[0]!;
       await acknowledgeQaLobby(page, 'branch', branch, { timeout });
     }
-    await expect(page.locator('#scene-status')).toHaveAttribute('data-ready', 'true', {timeout:45000});
+    await expect(page.locator('#scene-status')).toHaveAttribute(
+      'data-ready',
+      'true',
+      { timeout: 45000 },
+    );
     await acknowledgeQaLobby(page, 'confirm', '', { timeout });
   }
   await Promise.all(pages.map((page) => waitForGameReady(page, { timeout })));
@@ -98,7 +104,11 @@ export async function startAuditTogether(
   for (const [page, school, branch] of roster) {
     await acknowledge(page, 'school', school);
     await acknowledge(page, 'branch', branch);
-    await expect(page.locator('#scene-status')).toHaveAttribute('data-ready', 'true', {timeout:45000});
+    await expect(page.locator('#scene-status')).toHaveAttribute(
+      'data-ready',
+      'true',
+      { timeout: 45000 },
+    );
     await acknowledge(page, 'confirm');
   }
   await Promise.all(

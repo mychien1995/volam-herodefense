@@ -339,10 +339,15 @@ export class WaveArenaPresentation {
       ? (JSON.parse(state.defense.waveArena) as WaveArenaView | null)
       : null;
     const locked = zone === 'arena' && !!v?.locked;
-    (
-      this.scene.children.getByName('art01:statue_male') as
-        Phaser.GameObjects.Image | undefined
-    )?.setVisible(!locked);
+    for (const name of [
+      'art01:statue_male',
+      'art01:lantern:left',
+      'art01:lantern:right',
+    ])
+      (
+        this.scene.children.getByName(name) as
+          Phaser.GameObjects.Image | undefined
+      )?.setVisible(!locked);
     this.boundary.clear().setVisible(locked);
     if (locked && v)
       for (const [width, alpha] of [

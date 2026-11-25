@@ -22,7 +22,11 @@ export function createGameServer(transport?: WebSocketTransport) {
   serverInvasionDefinition(); // Fail startup, rather than the first room, for invalid dev tuning.
   return defineServer({
     transport: transport ?? new WebSocketTransport({ ...browserSocketOptions }),
-    rooms: { [MATCH_ROOM]: defineRoom(MatchRoom), [PVP_ROOM]: defineRoom(StandaloneLoiDaiRoom), [PRACTICE_ROOM]: defineRoom(PracticeRoom) },
+    rooms: {
+      [MATCH_ROOM]: defineRoom(MatchRoom),
+      [PVP_ROOM]: defineRoom(StandaloneLoiDaiRoom),
+      [PRACTICE_ROOM]: defineRoom(PracticeRoom),
+    },
     routes: createRouter({
       rooms: createEndpoint('/rooms', { method: 'GET' }, async () => {
         const rooms = await matchMaker.query({
@@ -35,6 +39,7 @@ export function createGameServer(transport?: WebSocketTransport) {
           maxClients: room.maxClients,
           locked: room.locked,
           phase: room.metadata?.phase ?? 'WAITING_LOBBY',
+          arenaId: room.metadata?.arenaId ?? 'dao_hoa_dao',
         }));
       }),
       health: createEndpoint('/health', { method: 'GET' }, async () => ({

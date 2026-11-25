@@ -1,6 +1,67 @@
 import { blocked, distance, segmentRect } from './geometry.js';
 import type { Creep, Actor, Point, Rect, SimulationConfig } from './types.js';
 const cell = 32;
+const directions = [
+  [1, 0],
+  [0, 1],
+  [-1, 0],
+  [0, -1],
+] as const;
+const grids = new Map<string, { passable: Uint8Array; links: Uint8Array }>();
+/** Geometry-only cache: bounds callbacks remain per query, and mutable walls change the key. */
+function navigationGrid(
+  width: number,
+  height: number,
+  radius: number,
+  walls: Rect[],
+) {
+  const key = [
+    width,
+    height,
+    radius,
+    ...walls.flatMap((w) => [w.x, w.y, w.width, w.height]),
+  ].join(',');
+  const cached = grids.get(key);
+  if (cached) return cached;
+  const cols = Math.ceil(width / cell),
+    rows = Math.ceil(height / cell);
+  const point = (n: number) => ({
+    x: ((n % cols) + 0.5) * cell,
+    y: (Math.floor(n / cols) + 0.5) * cell,
+  });
+  const passable = new Uint8Array(cols * rows),
+    links = new Uint8Array(cols * rows);
+  for (let n = 0; n < passable.length; n++)
+    passable[n] = Number(!blocked(point(n), radius, width, height, walls));
+  for (let n = 0; n < passable.length; n++)
+    if (passable[n])
+      directions.forEach(([dx, dy], index) => {
+        const x = (n % cols) + dx,
+          y = Math.floor(n / cols) + dy,
+          next = y * cols + x;
+        if (
+          x >= 0 &&
+          x < cols &&
+          y >= 0 &&
+          y < rows &&
+          passable[next] &&
+          !walls.some(
+            (w) =>
+              segmentRect(
+                point(n),
+                point(next),
+                w,
+                Math.max(0, radius - 1e-7),
+              ) !== undefined,
+          )
+        )
+          links[n]! |= 1 << index;
+      });
+  if (grids.size >= 32) grids.delete(grids.keys().next().value!);
+  const result = { passable, links };
+  grids.set(key, result);
+  return result;
+}
 /** Small deterministic grid search only for dungeon creeps blocked by scenery. */
 export function dungeonWaypoint(
   enemy: Creep,
@@ -63,15 +124,13 @@ export function findWalkPath(
   if (clear(from, to)) return [{ x: to.x, y: to.y }];
   const cols = Math.ceil(width / cell),
     rows = Math.ceil(height / cell);
+  const grid = navigationGrid(width, height, radius, walls);
   const point = (n: number) => ({
     x: ((n % cols) + 0.5) * cell,
     y: (Math.floor(n / cols) + 0.5) * cell,
   });
   const valid = (n: number) =>
-    n >= 0 &&
-    n < cols * rows &&
-    !blocked(point(n), radius, width, height, walls) &&
-    insideBounds(point(n));
+    n >= 0 && n < cols * rows && !!grid.passable[n] && insideBounds(point(n));
   const near = (p: Point) => {
     const choices: number[] = [];
     for (
@@ -100,12 +159,7 @@ export function findWalkPath(
     previous[start] = start;
     for (let head = 0; head < queue.length && previous[goal] === -1; head++) {
       const n = queue[head]!;
-      for (const [dx, dy] of [
-        [1, 0],
-        [0, 1],
-        [-1, 0],
-        [0, -1],
-      ]) {
+      for (const [index, [dx, dy]] of directions.entries()) {
         const x = (n % cols) + dx!,
           y = Math.floor(n / cols) + dy!,
           next = y * cols + x;
@@ -116,7 +170,7 @@ export function findWalkPath(
           y >= rows ||
           previous[next] !== -1 ||
           !valid(next) ||
-          !clear(point(n), point(next))
+          !(grid.links[n]! & (1 << index))
         )
           continue;
         previous[next] = n;

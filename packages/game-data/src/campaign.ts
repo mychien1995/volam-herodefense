@@ -86,7 +86,7 @@ export const campaignDefinition: CampaignDefinition = campaignSchema.parse({
   invasionChapterCount: 20,
   invasionHpMultiplier: 1.1,
   invasionDamageMultiplier: 1.08,
-  chapterSeconds: 900,
+  chapterSeconds: 600,
   // Cumulative thresholds for levels 1–30. The curve rejoins v1 at level 18.
   xpThresholds: [
     0, 45, 135, 270, 450, 670, 970, 1330, 1750, 2230, 2750, 3310, 3910, 4550,

@@ -44,6 +44,7 @@ export const worldDepthConfig = {
 export class WorldDepthEffects {
   enabled = new URLSearchParams(location.search).get('visualDepth') !== 'off';
   private zone = '';
+  private activeProfile: ReturnType<typeof depthProfile> | undefined;
   private actors = new Map<string, ActorShadow>();
   private props: Image[] = [];
   private terrain: Image[] = [];
@@ -314,8 +315,25 @@ export class WorldDepthEffects {
           skip.add(id);
       });
     }
-    this.environment.sync(zone, depthProfile(zone));
-    this.expandedShadows.sync(state, zone, views, depthProfile(zone), skip);
+    const profile = { ...depthProfile(zone) };
+    if (zone === 'arena') {
+      const selected = state?.defense.arenaId;
+      if (selected === 'tuong_duong' || selected === 'tu_hien_trang') {
+        profile.daylight = selected === 'tuong_duong' ? 0.025 : 0.035;
+        profile.shade = 0.055;
+        profile.ambient =
+          selected === 'tuong_duong' ? [115, 105, 140] : [93, 136, 167];
+        profile.sun =
+          selected === 'tuong_duong' ? [255, 159, 83] : [178, 213, 245];
+        profile.theme =
+          selected === 'tuong_duong'
+            ? 'firelit wartime night'
+            : 'moonlit lotus water';
+      }
+    }
+    this.activeProfile = profile;
+    this.environment.sync(zone, profile);
+    this.expandedShadows.sync(state, zone, views, profile, skip);
     if (zone === 'arena') {
       const active = new Set<string>();
       const renderShadow = (
@@ -514,7 +532,7 @@ export class WorldDepthEffects {
   inspect() {
     return {
       enabled: this.enabled,
-      profile: this.zone ? depthProfile(this.zone) : undefined,
+      profile: this.activeProfile,
       expandedShadows: this.expandedShadows.inspect(),
       environment: this.environment.inspect(),
       zone: this.zone,

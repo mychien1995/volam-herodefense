@@ -82,7 +82,7 @@ describe('M2B deterministic statue defense', () => {
         NODE_ENV: 'production',
         VOLAM_INVASION_INTERVAL_SECONDS: '3',
       }).intervalTicks,
-    ).toBe(5400);
+    ).toBe(3600);
     expect(() =>
       serverInvasionDefinition({ VOLAM_INVASION_INTERVAL_SECONDS: 'bad' }),
     ).toThrow();

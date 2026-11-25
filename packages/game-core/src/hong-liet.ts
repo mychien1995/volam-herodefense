@@ -1,3 +1,4 @@
+import { bossFightReady } from './boss-provocation.js';
 import { grantCraftMaterial } from './economy.js';
 import { announceBossSkill } from './boss-skill-announcement.js';
 import { addCreep } from './simulation.js';
@@ -84,6 +85,7 @@ export class HongLietEncounter {
     }
   }
   step(world: World, config: SimulationConfig): void {
+    if (!bossFightReady(world, config)) return;
     this.emptySince = undefined;
     let boss = world.creeps.get(this.bossId);
     if (!boss) return;

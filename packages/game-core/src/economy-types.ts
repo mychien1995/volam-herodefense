@@ -17,8 +17,8 @@ export type CraftBranch =
   | 'fortitude'
   | 'assault'
   | 'cleanse'
-  | 'blink'
-  | 'needle';
+  | 'haste'
+  | 'spring';
 export interface RecipeDefinition {
   bossId: string;
   bossNameVi: string;
@@ -47,14 +47,10 @@ export interface EconomyDefinition {
     auraRadius: number;
     auraSlow: number;
     auraDamage: number;
-    auxiliaryCooldownSeconds: number;
-    blinkRange: number;
-    needleDamage: number;
-    needleRange: number;
-    needleSpeed: number;
-    needleSlow: number;
-    needlePoisonDamage: number;
-    needlePoisonSeconds: number;
+    bootCooldownSeconds: number;
+    springChance: number;
+    springDamageThreshold: number;
+    springHealFraction: number;
   };
   potionLimit: number;
   potionCooldownSeconds: number;
@@ -85,6 +81,7 @@ export interface HeroInventory {
   crafted?: Partial<Record<EquipmentSlot, CraftBranch>>;
   /** Zone clock translated on travel, just like Q/W/E/R/T. */
   auxiliaryReadyAt?: number;
+  bootsCooldownTicks?: number;
   revision: number;
   /** Match clock, not the independently paused/translated zone clock. */
   potionReadyAt: number;

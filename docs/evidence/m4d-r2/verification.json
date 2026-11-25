@@ -1,0 +1,85 @@
+{
+  "date": "2026-11-25",
+  "revision": "M4D arena feedback R2",
+  "branch": "milestone/m4d",
+  "protocol": 49,
+  "checks": [
+    {
+      "command": "pnpm exec vitest run tests/m4d-arena-review.test.ts tests/m4d.test.ts tests/renovation-navigation.test.ts tests/local-movement.test.ts tests/invasions.test.ts tests/invasion-room.test.ts",
+      "status": "PASS",
+      "files": 6,
+      "tests": 46
+    },
+    {
+      "command": "pnpm exec tsc -b",
+      "status": "PASS",
+      "note": "Final compile also part of check:browser."
+    },
+    {
+      "command": "pnpm exec tsc -p tsconfig.tools.json --noEmit",
+      "status": "PASS"
+    },
+    {
+      "command": "python scripts/verify-m4d-art.py",
+      "status": "PASS",
+      "note": "Retained v01 plus three v02 underlays and four new alpha lotus sprites, zero extraction warnings."
+    },
+    {
+      "command": "node tools/run-playwright.mjs test --config playwright.m4d.config.ts --grep 'M4D-R2 dao_hoa_dao' --output artifacts/m4d-r2-slice-02",
+      "status": "PASS",
+      "tests": 1,
+      "note": "Representative slice before expanding TD/TH ground redraws."
+    },
+    {
+      "command": "pnpm check:browser --config playwright.m4d.config.ts --grep 'M4D-R2|TH-B six-player'",
+      "status": "PASS",
+      "tests": 4,
+      "runId": "fc1e56a2-7f75-48cd-8a62-8c32f83e379a",
+      "seconds": 280.8,
+      "mode": "Production preview; fresh preflight, asset preparation, compile, client build, owned server/client identities."
+    },
+    {
+      "command": "pnpm exec prettier --check <21 changed runtime/test/config files>",
+      "status": "PASS"
+    },
+    {
+      "command": "git diff --check",
+      "status": "PASS"
+    }
+  ],
+  "coverage": [
+    "Three two-client arena cases: room-list selects absent, modal options/cancel/Escape/confirm, authoritative shared selection, real movement and Shift stopped by prop feet, peer position acknowledgement",
+    "All paired gate rows use measured painted road centers; actual production creep AI observed before any player aggro",
+    "DH/TH water texture frame changes, TD flame transform and rising ember motion, TH twelve independent lotus sprites bob over cleaned water",
+    "Six TH clients: authoritative bank block, bridge passage, paired wave spawn, real A creates HP0 with unchanged native creep death scale/source, hidden boss statue/lamps, unprovoked waiting and first hit"
+  ],
+  "iterations": [
+    "DH first browser centering assertion failed because reviewer attracted aggro; moved reviewers away before spawn and passed repeat",
+    "Lotus extraction rejected non-divisible cell size and near-transparent edge noise; rounded cells plus alpha-floor-8 retained native-alpha sprites, current pack zero warnings",
+    "Corrected old test prerequisite inside moved lotus water, keeping projectile target within unchanged actual range"
+  ],
+  "limitations": [
+    "Still layered raster underlays; actual source resolution about 1480x1060, not 4K or a new tilemap",
+    "Parametric motion of authored art, no newly authored frame-by-frame fire or full-scene video loop",
+    "No full-campaign/FPS guarantee; new runtime art approval remains pending director review",
+    "PNG evidence retained; no recordings or trace stream"
+  ],
+  "evidence": {
+    "dao_hoa_dao.json": "8ca1ffe374d8227122d65ccfe649eb37c8795547f4c496074cc06297b49a433e",
+    "dao_hoa_dao.png": "d18465fe90ce1c0a11e0229c1b1c76158aba6c5a28aaeafb4283f302cb9acae1",
+    "production-browser-timings.json": "c12d6fd6d1e3180b05f86783bf210f62db0f131f9b31dd77cd45e87964f9463c",
+    "six-player.json": "f2302c72f96fafd23fc6e6d0757a81feb244d63cad7afe9a28df7f1cf3d1d780",
+    "th-b-six-player.png": "0752f3547c199b5a3f625b670b359d31ab79b391369bca032dae24a44b026466",
+    "tu_hien_trang.json": "4364e42a20b112a3f8aa40b6a3d9420a613e55ad554117761410ef7c6537e901",
+    "tu_hien_trang.png": "ce6b817e05c462c3efc6b722b2f2d6158d159efd97eb39f508ab318261bf9b22",
+    "tuong_duong.json": "c7d24688dc9a895bac2085f5995c85a0cb4b35458b11d3fb59270d4b31f788c3",
+    "tuong_duong.png": "1a839cc33ce40fc44b1eaf117113c0e2790b2e2503fd101a31d8ddcaeeca186c"
+  },
+  "localReview": {
+    "url": "http://127.0.0.1:5554/",
+    "status": 200,
+    "serverPort": 2954,
+    "protocol": 49,
+    "mode": "Normal production server; no QA prerequisite middleware"
+  }
+}

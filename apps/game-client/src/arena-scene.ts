@@ -1,3 +1,4 @@
+import { arenaVariants, type ArenaId } from '@volam/game-data';
 import { frameWorld, nativeGameplayZoom } from './camera-policy.js';
 import { SkillReviseArt, preloadSkillRevise } from './skill-revise-art.js';
 import { PvpArt, pvpView, drawPvpMap, fitPvpCamera } from './pvp-art.js';
@@ -31,6 +32,11 @@ import {
   isConLuanBody,
   preloadConLuanArt,
 } from './con-luan-art.js';
+import { preloadM4dArena, createM4dArena } from './m4d-arena.js';
+import {
+  StatusPresentation,
+  preloadStatusPresentation,
+} from './status-presentation.js';
 import Phaser from 'phaser';
 import { preloadSkillSounds } from './skill-sounds.js';
 import { inspectConLuanSounds, syncConLuanSounds } from './con-luan-sounds.js';
@@ -172,14 +178,6 @@ interface EntityView {
   lastLevel?: number;
 }
 
-const controlLabels: Record<string, string> = {
-  silence: 'Câm lặng',
-  disarm: 'Tước vũ khí',
-  slow: 'Chậm',
-  stun: 'Choáng',
-  root: 'Định thân',
-};
-
 export class ArenaScene extends Phaser.Scene {
   private readonly localMovement = new LocalMovement();
   private readonly predictMovement =
@@ -187,6 +185,7 @@ export class ArenaScene extends Phaser.Scene {
   private readonly shaolinDao = new ShaolinDaoMatchArt(this);
   private readonly hitArt = new M3dHitArt(this);
   private polished = true;
+  private readonly statusPresentation = new StatusPresentation(this);
   private worldDepth?: WorldDepthEffects;
   onNpc: (menu: 'merchant' | 'pvp') => void = () => {};
   private zoneId = 'arena';
@@ -453,6 +452,8 @@ export class ArenaScene extends Phaser.Scene {
     });
   }
   preload(): void {
+    preloadM4dArena(this);
+    preloadStatusPresentation(this);
     this.load.image('click-move-marker', markerArt);
     this.bootArtFailed = false;
     const onLoadError = (file: Phaser.Loader.File) => {
@@ -781,7 +782,15 @@ export class ArenaScene extends Phaser.Scene {
     if (zone === this.pendingZone) return;
     this.pendingZone = '';
     this.pendingCombat.length = 0;
-    if (zone === this.zoneId) return;
+    if (
+      zone === this.zoneId &&
+      !(
+        zone === 'arena' &&
+        this.registry.get('m4d-arena') !==
+          (this.snapshot?.defense.arenaId ?? 'dao_hoa_dao')
+      )
+    )
+      return;
     if (zone === 'arena' || this.eagerArt) {
       this.drawZone(zone);
       return;
@@ -817,6 +826,7 @@ export class ArenaScene extends Phaser.Scene {
     this.worldDepth?.setEnabled(enabled);
   }
   private drawZone(zoneId: string): void {
+    this.statusPresentation.clear();
     this.pvpArt?.clear();
     this.pvpArt = undefined;
     this.worldDepth?.clear();
@@ -866,7 +876,10 @@ export class ArenaScene extends Phaser.Scene {
       drawPvpMap(this, pvp.mapId);
       this.pvpArt = new PvpArt(this);
     } else if (zoneId === 'arena') {
-      this.trees = createRenovationWorld(this, zoneId);
+      this.trees = createM4dArena(
+        this,
+        this.snapshot?.defense.arenaId ?? 'dao_hoa_dao',
+      );
       applyArenaPalette(this, this.polished);
       this.cameras.main
         .setBounds(0, 0, arena.width, arena.height)
@@ -1009,6 +1022,7 @@ export class ArenaScene extends Phaser.Scene {
     const active = new Set<string>();
     this.conLuanArt?.begin();
     this.nguDocArt?.begin();
+    this.statusPresentation.begin();
     const render = (
       id: string,
       actor: {
@@ -1173,6 +1187,7 @@ export class ArenaScene extends Phaser.Scene {
               local.build.stats.movementSpeed,
               states,
               performance.now(),
+              arenaVariants[state.defense.arenaId as ArenaId]?.collision ?? [],
             )
           : undefined;
       // A confirmed blink snaps the rendered feet to replicated position before
@@ -1502,12 +1517,7 @@ export class ArenaScene extends Phaser.Scene {
             String(view.sprite.frame.name),
         );
       view.label.setVisible(!enemy && actor.hp > 0);
-      if (!enemy) {
-        const controls = states
-          .map((s) => controlLabels[s.kind])
-          .filter((s): s is string => !!s);
-        view.label.setText([name, ...new Set(controls)].join('\n'));
-      }
+      if (!enemy) view.label.setText(name);
       view.label.setPosition(view.sprite.x, view.sprite.y + 5);
       const labelDepth = view.sprite.y + 0.2;
       if (view.label.depth !== labelDepth) view.label.setDepth(labelDepth);
@@ -1534,6 +1544,14 @@ export class ArenaScene extends Phaser.Scene {
         view.sprite.x - barSize / 2,
         view.sprite.y - barOffset,
       );
+      if (!enemy)
+        this.statusPresentation.sync(
+          id,
+          view.sprite,
+          view.bar.y - 10,
+          states,
+          actor.hp,
+        );
       const barDepth = view.sprite.y + 0.1;
       if (view.bar.depth !== barDepth) view.bar.setDepth(barDepth);
       const barWidth = Math.round((barSize * actor.hp) / actor.maxHp);
@@ -1611,6 +1629,7 @@ export class ArenaScene extends Phaser.Scene {
         }
       }
     const localBody = this.keepLocalHeroVisible(state);
+    this.statusPresentation.end();
     this.chu?.sync(state, this.zoneId);
     this.hongLiet?.sync(state, this.zoneId);
     this.kim?.sync(state, this.zoneId);
@@ -1984,6 +2003,40 @@ export class ArenaScene extends Phaser.Scene {
         gamePaused: this.game.isPaused,
       },
       polished: this.polished,
+      statusPresentation: this.statusPresentation.inspect(),
+      m4dArena: {
+        id: this.registry.get('m4d-arena'),
+        ambient: this.registry.get('m4d-ambient'),
+        groundSurface: this.registry.get('m4d-ground-surface'),
+        ground: (
+          this.children.getByName('arena:ground') as
+            Phaser.GameObjects.Image | undefined
+        )?.texture.key,
+        props: this.children.list
+          .filter((o) => o.name.startsWith('m4d:prop:'))
+          .map((o) => {
+            const p = o as Phaser.GameObjects.Image;
+            return {
+              name: p.name,
+              x: p.x,
+              y: p.y,
+              depth: p.depth,
+              scale: [p.scaleX, p.scaleY],
+              origin: [p.originX, p.originY],
+            };
+          }),
+        cluster: [
+          'art01:statue_male',
+          'art01:lantern:left',
+          'art01:lantern:right',
+        ].map((name) => ({
+          name,
+          visible:
+            this.children.getByName(name)?.active &&
+            (this.children.getByName(name) as Phaser.GameObjects.Image)
+              ?.visible,
+        })),
+      },
       worldDepth: this.worldDepth?.inspect(),
       heroMotionObserved: [
         ...(this.registry.get('hero-motion-observed') ?? []),

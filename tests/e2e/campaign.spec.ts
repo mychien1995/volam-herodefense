@@ -21,8 +21,12 @@ test('fresh campaign heroes see their starter potions and the new XP curve', asy
     await startTogether([page, b], ['cai_bang_chuong', 'vo_dang']);
     for (const p of [page, b]) {
       await expect(p.locator('#xp-text')).toHaveText('KN 0 / 45');
-      await expect(p.locator('[data-potion-resource="hp"] em')).toHaveText('10');
-      await expect(p.locator('[data-potion-resource="mp"] em')).toHaveText('10');
+      await expect(p.locator('[data-potion-resource="hp"] em')).toHaveText(
+        '10',
+      );
+      await expect(p.locator('[data-potion-resource="mp"] em')).toHaveText(
+        '10',
+      );
       expect((await hero(p)).inventory.potions).toMatchObject({
         hp_small: 10,
         mp_small: 10,
@@ -65,8 +69,10 @@ test('campaign HUD formats pearl stats and keeps lives clear of the defense HUD'
   await expect(page.getByTestId('dragon-pearls')).toContainText(
     'Long Châu 1/8 · +4%',
   );
-  await mkdir('docs/evidence/campaign', { recursive: true });
-  await page.screenshot({ path: 'docs/evidence/campaign/pearl-inventory.png' });
+  await mkdir('docs/evidence/m4d-campaign', { recursive: true });
+  await page.screenshot({
+    path: 'docs/evidence/m4d-campaign/pearl-inventory.png',
+  });
 });
 async function fixture(
   p: Page,
@@ -122,17 +128,65 @@ for (const kind of ['dungeon', 'wave'])
           )
           .toBe('fighting');
       }
-      for (let death = 0; death < 4; death++) {
+      const attackerId = (await snap(a)).sessionId;
+      if (kind === 'wave') {
         await fixture(a, 'arm');
-        for (const p of [a, b])
-          await expect
-            .poll(async () => (await hero(p)).hp)
-            .toBeLessThanOrEqual(0);
-        if (death < 3)
+        await a.bringToFront();
+        await a.locator('#game canvas').focus();
+        await a.keyboard.press('a');
+        await expect
+          .poll(async () =>
+            (await snap(a)).events.some(
+              (e: any) => e.kind === 'hit' && e.sourceId === attackerId,
+            ),
+          )
+          .toBe(true);
+        // Independent revival clocks can let one hero die again before the
+        // other revives. Re-arm living actors; never inject deaths or votes.
+        await expect
+          .poll(
+            async () => {
+              const retry = JSON.parse(
+                (await hero(a)).inventory.campaign,
+              ).retry;
+              if (retry?.phase !== 'vote') await fixture(a, 'arm');
+              return retry?.phase;
+            },
+            { timeout: 65000, intervals: [500] },
+          )
+          .toBe('vote');
+        for (const p of [a, b]) {
+          expect(
+            JSON.parse((await hero(p)).inventory.campaign).retry.revivals,
+          ).toBe(0);
+          expect((await hero(p)).hp).toBeLessThanOrEqual(0);
+        }
+      } else {
+        for (let death = 0; death < 4; death++) {
+          await fixture(a, 'arm');
+          if (death === 0) {
+            // M4D bosses wait for the first real player attack on each fresh attempt.
+            await a.bringToFront();
+            await a.locator('#game canvas').focus();
+            await a.keyboard.press('a');
+            await expect
+              .poll(async () =>
+                (await snap(a)).events.some(
+                  (e: any) => e.kind === 'hit' && e.sourceId === attackerId,
+                ),
+              )
+              .toBe(true);
+          }
           for (const p of [a, b])
             await expect
-              .poll(async () => (await hero(p)).hp, { timeout: 10000 })
-              .toBeGreaterThan(0);
+              .poll(async () => (await hero(p)).hp)
+              .toBeLessThanOrEqual(0);
+          if (death < 3)
+            for (const p of [a, b])
+              await expect
+                .poll(async () => (await hero(p)).hp, { timeout: 10000 })
+                .toBeGreaterThan(0);
+        }
       }
       for (const p of [a, b])
         await expect(p.locator('#boss-retry-dialog')).toBeVisible();
@@ -144,8 +198,10 @@ for (const kind of ['dungeon', 'wave'])
       const box = await a.locator('#boss-retry-dialog > section').boundingBox();
       expect(box!.x).toBeGreaterThanOrEqual(0);
       expect(box!.y + box!.height).toBeLessThanOrEqual(720);
-      await mkdir('docs/evidence/campaign', { recursive: true });
-      await a.screenshot({ path: `docs/evidence/campaign/${kind}-retry.png` });
+      await mkdir('docs/evidence/m4d-campaign', { recursive: true });
+      await a.screenshot({
+        path: `docs/evidence/m4d-campaign/${kind}-retry.png`,
+      });
       await a.setViewportSize({ width: 944, height: 720 });
       const narrow = await a
         .locator('#boss-retry-dialog > section')
@@ -179,7 +235,7 @@ for (const kind of ['dungeon', 'wave'])
           'Long Châu 1/8 · +4%',
         );
         await a.screenshot({
-          path: 'docs/evidence/campaign/pearl-inventory.png',
+          path: 'docs/evidence/m4d-campaign/pearl-inventory.png',
         });
       } else
         await expect.poll(async () => (await hero(b)).bossSpectator).toBe(true);

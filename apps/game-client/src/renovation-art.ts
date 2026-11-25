@@ -1,3 +1,4 @@
+import { nativeCreepPose } from './creep-body-policy.js';
 import {
   preloadUnifiedBosses,
   presentUnifiedBoss,
@@ -59,8 +60,7 @@ export function usesRenovatedCreepPose(
 ): boolean {
   return (
     renovationEnabled(scene) &&
-    isCreepGroup(id ? definitions.get(id)?.group : undefined) &&
-    ['idle', 'walk', 'hurt', 'stun', 'cast'].includes(pose)
+    nativeCreepPose(id ? definitions.get(id)?.group : undefined, pose)
   );
 }
 
@@ -159,13 +159,13 @@ export function presentRenovatedBody(
         : 'down';
   const locomotion = pose === 'idle' || pose === 'walk';
   const boss = approvedBossBody(id);
-  const defeat = boss && pose === 'death';
+  const creep = isCreepGroup(definition.group);
+  const defeat = (boss || creep) && pose === 'death';
   const defeatedAt = defeat
     ? ((image.getData('renovation-defeat') as number | undefined) ??
       scene.time.now)
     : undefined;
-  if (boss) image.setData('renovation-defeat', defeatedAt);
-  const creep = isCreepGroup(definition.group);
+  if (boss || creep) image.setData('renovation-defeat', defeatedAt);
   const reaction =
     (creep || definition.group === 'heroes' || approvedBossBody(id)) &&
     (pose === 'hurt' || pose === 'stun');
@@ -279,7 +279,7 @@ export function presentRenovatedBody(
       const progress = Math.min(1, (scene.time.now - defeatedAt) / 480);
       image
         .setRotation((direction === 'left' ? 1 : -1) * progress * 1.15)
-        .setAlpha(image.alpha * (1 - 0.7 * progress));
+        .setAlpha(creep ? 1 : 1 - 0.7 * progress);
     }
   } else if (
     pose === 'death' ||

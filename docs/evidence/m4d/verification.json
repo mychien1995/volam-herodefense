@@ -1,0 +1,120 @@
+{
+  "date": "2026-11-25",
+  "branch": "milestone/m4d",
+  "protocol": 49,
+  "scope": "User-requested focused checks, production build and live Phaser; no full campaign balance or final art approval inferred.",
+  "checks": [
+    {
+      "command": "pnpm exec tsc -b",
+      "status": "PASS"
+    },
+    {
+      "command": "pnpm exec tsc -p tsconfig.tools.json --noEmit",
+      "status": "PASS",
+      "note": "Repeated after final test fixture changes only."
+    },
+    {
+      "command": "pnpm exec vitest run tests/m4d.test.ts tests/m4d-boss-provocation.test.ts tests/crafting.test.ts tests/invasions.test.ts tests/invasion-room.test.ts tests/economy-room.test.ts tests/protocol.test.ts tests/arena-layout.test.ts tests/arena-creep-presentation.test.ts tests/m3d-review.test.ts tests/desert-dungeon.test.ts tests/local-movement.test.ts tests/renovation-navigation.test.ts",
+      "status": "PASS",
+      "files": 13,
+      "tests": 96
+    },
+    {
+      "command": "pnpm exec vitest run tests/m4d.test.ts",
+      "status": "PASS",
+      "tests": 21,
+      "note": "Four gate bridge routes added."
+    },
+    {
+      "command": "python scripts/verify-m4d-art.py",
+      "status": "PASS",
+      "ground": 3,
+      "alphaPropsAndIcons": 24,
+      "packs": 4,
+      "warnings": 0
+    },
+    {
+      "command": "pnpm --filter @volam/game-server exec tsx ../../tools/m4d-balance.ts",
+      "status": "PASS",
+      "report": "balance.json"
+    },
+    {
+      "command": "pnpm check:browser --config playwright.m4d.config.ts",
+      "status": "PASS",
+      "tests": 3,
+      "runId": "cdfe8703-ef98-4fbd-9e4d-08711fea6bed",
+      "report": "production-browser-timings.json",
+      "clientMode": "production preview"
+    },
+    {
+      "command": "node tools/run-playwright.mjs test --config playwright.campaign.config.ts --grep 'two Phaser peers' --output artifacts/m4d-campaign-regression",
+      "status": "PARTIAL",
+      "passed": [
+        "dungeon deaths, revivals, retry, pearl reward"
+      ],
+      "failed": [
+        "wave synchronized revival assumption"
+      ],
+      "serverPort": 2954,
+      "clientPort": 5554
+    },
+    {
+      "command": "node tools/run-playwright.mjs test --config playwright.campaign.config.ts --grep 'real wave deaths' --output artifacts/m4d-campaign-wave-regression",
+      "status": "PASS",
+      "tests": 1,
+      "note": "Independent revival clocks; re-arm only living heroes, server AI delivers deaths, verify both ledgers exhausted and actual UI vote/attempt 2."
+    },
+    {
+      "command": "node tools/run-playwright.mjs test --config playwright.m4d.config.ts --grep 'clean art review' --output artifacts/m4d-art-review",
+      "status": "PASS",
+      "tests": 1
+    }
+  ],
+  "browserCoverage": [
+    "DH two clients and normal zoom slice before prop batch",
+    "TD two clients, selection, night shading, overhead stars orbit and expire",
+    "TH six clients: pond blocks bank, bridge passage, peer sync, two spawn rows, real A produces HP0 corpse with retained texture/scale, hidden statue and lamps, idle boss and first hit",
+    "Campaign dungeon real AI deaths/revivals/vote/retry/reward",
+    "Campaign wave real AI deaths and asynchronous revivals/vote/retry"
+  ],
+  "historicalFailures": [
+    "offline package cache incomplete; online frozen lock install succeeded",
+    "missing Chromium installed locally",
+    "fixture middleware returned Connect app; corrected return handling",
+    "legacy one-row expectations updated",
+    "waiting Nam De walking pose reset",
+    "six-client cold load timed out; raised test timeout and validated production run",
+    "art-only idle statue destroyed before combat check; fixture protects statue, production HP unchanged",
+    "campaign test required simultaneous revivals; changed wave assertion to independent authoritative ledgers"
+  ],
+  "limits": [
+    "No full 20-wave human campaign or human win-rate claim",
+    "Six-client art smoke is not a guaranteed FPS benchmark",
+    "Fixtures set HP/position/status prerequisites; combat outcomes use real keyboard/server pipeline",
+    "Concept B approved; integrated final art pending director review",
+    "No videos, GIF or trace stream"
+  ],
+  "evidence": {
+    "balance.json": "f3d46f2aacc84e2ab4d715a89e0dc57fc86bc52718a29934114a9e5c30f97f70",
+    "dh-b-slice.json": "ec85bf8cff6d90f143c013f48a6ce5cfa8296186441851ad03dbd9730b9fee67",
+    "dh-b-slice.png": "b9b4b138aa645b51bd2d99df8a9dd161e2b50579ad7ca0497d5558c0ff3250c0",
+    "production-browser-timings.json": "e6183373010171624e21605bd06ae369cb5612cbc5e1f60500fe460ede2f4b81",
+    "six-player.json": "8d23e3bcf977332de7f16713a96044f4e295ed3cc825246198c80b41dd451ff5",
+    "td-b-night.png": "7657269681cf871ff295eebf6df536e8b0e079742ccfd4cfe60cc5bb1718d974",
+    "th-b-clean.png": "0d3bc13243ffb87c75a27590f73be15ba7b31014463e864e63e1429a4f744159",
+    "th-b-six-player.png": "81616ee4ff5b8b6fd01082863371e9b41ee961e824ecdd8a173db6379c7dedaa"
+  },
+  "metadataChecks": [
+    "New documentation links PASS",
+    "Evidence hashes PASS",
+    "M4D asset validator PASS",
+    "Scoped Prettier PASS",
+    "git diff --check PASS"
+  ],
+  "localReview": {
+    "url": "http://127.0.0.1:5554/",
+    "server": "http://127.0.0.1:2954/health",
+    "protocol": 49,
+    "mode": "Normal production server and Vite preview; no QA prerequisite middleware"
+  }
+}

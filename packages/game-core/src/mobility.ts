@@ -1,5 +1,4 @@
 import { duongMon } from './duong-mon-ids.js';
-import { inQuicksand } from './creep-abilities.js';
 import { blocked, direction, segmentRect, insideEllipse } from './geometry.js';
 import { emit } from './combat.js';
 import { hasStatus, movementSkillLocked } from './status.js';
@@ -9,7 +8,11 @@ import type { Hero, SimulationConfig, World } from './types.js';
 
 export function dashCapacity(hero: Hero, config: SimulationConfig): number {
   const capacity = config.mobility?.charges ?? 0;
-  return capacity && hero.basicId === duongMon.amKhi ? capacity + 2 : capacity;
+  return (
+    capacity +
+    (capacity && hero.basicId === duongMon.amKhi ? 2 : 0) +
+    (capacity && hero.inventory?.crafted?.boots === 'haste' ? 2 : 0)
+  );
 }
 
 /** Recharge debt is sequential and survives travel, death and build edits. */
@@ -41,7 +44,6 @@ export function dash(world: World, hero: Hero, config: SimulationConfig): void {
     world.chu?.phase === 'reflect' ||
     !hero.dashCharges ||
     hasStatus(hero, 'dash_lock', world.tick) ||
-    inQuicksand(world, hero) ||
     hasStatus(hero, 'root', world.tick) ||
     hasStatus(hero, 'stun', world.tick) ||
     (world.actions ?? []).some((a) => a.ownerId === hero.id)

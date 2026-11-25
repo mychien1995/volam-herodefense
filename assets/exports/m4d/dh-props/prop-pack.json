@@ -1,0 +1,527 @@
+{
+  "schema": "generate2dmap.prop_pack.v2",
+  "tool": {
+    "name": "extract_prop_pack",
+    "version": "0.5.0"
+  },
+  "input": "../../../source/m4d-arena-v01/dh-props.png",
+  "source_size": [
+    1536,
+    1024
+  ],
+  "source_sha256": "29c7b138abecf7c242d45dd0ad7018dca2110c217c73a60b4ef8fa0447e99f50",
+  "source_mode": "RGBA",
+  "layout_mode": "explicit_boxes",
+  "boxes_file": "../../../source/m4d-arena-v01/dh-crops.json",
+  "labels_file": null,
+  "background_mode": "native_alpha",
+  "art_source": "host_image",
+  "rows": null,
+  "cols": null,
+  "threshold": 100,
+  "edge_threshold": 150,
+  "despill_radius": 0,
+  "despill": {
+    "mode": "off",
+    "applied": "off",
+    "radius": 0,
+    "margin": 12,
+    "changed_px": 0
+  },
+  "hygiene": {
+    "mode": "floor",
+    "floor": 12,
+    "solid_min": 32,
+    "attach_radius": 2,
+    "connectivity": 8,
+    "floor_px": 166861,
+    "detached_px": 0,
+    "detached_components": 0,
+    "max_removed_alpha": 12
+  },
+  "alpha_floor": 12,
+  "alpha_floor_pixels_removed": 166861,
+  "trim_border": 0,
+  "edge_clean_depth": 0,
+  "component_mode": "largest",
+  "component_padding": 8,
+  "min_component_area": "auto",
+  "edge_touch_margin": 0,
+  "geometry": {
+    "connectivity": 8,
+    "alpha_geometry_threshold": 16,
+    "anchor_mode": "feet",
+    "support_band_fraction": 0.25,
+    "anchor_rounding": "whole pixels, half-up",
+    "grid_rounding": null,
+    "keep_canvas": false,
+    "world_scale": "1/3"
+  },
+  "accepted": [
+    {
+      "index": 0,
+      "label": "peach-large",
+      "display_name": "peach_large",
+      "status": "accepted",
+      "image": "peach-large/prop.png",
+      "sha256": "61be6f636d53a2d92768a009ba19cb36a8da53001b702806bfd5d5e8b6e05719",
+      "output_size": [
+        795,
+        507
+      ],
+      "grid": null,
+      "cell_box": [
+        0,
+        0,
+        840,
+        512
+      ],
+      "source_box": [
+        0,
+        0,
+        840,
+        512
+      ],
+      "source_rect": [
+        39,
+        0,
+        834,
+        507
+      ],
+      "trim_offset": [
+        39,
+        0
+      ],
+      "padding": [
+        10,
+        7,
+        8,
+        9
+      ],
+      "anchor_px": [
+        426,
+        498
+      ],
+      "anchor_source": "measured",
+      "component_mode": "largest",
+      "component_count": 1,
+      "min_component_area": 100,
+      "trim_applied": 0,
+      "crop_bbox": [
+        49,
+        7,
+        826,
+        498
+      ],
+      "padded_crop_bbox": [
+        39,
+        0,
+        834,
+        507
+      ],
+      "selected_component_area": 202001,
+      "selected_component_bbox": [
+        49,
+        7,
+        826,
+        498
+      ],
+      "kept_area": 202001,
+      "dropped_components": 8,
+      "dropped_area": 8,
+      "edge_touch": false,
+      "world_size": [
+        265,
+        169
+      ],
+      "world_anchor": [
+        142,
+        166
+      ],
+      "footprint": {
+        "shape": "ellipse",
+        "width": 360,
+        "depth": 180,
+        "offset": [
+          3,
+          -90
+        ],
+        "rotate": 0,
+        "basis": "prop_px",
+        "suggested": true,
+        "method": "columns at least half covered in the bottom 25% of alpha > 16; depth = width x 0.5; front edge on the ground line"
+      }
+    },
+    {
+      "index": 1,
+      "label": "peach-small",
+      "display_name": "peach_small",
+      "status": "accepted",
+      "image": "peach-small/prop.png",
+      "sha256": "ba19def7da6c6c182fb0c69e913137c3fa08976ec6aae100e43aa23269cd8702",
+      "output_size": [
+        600,
+        417
+      ],
+      "grid": null,
+      "cell_box": [
+        840,
+        0,
+        1536,
+        512
+      ],
+      "source_box": [
+        840,
+        0,
+        1536,
+        512
+      ],
+      "source_rect": [
+        861,
+        84,
+        1461,
+        501
+      ],
+      "trim_offset": [
+        21,
+        84
+      ],
+      "padding": [
+        8,
+        9,
+        10,
+        9
+      ],
+      "anchor_px": [
+        216,
+        408
+      ],
+      "anchor_source": "measured",
+      "component_mode": "largest",
+      "component_count": 1,
+      "min_component_area": 100,
+      "trim_applied": 0,
+      "crop_bbox": [
+        29,
+        93,
+        611,
+        492
+      ],
+      "padded_crop_bbox": [
+        21,
+        84,
+        621,
+        501
+      ],
+      "selected_component_area": 90697,
+      "selected_component_bbox": [
+        29,
+        93,
+        611,
+        492
+      ],
+      "kept_area": 90697,
+      "dropped_components": 4,
+      "dropped_area": 4,
+      "edge_touch": false,
+      "world_size": [
+        200,
+        139
+      ],
+      "world_anchor": [
+        72,
+        136
+      ],
+      "footprint": {
+        "shape": "ellipse",
+        "width": 176,
+        "depth": 88,
+        "offset": [
+          -13,
+          -44
+        ],
+        "rotate": 0,
+        "basis": "prop_px",
+        "suggested": true,
+        "method": "columns at least half covered in the bottom 25% of alpha > 16; depth = width x 0.5; front edge on the ground line"
+      }
+    },
+    {
+      "index": 2,
+      "label": "pavilion",
+      "display_name": "pavilion",
+      "status": "accepted",
+      "image": "pavilion/prop.png",
+      "sha256": "1718937b4a81bb9ded5ae0fd43a1126d685e7567dc3b22248a6c1c8dfbbe3627",
+      "output_size": [
+        450,
+        477
+      ],
+      "grid": null,
+      "cell_box": [
+        0,
+        512,
+        768,
+        1024
+      ],
+      "source_box": [
+        0,
+        512,
+        768,
+        1024
+      ],
+      "source_rect": [
+        186,
+        517,
+        636,
+        994
+      ],
+      "trim_offset": [
+        186,
+        5
+      ],
+      "padding": [
+        9,
+        9,
+        10,
+        8
+      ],
+      "anchor_px": [
+        231,
+        468
+      ],
+      "anchor_source": "measured",
+      "component_mode": "largest",
+      "component_count": 1,
+      "min_component_area": 100,
+      "trim_applied": 0,
+      "crop_bbox": [
+        195,
+        14,
+        626,
+        474
+      ],
+      "padded_crop_bbox": [
+        186,
+        5,
+        636,
+        482
+      ],
+      "selected_component_area": 124166,
+      "selected_component_bbox": [
+        195,
+        14,
+        626,
+        474
+      ],
+      "kept_area": 124166,
+      "dropped_components": 3,
+      "dropped_area": 3,
+      "edge_touch": false,
+      "world_size": [
+        150,
+        159
+      ],
+      "world_anchor": [
+        77,
+        156
+      ],
+      "footprint": {
+        "shape": "ellipse",
+        "width": 387,
+        "depth": 193.5,
+        "offset": [
+          -0.5,
+          -96.75
+        ],
+        "rotate": 0,
+        "basis": "prop_px",
+        "suggested": true,
+        "method": "columns at least half covered in the bottom 25% of alpha > 16; depth = width x 0.5; front edge on the ground line"
+      }
+    },
+    {
+      "index": 3,
+      "label": "garden-rock",
+      "display_name": "garden_rock",
+      "status": "accepted",
+      "image": "garden-rock/prop.png",
+      "sha256": "9225e1186445aa7278af2c57f788cafaa152307b05d7176ced7d6095a2fe76bf",
+      "output_size": [
+        537,
+        483
+      ],
+      "grid": null,
+      "cell_box": [
+        768,
+        512,
+        1536,
+        1024
+      ],
+      "source_box": [
+        768,
+        512,
+        1536,
+        1024
+      ],
+      "source_rect": [
+        864,
+        513,
+        1401,
+        996
+      ],
+      "trim_offset": [
+        96,
+        1
+      ],
+      "padding": [
+        9,
+        9,
+        10,
+        9
+      ],
+      "anchor_px": [
+        240,
+        474
+      ],
+      "anchor_source": "measured",
+      "component_mode": "largest",
+      "component_count": 1,
+      "min_component_area": 100,
+      "trim_applied": 0,
+      "crop_bbox": [
+        105,
+        10,
+        623,
+        475
+      ],
+      "padded_crop_bbox": [
+        96,
+        1,
+        633,
+        484
+      ],
+      "selected_component_area": 133609,
+      "selected_component_bbox": [
+        105,
+        10,
+        623,
+        475
+      ],
+      "kept_area": 133609,
+      "dropped_components": 5,
+      "dropped_area": 5,
+      "edge_touch": false,
+      "world_size": [
+        179,
+        161
+      ],
+      "world_anchor": [
+        80,
+        158
+      ],
+      "footprint": {
+        "shape": "ellipse",
+        "width": 395,
+        "depth": 197.5,
+        "offset": [
+          9.5,
+          -98.75
+        ],
+        "rotate": 0,
+        "basis": "prop_px",
+        "suggested": true,
+        "method": "columns at least half covered in the bottom 25% of alpha > 16; depth = width x 0.5; front edge on the ground line"
+      }
+    }
+  ],
+  "rejected": [],
+  "edge_touch_props": [],
+  "warnings": [],
+  "qa": {
+    "status": "pass",
+    "method": "native alpha, not keyed; alpha hygiene floor; 8-connected components (largest); checks measured on the published pixels",
+    "notProven": [
+      "that each label names the art in its cell or box",
+      "that a prop is complete: clipping is detected only where art meets the cell edge",
+      "keyed-edge quality beyond the edge fringe count",
+      "that anchors and suggested footprints match gameplay contact (both are measured from alpha)",
+      "runtime placement, collision or occlusion"
+    ],
+    "checks": [
+      {
+        "id": "accepted",
+        "status": "pass",
+        "value": 4,
+        "threshold": ">= 1"
+      },
+      {
+        "id": "edge_touch",
+        "status": "pass",
+        "value": [],
+        "threshold": 0
+      },
+      {
+        "id": "dropped_area",
+        "status": "pass",
+        "value": {
+          "peach-large": 0.0,
+          "peach-small": 0.0,
+          "pavilion": 0.0,
+          "garden-rock": 0.0
+        },
+        "threshold": 0.01
+      },
+      {
+        "id": "strategy_aspect",
+        "status": "skipped",
+        "value": null,
+        "threshold": 1.6
+      },
+      {
+        "id": "edge_fringe",
+        "status": "skipped",
+        "value": null,
+        "threshold": 0.02
+      }
+    ],
+    "inputs": [
+      {
+        "path": "../../../source/m4d-arena-v01/dh-props.png",
+        "sha256": "29c7b138abecf7c242d45dd0ad7018dca2110c217c73a60b4ef8fa0447e99f50",
+        "bytes": 2523984
+      },
+      {
+        "path": "../../../source/m4d-arena-v01/dh-crops.json",
+        "sha256": "a376d9f6d3df79991b033138dd6d4ef30339fcd4e8eeb5716776a2591fa7e76f",
+        "bytes": 186
+      }
+    ],
+    "outputs": [
+      {
+        "path": "peach-large/prop.png",
+        "sha256": "61be6f636d53a2d92768a009ba19cb36a8da53001b702806bfd5d5e8b6e05719",
+        "bytes": 595621
+      },
+      {
+        "path": "peach-small/prop.png",
+        "sha256": "ba19def7da6c6c182fb0c69e913137c3fa08976ec6aae100e43aa23269cd8702",
+        "bytes": 286041
+      },
+      {
+        "path": "pavilion/prop.png",
+        "sha256": "1718937b4a81bb9ded5ae0fd43a1126d685e7567dc3b22248a6c1c8dfbbe3627",
+        "bytes": 340803
+      },
+      {
+        "path": "garden-rock/prop.png",
+        "sha256": "9225e1186445aa7278af2c57f788cafaa152307b05d7176ced7d6095a2fe76bf",
+        "bytes": 388534
+      }
+    ],
+    "tool": {
+      "name": "extract_prop_pack",
+      "version": "0.5.0"
+    }
+  }
+}

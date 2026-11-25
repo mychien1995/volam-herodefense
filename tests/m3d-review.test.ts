@@ -256,26 +256,23 @@ it('cycles darts, warns four geysers every three seconds and relocates staggered
   expect(hasStatus(hell.h, 'stun', hell.w.tick)).toBe(true);
 });
 
-it('slows walking, blocks a dash without spending a charge and restores both after leaving sand', () => {
+it('slows walking in sand but allows Shift to spend a charge and escape', () => {
   const { w, h, c, step } = fixture('desert');
   step(1);
   const pit = w.creepCombat!.effects.get('quicksand_0')!;
   Object.assign(h, { x: pit.x, y: pit.y });
   const speed = characterStats(h, c, w.tick).total.movementSpeed;
   submitInput(w, h.id, 1, { kind: 'move', x: 1, y: 0 });
-  submitInput(w, h.id, 2, { kind: 'dash' });
   step(1);
   const x = h.x;
   step(1);
   expect(h.x - x).toBeCloseTo((speed * 0.1) / c.tickRate);
   expect(hasStatus(h, 'slow', w.tick)).toBe(true);
-  expect(h.dashCharges).toBe(2);
-  Object.assign(h, c.spawn);
-  step(1);
-  expect(hasStatus(h, 'slow', w.tick)).toBe(false);
-  submitInput(w, h.id, 3, { kind: 'dash' });
+  submitInput(w, h.id, 2, { kind: 'dash' });
   step(1);
   expect(h.dashCharges).toBe(1);
+  step(12);
+  expect(hasStatus(h, 'slow', w.tick)).toBe(false);
 });
 
 it('keeps the reviewed source and Phaser atlas bytes pinned', () => {

@@ -1,3 +1,4 @@
+import { bossFightReady } from './boss-provocation.js';
 import { waveBossFarewell } from './boss-banter.js';
 import { announceBossSkill } from './boss-skill-announcement.js';
 import { emit, hurt } from './combat.js';
@@ -166,6 +167,7 @@ export class DongTaEncounter {
   }
   /** Called after player skills/projectiles/DOT, before respawn processing. */
   afterStep(world: World, config: SimulationConfig): void {
+    if (!bossFightReady(world, config)) return;
     if (this.phase !== 'fighting') return;
     const boss = world.creeps.get(bossId);
     if (!boss || boss.hp <= 0) {

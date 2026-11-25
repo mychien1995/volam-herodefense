@@ -465,36 +465,6 @@ export class ItemMenu {
       },
     ).join(
       '',
-    )}</div><section class="item-held-detail" aria-live="polite"><h3>${selected ? escape(selected.name) : 'Chọn một vật phẩm'}</h3><p>${selected ? selected.description : 'Chọn bình để sử dụng hoặc xem chiến lợi phẩm đang giữ.'}</p>${selected?.potionId ? `<button data-ui-action="use-held" data-value="${selected.potionId}" ${this.potionDisabled(selected.potionId) ? 'disabled' : ''}>${cooldown ? `Đang hồi · ${cooldown}s` : 'Dùng bình'}</button>` : '<button disabled>Trang bị</button>'}</section><div class="item-auxiliary-detail">${art(boots?.art ?? 'thanh_tam')}<div><h3>Kỹ năng từ giày <kbd>Z</kbd></h3><p>${boots ? boots.nameVi + ' · ' + boots.descriptionVi : 'Cần giày chế tạo.'}</p></div></div><div class="item-gold"><span class="pixel-icon icon-gold" aria-hidden="true"></span><b class="live-gold">${this.hero?.gold ?? '—'}</b><span>vàng</span></div></section></div>`;
+    )}</div><section class="item-held-detail" aria-live="polite"><h3>${selected ? escape(selected.name) : 'Chọn một vật phẩm'}</h3><p>${selected ? selected.description : 'Chọn bình để sử dụng hoặc xem chiến lợi phẩm đang giữ.'}</p>${selected?.potionId ? `<button data-ui-action="use-held" data-value="${selected.potionId}" ${this.potionDisabled(selected.potionId) ? 'disabled' : ''}>${cooldown ? `Đang hồi · ${cooldown}s` : 'Dùng bình'}</button>` : '<button disabled>Trang bị</button>'}</section><div class="item-auxiliary-detail">${art(boots?.art ?? 'thanh_tam')}<div><h3>Đặc tính giày</h3><p>${boots ? boots.nameVi + ' · ' + boots.descriptionVi : 'Cần giày chế tạo.'}</p></div></div><div class="item-gold"><span class="pixel-icon icon-gold" aria-hidden="true"></span><b class="live-gold">${this.hero?.gold ?? '—'}</b><span>vàng</span></div></section></div>`;
   }
-}
-
-export function auxiliarySlot(): string {
-  return `<div id="slot-z" class="hotbar-slot auxiliary-slot unequipped" tabindex="0" role="img" aria-label="Z · Kỹ năng từ giày chưa mở" aria-describedby="auxiliary-tip">${art('boots')}<kbd>Z</kbd><b class="cooldown-number" aria-hidden="true"></b><span id="auxiliary-tip" class="auxiliary-tooltip" role="tooltip"><strong>Kỹ năng từ giày · Z</strong><span>Cần giày chế tạo.</span></span></div>`;
-}
-
-export function updateAuxiliarySlot(hero: Hero): void {
-  const slot = document.querySelector<HTMLElement>('#slot-z');
-  if (!slot) return;
-  const boots = economyTrial.recipes.boots.branches.find(
-    (branch) => branch.id === hero.inventory.crafted.get('boots'),
-  );
-  const cooldown = Math.ceil(
-    hero.inventory.auxiliaryCooldownTicks / m1Config.tickRate,
-  );
-  slot.classList.toggle('unequipped', !boots);
-  slot.classList.toggle('cooling', cooldown > 0);
-  const label = boots
-    ? 'Z · ' + boots.nameVi + (cooldown ? ' · ' + cooldown + ' giây' : '')
-    : 'Z · Cần giày chế tạo';
-  slot.setAttribute('aria-label', label);
-  const image = slot.querySelector('img')!;
-  const src = itemUrl(boots?.art ?? 'boots');
-  if (image.getAttribute('src') !== src) image.setAttribute('src', src);
-  slot.querySelector('.cooldown-number')!.textContent = cooldown
-    ? String(cooldown)
-    : '';
-  slot.querySelector('strong')!.textContent = label;
-  slot.querySelector('#auxiliary-tip span')!.textContent =
-    boots?.descriptionVi ?? 'Cần giày chế tạo.';
 }

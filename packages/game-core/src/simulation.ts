@@ -1,3 +1,5 @@
+import { invasionApproach } from './invasion-route.js';
+import { bossFightReady } from './boss-provocation.js';
 import { nguDoc } from './ngu-doc-ids.js';
 import {
   attachNguDocMark,
@@ -8,11 +10,7 @@ import {
 import { nguDocSummons, stepNguDocSummons } from './ngu-doc-summons.js';
 import { duongMon } from './duong-mon-ids.js';
 import { canDuel, opponent, opponents, targetRadius } from './opponents.js';
-import {
-  stepEquipmentCombat,
-  useEquipmentSkill,
-  withBasicEquipment,
-} from './equipment-combat.js';
+import { stepEquipmentCombat, withBasicEquipment } from './equipment-combat.js';
 import { stepBossBanter } from './boss-banter.js';
 import { advanceDragonDive } from './dragon-dive.js';
 import { dungeonWaypoint, findWalkPath } from './dungeon-navigation.js';
@@ -316,10 +314,6 @@ function runCommand(
     else startTamLienTram(world, hero, config);
     return;
   }
-  if (command.kind === 'gear-skill') {
-    useEquipmentSkill(world, hero, config);
-    return;
-  }
   if (command.kind === 'dev-loadout') {
     if (hero.progression) return;
     if (
@@ -589,7 +583,7 @@ function advanceProjectile(
   let wallT = blocked(end, shot.effect.radius, config.width, config.height, [])
     ? 1
     : Infinity;
-  for (const wall of config.collision)
+  for (const wall of config.combatCollision ?? config.collision)
     if (shot.hostile || wall !== world.statue?.collision)
       wallT = Math.min(
         wallT,
@@ -718,18 +712,7 @@ function advanceProjectile(
         spread?.hitTargets.add(spreadKey);
         if (shot.effect.oncePerCast && shot.comboTargets)
           shot.comboTargets[enemy.id] ??= false;
-        if (shot.abilityId === 'gear_needle' && enemy.hp > 0) {
-          const target = world.creeps.get(enemy.id);
-          const tuning = config.economy?.craftedCombat;
-          if (target && tuning)
-            target.needlePoison = {
-              sourceId: shot.ownerId,
-              until: world.tick + tuning.needlePoisonSeconds * config.tickRate,
-              next: world.tick + config.tickRate,
-            };
-        }
       }
-      if (shot.abilityId === 'gear_needle' && !hit) continue;
       if (hit && shot.refund && !shot.refund.used) {
         shot.refund.used = true;
         const hero = world.heroes.get(shot.ownerId);
@@ -968,7 +951,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
     config = { ...config, collision: [...config.collision, ...rocks] };
   world.events = [];
   stepCreepHazards(world, config);
-  world.bacCai?.prepare(world, config);
+  if (bossFightReady(world, config)) world.bacCai?.prepare(world, config);
   expireGuardCounters(world, config);
   expireStatuses(world);
   expireCombos(world);
@@ -1321,8 +1304,14 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       };
     if (config.dungeonAggro) enemy.aggroTargetId = combatant?.id ?? '';
     const waypoint =
-      config.dungeonAggro && combatant
-        ? dungeonWaypoint(enemy, combatant, world.tick, config)
+      (config.dungeonAggro && combatant) ||
+      (enemy.invasion && (combatant || objective))
+        ? dungeonWaypoint(
+            enemy,
+            invasionApproach(enemy, (combatant ?? objective)!, !!combatant),
+            world.tick,
+            config,
+          )
         : target;
     const delta = direction(waypoint.x - enemy.x, waypoint.y - enemy.y);
     const moving =
@@ -1374,7 +1363,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       !hasStatus(enemy, 'disarm', world.tick) &&
       !(
         config.dungeonAggro &&
-        config.collision.some(
+        (config.combatCollision ?? config.collision).some(
           (w) => segmentRect(enemy, victim, w) !== undefined,
         )
       )

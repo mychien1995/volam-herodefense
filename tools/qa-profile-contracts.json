@@ -1430,6 +1430,19 @@
       ],
       "channels": [null],
       "setup": null
+    },
+    "playwright.m4d.config.ts": {
+      "profile": "m4d",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 2954,
+          "clientPort": 5554
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/m4d-setup.ts"
     }
   }
 }

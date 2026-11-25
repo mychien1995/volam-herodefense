@@ -1,3 +1,7 @@
+## M4D · protocol 49
+
+Arena ID được host chọn khi tạo room, server kiểm tra và đồng bộ trong Defense; late join không đổi lựa chọn. Geometry hồ sen dùng chung game-data cho server và prediction; nước thuộc collision di chuyển, combatCollision giữ đường đạn riêng. Boss provocation thuộc server, reset theo actor/attempt mới. Arena có ground/alpha props/Y-depth/shading độc lập; status renderer nhận trạng thái đã đồng bộ. [Chi tiết M4D](docs/M4D_IMPLEMENTATION.md).
+
 ## UI/camera dùng chung · 2026-11-19
 
 `ui-components.ts/css` sở hữu nút, hàng action và skin panel; `school-selection.ts/css` sở hữu grid và branch dialog cho Defense/PvP/Practice. Handler từng mode giữ focus, input gating, draft/pending và server acknowledgement. `camera-policy.ts` gom native/cover/overview; toàn viewport, rotation0, giữ ngoại lệ Hồng Mộc trong Defense và Kim Luân. HUD utility dùng một công thức cỡ nút. Không đổi mô phỏng/protocol/artwork. [Quy ước và profile kiểm chứng](docs/SHARED_UI_CAMERA.md).

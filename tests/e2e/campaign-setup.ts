@@ -50,6 +50,8 @@ export default async function setup() {
                       h.hp = 1;
                       h.x = boss.x + 34;
                       h.y = boss.y;
+                      h.fx = -1;
+                      h.fy = 0;
                       h.moveX = h.moveY = 0;
                     }
                   } else if (op === 'finisher') {

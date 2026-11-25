@@ -525,6 +525,24 @@ describe('M3C2 authoritative Yin–Yang', () => {
     expect(b.hp).toBe(160);
     expect(f.enemies[0]!.hp).toBe(10000 - 12 * 22);
   });
+  it('Thất Tinh base cooldown is 3s: rejects at tick 89 and accepts exactly at tick 90, retaining rank reductions', () => {
+    expect(m1Config.skillCatalogue!.that_tinh_kiem!.cooldownTicks).toBe(90);
+    m1Config.progression!.skills.that_tinh_kiem!.ranks.forEach((a, i) =>
+      expect(a.cooldownTicks).toBe(90 - i * 3),
+    );
+    const f = fixture('that_tinh_kiem');
+    f.cast();
+    const start = f.world.tick;
+    expect(f.hero.skillCooldowns[0]).toBe(start + 90);
+    f.steps(88);
+    f.cast();
+    expect(f.world.tick - start).toBe(89);
+    expect(f.events.filter((e) => e.kind === 'cast')).toHaveLength(1);
+    f.cast();
+    expect(f.world.tick - start).toBe(90);
+    expect(f.events.filter((e) => e.kind === 'cast')).toHaveLength(2);
+  });
+
   it('Thất Tinh has seven staggered remote impacts despite cast spam and no warning ring', () => {
     const f = fixture('that_tinh_kiem');
     f.cast();
@@ -822,7 +840,9 @@ describe('M3C2 authoritative Yin–Yang', () => {
             ?.animations.length,
         ).toBeGreaterThan(0);
       expect(skillIcon(skill.id)).toContain(
-        skill.id === 'that_tinh_kiem' ? '/skill-revise-feedback-v04/' : '/vo-dang/',
+        skill.id === 'that_tinh_kiem'
+          ? '/skill-revise-feedback-v04/'
+          : '/vo-dang/',
       );
       expect(skillVisualStages[skill.id]).toBeDefined();
     }

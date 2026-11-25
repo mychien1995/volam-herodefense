@@ -1,3 +1,4 @@
+import { bossFightReady } from './boss-provocation.js';
 import { waveBossFarewell } from './boss-banter.js';
 import { announceBossSkill } from './boss-skill-announcement.js';
 import { addCreep } from './simulation.js';
@@ -780,6 +781,11 @@ function stepSmallBurst(w: World, c: SimulationConfig): void {
   if (cast && w.tick >= cast.until) delete s.smallCast;
 }
 export function stepNamDe(w: World, c: SimulationConfig): void {
+  if (!bossFightReady(w, c) && w.namDe?.phase !== 'enter') {
+    const waiting = w.creeps.get(NAM_DE_ID);
+    if (waiting && waiting.hp > 0) waiting.pose = 'idle';
+    return;
+  }
   const s = w.namDe;
   if (!s) return;
   const d = s.definition;

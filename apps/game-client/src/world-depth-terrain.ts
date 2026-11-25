@@ -58,7 +58,7 @@ export function createDepthTerrain(
   const ground = scene.children.getByName(
     'arena:ground',
   ) as Phaser.GameObjects.Image;
-  if (!ground) return [];
+  if (!ground || ground.getData('m4d-ground')) return [];
   const width = ground.displayWidth,
     height = ground.displayHeight;
   const keys = [

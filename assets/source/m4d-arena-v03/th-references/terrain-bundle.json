@@ -1,0 +1,270 @@
+{
+  "schema": "generate2dmap.terrain_tile_bundle.v2",
+  "source": {
+    "path": "../../../exports/m4d/r2/th-ground.png",
+    "sha256": "b7f944d2c7eeaeb03bc96212171089637e1892d6363911fc0972bfebf334d11b",
+    "bytes": 3663187,
+    "size": [
+      1482,
+      1061
+    ],
+    "mode": "RGB",
+    "bit_depth": 8,
+    "conversion": "RGB -> RGBA"
+  },
+  "grid": {
+    "rows": 2,
+    "cols": 2,
+    "rounding": "nearest",
+    "source_cell_size": [
+      741,
+      530
+    ],
+    "output_tile_size": [
+      741,
+      530
+    ],
+    "source_cell_size_max": [
+      741,
+      531
+    ]
+  },
+  "tile": {
+    "shape": "rect",
+    "layer": "base",
+    "footprint": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        741.0,
+        0.0
+      ],
+      [
+        741.0,
+        530.0
+      ],
+      [
+        0.0,
+        530.0
+      ]
+    ]
+  },
+  "terrains": {
+    "north": {
+      "display_name": "north",
+      "row": 0,
+      "kind": "fill",
+      "variants": [
+        {
+          "path": "north-1.png",
+          "source_cell": [
+            0,
+            0
+          ],
+          "source_box": [
+            0,
+            0,
+            741,
+            531
+          ],
+          "resized": true,
+          "mean_luminance": 0.349875,
+          "contrast": 0.214495,
+          "border": {
+            "checked": true,
+            "frame": false,
+            "frames": [],
+            "max_delta": 0.0
+          },
+          "sha256": "ba79010ddca11af36672c51c36b6d759ff0d70b532d826d1c6f508a7316d2b35"
+        },
+        {
+          "path": "north-2.png",
+          "source_cell": [
+            0,
+            1
+          ],
+          "source_box": [
+            741,
+            0,
+            1482,
+            531
+          ],
+          "resized": true,
+          "mean_luminance": 0.349629,
+          "contrast": 0.213726,
+          "border": {
+            "checked": true,
+            "frame": false,
+            "frames": [],
+            "max_delta": 0.0
+          },
+          "sha256": "1a7b7a3c4d29757a580353d26c38bd2c91c07d4f7c7b7da9d337c1baca8fb5c8"
+        }
+      ],
+      "variant_difference_min": 0.176232
+    },
+    "south": {
+      "display_name": "south",
+      "row": 1,
+      "kind": "fill",
+      "variants": [
+        {
+          "path": "south-1.png",
+          "source_cell": [
+            1,
+            0
+          ],
+          "source_box": [
+            0,
+            531,
+            741,
+            1061
+          ],
+          "resized": false,
+          "mean_luminance": 0.334209,
+          "contrast": 0.214962,
+          "border": {
+            "checked": true,
+            "frame": false,
+            "frames": [],
+            "max_delta": 0.0
+          },
+          "sha256": "2a73cbe41a1d92ce78555552bb455b04d9571a9f0d7421fdb8a503bc459b502c"
+        },
+        {
+          "path": "south-2.png",
+          "source_cell": [
+            1,
+            1
+          ],
+          "source_box": [
+            741,
+            531,
+            1482,
+            1061
+          ],
+          "resized": false,
+          "mean_luminance": 0.337529,
+          "contrast": 0.217322,
+          "border": {
+            "checked": true,
+            "frame": false,
+            "frames": [],
+            "max_delta": 0.0
+          },
+          "sha256": "d547ae1d6ff15ba2ff4e77424351312dc849e922a093671d59e30452d3d9a868"
+        }
+      ],
+      "variant_difference_min": 0.192109
+    }
+  },
+  "processing": {
+    "background_mode": "opaque",
+    "background_mode_requested": "opaque",
+    "cell_shape": "square",
+    "resampler": "lanczos",
+    "grid_rounding": "nearest",
+    "edge_policy": "isolated",
+    "wrap_aware_resize": false
+  },
+  "qc": {
+    "min_contrast": 0.035,
+    "min_variant_difference": 0.025,
+    "max_border_delta": 0.1,
+    "min_shape_coverage": 0.97,
+    "max_shape_spill": 0.03,
+    "max_seam_ratio": null,
+    "warnings": [],
+    "passed": true,
+    "seamless_verified": false
+  },
+  "qa": {
+    "status": "pass",
+    "method": "Grid slices of the atlas, background handled per --background-mode, resized to the tile size (Lanczos or nearest; wrap-aware for the seamless policy). Luminance contrast and mean thumbnail differences; drawn frames along opposite edges; footprint coverage and spill for iso/hex base tiles; for the seamless policy, premultiplied wrap and Wang-join steps normalised by the art's own steps near each edge.",
+    "notProven": [
+      "visual quality, style match and readability at game zoom",
+      "that each variant reads as the named terrain",
+      "seamlessness: no exact seam proof exists for image tiles (seamless_verified stays false)"
+    ],
+    "checks": [
+      {
+        "id": "contrast",
+        "status": "pass",
+        "value": 0.213726,
+        "threshold": 0.035
+      },
+      {
+        "id": "variant_difference",
+        "status": "pass",
+        "value": 0.176232,
+        "threshold": 0.025
+      },
+      {
+        "id": "border_frame",
+        "status": "pass",
+        "value": 0,
+        "threshold": 0.1
+      },
+      {
+        "id": "shape_coverage",
+        "status": "skipped",
+        "value": null,
+        "threshold": 0.97
+      },
+      {
+        "id": "shape_spill",
+        "status": "skipped",
+        "value": null,
+        "threshold": 0.03
+      },
+      {
+        "id": "wrap_seams",
+        "status": "skipped",
+        "value": null,
+        "threshold": null
+      },
+      {
+        "id": "wang_seams",
+        "status": "skipped",
+        "value": null,
+        "threshold": null
+      }
+    ],
+    "inputs": [
+      {
+        "path": "../../../exports/m4d/r2/th-ground.png",
+        "sha256": "b7f944d2c7eeaeb03bc96212171089637e1892d6363911fc0972bfebf334d11b",
+        "bytes": 3663187
+      }
+    ],
+    "outputs": [
+      {
+        "path": "north-1.png",
+        "sha256": "ba79010ddca11af36672c51c36b6d759ff0d70b532d826d1c6f508a7316d2b35",
+        "bytes": 960265
+      },
+      {
+        "path": "north-2.png",
+        "sha256": "1a7b7a3c4d29757a580353d26c38bd2c91c07d4f7c7b7da9d337c1baca8fb5c8",
+        "bytes": 966991
+      },
+      {
+        "path": "south-1.png",
+        "sha256": "2a73cbe41a1d92ce78555552bb455b04d9571a9f0d7421fdb8a503bc459b502c",
+        "bytes": 970222
+      },
+      {
+        "path": "south-2.png",
+        "sha256": "d547ae1d6ff15ba2ff4e77424351312dc849e922a093671d59e30452d3d9a868",
+        "bytes": 970436
+      }
+    ],
+    "tool": {
+      "name": "extract_terrain_tiles.py",
+      "version": "0.5.0"
+    }
+  }
+}
