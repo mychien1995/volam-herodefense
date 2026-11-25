@@ -1,0 +1,549 @@
+{
+  "runId": "f6353ed7-9734-49c4-88e8-06c4ae157403",
+  "status": "FAIL",
+  "scope": "Remaining final stages after fixture-only retries; prior failing full-suite history retained.",
+  "args": [
+    "--config",
+    "playwright.standalone-pvp.config.ts",
+    "--grep",
+    "1v1 profile|entry, link"
+  ],
+  "stages": [
+    {
+      "label": "fresh final preflight",
+      "command": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "tools/qa-preflight.mjs",
+        "--mode",
+        "final",
+        "--config",
+        "playwright.standalone-pvp.config.ts",
+        "--grep",
+        "1v1 profile|entry, link"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 0.6992343000000001,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\0-fresh-final-preflight.log"
+    },
+    {
+      "label": "typecheck revised fixtures",
+      "command": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\node_modules\\.pnpm\\typescript@7.0.2\\node_modules\\typescript\\bin\\tsc",
+        "-p",
+        "tsconfig.tools.json",
+        "--noEmit"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 2.4185581000000003,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\1-typecheck-revised-fixtures.log"
+    },
+    {
+      "label": "production client build",
+      "command": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\node_modules\\.pnpm\\vite@8.3.5_@types+node@26.6.5_esbuild@0.28.2_tsx@4.23.15\\node_modules\\vite\\bin\\vite.js",
+        "build"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\apps\\game-client",
+      "seconds": 15.1320608,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\2-production-client-build.log"
+    },
+    {
+      "label": "scripts/verify-assets.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-assets.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 0.376054500000002,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\3-scripts-verify-assets-py.log"
+    },
+    {
+      "label": "scripts/verify-arena-art01.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-arena-art01.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 0.6844249000000018,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\4-scripts-verify-arena-art01-py.log"
+    },
+    {
+      "label": "scripts/verify-arena-v2.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-arena-v2.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 0.5344097000000002,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\5-scripts-verify-arena-v2-py.log"
+    },
+    {
+      "label": "scripts/verify-thien-son.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-thien-son.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 0.41205699999999706,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\6-scripts-verify-thien-son-py.log"
+    },
+    {
+      "label": "scripts/verify-vo-dang.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-vo-dang.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 0.41366129999999973,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\7-scripts-verify-vo-dang-py.log"
+    },
+    {
+      "label": "scripts/verify-thieu-lam.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-thieu-lam.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 0.49530809999999836,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\8-scripts-verify-thieu-lam-py.log"
+    },
+    {
+      "label": "scripts/verify-thieu-lam-skills.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-thieu-lam-skills.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 11.316256399999999,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\9-scripts-verify-thieu-lam-skills-py.log"
+    },
+    {
+      "label": "scripts/verify-thien-son-skills.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-thien-son-skills.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 1.3206255999999958,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\10-scripts-verify-thien-son-skills-py.log"
+    },
+    {
+      "label": "scripts/verify-vo-dang-skills.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-vo-dang-skills.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 1.9876680999999954,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\11-scripts-verify-vo-dang-skills-py.log"
+    },
+    {
+      "label": "scripts/verify-bamboo-forest.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-bamboo-forest.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 0.4868603000000003,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\12-scripts-verify-bamboo-forest-py.log"
+    },
+    {
+      "label": "scripts/verify-desert.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-desert.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 3.3813197,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\13-scripts-verify-desert-py.log"
+    },
+    {
+      "label": "scripts/verify-forest-creeps.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-forest-creeps.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 3.2765815000000003,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\14-scripts-verify-forest-creeps-py.log"
+    },
+    {
+      "label": "scripts/verify-beach.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-beach.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 1.7498004999999976,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\15-scripts-verify-beach-py.log"
+    },
+    {
+      "label": "scripts/verify-hell.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-hell.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 1.3803562999999994,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\16-scripts-verify-hell-py.log"
+    },
+    {
+      "label": "scripts/verify-chu-art.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-chu-art.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 0.4419699000000037,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\17-scripts-verify-chu-art-py.log"
+    },
+    {
+      "label": "scripts/verify-ly-mac-sau.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-ly-mac-sau.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 2.624575899999996,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\18-scripts-verify-ly-mac-sau-py.log"
+    },
+    {
+      "label": "scripts/verify-inventory-ui.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-inventory-ui.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 0.860065800000004,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\19-scripts-verify-inventory-ui-py.log"
+    },
+    {
+      "label": "scripts/verify-tay-doc.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-tay-doc.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 0.9411425000000018,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\20-scripts-verify-tay-doc-py.log"
+    },
+    {
+      "label": "scripts/verify-nam-de.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-nam-de.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 0.3670161999999982,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\21-scripts-verify-nam-de-py.log"
+    },
+    {
+      "label": "scripts/verify-bac-cai-preview.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-bac-cai-preview.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 1.1924723999999987,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\22-scripts-verify-bac-cai-preview-py.log"
+    },
+    {
+      "label": "scripts/verify-vuong-trung-duong.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-vuong-trung-duong.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 0.786037599999996,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\23-scripts-verify-vuong-trung-duong-py.log"
+    },
+    {
+      "label": "scripts/verify-renovation.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-renovation.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 8.481417699999998,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\24-scripts-verify-renovation-py.log"
+    },
+    {
+      "label": "scripts/verify-renovation-runtime.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-renovation-runtime.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 1.5212877999999983,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\25-scripts-verify-renovation-runtime-py.log"
+    },
+    {
+      "label": "scripts/verify-renovation-v2.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-renovation-v2.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 0.6422514999999985,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\26-scripts-verify-renovation-v2-py.log"
+    },
+    {
+      "label": "scripts/verify-renovation-v3.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-renovation-v3.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 3.746230100000001,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\27-scripts-verify-renovation-v3-py.log"
+    },
+    {
+      "label": "scripts/verify-renovation-v4.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-renovation-v4.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 2.3535296999999993,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\28-scripts-verify-renovation-v4-py.log"
+    },
+    {
+      "label": "scripts/verify-renovation-v5.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-renovation-v5.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 0.7173861000000034,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\29-scripts-verify-renovation-v5-py.log"
+    },
+    {
+      "label": "scripts/verify-renovation-v6.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-renovation-v6.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 0.49477219999999217,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\30-scripts-verify-renovation-v6-py.log"
+    },
+    {
+      "label": "scripts/verify-renovation-v7.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-renovation-v7.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 0.831638100000011,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\31-scripts-verify-renovation-v7-py.log"
+    },
+    {
+      "label": "scripts/verify-renovation-v8.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-renovation-v8.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 0.6113166000000055,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\32-scripts-verify-renovation-v8-py.log"
+    },
+    {
+      "label": "scripts/verify-loi-dai.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-loi-dai.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 0.5400930999999982,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\33-scripts-verify-loi-dai-py.log"
+    },
+    {
+      "label": "scripts/verify-contact-impacts.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-contact-impacts.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 1.4414907999999995,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\34-scripts-verify-contact-impacts-py.log"
+    },
+    {
+      "label": "scripts/verify-pvp.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-pvp.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 2.2153357000000105,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\35-scripts-verify-pvp-py.log"
+    },
+    {
+      "label": "scripts/verify-skill-sounds.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-skill-sounds.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 18.064841900000015,
+      "exitCode": 0,
+      "status": "PASS",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\36-scripts-verify-skill-sounds-py.log"
+    },
+    {
+      "label": "scripts/verify-skill-revise-thien-su.py",
+      "command": "python",
+      "args": [
+        "-X",
+        "utf8",
+        "scripts/verify-skill-revise-thien-su.py"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense",
+      "seconds": 0.5318862000000081,
+      "exitCode": 1,
+      "status": "FAIL",
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\m4d-pvp\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-pvp-balance-final\\resume\\f6353ed7-9734-49c4-88e8-06c4ae157403\\37-scripts-verify-skill-revise-thien-su-py.log"
+    }
+  ]
+}

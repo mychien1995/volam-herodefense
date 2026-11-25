@@ -10,6 +10,7 @@ import { dashCapacity } from './mobility.js';
 import { hurt } from './combat.js';
 import { segmentCircle } from './geometry.js';
 import { findNguDocSummon } from './ngu-doc-summons.js';
+import { createPvp1v1Config, pvpControlPolicy } from './pvp-balance.js';
 import type { BuildChange } from './progression-types.js';
 import type { Command, Hero, Point, Rect, SimulationConfig } from './types.js';
 import {
@@ -241,6 +242,8 @@ export class StandaloneLoiDai extends DungeonMatch {
     const world = this.arena.world,
       config = this.arena.config;
     const h = addHero(world, member.id, member.nickname, config);
+    if (world.pvp1v1)
+      h.statusDurationPolicy = pvpControlPolicy(world.pvp1v1, config.tickRate);
     h.schoolId = member.schoolId;
     h.level = 30;
     h.xp = experienceAtLevel(30, config);
@@ -305,6 +308,20 @@ export class StandaloneLoiDai extends DungeonMatch {
   private beginRound(): void {
     const world = this.arena.world;
     this.clearWorld();
+    const lineup = [...this.members.values()].filter(
+      (m) => m.ready && m.team !== 'spectator',
+    );
+    if (
+      this.definition.oneVOne &&
+      lineup.filter((m) => m.team === 'chinh').length === 1 &&
+      lineup.filter((m) => m.team === 'ta').length === 1
+    ) {
+      this.arena.config = createPvp1v1Config(
+        this.arena.config,
+        this.definition.oneVOne,
+      );
+      world.pvp1v1 = this.arena.config.pvp1v1!;
+    }
     const fighters = new Set<string>(),
       teams = new Map<string, string>();
     for (const m of this.members.values())
@@ -647,6 +664,7 @@ export class StandaloneLoiDai extends DungeonMatch {
   }
   snapshot(): PvpSnapshot {
     return {
+      combatProfile: this.arena.world.pvp1v1 ? 'pvp_1v1' : 'standard',
       mapId: this.mapId,
       hazardsEnabled: this.hazardsEnabled,
       phase: this.phase,

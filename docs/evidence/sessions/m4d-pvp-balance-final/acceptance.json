@@ -1,0 +1,147 @@
+{
+  "status": "PASS_WITH_AFFECTED_STAGE_RETRIES",
+  "date": "2026-11-25",
+  "branch": "wip/m4d/pvp",
+  "baseline": "82ddf8e096073425d3cf71a2a743e0a41767458c",
+  "scope": "All approved 1v1 tuning, including faster Nhan Kiem projectile and larger That Tinh impacts; standalone initial 1v1 lineups only.",
+  "finalWorkflow": {
+    "command": "pnpm check:final --config playwright.standalone-pvp.config.ts --grep \"1v1 profile|entry, link\"",
+    "singleInvocationPassed": false,
+    "historyRetained": true,
+    "reasons": [
+      "Existing QA registry test contradicted its own manual-profile exclusion.",
+      "Eleven M4D fixtures still used protocol48, 180-second production wave assumptions or skipped new boss provocation. Runtime PvE was not changed to satisfy fixtures.",
+      "Retained asset SHA inputs required CRLF checkout, missing from attributes. Original hash values and all raster bytes retained.",
+      "Existing guest-scene ready marker timed out twice at 45s before combat. Foregrounding alone did not make the first retry pass; the diagnostic rerun passed with the same gate and timeout. Root cause of this intermittent wait is not established."
+    ],
+    "reports": [
+      "check-workflow/final-timings.json",
+      "resume-timings.json",
+      "final-retry-timings.json",
+      "browser-retry-timings.json",
+      "browser-diagnostic-timings.json"
+    ]
+  },
+  "checks": {
+    "compile": "PASS",
+    "testToolTypes": "PASS",
+    "workflow": {
+      "status": "PASS",
+      "tests": 70
+    },
+    "unitIntegration": {
+      "status": "PASS_AFTER_FIXTURE_RETRIES",
+      "uniqueTests": 1330,
+      "files": 132,
+      "fullRun": {
+        "pass": 1319,
+        "fail": 11
+      },
+      "retry1": {
+        "files": [
+          "tests/bac-cai-room.test.ts",
+          "tests/creep-upgrade.test.ts",
+          "tests/dong-ta-room.test.ts",
+          "tests/dungeon-room.test.ts",
+          "tests/m3d-bac-cai-integration.test.ts",
+          "tests/m3d-hell-integration.test.ts",
+          "tests/m3d-kim-integration.test.ts",
+          "tests/m3d-nam-de-integration.test.ts",
+          "tests/nam-de-room.test.ts",
+          "tests/tay-doc-room.test.ts",
+          "tests/tay-doc.test.ts"
+        ],
+        "pass": 96,
+        "fail": 3,
+        "total": 99
+      },
+      "retry2": {
+        "files": [
+          "tests/bac-cai-room.test.ts",
+          "tests/nam-de-room.test.ts",
+          "tests/tay-doc-room.test.ts"
+        ],
+        "pass": 4,
+        "fail": 0
+      },
+      "profileRegressionTests": 13,
+      "limits": "Retry counts come from the executed Vitest tool output; passing full suites were not rerun after fixture-only corrections."
+    },
+    "productionBuild": "PASS",
+    "assets": {
+      "status": "PASS",
+      "validators": 35,
+      "exactMetadataRestorations": [
+        {
+          "path": "assets/exports/skill-revise-feedback-v04/hammer-coherent-v4/body.json",
+          "sha256": "9bc6c128eb59e8021f06c87fa552d9f65f2128d09048309c997df81acb8ea059",
+          "change": "Explicit CRLF checkout; JSON content unchanged. Exact original manifest hashes verified."
+        },
+        {
+          "path": "assets/reviews/thien-su-reference-motion-2026-11-24/body.json",
+          "sha256": "023eece91ecfad47eabeada99d4b9081991a6f7c8ba73bb784a98b2c84c88fdd",
+          "change": "Explicit CRLF checkout; JSON content unchanged. Exact original manifest hashes verified."
+        },
+        {
+          "path": "assets/reviews/thien-su-reference-motion-2026-11-24/study.json",
+          "sha256": "a2505d5737340e839bddbb3227c0e903edb1c7011684c5bc912b208346435937",
+          "change": "Explicit CRLF checkout; JSON content unchanged. Exact original manifest hashes verified."
+        },
+        {
+          "path": "assets/reviews/thien-su-reference-motion-2026-11-24/sweep/body.json",
+          "sha256": "c5585b7e3a0436a2cc41ecb7404f64f7ab1e54b577fee42e92bb4b465357f454",
+          "change": "Explicit CRLF checkout; JSON content unchanged. Exact original manifest hashes verified."
+        },
+        {
+          "path": "assets/reviews/thien-su-reference-motion-2026-11-24/sweep/study.json",
+          "sha256": "e5b82b08afb29d5d23ae3a94a6cf99922800230c80d8069c640256635a4380c3",
+          "change": "Explicit CRLF checkout; JSON content unchanged. Exact original manifest hashes verified."
+        },
+        {
+          "path": "assets/exports/skill-revise-thien-su-v06/hammer-combo-v6/body.json",
+          "sha256": "14df9b1c8738a15970aa97aff111fb016c07710be4590c5727df002760249cab",
+          "change": "Explicit CRLF checkout; JSON content unchanged. Exact original manifest hashes verified."
+        },
+        {
+          "path": "assets/exports/skill-revise-thien-su-v06/hammer-combo-v6/manifest.json",
+          "sha256": "ff30c9a8019f903b294c5343f9efb21ec9a5ed47f5b6f8c95c2023ef19d3d907",
+          "change": "Explicit CRLF checkout; JSON content unchanged. Exact original manifest hashes verified."
+        },
+        {
+          "path": "assets/source/skill-revise-thien-su-v08/registration-config.json",
+          "sha256": "3650abcc731067daec061c7a5a86724f058c79976e26da4820585936c625a9e7",
+          "change": "Explicit CRLF checkout; JSON content unchanged. Exact original manifest hashes verified."
+        }
+      ]
+    },
+    "browser": {
+      "status": "PASS_AFTER_AFFECTED_CASE_RETRY",
+      "uniqueCases": 2,
+      "profileCase": "1v1 profile publishes adjusted mana costs and replicates real skill damage",
+      "existingFlowCase": "entry, link, host team assignment, countdown freeze and replicated manual combat",
+      "recording": false,
+      "trace": false,
+      "screenshots": [
+        "standalone-pvp/pvp-1v1-balance.png",
+        "standalone-pvp/two-client-combat.png"
+      ],
+      "limits": "Earlier initial-render timeouts are retained; this is not a claim that the intermittent scene-start wait has been eliminated."
+    },
+    "pve": {
+      "status": "PASS",
+      "scenarios": 336,
+      "comparedTicks": 80640,
+      "canonicalConfigUnchanged": true,
+      "report": "pve-parity.json",
+      "limits": "14 branches, levels1/6/15/30, one/six players, three seeds, 240 ticks each. Not a full campaign."
+    },
+    "balance": {
+      "status": "MEASURED",
+      "duels": 2184,
+      "perVersion": 1092,
+      "report": "bot-comparison.json",
+      "limits": "Fixed tactical bots with movement/manual A/casts, two starting-distance profiles and reversed sides. Results do not establish human PvP balance."
+    }
+  },
+  "runtimeChangesOutside1v1": "None intended; full serialized PvE state and events matched the committed baseline in the tested scenarios."
+}

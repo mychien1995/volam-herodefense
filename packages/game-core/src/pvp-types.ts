@@ -1,4 +1,5 @@
 import type { Point } from './types.js';
+import type { Pvp1v1Tuning } from './pvp-balance.js';
 
 export const pvpMapIds = [
   'hong_moc',
@@ -21,6 +22,7 @@ export interface PvpMapDefinition {
   spawns: { chinh: Point[]; ta: Point[] };
 }
 export interface PvpDefinition {
+  oneVOne?: Pvp1v1Tuning;
   maxPlayers: number;
   teamCapacity: number;
   wins: number;
@@ -81,6 +83,7 @@ export interface PvpResult {
   reason: 'elimination' | 'timeout' | 'disconnect';
 }
 export interface PvpSnapshot {
+  combatProfile: 'standard' | 'pvp_1v1';
   mapId: PvpMapId;
   hazardsEnabled: boolean;
   phase: PvpPhase;

@@ -55,3 +55,5 @@ Theo yêu cầu mới nhất chỉ chạy kiểm tra cần thiết, dùng focuse
 Phòng hai client DH/TD kiểm tra shading, props, movement/arena sync và overhead stars. Phòng sáu client TH kiểm tra bờ/cầu, spawn hai hàng, death source/scale và statue cluster/boss first hit. Fixture chỉ đặt tiền đề hợp lệ; riêng target hình chết đứng yên/1 HP và player được bảo vệ để đòn thật từ keyboard tạo HP0. Tượng trong fixture art được bảo vệ vì sáu peer đứng xem không phòng thủ; không coi đây là phép đo sống sót của tượng. Status fixture kiểm tra renderer riêng; core tests kiểm tra status/cleanse/damage pipeline.
 
 Không có video/GIF/trace stream, không nhận đã chơi hết 20 wave hoặc campaign với người thật. Không tự đổi HP tượng/giá/thưởng để bù áp lực mới. QA thất bại trước đó (fixture middleware, expected one-row counts, thiếu thời gian tải sáu client, tượng bị phá trước đòn kiểm tra) được ghi trong verification, không gộp thành PASS.
+
+PvP1v1 follow-up: [profile chiến đấu riêng, toàn bộ tuning đã được yêu cầu và hồi quy PvE](PVP_1V1_BALANCE.md), triển khai trên `wip/m4d/pvp` từ baseline M4D `82ddf8e0`.

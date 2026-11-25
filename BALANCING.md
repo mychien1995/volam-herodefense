@@ -180,3 +180,7 @@ Director approved larger frontal damage for Hoành trảm; trial coefficient2.4�
 ## 2026-11-23 — approved skill revise integration
 
 The director authorized the twelve-branch revision and selected the crescent Phong Quyển projectile. [Canonical integration contract and trial tuning](docs/SKILL_REVISE_INTEGRATION_2026_11_23.md) supersede the older skill behavior in this scope. Stable IDs, server authority and unrelated campaign/economy rules remain in force. Old active Q Ngũ Lôi stance is replaced by a reactive passive; E Lôi Đình Chấn Vực is a rename only. Gameplay feel awaits the director’s Phòng test review.
+
+## PvP 1v1 M4D — 2026-11-25
+
+Người dùng cho phép triển khai profile thử riêng cho đội hình ban đầu1v1 của Lôi Đài độc lập: sát thương lên đấu thủ×0,75, giới hạn hard CC, nhịp A và các override từng nhánh. Bao gồm bán kính Thất Tinh48 và hồi Kinh Lôi3s. Profile khóa theo hiệp, không áp dụng theo số người còn sống. PvE/catalogue nền/đấu đội/Practice/Lôi Đài trong Defense giữ nguyên. [Thông số, phạm vi và cách kiểm chứng](docs/PVP_1V1_BALANCE.md).

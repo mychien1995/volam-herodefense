@@ -1,4 +1,5 @@
 import type { PvpDefinition, PvpMapDefinition } from '@volam/game-core';
+import { pvp1v1Tuning } from './pvp-balance.js';
 const rect = (x: number, y: number, width: number, height: number) => [
   { x, y },
   { x: x + width, y },
@@ -79,6 +80,7 @@ const maps: PvpDefinition['maps'] = {
   },
 };
 export const pvpDefinition: PvpDefinition = {
+  oneVOne: pvp1v1Tuning,
   maxPlayers: 8,
   teamCapacity: 4,
   wins: 3,
@@ -88,7 +90,7 @@ export const pvpDefinition: PvpDefinition = {
   intermissionTicks: 60,
   resultTicks: 120,
   maps,
-  // Trial hazard tuning; no separate PvP multiplier is applied to school skills.
+  // Hazards keep their own tuning; school overrides apply only to starting 1v1 lineups.
   hazards: {
     dartInterval: 75,
     arrowInterval: 120,

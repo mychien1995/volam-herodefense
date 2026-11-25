@@ -1,4 +1,5 @@
 import { provokeBossFight } from './boss-provocation.js';
+import { pvpDamageMultiplier } from './pvp-balance.js';
 import type {
   Actor,
   CombatEvent,
@@ -56,6 +57,8 @@ export function hurt(
     directHp?: boolean;
     periodic?: boolean | undefined;
     resolvedReflection?: boolean | undefined;
+    /** Stored HP loss already passed the 1v1 multiplier; retain the normal armor pipeline. */
+    pvpDamageResolved?: boolean | undefined;
     /** Exact, server-owned curse HP settlement. */
     unavoidableHpLoss?: boolean | undefined;
     combo?: ComboSpec | undefined;
@@ -409,6 +412,12 @@ export function hurt(
   }
   if (reflected) damage *= 0.5;
   const hero = craftedDefender;
+  if (
+    !snapshot?.unavoidableHpLoss &&
+    !snapshot?.resolvedReflection &&
+    !snapshot?.pvpDamageResolved
+  )
+    damage *= pvpDamageMultiplier(world, sourceId, target.id);
   // Strongest shield only; no additive absorption or duplicate resource spend.
   const shield = (snapshot?.unavoidableHpLoss ? [] : (hero?.statuses ?? []))
     .filter((s) => s.kind === 'mana_shield' && s.until > world.tick)
@@ -687,6 +696,7 @@ export function releaseGuardCounter(
       preserveFraction: true,
       fx: owner.fx,
       fy: owner.fy,
+      pvpDamageResolved: !!world.pvp1v1,
     });
   }
 }

@@ -31,6 +31,7 @@
     "assets:prepare": "node scripts/prepare-assets.mjs",
     "assets:generate": "python assets/source/m1_art.py && python assets/source/ui_world.py",
     "test:balance": "pnpm build:shared && pnpm --filter @volam/game-server exec tsx ../../tools/m1-balance.ts",
+    "test:balance:pvp": "pnpm build:shared && node tools/pvp-1v1-balance.mjs",
     "test:balance:m2b": "pnpm build:shared && pnpm --filter @volam/game-server exec tsx ../../tools/m2b-balance.ts",
     "test:balance:m3a": "pnpm build:shared && pnpm --filter @volam/game-server exec tsx ../../tools/m3a-balance.ts",
     "assets:export:skills": "node assets/source/skills/cai-bang/build.mjs",

@@ -628,3 +628,7 @@ Director approved the v05 preview of Dung Nham Liệt Địa, Vạn Lý Nham H�
 ## 2026-11-23 — approved skill revise integration
 
 The director authorized the twelve-branch revision and selected the crescent Phong Quyển projectile. [Canonical integration contract and trial tuning](docs/SKILL_REVISE_INTEGRATION_2026_11_23.md) supersede the older skill behavior in this scope. Stable IDs, server authority and unrelated campaign/economy rules remain in force. Old active Q Ngũ Lôi stance is replaced by a reactive passive; E Lôi Đình Chấn Vực is a rename only. Gameplay feel awaits the director’s Phòng test review.
+
+## PvP 1v1 M4D — 2026-11-25
+
+Người dùng yêu cầu “Làm tất cả các thay đổi trên trên nhánh wip/m4d/pvp”. Phạm vi xác nhận là toàn bộ gói thử1v1 vừa đề xuất, gồm Thất Tinh42→48 và hồi Kinh Lôi4→3s trước đó dành cho vòng thử sau. Chỉ Lôi Đài độc lập1v1; giữ PvE, Practice, Lôi Đài trong Defense và đấu đội. Tuning này được phép triển khai, chưa xác nhận cân bằng PvP cuối cùng hoặc mở scope khác. [Hợp đồng và kiểm chứng](docs/PVP_1V1_BALANCE.md).
