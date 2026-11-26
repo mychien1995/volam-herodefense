@@ -1,3 +1,4 @@
+import { pvpSnapshot } from './presentation-state-cache.js';
 import { assetUrl } from './asset-url.js';
 import { escapeHtml as esc } from './ui-components.js';
 import { readPlayerName, rememberPlayerName } from './player-name.js';
@@ -16,7 +17,7 @@ export const readPvp = (
 ): PvpSnapshot | undefined => {
   if (!state?.pvp.enabled || !state.pvp.json) return;
   try {
-    return JSON.parse(state.pvp.json) as PvpSnapshot;
+    return pvpSnapshot(state);
   } catch {
     return;
   }

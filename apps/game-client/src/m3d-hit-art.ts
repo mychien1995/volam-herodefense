@@ -1,3 +1,4 @@
+import { contourPixels } from './pixel-analysis.js';
 import Phaser from 'phaser';
 import type { CombatEvent } from '@volam/game-core';
 import { approvedM3dPresentation } from './m3d-approved-boss-body.js';
@@ -78,29 +79,7 @@ function drawContour(
   const { width, height } = canvas;
   const source = context.getImageData(0, 0, width, height).data;
   const edge = context.createImageData(width, height);
-  for (let y = 0; y < height; y++)
-    for (let x = 0; x < width; x++) {
-      const i = (y * width + x) * 4;
-      const original = source[i + 3]!;
-      if (original === 255) continue;
-      let maxAlpha = original;
-      for (
-        let dy = Math.max(0, y - padding);
-        dy <= Math.min(height - 1, y + padding);
-        dy++
-      )
-        for (
-          let dx = Math.max(0, x - padding);
-          dx <= Math.min(width - 1, x + padding);
-          dx++
-        )
-          maxAlpha = Math.max(maxAlpha, source[(dy * width + dx) * 4 + 3]!);
-      if (maxAlpha === original) continue;
-      edge.data[i] = 255;
-      edge.data[i + 1] = 223;
-      edge.data[i + 2] = 156;
-      edge.data[i + 3] = Math.round((maxAlpha - original) * 0.75);
-    }
+  edge.data.set(contourPixels(source, width, height, padding));
   context.putImageData(edge, 0, 0);
 }
 

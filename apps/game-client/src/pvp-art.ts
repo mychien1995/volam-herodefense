@@ -1,3 +1,4 @@
+import { pvpSnapshot } from './presentation-state-cache.js';
 import { frameWorld } from './camera-policy.js';
 import Phaser from 'phaser';
 import { pvpDefinition } from '@volam/game-data';
@@ -6,12 +7,7 @@ import type { PvpMapId, PvpSnapshot } from '@volam/game-core';
 import manifest from '../../../assets/exports/pvp/manifest.json';
 import { PvpSwordArt } from './pvp-sword-art.js';
 import { drawLoiDai } from './loi-dai-art.js';
-export const pvpView = (
-  state: LobbyState | undefined,
-): PvpSnapshot | undefined => {
-  if (!state?.pvp.enabled || !state.pvp.json) return;
-  return JSON.parse(state.pvp.json) as PvpSnapshot;
-};
+export const pvpView = pvpSnapshot;
 const key = (id: string) => 'standalone-pvp:' + id;
 export function preloadPvpArt(scene: Phaser.Scene): void {
   for (const file of manifest.files)

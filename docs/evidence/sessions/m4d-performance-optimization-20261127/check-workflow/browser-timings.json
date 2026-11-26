@@ -1,0 +1,101 @@
+{
+  "runId": "cded8c2c-b902-4e00-9d27-dd5f1c7bc34e",
+  "mode": "browser",
+  "args": [
+    "--config",
+    "playwright.performance.config.ts"
+  ],
+  "startedAt": "2026-11-26T23:00:20.485Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "environment preflight",
+      "seconds": 1.897,
+      "status": "PASS",
+      "checks": [
+        {
+          "id": "workspace",
+          "status": "PASS",
+          "detail": {
+            "mode": "browser",
+            "stage": "before-build",
+            "managed": true
+          }
+        },
+        {
+          "id": "session",
+          "status": "PASS",
+          "detail": {
+            "serverPort": 28961,
+            "clientPort": 28962
+          }
+        },
+        {
+          "id": "ports",
+          "status": "PASS"
+        },
+        {
+          "id": "node",
+          "status": "PASS",
+          "detail": "26.0.0"
+        },
+        {
+          "id": "installation",
+          "status": "PASS",
+          "detail": "pnpm@11.25.0"
+        },
+        {
+          "id": "tools",
+          "status": "PASS",
+          "detail": {
+            "typescript": "7.0.2",
+            "vitest": "5.0.5",
+            "vite": "8.3.5",
+            "@playwright/test": "1.64.1"
+          }
+        },
+        {
+          "id": "chromium",
+          "status": "PASS",
+          "detail": {
+            "version": "156.0.8078.4",
+            "cache": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\.cache\\ms-playwright"
+          }
+        }
+      ]
+    },
+    {
+      "label": "prepare assets (once)",
+      "seconds": 19.31,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-performance-optimization-20261127\\check-workflow\\cded8c2c-b902-4e00-9d27-dd5f1c7bc34e\\1-prepare-assets-once-.log",
+      "outputBytes": 806
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 0.42,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-performance-optimization-20261127\\check-workflow\\cded8c2c-b902-4e00-9d27-dd5f1c7bc34e\\2-compile-TypeScript.log",
+      "outputBytes": 0
+    },
+    {
+      "label": "production client build",
+      "seconds": 25.42,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-performance-optimization-20261127\\check-workflow\\cded8c2c-b902-4e00-9d27-dd5f1c7bc34e\\3-production-client-build.log",
+      "outputBytes": 25811
+    },
+    {
+      "label": "browser verification",
+      "seconds": 122.95,
+      "status": "FAIL",
+      "exitCode": 1,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-performance-optimization-20261127\\check-workflow\\cded8c2c-b902-4e00-9d27-dd5f1c7bc34e\\4-browser-verification.log",
+      "outputBytes": 3982
+    }
+  ],
+  "totalSeconds": 170.01
+}

@@ -1,3 +1,10 @@
+import {
+  findElement,
+  setText,
+  setAttribute,
+  setProperty,
+  setStyle,
+} from './dom-updates.js';
 import { skillIcon, assetUrl } from './asset-url.js';
 import { heroPortraitUrl } from './hero-portraits.js';
 import { heroTexture } from './hero-texture.js';
@@ -35,7 +42,7 @@ import {
 import type { MerchantAction, PotionId } from '@volam/game-core';
 import { ItemMenu } from './item-menu.js';
 export function element<T extends HTMLElement>(selector: string): T {
-  const found = document.querySelector<T>(selector);
+  const found = findElement<T>(selector);
   if (!found) throw new Error(`Missing element: ${selector}`);
   return found;
 }
@@ -635,8 +642,12 @@ export class GameUI {
   }
   refresh(state: LobbyState): void {
     this.state = state;
-    element('#viewport').dataset['practice'] = String(state.practice.enabled);
-    element('#practice-banner').hidden = !state.practice.enabled;
+    setProperty(
+      element('#viewport').dataset,
+      'practice',
+      String(state.practice.enabled),
+    );
+    setProperty(element('#practice-banner'), 'hidden', !state.practice.enabled);
     if (['DEFEAT', 'VICTORY'].includes(state.phase) && !this.ended) {
       this.ended = true;
       window.dispatchEvent(new Event('volam:controls-blocked'));
@@ -644,8 +655,10 @@ export class GameUI {
       this.setStudy(false);
     }
     this.defense.update(state, state.hostId === this.sessionId);
-    element('#player-count').textContent =
-      `${state.players.size} / ${state.maxPlayers}`;
+    setText(
+      element('#player-count'),
+      `${state.players.size} / ${state.maxPlayers}`,
+    );
     const list = document.querySelector('#players');
     list?.replaceChildren(
       ...[...state.players.entries()].map(([id, hero]) => {
@@ -657,23 +670,26 @@ export class GameUI {
           hp: String(hero.hp),
         });
         const name = document.createElement('strong');
-        name.textContent = `${hero.nickname}${id === this.sessionId ? ' (bạn)' : ''} · Cấp ${hero.level}`;
+        setText(
+          name,
+          `${hero.nickname}${id === this.sessionId ? ' (bạn)' : ''} · Cấp ${hero.level}`,
+        );
         const checks = document.createElement('small');
-        checks.textContent = `Lần kiểm tra: ${hero.checks}`;
+        setText(checks, `Lần kiểm tra: ${hero.checks}`);
         row.append(name, checks);
         return row;
       }),
     );
     const partyRoom = document.querySelector('#party-room');
-    if (partyRoom) partyRoom.textContent = this.roomId;
+    if (partyRoom) setText(partyRoom, this.roomId);
     const ack = document.querySelector('#ack');
-    if (ack) ack.textContent = this.ack;
+    if (ack) setText(ack, this.ack);
     document.querySelector('#creeps')?.replaceChildren(
       ...[...state.creeps.entries()].map(([id, creep]) => {
         const row = document.createElement('li');
-        row.dataset['creepId'] = id;
-        row.dataset['hp'] = String(creep.hp);
-        row.textContent = `Sơn tặc · ${Math.ceil(creep.hp)} / ${creep.maxHp} HP`;
+        setProperty(row.dataset, 'creepId', id);
+        setProperty(row.dataset, 'hp', String(creep.hp));
+        setText(row, `Sơn tặc · ${Math.ceil(creep.hp)} / ${creep.maxHp} HP`);
         return row;
       }),
     );
@@ -716,59 +732,73 @@ export class GameUI {
       : inDuel
         ? 'Về đấu trường'
         : 'Lôi Đài';
-    pvp.title = duelLabel;
-    pvp.setAttribute('aria-label', duelLabel);
-    pvp.querySelector('span:last-child')!.textContent = duelLabel;
-    pvp.disabled = hero.zoneId !== 'arena' && !inDuel;
+    setProperty(pvp, 'title', duelLabel);
+    setAttribute(pvp, 'aria-label', duelLabel);
+    setText(pvp.querySelector('span:last-child')!, duelLabel);
+    setProperty(pvp, 'disabled', hero.zoneId !== 'arena' && !inDuel);
     for (const menu of ['dungeons', 'merchant'])
-      element<HTMLButtonElement>(
-        `.system-buttons [data-menu="${menu}"]`,
-      ).disabled = inDuel;
+      setProperty(
+        element<HTMLButtonElement>(`.system-buttons [data-menu="${menu}"]`),
+        'disabled',
+        inDuel,
+      );
     const hint = element('#loi-dai-hint');
-    hint.hidden = !inDuel || hero.hp <= 0 || this.blocked;
-    hint.textContent = !inDuel
-      ? ''
-      : state.loiDaiGateTicks > 0
-        ? `Mở lối lên đài sau ${Math.ceil(state.loiDaiGateTicks / m1Config.tickRate)} giây`
-        : state.loiDaiFighters === 2
-          ? hero.loiDaiFighter
-            ? ''
-            : 'Đang quan chiến · Sàn đủ hai đấu thủ'
-          : hero.loiDaiFighter
-            ? 'Đang chờ đối thủ'
-            : 'Đi lên bậc thang để vào sàn đấu';
+    setProperty(hint, 'hidden', !inDuel || hero.hp <= 0 || this.blocked);
+    setText(
+      hint,
+      !inDuel
+        ? ''
+        : state.loiDaiGateTicks > 0
+          ? `Mở lối lên đài sau ${Math.ceil(state.loiDaiGateTicks / m1Config.tickRate)} giây`
+          : state.loiDaiFighters === 2
+            ? hero.loiDaiFighter
+              ? ''
+              : 'Đang quan chiến · Sàn đủ hai đấu thủ'
+            : hero.loiDaiFighter
+              ? 'Đang chờ đối thủ'
+              : 'Đi lên bậc thang để vào sàn đấu',
+    );
     hint.hidden ||= !hint.textContent;
     const help = element<HTMLButtonElement>('#boss-help-button');
-    help.hidden =
+    setProperty(
+      help,
+      'hidden',
       hero.zoneId === 'arena' ||
-      inDuel ||
-      !isBossDestination(dungeonForZone(hero.zoneId).id) ||
-      state.players.size <= 1 ||
-      hero.hp <= 0;
-    help.disabled = this.blocked;
+        inDuel ||
+        !isBossDestination(dungeonForZone(hero.zoneId).id) ||
+        state.players.size <= 1 ||
+        hero.hp <= 0,
+    );
+    setProperty(help, 'disabled', this.blocked);
     const dead =
       !state.pvp.enabled && hero.hp <= 0 && state.phase === 'IN_GAME';
     if (dead && !this.dead)
       window.dispatchEvent(new Event('volam:controls-blocked'));
     this.dead = dead;
     element('#game').classList.toggle('hero-dead', dead);
-    element('#respawn-overlay').hidden = !dead;
-    element('#respawn-countdown').textContent = inDuel
-      ? `Trở về sảnh chờ sau ${Math.ceil(hero.respawnTicks / m1Config.tickRate)} giây`
-      : hero.bossSpectator
-        ? 'Đã hết lượt hồi sinh · ↑ ↓ ← → để quan chiến'
-        : `Tự hồi sinh ${hero.zoneId === 'arena' ? 'tại đấu trường' : isBossDestination(dungeonForZone(hero.zoneId).id) ? 'tại cửa phó bản' : 'tại đấu trường'} sau ${Math.ceil(hero.respawnTicks / m1Config.tickRate)} giây`;
+    setProperty(element('#respawn-overlay'), 'hidden', !dead);
+    setText(
+      element('#respawn-countdown'),
+      inDuel
+        ? `Trở về sảnh chờ sau ${Math.ceil(hero.respawnTicks / m1Config.tickRate)} giây`
+        : hero.bossSpectator
+          ? 'Đã hết lượt hồi sinh · ↑ ↓ ← → để quan chiến'
+          : `Tự hồi sinh ${hero.zoneId === 'arena' ? 'tại đấu trường' : isBossDestination(dungeonForZone(hero.zoneId).id) ? 'tại cửa phó bản' : 'tại đấu trường'} sau ${Math.ceil(hero.respawnTicks / m1Config.tickRate)} giây`,
+    );
     const dungeon =
       hero.zoneId === 'arena' || inDuel
         ? undefined
         : dungeonForZone(hero.zoneId);
     const exit = dungeon?.exit;
-    element('#dungeon-exit-hint').hidden =
+    setProperty(
+      element('#dungeon-exit-hint'),
+      'hidden',
       this.blocked ||
-      dead ||
-      !dungeon ||
-      !exit ||
-      Math.hypot(hero.x - exit.x, hero.y - exit.y) > dungeon.exitRange;
+        dead ||
+        !dungeon ||
+        !exit ||
+        Math.hypot(hero.x - exit.x, hero.y - exit.y) > dungeon.exitRange,
+    );
     this.skillMenu?.update(hero);
     this.itemMenu?.update(hero);
     for (const resource of ['hp', 'mp'] as const) {
@@ -783,59 +813,73 @@ export class GameUI {
       const seconds = Math.ceil(
         hero.inventory.potionCooldownTicks / m1Config.tickRate,
       );
-      button.disabled =
+      setProperty(
+        button,
+        'disabled',
         inDuel ||
-        dead ||
-        !id ||
-        seconds > 0 ||
-        (resource === 'hp' ? hero.hp >= hero.maxHp : hero.mana >= hero.maxMana);
-      button.querySelector('em')!.textContent = String(count);
-      button.querySelector('b')!.textContent = seconds ? `${seconds}` : '';
+          dead ||
+          !id ||
+          seconds > 0 ||
+          (resource === 'hp'
+            ? hero.hp >= hero.maxHp
+            : hero.mana >= hero.maxMana),
+      );
+      setText(button.querySelector('em')!, String(count));
+      setText(button.querySelector('b')!, seconds ? `${seconds}` : '');
       const label = id
         ? `${economyTrial.potions[id].nameVi} · Hồi ${economyTrial.potions[id].amount} · Dùng cỡ nhỏ trước`
         : `Không còn bình ${resource === 'hp' ? 'máu' : 'mana'}`;
       const hotkey = resource === 'hp' ? '1' : '2';
-      button.title = `${hotkey} · ${seconds ? `Đang hồi · ${seconds}s` : label}`;
-      button.setAttribute('aria-label', `${label} · Phím ${hotkey}`);
+      setProperty(
+        button,
+        'title',
+        `${hotkey} · ${seconds ? `Đang hồi · ${seconds}s` : label}`,
+      );
+      setAttribute(button, 'aria-label', `${label} · Phím ${hotkey}`);
     }
-    element('#available-points').textContent = hero.build.enabled
-      ? String(hero.build.available)
-      : '';
+    setText(
+      element('#available-points'),
+      hero.build.enabled ? String(hero.build.available) : '',
+    );
     const inArena = hero.zoneId === 'arena';
     const canEnter = inArena && hero.hp > 0;
     const enter = document.querySelector<HTMLButtonElement>('#enter-dungeon');
-    if (enter) enter.disabled = !canEnter;
+    if (enter) setProperty(enter, 'disabled', !canEnter);
     const kind = document.querySelector('#dungeon-kind');
     if (kind)
-      kind.textContent = [
-        'chu_ba_thong',
-        'hong_liet',
-        'kim_luan',
-        'co_mo',
-      ].includes(this.dungeonDestination)
-        ? 'Thủ lĩnh · Chung'
-        : 'Quái thường · Riêng';
+      setText(
+        kind,
+        ['chu_ba_thong', 'hong_liet', 'kim_luan', 'co_mo'].includes(
+          this.dungeonDestination,
+        )
+          ? 'Thủ lĩnh · Chung'
+          : 'Quái thường · Riêng',
+      );
     const entryNote = document.querySelector('#dungeon-entry-note');
     if (entryNote)
-      entryNote.textContent = canEnter
-        ? `${isBossDestination(this.dungeonDestination) ? 'Phó bản chung' : 'Phó bản riêng'} · ${{ forest: 'Rừng Trúc', desert: 'Sa Mạc', sea: 'Biển', hell: 'Địa Ngục', chu_ba_thong: 'Chu Bá Thông', hong_liet: 'Hoàn Nhan Hồng Liệt', kim_luan: 'Kim Luân Pháp Vương · Tương Dương', co_mo: 'Cổ Mộ Phái' }[this.dungeonDestination]}.`
-        : inArena
-          ? 'Bạn cần hồi sinh trước khi vào phó bản.'
-          : 'Đến gần cửa rồi nhấn Space để về đấu trường.';
+      setText(
+        entryNote,
+        canEnter
+          ? `${isBossDestination(this.dungeonDestination) ? 'Phó bản chung' : 'Phó bản riêng'} · ${{ forest: 'Rừng Trúc', desert: 'Sa Mạc', sea: 'Biển', hell: 'Địa Ngục', chu_ba_thong: 'Chu Bá Thông', hong_liet: 'Hoàn Nhan Hồng Liệt', kim_luan: 'Kim Luân Pháp Vương · Tương Dương', co_mo: 'Cổ Mộ Phái' }[this.dungeonDestination]}.`
+          : inArena
+            ? 'Bạn cần hồi sinh trước khi vào phó bản.'
+            : 'Đến gần cửa rồi nhấn Space để về đấu trường.',
+      );
     const studyButton =
       document.querySelector<HTMLButtonElement>('#forest-study');
-    if (studyButton) studyButton.disabled = !inArena;
+    if (studyButton) setProperty(studyButton, 'disabled', !inArena);
     const zone = state.dungeons.get(hero.zoneId);
     const zoneStatus = element('#zone-status');
-    zoneStatus.hidden = inArena && hero.respawnTicks <= 0;
+    setProperty(zoneStatus, 'hidden', inArena && hero.respawnTicks <= 0);
     const desert = hero.zoneId.startsWith('desert_');
     const beach = hero.zoneId.startsWith('sea_');
     const hell = hero.zoneId.startsWith('hell_');
     const coMo = hero.zoneId.startsWith('co_mo_');
     const hongLiet = hero.zoneId.startsWith('hong_liet_');
     const kim = hero.zoneId.startsWith('kim_luan_');
-    zoneStatus.title = '';
-    zoneStatus.textContent =
+    setProperty(zoneStatus, 'title', '');
+    setText(
+      zoneStatus,
       hero.respawnTicks > 0
         ? `Đã gục ngã · Về đấu trường sau ${Math.ceil(hero.respawnTicks / m1Config.tickRate)} giây`
         : zone
@@ -848,37 +892,51 @@ export class GameUI {
               : hongLiet
                 ? `Hoàn Nhan Hồng Liệt · ${zone.access === 'private' ? 'Riêng' : 'Chung'}${zone.bossRespawnTicks ? ` · Hồi sinh ${Math.ceil(zone.bossRespawnTicks / 30)}s` : ''}`
                 : `${dungeon?.id === 'chu_ba_thong' ? 'Chu Bá Thông' : hell ? 'Địa Ngục' : beach ? 'Biển' : desert ? 'Sa Mạc' : 'Rừng Trúc'} · ${zone.access === 'private' ? 'Riêng' : 'Chung'} · Đợt ${zone.wave} · ${zone.living} còn lại${zone.nextWaveTicks > 0 ? ` · Đợt tiếp sau ${Math.ceil(zone.nextWaveTicks / m1Config.tickRate)}s` : ''}`
-          : '';
+          : '',
+    );
     const claims = JSON.parse(hero.bossLoot || '[]') as Array<{
       nameVi: string;
     }>;
     const lootNotice = document.querySelector('#boss-loot-notice');
     if (lootNotice)
-      lootNotice.textContent = claims.length
-        ? `Chiến lợi phẩm: ${claims.at(-1)!.nameVi} · ${claims.length} vật phẩm`
-        : '';
+      setText(
+        lootNotice,
+        claims.length
+          ? `Chiến lợi phẩm: ${claims.at(-1)!.nameVi} · ${claims.length} vật phẩm`
+          : '',
+      );
     const lootList = document.querySelector('#boss-loot-items');
     if (lootList) {
       lootList.replaceChildren(
         ...claims.map((c) => {
           const li = document.createElement('li');
-          li.textContent = c.nameVi;
+          setText(li, c.nameVi);
           return li;
         }),
       );
       const title = document.querySelector('#game-dialog .item-description h3');
-      if (title && claims.length) title.textContent = 'Chiến lợi phẩm đang giữ';
+      if (title && claims.length) setText(title, 'Chiến lợi phẩm đang giữ');
     }
-    element('#hero-name').textContent = hero.nickname;
-    element('#school-name').textContent =
-      schools.find((s) => s.id === hero.schoolId)?.name ?? 'Cái Bang';
-    element('#duong-mon-innate-icon').hidden =
-      hero.schoolId !== duongMon.school;
-    element('#ngu-doc-innate-icon').hidden = hero.schoolId !== nguDoc.school;
-    element('#viewport').dataset['heroSchool'] = hero.schoolId;
-    element('#viewport').dataset['heroForm'] = heroTexture(
-      hero.basicId,
-      hero.schoolId,
+    setText(element('#hero-name'), hero.nickname);
+    setText(
+      element('#school-name'),
+      schools.find((s) => s.id === hero.schoolId)?.name ?? 'Cái Bang',
+    );
+    setProperty(
+      element('#duong-mon-innate-icon'),
+      'hidden',
+      hero.schoolId !== duongMon.school,
+    );
+    setProperty(
+      element('#ngu-doc-innate-icon'),
+      'hidden',
+      hero.schoolId !== nguDoc.school,
+    );
+    setProperty(element('#viewport').dataset, 'heroSchool', hero.schoolId);
+    setProperty(
+      element('#viewport').dataset,
+      'heroForm',
+      heroTexture(hero.basicId, hero.schoolId),
     );
     const form = heroTexture(hero.basicId, hero.schoolId);
     const viewport = element('#viewport');
@@ -890,14 +948,34 @@ export class GameUI {
       if (viewport.style.getPropertyValue(name!) !== value)
         viewport.style.setProperty(name!, value);
     }
-    element('.portrait').title =
+    setProperty(
+      element('.portrait'),
+      'title',
       'Chân dung ' +
-      (schools.find((s) => s.id === hero.schoolId)?.name ?? 'Cái Bang');
+        (schools.find((s) => s.id === hero.schoolId)?.name ?? 'Cái Bang'),
+    );
+    const schoolHasSkillIcon = [
+      'cai_bang',
+      'thien_son',
+      'vo_dang',
+      'thieu_lam',
+      'con_luan',
+      'duong_mon',
+      'ngu_doc',
+    ].includes(hero.schoolId);
     const chuong = hero.basicId === 'cai_bang_chuong';
-    element('#viewport').dataset['basicStyle'] = chuong ? 'chuong' : 'bong';
-    element('#slot-a .pixel-icon').className =
-      `pixel-icon ${chuong ? 'icon-palm' : 'icon-staff'}`;
-    element('#hero-level').textContent = String(hero.level);
+    setProperty(
+      element('#viewport').dataset,
+      'basicStyle',
+      chuong ? 'chuong' : 'bong',
+    );
+    if (!schoolHasSkillIcon)
+      setProperty(
+        element('#slot-a .pixel-icon'),
+        'className',
+        `pixel-icon ${chuong ? 'icon-palm' : 'icon-staff'}`,
+      );
+    setText(element('#hero-level'), String(hero.level));
     for (const [name, value, max, label] of [
       ['hp', hero.hp, hero.maxHp, 'SL'],
       ['mp', hero.mana, hero.maxMana, 'NL'],
@@ -925,25 +1003,36 @@ export class GameUI {
               ? value - JSON.parse(hero.inventory.campaign).xpStart
               : value % max
           : value;
-      meter.setAttribute('aria-valuenow', String(progress));
-      meter.setAttribute('aria-valuemax', String(max));
-      meter.querySelector<HTMLElement>('i')!.style.width =
-        `${Math.min(100, Math.max(0, (progress / max) * 100))}%`;
-      element(`#${name}-text`).textContent = capped
-        ? 'Kinh nghiệm tối đa · Cấp 30'
-        : `${label} ${Math.floor(progress)} / ${Math.ceil(max)}`;
+      setAttribute(meter, 'aria-valuenow', String(progress));
+      setAttribute(meter, 'aria-valuemax', String(max));
+      setStyle(
+        meter.querySelector<HTMLElement>('i')!.style,
+        'width',
+        `${Math.min(100, Math.max(0, (progress / max) * 100))}%`,
+      );
+      setText(
+        element(`#${name}-text`),
+        capped
+          ? 'Kinh nghiệm tối đa · Cấp 30'
+          : `${label} ${Math.floor(progress)} / ${Math.ceil(max)}`,
+      );
     }
-    element('#hero-stats').textContent =
-      `Cấp ${hero.level} · Sinh lực ${Math.ceil(hero.hp)}/${hero.maxHp} · Nội lực ${Math.floor(hero.mana)}/${hero.maxMana} · Kinh nghiệm ${hero.xp} · Vàng ${hero.gold} · Điểm kỹ năng ${hero.skillPoints}`;
+    setText(
+      element('#hero-stats'),
+      `Cấp ${hero.level} · Sinh lực ${Math.ceil(hero.hp)}/${hero.maxHp} · Nội lực ${Math.floor(hero.mana)}/${hero.maxMana} · Kinh nghiệm ${hero.xp} · Vàng ${hero.gold} · Điểm kỹ năng ${hero.skillPoints}`,
+    );
     for (const target of document.querySelectorAll('.live-gold'))
-      target.textContent = String(hero.gold);
+      setText(target, String(hero.gold));
     const stats = document.querySelector('#inventory-stats');
     if (stats)
-      stats.textContent = `Cấp ${hero.level} · Sinh lực ${Math.ceil(hero.hp)}/${hero.maxHp} · Nội lực ${Math.floor(hero.mana)}/${hero.maxMana} · Kinh nghiệm ${hero.xp} · Điểm kỹ năng ${hero.skillPoints}`;
+      setText(
+        stats,
+        `Cấp ${hero.level} · Sinh lực ${Math.ceil(hero.hp)}/${hero.maxHp} · Nội lực ${Math.floor(hero.mana)}/${hero.maxMana} · Kinh nghiệm ${hero.xp} · Điểm kỹ năng ${hero.skillPoints}`,
+      );
     const select = document.querySelector<HTMLSelectElement>('#basic-style');
-    if (select) select.disabled = !inArena || hero.hp <= 0;
+    if (select) setProperty(select, 'disabled', !inArena || hero.hp <= 0);
     if (select && document.activeElement !== select)
-      select.value = hero.basicId;
+      setProperty(select, 'value', hero.basicId);
     let combo = document.querySelector<HTMLElement>('#phat-dong-progress');
     if (!combo) {
       combo = document.createElement('div');
@@ -956,8 +1045,13 @@ export class GameUI {
       step: number;
       ticks: number;
     }>;
-    combo.hidden = hero.schoolId !== 'thieu_lam' || records.length === 0;
-    combo.textContent =
+    setProperty(
+      combo,
+      'hidden',
+      hero.schoolId !== 'thieu_lam' || records.length === 0,
+    );
+    setText(
+      combo,
       records
         .slice(0, 3)
         .map(
@@ -965,22 +1059,32 @@ export class GameUI {
             `${c.id === 'phat_dong_a' ? 'A' : 'B'} ${c.step}/3 · ${(c.ticks / m1Config.tickRate).toFixed(1)}s`,
         )
         .join(' | ') +
-      (records.length > 3 ? ` +${records.length - 3} địch` : '');
-    combo.title = records
-      .map(
-        (c) =>
-          `${c.id === 'phat_dong_a' ? 'A' : 'B'} · ${c.targetId} · ${c.step}/3`,
-      )
-      .join('\n');
-    element('#dash-charges').textContent = String(hero.dashCharges);
-    element('#dash-timer').textContent =
+        (records.length > 3 ? ` +${records.length - 3} địch` : ''),
+    );
+    setProperty(
+      combo,
+      'title',
+      records
+        .map(
+          (c) =>
+            `${c.id === 'phat_dong_a' ? 'A' : 'B'} · ${c.targetId} · ${c.step}/3`,
+        )
+        .join('\n'),
+    );
+    setText(element('#dash-charges'), String(hero.dashCharges));
+    setText(
+      element('#dash-timer'),
       hero.dashRechargeTicks > 0
         ? `${(hero.dashRechargeTicks / m1Config.tickRate).toFixed(1)}s`
-        : '';
+        : '',
+    );
     const dashProgress = element<HTMLProgressElement>('#dash-progress');
-    dashProgress.max = m1Config.mobility!.rechargeTicks;
-    dashProgress.value =
-      m1Config.mobility!.rechargeTicks - hero.dashRechargeTicks;
+    setProperty(dashProgress, 'max', m1Config.mobility!.rechargeTicks);
+    setProperty(
+      dashProgress,
+      'value',
+      m1Config.mobility!.rechargeTicks - hero.dashRechargeTicks,
+    );
     element('#dash-status').classList.toggle(
       'unavailable',
       hero.hp <= 0 ||
@@ -989,20 +1093,32 @@ export class GameUI {
     );
     const fixed = hero.build.mode === 'fixed';
     const points = element('#fixed-skill-points');
-    points.hidden = inDuel || !fixed || hero.build.available === 0;
-    points.textContent = hero.build.available + ' điểm · Giữ O + QWERT';
+    setProperty(
+      points,
+      'hidden',
+      inDuel || !fixed || hero.build.available === 0,
+    );
+    setText(points, hero.build.available + ' điểm · Giữ O + QWERT');
     const stance = element('#shaolin-stance');
-    stance.hidden = !fixed || hero.basicId !== 'thieu_lam_quyen';
-    stance.textContent =
+    setProperty(stance, 'hidden', !fixed || hero.basicId !== 'thieu_lam_quyen');
+    setText(
+      stance,
       (hero.build.slotSkills[0] === 'toan_phong_thoai' ? 'Cước' : 'Quyền') +
-      ' · F';
+        ' · F',
+    );
     const dodge = directDodgeChance(hero.schoolId, hero.level, m1Config);
     const passive = element('#innate-dodge');
-    passive.hidden = dodge === 0;
-    passive.textContent =
-      'Bắc Minh Thần Công · Né đòn ' + dodgePercentage.format(dodge);
-    element('.loadout-toggle').hidden = !!this.state?.requiresBranch;
-    element('#slot-t').hidden = !fixed;
+    setProperty(passive, 'hidden', dodge === 0);
+    setText(
+      passive,
+      'Bắc Minh Thần Công · Né đòn ' + dodgePercentage.format(dodge),
+    );
+    setProperty(
+      element('.loadout-toggle'),
+      'hidden',
+      !!this.state?.requiresBranch,
+    );
+    setProperty(element('#slot-t'), 'hidden', !fixed);
     const combatConfig = pvpCombatConfig(readPvp(this.state));
     const slots = [
       {
@@ -1037,16 +1153,20 @@ export class GameUI {
         area.ownerId === this.sessionId &&
         area.zoneId === hero.zoneId,
     ).length;
-    element('#kinh-loi-status').hidden = !plant;
-    element('#kinh-loi-charges').textContent = plant
-      ? String(Math.min(plant.count, plant.capacity - placed))
-      : '';
-    element('#kinh-loi-timer').textContent = plant?.rechargeTicks
-      ? (plant.rechargeTicks / m1Config.tickRate).toFixed(1)
-      : '';
+    setProperty(element('#kinh-loi-status'), 'hidden', !plant);
+    setText(
+      element('#kinh-loi-charges'),
+      plant ? String(Math.min(plant.count, plant.capacity - placed)) : '',
+    );
+    setText(
+      element('#kinh-loi-timer'),
+      plant?.rechargeTicks
+        ? (plant.rechargeTicks / m1Config.tickRate).toFixed(1)
+        : '',
+    );
     const conLuanStance = element('#con-luan-stance');
-    conLuanStance.hidden = hero.basicId !== conLuan.monk;
-    conLuanStance.textContent = 'Ngũ Lôi · Nội tại';
+    setProperty(conLuanStance, 'hidden', hero.basicId !== conLuan.monk);
+    setText(conLuanStance, 'Ngũ Lôi · Nội tại');
     const recallReady = [...(this.state?.projectiles.values() ?? [])].some(
       (shot) =>
         shot.ownerId === this.sessionId &&
@@ -1094,7 +1214,7 @@ export class GameUI {
       const slot = element(`#slot-${key}`),
         cooling = remaining > 0 && !recast,
         cost = recast || state.practice.enabled ? 0 : (ability?.manaCost ?? 0);
-      slot.dataset['recastReady'] = String(recast);
+      setProperty(slot.dataset, 'recastReady', String(recast));
       slot.classList.toggle('cooling', cooling);
       const controlled = activeStatuses.some(
         (s) =>
@@ -1128,77 +1248,94 @@ export class GameUI {
         let badge = slot.querySelector<HTMLElement>('.skill-rank');
         if (!badge) {
           badge = document.createElement('b');
-          badge.className = 'skill-rank';
+          setProperty(badge, 'className', 'skill-rank');
           slot.append(badge);
         }
-        badge.textContent = hero.build.enabled && ability ? String(rank) : '';
+        setText(badge, hero.build.enabled && ability ? String(rank) : '');
         const upgrade = slot.querySelector<HTMLButtonElement>('.rank-up')!;
         const gate = ability
           ? m1Config.progression?.skills[ability.id]?.levelGates[rank]
           : undefined;
-        upgrade.hidden =
+        setProperty(
+          upgrade,
+          'hidden',
           inDuel ||
-          !fixed ||
-          !ability ||
-          gate === undefined ||
-          hero.build.available === 0;
-        upgrade.disabled =
+            !fixed ||
+            !ability ||
+            gate === undefined ||
+            hero.build.available === 0,
+        );
+        setProperty(
+          upgrade,
+          'disabled',
           hero.hp <= 0 ||
-          this.blocked ||
-          gate === undefined ||
-          hero.level < gate;
-        upgrade.title =
+            this.blocked ||
+            gate === undefined ||
+            hero.level < gate,
+        );
+        setProperty(
+          upgrade,
+          'title',
           ability && gate !== undefined
             ? 'Tăng ' +
-              ability.nameVi +
-              ' lên bậc ' +
-              (rank + 1) +
-              ' · Cấp ' +
-              gate
-            : '';
-        upgrade.setAttribute('aria-label', upgrade.title);
+                ability.nameVi +
+                ' lên bậc ' +
+                (rank + 1) +
+                ' · Cấp ' +
+                gate
+            : '',
+        );
+        setAttribute(upgrade, 'aria-label', upgrade.title);
         const art = slot.querySelector<HTMLElement>('.pixel-icon')!;
-        art.className = ability
-          ? 'pixel-icon skill-icon'
-          : 'pixel-icon icon-lock';
-        art.style.backgroundImage = ability
-          ? `url("${skillIcon(ability.id)}")`
-          : '';
-        art.style.backgroundPosition = ability ? 'center' : '';
-        art.style.backgroundSize = ability ? 'contain' : '';
-        art.style.backgroundRepeat = 'no-repeat';
+        setProperty(
+          art,
+          'className',
+          ability ? 'pixel-icon skill-icon' : 'pixel-icon icon-lock',
+        );
+        setStyle(
+          art.style,
+          'backgroundImage',
+          ability ? `url("${skillIcon(ability.id)}")` : '',
+        );
+        setStyle(art.style, 'backgroundPosition', ability ? 'center' : '');
+        setStyle(art.style, 'backgroundSize', ability ? 'contain' : '');
+        setStyle(art.style, 'backgroundRepeat', 'no-repeat');
       }
-      if (
-        key === 'a' &&
-        [
-          'cai_bang',
-          'thien_son',
-          'vo_dang',
-          'thieu_lam',
-          'con_luan',
-          'duong_mon',
-          'ngu_doc',
-        ].includes(hero.schoolId)
-      ) {
+      if (key === 'a' && schoolHasSkillIcon) {
         const art = slot.querySelector<HTMLElement>('.pixel-icon')!;
-        art.className = 'pixel-icon skill-icon';
-        art.style.background = `url("${skillIcon(hero.basicId)}") center / contain no-repeat`;
+        setProperty(art, 'className', 'pixel-icon skill-icon');
+        setStyle(
+          art.style,
+          'background',
+          `url("${skillIcon(hero.basicId)}") center / contain no-repeat`,
+        );
       } else if (key === 'a')
-        slot.querySelector<HTMLElement>('.pixel-icon')!.style.background = '';
-      element(`#timer-${key}`).textContent = passive
-        ? ''
-        : recast
-          ? recall
-            ? ''
-            : ((fortune?.ticks ?? hero.blinkTicks) / m1Config.tickRate).toFixed(
-                1,
-              )
-          : cooling
-            ? (remaining / m1Config.tickRate).toFixed(1)
-            : '';
-      slot.querySelector<HTMLElement>('.cooldown-shade')!.style.height =
-        `${recast ? 0 : Math.min(100, (remaining / (ability?.cooldownTicks || 1)) * 100)}%`;
-      element(`#cooldown-${key}`).textContent =
+        setStyle(
+          slot.querySelector<HTMLElement>('.pixel-icon')!.style,
+          'background',
+          '',
+        );
+      setText(
+        element(`#timer-${key}`),
+        passive
+          ? ''
+          : recast
+            ? recall
+              ? ''
+              : (
+                  (fortune?.ticks ?? hero.blinkTicks) / m1Config.tickRate
+                ).toFixed(1)
+            : cooling
+              ? (remaining / m1Config.tickRate).toFixed(1)
+              : '',
+      );
+      setStyle(
+        slot.querySelector<HTMLElement>('.cooldown-shade')!.style,
+        'height',
+        `${recast ? 0 : Math.min(100, (remaining / (ability?.cooldownTicks || 1)) * 100)}%`,
+      );
+      setText(
+        element(`#cooldown-${key}`),
         key === 'a'
           ? hero.schoolId === nguDoc.school
             ? hero.basicId === nguDoc.coSu
@@ -1247,7 +1384,8 @@ export class GameUI {
                     ? 'Cấp ' +
                       m1Config.progression?.skills[ability.id]?.levelGates[0]
                     : `${cost} NL`
-                  : 'Trống';
+                  : 'Trống',
+      );
       const id = ability?.id ?? '';
       const definition = m1Config.progression?.skills[id];
       const combatProfile = combatConfig.pvp1v1 ? 'pvp_1v1' : 'standard';
@@ -1257,26 +1395,32 @@ export class GameUI {
         slot.dataset['combatProfile'] !== combatProfile ||
         slot.dataset['practice'] !== String(state.practice.enabled)
       ) {
-        slot.dataset['skillId'] = id;
-        slot.dataset['skillRank'] = String(rank);
-        slot.dataset['combatProfile'] = combatProfile;
-        slot.dataset['practice'] = String(state.practice.enabled);
+        setProperty(slot.dataset, 'skillId', id);
+        setProperty(slot.dataset, 'skillRank', String(rank));
+        setProperty(slot.dataset, 'combatProfile', combatProfile);
+        setProperty(slot.dataset, 'practice', String(state.practice.enabled));
         const name = ability?.nameVi ?? 'Chưa trang bị';
-        element(`#skill-tip-${key} strong`).textContent = name;
-        slot
-          .querySelector('.pixel-icon')!
-          .setAttribute('aria-label', `${name} · ${key.toUpperCase()}`);
-        element(`#skill-tip-${key} .skill-tip-description`).textContent =
+        setText(element(`#skill-tip-${key} strong`), name);
+        setAttribute(
+          slot.querySelector('.pixel-icon')!,
+          'aria-label',
+          `${name} · ${key.toUpperCase()}`,
+        );
+        setText(
+          element(`#skill-tip-${key} .skill-tip-description`),
           definition?.descriptionVi ??
-          (ability ? abilitySummary(ability).replace(/^ · /, '') : '');
-        element(`#skill-tip-${key} .skill-tip-stats`).textContent =
+            (ability ? abilitySummary(ability).replace(/^ · /, '') : ''),
+        );
+        setText(
+          element(`#skill-tip-${key} .skill-tip-stats`),
           ability && definition && rank > 0
             ? skillRankStats(
                 state.practice.enabled
                   ? { ...ability, manaCost: 0, cooldownTicks: 0 }
                   : ability,
               )
-            : '';
+            : '',
+        );
       }
       const status = !ability
         ? 'Chưa mở'
@@ -1301,7 +1445,7 @@ export class GameUI {
         .filter(Boolean)
         .join(' · ');
       const tipState = element(`#skill-tip-${key} .skill-tip-state`);
-      if (tipState.textContent !== details) tipState.textContent = details;
+      if (tipState.textContent !== details) setText(tipState, details);
     }
   }
 

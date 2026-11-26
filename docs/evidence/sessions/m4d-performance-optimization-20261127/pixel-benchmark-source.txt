@@ -1,0 +1,86 @@
+import { emissionPoint, contourPixels } from '../../apps/game-client/src/pixel-analysis.js';
+import {writeFileSync,mkdirSync} from 'node:fs';
+import {fileURLToPath} from 'node:url';
+process.chdir(fileURLToPath(new URL('../../',import.meta.url)));
+function legacyEmission(data: Uint8ClampedArray, tone: string) {
+  let peak = -1,
+    px = 24,
+    py = 24;
+  for (let y = 2; y < 46; y += 2)
+    for (let x = 2; x < 46; x += 2) {
+      let value = 0;
+      for (let dy = -2; dy <= 2; dy++)
+        for (let dx = -2; dx <= 2; dx++) {
+          const i = ((y + dy) * 48 + x + dx) * 4,
+            r = data[i]!,
+            g = data[i + 1]!,
+            b = data[i + 2]!;
+          if (
+            tone === 'warm'
+              ? r > 145 && g > 65 && r > b * 1.18
+              : Math.max(r, g, b) > 165 &&
+                (tone === 'poison'
+                  ? g > r * 1.02 || b > g * 1.05
+                  : b > r * 0.95 || Math.min(r, g, b) > 205)
+          )
+            value += ((r + g + b * 0.3) * data[i + 3]!) / 255;
+        }
+      if (value > peak) {
+        peak = value;
+        px = x;
+        py = y;
+      }
+    }
+  return {
+    x: (px + 0.5) / 48,
+    y: (py + 0.5) / 48,
+    strength: Math.min(1, Math.max(0, peak) / 7000),
+  };
+}
+function legacyContour(
+  source: Uint8ClampedArray,
+  width: number,
+  height: number,
+  padding: number,
+) {
+  const edge = new Uint8ClampedArray(source.length);
+  for (let y = 0; y < height; y++)
+    for (let x = 0; x < width; x++) {
+      const i = (y * width + x) * 4,
+        original = source[i + 3]!;
+      if (original === 255) continue;
+      let a = original;
+      for (
+        let dy = Math.max(0, y - padding);
+        dy <= Math.min(height - 1, y + padding);
+        dy++
+      )
+        for (
+          let dx = Math.max(0, x - padding);
+          dx <= Math.min(width - 1, x + padding);
+          dx++
+        )
+          a = Math.max(a, source[(dy * width + dx) * 4 + 3]!);
+      if (a === original) continue;
+      edge[i] = 255;
+      edge[i + 1] = 223;
+      edge[i + 2] = 156;
+      edge[i + 3] = Math.round((a - original) * 0.75);
+    }
+  return edge;
+}
+
+let seed=42;
+const pixels=(n:number)=>Uint8ClampedArray.from({length:n},()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed>>>24;});
+const light=Array.from({length:30},()=>pixels(48*48*4));
+const body=pixels(192*192*4);
+const results:any={scope:'Pure CPU algorithms, same inputs and exact-result unit oracle, alternating order; not FPS or GPU readback/warmup time',rows:[]};
+for(let run=0;run<7;run++){
+ const row:any={run};
+ for(const kind of (run%2?['optimized','legacy']:['legacy','optimized'])){
+  let t=performance.now();for(let repeat=0;repeat<10;repeat++)for(const p of light)for(const tone of ['warm','cool','poison'])(kind==='legacy'?legacyEmission:emissionPoint)(p,tone);row['emission_'+kind]=performance.now()-t;
+  t=performance.now();for(let repeat=0;repeat<50;repeat++)(kind==='legacy'?legacyContour:contourPixels)(body,192,192,2);row['contour_'+kind]=performance.now()-t;
+ }
+ results.rows.push(row);console.log(JSON.stringify(row));
+}
+mkdirSync('docs/evidence/sessions/m4d-performance-optimization-20261127',{recursive:true});writeFileSync('docs/evidence/sessions/m4d-performance-optimization-20261127/pixel-benchmark.json',JSON.stringify(results,null,2));

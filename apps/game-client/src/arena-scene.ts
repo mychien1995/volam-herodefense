@@ -1,3 +1,5 @@
+import { actorStatuses } from './presentation-state-cache.js';
+import { prepareDepthEmission } from './prepare-depth-emission.js';
 import { readableWorldText } from './readable-world-text.js';
 import { arenaVariants, type ArenaId } from '@volam/game-data';
 import { frameWorld, nativeGameplayZoom } from './camera-policy.js';
@@ -594,6 +596,7 @@ export class ArenaScene extends Phaser.Scene {
       registerArtPack(this, 'pvp');
       this.loadedPacks.add('pvp');
     }
+    prepareDepthEmission(this);
     this.ready = true;
     document.querySelector('#scene-status')?.setAttribute('data-ready', 'true');
     this.syncZone();
@@ -640,6 +643,7 @@ export class ArenaScene extends Phaser.Scene {
                   if (pack === 'wave-bosses')
                     this.createLateWaveBossRenderers();
                   createRuntimeArtReview(this);
+                  prepareDepthEmission(this);
                   this.loadedPacks.add(pack);
                   resolve();
                 } catch (error) {
@@ -1020,6 +1024,7 @@ export class ArenaScene extends Phaser.Scene {
     if (!this.zoneReady) return;
     const state = this.snapshot;
     const waveArtReady = this.hasArt('wave-bosses');
+    const actorZoneTick = zoneTick(state, this.zoneId);
     this.shaolinDao.sync(state, this.zoneId);
     const active = new Set<string>();
     this.conLuanArt?.begin();
@@ -1089,10 +1094,7 @@ export class ArenaScene extends Phaser.Scene {
               this.zoneId,
             ))
           : undefined;
-      const states = JSON.parse(actor.statuses ?? '[]') as Array<{
-        kind: string;
-        ticks?: number;
-      }>;
+      const states = actorStatuses(actor);
       const heroReaction =
         !enemy && actor.hp > 0
           ? states.some((status) => status.kind === 'stun')
@@ -1110,7 +1112,6 @@ export class ArenaScene extends Phaser.Scene {
         )
           ?.get(art.id)
           ?.includes('/creep_motion_v08__');
-      const actorZoneTick = zoneTick(state, this.zoneId);
       const tick = actorZoneTick ?? 0;
       const daoPose = enemy
         ? undefined

@@ -1451,6 +1451,19 @@
       ],
       "channels": [null],
       "setup": "./tests/e2e/m4d-setup.ts"
+    },
+    "playwright.performance.config.ts": {
+      "profile": "performance",
+      "ports": "shared",
+      "clientMode": "preview",
+      "services": [
+        {
+          "serverPort": 28961,
+          "clientPort": 28962
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/performance-setup.ts"
     }
   }
 }
