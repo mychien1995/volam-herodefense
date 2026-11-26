@@ -1,4 +1,6 @@
+import { assetUrl } from './asset-url.js';
 import { escapeHtml as esc } from './ui-components.js';
+import { readPlayerName, rememberPlayerName } from './player-name.js';
 import { m1Config, pvpDefinition, pvpMaps, schools } from '@volam/game-data';
 import type { LobbyState, PvpAction } from '@volam/game-protocol';
 import type { PvpMapId, PvpSnapshot, PvpTeam } from '@volam/game-core';
@@ -161,6 +163,7 @@ export class PvpUI {
       this.nickname = (
         this.node.querySelector<HTMLInputElement>('#pvp-nickname')?.value ?? ''
       ).trim();
+      rememberPlayerName(this.nickname);
       const raw = (
         this.node.querySelector<HTMLInputElement>('#pvp-room-code')?.value ?? ''
       ).trim();
@@ -254,7 +257,7 @@ export class PvpUI {
     this.choicePending = false;
     this.view = undefined;
     this.state = undefined;
-    this.nickname = nickname;
+    this.nickname = readPlayerName() || nickname;
     this.entryId = id;
     this.notice = message;
     this.node.hidden = false;
@@ -502,7 +505,7 @@ export class PvpUI {
               '" aria-pressed="' +
               (m.id === v.mapId) +
               '"><img src="' +
-              thumb(m.id) +
+              assetUrl(thumb(m.id)) +
               '" alt=""><strong>' +
               m.name +
               '</strong></button>',

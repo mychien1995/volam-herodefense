@@ -19,6 +19,7 @@ export function bindGameplayInput(
   namDeGuard?: { enabled: () => boolean; use: () => void },
 ): () => void {
   const held = new Set<string>();
+  const pressed = new Set<string>();
   let learning = false;
   const move = (): void =>
     spectator?.active()
@@ -41,7 +42,10 @@ export function bindGameplayInput(
     (['INPUT', 'SELECT', 'TEXTAREA'].includes(target.tagName) ||
       target.isContentEditable);
   const keydown = (event: KeyboardEvent): void => {
+    // Track blocked presses too, preventing a cast when a menu closes before release.
+    if (event.code) pressed.add(event.code);
     if (!connected()) return;
+    if (typing(event.target)) return;
     const qte = capture(event.repeat ? '' : event.code);
     if (qte !== undefined) {
       event.preventDefault();
@@ -142,6 +146,18 @@ export function bindGameplayInput(
     }
   };
   const keyup = (event: KeyboardEvent): void => {
+    const hadKeydown = pressed.delete(event.code);
+    // Desktop IMEs can swallow keydown while retaining the physical keyup.
+    if (
+      !hadKeydown &&
+      inputBindings.activeSkills.some((code) => code === event.code) &&
+      !event.ctrlKey &&
+      !event.altKey &&
+      !event.metaKey
+    ) {
+      keydown(event);
+      pressed.delete(event.code);
+    }
     if (event.code === 'KeyO') learning = false;
     if (
       held.delete(event.code) &&
@@ -158,7 +174,7 @@ export function bindGameplayInput(
   const visibility = (): void => {
     if (document.hidden) stop();
   };
-  window.addEventListener('keydown', keydown);
+  window.addEventListener('keydown', keydown, true);
   window.addEventListener('keyup', keyup);
   window.addEventListener('blur', stop);
   window.addEventListener('volam:controls-blocked', stop);
@@ -171,7 +187,7 @@ export function bindGameplayInput(
   }, 100);
   return () => {
     clearInterval(heartbeat);
-    window.removeEventListener('keydown', keydown);
+    window.removeEventListener('keydown', keydown, true);
     window.removeEventListener('keyup', keyup);
     window.removeEventListener('blur', stop);
     window.removeEventListener('volam:controls-blocked', stop);

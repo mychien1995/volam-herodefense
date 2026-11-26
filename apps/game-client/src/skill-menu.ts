@@ -1,4 +1,5 @@
-import { m1Config, skillIcon, schools } from '@volam/game-data';
+import { skillIcon } from './asset-url.js';
+import { m1Config, schools } from '@volam/game-data';
 import { automaticRanks, duongMon } from '@volam/game-core';
 import type {
   Ability,

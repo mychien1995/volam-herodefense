@@ -39,6 +39,7 @@ import type { ArtPreviewScene } from './art-preview.js';
 import type { ThienSonSkillPreviewScene } from './thien-son-skill-preview.js';
 import type { AnimationReviewScene } from './animation-review.js';
 import { bindGameplayInput } from './input.js';
+import { bindGameContextMenu } from './game-context-menu.js';
 import { InputTiming } from './input-timing.js';
 import { GameUI, element } from './ui.js';
 import { SkillPreview } from './skill-preview.js';
@@ -583,9 +584,10 @@ const worldMouse = (event: MouseEvent) =>
   event.target instanceof HTMLCanvasElement &&
   mouseMode() &&
   gameplayConnected();
-function worldContextMenu(event: MouseEvent): void {
-  if (worldMouse(event)) event.preventDefault();
-}
+const unbindContextMenu = bindGameContextMenu(
+  element('#viewport'),
+  gameplayConnected,
+);
 function worldPointerDown(event: PointerEvent): void {
   if (event.button !== 2 || !worldMouse(event) || !room || !arenaScene) return;
   event.preventDefault();
@@ -610,7 +612,6 @@ function worldPointerDown(event: PointerEvent): void {
   });
   if (!click.targetId) arenaScene.showMoveMarker(click.position);
 }
-worldCanvas.addEventListener('contextmenu', worldContextMenu);
 worldCanvas.addEventListener('pointerdown', worldPointerDown);
 function controls(connected: boolean, busy = false): void {
   for (const field of form.querySelectorAll<
@@ -1144,7 +1145,7 @@ if (import.meta.hot)
     matchMusic?.remove();
     void room?.leave();
     unbindInput();
-    worldCanvas.removeEventListener('contextmenu', worldContextMenu);
+    unbindContextMenu();
     worldCanvas.removeEventListener('pointerdown', worldPointerDown);
     pregame.destroy();
     pvpUi.destroy();

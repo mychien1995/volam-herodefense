@@ -14,6 +14,7 @@ import type { Preferences } from './preferences.js';
 import { bindSettings, settingsControls } from './settings-controls.js';
 import './pregame-guide.css';
 import { creepPreviewRequested } from './creep-preview.js';
+import { readPlayerName, rememberPlayerName } from './player-name.js';
 
 interface RoomListing {
   roomId: string;
@@ -24,7 +25,7 @@ interface RoomListing {
 }
 export class PreGame {
   readonly node = document.createElement('section');
-  nickname = '';
+  nickname = readPlayerName();
   portalCount: 1 | 2 | 3 | 4 = 4;
   arenaId: ArenaId = 'dao_hoa_dao';
   difficulty: 'easy' | 'hard' = 'hard';
@@ -50,6 +51,7 @@ export class PreGame {
   onLoiDai: () => void = () => {};
   onPractice: () => void = () => {};
   openHome(): void {
+    this.nickname = readPlayerName() || this.nickname;
     this.node.hidden = false;
     this.showHome();
   }
@@ -119,6 +121,7 @@ export class PreGame {
       if (action === 'standalone-loi-dai') this.onLoiDai();
       if (action === 'practice') this.onPractice();
       if (action === 'play') {
+        this.nickname = readPlayerName() || this.nickname;
         this.screen = 'landing';
         this.render();
         this.node.querySelector<HTMLElement>('#pre-nickname')?.focus();
@@ -185,6 +188,7 @@ export class PreGame {
           this.render();
           return;
         }
+        rememberPlayerName(this.nickname);
         this.screen = 'browser';
         this.render();
         void this.refresh();

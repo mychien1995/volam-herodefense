@@ -1,9 +1,9 @@
+import { skillIcon } from './asset-url.js';
 import statueArt from './controls-art/statue-guide.webp?url';
 import {
   bossSkillNames,
   m1Config,
   schools,
-  skillIcon,
   statueIntroduction,
 } from '@volam/game-data';
 import { abilitySummary } from './skill-menu.js';

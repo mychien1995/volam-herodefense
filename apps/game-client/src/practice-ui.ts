@@ -1,4 +1,5 @@
 import { escapeHtml as esc } from './ui-components.js';
+import { readPlayerName, rememberPlayerName } from './player-name.js';
 import {
   nicknameSchema,
   type PracticeJoinOptions,
@@ -40,6 +41,7 @@ export class PracticeUI {
         return;
       }
       this.nickname = parsed.data;
+      rememberPlayerName(this.nickname);
       this.stage = 'school';
       this.notice = '';
       this.render();
@@ -122,7 +124,7 @@ export class PracticeUI {
   }
   open(nickname = ''): void {
     this.clear();
-    this.nickname = nickname;
+    this.nickname = readPlayerName() || nickname;
     this.stage = 'name';
     this.node.hidden = false;
     this.render();

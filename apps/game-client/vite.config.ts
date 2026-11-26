@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { runtimeDeliveryPlugin } from '../../scripts/runtime-delivery-plugin.mjs';
 
 let compiledServerUrl = 'http://localhost:2567';
 const runtimePublicDir = process.env['VOLAM_RUNTIME_PUBLIC_DIR'];
@@ -22,6 +23,7 @@ export default defineConfig({
     strictPort: true,
   },
   plugins: [
+    runtimeDeliveryPlugin({ runtimePublicDir, aliases }),
     {
       name: 'volam-build-endpoint',
       configResolved(config) {
@@ -40,6 +42,7 @@ export default defineConfig({
     },
   ],
   build: {
+    assetsDir: 'bundles',
     target: 'es2022',
     rollupOptions: {
       output: {

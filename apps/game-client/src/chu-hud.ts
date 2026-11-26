@@ -1,3 +1,4 @@
+import { assetUrl } from './asset-url.js';
 import type { LobbyState } from '@volam/game-protocol';
 import type { ChuView, KimView, WaveArenaView } from '@volam/game-core';
 import { hongLietDefinition, lyMacSauEncounter } from '@volam/game-data';
@@ -172,7 +173,7 @@ export class ChuHud {
       (_, i) => {
         const item = items[i];
         return item
-          ? `<div class="chu-bag-item">${item === 'toan_chan_tien_tuu' ? '<img src="/assets/chu/toan_chan_tien_tuu_icon.png" alt=""/>' : ''}<span>${itemNames[item] ?? 'Chiến lợi phẩm'}</span><button data-boss-item="${i}" data-item-id="${item}" data-action="sell">Bán</button><button data-boss-item="${i}" data-item-id="${item}" data-action="drop">Thả</button></div>`
+          ? `<div class="chu-bag-item">${item === 'toan_chan_tien_tuu' ? `<img src="${assetUrl('/assets/chu/toan_chan_tien_tuu_icon.png')}" alt=""/>` : ''}<span>${itemNames[item] ?? 'Chiến lợi phẩm'}</span><button data-boss-item="${i}" data-item-id="${item}" data-action="sell">Bán</button><button data-boss-item="${i}" data-item-id="${item}" data-action="drop">Thả</button></div>`
           : `<button disabled aria-label="Ô hành trang trống ${i + 1}">＋</button>`;
       },
     ).join('');

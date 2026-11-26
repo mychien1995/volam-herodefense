@@ -1,3 +1,4 @@
+import { assetUrl } from './asset-url.js';
 import { settingsControls } from './settings-controls.js';
 
 export type Menu =
@@ -49,7 +50,7 @@ export function menuContents(
       ]
         .map(
           ([id, name, desc]) =>
-            `<button type="button" class="destination ${id}" data-destination="${id}" aria-label="${name}" aria-pressed="${id === 'forest'}" aria-disabled="${!['forest', 'desert', 'sea', 'hell', 'chu_ba_thong', 'hong_liet', 'kim_luan', 'co_mo'].includes(id!)}"><img class="destination-illustration" src="${['co_mo', 'hong_liet', 'kim_luan'].includes(id!) ? '/assets/m3d_r3/arena_' + id + '.png' : id === 'chu_ba_thong' ? '/assets/m3d_followup/chu_arena.png' : '/assets/dungeon_cards/' + id + '.png'}" alt="${desc}"/><span class="destination-copy"><strong>${name}</strong><span>${desc}</span></span>${['forest', 'desert', 'sea', 'hell', 'chu_ba_thong', 'hong_liet', 'kim_luan', 'co_mo'].includes(id!) ? `<span class="destination-check" aria-hidden="true" ${id === 'forest' ? '' : 'hidden'}>✓</span>` : '<span class="destination-availability">Chưa mở</span>'}</button>`,
+            `<button type="button" class="destination ${id}" data-destination="${id}" aria-label="${name}" aria-pressed="${id === 'forest'}" aria-disabled="${!['forest', 'desert', 'sea', 'hell', 'chu_ba_thong', 'hong_liet', 'kim_luan', 'co_mo'].includes(id!)}"><img class="destination-illustration" src="${assetUrl(['co_mo', 'hong_liet', 'kim_luan'].includes(id!) ? '/assets/m3d_r3/arena_' + id + '.png' : id === 'chu_ba_thong' ? '/assets/m3d_followup/chu_arena.png' : '/assets/dungeon_cards/' + id + '.png')}" alt="${desc}"/><span class="destination-copy"><strong>${name}</strong><span>${desc}</span></span>${['forest', 'desert', 'sea', 'hell', 'chu_ba_thong', 'hong_liet', 'kim_luan', 'co_mo'].includes(id!) ? `<span class="destination-check" aria-hidden="true" ${id === 'forest' ? '' : 'hidden'}>✓</span>` : '<span class="destination-availability">Chưa mở</span>'}</button>`,
         )
         .join('')}</div>
       <div class="dungeon-options"><div class="dungeon-choice"><span>Thử thách</span><strong id="dungeon-kind">Quái thường · Riêng</strong></div></div>

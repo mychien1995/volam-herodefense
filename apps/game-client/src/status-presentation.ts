@@ -1,3 +1,4 @@
+import { assetUrl } from './asset-url.js';
 import Phaser from 'phaser';
 const icons: Record<string, string> = {
   stun: 'star',
@@ -17,7 +18,7 @@ export function preloadStatusPresentation(scene: Phaser.Scene): void {
   for (const name of new Set(Object.values(icons)))
     scene.load.image(
       'm4d-status-' + name,
-      `/assets/m4d/status-v02/${name}/prop.png`,
+      assetUrl(`/assets/m4d/status-v02/${name}/prop.png`),
     );
 }
 /** Presentation follows replicated statuses, never predicts a hit or dispel. */

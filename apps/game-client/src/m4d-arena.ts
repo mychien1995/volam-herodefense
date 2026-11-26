@@ -1,3 +1,4 @@
+import { assetUrl } from './asset-url.js';
 import {
   createGroundSurface,
   preloadGroundSurface,
@@ -12,11 +13,14 @@ const grounds = { dao_hoa_dao: 'dh', tuong_duong: 'td', tu_hien_trang: 'th' };
 export function preloadM4dArena(scene: Phaser.Scene): void {
   preloadGroundSurface(scene);
   for (const [id, prefix] of Object.entries(grounds))
-    scene.load.image('m4d-ground-' + id, `/assets/m4d/r2/${prefix}-ground.png`);
+    scene.load.image(
+      'm4d-ground-' + id,
+      assetUrl(`/assets/m4d/r2/${prefix}-ground.png`),
+    );
   for (const p of lotus)
-    scene.load.image('m4d:' + p.id, '/assets/m4d/' + p.image);
+    scene.load.image('m4d:' + p.id, assetUrl('/assets/m4d/' + p.image));
   for (const p of raw.props)
-    scene.load.image('m4d-prop-' + p.id, '/assets/m4d/' + p.image);
+    scene.load.image('m4d-prop-' + p.id, assetUrl('/assets/m4d/' + p.image));
 }
 export function createM4dArena(
   scene: Phaser.Scene,

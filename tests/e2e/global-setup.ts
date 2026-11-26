@@ -15,5 +15,10 @@ export async function startGameQa(
   });
 }
 export default async function setup(): Promise<() => Promise<void>> {
+  if (process.env['VOLAM_RUNTIME_PUBLIC_DIR'])
+    return startOwnedGameQa({
+      loadClientConfig: true,
+      environment: { NODE_ENV: 'development', VOLAM_DEV_PRACTICE_CREEPS: '1' },
+    });
   return startGameQa();
 }

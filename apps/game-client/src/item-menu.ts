@@ -1,3 +1,4 @@
+import { assetUrl } from './asset-url.js';
 import type { LobbyState } from '@volam/game-protocol';
 import { economyTrial, m1Config } from '@volam/game-data';
 import {
@@ -10,7 +11,9 @@ import {
 type Hero = NonNullable<ReturnType<LobbyState['players']['get']>>;
 type Tab = 'equipment' | 'potions' | 'craft';
 const itemUrl = (id: string) =>
-  id.startsWith('/assets/') ? id : '/assets/inventory_ui/' + id + '.png';
+  assetUrl(
+    id.startsWith('/assets/') ? id : '/assets/inventory_ui/' + id + '.png',
+  );
 const art = (id: string, extra = '') =>
   `<img class="item-art ${extra}" src="${itemUrl(id)}" alt="" draggable="false"/>`;
 const escape = (text: string) =>
@@ -458,7 +461,7 @@ export class ItemMenu {
               escape(item.name),
               i === this.selectedItem,
               item.image
-                ? `<img class="item-art" src="${item.image}" alt=""/>`
+                ? `<img class="item-art" src="${assetUrl(item.image)}" alt=""/>`
                 : '<span class="pixel-icon icon-jade" aria-hidden="true"></span>',
             )
           : `<button disabled aria-label="Ô hành trang trống ${i + 1}"></button>`;

@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { assetUrl } from './asset-url.js';
 import { setArtFilter } from './art-filter.js';
 import manifest from './approved-art.generated.json';
 import renovatedSkills from './renovation-skills.generated.json';
@@ -16,8 +17,6 @@ import {
 } from './renovation-policy.js';
 import feedbackV4 from './renovation-feedback.generated.json';
 import { createRuntimeArtGallery } from './runtime-art-gallery.js';
-
-declare const __VOLAM_RASTER_ALIASES__: Readonly<Record<string, string>>;
 
 type Mode = 'current' | 'candidate';
 type ReviewAsset = {
@@ -194,13 +193,12 @@ export function preloadRuntimeArtReview(scene: Phaser.Scene): void {
   scene.load.on(Phaser.Loader.Events.ADD, select);
   const canonicalize = (
     _key: string,
-    type: string,
+    _type: string,
     _loader: unknown,
     file: Phaser.Loader.File,
   ) => {
-    if (type !== 'image' || typeof file.url !== 'string') return;
-    const canonical = __VOLAM_RASTER_ALIASES__[file.url];
-    if (canonical) file.url = canonical;
+    if (typeof file.url !== 'string') return;
+    file.url = assetUrl(file.url);
   };
   scene.load.on(Phaser.Loader.Events.ADD, canonicalize);
   scene.load.once(Phaser.Loader.Events.COMPLETE, () => {

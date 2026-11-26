@@ -1,0 +1,113 @@
+{
+  "runId": "b80dd95e-0c17-4c2a-87c1-94734f17d7ce",
+  "mode": "final",
+  "args": [
+    "tests/e2e/input-name.spec.ts"
+  ],
+  "startedAt": "2026-11-26T10:15:07.121Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "environment preflight",
+      "seconds": 1.642,
+      "status": "PASS",
+      "checks": [
+        {
+          "id": "workspace",
+          "status": "PASS",
+          "detail": {
+            "mode": "final",
+            "stage": "before-build",
+            "managed": true
+          }
+        },
+        {
+          "id": "session",
+          "status": "PASS",
+          "detail": {
+            "serverPort": 28971,
+            "clientPort": 28972
+          }
+        },
+        {
+          "id": "ports",
+          "status": "PASS"
+        },
+        {
+          "id": "node",
+          "status": "PASS",
+          "detail": "26.0.0"
+        },
+        {
+          "id": "installation",
+          "status": "PASS",
+          "detail": "pnpm@11.25.0"
+        },
+        {
+          "id": "tools",
+          "status": "PASS",
+          "detail": {
+            "typescript": "7.0.2",
+            "vitest": "5.0.5",
+            "vite": "8.3.5",
+            "@playwright/test": "1.64.1"
+          }
+        },
+        {
+          "id": "chromium",
+          "status": "PASS",
+          "detail": {
+            "version": "156.0.8078.4",
+            "cache": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\.cache\\ms-playwright"
+          }
+        },
+        {
+          "id": "python",
+          "status": "PASS",
+          "detail": "Python 3.13.5"
+        }
+      ]
+    },
+    {
+      "label": "prepare assets (once)",
+      "seconds": 68.71,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-input-name-transfer\\check-workflow\\b80dd95e-0c17-4c2a-87c1-94734f17d7ce\\1-prepare-assets-once-.log",
+      "outputBytes": 806
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 2.23,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-input-name-transfer\\check-workflow\\b80dd95e-0c17-4c2a-87c1-94734f17d7ce\\2-compile-TypeScript.log",
+      "outputBytes": 0
+    },
+    {
+      "label": "typecheck tests and tools",
+      "seconds": 4.11,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-input-name-transfer\\check-workflow\\b80dd95e-0c17-4c2a-87c1-94734f17d7ce\\3-typecheck-tests-and-tools.log",
+      "outputBytes": 0
+    },
+    {
+      "label": "workflow regression checks",
+      "seconds": 14.23,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-input-name-transfer\\check-workflow\\b80dd95e-0c17-4c2a-87c1-94734f17d7ce\\4-workflow-regression-checks.log",
+      "outputBytes": 8206
+    },
+    {
+      "label": "all unit/integration tests",
+      "seconds": 291.83,
+      "status": "FAIL",
+      "exitCode": 1,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-input-name-transfer\\check-workflow\\b80dd95e-0c17-4c2a-87c1-94734f17d7ce\\5-all-unit-integration-tests.log",
+      "outputBytes": 8525
+    }
+  ],
+  "totalSeconds": 382.76
+}

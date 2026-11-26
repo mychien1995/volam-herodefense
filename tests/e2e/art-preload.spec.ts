@@ -1,5 +1,14 @@
 import { expect, test } from '@playwright/test';
 import { joinWaiting, startTogether } from './pregame-helper.js';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+
+const runtimeDir = process.env['VOLAM_RUNTIME_PUBLIC_DIR'];
+const aliases: Record<string, string> = runtimeDir
+  ? JSON.parse(
+      readFileSync(resolve(runtimeDir, '../runtime-assets.json'), 'utf8'),
+    ).aliases
+  : {};
 
 test('arena art starts at room join and a failed dungeon pack can be retried', async ({
   page,
@@ -26,11 +35,16 @@ test('arena art starts at room join and a failed dungeon pack can be retried', a
     'data-ready',
     'true',
   );
-  expect(requests).toContain('/assets/renovation-v2/arena-ground.png');
-  expect(requests).not.toContain('/assets/renovation-v1/forest-ground.png');
+  const delivered = (path: string) => aliases[path] ?? path;
+  expect(requests).toContain(
+    delivered('/assets/renovation-v2/arena-ground.png'),
+  );
+  expect(requests).not.toContain(
+    delivered('/assets/renovation-v1/forest-ground.png'),
+  );
   expect(requests).not.toContain(desertManifest);
   expect(requests).not.toContain(
-    '/assets/renovation-v1/chu_ba_thong-ground.png',
+    delivered('/assets/renovation-v1/chu_ba_thong-ground.png'),
   );
 
   const authoritativeZone = () =>

@@ -1,3 +1,4 @@
+import { skillIcon, assetUrl } from './asset-url.js';
 import { heroPortraitUrl } from './hero-portraits.js';
 import { heroTexture } from './hero-texture.js';
 import { heroIdleUrl } from './character-revision.js';
@@ -8,7 +9,6 @@ import {
   lobbyConfig,
   m1Config,
   schools,
-  skillIcon,
   dungeonForZone,
   economyTrial,
   type DungeonDestination,
@@ -109,7 +109,7 @@ export class GameUI {
             <div class="meter hp" role="meter" aria-label="Sinh lực" aria-valuemin="0"><i></i><span id="hp-text">—</span></div><div class="meter mp" role="meter" aria-label="Nội lực" aria-valuemin="0"><i></i><span id="mp-text">—</span></div><div class="meter xp" role="meter" aria-label="Kinh nghiệm" aria-valuemin="0"><i></i><span id="xp-text">—</span></div></div></section>
           <nav class="system-buttons" aria-label="Menu trò chơi"><button data-action="quit" title="Thoát" aria-label="Thoát">${icon('quit')}<span>Thoát</span></button><button data-menu="settings" title="Cài đặt" aria-label="Cài đặt">${icon('settings')}<span>Cài đặt</span></button><button data-menu="dungeons" title="Phó Bản" aria-label="Phó Bản">${icon('portal')}<span>Phó Bản</span></button><button data-menu="merchant" title="Thương Gia" aria-label="Thương Gia">${icon('shop')}<span>Thương Gia</span></button><button data-menu="pvp" title="Lôi Đài" aria-label="Lôi Đài">${icon('swords')}<span>Lôi Đài</span></button></nav>
           <span class="sr-only"><span id="hud-connection">Connected</span> · <span id="current-room" data-testid="room-id">—</span> · <span id="player-count" data-testid="player-count">0 / 6</span></span>
-          <section class="bag-cluster framed"><button data-menu="inventory" title="Túi đồ">${icon('bag')}<span>Túi đồ</span></button><div>${icon('gold')}<strong class="live-gold">0</strong><small>Vàng</small></div><section class="quick-potions" aria-label="Bình mang theo"><button type="button" data-potion-resource="hp" aria-keyshortcuts="1" title="Bình máu" aria-label="Bình máu" disabled><img src="/assets/inventory_ui/potion_hp.png" alt=""/><kbd>1</kbd><em>—</em><b></b></button><button type="button" data-potion-resource="mp" aria-keyshortcuts="2" title="Bình mana" aria-label="Bình mana" disabled><img src="/assets/inventory_ui/potion_mp.png" alt=""/><kbd>2</kbd><em>—</em><b></b></button></section></section>
+          <section class="bag-cluster framed"><button data-menu="inventory" title="Túi đồ">${icon('bag')}<span>Túi đồ</span></button><div>${icon('gold')}<strong class="live-gold">0</strong><small>Vàng</small></div><section class="quick-potions" aria-label="Bình mang theo"><button type="button" data-potion-resource="hp" aria-keyshortcuts="1" title="Bình máu" aria-label="Bình máu" disabled><img src="${assetUrl('/assets/inventory_ui/potion_hp.png')}" alt=""/><kbd>1</kbd><em>—</em><b></b></button><button type="button" data-potion-resource="mp" aria-keyshortcuts="2" title="Bình mana" aria-label="Bình mana" disabled><img src="${assetUrl('/assets/inventory_ui/potion_mp.png')}" alt=""/><kbd>2</kbd><em>—</em><b></b></button></section></section>
           <section class="hotbar framed" aria-label="Thanh kỹ năng chiến đấu">
             ${[
               ['a', 'staff', 'Đánh thường · A'],
@@ -124,7 +124,7 @@ export class GameUI {
                   `<div id="slot-${key}" class="hotbar-slot hotbar-skill ${key === 'e' || key === 'r' ? 'unequipped' : ''}"><span class="pixel-icon icon-${art}" role="img" tabindex="0" aria-label="${title}" aria-describedby="skill-tip-${key}"></span><kbd>${key!.toUpperCase()}</kbd><b id="timer-${key}" class="cooldown-number"></b><small id="cooldown-${key}">${key === 'q' ? '18 NL' : key === 'w' ? '25 NL' : key === 'a' ? 'Bổng' : 'Trống'}</small><div class="cooldown-shade"></div>${key !== 'a' ? `<button class="rank-up" type="button" data-rank-slot="${'qwert'.indexOf(key!)}" hidden>+</button>` : ''}<span id="skill-tip-${key}" class="skill-tooltip" role="tooltip"><strong></strong><span class="skill-tip-description"></span><span class="skill-tip-stats"></span><span class="skill-tip-state"></span></span></div>`,
               )
               .join('')}
-            <div id="dash-status" class="dash-status" role="status" aria-label="Lướt · Shift"><img src="/assets/m3d_feedback/dash_icon_frame.png" alt="" width="32" height="32"><b id="dash-charges">2</b><kbd>Shift</kbd><small id="dash-timer"></small><progress id="dash-progress" max="180" value="180" aria-label="Hồi lượt lướt"></progress></div>
+            <div id="dash-status" class="dash-status" role="status" aria-label="Lướt · Shift"><img src="${assetUrl('/assets/m3d_feedback/dash_icon_frame.png')}" alt="" width="32" height="32"><b id="dash-charges">2</b><kbd>Shift</kbd><small id="dash-timer"></small><progress id="dash-progress" max="180" value="180" aria-label="Hồi lượt lướt"></progress></div>
             <div id="kinh-loi-status" class="dash-status" role="status" aria-label="Kinh Lôi · S" hidden><img src="${skillIcon(conLuan.plant)}" alt="" width="32" height="32"><b id="kinh-loi-charges"></b><kbd>S</kbd><small id="kinh-loi-timer"></small></div>
 
             <span id="fixed-skill-points" class="skill-points" hidden></span><span id="shaolin-stance" class="stance-indicator" hidden></span><span id="con-luan-stance" class="stance-indicator" hidden></span><span id="innate-dodge" class="stance-indicator" hidden></span>

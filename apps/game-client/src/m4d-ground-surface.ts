@@ -1,12 +1,13 @@
+import { assetUrl } from './asset-url.js';
 import Phaser from 'phaser';
 import { materialPattern } from './world-depth-material.js';
 import { arenaVariants, type ArenaId } from '@volam/game-data';
 import plazas from './m4d-plazas.generated.json';
 
 export function preloadGroundSurface(scene: Phaser.Scene): void {
-  scene.load.image('m4d:materials', '/assets/m4d/r3/materials.png');
+  scene.load.image('m4d:materials', assetUrl('/assets/m4d/r3/materials.png'));
   for (const p of plazas)
-    scene.load.image('m4d:plaza:' + p.id, '/assets/m4d/' + p.image);
+    scene.load.image('m4d:plaza:' + p.id, assetUrl('/assets/m4d/' + p.image));
 }
 const geometry: Record<
   ArenaId,

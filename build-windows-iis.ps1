@@ -1,4 +1,4 @@
-param([string]$ArchiveName = 'volam-hero-defense-windows-iis.zip')
+param([string]$ArchiveName = 'volam-hero-defense-m4d-windows-iis.zip')
 
 $ErrorActionPreference = 'Stop'
 if ([IO.Path]::GetFileName($ArchiveName) -cne $ArchiveName -or !$ArchiveName.EndsWith('.zip')) {
@@ -25,6 +25,10 @@ function Invoke-Pnpm {
 }
 
 $repo = (Resolve-Path -LiteralPath $PSScriptRoot).Path
+$buildBranch = (& git -C $repo symbolic-ref --short HEAD).Trim()
+if ($LASTEXITCODE -ne 0 -or $buildBranch -cne 'milestone/m4d') { throw "This release must be built from milestone/m4d; actual branch: $buildBranch" }
+$buildCommit = (& git -C $repo rev-parse HEAD).Trim()
+Write-Host "Release source: $buildBranch @ $buildCommit"
 $gameHost = 'hero-defense.stackfolio.cloud'
 $gameUrl = "https://$gameHost"
 $packageManager = (Get-Content -LiteralPath (Join-Path $repo 'package.json') -Raw | ConvertFrom-Json).packageManager
@@ -68,6 +72,9 @@ try {
     if ($builtEndpoint -cne $env:VITE_SERVER_URL) {
         throw "Unexpected endpoint in client build: $builtEndpoint"
     }
+    $buildInfo = Get-Content -LiteralPath (Join-Path $client 'volam-build-info.json') -Raw | ConvertFrom-Json
+    if ($buildInfo.branch -cne $buildBranch -or $buildInfo.commit -cne $buildCommit) { throw 'Release source changed during build.' }
+    $buildProtocol = $buildInfo.protocolVersion
     $gameEntry = Join-Path $client 'index.html'
     if (!(Test-Path -LiteralPath $gameEntry -PathType Leaf)) {
         throw 'The client build is missing index.html.'
@@ -173,49 +180,8 @@ console.log(`Verified ${installed.size} runtime packages against the installed d
         throw "Server packaging failed with exit code $LASTEXITCODE."
     }
 
-    $iisConfig = @'
-<?xml version="1.0" encoding="utf-8"?>
-<configuration>
-  <system.webServer>
-    <defaultDocument enabled="true">
-      <files>
-        <remove value="index.html" />
-        <add value="index.html" />
-      </files>
-    </defaultDocument>
-    <staticContent>
-      <remove fileExtension=".json" />
-      <mimeMap fileExtension=".json" mimeType="application/json" />
-      <remove fileExtension=".tmj" />
-      <mimeMap fileExtension=".tmj" mimeType="application/json" />
-      <remove fileExtension=".ogg" />
-      <mimeMap fileExtension=".ogg" mimeType="audio/ogg" />
-      <remove fileExtension=".mp3" />
-      <mimeMap fileExtension=".mp3" mimeType="audio/mpeg" />
-      <remove fileExtension=".wav" />
-      <mimeMap fileExtension=".wav" mimeType="audio/wav" />
-    </staticContent>
-    <rewrite>
-__VOLAM_RASTER_MAP__
-      <rules>
-        <rule name="Volam canonical raster" stopProcessing="true">
-          <match url="^assets/.*\.png$" />
-          <conditions>
-            <add input="{VolamRasterAliases:{R:0}}" pattern="^(.+)$" />
-          </conditions>
-          <action type="Rewrite" url="{C:1}" />
-        </rule>
-        <rule name="Volam game server" stopProcessing="true">
-          <match url="^game-api/(.*)$" />
-          <action type="Rewrite" url="http://127.0.0.1:2567/{R:1}" appendQueryString="true" />
-        </rule>
-      </rules>
-    </rewrite>
-  </system.webServer>
-</configuration>
-'@
-    $iisConfig.Replace('__VOLAM_RASTER_MAP__', (Get-Content -LiteralPath (Join-Path $stage 'runtime-assets-iis.xml') -Raw)) |
-        Set-Content -LiteralPath (Join-Path $client 'web.config') -Encoding UTF8
+    Invoke-Checked $node.Source @('scripts/iis-client-config.mjs', $stage)
+    Copy-Item -LiteralPath (Join-Path $client 'volam-build-info.json') -Destination (Join-Path $server 'build-info.json')
 
     @'
 @echo off
@@ -228,7 +194,9 @@ exit /b %errorlevel%
 '@ | Set-Content -LiteralPath (Join-Path $server 'start-server.cmd') -Encoding Ascii
 
     @"
-Vo Lam Hero Defense on Windows IIS
+Vo Lam Hero Defense M4D on Windows IIS
+Source: $buildBranch @ $buildCommit
+See client\volam-build-info.json and server\build-info.json for build ID and protocol.
 
 1. Install Node.js 24 LTS on the VPS and put node.exe on PATH.
 2. Extract the ZIP. Keep the server folder outside the IIS site root.
@@ -236,7 +204,11 @@ Vo Lam Hero Defense on Windows IIS
 4. Enable IIS Static Content, WebSocket Protocol, URL Rewrite and ARR proxy.
 5. Point the IIS site root to the client folder. Bind HTTPS on port 443 to $gameHost with a valid TLS certificate.
 6. Check $gameUrl/game-api/health and join the same room from two browsers.
-7. Allow public TCP 443 and keep TCP 2567 private. Use a Windows startup task
+7. Update client and server together, then restart the Node server (M4D protocol $buildProtocol).
+   Keep previous client\assets\immutable files when updating an existing site.
+8. Gzip JS/CSS/JSON is prebuilt in this ZIP. Keep all .gz files and generated web.config files.
+   Native IIS Static Content Compression is not required for these responses.
+9. Allow public TCP 443 and keep TCP 2567 private. Use a Windows startup task
    to run server\start-server.cmd across reboots.
 "@ | Set-Content -LiteralPath (Join-Path $stage 'DEPLOY.txt') -Encoding Ascii
 

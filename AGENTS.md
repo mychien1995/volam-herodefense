@@ -2,7 +2,7 @@
 
 ## Scope and source of truth
 
-- Continue the existing M3D baseline; implement only the user's requested scope. `CODEX_START_HERE.md` and its M0 bootstrap are historical, not instructions to restart the game.
+- All new work must target `milestone/m4d`. Use the existing M4D checkout at `C:/Users/ADMIN/.codex/worktrees/milestone-m4d/volam-hero-defense`; do not implement new changes on `milestone/m3d`. Continue the existing M4D baseline and implement only the user's requested scope. `CODEX_START_HERE.md` and its M0 bootstrap are historical, not instructions to restart the game.
 - Preserve approved rules. Use the latest explicit user decisions and task-specific canonical overrides; distinguish implemented behavior, proposals and art approval. Read relevant sections, not the entire historical handoff on every turn.
 - Campaign override: [2026-11-06 rules](docs/CAMPAIGN_BALANCE_2026_11_06.md) supersede older two-gate/no-Long-Châu/one-revive restrictions. Keep inventory-v2 migration separate.
 

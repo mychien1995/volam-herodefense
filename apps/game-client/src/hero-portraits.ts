@@ -1,3 +1,4 @@
+import { assetUrl } from './asset-url.js';
 const forms: Record<string, string> = {
   hero_cai_bang: 'cai_bang_bong',
   hero_cai_bang_chuong: 'cai_bang_chuong',
@@ -44,14 +45,18 @@ const coherentFolders: Record<string, string> = {
 export const heroBodyUrl = (form: string): string => {
   const basic = forms[form] ?? form,
     folder = coherentFolders[basic];
-  return folder
-    ? '/assets/' + folder + '/avatar-body.png'
-    : '/assets/player-portraits-v1/' + basic + '-body.png';
+  return assetUrl(
+    folder
+      ? '/assets/' + folder + '/avatar-body.png'
+      : '/assets/player-portraits-v1/' + basic + '-body.png',
+  );
 };
 export const heroPortraitUrl = (form: string): string => {
   const basic = forms[form] ?? form,
     folder = coherentFolders[basic];
-  return folder
-    ? '/assets/' + folder + '/avatar.png'
-    : '/assets/player-portraits-v1/' + basic + '.png';
+  return assetUrl(
+    folder
+      ? '/assets/' + folder + '/avatar.png'
+      : '/assets/player-portraits-v1/' + basic + '.png',
+  );
 };
