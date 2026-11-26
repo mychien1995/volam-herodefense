@@ -1,5 +1,4 @@
 import { afterAll, afterEach, beforeAll, expect, it } from 'vitest';
-import { m1Config } from '@volam/game-data';
 import { MATCH_ROOM, PROTOCOL_VERSION } from '@volam/game-protocol';
 import { startRoomTestServer } from './room-test-server.js';
 import type { MatchRoom } from '../apps/game-server/src/rooms/MatchRoom.js';
@@ -170,13 +169,17 @@ it('broadcasts death/respawn, then freezes the match at a single defeat', async 
   await begin(a, b);
   const room = server.getRoomById<MatchRoom>(a.roomId),
     h = room.world.heroes.get(a.sessionId)!;
+  // Use the room's registered map coordinates, not the unregistered template.
+  const spawn = { ...room.simulation.base.spawn };
   h.hp = 0;
   await expect.poll(() => b.state.players.get(a.sessionId)?.pose).toBe('death');
   const respawn = room.simulation.respawns.get(a.sessionId)!;
   advance(room, respawn + 1);
   await expect.poll(() => b.state.players.get(a.sessionId)?.hp).toBe(h.maxHp);
-  expect(h.x).toBe(m1Config.spawn.x);
-  expect(h.y).toBe(m1Config.spawn.y);
+  expect(h.x).toBe(spawn.x);
+  expect(h.y).toBe(spawn.y);
+  await expect.poll(() => b.state.players.get(a.sessionId)?.x).toBe(spawn.x);
+  await expect.poll(() => b.state.players.get(a.sessionId)?.y).toBe(spawn.y);
   room.world.statue!.hp = 0;
   await expect.poll(() => a.state.phase).toBe('DEFEAT');
   await expect.poll(() => b.state.phase).toBe('DEFEAT');

@@ -50,7 +50,7 @@ describe('real Colyseus room + SDK clients', () => {
     const response = await server.http.get('/health');
     expect(response.data).toEqual({
       status: 'ok',
-      milestone: 'M3B',
+      milestone: 'M4D',
       protocolVersion: PROTOCOL_VERSION,
       ...(process.env['VOLAM_QA_RUN_ID']
         ? {
@@ -303,6 +303,12 @@ describe('M1 authoritative room gameplay', () => {
       slot: 3,
     });
     expect((await rejection).reason).toContain('chưa được trang bị');
+    // M4D registers the arena spawn to the selected map. Put the existing
+    // target on the hero's real facing line, without injecting a hit or damage.
+    const world = server.getRoomById<MatchRoom>(a.roomId).world;
+    const hero = world.heroes.get(a.sessionId)!;
+    const target = world.creeps.get('creep_0')!;
+    Object.assign(target, { x: hero.x + 36, y: hero.y, controlled: true });
     const initial = server
       .getRoomById<MatchRoom>(other.roomId)
       .world.heroes.get(other.sessionId)!.x;
