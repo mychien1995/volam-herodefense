@@ -25,6 +25,7 @@ import {
   m1Config,
   arenaVariants,
   dongTaForDifficulty,
+  campaignForDifficulty,
   creepDungeon,
   desertDungeon,
   beachDungeon,
@@ -926,6 +927,14 @@ export class MatchRoom extends Room<{
     this.state.defense.difficulty = difficulty.data;
     this.simulation.base.difficulty = difficulty.data;
     this.simulation.arena.config.difficulty = difficulty.data;
+    if (this.simulation.base.campaign) {
+      const campaign = campaignForDifficulty(
+        this.simulation.base.campaign,
+        difficulty.data,
+      );
+      this.simulation.base.campaign = campaign;
+      this.simulation.arena.config.campaign = campaign;
+    }
     if (this.simulation.dongTa)
       Object.assign(
         this.simulation.dongTa.definition,

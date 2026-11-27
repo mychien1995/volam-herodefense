@@ -1,3 +1,11 @@
+## M4D · EXP wave Dễ — 2026-11-27
+
+Dễ nhận pool 110/450/750/750; Khó vẫn 100/300/450/650, mặc định Khó. Kiểm tra phòng riêng biệt/peer không ghi đè, đủ pool khi stream xong, chia thưởng solo và sáu người ở wave 1/6/11/16 qua kill thật; vàng bằng baseline. Deep equality bảo vệ EXP boss/phó bản và các tham số campaign khác. Browser chọn độ khó qua UI và kill bằng A thật; số lẻ đối chiếu trên server. [Lệnh và kết quả thực tế](docs/M4D_EASY_WAVE_XP_2026_11_27.md).
+
+## M4D · rest/farm regression — 2026-11-27
+
+Wave đầu 120s; stream 60s rồi nghỉ 120s, warnings tính theo deadline mới; quái sống không ngăn wave kế. Hai peer phải cùng thấy stream → countdown → wave mới. Quái phó bản thường +25% EXP/vàng, giữ phần lẻ/chia pool/over-level; floor không tăng ở 600/899s, tăng ở 900/1800/2700/3600s hoặc tiến trình boss cao hơn. [Nhịp wave và kinh tế M4D](docs/M4D_WAVE_PACING_2026_11_27.md) ghi lệnh và kết quả thật; checklist không tự là PASS.
+
 ## M4D acceptance — 2026-11-25
 
 Phạm vi mới: 2/3/4 cổng × 1/2/6 người với hai hàng/đôi số creep, chu kỳ 120s, ngân sách thưởng không đổi, floor 600s; boss đủ chín controller chờ hit và retry reset; ba giày thụ động, no Z, proc/threshold/cooldown/debt; Shift thoát hố cát; ba arena giữ sprite scale/shading/Y-depth, hồ sen authoritative collision và dự đoán; đồng bộ status trên đầu và cả tượng/hai đèn ẩn trong boss wave. [Kết quả thực tế và giới hạn](docs/M4D_IMPLEMENTATION.md), không suy diễn PASS từ checklist này.

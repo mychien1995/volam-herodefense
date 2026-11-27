@@ -1,0 +1,79 @@
+{
+  "runId": "69531e85-ffc5-4aea-af0b-f42399c162d8",
+  "mode": "quick",
+  "args": [
+    "tests/easy-campaign-xp.test.ts",
+    "tests/difficulty-room.test.ts",
+    "tests/difficulty.test.ts",
+    "tests/wave-pacing.test.ts",
+    "tests/campaign-xp-trials.test.ts"
+  ],
+  "startedAt": "2026-11-27T00:14:49.044Z",
+  "status": "PASS",
+  "stages": [
+    {
+      "label": "environment preflight",
+      "seconds": 0.011,
+      "status": "PASS",
+      "checks": [
+        {
+          "id": "workspace",
+          "status": "PASS",
+          "detail": {
+            "mode": "quick",
+            "stage": "before-build",
+            "managed": false
+          }
+        },
+        {
+          "id": "session",
+          "status": "PASS",
+          "detail": "No managed service ports for this profile"
+        },
+        {
+          "id": "node",
+          "status": "PASS",
+          "detail": "26.0.0"
+        },
+        {
+          "id": "installation",
+          "status": "PASS",
+          "detail": "pnpm@11.25.0"
+        },
+        {
+          "id": "tools",
+          "status": "PASS",
+          "detail": {
+            "typescript": "7.0.2",
+            "vitest": "5.0.5"
+          }
+        }
+      ]
+    },
+    {
+      "label": "prepare assets (once)",
+      "seconds": 17.26,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-easy-wave-xp-2026-11-27\\check-workflow\\69531e85-ffc5-4aea-af0b-f42399c162d8\\1-prepare-assets-once-.log",
+      "outputBytes": 806
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 0.33,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-easy-wave-xp-2026-11-27\\check-workflow\\69531e85-ffc5-4aea-af0b-f42399c162d8\\2-compile-TypeScript.log",
+      "outputBytes": 0
+    },
+    {
+      "label": "focused tests",
+      "seconds": 7.66,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-easy-wave-xp-2026-11-27\\check-workflow\\69531e85-ffc5-4aea-af0b-f42399c162d8\\3-focused-tests.log",
+      "outputBytes": 426
+    }
+  ],
+  "totalSeconds": 25.27
+}

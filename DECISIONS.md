@@ -1,3 +1,11 @@
+## Đã duyệt · EXP wave mức Dễ M4D — 2026-11-27
+
+Người dùng duyệt áp dụng pool EXP wave **110/450/750/750** riêng mức **Dễ** trên `milestone/m4d`. Mức Khó giữ **100/300/450/650** và vẫn là mặc định tạo phòng. Giữ EXP boss/phó bản, vàng, giá đồ, đường lên cấp và luật chia thưởng. Cấu hình được server chốt theo lựa chọn host lúc tạo phòng, độc lập giữa các phòng. [Triển khai và kiểm chứng](docs/M4D_EASY_WAVE_XP_2026_11_27.md).
+
+## Đã duyệt · nhịp wave và farm M4D — 2026-11-27
+
+Trên `wip/m4d/diff-level`: wave đầu sau 120s; các wave sau bắt đầu 120s sau khi stream 60s trước kết thúc, không chờ giết hết. HUD phân biệt đang ra quái và thời gian nghỉ. Quái phó bản thường tăng 25% vàng/EXP; floor thời gian 900s, vẫn lấy mức cao hơn với tiến trình boss thực. Giữ thưởng wave/boss, luật chia thưởng, giá đồ, phạt EXP vượt cấp và pause. [Nhịp wave và kinh tế M4D](docs/M4D_WAVE_PACING_2026_11_27.md) supersede các mốc start-to-start 120s và floor 600s M4D bên dưới.
+
 ## Nam Đế hắc hóa M4D · 2026-11-25
 
 Người dùng duyệt concept và yêu cầu tích hợp: ở 40% HP, Nam Đế mắt đỏ, thân đen trắng, cởi trần cơ bắp và lớn gấp đôi. Phase này bỏ Đại Lý Phong Huyệt/Liên Hoàn Nhất Dương Chỉ; thêm Canh Khí bảo hộ và làm chậm người đánh, Băng Đao bán nguyệt dùng Z đỡ/phản (ba lần phản trúng mới vỡ bảo hộ), Hoàng Quyền báo trước rồi đấm từ trên xuống gây stun với tần suất cao. Có nút DEV host vào thẳng phase để thử progression cấp 18. [Phạm vi, nguồn art và kiểm chứng](docs/NAM_DE_DARK_2026_11_25.md). Sau khi xem bản chơi, người dùng duyệt runtime art/integration và yêu cầu commit trên milestone/m4d; [hash bản đã duyệt](assets/approved_nam_de_dark_v01.lock.json). Giữ tuning hiện tại, không suy ra kết quả cân bằng toàn campaign từ lần duyệt này.

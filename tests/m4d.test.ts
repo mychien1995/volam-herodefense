@@ -49,13 +49,14 @@ function fixture() {
   return { c, w, h };
 }
 describe('M4D approved changes', () => {
-  it('production starts waves every 120 seconds and streams two rows', () => {
+  it('production rests 120 seconds after streaming two rows', () => {
     const d = serverInvasionDefinition({ NODE_ENV: 'production' }, 4);
     expect(d.intervalTicks).toBe(3600);
     expect(d.rowsPerGate).toBe(2);
     expect(d.warningTicks).toEqual([1800, 450]);
     expect(d.streamTicks).toBe(1800);
-    expect(campaignDefinition.chapterSeconds).toBe(600);
+    expect(d.restAfterStream).toBe(true);
+    expect(campaignDefinition.chapterSeconds).toBe(900);
   });
   for (const players of [1, 2, 6])
     for (const gates of [2, 3, 4] as const)

@@ -2,7 +2,7 @@ import { beforeAll, afterAll, expect, it } from 'vitest';
 import { startRoomTestServer } from './room-test-server.js';
 import type { MatchRoom } from '../apps/game-server/src/rooms/MatchRoom.js';
 import { MATCH_ROOM, PROTOCOL_VERSION } from '@volam/game-protocol';
-import { dongTaDefinition } from '@volam/game-data';
+import { campaignDefinition, dongTaDefinition } from '@volam/game-data';
 let server: Awaited<ReturnType<typeof startRoomTestServer>>;
 beforeAll(async () => {
   server = await startRoomTestServer();
@@ -32,6 +32,20 @@ it('creator chooses the room difficulty; peers cannot override it; default and s
   const e = server.getRoomById<MatchRoom>(a.roomId),
     h = server.getRoomById<MatchRoom>(hard.roomId);
   expect(e.simulation.base.difficulty).toBe('easy');
+  expect(e.simulation.base.campaign!.invasionXp).toEqual([
+    110, 450, 750, 750, 750,
+  ]);
+  expect(e.simulation.arena.config.campaign!.invasionXp).toEqual([
+    110, 450, 750, 750, 750,
+  ]);
+  expect(e.simulation.base.campaign).toEqual({
+    ...campaignDefinition,
+    invasionXp: [110, 450, 750, 750, 750],
+  });
+  expect(h.simulation.base.campaign).toEqual(campaignDefinition);
+  expect(h.simulation.base.campaign!.invasionXp).toEqual([
+    100, 300, 450, 650, 650,
+  ]);
   expect(
     e.simulation.dongTa!.definition.abilities.lac_anh_normal.damage,
   ).toBeCloseTo(26 * 0.85);

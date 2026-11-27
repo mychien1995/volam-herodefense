@@ -1,3 +1,15 @@
+## M4D · đã áp dụng EXP wave mức Dễ — 2026-11-27
+
+Pool EXP wave Dễ là **110/450/750/750**, mức Khó giữ **100/300/450/650**. Giữ EXP boss/phó bản, vàng, giá đồ và luật thưởng. Bộ `wave_target` từ thử nghiệm trước được duyệt cho **Dễ**; kết quả forecast không phải xác nhận bot thắng chiến dịch tự nhiên. [Runtime và kiểm chứng](docs/M4D_EASY_WAVE_XP_2026_11_27.md).
+
+## M4D · khoảng nghỉ và bù farm — 2026-11-27
+
+Được người dùng duyệt: stream 60s rồi nghỉ đủ 120s; lần đầu chờ 120s. Tổng thưởng invasion mỗi wave giữ nguyên, quái phó bản thường ×1,25 EXP/vàng, floor mỗi 15 phút thay 10 phút. Tuning này chưa chứng minh mức sẵn sàng của người chơi trước boss; cần đối chiếu level 6/12/18/24, vàng và đồ ở từng encounter. [Nhịp wave và kinh tế M4D](docs/M4D_WAVE_PACING_2026_11_27.md).
+
+Đánh giá bổ sung 2026-11-27: [readiness theo boss](docs/CAMPAIGN_READINESS_2026_11_27.md) dùng 43 forecast kinh tế có giả định và sáu lượt bot tự nhiên. Còn hụt EXP trong policy bot; chưa xác nhận full-campaign victory và không tự điều chỉnh thêm tuning.
+
+**Thử nghiệm lịch sử — 2026-11-27 (sau đó được duyệt riêng cho Dễ, xem trên):** [thử bù EXP theo chặng](docs/CAMPAIGN_XP_TRIAL_2026_11_27.md) đề xuất pool wave solo 110/450/750/750, giữ EXP boss/phó bản, vàng và giá đồ. Đây là kết quả forecast có giả định clear, chưa xác nhận natural campaign victory cho mọi mức khó.
+
 M4D · Thất Tinh Kiếm: hồi chiêu cơ bản 135→90 tick (4,5→3 giây), giữ giảm hồi chiêu theo bậc/nội tại hiện hành; không đổi mana, sát thương hay bảy nhịp kiếm. Theo yêu cầu người dùng ngày 2026-11-25.
 
 ## M4D · mật độ và nhịp trận — 2026-11-25

@@ -1,0 +1,49 @@
+{
+  "status": "PASS",
+  "scope": "Easy wave EXP runtime M4D; Hard, boss/dungeon EXP, gold and prices unchanged",
+  "unitIntegration": {
+    "passed": 1481,
+    "log": "resume-3.log"
+  },
+  "workflow": {
+    "passed": 77,
+    "log": "resume-2.log"
+  },
+  "assetValidators": {
+    "passed": 35,
+    "report": "resume-final.json"
+  },
+  "browser": {
+    "passed": 3,
+    "details": [
+      {
+        "case": "Easy/Hard UI + actual A kill EXP/gold",
+        "status": "PASS",
+        "log": "browser-retry-3.log"
+      },
+      {
+        "case": "Actual dungeon kill EXP/gold",
+        "status": "PASS",
+        "log": "browser-retry-3.log"
+      },
+      {
+        "case": "Two-peer stream/rest/next stream with surviving creeps",
+        "status": "PASS",
+        "log": "pacing-observer-3.log"
+      }
+    ]
+  },
+  "typecheck": "PASS including final QA fixture",
+  "retries": [
+    "Test type assertion fix after initial check:final tool typecheck failure",
+    "QA client rebuilt for correct M4D endpoint",
+    "Accelerated pacing test changed to passive in-page phase observation with 10s/10s fixture durations; production 60s/120s unchanged"
+  ],
+  "reports": [
+    "check-workflow/final-timings.json",
+    "resume-final.json",
+    "browser-retry.json",
+    "pacing-retry.json",
+    "pacing-observer.json"
+  ]
+}

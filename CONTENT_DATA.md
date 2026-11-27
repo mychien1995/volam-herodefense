@@ -1,3 +1,11 @@
+## M4D · EXP wave mức Dễ — 2026-11-27
+
+`campaignForDifficulty` clone/validate campaign theo phòng: Dễ dùng `invasionXp=[110,450,750,750,750]`; Khó giữ baseline `[100,300,450,650,650]` trong `campaign.ts`. Bốn pool tương ứng wave 1–5/6–10/11–15/16–20; phần tử thứ năm đáp ứng schema, không thêm wave. EXP boss/phó bản, vàng và giá đồ giữ nguyên. [Chi tiết](docs/M4D_EASY_WAVE_XP_2026_11_27.md).
+
+## M4D · pacing/economy — 2026-11-27
+
+Production: chờ đầu 120s, stream 60s, rồi nghỉ 120s; floor dungeon 900s. `campaign.ts`: `dungeonXp=[3.75,6.25,10,13.75,17.5]`, `dungeonGold=[1,1.875,2.5,3.125,3.75]`. Các mốc 120s start-to-start/600s bên dưới là baseline lịch sử. [Nhịp wave và kinh tế M4D](docs/M4D_WAVE_PACING_2026_11_27.md).
+
 M4D · Thất Tinh Kiếm: hồi chiêu cơ bản 135→90 tick (4,5→3 giây), giữ giảm hồi chiêu theo bậc/nội tại hiện hành; không đổi mana, sát thương hay bảy nhịp kiếm. Theo yêu cầu người dùng ngày 2026-11-25.
 
 ## M4D · 2026-11-25

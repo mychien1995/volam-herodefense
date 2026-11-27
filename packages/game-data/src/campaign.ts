@@ -86,7 +86,7 @@ export const campaignDefinition: CampaignDefinition = campaignSchema.parse({
   invasionChapterCount: 20,
   invasionHpMultiplier: 1.1,
   invasionDamageMultiplier: 1.08,
-  chapterSeconds: 600,
+  chapterSeconds: 900,
   // Cumulative thresholds for levels 1–30. The curve rejoins v1 at level 18.
   xpThresholds: [
     0, 45, 135, 270, 450, 670, 970, 1330, 1750, 2230, 2750, 3310, 3910, 4550,
@@ -98,8 +98,9 @@ export const campaignDefinition: CampaignDefinition = campaignSchema.parse({
   farmOverflowRatio: 0.25,
   invasionXp: [100, 300, 450, 650, 650],
   invasionGold: [70, 100, 130, 160, 160],
-  dungeonXp: [3, 5, 8, 11, 14],
-  dungeonGold: [0.8, 1.5, 2, 2.5, 3],
+  // Approved regular dungeon reward increase (+25%); boss and invasion pools stay separate.
+  dungeonXp: [3.75, 6.25, 10, 13.75, 17.5],
+  dungeonGold: [1, 1.875, 2.5, 3.125, 3.75],
   dungeonHp: [1, 1.5, 2.2, 3, 3.8],
   dungeonDamage: [1, 1.2, 1.45, 1.7, 2],
   dungeonEnemyDamageMultiplier: 0.85,

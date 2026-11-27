@@ -1,3 +1,11 @@
+## M4D · tiến trình mức Dễ — 2026-11-27
+
+Chủ phòng chọn Dễ sẽ dùng pool EXP wave 110/450/750/750 theo bốn chặng năm wave. Mức Khó giữ 100/300/450/650. Đây là áp dụng bộ thông số đã mô phỏng cho mức Dễ; EXP boss/phó bản, vàng và giá đồ giữ nguyên. Lịch stream 60s rồi nghỉ 120s và floor 15 phút tiếp tục như đã duyệt. [Chi tiết và giới hạn đo](docs/M4D_EASY_WAVE_XP_2026_11_27.md).
+
+## M4D · vòng thủ và farm — 2026-11-27
+
+Wave ra quái trong 60s, sau đó mới đếm 120s tới wave sau. Khoảng nghỉ dùng để dọn quái còn lại, farm hoặc mua đồ; không chờ clear toàn bộ. Farm phó bản thường được cộng 25% tiền/EXP, độ khó theo thời gian tăng mỗi 15 phút hoặc sớm hơn theo boss đã hạ. [Nhịp wave và kinh tế M4D](docs/M4D_WAVE_PACING_2026_11_27.md) thay nhịp 2 phút start-to-start trong baseline M4D.
+
 ## M4D · 2026-11-25
 
 Chủ phòng chọn Đào Hoa Đảo, Tương Dương đêm chiến tranh hoặc Tụ Hiền Trang hồ sen. Tụ Hiền Trang có nước chặn di chuyển và bốn cầu nối đảo trung tâm. Wave thường hai hàng mỗi cổng, mỗi 2 phút; boss chỉ tấn công sau khi đội đánh trước. Giày ghép chuyển sang ba nội tại và bỏ Z. [Đặc tả triển khai M4D](docs/M4D_IMPLEMENTATION.md) ghi các thay đổi và phạm vi duyệt art.

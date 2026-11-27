@@ -262,9 +262,10 @@ describe('approved campaign progression and economy', () => {
         critChance: 0,
         critMultiplier: 1,
       });
-    expect(h.xp).toBe(18);
-    expect(h.gold).toBe(4);
-    expect(h.farmGoldRemainder).toBeCloseTo(0.8);
+    expect(h.xp).toBe(22);
+    expect(h.farmXpRemainder).toBeCloseTo(0.5);
+    expect(h.gold).toBe(6);
+    expect(h.farmGoldRemainder).toBeCloseTo(0);
     gainExperience(h, experienceAtLevel(8, c) - h.xp, c);
     ticks(m, 61);
     const before = h.xp;
@@ -274,8 +275,8 @@ describe('approved campaign progression and economy', () => {
           critChance: 0,
           critMultiplier: 1,
         });
-    expect(h.xp - before).toBe(4);
-    expect(h.farmXpRemainder).toBeCloseTo(0.5);
+    expect(h.xp - before).toBe(6);
+    expect(h.farmXpRemainder).toBeCloseTo(0.125);
   });
   it('reuses all six identities while time and room count increase private-dungeon threat', () => {
     const { m, h } = fixture(6);

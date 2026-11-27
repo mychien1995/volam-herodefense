@@ -1,0 +1,59 @@
+ℹ️  optional .env file not found: .env.development, .env
+
+   ___      _                                   ___   _  ___  
+  / __\___ | |_   _ ___  ___ _   _ ___  __   __/ _ \ / |( _ ) 
+ / /  / _ \| | | | / __|/ _ \ | | / __| \ \ / / | | || |/ _ \ 
+/ /__| (_) | | |_| \__ \  __/ |_| \__ \  \ V /| |_| || | (_) |
+\____/\___/|_|\__, |___/\___|\__,_|___/   \_/  \___(_)_|\___/ 
+              |___/                                           
+
+             · Multiplayer Framework for Node.js ·
+
+💖 Consider becoming a Sponsor on GitHub → https://github.com/sponsors/endel
+🌟 Give us a star on GitHub → https://github.com/colyseus/colyseus
+☁️  Deploy and scale your project on Colyseus Cloud → https://cloud.colyseus.io
+
+
+Running 3 tests using 1 worker
+
+(node:38204) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\m4d-easy-xp.spec.ts:15:1 › Easy and Hard rooms award their own wave EXP through a real A kill with identical gold (1.2m)
+  x  2 tests\e2e\m4d-wave-pacing.spec.ts:16:1 › wave countdown starts after spawning and agrees across two Phaser peers (1.2m)
+(node:1856) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 3 tests\e2e\m4d-wave-pacing.spec.ts:78:1 › a real dungeon kill awards the increased fractional gold and EXP (35.4s)
+
+
+  1) tests\e2e\m4d-wave-pacing.spec.ts:16:1 › wave countdown starts after spawning and agrees across two Phaser peers 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#invasion-countdown')
+    Expected substring: "Đợt 2 đang ra quái"
+    Received string:    "Đợt 2 · Đợt 3 sau 00:00"
+    Timeout: 20000ms
+
+    Call log:
+      - Expect "toContainText" locator('#invasion-countdown') with timeout 20000ms
+      - waiting for locator('#invasion-countdown')
+        - locator resolved to <span id="invasion-countdown">Đợt 2 · Đợt 3 sau 00:01</span>
+        - unexpected value "Đợt 2 · Đợt 3 sau 00:01"
+        14 × locator resolved to <span id="invasion-countdown">Đợt 2 · Đợt 3 sau 00:00</span>
+           - unexpected value "Đợt 2 · Đợt 3 sau 00:00"
+
+
+      66 |       { label: 'second wave after full rest' },
+      67 |     );
+    > 68 |     await expect(peer.locator('#invasion-countdown')).toContainText(
+         |                                                       ^
+      69 |       'Đợt 2 đang ra quái',
+      70 |     );
+      71 |     expect((await snap(peer)).state.tick).toBeGreaterThanOrEqual(next);
+        at C:\Users\ADMIN\.codex\worktrees\milestone-m4d\volam-hero-defense\tests\e2e\m4d-wave-pacing.spec.ts:68:55
+
+    Error Context: artifacts\m4d-browser\m4d-wave-pacing-wave-count-aa826-ees-across-two-Phaser-peers\error-context.md
+
+  1 failed
+    tests\e2e\m4d-wave-pacing.spec.ts:16:1 › wave countdown starts after spawning and agrees across two Phaser peers 
+  2 passed (3.1m)

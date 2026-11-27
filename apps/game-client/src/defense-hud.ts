@@ -131,20 +131,24 @@ export class DefenseHud {
     this.panel.querySelector('#invasion-countdown')!.textContent =
       d.defeated || won
         ? 'Trận đấu kết thúc'
-        : d.wave >= 20
-          ? 'Đợt 20 · Đã hết đợt xâm lăng'
-          : d.paused
-            ? campaignVote
-              ? `Đợt ${d.wave} · Tạm dừng — biểu quyết đánh lại boss`
-              : inLoiDai
-                ? `Đợt ${d.wave} · Tạm dừng — toàn đội đang ở Lôi Đài`
-                : `Đợt ${d.wave} · Tạm dừng — toàn đội đang trong phó bản boss`
-            : `Đợt ${d.wave} · Đợt ${d.wave + 1} sau ${Math.floor(seconds / 60)
-                .toString()
-                .padStart(
-                  2,
-                  '0',
-                )}:${(seconds % 60).toString().padStart(2, '0')}`;
+        : d.paused
+          ? campaignVote
+            ? `Đợt ${d.wave} · Tạm dừng — biểu quyết đánh lại boss`
+            : inLoiDai
+              ? `Đợt ${d.wave} · Tạm dừng — toàn đội đang ở Lôi Đài`
+              : `Đợt ${d.wave} · Tạm dừng — toàn đội đang trong phó bản boss`
+          : d.streamUntilTick > state.tick
+            ? `Đợt ${d.wave} đang ra quái · còn ${Math.ceil((d.streamUntilTick - state.tick) / m1Config.tickRate)}s`
+            : d.wave >= 20
+              ? 'Đã mở đủ 20 đợt xâm lăng'
+              : `Đợt ${d.wave} · Đợt ${d.wave + 1} sau ${Math.floor(
+                  seconds / 60,
+                )
+                  .toString()
+                  .padStart(
+                    2,
+                    '0',
+                  )}:${(seconds % 60).toString().padStart(2, '0')}`;
     const nextName = invasionCreepName(d.wave + 1);
     const roster = this.panel.querySelector<HTMLElement>(
       '#next-invasion-creep',

@@ -52,6 +52,70 @@ export default () =>
               // Idle art-review peers do not defend; isolate rendering from statue defeat.
               z.world.statue!.invulnerable = true;
               m.invasion!.nextWaveTick = m.arenaTick + 1;
+            } else if (op === 'pacing') {
+              // Shorten only fixture durations; the production director must perform every transition.
+              const invasion = m.invasion!;
+              invasion.definition.intervalTicks = 300;
+              invasion.definition.streamTicks = 300;
+              invasion.definition.warningTicks = [60, 15];
+              invasion.definition.maxWaves = 2;
+              invasion.nextWaveTick = m.arenaTick + 1;
+              z.world.statue!.invulnerable = true;
+              for (const hero of z.world.heroes.values())
+                hero.invulnerable = true;
+            } else if (op === 'reward-balance') {
+              res.setHeader('content-type', 'application/json');
+              res.end(
+                JSON.stringify({
+                  xp: h.xp + (h.farmXpRemainder ?? 0),
+                  gold: h.gold + (h.farmGoldRemainder ?? 0),
+                }),
+              );
+              return;
+            } else if (
+              op === 'farm-target' ||
+              op === 'invasion-reward-target'
+            ) {
+              if (op === 'farm-target' && !z.config.dungeonAggro)
+                throw Error('Enter a regular dungeon first');
+              if (op === 'invasion-reward-target' && z.id !== 'arena')
+                throw Error('Enter the arena first');
+              const enemy = [...z.world.creeps.values()].find(
+                (e) =>
+                  e.hp > 0 &&
+                  (op === 'farm-target' || !!e.invasion) &&
+                  !blocked(
+                    { x: e.x - 40, y: e.y },
+                    z.config.radius,
+                    z.config.width,
+                    z.config.height,
+                    z.config.collision,
+                  ),
+              );
+              if (!enemy) throw Error('No legal farm target');
+              // Legal target/position prerequisites; a real A input must kill and award rewards.
+              if (op === 'invasion-reward-target') {
+                // Keep incidental cleave from awarding another creep; do not inject a reward.
+                for (const other of z.world.creeps.values())
+                  other.invulnerable = other !== enemy;
+              }
+              enemy.hp = 1;
+              h.invulnerable = true;
+              h.x = enemy.x - 40;
+              h.y = enemy.y;
+              h.moveX = h.moveY = 0;
+              h.fx = 1;
+              h.fy = 0;
+              res.setHeader('content-type', 'application/json');
+              res.end(
+                JSON.stringify({
+                  ok: true,
+                  target: z.id === 'arena' ? enemy.id : `${z.id}:${enemy.id}`,
+                  xp: enemy.stats?.xp ?? z.config.creep.xp,
+                  gold: enemy.stats?.gold ?? z.config.creep.gold,
+                }),
+              );
+              return;
             } else if (op === 'target') {
               const enemy = z.world.creeps.get(q.get('target') ?? '')!;
               const point = { x: enemy.x - 40, y: enemy.y };

@@ -1,7 +1,7 @@
 import { defineConfig } from '@playwright/test';
 export default defineConfig({
   testDir: './tests/e2e',
-  testMatch: /m4d(-review|-r3)?\.spec\.ts/,
+  testMatch: /m4d(-review|-r3|-wave-pacing|-easy-xp)?\.spec\.ts/,
   globalSetup: './tests/e2e/m4d-setup.ts',
   workers: 1,
   timeout: 180000,

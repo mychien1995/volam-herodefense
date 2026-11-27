@@ -10,6 +10,7 @@ const point = z.strictObject({
 export const invasionDefinitionSchema = z
   .strictObject({
     intervalTicks: z.number().int().min(90),
+    restAfterStream: z.boolean().optional(),
     streamTicks: z.number().int().positive().optional(),
     spawnEveryTicks: z.number().int().positive().optional(),
     portalCount: z
@@ -98,6 +99,7 @@ export function createInvasionDefinition(
     durationSeconds?: number;
     spawnEverySeconds?: number;
     rowsPerGate?: 1 | 2;
+    restAfterStream?: boolean;
   },
 ): InvasionDefinition {
   const seconds = z.number().int().min(3).max(3600).parse(intervalSeconds),
@@ -148,6 +150,7 @@ export function createInvasionDefinition(
     ...(stream
       ? {
           portalCount: stream.portalCount,
+          restAfterStream: stream.restAfterStream ?? false,
           rowsPerGate: stream.rowsPerGate ?? 1,
           streamTicks: Math.round((stream.durationSeconds ?? 60) * rate),
           spawnEveryTicks: Math.round((stream.spawnEverySeconds ?? 2) * rate),

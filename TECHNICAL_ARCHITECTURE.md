@@ -1,3 +1,11 @@
+## M4D · cấu hình EXP theo phòng — 2026-11-27
+
+`MatchRoom.onCreate` kiểm tra độ khó rồi gọi `game-data/campaignForDifficulty`, gán cùng cấu hình đã clone cho `simulation.base.campaign` và `simulation.arena.config.campaign`. Chỉ Dễ thay `invasionXp`; Khó giữ baseline. Director chia pool qua pipeline thưởng/fractional remainder hiện có; peer join không đổi cấu hình host. Không đổi schema mạng/protocol. [Chi tiết](docs/M4D_EASY_WAVE_XP_2026_11_27.md).
+
+## M4D · server-owned wave rest — 2026-11-27
+
+`InvasionDirector` dùng `restAfterStream` từ cấu hình server: deadline wave tiếp = stream end + interval 120s. `streamUntilTick` và `nextWaveTick` hiện có đủ để HUD phân biệt hai giai đoạn, không đổi protocol. Farm dùng ngân sách data ×1,25 và phần dư server hiện có; floor 900s vẫn snapshot khi tạo wave dungeon. DEV preview/fixture có override interval rõ ràng giữ lịch start-to-start cũ. [Nhịp wave và kinh tế M4D](docs/M4D_WAVE_PACING_2026_11_27.md).
+
 ## M4D · protocol 49
 
 Arena ID được host chọn khi tạo room, server kiểm tra và đồng bộ trong Defense; late join không đổi lựa chọn. Geometry hồ sen dùng chung game-data cho server và prediction; nước thuộc collision di chuyển, combatCollision giữ đường đạn riêng. Boss provocation thuộc server, reset theo actor/attempt mới. Arena có ground/alpha props/Y-depth/shading độc lập; status renderer nhận trạng thái đã đồng bộ. [Chi tiết M4D](docs/M4D_IMPLEMENTATION.md).

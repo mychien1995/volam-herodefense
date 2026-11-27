@@ -1,0 +1,16 @@
+ℹ️  optional .env file not found: .env.development, .env
+Error: Client build endpoint differs from this QA session
+
+   at ..\..\tools\qa-preflight.mjs:89
+
+  87 |     session.serverUrl.replace('://localhost:', '://127.0.0.1:')
+  88 |   )
+> 89 |     throw Error('Client build endpoint differs from this QA session');
+     |           ^
+  90 |   return { protocol: version(source), serverUrl: session.serverUrl };
+  91 | }
+  92 |
+    at verifyQaBuild (C:\Users\ADMIN\.codex\worktrees\milestone-m4d\volam-hero-defense\tools\qa-preflight.mjs:89:11)
+    at verifyBuild (C:\Users\ADMIN\.codex\worktrees\milestone-m4d\volam-hero-defense\tools\qa-game-services.mjs:29:7)
+    at runQaFixture (C:\Users\ADMIN\.codex\worktrees\milestone-m4d\volam-hero-defense\tools\qa-fixture.mjs:23:22)
+

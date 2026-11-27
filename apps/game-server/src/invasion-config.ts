@@ -26,6 +26,11 @@ export function serverInvasionDefinition(
       durationSeconds: test ? 12 : 60,
       spawnEverySeconds: test ? 3 : 2,
       rowsPerGate: 2,
+      // Explicit accelerated DEV fixtures retain their historical wave-start clock.
+      // Normal development and production both use a full rest after spawning.
+      restAfterStream:
+        !test &&
+        !(development && env['VOLAM_INVASION_INTERVAL_SECONDS'] !== undefined),
     },
   );
   if (test) definition.warningTicks = [60, 30];

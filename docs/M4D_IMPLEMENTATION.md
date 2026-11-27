@@ -1,3 +1,5 @@
+Current wave/economy override (2026-11-27): [120s rest after stream, +25% regular dungeon rewards, 15-minute floor](M4D_WAVE_PACING_2026_11_27.md). Supersedes the original 120s start-to-start / 600s floor below; historical verification remains unchanged.
+
 Latest VTD follow-up, protocol53: [28 stars, moving light and Thất Tuyệt practice](M4D_VTD_FOLLOW_UP_2026_11_25.md).
 
 Current boss follow-up: [arena registration, skill tuning and phase-two test](M4D_BOSS_FIXES_2026_11_25.md).

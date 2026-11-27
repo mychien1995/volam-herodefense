@@ -1,0 +1,28 @@
+{
+  "startedAt": "2026-11-27T00:28:49.466Z",
+  "reason": "EXP and dungeon browser cases passed; pacing fixture missed its 3-second transient. Observe both peers concurrently and allow a 10-second fixture stream; production timing unchanged.",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "typecheck updated browser fixture",
+      "status": "PASS",
+      "seconds": 5.45,
+      "log": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-easy-wave-xp-2026-11-27\\pacing-retry-1.log",
+      "exitCode": 0
+    },
+    {
+      "label": "browser environment preflight",
+      "status": "PASS",
+      "seconds": 0.97,
+      "log": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-easy-wave-xp-2026-11-27\\pacing-retry-2.log",
+      "exitCode": 0
+    },
+    {
+      "label": "two-peer pacing browser regression",
+      "status": "FAIL",
+      "seconds": 74.27,
+      "log": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-easy-wave-xp-2026-11-27\\pacing-retry-3.log",
+      "exitCode": 1
+    }
+  ]
+}

@@ -1,3 +1,7 @@
+Cập nhật runtime 2026-11-27: người dùng duyệt **110/450/750/750 riêng mức Dễ**; Khó giữ baseline. Xem [triển khai mức Dễ](M4D_EASY_WAVE_XP_2026_11_27.md). Các kết quả/đề xuất bên dưới giữ nguyên như bằng chứng lịch sử, không áp dụng bộ mới cho mọi mức khó.
+
+Latest pacing/economy override — 2026-11-27: [M4D wave rest and farm](M4D_WAVE_PACING_2026_11_27.md). Production now waits 120s after each 60s stream, regular dungeon reward pools below are multiplied by 1.25, and the time floor is 900s. Keep later boss-difficulty overrides and retained first-clear/pause rules. Earlier measurements remain historical.
+
 # Campaign balance, boss progression and retries — 2026-11-06
 
 ## Boss tuning update — 2026-11-13

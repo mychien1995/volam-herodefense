@@ -2,17 +2,17 @@ Latest practice/boss follow-up: [Thất Tuyệt,28 sao và đuôi rồng v05](M4
 
 # M4D — độ khó phòng và thử boss · 2026-11-25
 
-Từ yêu cầu này, chạy game bằng checkout `milestone/m4d` tại `C:/Users/ADMIN/.codex/worktrees/milestone-m4d/volam-hero-defense`. Protocol **53**, cần phòng mới và client/server cùng bản.
+Từ yêu cầu này, chạy game bằng checkout `milestone/m4d` tại `C:/Users/ADMIN/.codex/worktrees/milestone-m4d/volam-hero-defense`. Bản gốc dùng protocol **53**; runtime hiện tại là **55**. Cập nhật EXP mức Dễ ngày 2026-11-27 không đổi protocol; cần phòng mới và client/server cùng bản.
 
 Host chọn **Dễ** hoặc **Khó** trong cửa sổ tạo phòng. Mặc định Khó giữ cơ chế và tuning hiện tại; peer/late join nhận lựa chọn của phòng và không thể ghi đè nó qua join options.
 
-Dễ hiện chỉ thay encounter Đông Tà (gồm sát thương kỹ năng của Mai Siêu Phong trong encounter):
+Dễ hiện có [EXP wave 110/450/750/750](M4D_EASY_WAVE_XP_2026_11_27.md) (2026-11-27), ngoài các thay đổi encounter Đông Tà (gồm sát thương kỹ năng của Mai Siêu Phong trong encounter):
 
 - Lạc Anh lướt chỉ dùng đường chữ nhật. Server chốt đường lúc cast và báo trước một giây; client vẽ đúng bề rộng/đường đó. Cảnh báo hết khi bắt đầu lướt, hủy cast hoặc kết thúc encounter.
 - Đòn quét nhiều tia kiếm phía trước, được người dùng xác nhận là chiêu hình quạt cần thu nhỏ, có chiều dài và bề rộng nhân `sqrt(0.3)`: diện tích danh định còn **30%**. ID thực thi hiện tại là `ta_kiem_lien_kich`. Bốn đường Lạc Anh +/X không đổi.
 - Ngọc Tiêu Hồi Phong giữ Đông Tà trong action đến khi cánh hoa cuối cùng kết thúc, bao gồm thời gian chờ nổ.
 - Mọi damage profile của encounter nhân **0.85**: giảm **15%**, còn **85%**. Đính chính trực tiếp của người dùng thay thế cách hiểu trước. Defense/scaling vẫn qua pipeline thường.
-- Không đổi HP, phần thưởng, lịch wave, số hồi sinh hoặc các boss khác theo độ khó.
+- Không đổi HP, EXP boss/phó bản, vàng, giá đồ, lịch wave, số hồi sinh hoặc các boss khác theo độ khó. Chỉ pool EXP wave thường thay đổi theo mức Dễ như cập nhật trên.
 
 ## Chế độ thử wave boss
 

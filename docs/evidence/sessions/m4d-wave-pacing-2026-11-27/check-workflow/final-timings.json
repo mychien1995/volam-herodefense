@@ -1,0 +1,411 @@
+{
+  "runId": "a5f8647f-febb-4673-8b3c-2741c78b8e45",
+  "mode": "final",
+  "args": [
+    "--config",
+    "playwright.m4d.config.ts",
+    "tests/e2e/m4d-wave-pacing.spec.ts"
+  ],
+  "startedAt": "2026-11-26T17:31:26.665Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "environment preflight",
+      "seconds": 0.628,
+      "status": "PASS",
+      "checks": [
+        {
+          "id": "workspace",
+          "status": "PASS",
+          "detail": {
+            "mode": "final",
+            "stage": "before-build",
+            "managed": true
+          }
+        },
+        {
+          "id": "session",
+          "status": "PASS",
+          "detail": {
+            "serverPort": 2954,
+            "clientPort": 5554
+          }
+        },
+        {
+          "id": "ports",
+          "status": "PASS"
+        },
+        {
+          "id": "node",
+          "status": "PASS",
+          "detail": "26.0.0"
+        },
+        {
+          "id": "installation",
+          "status": "PASS",
+          "detail": "pnpm@11.25.0"
+        },
+        {
+          "id": "tools",
+          "status": "PASS",
+          "detail": {
+            "typescript": "7.0.2",
+            "vitest": "5.0.5",
+            "vite": "8.3.5",
+            "@playwright/test": "1.64.1"
+          }
+        },
+        {
+          "id": "chromium",
+          "status": "PASS",
+          "detail": {
+            "version": "156.0.8078.4",
+            "cache": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\.cache\\ms-playwright"
+          }
+        },
+        {
+          "id": "python",
+          "status": "PASS",
+          "detail": "Python 3.13.5"
+        }
+      ]
+    },
+    {
+      "label": "prepare assets (once)",
+      "seconds": 16.75,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\1-prepare-assets-once-.log",
+      "outputBytes": 806
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 2.06,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\2-compile-TypeScript.log",
+      "outputBytes": 0
+    },
+    {
+      "label": "typecheck tests and tools",
+      "seconds": 3.21,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\3-typecheck-tests-and-tools.log",
+      "outputBytes": 0
+    },
+    {
+      "label": "workflow regression checks",
+      "seconds": 13.42,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\4-workflow-regression-checks.log",
+      "outputBytes": 8204
+    },
+    {
+      "label": "all unit/integration tests",
+      "seconds": 253.03,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\5-all-unit-integration-tests.log",
+      "outputBytes": 715
+    },
+    {
+      "label": "production client build",
+      "seconds": 20.59,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\6-production-client-build.log",
+      "outputBytes": 25907
+    },
+    {
+      "label": "scripts/verify-assets.py",
+      "seconds": 0.41,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\7-scripts-verify-assets-py.log",
+      "outputBytes": 160
+    },
+    {
+      "label": "scripts/verify-arena-art01.py",
+      "seconds": 0.75,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\8-scripts-verify-arena-art01-py.log",
+      "outputBytes": 132
+    },
+    {
+      "label": "scripts/verify-arena-v2.py",
+      "seconds": 0.58,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\9-scripts-verify-arena-v2-py.log",
+      "outputBytes": 135
+    },
+    {
+      "label": "scripts/verify-thien-son.py",
+      "seconds": 0.7,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\10-scripts-verify-thien-son-py.log",
+      "outputBytes": 205
+    },
+    {
+      "label": "scripts/verify-vo-dang.py",
+      "seconds": 0.59,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\11-scripts-verify-vo-dang-py.log",
+      "outputBytes": 232
+    },
+    {
+      "label": "scripts/verify-thieu-lam.py",
+      "seconds": 0.62,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\12-scripts-verify-thieu-lam-py.log",
+      "outputBytes": 200
+    },
+    {
+      "label": "scripts/verify-thieu-lam-skills.py",
+      "seconds": 7.87,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\13-scripts-verify-thieu-lam-skills-py.log",
+      "outputBytes": 688
+    },
+    {
+      "label": "scripts/verify-thien-son-skills.py",
+      "seconds": 1.32,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\14-scripts-verify-thien-son-skills-py.log",
+      "outputBytes": 521
+    },
+    {
+      "label": "scripts/verify-vo-dang-skills.py",
+      "seconds": 2.38,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\15-scripts-verify-vo-dang-skills-py.log",
+      "outputBytes": 730
+    },
+    {
+      "label": "scripts/verify-bamboo-forest.py",
+      "seconds": 0.51,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\16-scripts-verify-bamboo-forest-py.log",
+      "outputBytes": 173
+    },
+    {
+      "label": "scripts/verify-desert.py",
+      "seconds": 1.07,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\17-scripts-verify-desert-py.log",
+      "outputBytes": 133
+    },
+    {
+      "label": "scripts/verify-forest-creeps.py",
+      "seconds": 3.62,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\18-scripts-verify-forest-creeps-py.log",
+      "outputBytes": 2233
+    },
+    {
+      "label": "scripts/verify-beach.py",
+      "seconds": 1.87,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\19-scripts-verify-beach-py.log",
+      "outputBytes": 156
+    },
+    {
+      "label": "scripts/verify-hell.py",
+      "seconds": 1.06,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\20-scripts-verify-hell-py.log",
+      "outputBytes": 202
+    },
+    {
+      "label": "scripts/verify-chu-art.py",
+      "seconds": 0.51,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\21-scripts-verify-chu-art-py.log",
+      "outputBytes": 89
+    },
+    {
+      "label": "scripts/verify-ly-mac-sau.py",
+      "seconds": 2.24,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\22-scripts-verify-ly-mac-sau-py.log",
+      "outputBytes": 202
+    },
+    {
+      "label": "scripts/verify-inventory-ui.py",
+      "seconds": 0.95,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\23-scripts-verify-inventory-ui-py.log",
+      "outputBytes": 121
+    },
+    {
+      "label": "scripts/verify-tay-doc.py",
+      "seconds": 0.99,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\24-scripts-verify-tay-doc-py.log",
+      "outputBytes": 149
+    },
+    {
+      "label": "scripts/verify-nam-de.py",
+      "seconds": 0.36,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\25-scripts-verify-nam-de-py.log",
+      "outputBytes": 138
+    },
+    {
+      "label": "scripts/verify-bac-cai-preview.py",
+      "seconds": 1.08,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\26-scripts-verify-bac-cai-preview-py.log",
+      "outputBytes": 162
+    },
+    {
+      "label": "scripts/verify-vuong-trung-duong.py",
+      "seconds": 0.73,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\27-scripts-verify-vuong-trung-duong-py.log",
+      "outputBytes": 97
+    },
+    {
+      "label": "scripts/verify-renovation.py",
+      "seconds": 7.39,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\28-scripts-verify-renovation-py.log",
+      "outputBytes": 201
+    },
+    {
+      "label": "scripts/verify-renovation-runtime.py",
+      "seconds": 1.97,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\29-scripts-verify-renovation-runtime-py.log",
+      "outputBytes": 141
+    },
+    {
+      "label": "scripts/verify-renovation-v2.py",
+      "seconds": 0.64,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\30-scripts-verify-renovation-v2-py.log",
+      "outputBytes": 439
+    },
+    {
+      "label": "scripts/verify-renovation-v3.py",
+      "seconds": 4.38,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\31-scripts-verify-renovation-v3-py.log",
+      "outputBytes": 2933
+    },
+    {
+      "label": "scripts/verify-renovation-v4.py",
+      "seconds": 2.43,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\32-scripts-verify-renovation-v4-py.log",
+      "outputBytes": 132
+    },
+    {
+      "label": "scripts/verify-renovation-v5.py",
+      "seconds": 0.68,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\33-scripts-verify-renovation-v5-py.log",
+      "outputBytes": 93
+    },
+    {
+      "label": "scripts/verify-renovation-v6.py",
+      "seconds": 0.49,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\34-scripts-verify-renovation-v6-py.log",
+      "outputBytes": 110
+    },
+    {
+      "label": "scripts/verify-renovation-v7.py",
+      "seconds": 0.88,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\35-scripts-verify-renovation-v7-py.log",
+      "outputBytes": 115
+    },
+    {
+      "label": "scripts/verify-renovation-v8.py",
+      "seconds": 0.63,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\36-scripts-verify-renovation-v8-py.log",
+      "outputBytes": 122
+    },
+    {
+      "label": "scripts/verify-loi-dai.py",
+      "seconds": 0.53,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\37-scripts-verify-loi-dai-py.log",
+      "outputBytes": 165
+    },
+    {
+      "label": "scripts/verify-contact-impacts.py",
+      "seconds": 1.13,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\38-scripts-verify-contact-impacts-py.log",
+      "outputBytes": 78
+    },
+    {
+      "label": "scripts/verify-pvp.py",
+      "seconds": 2.38,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\39-scripts-verify-pvp-py.log",
+      "outputBytes": 169
+    },
+    {
+      "label": "scripts/verify-skill-sounds.py",
+      "seconds": 22.47,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\40-scripts-verify-skill-sounds-py.log",
+      "outputBytes": 306
+    },
+    {
+      "label": "scripts/verify-skill-revise-thien-su.py",
+      "seconds": 2.85,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\41-scripts-verify-skill-revise-thien-su-py.log",
+      "outputBytes": 1534
+    },
+    {
+      "label": "browser verification",
+      "seconds": 223.13,
+      "status": "FAIL",
+      "exitCode": 1,
+      "logPath": "C:\\Users\\ADMIN\\.codex\\worktrees\\milestone-m4d\\volam-hero-defense\\docs\\evidence\\sessions\\m4d-wave-pacing-2026-11-27\\check-workflow\\a5f8647f-febb-4673-8b3c-2741c78b8e45\\42-browser-verification.log",
+      "outputBytes": 2266
+    }
+  ],
+  "totalSeconds": 611.94
+}

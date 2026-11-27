@@ -110,10 +110,10 @@ describe('M2A deterministic creep instances', () => {
         for (const enemy of enemies) enemy.hp = 1;
         clear(match, zone, hero);
         const oldCount = Math.ceil(6 * (1 + 0.1 * (players - 1)));
-        expect(hero.xp).toBe(3 * oldCount);
-        expect(hero.gold + (hero.farmGoldRemainder ?? 0)).toBeCloseTo(
-          0.8 * oldCount,
+        expect(hero.xp + (hero.farmXpRemainder ?? 0)).toBeCloseTo(
+          3.75 * oldCount,
         );
+        expect(hero.gold + (hero.farmGoldRemainder ?? 0)).toBeCloseTo(oldCount);
       }
     },
   );

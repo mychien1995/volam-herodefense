@@ -1,4 +1,5 @@
-import type { DongDefinition } from '@volam/game-core';
+import type { CampaignDefinition, DongDefinition } from '@volam/game-core';
+import { campaignSchema } from './campaign.js';
 import { dongTaDefinitionSchema } from './dong-ta.js';
 export const easyDongTuning = {
   damageRatio: 0.85,
@@ -24,4 +25,15 @@ export function dongTaForDifficulty(
     easyDongTuning.dashWarningTicks,
   );
   return dongTaDefinitionSchema.parse(tuned) as DongDefinition;
+}
+
+/** Per-room wave rewards; all other campaign tuning stays unchanged. */
+export const easyCampaignInvasionXp = [110, 450, 750, 750, 750] as const;
+export function campaignForDifficulty(
+  definition: CampaignDefinition,
+  difficulty: 'easy' | 'hard',
+): CampaignDefinition {
+  const tuned = campaignSchema.parse(definition);
+  if (difficulty === 'easy') tuned.invasionXp = [...easyCampaignInvasionXp];
+  return campaignSchema.parse(tuned);
 }

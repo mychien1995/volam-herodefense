@@ -1,3 +1,7 @@
+## M4D · countdown hai giai đoạn — 2026-11-27
+
+Trong stream: “Đợt N đang ra quái · còn …s”, không hiện countdown wave tiếp. Khi stream kết thúc mới hiện “Đợt N+1 sau 02:00” và đếm lùi; wave 20 cũng hiện đang ra quái cho tới hết stream. Giữ HUD trong viewport, layout và warning 60/15s. [Nhịp wave và kinh tế M4D](docs/M4D_WAVE_PACING_2026_11_27.md).
+
 R2 arena feedback: [shared prop collision, create-room modal, registered lanes, sharp ground and ambient motion](docs/M4D_ARENA_REVIEW_R2.md). This follow-up supersedes the initial M4D arena presentation below.
 
 ## M4D · arena, status và giày — 2026-11-25

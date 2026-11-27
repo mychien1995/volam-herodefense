@@ -3,6 +3,8 @@ import type { Point, Rect, SimulationConfig, World } from './types.js';
 
 export interface InvasionDefinition {
   intervalTicks: number;
+  /** Count the interval from stream completion; legacy accelerated fixtures keep start-to-start timing. */
+  restAfterStream?: boolean | undefined;
   streamTicks?: number | undefined;
   spawnEveryTicks?: number | undefined;
   portalCount?: 1 | 2 | 3 | 4 | undefined;
@@ -205,7 +207,11 @@ export class InvasionDirector {
             };
           }
       this.publish('wave', this.wave, 0, tick);
-      this.nextWaveTick += this.definition.intervalTicks;
+      this.nextWaveTick = this.definition.restAfterStream
+        ? tick +
+          (this.definition.streamTicks ?? 0) +
+          this.definition.intervalTicks
+        : this.nextWaveTick + this.definition.intervalTicks;
     }
     const count = this.definition.portalCount ?? 2;
     const lanes =

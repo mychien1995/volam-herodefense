@@ -669,3 +669,7 @@ docs/evidence/nam-de-dark/** -text -eol whitespace=cr-at-eol
 # Raw diagnostic output includes intentional banner whitespace.
 docs/evidence/nam-de-dark/*.log -whitespace
 docs/evidence/nam-de-dark/**/*.log -whitespace
+
+# Keep hash-addressed campaign trial source snapshots byte-exact.
+docs/evidence/sessions/campaign-xp-trial-2026-11-27/kernel-snapshots/** -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/evidence/sessions/campaign-xp-trial-2026-11-27/profile-snapshots/** -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

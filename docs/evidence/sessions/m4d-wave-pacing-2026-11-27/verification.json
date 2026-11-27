@@ -1,0 +1,129 @@
+{
+  "branch": "wip/m4d/diff-level",
+  "runtime": {
+    "firstWaveSeconds": 120,
+    "streamSeconds": 60,
+    "restAfterStreamSeconds": 120,
+    "regularDungeonRewardMultiplier": 1.25,
+    "chapterSeconds": 900
+  },
+  "finalPipeline": {
+    "command": "pnpm check:final --config playwright.m4d.config.ts tests/e2e/m4d-wave-pacing.spec.ts",
+    "overall": "FAIL at initial browser reward fixture; preceding stages PASS; retained without relabeling",
+    "report": "check-workflow/final-timings.json",
+    "unitFiles": 141,
+    "unitTests": 1417,
+    "passedStages": [
+      "environment preflight",
+      "prepare assets (once)",
+      "compile TypeScript",
+      "typecheck tests and tools",
+      "workflow regression checks",
+      "all unit/integration tests",
+      "production client build",
+      "scripts/verify-assets.py",
+      "scripts/verify-arena-art01.py",
+      "scripts/verify-arena-v2.py",
+      "scripts/verify-thien-son.py",
+      "scripts/verify-vo-dang.py",
+      "scripts/verify-thieu-lam.py",
+      "scripts/verify-thieu-lam-skills.py",
+      "scripts/verify-thien-son-skills.py",
+      "scripts/verify-vo-dang-skills.py",
+      "scripts/verify-bamboo-forest.py",
+      "scripts/verify-desert.py",
+      "scripts/verify-forest-creeps.py",
+      "scripts/verify-beach.py",
+      "scripts/verify-hell.py",
+      "scripts/verify-chu-art.py",
+      "scripts/verify-ly-mac-sau.py",
+      "scripts/verify-inventory-ui.py",
+      "scripts/verify-tay-doc.py",
+      "scripts/verify-nam-de.py",
+      "scripts/verify-bac-cai-preview.py",
+      "scripts/verify-vuong-trung-duong.py",
+      "scripts/verify-renovation.py",
+      "scripts/verify-renovation-runtime.py",
+      "scripts/verify-renovation-v2.py",
+      "scripts/verify-renovation-v3.py",
+      "scripts/verify-renovation-v4.py",
+      "scripts/verify-renovation-v5.py",
+      "scripts/verify-renovation-v6.py",
+      "scripts/verify-renovation-v7.py",
+      "scripts/verify-renovation-v8.py",
+      "scripts/verify-loi-dai.py",
+      "scripts/verify-contact-impacts.py",
+      "scripts/verify-pvp.py",
+      "scripts/verify-skill-sounds.py",
+      "scripts/verify-skill-revise-thien-su.py"
+    ]
+  },
+  "browser": {
+    "timerTwoPeers": "PASS in final pipeline (34.4s)",
+    "rewardRealInputs": "PASS on focused retry (24.6s)",
+    "retryCommand": "node tools/run-playwright.mjs test --config playwright.m4d.config.ts tests/e2e/m4d-wave-pacing.spec.ts --grep 'a real dungeon kill'",
+    "retryLog": "browser-retry-scoped-id.log",
+    "fixtureCorrections": [
+      "Current dungeon menu automatically uses private access for forest; no legacy radio",
+      "Observe instance-prefixed projected creep ID, not world-local ID"
+    ],
+    "typecheckAfterFixtureCorrections": "PASS",
+    "preflightBeforeRetry": "PASS 7 checks"
+  },
+  "economy": {
+    "command": "pnpm --filter @volam/game-server exec tsx ../../tools/wave-pacing-balance.ts",
+    "probes": 192,
+    "schools": [
+      "cai_bang",
+      "thien_son",
+      "vo_dang",
+      "thieu_lam"
+    ],
+    "levels": [
+      1,
+      6,
+      15,
+      30
+    ],
+    "players": [
+      1,
+      6
+    ],
+    "seeds": [
+      17,
+      41,
+      89
+    ],
+    "rewardRatioMismatches": 0,
+    "completeReport": "../../../../artifacts/wave-pacing/balance.json",
+    "sample": {
+      "school": "cai_bang",
+      "basic": "cai_bang_bong",
+      "level": 1,
+      "players": 1,
+      "seed": 17,
+      "baseline": {
+        "enemies": 10,
+        "enemyHp": 120,
+        "xp": 18,
+        "xpRemainder": 0,
+        "gold": 4,
+        "goldRemainder": 0.800000000000001
+      },
+      "candidate": {
+        "enemies": 10,
+        "enemyHp": 120,
+        "xp": 22,
+        "xpRemainder": 0.5,
+        "gold": 6,
+        "goldRemainder": -3.3306690738754696e-16
+      }
+    },
+    "limits": "Real damaging kill settlement for one private forest wave; four schools, both basics, levels 1/6/15/30, P1/P6, seeds 17/41/89, no gear. Direct damage isolates economy, not DPS, clear time, survival, XP/minute or full campaign readiness. Level 30 is XP-capped; the retained over-level farm penalty applies."
+  },
+  "limits": [
+    "No complete human campaign or readiness/farm-rate claim",
+    "Browser duration fixture uses 3s stream/4s rest; production 60s/120s checked by regression",
+    "No new art or recordings"
+  ]
+}
