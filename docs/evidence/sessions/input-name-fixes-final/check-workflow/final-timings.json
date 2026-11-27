@@ -1,0 +1,108 @@
+{
+  "runId": "ee667f67-ff5c-4b18-a89c-bf5ebe759106",
+  "mode": "final",
+  "args": [
+    "tests/e2e/input-name.spec.ts",
+    "tests/e2e/gameplay.spec.ts",
+    "--grep",
+    "name entered|IME skill|two clients agree|ranged projectile"
+  ],
+  "startedAt": "2026-11-26T09:52:08.171Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "environment preflight",
+      "seconds": 0.588,
+      "status": "PASS",
+      "checks": [
+        {
+          "id": "workspace",
+          "status": "PASS",
+          "detail": {
+            "mode": "final",
+            "stage": "before-build",
+            "managed": true
+          }
+        },
+        {
+          "id": "session",
+          "status": "PASS",
+          "detail": {
+            "serverPort": 28971,
+            "clientPort": 28972
+          }
+        },
+        {
+          "id": "ports",
+          "status": "PASS"
+        },
+        {
+          "id": "node",
+          "status": "PASS",
+          "detail": "26.0.0"
+        },
+        {
+          "id": "installation",
+          "status": "PASS",
+          "detail": "pnpm@11.25.0"
+        },
+        {
+          "id": "tools",
+          "status": "PASS",
+          "detail": {
+            "typescript": "7.0.2",
+            "vitest": "5.0.5",
+            "vite": "8.3.5",
+            "@playwright/test": "1.64.1"
+          }
+        },
+        {
+          "id": "chromium",
+          "status": "PASS",
+          "detail": {
+            "version": "156.0.8078.4",
+            "cache": "D:\\Projects\\volam-hero-defense\\.cache\\ms-playwright"
+          }
+        },
+        {
+          "id": "python",
+          "status": "PASS",
+          "detail": "Python 3.13.5"
+        }
+      ]
+    },
+    {
+      "label": "prepare assets (once)",
+      "seconds": 13.33,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\input-name-fixes-final\\check-workflow\\ee667f67-ff5c-4b18-a89c-bf5ebe759106\\1-prepare-assets-once-.log",
+      "outputBytes": 738
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 0.93,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\input-name-fixes-final\\check-workflow\\ee667f67-ff5c-4b18-a89c-bf5ebe759106\\2-compile-TypeScript.log",
+      "outputBytes": 0
+    },
+    {
+      "label": "typecheck tests and tools",
+      "seconds": 3.12,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\input-name-fixes-final\\check-workflow\\ee667f67-ff5c-4b18-a89c-bf5ebe759106\\3-typecheck-tests-and-tools.log",
+      "outputBytes": 0
+    },
+    {
+      "label": "workflow regression checks",
+      "seconds": 12.65,
+      "status": "FAIL",
+      "exitCode": 1,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\input-name-fixes-final\\check-workflow\\ee667f67-ff5c-4b18-a89c-bf5ebe759106\\4-workflow-regression-checks.log",
+      "outputBytes": 8383
+    }
+  ],
+  "totalSeconds": 30.63
+}

@@ -1,0 +1,60 @@
+{
+  "date": "2026-11-26",
+  "scope": [
+    "Recover skill key releases when an IME swallows their keydown; avoid duplicate ordinary presses",
+    "Suppress native right-click actions across the active game viewport, including HUD siblings; keep editable fields and existing right-click movement",
+    "Validate, normalize and persist the latest nickname across practice, standalone Loi Dai and defense entry"
+  ],
+  "verification": [
+    {
+      "command": "pnpm check:quick tests/gameplay-input.test.ts",
+      "result": "Expected pre-fix regression: missing-keydown W/R test failed; other two tests passed"
+    },
+    {
+      "command": "pnpm exec vitest run tests/gameplay-input.test.ts tests/player-name.test.ts",
+      "result": "PASS: 6 focused tests after the fix"
+    },
+    {
+      "command": "pnpm check:final tests/e2e/input-name.spec.ts tests/e2e/gameplay.spec.ts --grep 'name entered|IME skill|two clients agree|ranged projectile'",
+      "result": "FAILED: preparation, compilation and tools/test typechecking passed; workflow tests stopped at missing playwright.boss-combat-review.config.ts preflight contract (71 passed, 1 failed)"
+    },
+    {
+      "command": "pnpm exec vitest run",
+      "result": "1289 passed, 1 timeout out of 1290 tests"
+    },
+    {
+      "command": "pnpm exec vitest run tests/standalone-loi-dai.test.ts -t 'raises Doc Co cast frequency'",
+      "result": "PASS: the sole timeout passed on its isolated retry; all 1290 unit/integration cases have passed across these runs"
+    },
+    {
+      "command": "pnpm --filter @volam/game-client build",
+      "result": "PASS; VITE_SERVER_URL=http://127.0.0.1:28971"
+    },
+    {
+      "command": "pnpm verify:assets; then remaining validators with PYTHONUTF8=1",
+      "result": "All asset validators passed except verify-skill-revise-thien-su.py: existing source hash mismatch at assets/exports/skill-revise-feedback-v04/hammer-coherent-v4/body.json. The first run also required a UTF-8 retry to print Vietnamese in verify-bac-cai-preview.py; its retry passed. No changed bytes in the mismatched source were introduced by this task."
+    },
+    {
+      "command": "node tools/run-playwright.mjs test tests/e2e/input-name.spec.ts tests/e2e/gameplay.spec.ts --grep 'name entered|IME skill|two clients agree|ranged projectile'",
+      "result": "4 new Chromium cases passed: all three name origins survive reload and fill all modes/shared-link entry; IME release commands each advance the server input sequence once; four native Shift/right-clicks on canvas and one on HUD all have their context menu prevented. Two existing gameplay cases timed out."
+    },
+    {
+      "command": "node tools/run-playwright.mjs test --config playwright.qa-helpers.config.ts --grep 'waits for real two-client'",
+      "result": "PASS: two real clients, authoritative movement/peer replication and one real A projectile against the existing durable-target fixture"
+    },
+    {
+      "command": "node tools/run-playwright.mjs test tests/e2e/gameplay.spec.ts --grep 'two clients agree|ranged projectile'",
+      "result": "Both existing default-fixture cases still timed out on an isolated retry. The projectile case acknowledged the A input on the server but did not observe a new projectile. Their baseline was not compared, so these failures are not classified as proven pre-existing failures."
+    },
+    {
+      "command": "git diff --check",
+      "result": "PASS"
+    }
+  ],
+  "limits": [
+    "IME coverage uses synthetic native-DOM KeyboardEvents, not an end-to-end physical UniKey test",
+    "The fallback depends on the browser still receiving the physical skill keyup",
+    "The full final pipeline is not green; workflow-contract, art-hash and default-gameplay failures remain disclosed above",
+    "No recordings, artwork changes, gameplay tuning or multiplayer authority changes"
+  ]
+}

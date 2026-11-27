@@ -1,0 +1,32 @@
+{
+  "branch": "milestone/m4d",
+  "status": "PASS_AFTER_STAGE_RETRIES",
+  "scope": "Test-only fixes for seven reproduced failures; no gameplay changes",
+  "originalCommand": "pnpm check:final --config playwright.qa-helpers.config.ts --grep 'waits for real two-client'",
+  "originalPipelineStatus": "FAIL at workflow child cleanup race; retained original timing report",
+  "verification": {
+    "focused": "26/26 passed; final import cleanup rechecked invasion-room 3/3",
+    "prepare": "PASS; repeated only to sync restored reviewed metadata bytes",
+    "compile": "PASS",
+    "typecheck": "PASS",
+    "workflow": "77/77 PASS on stage retry; standalone qa-children regression also PASS",
+    "unitIntegration": "1387/1387 PASS (140 files)",
+    "build": "PASS; rebuilt after restoring approved JSON EOL bytes",
+    "assets": "All validators PASS across initial run and targeted verify-skill-revise-thien-su.py retry",
+    "browser": "1/1 PASS: real two-client movement, peer replication and authoritative projectile"
+  },
+  "repairs": {
+    "tests": [
+      "M4D health label",
+      "Protocol 55 pins in four retained integration suites",
+      "Respawn uses room-registered map coordinates and checks peer position",
+      "Real SDK cast targets an existing server-owned creep on the actual hero facing line"
+    ],
+    "checkoutOnly": "Eight clean JSON files backed up under .cache/m4d-seven-tests-eol-backup; EOL changed only when CRLF candidate exactly matched previously reviewed SHA-256. Existing .gitattributes already requires CRLF. No manifest hashes or approval locks changed."
+  },
+  "limits": [
+    "Original final command did not finish in one green invocation; remaining stages were completed explicitly after failures",
+    "Browser scope is the focused two-client smoke, not every historical browser/art profile",
+    "Generated validation reports and raw run logs are excluded from the test commit"
+  ]
+}
